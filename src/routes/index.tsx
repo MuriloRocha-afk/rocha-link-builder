@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Distribuidora e madeireira com +25 anos: telhas, madeiramento estrutural e acessórios com frota própria em Franco da Rocha e Pirituba. Cote pelo WhatsApp.",
+          "Distribuidora e madeireira com +25 anos: telhas, madeiramento estrutural, madeirites e acessórios com frota própria em Franco da Rocha. Cote pelo WhatsApp.",
       },
       { property: "og:title", content: "Rocha Telhas | Telhas e Madeiramento Estrutural" },
       {
@@ -56,7 +56,7 @@ function Index() {
           <div className="relative mx-auto w-full max-w-7xl px-5 py-20">
             <div className="max-w-3xl">
               <span className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/15 px-4 py-1.5 text-xs font-bold tracking-[0.18em] text-accent uppercase">
-                Franco da Rocha · Pirituba
+                Franco da Rocha · SP
               </span>
               <h1 className="mt-6 text-4xl leading-[1.05] font-extrabold text-primary-foreground md:text-6xl lg:text-7xl">
                 A Solução Completa em{" "}
