@@ -170,3 +170,43 @@
     color: var(--color-foreground);
   }
 }
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility text-gradient-accent {
+  background: var(--gradient-accent);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility surface-dark {
+  background: var(--gradient-primary);
+  color: var(--color-primary-foreground);
+}
+
+@utility pulse-whats {
+  animation: pulse-whats 2.4s ease-out infinite;
+}
+
+@keyframes pulse-whats {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--whats) 60%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 18px color-mix(in oklab, var(--whats) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--whats) 0%, transparent);
+  }
+}
