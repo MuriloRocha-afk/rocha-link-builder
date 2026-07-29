@@ -1,24 +1,115 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Award, Truck, TreePine, CreditCard, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Header } from "@/components/site/Header";
+import { Catalogo } from "@/components/site/Catalogo";
+import { Acao, Depoimentos, Faq, Unidades } from "@/components/site/Sections";
+import { Footer, FloatingWhats } from "@/components/site/Footer";
+import { WhatsAppButton } from "@/components/site/shared";
+import hero from "@/assets/hero-patio.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Rocha Telhas | Telhas e Madeiramento em Franco da Rocha" },
+      {
+        name: "description",
+        content:
+          "Distribuidora e madeireira com +25 anos: telhas, madeiramento estrutural e acessórios com frota própria em Franco da Rocha e Pirituba. Cote pelo WhatsApp.",
+      },
+      { property: "og:title", content: "Rocha Telhas | Telhas e Madeiramento Estrutural" },
+      {
+        property: "og:description",
+        content:
+          "Tradição de mais de 25 anos em telhas e madeiras. Frota própria, entrega rápida em toda SP e orçamento na hora pelo WhatsApp.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const KPIS = [
+  { icon: Award, title: "+25 Anos", text: "de tradição e confiança na região" },
+  { icon: Truck, title: "Frota Própria", text: "entrega rápida em toda São Paulo" },
+  { icon: TreePine, title: "Madeiras Selecionadas", text: "certificadas e conferidas peça a peça" },
+  { icon: CreditCard, title: "Até 12x no Cartão", text: "parcelamento e condições para obras" },
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Header />
+
+      <main>
+        <section id="inicio" className="relative flex min-h-[92vh] items-center pt-20">
+          <img
+            src={hero}
+            alt="Pátio logístico da Rocha Telhas com caminhões carregando madeira e telhas"
+            width={1920}
+            height={1088}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,var(--primary-deep)_18%,color-mix(in_oklab,var(--primary-deep)_78%,transparent)_55%,color-mix(in_oklab,var(--primary-deep)_45%,transparent)_100%)]" />
+
+          <div className="relative mx-auto w-full max-w-7xl px-5 py-20">
+            <div className="max-w-3xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/15 px-4 py-1.5 text-xs font-bold tracking-[0.18em] text-accent uppercase">
+                Franco da Rocha · Pirituba
+              </span>
+              <h1 className="mt-6 text-4xl leading-[1.05] font-extrabold text-primary-foreground md:text-6xl lg:text-7xl">
+                A Solução Completa em{" "}
+                <span className="text-gradient-accent">Telhas e Madeiramento</span> Estrutural para
+                sua Obra
+              </h1>
+              <p className="mt-6 max-w-2xl text-base text-primary-foreground/80 md:text-xl">
+                Tradição de mais de 25 anos entregando qualidade, agilidade com frota própria e o
+                melhor atendimento da região.
+              </p>
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <WhatsAppButton message="Olá! Quero cotar telhas e madeiramento com a Rocha Telhas.">
+                  Cotar pelo WhatsApp Agora
+                </WhatsAppButton>
+                <Button asChild variant="outlineAccent" size="xl">
+                  <a href="#produtos">
+                    Ver Catálogo de Produtos
+                    <ArrowRight />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative z-10 bg-card">
+          <div className="mx-auto max-w-7xl px-5">
+            <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-[var(--shadow-lift)] md:-mt-14 md:grid-cols-2 lg:grid-cols-4">
+              {KPIS.map((k) => (
+                <div key={k.title} className="flex items-start gap-4 bg-card p-7">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+                    <k.icon className="h-6 w-6" />
+                  </span>
+                  <div>
+                    <p className="text-base font-extrabold text-primary">{k.title}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{k.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="h-14" />
+        </section>
+
+        <Catalogo />
+        <Acao />
+        <Depoimentos />
+        <Faq />
+        <Unidades />
+      </main>
+
+      <Footer />
+      <FloatingWhats />
     </div>
   );
 }
