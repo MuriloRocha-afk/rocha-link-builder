@@ -7,7 +7,7 @@ const NAV = [
   { label: "Produtos", href: "#produtos" },
   { label: "A Rocha em Ação", href: "#acao" },
   { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Unidades", href: "#unidades" },
+  { label: "Localização", href: "#unidades" },
 ];
 
 export function Header() {

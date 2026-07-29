@@ -8,8 +8,18 @@ import fibro from "@/assets/prod-fibro.jpg";
 import cambara from "@/assets/prod-cambara.jpg";
 import eucalipto from "@/assets/prod-eucalipto.jpg";
 import acessorios from "@/assets/prod-acessorios.jpg";
+import madeirite from "@/assets/prod-madeirite.jpg";
+import rufos from "@/assets/prod-rufos.jpg";
 
-const TABS = ["Todas", "Telhas", "Madeiras Nativas", "Ecológicas e PVC", "Outros"] as const;
+const TABS = [
+  "Todas",
+  "Telhas",
+  "Madeiras Nativas",
+  "Madeiras & Chapas",
+  "Ecológicas e PVC",
+  "Acabamento & Proteção",
+  "Outros",
+] as const;
 type Tab = (typeof TABS)[number];
 
 const PRODUCTS: {
@@ -52,6 +62,20 @@ const PRODUCTS: {
     image: eucalipto,
     description:
       "Autoclavado em estufa para escoramento, caixaria, galpões e estruturas expostas ao tempo. Madeira de reflorestamento.",
+  },
+  {
+    name: "Madeirites (Chapas de Madeira)",
+    tag: "Madeiras & Chapas",
+    image: madeirite,
+    description:
+      "Chapas de Madeiririte Resinado e Plastificado de alta resistência. Ideais para caixaria, fôrmas de concreto, tapumes e estruturas de obra.",
+  },
+  {
+    name: "Rufos, Calhas e Pingadeiras",
+    tag: "Acabamento & Proteção",
+    image: rufos,
+    description:
+      "Rufos externos, pingadeiras e calhas galvanizadas sob medida para vedação perfeita do telhado, protegendo paredes e alvenaria contra infiltrações.",
   },
   {
     name: "Acessórios para Telhado",

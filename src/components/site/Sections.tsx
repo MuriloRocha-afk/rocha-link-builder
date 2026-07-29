@@ -125,7 +125,7 @@ const REVIEWS = [
   },
   {
     name: "Sandra Ferreira",
-    role: "Cliente residencial — Pirituba",
+    role: "Cliente residencial — Franco da Rocha",
     text: "Reformei o telhado da minha casa e fui muito bem atendida do orçamento à entrega. Parcelei no cartão e recebi tudo no dia combinado.",
   },
 ];
@@ -244,73 +244,57 @@ export function Faq() {
   );
 }
 
-const UNITS = [
-  {
-    name: "Rocha Telhas — Franco da Rocha",
-    address: "Av. Liberdade, 1.200 — Vila Bela, Franco da Rocha / SP",
-    hours: "Seg a Sex: 7h30 às 18h · Sáb: 8h às 13h",
-    phone: "(11) 4449-0000",
-    map: "https://www.google.com/maps?q=Franco+da+Rocha+SP&output=embed",
-  },
-  {
-    name: "ROV Telhas — Pirituba",
-    address: "Av. Dr. Felipe Pinel, 850 — Pirituba, São Paulo / SP",
-    hours: "Seg a Sex: 7h30 às 18h · Sáb: 8h às 13h",
-    phone: "(11) 3901-0000",
-    map: "https://www.google.com/maps?q=Pirituba+Sao+Paulo+SP&output=embed",
-  },
-];
+const UNIT = {
+  name: "Rocha Telhas — Franco da Rocha",
+  address: "Av. Liberdade, 1.200 — Vila Bela, Franco da Rocha / SP · CEP 07850-000",
+  hours: "Segunda a Sexta: 07h30 às 17h30 · Sábado: 07h30 às 13h00",
+  phone: "(11) 4449-0000 — WhatsApp comercial",
+  map: "https://www.google.com/maps?q=Rocha+Telhas+Franco+da+Rocha+SP&output=embed",
+};
 
 export function Unidades() {
   return (
     <section id="unidades" className="scroll-mt-24 bg-secondary py-24">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeading
-          kicker="Unidades"
-          title="Duas lojas para atender sua obra"
-          subtitle="Venha tomar um café e conhecer o pátio, ou peça sua cotação sem sair do canteiro."
+          kicker="Localização"
+          title="Venha conhecer nossa loja"
+          subtitle="Estamos em Franco da Rocha, atendendo toda a região. Venha tomar um café e conhecer o pátio, ou peça sua cotação sem sair do canteiro."
         />
-        <div className="mt-14 grid gap-8 lg:grid-cols-2">
-          {UNITS.map((u) => (
-            <div
-              key={u.name}
-              className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]"
-            >
-              <iframe
-                title={`Mapa ${u.name}`}
-                src={u.map}
-                loading="lazy"
-                className="h-64 w-full border-0"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              <div className="p-7">
-                <h3 className="text-xl font-extrabold text-primary">{u.name}</h3>
-                <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
-                  <li className="flex gap-3">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    {u.address}
-                  </li>
-                  <li className="flex gap-3">
-                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    {u.hours}
-                  </li>
-                  <li className="flex gap-3">
-                    <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    {u.phone}
-                  </li>
-                </ul>
-                <div className="mt-6">
-                  <WhatsAppButton
-                    size="lg"
-                    className="w-full"
-                    message={`Olá! Quero falar com a unidade ${u.name}.`}
-                  >
-                    Falar com esta unidade
-                  </WhatsAppButton>
-                </div>
-              </div>
+        <div className="mt-14 grid gap-8 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] lg:grid-cols-2 lg:gap-0">
+          <iframe
+            title={`Mapa ${UNIT.name}`}
+            src={UNIT.map}
+            loading="lazy"
+            className="h-72 w-full border-0 lg:h-full lg:min-h-[24rem]"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+          <div className="p-7 lg:p-10">
+            <h3 className="text-2xl font-extrabold text-primary">{UNIT.name}</h3>
+            <ul className="mt-6 space-y-4 text-sm text-muted-foreground">
+              <li className="flex gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                {UNIT.address}
+              </li>
+              <li className="flex gap-3">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                {UNIT.hours}
+              </li>
+              <li className="flex gap-3">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                {UNIT.phone}
+              </li>
+            </ul>
+            <div className="mt-8">
+              <WhatsAppButton
+                size="lg"
+                className="w-full"
+                message="Olá! Quero falar com a Rocha Telhas em Franco da Rocha."
+              >
+                Falar com a loja no WhatsApp
+              </WhatsAppButton>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

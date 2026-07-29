@@ -1,4 +1,4 @@
-import { Facebook, Instagram, MessageCircle } from "lucide-react";
+import { Clock, Facebook, Instagram, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Logo, WhatsAppButton, waLink } from "./shared";
 
 export function Footer() {
@@ -12,8 +12,22 @@ export function Footer() {
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
               Distribuidora e madeireira com mais de 25 anos de tradição em Franco da Rocha e
-              Pirituba. Telhas, madeiramento estrutural e acessórios com frota própria.
+              região. Telhas, madeiramento estrutural e acessórios com frota própria.
             </p>
+            <ul className="mt-6 space-y-3 text-sm text-primary-foreground/70">
+              <li className="flex gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                Av. Liberdade, 1.200 — Vila Bela, Franco da Rocha / SP
+              </li>
+              <li className="flex gap-3">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                Seg a Sex: 07h30 às 17h30 · Sáb: 07h30 às 13h00
+              </li>
+              <li className="flex gap-3">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                (11) 4449-0000 — WhatsApp comercial
+              </li>
+            </ul>
             <div className="mt-6 flex gap-3">
               <a
                 href="https://instagram.com"
@@ -55,7 +69,7 @@ export function Footer() {
                 ["Produtos", "#produtos"],
                 ["A Rocha em Ação", "#acao"],
                 ["Depoimentos", "#depoimentos"],
-                ["Unidades", "#unidades"],
+                ["Localização", "#unidades"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <a href={href} className="transition-colors hover:text-accent">
@@ -85,7 +99,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 border-t border-primary-foreground/15 pt-6 text-xs text-primary-foreground/50">
-          © {new Date().getFullYear()} Rocha Telhas · ROV Telhas. Todos os direitos reservados.
+          © {new Date().getFullYear()} Rocha Telhas. Todos os direitos reservados.
         </div>
       </div>
     </footer>
