@@ -1,10 +1,17 @@
-import { Star, MapPin, Clock, Phone } from "lucide-react";
+import { Star, MapPin, Clock, Phone, Play } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { SectionHeading, WhatsAppButton } from "./shared";
 import acao1 from "@/assets/acao-1.jpg";
 import acao2 from "@/assets/acao-2.jpg";
@@ -12,15 +19,47 @@ import acao3 from "@/assets/acao-3.jpg";
 import acao4 from "@/assets/acao-4.jpg";
 
 const GALLERY = [
-  { src: acao1, alt: "Carregamento de madeira no pátio da Rocha Telhas", label: "Pátio logístico" },
-  { src: acao2, alt: "Telhado residencial finalizado com telha colonial", label: "Obra entregue" },
-  { src: acao3, alt: "Galpão de estocagem de madeira tratada", label: "Estoque coberto" },
-  { src: acao4, alt: "Estrutura de madeiramento de galpão industrial", label: "Grande porte" },
+  {
+    src: acao1,
+    alt: "Carregamento de madeira no pátio da Rocha Telhas",
+    label: "Pátio logístico",
+    tag: "Bastidores",
+  },
+  {
+    src: acao2,
+    alt: "Telhado residencial finalizado com telha colonial",
+    label: "Obra entregue",
+    tag: "Antes & depois",
+  },
+  {
+    src: acao3,
+    alt: "Galpão de estocagem de madeira tratada",
+    label: "Estoque coberto",
+    tag: "Tour da loja",
+  },
+  {
+    src: acao4,
+    alt: "Estrutura de madeiramento de galpão industrial",
+    label: "Grande porte",
+    tag: "Obra em ação",
+  },
+  {
+    src: acao2,
+    alt: "Entrega de telhas com frota própria",
+    label: "Entrega em 24h",
+    tag: "Frota própria",
+  },
+  {
+    src: acao1,
+    alt: "Equipe separando madeiramento no pátio",
+    label: "Separação de pedido",
+    tag: "Bastidores",
+  },
 ];
 
 export function Acao() {
   return (
-    <section id="acao" className="surface-dark scroll-mt-24 py-24">
+    <section id="acao" className="surface-dark scroll-mt-24 overflow-hidden py-24">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeading
           invert
@@ -28,34 +67,45 @@ export function Acao() {
           title="Estrutura de verdade, todos os dias"
           subtitle="Transparência e estrutura gigante para atender desde reformas residenciais até grandes construtoras."
         />
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {GALLERY.map((g, i) => (
-            <figure
-              key={g.label}
-              className={`group relative overflow-hidden rounded-2xl border border-primary-foreground/10 ${
-                i === 0 ? "lg:col-span-2 lg:row-span-2" : ""
-              }`}
-            >
-              <img
-                src={g.src}
-                alt={g.alt}
-                loading="lazy"
-                width={1200}
-                height={900}
-                className={`w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-                  i === 0 ? "h-72 lg:h-full lg:min-h-[26rem]" : "h-56"
-                }`}
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-sm font-bold text-primary-foreground">
-                {g.label}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <Carousel opts={{ align: "start", loop: true }} className="mt-14">
+          <CarouselContent className="-ml-4">
+            {GALLERY.map((g, i) => (
+              <CarouselItem
+                key={`${g.label}-${i}`}
+                className="basis-[78%] pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+              >
+                <figure className="group relative aspect-[9/16] overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
+                  <img
+                    src={g.src}
+                    alt={g.alt}
+                    loading="lazy"
+                    width={900}
+                    height={1600}
+                    className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/25" />
+                  <span className="absolute top-4 left-4 rounded-full border border-primary-foreground/25 bg-black/35 px-3 py-1 text-[0.65rem] font-bold tracking-[0.16em] text-primary-foreground uppercase backdrop-blur-sm">
+                    {g.tag}
+                  </span>
+                  <span className="absolute top-1/2 left-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary-foreground/40 bg-primary-foreground/15 text-primary-foreground opacity-0 backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:opacity-100">
+                    <Play className="ml-0.5 h-6 w-6 fill-current" />
+                  </span>
+                  <figcaption className="absolute inset-x-0 bottom-0 p-5">
+                    <p className="text-base font-extrabold text-primary-foreground">{g.label}</p>
+                    <p className="mt-1 h-0.5 w-10 rounded-full bg-accent" />
+                  </figcaption>
+                </figure>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="-left-2 border-primary-foreground/25 bg-primary-foreground/10 text-primary-foreground hover:bg-accent hover:text-accent-foreground lg:-left-6" />
+          <CarouselNext className="-right-2 border-primary-foreground/25 bg-primary-foreground/10 text-primary-foreground hover:bg-accent hover:text-accent-foreground lg:-right-6" />
+        </Carousel>
       </div>
     </section>
   );
 }
+
 
 const REVIEWS = [
   {
