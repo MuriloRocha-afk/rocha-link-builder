@@ -1,0 +1,107 @@
+import { Facebook, Instagram, MessageCircle } from "lucide-react";
+import { Logo, WhatsAppButton, waLink } from "./shared";
+
+export function Footer() {
+  return (
+    <footer className="surface-dark pt-20 pb-28">
+      <div className="mx-auto max-w-7xl px-5">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
+          <div>
+            <div className="rounded-xl bg-primary-foreground/95 p-4 inline-block">
+              <Logo />
+            </div>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
+              Distribuidora e madeireira com mais de 25 anos de tradição em Franco da Rocha e
+              Pirituba. Telhas, madeiramento estrutural e acessórios com frota própria.
+            </p>
+            <div className="mt-6 flex gap-3">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary-foreground/20 text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary-foreground/20 text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a
+                href={waLink("Olá! Vim pelo site da Rocha Telhas.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary-foreground/20 text-primary-foreground transition-colors hover:bg-whats hover:text-primary-deep"
+              >
+                <MessageCircle className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+
+          <nav>
+            <h3 className="text-sm font-bold tracking-[0.18em] text-accent uppercase">
+              Links rápidos
+            </h3>
+            <ul className="mt-5 space-y-3 text-sm text-primary-foreground/70">
+              {[
+                ["Início", "#inicio"],
+                ["Produtos", "#produtos"],
+                ["A Rocha em Ação", "#acao"],
+                ["Depoimentos", "#depoimentos"],
+                ["Unidades", "#unidades"],
+              ].map(([label, href]) => (
+                <li key={href}>
+                  <a href={href} className="transition-colors hover:text-accent">
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-7">
+            <h3 className="text-xl font-extrabold text-primary-foreground">
+              Peça sua cotação agora
+            </h3>
+            <p className="mt-3 text-sm text-primary-foreground/70">
+              Envie sua lista de materiais e receba o orçamento completo em minutos.
+            </p>
+            <div className="mt-6">
+              <WhatsAppButton
+                className="w-full"
+                message="Olá! Quero um orçamento completo com a Rocha Telhas."
+              >
+                Cotar pelo WhatsApp
+              </WhatsAppButton>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-14 border-t border-primary-foreground/15 pt-6 text-xs text-primary-foreground/50">
+          © {new Date().getFullYear()} Rocha Telhas · ROV Telhas. Todos os direitos reservados.
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+export function FloatingWhats() {
+  return (
+    <a
+      href={waLink("Olá! Vim pelo site e gostaria de falar com o comercial.")}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="pulse-whats fixed right-5 bottom-5 z-50 flex items-center gap-2 rounded-full bg-whats px-5 py-4 text-sm font-bold text-primary-deep shadow-[var(--shadow-lift)] transition-transform hover:scale-105"
+    >
+      <MessageCircle className="h-5 w-5" />
+      Fale Conosco
+    </a>
+  );
+}
