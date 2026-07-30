@@ -67,7 +67,7 @@ export function Footer() {
               {[
                 ["Início", "#inicio"],
                 ["Produtos", "#produtos"],
-                ["Tecnologia", "#tecnologia"],
+                ["Nossa Estrutura", "#tecnologia"],
                 ["A Rocha em Ação", "#acao"],
                 ["Depoimentos", "#depoimentos"],
                 ["Localização", "#unidades"],

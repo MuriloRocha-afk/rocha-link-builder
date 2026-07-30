@@ -5,7 +5,7 @@ export const WHATSAPP_NUMBER = "5511999999999";
 
 export const CONTATO = {
   address: "R. Dr. Hamilton Prado, 856 — Centro, Franco da Rocha / SP · CEP 07849-070",
-  hours: "Segunda a Sexta: 07h30 às 17h30 · Sábado: 07h30 às 13h00",
+  hours: "Segunda a Sexta: 08h00 às 18h00 · Sábado: 07h30 às 13h00",
   phone: "(11) 4449-0000 — WhatsApp comercial",
   map: "https://www.google.com/maps?q=R.+Dr.+Hamilton+Prado,+856+-+Centro,+Franco+da+Rocha+-+SP,+07849-070&output=embed",
 };
