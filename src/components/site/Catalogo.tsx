@@ -62,7 +62,7 @@ const PRODUCTS: Produto[] = [
       "Acabamento periférico de alta precisão que protege e valoriza as bordas do telhado.",
   },
   {
-    name: "Madeiririte Resinado e Plastificado",
+    name: "Madeirite Resinado e Plastificado",
     tag: "Madeiras & Chapas",
     image: madeirite,
     description: "Chapas de alta resistência para caixarias de concreto, fôrmas e tapumes de obra.",
