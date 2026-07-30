@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo, WhatsAppButton } from "./shared";
+import { SobreModal } from "./SobreModal";
 
 const NAV = [
   { label: "Início", href: "#inicio" },
   { label: "Produtos", href: "#produtos" },
-  { label: "A Rocha em Ação", href: "#acao" },
-  { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Localização", href: "#unidades" },
+  { label: "Tecnologia", href: "#tecnologia" },
+  { label: "Contato", href: "#contato" },
 ];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [sobre, setSobre] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -24,16 +25,18 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all ${
-        scrolled ? "bg-card/95 shadow-[var(--shadow-card)] backdrop-blur" : "bg-card/80 backdrop-blur"
+        scrolled
+          ? "bg-card/95 shadow-[var(--shadow-card)] backdrop-blur"
+          : "bg-card/80 backdrop-blur"
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5">
+      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5">
         <a href="#inicio" aria-label="Rocha Telhas — início">
-          <Logo />
+          <Logo size="lg" />
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {NAV.map((item) => (
+          {NAV.slice(0, 3).map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -42,6 +45,19 @@ export function Header() {
               {item.label}
             </a>
           ))}
+          <button
+            type="button"
+            onClick={() => setSobre(true)}
+            className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
+          >
+            Sobre Nós
+          </button>
+          <a
+            href="#contato"
+            className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
+          >
+            Contato
+          </a>
         </nav>
 
         <div className="hidden lg:block">
@@ -76,6 +92,16 @@ export function Header() {
                 {item.label}
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                setSobre(true);
+              }}
+              className="text-left text-base font-semibold text-primary"
+            >
+              Sobre Nós
+            </button>
           </nav>
           <div className="mt-5">
             <WhatsAppButton
@@ -88,6 +114,8 @@ export function Header() {
           </div>
         </div>
       ) : null}
+
+      <SobreModal open={sobre} onOpenChange={setSobre} />
     </header>
   );
 }

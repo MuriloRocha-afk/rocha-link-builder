@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Catalogo } from "@/components/site/Catalogo";
 import { Acao, Depoimentos, Faq, Unidades } from "@/components/site/Sections";
+import { Tecnologia, CtaFinal } from "@/components/site/Tecnologia";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/shared";
 import hero from "@/assets/hero-patio.jpg";
@@ -43,7 +44,7 @@ function Index() {
       <Header />
 
       <main>
-        <section id="inicio" className="relative flex min-h-[92vh] items-center pt-20">
+        <section id="inicio" className="relative flex min-h-[92vh] items-center pt-24">
           <img
             src={hero}
             alt="Pátio logístico da Rocha Telhas com caminhões carregando madeira e telhas"
@@ -64,8 +65,8 @@ function Index() {
                 sua Obra
               </h1>
               <p className="mt-6 max-w-2xl text-base text-primary-foreground/80 md:text-xl">
-                Tradição de mais de 25 anos entregando qualidade, agilidade com frota própria e o
-                melhor atendimento da região.
+                Mais de 25 anos de tradição, frota própria, agilidade nas entregas e maquinário de
+                alta precisão.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <WhatsAppButton message="Olá! Quero cotar telhas e madeiramento com a Rocha Telhas.">
@@ -73,7 +74,7 @@ function Index() {
                 </WhatsAppButton>
                 <Button asChild variant="outlineAccent" size="xl">
                   <a href="#produtos">
-                    Ver Catálogo de Produtos
+                    Ver Catálogo Completo
                     <ArrowRight />
                   </a>
                 </Button>
@@ -102,10 +103,12 @@ function Index() {
         </section>
 
         <Catalogo />
+        <Tecnologia />
         <Acao />
         <Depoimentos />
         <Faq />
         <Unidades />
+        <CtaFinal />
       </main>
 
       <Footer />
