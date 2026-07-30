@@ -12,7 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { SectionHeading, WhatsAppButton } from "./shared";
+import { CONTATO, SectionHeading, WhatsAppButton } from "./shared";
 import acao1 from "@/assets/acao-1.jpg";
 import acao2 from "@/assets/acao-2.jpg";
 import acao3 from "@/assets/acao-3.jpg";
@@ -246,10 +246,10 @@ export function Faq() {
 
 const UNIT = {
   name: "Rocha Telhas — Franco da Rocha",
-  address: "Av. Liberdade, 1.200 — Vila Bela, Franco da Rocha / SP · CEP 07850-000",
-  hours: "Segunda a Sexta: 07h30 às 17h30 · Sábado: 07h30 às 13h00",
-  phone: "(11) 4449-0000 — WhatsApp comercial",
-  map: "https://www.google.com/maps?q=Rocha+Telhas+Franco+da+Rocha+SP&output=embed",
+  address: CONTATO.address,
+  hours: CONTATO.hours,
+  phone: CONTATO.phone,
+  map: CONTATO.map,
 };
 
 export function Unidades() {

@@ -1,5 +1,5 @@
 import { Clock, Facebook, Instagram, MapPin, MessageCircle, Phone } from "lucide-react";
-import { Logo, WhatsAppButton, waLink } from "./shared";
+import { CONTATO, Logo, WhatsAppButton, waLink } from "./shared";
 
 export function Footer() {
   return (
@@ -7,8 +7,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-5">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           <div>
-            <div className="rounded-xl bg-primary-foreground/95 p-4 inline-block">
-              <Logo />
+            <div className="inline-block rounded-2xl bg-primary-foreground/95 p-6">
+              <Logo size="lg" />
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
               Distribuidora e madeireira com mais de 25 anos de tradição em Franco da Rocha e
@@ -17,15 +17,15 @@ export function Footer() {
             <ul className="mt-6 space-y-3 text-sm text-primary-foreground/70">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                Av. Liberdade, 1.200 — Vila Bela, Franco da Rocha / SP
+                {CONTATO.address}
               </li>
               <li className="flex gap-3">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                Seg a Sex: 07h30 às 17h30 · Sáb: 07h30 às 13h00
+                {CONTATO.hours}
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                (11) 4449-0000 — WhatsApp comercial
+                {CONTATO.phone}
               </li>
             </ul>
             <div className="mt-6 flex gap-3">
@@ -67,9 +67,11 @@ export function Footer() {
               {[
                 ["Início", "#inicio"],
                 ["Produtos", "#produtos"],
+                ["Tecnologia", "#tecnologia"],
                 ["A Rocha em Ação", "#acao"],
                 ["Depoimentos", "#depoimentos"],
                 ["Localização", "#unidades"],
+                ["Contato", "#contato"],
               ].map(([label, href]) => (
                 <li key={href}>
                   <a href={href} className="transition-colors hover:text-accent">
