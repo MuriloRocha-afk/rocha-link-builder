@@ -11,8 +11,8 @@ const ITEMS = [
   },
   {
     icon: Cog,
-    title: "Plaina Dupla Face Industrial Alca Máquinas",
-    text: "Aparelhamento simultâneo das duas faces: madeira lisa, padronizada e pronta para envernizar direto no canteiro.",
+    title: "Plaina Dupla Face Industrial ",
+    text: "Aparelhamento simultâneo das duas faces: madeira lisa, padronizada e pronta para envernizar direto no seu telhado.",
   },
   {
     icon: ShieldCheck,

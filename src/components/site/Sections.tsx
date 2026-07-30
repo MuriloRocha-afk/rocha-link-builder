@@ -259,7 +259,7 @@ export function Unidades() {
         <SectionHeading
           kicker="Localização"
           title="Venha conhecer nossa loja"
-          subtitle="Estamos em Franco da Rocha, atendendo toda a região. Venha tomar um café e conhecer o pátio, ou peça sua cotação sem sair do canteiro."
+          subtitle="Estamos em Franco da Rocha, atendendo toda a região. Venha tomar um café e conhecer a nossa loja, ou peça sua cotação sem sair de casa."
         />
         <div className="mt-14 grid gap-8 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] lg:grid-cols-2 lg:gap-0">
           <iframe
