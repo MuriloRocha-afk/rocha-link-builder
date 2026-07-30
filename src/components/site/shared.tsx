@@ -36,11 +36,27 @@ export function WhatsAppButton({
   );
 }
 
-export function Logo({ compact = false }: { compact?: boolean }) {
+export function Logo({
+  compact = false,
+  size = "lg",
+}: {
+  compact?: boolean;
+  size?: "md" | "lg";
+}) {
+  const big = size === "lg";
   return (
-    <span className="flex items-center gap-2.5">
-      <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground shadow-[var(--shadow-card)]">
-        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden="true">
+    <span className="flex items-center gap-3">
+      <span
+        className={`flex items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-[var(--shadow-card)] ${
+          big ? "h-14 w-14" : "h-11 w-11"
+        }`}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className={big ? "h-9 w-9" : "h-7 w-7"}
+          fill="none"
+          aria-hidden="true"
+        >
           <path
             d="M2 11 12 4l10 7"
             stroke="currentColor"
@@ -58,16 +74,25 @@ export function Logo({ compact = false }: { compact?: boolean }) {
           />
         </svg>
       </span>
-      <span className="font-display text-xl leading-none font-extrabold tracking-tight">
+      <span
+        className={`font-display leading-none font-extrabold tracking-tight ${
+          big ? "text-2xl md:text-3xl" : "text-xl"
+        }`}
+      >
         <span className="text-accent">ROCHA</span>
         <span className={compact ? "text-primary-foreground" : "text-primary"}> TELHAS</span>
-        <span className="mt-0.5 block text-[10px] font-semibold tracking-[0.22em] text-muted-foreground">
+        <span
+          className={`mt-1 block font-semibold tracking-[0.24em] ${
+            big ? "text-[11px]" : "text-[10px]"
+          } ${compact ? "text-primary-foreground/60" : "text-muted-foreground"}`}
+        >
           DESDE 1998
         </span>
       </span>
     </span>
   );
 }
+
 
 export function SectionHeading({
   kicker,
