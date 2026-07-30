@@ -36,16 +36,16 @@ const PRODUCTS: Produto[] = [
     description: "A tradição e o excelente encaixe para coberturas residenciais.",
   },
   {
-    name: "Telha de Barro Isotec / Resinada",
-    tag: "Telhas",
-    image: isotec,
-    description: "Alta durabilidade, camada resinada e proteção contra umidade.",
-  },
-  {
-    name: "Telha Colonial em PVC & Fibrocimento",
+    name: "Telha Colonial em PVC\u00a0",
     tag: "Telhas",
     image: pvc,
     description: "Solução leve, econômica, moderna e de instalação rápida.",
+  },
+  {
+    name: "Telha de Fibrocimento Ondulada",
+    tag: "Telhas",
+    image: fibro,
+    description: "Alta durabilidade e excelente custo-benefício para coberturas de grandes áreas.",
   },
   {
     name: "Madeiras Nativas Selecionadas — Cambará, Cedrinho e Outras Essências",
@@ -62,7 +62,7 @@ const PRODUCTS: Produto[] = [
       "Acabamento periférico de alta precisão que protege e valoriza as bordas do telhado.",
   },
   {
-    name: "Madeiririte Resinado e Plastificado",
+    name: "Madeirite Resinado e Plastificado",
     tag: "Madeiras & Chapas",
     image: madeirite,
     description: "Chapas de alta resistência para caixarias de concreto, fôrmas e tapumes de obra.",
@@ -75,7 +75,7 @@ const PRODUCTS: Produto[] = [
       "Vedação completa e proteção contra infiltrações para as paredes e estruturas do telhado.",
   },
   {
-    name: "Kit de Vedação para Pregos/Parafusos & Mantas Térmicas",
+    name: "Kit de Vedação para Pregos & Mantas Térmicas",
     tag: "Acabamento & Proteção",
     image: vedacao,
     description:
@@ -91,7 +91,14 @@ const PRODUCTS: Produto[] = [
 
   // Itens adicionais revelados ao filtrar a categoria
   {
-    name: "Telha Termoacústica e Fibrocimento Industrial",
+    name: "Telha de Barro Isotec / Resinada",
+    tag: "Telhas",
+    image: isotec,
+    description: "Alta durabilidade, camada resinada e proteção contra umidade.",
+    extra: true,
+  },
+  {
+    name: "Telha Termoacústica Industrial",
     tag: "Telhas",
     image: fibro,
     description:
