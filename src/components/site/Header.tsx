@@ -6,7 +6,7 @@ import { SobreModal } from "./SobreModal";
 const NAV = [
   { label: "Início", href: "#inicio" },
   { label: "Produtos", href: "#produtos" },
-  { label: "Tecnologia", href: "#tecnologia" },
+  { label: "Nossa Estrutura", href: "#tecnologia" },
   { label: "Contato", href: "#contato" },
 ];
 
