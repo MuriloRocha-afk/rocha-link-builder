@@ -75,7 +75,7 @@ const PRODUCTS: Produto[] = [
       "Vedação completa e proteção contra infiltrações para as paredes e estruturas do telhado.",
   },
   {
-    name: "Kit de Vedação para Pregos/Parafusos & Mantas Térmicas",
+    name: "Kit de Vedação para Pregos & Mantas Térmicas",
     tag: "Acabamento & Proteção",
     image: vedacao,
     description:
