@@ -91,7 +91,14 @@ const PRODUCTS: Produto[] = [
 
   // Itens adicionais revelados ao filtrar a categoria
   {
-    name: "Telha Termoacústica e Fibrocimento Industrial",
+    name: "Telha de Barro Isotec / Resinada",
+    tag: "Telhas",
+    image: isotec,
+    description: "Alta durabilidade, camada resinada e proteção contra umidade.",
+    extra: true,
+  },
+  {
+    name: "Telha Termoacústica Industrial",
     tag: "Telhas",
     image: fibro,
     description:
