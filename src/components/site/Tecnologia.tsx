@@ -95,7 +95,7 @@ export function CtaFinal() {
   return (
     <section id="contato" className="scroll-mt-24 bg-background py-24">
       <div className="mx-auto max-w-7xl px-5">
-        <div className="relative overflow-hidden rounded-3xl bg-[var(--gradient-hero,linear-gradient(120deg,var(--primary-deep),var(--primary)))] px-6 py-16 text-center shadow-[var(--shadow-lift)] md:px-16">
+        <div className="relative overflow-hidden rounded-3xl surface-dark px-6 py-16 text-center shadow-[var(--shadow-lift)] md:px-16">
           <span className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-accent/25 blur-3xl" />
           <h2 className="relative text-3xl font-extrabold text-primary-foreground md:text-5xl">
             Faça seu orçamento sem sair de casa!
