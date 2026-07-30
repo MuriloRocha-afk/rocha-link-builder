@@ -36,16 +36,16 @@ const PRODUCTS: Produto[] = [
     description: "A tradição e o excelente encaixe para coberturas residenciais.",
   },
   {
-    name: "Telha de Barro Isotec / Resinada",
-    tag: "Telhas",
-    image: isotec,
-    description: "Alta durabilidade, camada resinada e proteção contra umidade.",
-  },
-  {
-    name: "Telha Colonial em PVC & Fibrocimento",
+    name: "Telha Colonial em PVC\u00a0",
     tag: "Telhas",
     image: pvc,
     description: "Solução leve, econômica, moderna e de instalação rápida.",
+  },
+  {
+    name: "Telha de Fibrocimento Ondulada",
+    tag: "Telhas",
+    image: fibro,
+    description: "Alta durabilidade e excelente custo-benefício para coberturas de grandes áreas.",
   },
   {
     name: "Madeiras Nativas Selecionadas — Cambará, Cedrinho e Outras Essências",
