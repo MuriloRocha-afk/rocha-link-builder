@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Check, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { waLink } from "@/components/site/shared";
 import { CATEGORIES } from "@/components/site/catalog-data";
 
-export const Route = createFileRoute("/catalogo")({
+export const Route = createFileRoute("/catalogo/")({
   head: () => ({
     meta: [
       { title: "Catálogo de Telhas e Madeiramento | Rocha Telhas" },
@@ -144,18 +144,29 @@ function CatalogoPage() {
                         </ul>
                       ) : null}
 
-                      <Button asChild variant="whats" className="mt-6 h-12 w-full">
-                        <a
-                          href={waLink(
-                            `Olá, gostaria de pedir um orçamento sobre ${item.name}.`,
-                          )}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <MessageCircle />
-                          {item.cta ?? "Cotar no WhatsApp"}
-                        </a>
-                      </Button>
+                      <div className="mt-6 flex flex-col gap-3">
+                        <Button asChild variant="cta" className="h-12 w-full">
+                          <Link
+                            to="/catalogo/$produtoSlug"
+                            params={{ produtoSlug: item.slug }}
+                          >
+                            Visualizar Detalhes
+                            <ArrowRight />
+                          </Link>
+                        </Button>
+                        <Button asChild variant="whats" className="h-12 w-full">
+                          <a
+                            href={waLink(
+                              `Olá, gostaria de pedir um orçamento sobre ${item.name}.`,
+                            )}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <MessageCircle />
+                            {item.cta ?? "Cotar no WhatsApp"}
+                          </a>
+                        </Button>
+                      </div>
                     </div>
                   </article>
                 ))}
