@@ -5,6 +5,7 @@ import { Header } from "@/components/site/Header";
 import { Categorias } from "@/components/site/Categorias";
 import { Acao, Depoimentos, Faq, Unidades } from "@/components/site/Sections";
 import { Tecnologia, CtaFinal } from "@/components/site/Tecnologia";
+import { AvisoEntrega } from "@/components/site/AvisoEntrega";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/shared";
 import hero from "@/assets/hero-patio.jpg";
@@ -104,6 +105,7 @@ function Index() {
         <Categorias />
         <Tecnologia />
         <Acao />
+        <AvisoEntrega />
         <Depoimentos />
         <Faq />
         <Unidades />
