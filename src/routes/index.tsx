@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Award, Truck, TreePine, CreditCard, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
-import { Catalogo } from "@/components/site/Catalogo";
+import { Categorias } from "@/components/site/Categorias";
 import { Acao, Depoimentos, Faq, Unidades } from "@/components/site/Sections";
 import { Tecnologia, CtaFinal } from "@/components/site/Tecnologia";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
@@ -60,24 +60,23 @@ function Index() {
                 Franco da Rocha · SP
               </span>
               <h1 className="mt-6 text-4xl leading-[1.05] font-extrabold text-primary-foreground md:text-6xl lg:text-7xl">
-                A Solução Completa em{" "}
-                <span className="text-gradient-accent">Telhas e Madeiramento</span> Estrutural para
-                sua Obra
+                A Maior Variedade em{" "}
+                <span className="text-gradient-accent">Telhas e Madeiramento Nobre</span> da Região
               </h1>
               <p className="mt-6 max-w-2xl text-base text-primary-foreground/80 md:text-xl">
-                Mais de 25 anos de tradição, frota própria, agilidade nas entregas e maquinário de
-                alta precisão.
+                Entrega rápida com frota própria e madeira aparelhada em plaina industrial de alta
+                precisão.
               </p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <WhatsAppButton message="Olá! Quero cotar telhas e madeiramento com a Rocha Telhas.">
-                  Cotar pelo WhatsApp Agora
-                </WhatsAppButton>
                 <Button asChild variant="outlineAccent" size="xl">
-                  <a href="#produtos">
+                  <Link to="/catalogo">
                     Ver Catálogo Completo
                     <ArrowRight />
-                  </a>
+                  </Link>
                 </Button>
+                <WhatsAppButton message="Olá! Quero falar com um vendedor da Rocha Telhas.">
+                  Falar com um Vendedor
+                </WhatsAppButton>
               </div>
             </div>
           </div>
@@ -102,7 +101,7 @@ function Index() {
           <div className="h-14" />
         </section>
 
-        <Catalogo />
+        <Categorias />
         <Tecnologia />
         <Acao />
         <Depoimentos />

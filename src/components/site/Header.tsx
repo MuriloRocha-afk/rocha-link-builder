@@ -1,14 +1,41 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Logo, WhatsAppButton } from "./shared";
 import { SobreModal } from "./SobreModal";
 
-const NAV = [
-  { label: "Início", href: "#inicio" },
-  { label: "Produtos", href: "#produtos" },
-  { label: "Nossa Estrutura", href: "#tecnologia" },
-  { label: "Contato", href: "#contato" },
+type NavItem = { label: string; hash?: string; to?: string };
+
+const NAV: NavItem[] = [
+  { label: "Home", to: "/" },
+  { label: "Estrutura & Pátio", hash: "tecnologia" },
+  { label: "Catálogo", to: "/catalogo" },
+  { label: "Depoimentos", hash: "depoimentos" },
+  { label: "Contato", hash: "contato" },
 ];
+
+function NavLink({
+  item,
+  onClick,
+  className,
+}: {
+  item: NavItem;
+  onClick?: () => void;
+  className: string;
+}) {
+  if (item.to) {
+    return (
+      <Link to={item.to} onClick={onClick} className={className}>
+        {item.label}
+      </Link>
+    );
+  }
+  return (
+    <Link to="/" hash={item.hash} onClick={onClick} className={className}>
+      {item.label}
+    </Link>
+  );
+}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,19 +58,17 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5">
-        <a href="#inicio" aria-label="Rocha Telhas — início">
+        <Link to="/" aria-label="Rocha Telhas — início">
           <Logo size="lg" />
-        </a>
+        </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {NAV.slice(0, 3).map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
+        <nav className="hidden items-center gap-7 lg:flex">
+          {NAV.map((item) => (
+            <NavLink
+              key={item.label}
+              item={item}
               className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
-            >
-              {item.label}
-            </a>
+            />
           ))}
           <button
             type="button"
@@ -52,12 +77,6 @@ export function Header() {
           >
             Sobre Nós
           </button>
-          <a
-            href="#contato"
-            className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
-          >
-            Contato
-          </a>
         </nav>
 
         <div className="hidden lg:block">
@@ -83,14 +102,12 @@ export function Header() {
         <div className="border-t border-border bg-card px-5 py-5 lg:hidden">
           <nav className="flex flex-col gap-4">
             {NAV.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
+              <NavLink
+                key={item.label}
+                item={item}
                 onClick={() => setOpen(false)}
                 className="text-base font-semibold text-primary"
-              >
-                {item.label}
-              </a>
+              />
             ))}
             <button
               type="button"

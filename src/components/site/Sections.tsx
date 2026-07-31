@@ -1,4 +1,6 @@
+import Autoplay from "embla-carousel-autoplay";
 import { Star, MapPin, Clock, Phone, Play } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
@@ -175,25 +177,35 @@ export function Depoimentos() {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {REVIEWS.map((r) => (
-            <blockquote
-              key={r.name}
-              className="flex flex-col rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)]"
-            >
-              <div className="flex gap-1 text-accent">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-5 flex-1 text-sm leading-relaxed text-foreground/80">“{r.text}”</p>
-              <footer className="mt-6 border-t border-border pt-4">
-                <p className="text-sm font-extrabold text-primary">{r.name}</p>
-                <p className="text-xs text-muted-foreground">{r.role}</p>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
+        <Carousel
+          opts={{ align: "start", loop: true }}
+          plugins={[Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })]}
+          className="mt-14"
+        >
+          <CarouselContent className="-ml-6">
+            {REVIEWS.map((r) => (
+              <CarouselItem key={r.name} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <blockquote className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)]">
+                  <div className="flex gap-1 text-accent">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                  <p className="mt-5 flex-1 text-sm leading-relaxed text-foreground/80">
+                    “{r.text}”
+                  </p>
+                  <footer className="mt-6 border-t border-border pt-4">
+                    <p className="text-sm font-extrabold text-primary">{r.name}</p>
+                    <p className="text-xs text-muted-foreground">{r.role}</p>
+                  </footer>
+                </blockquote>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="-left-2 lg:-left-6" />
+          <CarouselNext className="-right-2 lg:-right-6" />
+        </Carousel>
+
       </div>
     </section>
   );
