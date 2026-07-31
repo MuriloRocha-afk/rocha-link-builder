@@ -213,22 +213,23 @@ export function Depoimentos() {
 
 const FAQ = [
   {
-    q: "Como funciona o frete e o prazo de entrega?",
-    a: "Temos frota própria com caminhões de diferentes portes, o que nos permite entregar em toda a Grande São Paulo e interior. Pedidos confirmados até o meio-dia normalmente são entregues em até 24 a 48 horas, conforme a região e o volume. O valor do frete é calculado na cotação pelo WhatsApp.",
+    q: "Como funciona o descarregamento do material no local?",
+    a: "A entrega e o descarregamento são feitos na frente do imóvel ou no endereço acordado, sempre no nível do solo (térreo). Por segurança da equipe, os motoristas e ajudantes não realizam transporte manual interno, subida de escadas, elevadores ou rampas. Se a obra precisar de içamento ou movimentação interna, recomendamos combinar ajudantes no local.",
+  },
+  {
+    q: "Quais regiões a Rocha Telhas atende?",
+    a: "Atendemos Franco da Rocha, Caieiras, Francisco Morato, Mairiporã, Cajamar, Perus, Pirituba e toda a Grande São Paulo com frota própria. Para obras no interior, consulte o comercial pelo WhatsApp.",
+  },
+  {
+    q: "Quais as formas de pagamento aceitas?",
+    a: "Aceitamos PIX, cartões de crédito e débito, dinheiro e pagamento presencial no ato da entrega através da maquininha do motorista. Para construtoras e obras de grande porte trabalhamos com condições especiais.",
   },
   {
     q: "Vocês vendem madeira sob medida?",
-    a: "Sim. Cortamos vigas, caibros, ripas, pranchas e sarrafos nas medidas do seu projeto. Basta enviar a lista ou a planta pelo WhatsApp que a nossa equipe técnica calcula as peças e o rendimento do madeiramento.",
-  },
-  {
-    q: "Como solicitar um orçamento rápido?",
-    a: "Clique em qualquer botão verde do site e fale direto com o comercial no WhatsApp. Envie a metragem do telhado, a lista de materiais ou uma foto do projeto — respondemos com a cotação completa em poucos minutos no horário comercial.",
-  },
-  {
-    q: "Quais são as formas de pagamento aceitas?",
-    a: "Aceitamos PIX, dinheiro, débito, boleto para clientes cadastrados e cartão de crédito parcelado em até 12x. Para construtoras e obras de grande porte trabalhamos com condições e prazos especiais.",
+    a: "Sim. Cortamos e aparelhamos vigas, caibros, ripas, pranchas e sarrafos nas medidas do seu projeto, direto no nosso pátio, em plaina industrial de alta precisão. Envie a lista ou a planta pelo WhatsApp e a nossa equipe técnica calcula as peças.",
   },
 ];
+
 
 export function Faq() {
   return (

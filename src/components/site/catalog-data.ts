@@ -14,12 +14,16 @@ import rufos from "@/assets/prod-rufos.jpg";
 import tabeira from "@/assets/prod-tabeira.jpg";
 
 export type CatalogItem = {
+  slug: string;
   name: string;
   image: string;
   summary: string;
   specs: { label: string; value: string }[];
   badges?: string[];
   cta?: string;
+  gallery?: string[];
+  bitolas?: { label: string; value: string }[];
+  note?: string;
 };
 
 export type CatalogCategory = {
@@ -41,6 +45,7 @@ export const CATEGORIES: CatalogCategory[] = [
     image: ceramica,
     items: [
       {
+        slug: "telha-romana-ceramica",
         name: "Telha Romana (Cerâmica)",
         image: ceramica,
         summary: "Encaixe preciso e visual clássico para coberturas residenciais.",
@@ -52,6 +57,7 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
       },
       {
+        slug: "telha-portuguesa-ceramica",
         name: "Telha Portuguesa (Cerâmica)",
         image: isotec,
         summary: "Encaixe duplo com excelente vedação contra chuva de vento.",
@@ -63,6 +69,7 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
       },
       {
+        slug: "telha-pvc-colonial",
         name: "Telha PVC Colonial",
         image: pvc,
         summary: "Leveza extrema, instalação rápida e alto conforto térmico.",
@@ -74,6 +81,7 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
       },
       {
+        slug: "telha-fibrocimento-infibra",
         name: "Telha Fibrocimento (Infibra)",
         image: fibro,
         summary: "Solução econômica e resistente para grandes coberturas e galpões.",
@@ -85,6 +93,7 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
       },
       {
+        slug: "telhas-translucidas",
         name: "Telhas Translúcidas & Polipropileno",
         image: translucida,
         summary: "Iluminação natural sem abrir mão da vedação da cobertura.",
@@ -106,6 +115,7 @@ export const CATEGORIES: CatalogCategory[] = [
     image: cambara,
     items: [
       {
+        slug: "madeira-cambara",
         name: "Cambará",
         image: cambara,
         summary: "Madeira nobre para coberturas pesadas e estruturas aparentes.",
@@ -115,9 +125,18 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Aplicações", value: "Coberturas pesadas, pergolados e estruturas visíveis" },
           { label: "Acabamento", value: "Aparelhada em plaina industrial" },
         ],
+        bitolas: [
+          { label: "Vigas", value: "5x15 cm · 5x11 cm" },
+          { label: "Caibros", value: "5x7 cm · 5x6 cm" },
+          { label: "Ripas", value: "2x5 cm" },
+          { label: "Pranchas e sarrafos", value: "Sob medida" },
+          { label: "Comprimentos", value: "De 3,0 m a 7,5 m" },
+        ],
+        note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["DOF/IBAMA Legalizado", "Aparelhada em Plaina Industrial"],
       },
       {
+        slug: "madeira-cedrinho",
         name: "Cedrinho",
         image: cedrinho,
         summary: "Leve, estável e com acabamento estético superior.",
@@ -127,9 +146,17 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Diferencial", value: "Baixo peso e ótima usinagem" },
           { label: "Acabamento", value: "Aparelhada em plaina industrial" },
         ],
+        bitolas: [
+          { label: "Caibros", value: "5x6 cm · 5x7 cm" },
+          { label: "Ripas", value: "2x5 cm" },
+          { label: "Lambri / Forro", value: "10 cm de largura" },
+          { label: "Comprimentos", value: "De 3,0 m a 6,0 m" },
+        ],
+        note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["DOF/IBAMA Legalizado", "Aparelhada em Plaina Industrial"],
       },
       {
+        slug: "pinus-eucalipto-tratado",
         name: "Pinus & Eucalipto Tratado",
         image: eucalipto,
         summary: "Reflorestamento tratado em autoclave para obra e estrutura.",
@@ -139,9 +166,17 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Tratamento", value: "Autoclavado contra cupim e umidade" },
           { label: "Complementos", value: "Madeirite resinado e plastificado" },
         ],
+        bitolas: [
+          { label: "Tábuas", value: "20 cm e 30 cm de largura" },
+          { label: "Pontaletes", value: "7x7 cm" },
+          { label: "Sarrafos", value: "2,5x10 cm" },
+          { label: "Comprimentos", value: "De 3,0 m a 6,0 m" },
+        ],
+        note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["Reflorestamento", "Tratado em Autoclave"],
       },
       {
+        slug: "madeirite-tabeiras",
         name: "Madeirite & Tabeiras",
         image: madeirite,
         summary: "Chapas estruturais e acabamento periférico do telhado.",
@@ -163,6 +198,7 @@ export const CATEGORIES: CatalogCategory[] = [
     image: verniz,
     items: [
       {
+        slug: "vernizes-stain-protector",
         name: "Vernizes & Stain Protector",
         image: verniz,
         summary: "Proteção UV e ação hidrorrepelente para madeiras internas e externas.",
@@ -175,6 +211,7 @@ export const CATEGORIES: CatalogCategory[] = [
         cta: "Consultar Cores no Balcão",
       },
       {
+        slug: "tintas-emborrachadas-resinas",
         name: "Tintas Emborrachadas & Resinas para Telha",
         image: tintaTelha,
         summary: "Impermeabilização e renovação visual de telhados e alvenaria.",
@@ -187,6 +224,7 @@ export const CATEGORIES: CatalogCategory[] = [
         cta: "Consultar Cores no Balcão",
       },
       {
+        slug: "cupinicidas-seladores",
         name: "Cupinicidas & Seladores",
         image: tabeira,
         summary: "Tratamento preventivo e curativo para todo o madeiramento.",
@@ -209,6 +247,7 @@ export const CATEGORIES: CatalogCategory[] = [
     image: acessorios,
     items: [
       {
+        slug: "kits-fixacao-vedacao",
         name: "Kits de Fixação e Vedação",
         image: acessorios,
         summary:
@@ -222,6 +261,7 @@ export const CATEGORIES: CatalogCategory[] = [
         badges: ["Linha completa em estoque"],
       },
       {
+        slug: "rufos-calhas-pingadeiras",
         name: "Rufos, Calhas & Pingadeiras",
         image: rufos,
         summary: "Vedação galvanizada sob medida para paredes e bordas do telhado.",
@@ -233,6 +273,7 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
       },
       {
+        slug: "cumeeiras-complementos",
         name: "Cumeeiras & Complementos",
         image: fibro,
         summary: "Peças de arremate para fechar toda a cobertura em uma única compra.",
@@ -246,3 +287,15 @@ export const CATEGORIES: CatalogCategory[] = [
     ],
   },
 ];
+
+export function findProduct(slug: string) {
+  for (const category of CATEGORIES) {
+    const item = category.items.find((i) => i.slug === slug);
+    if (item) return { category, item };
+  }
+  return undefined;
+}
+
+export const ALL_PRODUCTS = CATEGORIES.flatMap((c) =>
+  c.items.map((item) => ({ category: c, item })),
+);
