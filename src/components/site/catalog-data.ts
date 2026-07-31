@@ -125,6 +125,14 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Aplicações", value: "Coberturas pesadas, pergolados e estruturas visíveis" },
           { label: "Acabamento", value: "Aparelhada em plaina industrial" },
         ],
+        bitolas: [
+          { label: "Vigas", value: "5x15 cm · 5x11 cm" },
+          { label: "Caibros", value: "5x7 cm · 5x6 cm" },
+          { label: "Ripas", value: "2x5 cm" },
+          { label: "Pranchas e sarrafos", value: "Sob medida" },
+          { label: "Comprimentos", value: "De 3,0 m a 7,5 m" },
+        ],
+        note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["DOF/IBAMA Legalizado", "Aparelhada em Plaina Industrial"],
       },
       {
@@ -138,6 +146,13 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Diferencial", value: "Baixo peso e ótima usinagem" },
           { label: "Acabamento", value: "Aparelhada em plaina industrial" },
         ],
+        bitolas: [
+          { label: "Caibros", value: "5x6 cm · 5x7 cm" },
+          { label: "Ripas", value: "2x5 cm" },
+          { label: "Lambri / Forro", value: "10 cm de largura" },
+          { label: "Comprimentos", value: "De 3,0 m a 6,0 m" },
+        ],
+        note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["DOF/IBAMA Legalizado", "Aparelhada em Plaina Industrial"],
       },
       {
@@ -151,6 +166,13 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Tratamento", value: "Autoclavado contra cupim e umidade" },
           { label: "Complementos", value: "Madeirite resinado e plastificado" },
         ],
+        bitolas: [
+          { label: "Tábuas", value: "20 cm e 30 cm de largura" },
+          { label: "Pontaletes", value: "7x7 cm" },
+          { label: "Sarrafos", value: "2,5x10 cm" },
+          { label: "Comprimentos", value: "De 3,0 m a 6,0 m" },
+        ],
+        note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["Reflorestamento", "Tratado em Autoclave"],
       },
       {
@@ -265,3 +287,15 @@ export const CATEGORIES: CatalogCategory[] = [
     ],
   },
 ];
+
+export function findProduct(slug: string) {
+  for (const category of CATEGORIES) {
+    const item = category.items.find((i) => i.slug === slug);
+    if (item) return { category, item };
+  }
+  return undefined;
+}
+
+export const ALL_PRODUCTS = CATEGORIES.flatMap((c) =>
+  c.items.map((item) => ({ category: c, item })),
+);
