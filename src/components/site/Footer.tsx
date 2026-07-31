@@ -1,4 +1,5 @@
 import { Clock, Facebook, Instagram, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { CONTATO, Logo, WhatsAppButton, waLink } from "./shared";
 
 export function Footer() {
@@ -11,8 +12,9 @@ export function Footer() {
               <Logo size="lg" />
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
-              Distribuidora e madeireira com mais de 25 anos de tradição em Franco da Rocha e
-              região. Telhas, madeiramento estrutural e acessórios com frota própria.
+              Distribuidora e madeireira com mais de 25 anos de tradição. Atendemos Franco da
+              Rocha, Caieiras, Francisco Morato, Mairiporã, Perus e toda a região com frota
+              própria.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-primary-foreground/70">
               <li className="flex gap-3">
@@ -66,6 +68,7 @@ export function Footer() {
             <ul className="mt-5 space-y-3 text-sm text-primary-foreground/70">
               {[
                 ["Início", "#inicio"],
+                ["Catálogo completo", "/catalogo"],
                 ["Produtos", "#produtos"],
                 ["Nossa Estrutura", "#tecnologia"],
                 ["A Rocha em Ação", "#acao"],
@@ -74,9 +77,15 @@ export function Footer() {
                 ["Contato", "#contato"],
               ].map(([label, href]) => (
                 <li key={href}>
-                  <a href={href} className="transition-colors hover:text-accent">
-                    {label}
-                  </a>
+                  {href.startsWith("#") ? (
+                    <Link to="/" hash={href.slice(1)} className="transition-colors hover:text-accent">
+                      {label}
+                    </Link>
+                  ) : (
+                    <Link to={href} className="transition-colors hover:text-accent">
+                      {label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
