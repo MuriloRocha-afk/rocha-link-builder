@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowLeft, Crown } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import { waLink } from "@/components/site/shared";
 import { CATEGORIES } from "@/components/site/catalog-data";
-import { AddToQuoteButton } from "@/components/site/quote-cart";
-
+import { ProductCatalogCard } from "@/components/site/ProductCard";
+import { CalculadoraTelhas } from "@/components/site/Calculadora";
 
 export const Route = createFileRoute("/catalogo/")({
   head: () => ({
@@ -16,13 +14,13 @@ export const Route = createFileRoute("/catalogo/")({
       {
         name: "description",
         content:
-          "Fichas técnicas de telhas cerâmicas, PVC, fibrocimento, madeiramento em cambará e cedrinho, tintas, vernizes e fixadores. Cote pelo WhatsApp.",
+          "Campeões de venda em telhas de fibrocimento, PVC e madeira cambará, com seletores de bitola, cor e dimensão. Monte seu orçamento e cote pelo WhatsApp.",
       },
       { property: "og:title", content: "Catálogo completo — Rocha Telhas" },
       {
         property: "og:description",
         content:
-          "Telhas, madeiramento aparelhado, tintas e fixadores com ficha técnica e cotação direta no WhatsApp.",
+          "Telhas, madeiramento aparelhado, tintas e funilaria com seletores de variação e cotação direta no WhatsApp.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -54,9 +52,9 @@ function CatalogoPage() {
               madeiramento e acabamentos
             </h1>
             <p className="mt-5 max-w-2xl text-base text-primary-foreground/75 md:text-lg">
-              Ficha técnica direta de cada linha que mantemos em estoque. Escolha o produto e receba
-              a cotação na hora pelo WhatsApp — sem preços no site, sempre a melhor condição para a
-              sua obra.
+              Os campeões de venda vêm primeiro, com seletor de dimensão, cor e bitola. Escolha a
+              variação exata, adicione ao orçamento e receba a cotação no WhatsApp — sem preços no
+              site, sempre a melhor condição para a sua obra.
             </p>
           </div>
         </section>
@@ -80,109 +78,74 @@ function CatalogoPage() {
           </div>
         </div>
 
-        {visible.map((cat) => (
-          <section
-            key={cat.id}
-            id={cat.id}
-            className="scroll-mt-44 border-b border-border bg-background py-20 last:border-b-0"
-          >
-            <div className="mx-auto max-w-7xl px-5">
-              <div className="max-w-3xl">
-                <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-4 py-1 text-xs font-bold tracking-[0.18em] text-accent uppercase">
-                  Categoria
-                </span>
-                <h2 className="mt-4 text-3xl font-extrabold text-primary md:text-4xl">
-                  {cat.title}
-                </h2>
-                <p className="mt-3 text-base text-muted-foreground">{cat.description}</p>
-              </div>
+        {visible.map((cat) => {
+          const destaques = cat.items.filter((i) => i.featured);
+          const demais = cat.items.filter((i) => !i.featured);
 
-              <div className="mt-10 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-                {cat.items.map((item) => (
-                  <article
-                    key={item.name}
-                    className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        loading="lazy"
-                        width={1024}
-                        height={768}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <span className="absolute top-4 left-4 rounded-full bg-accent px-3 py-1 text-[11px] font-bold tracking-wider text-accent-foreground uppercase">
-                        {cat.short}
-                      </span>
+          return (
+            <section
+              key={cat.id}
+              id={cat.id}
+              className="scroll-mt-44 border-b border-border bg-background py-20 last:border-b-0"
+            >
+              <div className="mx-auto max-w-7xl px-5">
+                <div className="max-w-3xl">
+                  <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-4 py-1 text-xs font-bold tracking-[0.18em] text-accent uppercase">
+                    Categoria
+                  </span>
+                  <h2 className="mt-4 text-3xl font-extrabold text-primary md:text-4xl">
+                    {cat.title}
+                  </h2>
+                  <p className="mt-3 text-base text-muted-foreground">{cat.description}</p>
+                </div>
+
+                {destaques.length ? (
+                  <>
+                    <div className="mt-10 flex items-center gap-2 text-sm font-extrabold tracking-[0.14em] text-accent uppercase">
+                      <Crown className="h-4 w-4" />
+                      Destaques e campeões de venda
                     </div>
-
-                    <div className="flex flex-1 flex-col p-6">
-                      <h3 className="text-lg font-extrabold text-primary">{item.name}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {item.summary}
-                      </p>
-
-                      <dl className="mt-5 space-y-2 border-t border-border pt-5 text-sm">
-                        {item.specs.map((s) => (
-                          <div key={s.label} className="grid grid-cols-[auto_1fr] gap-3">
-                            <dt className="font-bold text-primary/80">{s.label}</dt>
-                            <dd className="text-right text-muted-foreground">{s.value}</dd>
-                          </div>
-                        ))}
-                      </dl>
-
-                      {item.badges?.length ? (
-                        <ul className="mt-5 flex flex-wrap gap-2">
-                          {item.badges.map((b) => (
-                            <li
-                              key={b}
-                              className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-bold text-accent"
-                            >
-                              <Check className="h-3 w-3" />
-                              {b}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
-
-                      <div className="mt-6 flex flex-col gap-3">
-                        <Button asChild variant="cta" className="h-12 w-full">
-                          <Link
-                            to="/catalogo/$produtoSlug"
-                            params={{ produtoSlug: item.slug }}
-                          >
-                            Visualizar Detalhes
-                            <ArrowRight />
-                          </Link>
-                        </Button>
-                        <AddToQuoteButton
-                          id={item.slug}
-                          name={item.name}
-                          detail={cat.short}
-                          className="h-12 w-full"
+                    <div className="mt-5 grid gap-7 xl:grid-cols-2">
+                      {destaques.map((item) => (
+                        <ProductCatalogCard
+                          key={item.slug}
+                          item={item}
+                          categoryShort={cat.short}
+                          expansive
                         />
-                        <Button asChild variant="whats" className="h-12 w-full">
-                          <a
-                            href={waLink(
-                              `Olá, gostaria de pedir um orçamento sobre ${item.name}.`,
-                            )}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <MessageCircle />
-                            {item.cta ?? "Cotar no WhatsApp"}
-                          </a>
-                        </Button>
-                      </div>
-
+                      ))}
                     </div>
-                  </article>
-                ))}
+                  </>
+                ) : null}
+
+                {demais.length ? (
+                  <>
+                    <div className="mt-14 text-sm font-extrabold tracking-[0.14em] text-primary/60 uppercase">
+                      Demais opções da categoria
+                    </div>
+                    <div className="mt-5 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+                      {demais.map((item) => (
+                        <ProductCatalogCard
+                          key={item.slug}
+                          item={item}
+                          categoryShort={cat.short}
+                        />
+                      ))}
+                    </div>
+                  </>
+                ) : null}
               </div>
+            </section>
+          );
+        })}
+
+        {filtro === "todas" || filtro === "telhas" ? (
+          <section className="bg-secondary py-20">
+            <div className="mx-auto max-w-3xl px-5">
+              <CalculadoraTelhas />
             </div>
           </section>
-        ))}
+        ) : null}
       </main>
 
       <Footer />

@@ -8,7 +8,7 @@ import type { CatalogItem } from "./catalog-data";
 
 function BestsellerBadge({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--gradient-accent,linear-gradient(135deg,var(--accent),var(--accent)))] bg-accent px-3.5 py-1.5 text-[11px] font-extrabold tracking-wider text-accent-foreground uppercase shadow-[var(--shadow-lift)]">
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-[11px] font-extrabold tracking-wider text-accent-foreground uppercase shadow-[var(--shadow-lift)]">
       <Crown className="h-3.5 w-3.5" />
       {label}
     </span>
