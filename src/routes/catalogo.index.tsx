@@ -6,6 +6,8 @@ import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { waLink } from "@/components/site/shared";
 import { CATEGORIES } from "@/components/site/catalog-data";
+import { AddToQuoteButton } from "@/components/site/quote-cart";
+
 
 export const Route = createFileRoute("/catalogo/")({
   head: () => ({
