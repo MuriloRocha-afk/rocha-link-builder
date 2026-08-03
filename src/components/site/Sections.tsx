@@ -233,7 +233,7 @@ const FAQ = [
 
 export function Faq() {
   return (
-    <section className="bg-background py-24">
+    <section id="faq" className="scroll-mt-24 bg-background py-24">
       <div className="mx-auto max-w-3xl px-5">
         <SectionHeading kicker="FAQ" title="Dúvidas frequentes" />
         <Accordion type="single" collapsible className="mt-10">
