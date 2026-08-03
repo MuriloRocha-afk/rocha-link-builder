@@ -3,16 +3,19 @@ import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Logo, WhatsAppButton } from "./shared";
 import { SobreModal } from "./SobreModal";
+import { QuoteCartButton } from "./quote-cart";
 
 type NavItem = { label: string; hash?: string; to?: string };
 
 const NAV: NavItem[] = [
   { label: "Home", to: "/" },
-  { label: "Estrutura & Pátio", hash: "tecnologia" },
   { label: "Catálogo", to: "/catalogo" },
-  { label: "Depoimentos", hash: "depoimentos" },
+  { label: "Estrutura & Pátio", hash: "tecnologia" },
+  { label: "Calculadora", to: "/calculadora" },
+  { label: "FAQ", hash: "faq" },
   { label: "Contato", hash: "contato" },
 ];
+
 
 function NavLink({
   item,
@@ -62,7 +65,7 @@ export function Header() {
           <Logo size="lg" />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {NAV.map((item) => (
             <NavLink
               key={item.label}
@@ -79,23 +82,28 @@ export function Header() {
           </button>
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-3 lg:flex">
+          <QuoteCartButton />
           <WhatsAppButton
             size="lg"
             message="Olá! Gostaria de solicitar um orçamento na Rocha Telhas."
           >
-            Solicitar Orçamento
+            Falar no WhatsApp
           </WhatsAppButton>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Abrir menu"
-          className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary lg:hidden"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <QuoteCartButton />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Abrir menu"
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+
       </div>
 
       {open ? (

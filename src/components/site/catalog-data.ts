@@ -23,6 +23,7 @@ export type CatalogItem = {
   cta?: string;
   gallery?: string[];
   bitolas?: { label: string; value: string }[];
+  instrucoes?: string[];
   note?: string;
 };
 
@@ -126,11 +127,28 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Acabamento", value: "Aparelhada em plaina industrial" },
         ],
         bitolas: [
-          { label: "Vigas", value: "5x15 cm · 5x11 cm" },
-          { label: "Caibros", value: "5x7 cm · 5x6 cm" },
-          { label: "Ripas", value: "2x5 cm" },
-          { label: "Pranchas e sarrafos", value: "Sob medida" },
-          { label: "Comprimentos", value: "De 3,0 m a 7,5 m" },
+          { label: "Ripas", value: "1,5 x 5 cm" },
+          { label: "Sarrafos", value: "2x5 cm · 2x7 cm · 2x10 cm · 2x15 cm" },
+          { label: "Caibros", value: "5x5 cm · 5x7 cm" },
+          {
+            label: "Vigas e vigotas",
+            value: "5x11 · 5x15 · 5x20 · 5x25 · 5x30 · 7x15 · 7x20 · 7x30 cm",
+          },
+          {
+            label: "Tábuas e pranchões",
+            value: "2x20 · 2x25 · 2x30 · 5x30 · 7x30 · 10x30 cm",
+          },
+          {
+            label: "Comprimentos",
+            value: "De 2,5 m a 8,5 m (passos de 0,5 m) ou corte sob medida no pátio",
+          },
+        ],
+        instrucoes: [
+          "Galgamento das ripas: confira o rendimento da telha escolhida antes de fixar as ripas e mantenha o espaçamento constante em todo o pano do telhado.",
+          "Armazenagem na obra: empilhe as peças sobre calços a pelo menos 10 cm do solo, em local coberto e ventilado, evitando contato direto com umidade e concreto fresco.",
+          "Para evitar empenamento, mantenha as pilhas alinhadas com sarrafos espaçadores entre as camadas e nunca deixe as peças ao sol e chuva alternados.",
+          "Aplique cupinicida/selador antes da montagem e finalize com verniz ou stain após a estrutura montada, reforçando topos e cortes feitos na obra.",
+          "Cortes realizados no canteiro devem receber nova demão de proteção no mesmo dia.",
         ],
         note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["DOF/IBAMA Legalizado", "Aparelhada em Plaina Industrial"],
@@ -147,10 +165,28 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Acabamento", value: "Aparelhada em plaina industrial" },
         ],
         bitolas: [
-          { label: "Caibros", value: "5x6 cm · 5x7 cm" },
-          { label: "Ripas", value: "2x5 cm" },
-          { label: "Lambri / Forro", value: "10 cm de largura" },
-          { label: "Comprimentos", value: "De 3,0 m a 6,0 m" },
+          { label: "Ripas", value: "1,5 x 5 cm" },
+          { label: "Sarrafos", value: "2x5 cm · 2x7 cm · 2x10 cm · 2x15 cm" },
+          { label: "Caibros", value: "5x5 cm · 5x7 cm" },
+          {
+            label: "Vigas e vigotas",
+            value: "5x11 · 5x15 · 5x20 · 5x25 · 5x30 · 7x15 · 7x20 · 7x30 cm",
+          },
+          {
+            label: "Tábuas e pranchões",
+            value: "2x20 · 2x25 · 2x30 · 5x30 · 7x30 · 10x30 cm",
+          },
+          {
+            label: "Comprimentos",
+            value: "De 2,5 m a 8,5 m (passos de 0,5 m) ou corte sob medida no pátio",
+          },
+        ],
+        instrucoes: [
+          "Galgamento das ripas: confira o rendimento da telha escolhida antes de fixar as ripas e mantenha o espaçamento constante em todo o pano do telhado.",
+          "Armazenagem na obra: empilhe as peças sobre calços a pelo menos 10 cm do solo, em local coberto e ventilado, evitando contato direto com umidade e concreto fresco.",
+          "Para evitar empenamento, mantenha as pilhas alinhadas com sarrafos espaçadores entre as camadas e nunca deixe as peças ao sol e chuva alternados.",
+          "Aplique cupinicida/selador antes da montagem e finalize com verniz ou stain após a estrutura montada, reforçando topos e cortes feitos na obra.",
+          "Cortes realizados no canteiro devem receber nova demão de proteção no mesmo dia.",
         ],
         note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["DOF/IBAMA Legalizado", "Aparelhada em Plaina Industrial"],
@@ -171,6 +207,13 @@ export const CATEGORIES: CatalogCategory[] = [
           { label: "Pontaletes", value: "7x7 cm" },
           { label: "Sarrafos", value: "2,5x10 cm" },
           { label: "Comprimentos", value: "De 3,0 m a 6,0 m" },
+        ],
+        instrucoes: [
+          "Galgamento das ripas: confira o rendimento da telha escolhida antes de fixar as ripas e mantenha o espaçamento constante em todo o pano do telhado.",
+          "Armazenagem na obra: empilhe as peças sobre calços a pelo menos 10 cm do solo, em local coberto e ventilado, evitando contato direto com umidade e concreto fresco.",
+          "Para evitar empenamento, mantenha as pilhas alinhadas com sarrafos espaçadores entre as camadas e nunca deixe as peças ao sol e chuva alternados.",
+          "Aplique cupinicida/selador antes da montagem e finalize com verniz ou stain após a estrutura montada, reforçando topos e cortes feitos na obra.",
+          "Cortes realizados no canteiro devem receber nova demão de proteção no mesmo dia.",
         ],
         note: "Corte e beneficiamento sob medida no pátio.",
         badges: ["Reflorestamento", "Tratado em Autoclave"],
