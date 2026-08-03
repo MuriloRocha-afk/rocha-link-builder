@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Minus, Plus, ShoppingCart, Trash2, MessageCircle } from "lucide-react";
+import { AlertCircle, Minus, Plus, ShoppingCart, Trash2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -139,34 +139,6 @@ export function QuoteCartButton({ className }: { className?: string }) {
   );
 }
 
-export function AddToQuoteButton({
-  id,
-  name,
-  detail,
-  unit,
-  className,
-  variant = "outlineAccent",
-}: {
-  id: string;
-  name: string;
-  detail?: string;
-  unit?: string;
-  className?: string;
-  variant?: "outlineAccent" | "cta";
-}) {
-  const { addItem } = useQuoteCart();
-  return (
-    <Button
-      type="button"
-      variant={variant}
-      className={className}
-      onClick={() => addItem({ id, name, detail, unit })}
-    >
-      <Plus />
-      Adicionar ao Orçamento
-    </Button>
-  );
-}
 
 function buildMessage(items: QuoteItem[], nome: string, local: string) {
   const linhas = items
@@ -192,6 +164,7 @@ function QuoteDrawer() {
   const { items, open, setOpen, updateQty, removeItem, clear, count } = useQuoteCart();
   const [nome, setNome] = useState("");
   const [local, setLocal] = useState("");
+  const pronto = nome.trim().length >= 2 && local.trim().length >= 2;
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -274,43 +247,53 @@ function QuoteDrawer() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <Label htmlFor="quote-nome" className="text-xs font-bold text-primary/80">
-                Seu nome (opcional)
+                Seu nome <span className="text-accent">*</span>
               </Label>
               <Input
                 id="quote-nome"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 placeholder="Ex.: João Silva"
+                maxLength={80}
                 className="mt-1.5"
               />
             </div>
             <div>
               <Label htmlFor="quote-local" className="text-xs font-bold text-primary/80">
-                Bairro / cidade (opcional)
+                Bairro / cidade de entrega <span className="text-accent">*</span>
               </Label>
               <Input
                 id="quote-local"
                 value={local}
                 onChange={(e) => setLocal(e.target.value)}
                 placeholder="Ex.: Centro, Franco da Rocha"
+                maxLength={80}
                 className="mt-1.5"
               />
             </div>
           </div>
 
+          {items.length > 0 && !pronto ? (
+            <p className="mt-3 flex items-start gap-2 rounded-xl border border-accent/40 bg-accent/8 px-4 py-2.5 text-xs font-semibold text-primary/80">
+              <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
+              Informe seu nome e o bairro/cidade de entrega para enviar a cotação.
+            </p>
+          ) : null}
+
           <Button
             asChild
             variant="whats"
             size="xl"
-            className={`mt-4 w-full ${items.length === 0 ? "pointer-events-none opacity-50" : ""}`}
+            className={`mt-4 w-full ${items.length === 0 || !pronto ? "pointer-events-none opacity-50" : ""}`}
           >
             <a
               href={waLink(buildMessage(items, nome, local))}
               target="_blank"
               rel="noopener noreferrer"
+              aria-disabled={items.length === 0 || !pronto}
             >
               <MessageCircle />
-              Enviar cotação via WhatsApp
+              ENVIAR COTAÇÃO VIA WHATSAPP
             </a>
           </Button>
 

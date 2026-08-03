@@ -6,7 +6,7 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { waLink } from "@/components/site/shared";
 import { findProduct } from "@/components/site/catalog-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AddToQuoteButton } from "@/components/site/quote-cart";
+import { ProductConfigurator } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
 
 const INSTRUCOES_PADRAO = [
@@ -212,26 +212,23 @@ function ProdutoPage() {
                 </p>
               ) : null}
 
-              <div className="mt-8 flex flex-col gap-3">
-                <AddToQuoteButton
-                  id={item.slug}
-                  name={item.name}
-                  detail={category.short}
-                  variant="cta"
-                  className="h-14 w-full text-base"
-                />
-                <Button asChild variant="whats" size="xl" className="w-full">
-                  <a
-                    href={waLink(
-                      `Olá, gostaria de um orçamento sobre ${item.name} (${category.short}).`,
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <MessageCircle />
-                    Solicitar Cotação deste Produto no WhatsApp
-                  </a>
-                </Button>
+              <div className="mt-8">
+                {item.selectors?.length ? (
+                  <ProductConfigurator item={item} categoryShort={category.short} />
+                ) : (
+                  <Button asChild variant="whats" size="xl" className="w-full">
+                    <a
+                      href={waLink(
+                        `Olá, gostaria de um orçamento sobre ${item.name} (${category.short}).`,
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageCircle />
+                      Solicitar Cotação deste Produto no WhatsApp
+                    </a>
+                  </Button>
+                )}
               </div>
             </div>
 
