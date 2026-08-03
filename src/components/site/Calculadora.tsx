@@ -21,11 +21,16 @@ type Modelo = {
 };
 
 const MODELOS: Modelo[] = [
+  { id: "fibrocimento", name: "Telha Fibrocimento Ondulada 2,44 x 1,10 m", rendimento: 0.42, unit: "peças", nota: "Líder de vendas · inclinação mínima 10%" },
+  { id: "pvc", name: "Telha Colonial PVC 2,30 x 0,86 m", rendimento: 0.58, unit: "peças", nota: "Inclinação mínima 15%" },
   { id: "romana", name: "Telha Romana (cerâmica)", rendimento: 16, unit: "peças", nota: "Inclinação mínima 30%" },
   { id: "portuguesa", name: "Telha Portuguesa (cerâmica)", rendimento: 17, unit: "peças", nota: "Inclinação mínima 30%" },
   { id: "americana", name: "Telha Americana (cerâmica)", rendimento: 12.5, unit: "peças", nota: "Inclinação mínima 30%" },
-  { id: "pvc", name: "Telha PVC Colonial", rendimento: 0.45, unit: "peças", nota: "Base perfil 1,06 m x 2,20 m" },
-  { id: "fibrocimento", name: "Telha Fibrocimento Ondulada", rendimento: 0.42, unit: "peças", nota: "Base perfil 1,10 m x 2,44 m" },
+  { id: "concreto", name: "Telha de Concreto", rendimento: 10.5, unit: "peças", nota: "42 x 33 cm · inclinação mínima 30%" },
+  { id: "mediterranea", name: "Telha Mediterrânea (cerâmica)", rendimento: 12, unit: "peças", nota: "Inclinação mínima 30%" },
+  { id: "galvanizada", name: "Telha Galvanizada / Trapezoidal", rendimento: 0.36, unit: "peças", nota: "Base perfil 0,98 m útil x 3,00 m" },
+  { id: "termoacustica", name: "Telha Termoacústica Sanduíche", rendimento: 0.34, unit: "peças", nota: "Base perfil 1,00 m útil x 3,00 m" },
+  { id: "translucida", name: "Telha Translúcida Polipropileno", rendimento: 0.42, unit: "peças", nota: "Compatível com ondulada e colonial" },
 ];
 
 export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
