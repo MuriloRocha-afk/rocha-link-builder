@@ -12,25 +12,99 @@ import {
 } from "@/components/ui/select";
 import { useQuoteCart } from "./quote-cart";
 
+type Dimensao = {
+  id: string;
+  label: string;
+  /** peças por m² de telhado */
+  rendimento: number;
+};
+
 type Modelo = {
   id: string;
   name: string;
-  rendimento: number;
-  unit: string;
   nota: string;
+  unit: string;
+  dimensoes: Dimensao[];
 };
 
 const MODELOS: Modelo[] = [
-  { id: "fibrocimento", name: "Telha Fibrocimento Ondulada 2,44 x 1,10 m", rendimento: 0.42, unit: "peças", nota: "Líder de vendas · inclinação mínima 10%" },
-  { id: "pvc", name: "Telha Colonial PVC 2,30 x 0,86 m", rendimento: 0.58, unit: "peças", nota: "Inclinação mínima 15%" },
-  { id: "romana", name: "Telha Romana (cerâmica)", rendimento: 16, unit: "peças", nota: "Inclinação mínima 30%" },
-  { id: "portuguesa", name: "Telha Portuguesa (cerâmica)", rendimento: 17, unit: "peças", nota: "Inclinação mínima 30%" },
-  { id: "americana", name: "Telha Americana (cerâmica)", rendimento: 12.5, unit: "peças", nota: "Inclinação mínima 30%" },
-  { id: "concreto", name: "Telha de Concreto", rendimento: 10.5, unit: "peças", nota: "42 x 33 cm · inclinação mínima 30%" },
-  { id: "mediterranea", name: "Telha Mediterrânea (cerâmica)", rendimento: 12, unit: "peças", nota: "Inclinação mínima 30%" },
-  { id: "galvanizada", name: "Telha Galvanizada / Trapezoidal", rendimento: 0.36, unit: "peças", nota: "Base perfil 0,98 m útil x 3,00 m" },
-  { id: "termoacustica", name: "Telha Termoacústica Sanduíche", rendimento: 0.34, unit: "peças", nota: "Base perfil 1,00 m útil x 3,00 m" },
-  { id: "translucida", name: "Telha Translúcida Polipropileno", rendimento: 0.42, unit: "peças", nota: "Compatível com ondulada e colonial" },
+  {
+    id: "fibrocimento",
+    name: "Telha Fibrocimento Ondulada Infibra",
+    nota: "Líder de vendas · inclinação mínima 10%",
+    unit: "peças",
+    dimensoes: [
+      { id: "244", label: "2,44 x 1,10 m (5 mm)", rendimento: 0.42 },
+      { id: "305", label: "3,05 x 1,10 m", rendimento: 0.34 },
+      { id: "366", label: "3,66 x 1,10 m", rendimento: 0.28 },
+      { id: "183", label: "1,83 x 1,10 m", rendimento: 0.56 },
+      { id: "153", label: "1,53 x 1,10 m", rendimento: 0.67 },
+    ],
+  },
+  {
+    id: "pvc",
+    name: "Telha Colonial PVC",
+    nota: "Inclinação mínima 15% · largura útil 0,86 m",
+    unit: "peças",
+    dimensoes: [
+      { id: "230", label: "2,30 x 0,86 m", rendimento: 0.58 },
+      { id: "328", label: "3,28 x 0,86 m", rendimento: 0.41 },
+      { id: "420", label: "4,20 x 0,86 m", rendimento: 0.32 },
+      { id: "525", label: "5,25 x 0,86 m", rendimento: 0.26 },
+    ],
+  },
+  {
+    id: "ceramica",
+    name: "Telhas Cerâmicas Tradicionais",
+    nota: "Inclinação mínima 30%",
+    unit: "peças",
+    dimensoes: [
+      { id: "romana", label: "Romana (41 x 24 cm)", rendimento: 16 },
+      { id: "portuguesa", label: "Portuguesa (46 x 24 cm)", rendimento: 17 },
+      { id: "americana", label: "Americana", rendimento: 12.5 },
+      { id: "mediterranea", label: "Mediterrânea", rendimento: 12 },
+    ],
+  },
+  {
+    id: "concreto",
+    name: "Telha de Concreto",
+    nota: "Inclinação mínima 30%",
+    unit: "peças",
+    dimensoes: [{ id: "42x33", label: "42 x 33 cm", rendimento: 10.5 }],
+  },
+  {
+    id: "galvanizada",
+    name: "Telha Galvanizada / Trapezoidal",
+    nota: "Largura útil 0,98 m",
+    unit: "peças",
+    dimensoes: [
+      { id: "3", label: "3,00 m de comprimento", rendimento: 0.36 },
+      { id: "4", label: "4,00 m de comprimento", rendimento: 0.27 },
+      { id: "5", label: "5,00 m de comprimento", rendimento: 0.22 },
+      { id: "6", label: "6,00 m de comprimento", rendimento: 0.18 },
+    ],
+  },
+  {
+    id: "termoacustica",
+    name: "Telha Termoacústica Sanduíche",
+    nota: "Miolo EPS/PU · largura útil 1,00 m",
+    unit: "peças",
+    dimensoes: [
+      { id: "3", label: "3,00 m (miolo 30 mm)", rendimento: 0.34 },
+      { id: "4", label: "4,00 m (miolo 40 mm)", rendimento: 0.26 },
+      { id: "5", label: "5,00 m (miolo 50 mm)", rendimento: 0.21 },
+    ],
+  },
+  {
+    id: "translucida",
+    name: "Telha Translúcida Polipropileno",
+    nota: "Compatível com perfis ondulado e colonial",
+    unit: "peças",
+    dimensoes: [
+      { id: "244-ond", label: "2,44 x 1,10 m (ondulada)", rendimento: 0.42 },
+      { id: "230-col", label: "2,30 x 0,86 m (colonial)", rendimento: 0.58 },
+    ],
+  },
 ];
 
 export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
@@ -39,16 +113,18 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
   const [area, setArea] = useState("");
   const [largura, setLargura] = useState("");
   const [comprimento, setComprimento] = useState("");
-  const [modeloId, setModeloId] = useState(modeloPadrao ?? MODELOS[0].id);
+  const [modeloId, setModeloId] = useState<string>(modeloPadrao ?? "");
+  const [dimensaoId, setDimensaoId] = useState<string>("");
 
-  const modelo = MODELOS.find((m) => m.id === modeloId) ?? MODELOS[0];
+  const modelo = MODELOS.find((m) => m.id === modeloId);
+  const dimensao = modelo?.dimensoes.find((d) => d.id === dimensaoId);
 
   const metros = useMemo(() => {
     if (modo === "area") return Number(area.replace(",", ".")) || 0;
     return (Number(largura.replace(",", ".")) || 0) * (Number(comprimento.replace(",", ".")) || 0);
   }, [modo, area, largura, comprimento]);
 
-  const base = metros * modelo.rendimento;
+  const base = dimensao ? metros * dimensao.rendimento : 0;
   const total = base > 0 ? Math.ceil(base * 1.05) : 0;
 
   return (
@@ -58,16 +134,62 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
           <Calculator className="h-6 w-6" />
         </span>
         <div>
-          <h3 className="text-xl font-extrabold text-primary">Calculadora de Telhas</h3>
+          <h3 className="text-xl font-extrabold text-primary">Calculadora Inteligente de Telhas</h3>
           <p className="text-sm text-muted-foreground">
-            Estimativa de peças já com 5% de margem para perdas e cortes.
+            Escolha o modelo, a dimensão exata e a área — já com 5% de margem para perdas.
           </p>
         </div>
       </div>
 
       <div className="mt-7 grid gap-5 md:grid-cols-2">
         <div>
-          <Label className="text-xs font-bold text-primary/80">Como quer calcular?</Label>
+          <Label className="text-xs font-bold text-primary/80">
+            Passo 1 · Modelo da telha
+          </Label>
+          <Select
+            value={modeloId}
+            onValueChange={(v) => {
+              setModeloId(v);
+              setDimensaoId("");
+            }}
+          >
+            <SelectTrigger className="mt-2 h-11">
+              <SelectValue placeholder="Selecione o modelo" />
+            </SelectTrigger>
+            <SelectContent>
+              {MODELOS.map((m) => (
+                <SelectItem key={m.id} value={m.id}>
+                  {m.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <Label className="text-xs font-bold text-primary/80">
+            Passo 2 · Dimensão / comprimento
+          </Label>
+          <Select value={dimensaoId} onValueChange={setDimensaoId} disabled={!modelo}>
+            <SelectTrigger className="mt-2 h-11">
+              <SelectValue
+                placeholder={modelo ? "Selecione a dimensão" : "Escolha o modelo primeiro"}
+              />
+            </SelectTrigger>
+            <SelectContent>
+              {(modelo?.dimensoes ?? []).map((d) => (
+                <SelectItem key={d.id} value={d.id}>
+                  {d.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="md:col-span-2">
+          <Label className="text-xs font-bold text-primary/80">
+            Passo 3 · Como quer informar a área?
+          </Label>
           <div className="mt-2 flex gap-2">
             {(
               [
@@ -89,22 +211,6 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
               </button>
             ))}
           </div>
-        </div>
-
-        <div>
-          <Label className="text-xs font-bold text-primary/80">Modelo da telha</Label>
-          <Select value={modeloId} onValueChange={setModeloId}>
-            <SelectTrigger className="mt-2 h-11">
-              <SelectValue placeholder="Selecione o modelo" />
-            </SelectTrigger>
-            <SelectContent>
-              {MODELOS.map((m) => (
-                <SelectItem key={m.id} value={m.id}>
-                  {m.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </div>
 
         {modo === "area" ? (
@@ -159,12 +265,16 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
         </p>
         <p className="mt-2 text-4xl font-extrabold text-primary">
           {total > 0 ? total.toLocaleString("pt-BR") : "—"}{" "}
-          <span className="text-lg font-bold text-primary/70">{modelo.unit}</span>
+          <span className="text-lg font-bold text-primary/70">peças</span>
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
-          {metros > 0
-            ? `${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² · ${modelo.name} · ${modelo.nota} · inclui 5% de margem de segurança.`
-            : "Informe a área ou as medidas do telhado para ver a estimativa."}
+          {!modelo
+            ? "Passo 1: escolha o modelo da telha."
+            : !dimensao
+              ? "Passo 2: escolha a dimensão disponível para esse modelo."
+              : metros > 0
+                ? `${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² · ${modelo.name} · ${dimensao.label} · ${modelo.nota} · inclui 5% de margem.`
+                : "Passo 3: informe a área ou as medidas do telhado."}
         </p>
 
         <Button
@@ -174,17 +284,19 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
           className="mt-5 w-full"
           disabled={total === 0}
           onClick={() =>
-            addItem({
-              id: `calc-${modelo.id}`,
-              name: modelo.name,
-              detail: `Cálculo para ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (com 5% de margem)`,
-              unit: modelo.unit,
-              qty: total,
-            })
+            modelo && dimensao
+              ? addItem({
+                  id: `calc-${modelo.id}-${dimensao.id}`,
+                  name: `${modelo.name} — ${dimensao.label}`,
+                  detail: `Cálculo para ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (com 5% de margem)`,
+                  unit: modelo.unit,
+                  qty: total,
+                })
+              : undefined
           }
         >
           <Plus />
-          Adicionar Resultado ao Orçamento
+          Adicionar Resultado Exato ao Orçamento
         </Button>
         <p className="mt-3 text-xs text-muted-foreground">
           Estimativa de referência. A equipe técnica confere as quantidades na cotação final.
