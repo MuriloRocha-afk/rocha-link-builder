@@ -3,16 +3,19 @@ import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Logo, WhatsAppButton } from "./shared";
 import { SobreModal } from "./SobreModal";
+import { QuoteCartButton } from "./quote-cart";
 
 type NavItem = { label: string; hash?: string; to?: string };
 
 const NAV: NavItem[] = [
   { label: "Home", to: "/" },
-  { label: "Estrutura & Pátio", hash: "tecnologia" },
   { label: "Catálogo", to: "/catalogo" },
-  { label: "Depoimentos", hash: "depoimentos" },
+  { label: "Estrutura & Pátio", hash: "tecnologia" },
+  { label: "Calculadora", to: "/calculadora" },
+  { label: "FAQ", hash: "faq" },
   { label: "Contato", hash: "contato" },
 ];
+
 
 function NavLink({
   item,
