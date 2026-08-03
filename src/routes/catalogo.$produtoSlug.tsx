@@ -133,47 +133,48 @@ function ProdutoPage() {
                 </ul>
               ) : null}
 
-              <h2 className="mt-8 text-2xl font-extrabold text-primary">
-                Especificações técnicas
-              </h2>
-              <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
-                <table className="w-full text-sm">
-                  <tbody>
-                    {item.specs.map((s) => (
-                      <tr key={s.label} className="border-b border-border last:border-b-0">
-                        <th className="w-1/2 px-5 py-3.5 text-left font-bold text-primary/80">
-                          {s.label}
-                        </th>
-                        <td className="px-5 py-3.5 text-right text-muted-foreground">{s.value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <Tabs defaultValue="tecnicas" className="mt-8">
+                <TabsList className="h-auto w-full flex-wrap justify-start gap-1 bg-secondary p-1">
+                  <TabsTrigger value="tecnicas" className="text-xs font-bold sm:text-sm">
+                    Especificações
+                  </TabsTrigger>
+                  <TabsTrigger value="bitolas" className="text-xs font-bold sm:text-sm">
+                    Bitolas & Comprimentos
+                  </TabsTrigger>
+                  <TabsTrigger value="uso" className="text-xs font-bold sm:text-sm">
+                    Instruções de Uso
+                  </TabsTrigger>
+                </TabsList>
 
-              {item.bitolas?.length ? (
-                <>
-                  <h2 className="mt-10 text-2xl font-extrabold text-primary">
-                    Bitolas disponíveis em estoque
-                  </h2>
-                  <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
-                    <table className="w-full text-sm">
-                      <tbody>
-                        {item.bitolas.map((s) => (
-                          <tr key={s.label} className="border-b border-border last:border-b-0">
-                            <th className="w-1/2 px-5 py-3.5 text-left font-bold text-primary/80">
-                              {s.label}
-                            </th>
-                            <td className="px-5 py-3.5 text-right text-muted-foreground">
-                              {s.value}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </>
-              ) : null}
+                <TabsContent value="tecnicas">
+                  <SpecTable rows={item.specs} />
+                </TabsContent>
+
+                <TabsContent value="bitolas">
+                  {item.bitolas?.length ? (
+                    <SpecTable rows={item.bitolas} />
+                  ) : (
+                    <div className="mt-4">
+                      <SpecTable rows={item.specs} />
+                      <p className="mt-3 text-sm text-muted-foreground">
+                        Trabalhamos com medidas complementares e peças sob medida. Consulte o
+                        comercial para a disponibilidade da sua obra.
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+
+                <TabsContent value="uso">
+                  <ul className="mt-4 space-y-3 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+                    {(item.instrucoes ?? INSTRUCOES_PADRAO).map((tip) => (
+                      <li key={tip} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        {tip}
+                      </li>
+                    ))}
+                  </ul>
+                </TabsContent>
+              </Tabs>
 
               {item.note ? (
                 <p className="mt-4 flex items-start gap-2 rounded-xl border border-accent/40 bg-accent/8 p-4 text-sm text-primary/80">
@@ -182,19 +183,29 @@ function ProdutoPage() {
                 </p>
               ) : null}
 
-              <Button asChild variant="whats" size="xl" className="mt-8 w-full">
-                <a
-                  href={waLink(
-                    `Olá, gostaria de um orçamento sobre ${item.name} (${category.short}).`,
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle />
-                  Solicitar Cotação deste Produto no WhatsApp
-                </a>
-              </Button>
+              <div className="mt-8 flex flex-col gap-3">
+                <AddToQuoteButton
+                  id={item.slug}
+                  name={item.name}
+                  detail={category.short}
+                  variant="cta"
+                  className="h-14 w-full text-base"
+                />
+                <Button asChild variant="whats" size="xl" className="w-full">
+                  <a
+                    href={waLink(
+                      `Olá, gostaria de um orçamento sobre ${item.name} (${category.short}).`,
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <MessageCircle />
+                    Solicitar Cotação deste Produto no WhatsApp
+                  </a>
+                </Button>
+              </div>
             </div>
+
           </div>
         </section>
       </main>
