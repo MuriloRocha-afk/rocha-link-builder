@@ -5,6 +5,35 @@ import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { waLink } from "@/components/site/shared";
 import { findProduct } from "@/components/site/catalog-data";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AddToQuoteButton } from "@/components/site/quote-cart";
+import { CalculadoraTelhas } from "@/components/site/Calculadora";
+
+const INSTRUCOES_PADRAO = [
+  "Confira a inclinação mínima do modelo antes do galgamento das ripas e mantenha o espaçamento uniforme em todo o pano do telhado.",
+  "Armazene as peças sobre calços nivelados, em pilhas baixas e afastadas do trânsito da obra, evitando trincas e quebras.",
+  "Inicie o assentamento sempre do beiral para a cumeeira e do lado oposto aos ventos dominantes.",
+  "Use fitas de vedação e kits de parafuso/prego com arruela nas fixações para garantir estanqueidade contra goteiras.",
+  "Preveja de 3% a 5% de peças extras para cortes, arremates e reposições futuras.",
+];
+
+function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
+  return (
+    <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+      <table className="w-full text-sm">
+        <tbody>
+          {rows.map((s) => (
+            <tr key={s.label} className="border-b border-border last:border-b-0">
+              <th className="w-1/2 px-5 py-3.5 text-left font-bold text-primary/80">{s.label}</th>
+              <td className="px-5 py-3.5 text-right text-muted-foreground">{s.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 
 export const Route = createFileRoute("/catalogo/$produtoSlug")({
   loader: ({ params }) => {
