@@ -237,7 +237,16 @@ function ProdutoPage() {
 
           </div>
         </section>
+
+        {category.id === "telhas" ? (
+          <section className="bg-secondary py-16">
+            <div className="mx-auto max-w-3xl px-5">
+              <CalculadoraTelhas />
+            </div>
+          </section>
+        ) : null}
       </main>
+
 
       <Footer />
       <FloatingWhats />
