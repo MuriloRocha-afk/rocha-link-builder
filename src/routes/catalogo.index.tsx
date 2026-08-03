@@ -154,6 +154,12 @@ function CatalogoPage() {
                             <ArrowRight />
                           </Link>
                         </Button>
+                        <AddToQuoteButton
+                          id={item.slug}
+                          name={item.name}
+                          detail={cat.short}
+                          className="h-12 w-full"
+                        />
                         <Button asChild variant="whats" className="h-12 w-full">
                           <a
                             href={waLink(
@@ -167,6 +173,7 @@ function CatalogoPage() {
                           </a>
                         </Button>
                       </div>
+
                     </div>
                   </article>
                 ))}
