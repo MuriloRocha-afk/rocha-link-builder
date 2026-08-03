@@ -139,34 +139,6 @@ export function QuoteCartButton({ className }: { className?: string }) {
   );
 }
 
-export function AddToQuoteButton({
-  id,
-  name,
-  detail,
-  unit,
-  className,
-  variant = "outlineAccent",
-}: {
-  id: string;
-  name: string;
-  detail?: string;
-  unit?: string;
-  className?: string;
-  variant?: "outlineAccent" | "cta";
-}) {
-  const { addItem } = useQuoteCart();
-  return (
-    <Button
-      type="button"
-      variant={variant}
-      className={className}
-      onClick={() => addItem({ id, name, detail, unit })}
-    >
-      <Plus />
-      Adicionar ao Orçamento
-    </Button>
-  );
-}
 
 function buildMessage(items: QuoteItem[], nome: string, local: string) {
   const linhas = items
