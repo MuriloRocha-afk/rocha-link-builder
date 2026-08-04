@@ -35,10 +35,10 @@ const TELHADOS = [
 ] as const;
 
 const IMAGENS: Record<string, string> = {
-  "branco-barro": brancoBarro, "bege-barro": begeBarro, "cinza-barro": cinzaBarro, "grafite-barro": grafiteBarro,
-  "branco-pvc-ceramica": brancoPvcCeramica, "bege-pvc-ceramica": begePvcCeramica, "cinza-pvc-ceramica": cinzaPvcCeramica, "grafite-pvc-ceramica": grafitePvcCeramica,
-  "branco-pvc-marfim": brancoPvcMarfim, "bege-pvc-marfim": begePvcMarfim, "cinza-pvc-marfim": cinzaPvcMarfim, "grafite-pvc-marfim": grafitePvcMarfim,
-  "branco-fibrocimento": brancoFibro, "bege-fibrocimento": begeFibro, "cinza-fibrocimento": cinzaFibro, "grafite-fibrocimento": grafiteFibro,
+  "branco-barro": brancoBarro.url, "bege-barro": begeBarro.url, "cinza-barro": cinzaBarro.url, "grafite-barro": grafiteBarro.url,
+  "branco-pvc-ceramica": brancoPvcCeramica.url, "bege-pvc-ceramica": begePvcCeramica.url, "cinza-pvc-ceramica": cinzaPvcCeramica.url, "grafite-pvc-ceramica": grafitePvcCeramica.url,
+  "branco-pvc-marfim": brancoPvcMarfim.url, "bege-pvc-marfim": begePvcMarfim.url, "cinza-pvc-marfim": cinzaPvcMarfim.url, "grafite-pvc-marfim": grafitePvcMarfim.url,
+  "branco-fibrocimento": brancoFibro.url, "bege-fibrocimento": begeFibro.url, "cinza-fibrocimento": cinzaFibro.url, "grafite-fibrocimento": grafiteFibro.url,
 };
 
 export function SimuladorVisual() {
