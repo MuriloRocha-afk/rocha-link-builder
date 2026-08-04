@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { AlertCircle, ArrowRight, Check, Crown, MessageCircle, Minus, Plus } from "lucide-react";
+import { AlertCircle, ArrowRight, Check, ChevronDown, Crown, MessageCircle, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink } from "./shared";
 import { useQuoteCart } from "./quote-cart";
