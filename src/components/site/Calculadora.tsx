@@ -310,60 +310,31 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
                 : "Passo 3: informe a área ou as medidas do telhado."}
         </p>
 
-        <Button
-          type="button"
-          variant="cta"
-          size="xl"
-          className="mt-5 w-full"
-          disabled={total === 0}
-          onClick={() =>
-            modelo && dimensao
-              ? addItem({
-                  id: `calc-${modelo.id}-${dimensao.id}`,
-                  name: `${modelo.name} — ${dimensao.label}`,
-                  detail: `Cálculo para ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (com 5% de margem)`,
-                  unit: modelo.unit,
-                  qty: total,
-                })
-              : undefined
-          }
-        >
-          <Plus />
-          Adicionar Resultado Exato ao Orçamento
-        </Button>
         <p className="mt-3 text-xs text-muted-foreground">
           Estimativa de referência. A equipe técnica confere as quantidades na cotação final.
         </p>
       </div>
 
-      {acessorios ? (
+      {acessorios && total > 0 && modelo && dimensao ? (
         <div className="mt-7">
-          <p className="text-xs font-bold tracking-[0.18em] text-primary/70 uppercase">
-            Acessórios estimados para a cobertura
-          </p>
+          <p className="text-xs font-bold tracking-[0.18em] text-primary/70 uppercase">Acessórios estimados para a cobertura</p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {[
               { label: "Cumeeiras", value: `${acessorios.cumeeiras} peças` },
-              {
-                label: "Kits de vedação / parafusos autobrocantes",
-                value: `${acessorios.kitsVedacao} kit(s) · ~${acessorios.parafusos} parafusos`,
-              },
+              { label: "Kits de vedação / parafusos autobrocantes", value: `${acessorios.kitsVedacao} kit(s) · ~${acessorios.parafusos} parafusos` },
               { label: "Manta térmica aluminizada", value: `${acessorios.mantas} rolo(s)` },
               { label: "Calhas e rufos", value: `${acessorios.calhas} m lineares` },
-            ].map((c) => (
-              <div key={c.label} className="rounded-xl border border-border bg-secondary/60 p-4">
-                <p className="text-xs font-semibold text-muted-foreground">{c.label}</p>
-                <p className="mt-1 text-lg font-extrabold text-primary">{c.value}</p>
-              </div>
-            ))}
+            ].map((c) => <div key={c.label} className="rounded-xl border border-border bg-secondary/60 p-4"><p className="text-xs font-semibold text-muted-foreground">{c.label}</p><p className="mt-1 text-lg font-extrabold text-primary">{c.value}</p></div>)}
           </div>
 
-          <Button asChild variant="whats" size="xl" className="mt-5 w-full">
-            <a href={waLink(listaWhats())} target="_blank" rel="noopener noreferrer">
-              <MessageCircle />
-              Enviar lista calculada para orçamento no WhatsApp
-            </a>
-          </Button>
+          <div className="mt-5 grid gap-3 lg:grid-cols-2">
+            <Button asChild variant="outlineAccent" size="xl" className="w-full">
+              <a href={waLink(`Olá, Rocha Telhas! Gostaria de orçar apenas as telhas do cálculo: ${total} ${modelo.unit} de ${modelo.name}, dimensão ${dimensao.label}, para ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (inclui 5% de margem).`)} target="_blank" rel="noopener noreferrer"><MessageCircle />Orçar Apenas Telhas no WhatsApp</a>
+            </Button>
+            <Button asChild variant="whats" size="xl" className="w-full">
+              <a href={waLink(listaWhats())} target="_blank" rel="noopener noreferrer"><MessageCircle />Orçar Cobertura Completa + Acessórios no WhatsApp</a>
+            </Button>
+          </div>
         </div>
       ) : null}
     </div>

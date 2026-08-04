@@ -108,6 +108,10 @@ export function ProductConfigurator({
   const [selection, setSelection] = useState<Record<string, string>>({});
   const [qty, setQty] = useState(1);
   const [erro, setErro] = useState(false);
+  const [acessoriosAbertos, setAcessoriosAbertos] = useState(false);
+  const produtoTelha = /telha|fibrocimento|pvc|cerâmica/i.test(`${item.name} ${categoryShort}`);
+  const kitsRecomendados = Math.max(1, Math.ceil(qty / 15));
+  const cumeeirasRecomendadas = Math.max(1, Math.ceil(qty / 10));
 
   const faltando = useMemo(
     () => selectors.filter((s) => !selection[s.key]).map((s) => s.label),
