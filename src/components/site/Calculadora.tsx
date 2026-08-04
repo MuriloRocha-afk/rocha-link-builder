@@ -159,6 +159,53 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
     return linhas.join("\n");
   };
 
+  const areaLabel = `${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m²`;
+
+  const addTelhas = () => {
+    if (!modelo || !dimensao || total === 0) return;
+    addItem({
+      id: `calc-${modelo.id}-${dimensao.id}`,
+      name: `${modelo.name} — ${dimensao.label}`,
+      detail: `Cálculo para ${areaLabel} (com 5% de margem)`,
+      unit: modelo.unit,
+      qty: total,
+    });
+  };
+
+  const addCoberturaCompleta = () => {
+    if (!acessorios) return;
+    addTelhas();
+    addItem({
+      id: "calc-cumeeira",
+      name: "Cumeeira universal",
+      detail: `Estimativa para ${areaLabel}`,
+      unit: "peças",
+      qty: acessorios.cumeeiras,
+    });
+    addItem({
+      id: "calc-vedacao",
+      name: "Kit de vedação (parafusos autobrocantes + arruelas)",
+      detail: `~${acessorios.parafusos} parafusos para ${areaLabel}`,
+      unit: "kits",
+      qty: acessorios.kitsVedacao,
+    });
+    addItem({
+      id: "calc-manta",
+      name: "Manta térmica aluminizada",
+      detail: `Estimativa para ${areaLabel}`,
+      unit: "rolos",
+      qty: acessorios.mantas,
+    });
+    addItem({
+      id: "calc-calhas",
+      name: "Calhas e rufos",
+      detail: `Perímetro estimado para ${areaLabel}`,
+      unit: "m lineares",
+      qty: acessorios.calhas,
+    });
+  };
+
+
 
   return (
     <div className="rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)] md:p-9">
