@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Calculator, MessageCircle, PackagePlus, Plus } from "lucide-react";
+import { Calculator, MessageCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -159,53 +159,6 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
     return linhas.join("\n");
   };
 
-  const areaLabel = `${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m²`;
-
-  const addTelhas = () => {
-    if (!modelo || !dimensao || total === 0) return;
-    addItem({
-      id: `calc-${modelo.id}-${dimensao.id}`,
-      name: `${modelo.name} — ${dimensao.label}`,
-      detail: `Cálculo para ${areaLabel} (com 5% de margem)`,
-      unit: modelo.unit,
-      qty: total,
-    });
-  };
-
-  const addCoberturaCompleta = () => {
-    if (!acessorios) return;
-    addTelhas();
-    addItem({
-      id: "calc-cumeeira",
-      name: "Cumeeira universal",
-      detail: `Estimativa para ${areaLabel}`,
-      unit: "peças",
-      qty: acessorios.cumeeiras,
-    });
-    addItem({
-      id: "calc-vedacao",
-      name: "Kit de vedação (parafusos autobrocantes + arruelas)",
-      detail: `~${acessorios.parafusos} parafusos para ${areaLabel}`,
-      unit: "kits",
-      qty: acessorios.kitsVedacao,
-    });
-    addItem({
-      id: "calc-manta",
-      name: "Manta térmica aluminizada",
-      detail: `Estimativa para ${areaLabel}`,
-      unit: "rolos",
-      qty: acessorios.mantas,
-    });
-    addItem({
-      id: "calc-calhas",
-      name: "Calhas e rufos",
-      detail: `Perímetro estimado para ${areaLabel}`,
-      unit: "m lineares",
-      qty: acessorios.calhas,
-    });
-  };
-
-
 
   return (
     <div className="rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)] md:p-9">
@@ -357,36 +310,27 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
                 : "Passo 3: informe a área ou as medidas do telhado."}
         </p>
 
-        <div className="mt-5 grid gap-3">
-          <Button
-            type="button"
-            variant="cta"
-            size="xl"
-            className="w-full"
-            disabled={total === 0 || !acessorios}
-            onClick={addCoberturaCompleta}
-          >
-            <PackagePlus />
-            <span className="text-left leading-tight">
-              Adicionar Cobertura Completa
-              <span className="block text-[11px] font-bold opacity-80">
-                Telhas + Cumeeiras + Vedação + Manta + Calhas
-              </span>
-            </span>
-          </Button>
-          <Button
-            type="button"
-            variant="outlineAccent"
-            size="lg"
-            className="w-full"
-            disabled={total === 0}
-            onClick={addTelhas}
-          >
-            <Plus />
-            Adicionar Apenas Telhas ao Orçamento
-          </Button>
-        </div>
-
+        <Button
+          type="button"
+          variant="cta"
+          size="xl"
+          className="mt-5 w-full"
+          disabled={total === 0}
+          onClick={() =>
+            modelo && dimensao
+              ? addItem({
+                  id: `calc-${modelo.id}-${dimensao.id}`,
+                  name: `${modelo.name} — ${dimensao.label}`,
+                  detail: `Cálculo para ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (com 5% de margem)`,
+                  unit: modelo.unit,
+                  qty: total,
+                })
+              : undefined
+          }
+        >
+          <Plus />
+          Adicionar Resultado Exato ao Orçamento
+        </Button>
         <p className="mt-3 text-xs text-muted-foreground">
           Estimativa de referência. A equipe técnica confere as quantidades na cotação final.
         </p>
