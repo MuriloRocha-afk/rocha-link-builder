@@ -127,6 +127,37 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
   const base = dimensao ? metros * dimensao.rendimento : 0;
   const total = base > 0 ? Math.ceil(base * 1.05) : 0;
 
+  // Acessórios estimados a partir da área
+  const acessorios = useMemo(() => {
+    if (metros <= 0) return null;
+    const lado = Math.sqrt(metros);
+    const cumeeiraM = lado;
+    const perimetro = 4 * lado;
+    return {
+      cumeeiras: Math.ceil(cumeeiraM / 0.9),
+      kitsVedacao: Math.ceil((metros * 4) / 50),
+      parafusos: Math.ceil(metros * 4),
+      mantas: Math.ceil(metros / 30),
+      calhas: Math.ceil(perimetro),
+    };
+  }, [metros]);
+
+  const listaWhats = () => {
+    const linhas = [
+      "*Orçamento calculado no site — Rocha Telhas*",
+      `Área do telhado: ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m²`,
+      modelo && dimensao ? `• ${total} ${modelo.unit} — ${modelo.name} (${dimensao.label})` : "",
+      acessorios ? `• ${acessorios.cumeeiras} cumeeiras` : "",
+      acessorios ? `• ${acessorios.kitsVedacao} kit(s) de vedação (~${acessorios.parafusos} parafusos autobrocantes)` : "",
+      acessorios ? `• ${acessorios.mantas} rolo(s) de manta térmica aluminizada` : "",
+      acessorios ? `• ${acessorios.calhas} m lineares de calhas e rufos` : "",
+      "",
+      "Podem confirmar as quantidades e enviar a cotação?",
+    ].filter(Boolean);
+    return linhas.join("\n");
+  };
+
+
   return (
     <div className="rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)] md:p-9">
       <div className="flex items-center gap-3">
