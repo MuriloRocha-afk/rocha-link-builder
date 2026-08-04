@@ -1,7 +1,9 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { whatsappNumber } from "@/config/site";
 
-export const WHATSAPP_NUMBER = "5511999999999";
+/** Número do WhatsApp comercial — editável em src/config/site.ts */
+export const WHATSAPP_NUMBER = whatsappNumber;
 
 export const CONTATO = {
   address: "R. Dr. Hamilton Prado, 856 — Centro, Franco da Rocha / SP · CEP 07849-070",
