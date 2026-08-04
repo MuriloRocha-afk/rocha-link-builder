@@ -42,11 +42,8 @@ function CalculadoraPage() {
           </div>
         </section>
 
-        <section className="bg-background py-16">
-          <div className="mx-auto max-w-3xl px-5">
-            <CalculadoraTelhas />
-          </div>
-        </section>
+        <Ferramentas />
+
       </main>
       <Footer />
       <FloatingWhats />
