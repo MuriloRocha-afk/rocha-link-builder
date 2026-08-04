@@ -357,27 +357,36 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
                 : "Passo 3: informe a área ou as medidas do telhado."}
         </p>
 
-        <Button
-          type="button"
-          variant="cta"
-          size="xl"
-          className="mt-5 w-full"
-          disabled={total === 0}
-          onClick={() =>
-            modelo && dimensao
-              ? addItem({
-                  id: `calc-${modelo.id}-${dimensao.id}`,
-                  name: `${modelo.name} — ${dimensao.label}`,
-                  detail: `Cálculo para ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (com 5% de margem)`,
-                  unit: modelo.unit,
-                  qty: total,
-                })
-              : undefined
-          }
-        >
-          <Plus />
-          Adicionar Resultado Exato ao Orçamento
-        </Button>
+        <div className="mt-5 grid gap-3">
+          <Button
+            type="button"
+            variant="cta"
+            size="xl"
+            className="w-full"
+            disabled={total === 0 || !acessorios}
+            onClick={addCoberturaCompleta}
+          >
+            <PackagePlus />
+            <span className="text-left leading-tight">
+              Adicionar Cobertura Completa
+              <span className="block text-[11px] font-bold opacity-80">
+                Telhas + Cumeeiras + Vedação + Manta + Calhas
+              </span>
+            </span>
+          </Button>
+          <Button
+            type="button"
+            variant="outlineAccent"
+            size="lg"
+            className="w-full"
+            disabled={total === 0}
+            onClick={addTelhas}
+          >
+            <Plus />
+            Adicionar Apenas Telhas ao Orçamento
+          </Button>
+        </div>
+
         <p className="mt-3 text-xs text-muted-foreground">
           Estimativa de referência. A equipe técnica confere as quantidades na cotação final.
         </p>
