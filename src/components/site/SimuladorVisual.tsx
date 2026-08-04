@@ -3,22 +3,22 @@ import { Check, Home, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink } from "@/constants/whatsapp";
 
-import brancoBarro from "@/assets/sim/base-branco-barro.jpg";
-import begeBarro from "@/assets/sim/base-bege-barro.jpg";
-import cinzaBarro from "@/assets/sim/base-cinza-barro.jpg";
-import grafiteBarro from "@/assets/sim/base-grafite-barro.jpg";
-import brancoPvcCeramica from "@/assets/sim/base-branco-pvcceramica.jpg";
-import begePvcCeramica from "@/assets/sim/base-bege-pvcceramica.jpg";
-import cinzaPvcCeramica from "@/assets/sim/base-cinza-pvcceramica.jpg";
-import grafitePvcCeramica from "@/assets/sim/base-grafite-pvcceramica.jpg";
-import brancoPvcMarfim from "@/assets/sim/base-branco-pvcmarfim.jpg";
-import begePvcMarfim from "@/assets/sim/base-bege-pvcmarfim.jpg";
-import cinzaPvcMarfim from "@/assets/sim/base-cinza-pvcmarfim.jpg";
-import grafitePvcMarfim from "@/assets/sim/base-grafite-pvcmarfim.jpg";
-import brancoFibro from "@/assets/sim/base-branco-fibrocimento.jpg";
-import begeFibro from "@/assets/sim/base-bege-fibrocimento.jpg";
-import cinzaFibro from "@/assets/sim/base-cinza-fibrocimento.jpg";
-import grafiteFibro from "@/assets/sim/base-grafite-fibrocimento.jpg";
+import brancoBarro from "@/assets/sim/base-branco-barro.jpg.asset.json";
+import begeBarro from "@/assets/sim/base-bege-barro.jpg.asset.json";
+import cinzaBarro from "@/assets/sim/base-cinza-barro.jpg.asset.json";
+import grafiteBarro from "@/assets/sim/base-grafite-barro.jpg.asset.json";
+import brancoPvcCeramica from "@/assets/sim/base-branco-pvcceramica.jpg.asset.json";
+import begePvcCeramica from "@/assets/sim/base-bege-pvcceramica.jpg.asset.json";
+import cinzaPvcCeramica from "@/assets/sim/base-cinza-pvcceramica.jpg.asset.json";
+import grafitePvcCeramica from "@/assets/sim/base-grafite-pvcceramica.jpg.asset.json";
+import brancoPvcMarfim from "@/assets/sim/base-branco-pvcmarfim.jpg.asset.json";
+import begePvcMarfim from "@/assets/sim/base-bege-pvcmarfim.jpg.asset.json";
+import cinzaPvcMarfim from "@/assets/sim/base-cinza-pvcmarfim.jpg.asset.json";
+import grafitePvcMarfim from "@/assets/sim/base-grafite-pvcmarfim.jpg.asset.json";
+import brancoFibro from "@/assets/sim/base-branco-fibrocimento.jpg.asset.json";
+import begeFibro from "@/assets/sim/base-bege-fibrocimento.jpg.asset.json";
+import cinzaFibro from "@/assets/sim/base-cinza-fibrocimento.jpg.asset.json";
+import grafiteFibro from "@/assets/sim/base-grafite-fibrocimento.jpg.asset.json";
 
 const PAREDES = [
   { id: "branco", label: "Branco", color: "#F5F5F2" },
