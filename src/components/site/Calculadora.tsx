@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Calculator, Plus } from "lucide-react";
+import { Calculator, MessageCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +11,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useQuoteCart } from "./quote-cart";
+import { waLink } from "./shared";
+
 
 type Dimensao = {
   id: string;
@@ -126,6 +128,37 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
 
   const base = dimensao ? metros * dimensao.rendimento : 0;
   const total = base > 0 ? Math.ceil(base * 1.05) : 0;
+
+  // Acessórios estimados a partir da área
+  const acessorios = useMemo(() => {
+    if (metros <= 0) return null;
+    const lado = Math.sqrt(metros);
+    const cumeeiraM = lado;
+    const perimetro = 4 * lado;
+    return {
+      cumeeiras: Math.ceil(cumeeiraM / 0.9),
+      kitsVedacao: Math.ceil((metros * 4) / 50),
+      parafusos: Math.ceil(metros * 4),
+      mantas: Math.ceil(metros / 30),
+      calhas: Math.ceil(perimetro),
+    };
+  }, [metros]);
+
+  const listaWhats = () => {
+    const linhas = [
+      "*Orçamento calculado no site — Rocha Telhas*",
+      `Área do telhado: ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m²`,
+      modelo && dimensao ? `• ${total} ${modelo.unit} — ${modelo.name} (${dimensao.label})` : "",
+      acessorios ? `• ${acessorios.cumeeiras} cumeeiras` : "",
+      acessorios ? `• ${acessorios.kitsVedacao} kit(s) de vedação (~${acessorios.parafusos} parafusos autobrocantes)` : "",
+      acessorios ? `• ${acessorios.mantas} rolo(s) de manta térmica aluminizada` : "",
+      acessorios ? `• ${acessorios.calhas} m lineares de calhas e rufos` : "",
+      "",
+      "Podem confirmar as quantidades e enviar a cotação?",
+    ].filter(Boolean);
+    return linhas.join("\n");
+  };
+
 
   return (
     <div className="rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)] md:p-9">
@@ -302,6 +335,38 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
           Estimativa de referência. A equipe técnica confere as quantidades na cotação final.
         </p>
       </div>
+
+      {acessorios ? (
+        <div className="mt-7">
+          <p className="text-xs font-bold tracking-[0.18em] text-primary/70 uppercase">
+            Acessórios estimados para a cobertura
+          </p>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {[
+              { label: "Cumeeiras", value: `${acessorios.cumeeiras} peças` },
+              {
+                label: "Kits de vedação / parafusos autobrocantes",
+                value: `${acessorios.kitsVedacao} kit(s) · ~${acessorios.parafusos} parafusos`,
+              },
+              { label: "Manta térmica aluminizada", value: `${acessorios.mantas} rolo(s)` },
+              { label: "Calhas e rufos", value: `${acessorios.calhas} m lineares` },
+            ].map((c) => (
+              <div key={c.label} className="rounded-xl border border-border bg-secondary/60 p-4">
+                <p className="text-xs font-semibold text-muted-foreground">{c.label}</p>
+                <p className="mt-1 text-lg font-extrabold text-primary">{c.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <Button asChild variant="whats" size="xl" className="mt-5 w-full">
+            <a href={waLink(listaWhats())} target="_blank" rel="noopener noreferrer">
+              <MessageCircle />
+              Enviar lista calculada para orçamento no WhatsApp
+            </a>
+          </Button>
+        </div>
+      ) : null}
     </div>
+
   );
 }

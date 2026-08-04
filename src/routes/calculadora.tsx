@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import { CalculadoraTelhas } from "@/components/site/Calculadora";
+import { Ferramentas } from "@/components/site/Ferramentas";
 
 export const Route = createFileRoute("/calculadora")({
   head: () => ({
@@ -42,11 +42,8 @@ function CalculadoraPage() {
           </div>
         </section>
 
-        <section className="bg-background py-16">
-          <div className="mx-auto max-w-3xl px-5">
-            <CalculadoraTelhas />
-          </div>
-        </section>
+        <Ferramentas />
+
       </main>
       <Footer />
       <FloatingWhats />

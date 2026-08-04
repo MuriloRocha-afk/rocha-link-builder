@@ -6,7 +6,7 @@ import { Categorias } from "@/components/site/Categorias";
 import { Acao, Depoimentos, Faq, Unidades } from "@/components/site/Sections";
 import { Tecnologia, CtaFinal } from "@/components/site/Tecnologia";
 import { AvisoEntrega } from "@/components/site/AvisoEntrega";
-import { CalculadoraTelhas } from "@/components/site/Calculadora";
+import { Ferramentas } from "@/components/site/Ferramentas";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/shared";
 import hero from "@/assets/hero-patio.jpg";
@@ -107,11 +107,10 @@ function Index() {
         <Tecnologia />
         <Acao />
         <AvisoEntrega />
-        <section id="calculadora" className="scroll-mt-24 bg-secondary py-24">
-          <div className="mx-auto max-w-3xl px-5">
-            <CalculadoraTelhas />
-          </div>
+        <section id="calculadora" className="scroll-mt-24">
+          <Ferramentas />
         </section>
+
         <Depoimentos />
         <Faq />
         <Unidades />
