@@ -1,137 +1,84 @@
 import { useState } from "react";
-import { Home } from "lucide-react";
-import { WhatsAppButton } from "./shared";
+import { Check, Home, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { waLink } from "@/constants/whatsapp";
+
+import brancoBarro from "@/assets/sim/base-branco-barro.jpg.asset.json";
+import begeBarro from "@/assets/sim/base-bege-barro.jpg.asset.json";
+import cinzaBarro from "@/assets/sim/base-cinza-barro.jpg.asset.json";
+import grafiteBarro from "@/assets/sim/base-grafite-barro.jpg.asset.json";
+import brancoPvcCeramica from "@/assets/sim/base-branco-pvcceramica.jpg.asset.json";
+import begePvcCeramica from "@/assets/sim/base-bege-pvcceramica.jpg.asset.json";
+import cinzaPvcCeramica from "@/assets/sim/base-cinza-pvcceramica.jpg.asset.json";
+import grafitePvcCeramica from "@/assets/sim/base-grafite-pvcceramica.jpg.asset.json";
+import brancoPvcMarfim from "@/assets/sim/base-branco-pvcmarfim.jpg.asset.json";
+import begePvcMarfim from "@/assets/sim/base-bege-pvcmarfim.jpg.asset.json";
+import cinzaPvcMarfim from "@/assets/sim/base-cinza-pvcmarfim.jpg.asset.json";
+import grafitePvcMarfim from "@/assets/sim/base-grafite-pvcmarfim.jpg.asset.json";
+import brancoFibro from "@/assets/sim/base-branco-fibrocimento.jpg.asset.json";
+import begeFibro from "@/assets/sim/base-bege-fibrocimento.jpg.asset.json";
+import cinzaFibro from "@/assets/sim/base-cinza-fibrocimento.jpg.asset.json";
+import grafiteFibro from "@/assets/sim/base-grafite-fibrocimento.jpg.asset.json";
 
 const PAREDES = [
-  { id: "branco", label: "Branco", color: "#F5F5F2", shade: "#E2E1DC" },
-  { id: "bege", label: "Bege", color: "#E4D3B8", shade: "#CDBB9E" },
-  { id: "cinza", label: "Cinza", color: "#C6C9CC", shade: "#ADB1B5" },
-  { id: "grafite", label: "Grafite", color: "#4A4F55", shade: "#3A3E43" },
-];
+  { id: "branco", label: "Branco", color: "#F5F5F2" },
+  { id: "bege", label: "Bege", color: "#D8C3A5" },
+  { id: "cinza", label: "Cinza", color: "#AEB3B7" },
+  { id: "grafite", label: "Grafite", color: "#41464B" },
+] as const;
 
 const TELHADOS = [
-  { id: "barro", label: "Barro Natural", color: "#B45A32", dark: "#8E4324", texture: "onda" },
-  { id: "resinada", label: "Barro Resinada", color: "#8C2F1E", dark: "#6B2214", texture: "onda" },
-  { id: "pvc-marfim", label: "PVC Marfim", color: "#EDE4D0", dark: "#D3C7AD", texture: "onda" },
-  { id: "pvc-ceramica", label: "PVC Cerâmica", color: "#C1583A", dark: "#9B412A", texture: "onda" },
-  { id: "fibrocimento", label: "Fibrocimento", color: "#B9BDBE", dark: "#9AA0A1", texture: "reta" },
-];
+  { id: "barro", label: "Barro Natural", color: "#B45A32" },
+  { id: "pvc-ceramica", label: "PVC Cerâmica", color: "#C1583A" },
+  { id: "pvc-marfim", label: "PVC Marfim", color: "#E8DFC9" },
+  { id: "fibrocimento", label: "Fibrocimento", color: "#92989B" },
+] as const;
+
+const IMAGENS: Record<string, string> = {
+  "branco-barro": brancoBarro.url, "bege-barro": begeBarro.url, "cinza-barro": cinzaBarro.url, "grafite-barro": grafiteBarro.url,
+  "branco-pvc-ceramica": brancoPvcCeramica.url, "bege-pvc-ceramica": begePvcCeramica.url, "cinza-pvc-ceramica": cinzaPvcCeramica.url, "grafite-pvc-ceramica": grafitePvcCeramica.url,
+  "branco-pvc-marfim": brancoPvcMarfim.url, "bege-pvc-marfim": begePvcMarfim.url, "cinza-pvc-marfim": cinzaPvcMarfim.url, "grafite-pvc-marfim": grafitePvcMarfim.url,
+  "branco-fibrocimento": brancoFibro.url, "bege-fibrocimento": begeFibro.url, "cinza-fibrocimento": cinzaFibro.url, "grafite-fibrocimento": grafiteFibro.url,
+};
 
 export function SimuladorVisual() {
-  const [parede, setParede] = useState(PAREDES[0]);
-  const [telhado, setTelhado] = useState(TELHADOS[0]);
+  const [parede, setParede] = useState<(typeof PAREDES)[number]>(PAREDES[0]);
+  const [telhado, setTelhado] = useState<(typeof TELHADOS)[number]>(TELHADOS[0]);
+  const imagem = IMAGENS[`${parede.id}-${telhado.id}`] ?? brancoBarro;
+  const mensagem = `Olá, Rocha Telhas! Fiz uma simulação no Provador Visual e escolhi fachada ${parede.label} com telhado ${telhado.label}. Gostaria de receber orientação e orçamento para esta combinação.`;
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-7 shadow-[var(--shadow-card)] md:p-9">
-      <div className="flex items-center gap-3">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
-          <Home className="h-6 w-6" />
-        </span>
-        <div className="min-w-0">
-          <h3 className="text-xl font-extrabold text-primary">Simulador Visual de Telhados</h3>
-          <p className="text-sm text-muted-foreground">
-            Teste combinações de fachada e cobertura antes de decidir a sua compra.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-7 overflow-hidden rounded-2xl border border-border bg-secondary">
-        <svg viewBox="0 0 400 240" className="h-auto w-full" role="img"
-          aria-label={`Casa com parede ${parede.label} e telhado ${telhado.label}`}>
-          <defs>
-            <pattern id="sim-onda" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M0 8 Q2.5 2 5 8 T10 8" fill="none" stroke={telhado.dark} strokeWidth="1.4" />
-            </pattern>
-            <pattern id="sim-reta" width="12" height="12" patternUnits="userSpaceOnUse">
-              <path d="M0 0 V12" stroke={telhado.dark} strokeWidth="1.6" />
-            </pattern>
-          </defs>
-
-          <rect x="0" y="0" width="400" height="240" fill="#DCE7F0" />
-          <rect x="0" y="196" width="400" height="44" fill="#C7CBBF" />
-
-          {/* corpo da casa */}
-          <rect x="70" y="110" width="260" height="90" fill={parede.color} />
-          <rect x="70" y="110" width="14" height="90" fill={parede.shade} />
-
-          {/* telhado */}
-          <polygon points="200,40 350,112 50,112" fill={telhado.color} />
-          <polygon points="200,40 350,112 50,112" fill={`url(#sim-${telhado.texture})`} opacity="0.55" />
-          <polygon points="200,40 210,44 60,116 50,112" fill={telhado.dark} opacity="0.5" />
-          <rect x="46" y="110" width="308" height="7" rx="3" fill={telhado.dark} />
-
-          {/* porta e janelas */}
-          <rect x="180" y="150" width="40" height="50" fill={telhado.dark} opacity="0.85" rx="2" />
-          <rect x="108" y="140" width="46" height="34" fill="#7FA8C4" rx="2" />
-          <rect x="246" y="140" width="46" height="34" fill="#7FA8C4" rx="2" />
-        </svg>
-      </div>
-
-      <div className="mt-7 grid gap-6 md:grid-cols-2">
-        <div>
-          <p className="text-xs font-bold tracking-[0.18em] text-primary/70 uppercase">
-            Cor da parede / fachada
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {PAREDES.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => setParede(p)}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition-all ${
-                  parede.id === p.id
-                    ? "border-accent bg-accent/10 text-accent"
-                    : "border-border bg-card text-primary/70 hover:border-accent hover:text-accent"
-                }`}
-              >
-                <span
-                  className="h-4 w-4 rounded-full border border-border"
-                  style={{ background: p.color }}
-                />
-                {p.label}
-              </button>
-            ))}
+    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+      <div className="p-6 md:p-8">
+        <div className="flex items-center gap-3">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent"><Home className="h-6 w-6" /></span>
+          <div>
+            <h3 className="text-xl font-extrabold text-primary">Provador Visual de Telhados</h3>
+            <p className="text-sm text-muted-foreground">Combine acabamentos em uma maquete arquitetônica realista.</p>
           </div>
         </div>
 
-        <div>
-          <p className="text-xs font-bold tracking-[0.18em] text-primary/70 uppercase">
-            Tipo / cor do telhado
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {TELHADOS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setTelhado(t)}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold transition-all ${
-                  telhado.id === t.id
-                    ? "border-accent bg-accent/10 text-accent"
-                    : "border-border bg-card text-primary/70 hover:border-accent hover:text-accent"
-                }`}
-              >
-                <span
-                  className="h-4 w-4 rounded-full border border-border"
-                  style={{ background: t.color }}
-                />
-                {t.label}
-              </button>
-            ))}
-          </div>
+        <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-xl bg-secondary">
+          <img key={imagem} src={imagem} alt={`Fachada ${parede.label} com telhado ${telhado.label}`} loading="lazy" width={1280} height={800} className="h-full w-full object-cover transition-opacity duration-500" />
+          <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-primary/85 px-3 py-1.5 text-xs font-bold text-primary-foreground backdrop-blur"><Check className="h-3.5 w-3.5" /> Visualização realista</span>
+        </div>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <fieldset>
+            <legend className="text-xs font-bold tracking-[0.14em] text-primary/70 uppercase">Cor da fachada</legend>
+            <div className="mt-3 flex flex-wrap gap-2">{PAREDES.map((p) => <button key={p.id} type="button" onClick={() => setParede(p)} aria-pressed={parede.id === p.id} className={`flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-bold transition ${parede.id === p.id ? "border-accent bg-accent/10 text-accent" : "border-border text-primary/70 hover:border-accent"}`}><span className="h-4 w-4 rounded-full border border-border" style={{ backgroundColor: p.color }} />{p.label}</button>)}</div>
+          </fieldset>
+          <fieldset>
+            <legend className="text-xs font-bold tracking-[0.14em] text-primary/70 uppercase">Tipo e textura da telha</legend>
+            <div className="mt-3 flex flex-wrap gap-2">{TELHADOS.map((t) => <button key={t.id} type="button" onClick={() => setTelhado(t)} aria-pressed={telhado.id === t.id} className={`flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-bold transition ${telhado.id === t.id ? "border-accent bg-accent/10 text-accent" : "border-border text-primary/70 hover:border-accent"}`}><span className="h-4 w-4 rounded-full border border-border" style={{ backgroundColor: t.color }} />{t.label}</button>)}</div>
+          </fieldset>
         </div>
       </div>
 
-      <div className="mt-7 rounded-2xl border-2 border-accent bg-accent/8 p-6">
-        <p className="text-sm font-bold text-primary">
-          Combinação escolhida: fachada {parede.label} + telhado {telhado.label}
-        </p>
-        <WhatsAppButton
-          className="mt-4 w-full"
-          message={`Olá! Simulei no site a combinação: fachada ${parede.label} com telhado ${telhado.label}. Podem me enviar um orçamento?`}
-        >
-          Quero esta combinação — cotar no WhatsApp
-        </WhatsAppButton>
-      </div>
+      <footer className="border-t border-border bg-secondary/60 p-6 md:flex md:items-center md:justify-between md:gap-6 md:px-8">
+        <div><p className="text-xs font-bold tracking-[0.16em] text-accent uppercase">Resolução do Estilo</p><p className="mt-1 font-extrabold text-primary">Fachada {parede.label} + Telhado {telhado.label}</p></div>
+        <Button asChild variant="whats" size="lg" className="mt-4 w-full md:mt-0 md:w-auto"><a href={waLink(mensagem)} target="_blank" rel="noopener noreferrer"><MessageCircle />Enviar Combinação Escolhida para o WhatsApp</a></Button>
+      </footer>
     </div>
   );
 }
