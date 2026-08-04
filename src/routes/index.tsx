@@ -6,7 +6,7 @@ import { Categorias } from "@/components/site/Categorias";
 import { Acao, Depoimentos, Faq, Unidades } from "@/components/site/Sections";
 import { Tecnologia, CtaFinal } from "@/components/site/Tecnologia";
 import { AvisoEntrega } from "@/components/site/AvisoEntrega";
-import { CalculadoraTelhas } from "@/components/site/Calculadora";
+import { Ferramentas } from "@/components/site/Ferramentas";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/shared";
 import hero from "@/assets/hero-patio.jpg";
