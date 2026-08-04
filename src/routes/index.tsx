@@ -107,11 +107,10 @@ function Index() {
         <Tecnologia />
         <Acao />
         <AvisoEntrega />
-        <section id="calculadora" className="scroll-mt-24 bg-secondary py-24">
-          <div className="mx-auto max-w-3xl px-5">
-            <CalculadoraTelhas />
-          </div>
+        <section id="calculadora" className="scroll-mt-24">
+          <Ferramentas />
         </section>
+
         <Depoimentos />
         <Faq />
         <Unidades />
