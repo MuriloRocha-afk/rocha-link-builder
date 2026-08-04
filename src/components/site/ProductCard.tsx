@@ -249,18 +249,39 @@ export function ProductConfigurator({
         </div>
 
         {erro && faltando.length ? (
-          <p
-            role="alert"
-            className="flex items-start gap-2 rounded-xl border border-destructive/40 bg-destructive/8 px-4 py-3 text-sm font-semibold text-destructive"
-          >
+          <p role="alert" className="flex items-start gap-2 rounded-xl border border-destructive/40 bg-destructive/8 px-4 py-3 text-sm font-semibold text-destructive">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             Preencha as especificações antes de adicionar: {faltando.join(", ")}.
           </p>
         ) : null}
 
+        {produtoTelha ? (
+          <div className="overflow-hidden rounded-xl border border-accent/35 bg-accent/5">
+            <button type="button" onClick={() => setAcessoriosAbertos((v) => !v)} aria-expanded={acessoriosAbertos} className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-extrabold text-primary">
+              Sugestão de Acessórios Relacionados
+              <ChevronDown className={`h-4 w-4 shrink-0 text-accent transition-transform ${acessoriosAbertos ? "rotate-180" : ""}`} />
+            </button>
+            {acessoriosAbertos ? (
+              <div className="border-t border-accent/20 px-4 py-4">
+                <p className="text-xs text-muted-foreground">Proporção recomendada para {qty} telha(s):</p>
+                <ul className="mt-3 grid gap-2 text-sm font-semibold text-primary sm:grid-cols-2">
+                  <li className="rounded-lg bg-card px-3 py-2">{kitsRecomendados} kit(s) de vedação/parafusos</li>
+                  <li className="rounded-lg bg-card px-3 py-2">{cumeeirasRecomendadas} cumeeira(s)</li>
+                </ul>
+                <Button type="button" variant="cta" size="lg" className="mt-4 w-full" onClick={() => {
+                  if (faltando.length > 0) { setErro(true); return; }
+                  setErro(false);
+                  addItem({ id: variantId, name: item.name, detail, qty });
+                  addItem({ id: `${variantId}-kit-vedacao`, name: "Kit de vedação e parafusos", detail: `Recomendado para ${qty} telha(s) de ${item.name}`, qty: kitsRecomendados, unit: "kits" });
+                  addItem({ id: `${variantId}-cumeeira`, name: "Cumeeira compatível", detail: `Recomendada para ${item.name}`, qty: cumeeirasRecomendadas, unit: "peças" });
+                }}><Plus />Adicionar Telhas e Acessórios Recomendados</Button>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+
         <Button type="button" variant="cta" size="xl" className="w-full" onClick={handleAdd}>
-          <Plus />
-          Adicionar ao Orçamento
+          <Plus />Adicionar ao Orçamento
         </Button>
 
         <Button asChild variant="whats" size="xl" className="w-full">
