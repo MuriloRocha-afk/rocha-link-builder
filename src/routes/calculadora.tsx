@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import { CalculadoraTelhas } from "@/components/site/Calculadora";
+import { Ferramentas } from "@/components/site/Ferramentas";
 
 export const Route = createFileRoute("/calculadora")({
   head: () => ({
