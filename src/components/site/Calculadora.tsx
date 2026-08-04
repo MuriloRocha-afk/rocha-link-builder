@@ -11,6 +11,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useQuoteCart } from "./quote-cart";
+import { waLink } from "./shared";
+
 
 type Dimensao = {
   id: string;
