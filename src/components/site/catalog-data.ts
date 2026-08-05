@@ -736,7 +736,19 @@ export const ITEM_SLUG_ALIASES: Record<string, string> = {
   polipropileno: "outros-modelos-telhas",
   concreto: "outros-modelos-telhas",
   cumeeiras: "cumeeiras-complementos",
+  cambara: "madeira-cambara",
+  eucalipto: "pinus-eucalipto-tratado",
+  cedrinho: "outras-madeiras",
+  pinus: "outras-madeiras",
+  garapeira: "outras-madeiras",
+  amescla: "outras-madeiras",
+  "forro-pvc": "outras-madeiras",
+  "forro-cedrinho": "outras-madeiras",
+  madeirit: "madeirite-tabeiras",
+  "tabeiras-deck": "madeirite-tabeiras",
+  mourao: "madeirite-tabeiras",
 };
+
 
 export function findCategoryItem(categoryId: string, slug: string) {
   const category = CATEGORIES.find((c) => c.id === categoryId);
