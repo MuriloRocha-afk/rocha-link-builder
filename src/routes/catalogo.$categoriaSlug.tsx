@@ -117,6 +117,7 @@ function CategoriaPage() {
                       key={item.slug}
                       item={item}
                       categoryShort={category.short}
+                      categoryId={category.id}
                     />
                   ))}
                 </div>
