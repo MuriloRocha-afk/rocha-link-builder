@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
+import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
 const CalculadoraRoute = CalculadoraRouteImport.update({
@@ -43,6 +44,12 @@ const CatalogoCategoriaSlugIndexRoute =
     path: '/',
     getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
   } as any)
+const CatalogoMadeiramentoCambaraRoute =
+  CatalogoMadeiramentoCambaraRouteImport.update({
+    id: '/catalogo/madeiramento/cambara',
+    path: '/catalogo/madeiramento/cambara',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoCategoriaSlugProdutoSlugRoute =
   CatalogoCategoriaSlugProdutoSlugRouteImport.update({
     id: '/$produtoSlug',
@@ -56,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesByTo {
@@ -63,6 +71,7 @@ export interface FileRoutesByTo {
   '/calculadora': typeof CalculadoraRoute
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesById {
@@ -72,6 +81,7 @@ export interface FileRoutesById {
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRouteTypes {
@@ -82,6 +92,7 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/madeiramento/cambara'
     | '/catalogo/$categoriaSlug/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -89,6 +100,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/madeiramento/cambara'
     | '/catalogo/$categoriaSlug'
   id:
     | '__root__'
@@ -97,6 +109,7 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/madeiramento/cambara'
     | '/catalogo/$categoriaSlug/'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +118,7 @@ export interface RootRouteChildren {
   CalculadoraRoute: typeof CalculadoraRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
+  CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -144,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoCategoriaSlugIndexRouteImport
       parentRoute: typeof CatalogoCategoriaSlugRouteRoute
     }
+    '/catalogo/madeiramento/cambara': {
+      id: '/catalogo/madeiramento/cambara'
+      path: '/catalogo/madeiramento/cambara'
+      fullPath: '/catalogo/madeiramento/cambara'
+      preLoaderRoute: typeof CatalogoMadeiramentoCambaraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/$categoriaSlug/$produtoSlug': {
       id: '/catalogo/$categoriaSlug/$produtoSlug'
       path: '/$produtoSlug'
@@ -176,6 +197,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculadoraRoute: CalculadoraRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
+  CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
