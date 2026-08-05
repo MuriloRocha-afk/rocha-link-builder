@@ -199,7 +199,7 @@ function ProdutoPage() {
 
                 <TabsContent value="uso">
                   <ul className="mt-4 space-y-3 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-                    {(item.instrucoes ?? INSTRUCOES_PADRAO).map((tip) => (
+                    {(item.instrucoes ?? INSTRUCOES_PADRAO).map((tip: string) => (
                       <li key={tip} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
                         <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                         {tip}
