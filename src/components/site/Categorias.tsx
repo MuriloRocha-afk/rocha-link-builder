@@ -7,6 +7,7 @@ const EMOJI: Record<string, string> = {
   telhas: "🧱",
   madeiramento: "🪵",
   tintas: "🎨",
+  calhas: "🌧️",
   fixadores: "🔩",
 };
 
