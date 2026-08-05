@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { waLink } from "@/components/site/shared";
-import { CATEGORIES, findCategoryItem } from "@/components/site/catalog-data";
+import { findCategoryItem } from "@/components/site/catalog-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductConfigurator } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
