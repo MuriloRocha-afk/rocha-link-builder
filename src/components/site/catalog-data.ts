@@ -104,8 +104,10 @@ export const CATEGORIES: CatalogCategory[] = [
     title: "Telhas & Coberturas",
     short: "Telhas & Coberturas",
     description:
-      "Cerâmicas, PVC, fibrocimento e especialidades para coberturas residenciais, comerciais e industriais.",
+      "Fibrocimento, Colonial PVC, Cerâmica, Policarbonato e mais — todos os tipos para sua obra.",
     image: ceramica,
+    bestseller: "Campeão de Vendas",
+    ctaLabel: "Ver Tipos de Telha",
     items: [
       {
         slug: "telha-fibrocimento-infibra",
