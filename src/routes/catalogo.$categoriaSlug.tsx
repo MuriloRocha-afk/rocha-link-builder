@@ -58,8 +58,8 @@ function CategoriaNotFound() {
 
 function CategoriaPage() {
   const { category } = Route.useLoaderData();
-  const destaques = category.items.filter((i) => i.featured || i.bestseller);
-  const demais = category.items.filter((i) => !i.featured && !i.bestseller);
+  const destaques = category.items.filter((i: CatalogItem) => i.featured || i.bestseller);
+  const demais = category.items.filter((i: CatalogItem) => !i.featured && !i.bestseller);
 
   return (
     <div className="min-h-screen bg-background">
