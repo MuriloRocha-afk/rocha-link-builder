@@ -42,7 +42,7 @@ function CatalogoPage() {
 
       <main>
         <section className="surface-dark pt-40 pb-16">
-          <div class="mx-auto max-w-7xl px-5">
+          <div className="mx-auto max-w-7xl px-5">
             <Link
               to="/"
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/70 transition-colors hover:text-accent"
