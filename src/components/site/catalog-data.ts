@@ -308,11 +308,13 @@ export const CATEGORIES: CatalogCategory[] = [
   },
   {
     id: "madeiramento",
-    title: "Madeiramento Estrutural & Aparelhado",
+    title: "Madeiramento Estrutural",
     short: "Madeiramento",
     description:
-      "Madeira nativa e de reflorestamento cortada, seca e aparelhada em plaina industrial no nosso pátio.",
+      "Cambará, Eucalipto, Cedrinho, Pinus e mais — cortado e aparelhado no nosso pátio.",
     image: cambara,
+    bestseller: "Campeão de Vendas",
+    ctaLabel: "Ver Espécies de Madeira",
     items: [
       {
         slug: "madeira-cambara",
