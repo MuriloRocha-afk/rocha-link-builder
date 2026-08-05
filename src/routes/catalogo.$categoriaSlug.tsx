@@ -93,7 +93,7 @@ function CategoriaPage() {
                   Destaques e campeões de venda
                 </div>
                 <div className="mt-5 grid gap-7 xl:grid-cols-2">
-                  {destaques.map((item) => (
+                  {destaques.map((item: CatalogItem) => (
                     <ProductCatalogCard
                       key={item.slug}
                       item={item}
