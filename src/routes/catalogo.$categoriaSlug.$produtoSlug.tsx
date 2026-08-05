@@ -35,7 +35,7 @@ function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
 }
 
 
-export const Route = createFileRoute("/catalogo/$produtoSlug")({
+export const Route = createFileRoute("/catalogo/$categoriaSlug/$produtoSlug")({
   loader: ({ params }) => {
     const found = findProduct(params.produtoSlug);
     if (!found) throw notFound();
