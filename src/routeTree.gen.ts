@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
+import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
@@ -44,6 +45,12 @@ const CatalogoCategoriaSlugIndexRoute =
     path: '/',
     getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
   } as any)
+const CatalogoTelhasFibrocimentoRoute =
+  CatalogoTelhasFibrocimentoRouteImport.update({
+    id: '/catalogo/telhas/fibrocimento',
+    path: '/catalogo/telhas/fibrocimento',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoCambaraRoute =
   CatalogoMadeiramentoCambaraRouteImport.update({
     id: '/catalogo/madeiramento/cambara',
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesByTo {
@@ -72,6 +80,7 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesById {
@@ -82,6 +91,7 @@ export interface FileRoutesById {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRouteTypes {
@@ -93,6 +103,7 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -101,6 +112,7 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug'
   id:
     | '__root__'
@@ -110,6 +122,7 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug/'
   fileRoutesById: FileRoutesById
 }
@@ -119,6 +132,7 @@ export interface RootRouteChildren {
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
+  CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -157,6 +171,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/catalogo/$categoriaSlug/'
       preLoaderRoute: typeof CatalogoCategoriaSlugIndexRouteImport
       parentRoute: typeof CatalogoCategoriaSlugRouteRoute
+    }
+    '/catalogo/telhas/fibrocimento': {
+      id: '/catalogo/telhas/fibrocimento'
+      path: '/catalogo/telhas/fibrocimento'
+      fullPath: '/catalogo/telhas/fibrocimento'
+      preLoaderRoute: typeof CatalogoTelhasFibrocimentoRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/catalogo/madeiramento/cambara': {
       id: '/catalogo/madeiramento/cambara'
@@ -198,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
+  CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
