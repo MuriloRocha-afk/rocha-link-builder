@@ -494,11 +494,12 @@ export const CATEGORIES: CatalogCategory[] = [
   },
   {
     id: "tintas",
-    title: "Tintas, Vernizes & Impermeabilizantes",
+    title: "Tintas, Vernizes & Proteção",
     short: "Tintas & Proteção",
     description:
-      "Proteção UV, hidrorrepelência e impermeabilização para madeiras, telhas e alvenaria.",
+      "Anjo, Sayerlack, Vedacit — linha completa para proteger madeira, telha e alvenaria.",
     image: verniz,
+    ctaLabel: "Ver Produtos",
     items: [
       {
         slug: "vernizes-stain-protector",
