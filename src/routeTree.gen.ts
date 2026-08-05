@@ -14,9 +14,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
+import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
 import { Route as CatalogoTelhasCeramicaRouteImport } from './routes/catalogo.telhas.ceramica'
+import { Route as CatalogoMadeiramentoForroPvcRouteImport } from './routes/catalogo.madeiramento.forro-pvc'
 import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
@@ -48,6 +50,12 @@ const CatalogoCategoriaSlugIndexRoute =
     path: '/',
     getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
   } as any)
+const CatalogoTelhasPolicarbonatoRoute =
+  CatalogoTelhasPolicarbonatoRouteImport.update({
+    id: '/catalogo/telhas/policarbonato',
+    path: '/catalogo/telhas/policarbonato',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoTelhasFibrocimentoRoute =
   CatalogoTelhasFibrocimentoRouteImport.update({
     id: '/catalogo/telhas/fibrocimento',
@@ -65,6 +73,12 @@ const CatalogoTelhasCeramicaRoute = CatalogoTelhasCeramicaRouteImport.update({
   path: '/catalogo/telhas/ceramica',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoMadeiramentoForroPvcRoute =
+  CatalogoMadeiramentoForroPvcRouteImport.update({
+    id: '/catalogo/madeiramento/forro-pvc',
+    path: '/catalogo/madeiramento/forro-pvc',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoEucaliptoRoute =
   CatalogoMadeiramentoEucaliptoRouteImport.update({
     id: '/catalogo/madeiramento/eucalipto',
@@ -92,9 +106,11 @@ export interface FileRoutesByFullPath {
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesByTo {
@@ -104,9 +120,11 @@ export interface FileRoutesByTo {
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesById {
@@ -118,9 +136,11 @@ export interface FileRoutesById {
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRouteTypes {
@@ -133,9 +153,11 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/policarbonato'
     | '/catalogo/$categoriaSlug/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -145,9 +167,11 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/policarbonato'
     | '/catalogo/$categoriaSlug'
   id:
     | '__root__'
@@ -158,9 +182,11 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/policarbonato'
     | '/catalogo/$categoriaSlug/'
   fileRoutesById: FileRoutesById
 }
@@ -171,9 +197,11 @@ export interface RootRouteChildren {
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
   CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
+  CatalogoMadeiramentoForroPvcRoute: typeof CatalogoMadeiramentoForroPvcRoute
   CatalogoTelhasCeramicaRoute: typeof CatalogoTelhasCeramicaRoute
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
+  CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -213,6 +241,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoCategoriaSlugIndexRouteImport
       parentRoute: typeof CatalogoCategoriaSlugRouteRoute
     }
+    '/catalogo/telhas/policarbonato': {
+      id: '/catalogo/telhas/policarbonato'
+      path: '/catalogo/telhas/policarbonato'
+      fullPath: '/catalogo/telhas/policarbonato'
+      preLoaderRoute: typeof CatalogoTelhasPolicarbonatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/telhas/fibrocimento': {
       id: '/catalogo/telhas/fibrocimento'
       path: '/catalogo/telhas/fibrocimento'
@@ -232,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/telhas/ceramica'
       fullPath: '/catalogo/telhas/ceramica'
       preLoaderRoute: typeof CatalogoTelhasCeramicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/forro-pvc': {
+      id: '/catalogo/madeiramento/forro-pvc'
+      path: '/catalogo/madeiramento/forro-pvc'
+      fullPath: '/catalogo/madeiramento/forro-pvc'
+      preLoaderRoute: typeof CatalogoMadeiramentoForroPvcRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/madeiramento/eucalipto': {
@@ -282,20 +324,12 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
   CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
+  CatalogoMadeiramentoForroPvcRoute: CatalogoMadeiramentoForroPvcRoute,
   CatalogoTelhasCeramicaRoute: CatalogoTelhasCeramicaRoute,
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
+  CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
