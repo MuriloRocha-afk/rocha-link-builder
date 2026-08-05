@@ -6,6 +6,7 @@ import { CATEGORIES, type CatalogItem } from "@/components/site/catalog-data";
 import { ProductCatalogCard } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
 import { TelhasSubcardGrid } from "@/components/site/TelhasSubcards";
+import { MadeiramentoSubcardGrid } from "@/components/site/MadeiramentoSubcards";
 
 export const Route = createFileRoute("/catalogo/$categoriaSlug/")({
   loader: ({ params }) => {
@@ -94,14 +95,14 @@ function CategoriaPage() {
 
         <section className="bg-background py-20">
           <div className="mx-auto max-w-7xl px-5">
-            {category.id === "telhas" ? (
+            {category.id === "telhas" || category.id === "madeiramento" ? (
               <>
                 <div className="flex items-center gap-2 text-sm font-extrabold tracking-[0.14em] text-accent uppercase">
                   <Crown className="h-4 w-4" />
-                  Escolha o tipo de telha
+                  {category.id === "telhas" ? "Escolha o tipo de telha" : "Escolha o tipo de madeira"}
                 </div>
                 <div className="mt-6">
-                  <TelhasSubcardGrid />
+                  {category.id === "telhas" ? <TelhasSubcardGrid /> : <MadeiramentoSubcardGrid />}
                 </div>
               </>
             ) : (
