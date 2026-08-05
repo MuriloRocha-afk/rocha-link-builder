@@ -111,7 +111,7 @@ function CategoriaPage() {
                   Demais opções da categoria
                 </div>
                 <div className="mt-5 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-                  {demais.map((item) => (
+                  {demais.map((item: CatalogItem) => (
                     <ProductCatalogCard
                       key={item.slug}
                       item={item}
