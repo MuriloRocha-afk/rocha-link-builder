@@ -37,9 +37,11 @@ function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
 
 export const Route = createFileRoute("/catalogo/$categoriaSlug/$produtoSlug")({
   loader: ({ params }) => {
-    const found = findProduct(params.produtoSlug);
-    if (!found) throw notFound();
-    return { name: found.item.name, summary: found.item.summary };
+    const category = CATEGORIES.find((c) => c.id === params.categoriaSlug);
+    if (!category) throw notFound();
+    const item = category.items.find((i) => i.slug === params.produtoSlug);
+    if (!item) throw notFound();
+    return { name: item.name, summary: item.summary };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
