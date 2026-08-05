@@ -133,7 +133,7 @@ function ProdutoPage() {
                 />
               </div>
               <div className="grid grid-cols-2 gap-5">
-                {gallery.slice(1).map((src) => (
+                {gallery.slice(1).map((src: string) => (
                   <div
                     key={src}
                     className="overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)]"
