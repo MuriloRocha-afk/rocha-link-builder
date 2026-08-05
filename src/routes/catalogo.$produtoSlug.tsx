@@ -98,11 +98,12 @@ function ProdutoPage() {
         <section className="surface-dark pt-40 pb-14">
           <div className="mx-auto max-w-7xl px-5">
             <Link
-              to="/catalogo"
+              to="/catalogo/$categoriaSlug"
+              params={{ categoriaSlug: category.id }}
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/70 transition-colors hover:text-accent"
             >
               <ArrowLeft className="h-4 w-4" />
-              Voltar ao catálogo
+              Voltar para {category.short}
             </Link>
             <span className="mt-6 inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-4 py-1 text-xs font-bold tracking-[0.18em] text-accent uppercase">
               {category.short}
