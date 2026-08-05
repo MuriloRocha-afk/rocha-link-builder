@@ -16,6 +16,8 @@ import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalog
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
+import { Route as CatalogoTelhasCeramicaRouteImport } from './routes/catalogo.telhas.ceramica'
+import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
@@ -58,6 +60,17 @@ const CatalogoTelhasColonialPvcRoute =
     path: '/catalogo/telhas/colonial-pvc',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoTelhasCeramicaRoute = CatalogoTelhasCeramicaRouteImport.update({
+  id: '/catalogo/telhas/ceramica',
+  path: '/catalogo/telhas/ceramica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoMadeiramentoEucaliptoRoute =
+  CatalogoMadeiramentoEucaliptoRouteImport.update({
+    id: '/catalogo/madeiramento/eucalipto',
+    path: '/catalogo/madeiramento/eucalipto',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoCambaraRoute =
   CatalogoMadeiramentoCambaraRouteImport.update({
     id: '/catalogo/madeiramento/cambara',
@@ -78,6 +91,8 @@ export interface FileRoutesByFullPath {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
@@ -88,6 +103,8 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
@@ -100,6 +117,8 @@ export interface FileRoutesById {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
@@ -113,6 +132,8 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug/'
@@ -123,6 +144,8 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug'
@@ -134,6 +157,8 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug/'
@@ -145,6 +170,8 @@ export interface RootRouteChildren {
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
+  CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
+  CatalogoTelhasCeramicaRoute: typeof CatalogoTelhasCeramicaRoute
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
 }
@@ -200,6 +227,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoTelhasColonialPvcRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/telhas/ceramica': {
+      id: '/catalogo/telhas/ceramica'
+      path: '/catalogo/telhas/ceramica'
+      fullPath: '/catalogo/telhas/ceramica'
+      preLoaderRoute: typeof CatalogoTelhasCeramicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/eucalipto': {
+      id: '/catalogo/madeiramento/eucalipto'
+      path: '/catalogo/madeiramento/eucalipto'
+      fullPath: '/catalogo/madeiramento/eucalipto'
+      preLoaderRoute: typeof CatalogoMadeiramentoEucaliptoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/cambara': {
       id: '/catalogo/madeiramento/cambara'
       path: '/catalogo/madeiramento/cambara'
@@ -240,6 +281,8 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
+  CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
+  CatalogoTelhasCeramicaRoute: CatalogoTelhasCeramicaRoute,
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
 }
