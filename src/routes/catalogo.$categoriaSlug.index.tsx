@@ -1,10 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Crown } from "lucide-react";
+import { ArrowLeft, ChevronRight, Crown } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { CATEGORIES, type CatalogItem } from "@/components/site/catalog-data";
 import { ProductCatalogCard } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
+import { TelhasSubcardGrid } from "@/components/site/TelhasSubcards";
 
 export const Route = createFileRoute("/catalogo/$categoriaSlug/")({
   loader: ({ params }) => {
@@ -68,9 +69,16 @@ function CategoriaPage() {
       <main>
         <section className="surface-dark pt-40 pb-16">
           <div className="mx-auto max-w-7xl px-5">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm font-semibold text-primary-foreground/70">
+              <Link to="/catalogo" className="transition-colors hover:text-accent">
+                Catálogo
+              </Link>
+              <ChevronRight className="h-4 w-4 opacity-60" />
+              <span className="text-accent">{category.title}</span>
+            </nav>
             <Link
               to="/catalogo"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/70 transition-colors hover:text-accent"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/70 transition-colors hover:text-accent"
             >
               <ArrowLeft className="h-4 w-4" />
               Voltar ao catálogo
@@ -86,45 +94,60 @@ function CategoriaPage() {
 
         <section className="bg-background py-20">
           <div className="mx-auto max-w-7xl px-5">
-            {destaques.length ? (
+            {category.id === "telhas" ? (
               <>
                 <div className="flex items-center gap-2 text-sm font-extrabold tracking-[0.14em] text-accent uppercase">
                   <Crown className="h-4 w-4" />
-                  Destaques e campeões de venda
+                  Escolha o tipo de telha
                 </div>
-                <div className="mt-5 grid gap-7 xl:grid-cols-2">
-                  {destaques.map((item: CatalogItem) => (
-                    <ProductCatalogCard
-                      key={item.slug}
-                      item={item}
-                      categoryShort={category.short}
-                      categoryId={category.id}
-                      expansive
-                    />
-                  ))}
+                <div className="mt-6">
+                  <TelhasSubcardGrid />
                 </div>
               </>
-            ) : null}
-
-            {demais.length ? (
+            ) : (
               <>
-                <div className={`${destaques.length ? "mt-14" : ""} text-sm font-extrabold tracking-[0.14em] text-primary/60 uppercase`}>
-                  Demais opções da categoria
-                </div>
-                <div className="mt-5 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-                  {demais.map((item: CatalogItem) => (
-                    <ProductCatalogCard
-                      key={item.slug}
-                      item={item}
-                      categoryShort={category.short}
-                      categoryId={category.id}
-                    />
-                  ))}
-                </div>
+                {destaques.length ? (
+                  <>
+                    <div className="flex items-center gap-2 text-sm font-extrabold tracking-[0.14em] text-accent uppercase">
+                      <Crown className="h-4 w-4" />
+                      Destaques e campeões de venda
+                    </div>
+                    <div className="mt-5 grid gap-7 xl:grid-cols-2">
+                      {destaques.map((item: CatalogItem) => (
+                        <ProductCatalogCard
+                          key={item.slug}
+                          item={item}
+                          categoryShort={category.short}
+                          categoryId={category.id}
+                          expansive
+                        />
+                      ))}
+                    </div>
+                  </>
+                ) : null}
+
+                {demais.length ? (
+                  <>
+                    <div className={`${destaques.length ? "mt-14" : ""} text-sm font-extrabold tracking-[0.14em] text-primary/60 uppercase`}>
+                      Demais opções da categoria
+                    </div>
+                    <div className="mt-5 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+                      {demais.map((item: CatalogItem) => (
+                        <ProductCatalogCard
+                          key={item.slug}
+                          item={item}
+                          categoryShort={category.short}
+                          categoryId={category.id}
+                        />
+                      ))}
+                    </div>
+                  </>
+                ) : null}
               </>
-            ) : null}
+            )}
           </div>
         </section>
+
 
         {category.id === "telhas" ? (
           <section className="bg-secondary py-20">

@@ -726,3 +726,23 @@ export function findProduct(slug: string) {
 export const ALL_PRODUCTS = CATEGORIES.flatMap((c) =>
   c.items.map((item) => ({ category: c, item })),
 );
+
+/** Slugs amigáveis do Nível 2 de Telhas → slug real do produto (Nível 3). */
+export const ITEM_SLUG_ALIASES: Record<string, string> = {
+  fibrocimento: "telha-fibrocimento-infibra",
+  "colonial-pvc": "telha-pvc-colonial",
+  ceramica: "telhas-ceramicas-tradicionais",
+  policarbonato: "outros-modelos-telhas",
+  polipropileno: "outros-modelos-telhas",
+  concreto: "outros-modelos-telhas",
+  cumeeiras: "cumeeiras-complementos",
+};
+
+export function findCategoryItem(categoryId: string, slug: string) {
+  const category = CATEGORIES.find((c) => c.id === categoryId);
+  if (!category) return undefined;
+  const realSlug = ITEM_SLUG_ALIASES[slug] ?? slug;
+  const item = category.items.find((i) => i.slug === realSlug);
+  if (!item) return undefined;
+  return { category, item };
+}

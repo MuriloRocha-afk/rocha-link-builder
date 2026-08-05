@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { waLink } from "@/components/site/shared";
-import { CATEGORIES } from "@/components/site/catalog-data";
+import { findCategoryItem } from "@/components/site/catalog-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductConfigurator } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
@@ -37,11 +37,9 @@ function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
 
 export const Route = createFileRoute("/catalogo/$categoriaSlug/$produtoSlug")({
   loader: ({ params }) => {
-    const category = CATEGORIES.find((c) => c.id === params.categoriaSlug);
-    if (!category) throw notFound();
-    const item = category.items.find((i) => i.slug === params.produtoSlug);
-    if (!item) throw notFound();
-    return { name: item.name, summary: item.summary };
+    const found = findCategoryItem(params.categoriaSlug, params.produtoSlug);
+    if (!found) throw notFound();
+    return { name: found.item.name, summary: found.item.summary };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -87,10 +85,9 @@ function ProdutoNotFound() {
 
 function ProdutoPage() {
   const { categoriaSlug, produtoSlug } = Route.useParams();
-  const category = CATEGORIES.find((c) => c.id === categoriaSlug);
-  const item = category?.items.find((i) => i.slug === produtoSlug);
-  if (!category || !item) return <ProdutoNotFound />;
-  const found = { category, item };
+  const found = findCategoryItem(categoriaSlug, produtoSlug);
+  if (!found) return <ProdutoNotFound />;
+  const { category, item } = found;
   const gallery = item.gallery?.length ? item.gallery : [item.image, category.image];
 
   return (
