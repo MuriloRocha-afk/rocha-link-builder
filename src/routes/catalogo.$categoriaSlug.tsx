@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Crown } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import { CATEGORIES } from "@/components/site/catalog-data";
+import { CATEGORIES, type CatalogItem } from "@/components/site/catalog-data";
 import { ProductCatalogCard } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
 
