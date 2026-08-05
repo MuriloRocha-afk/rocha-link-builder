@@ -154,7 +154,7 @@ function ProdutoPage() {
             <div>
               {item.badges?.length ? (
                 <ul className="flex flex-wrap gap-2">
-                  {item.badges.map((b) => (
+                  {item.badges.map((b: string) => (
                     <li
                       key={b}
                       className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-bold text-accent"
