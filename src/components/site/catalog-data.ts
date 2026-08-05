@@ -585,12 +585,13 @@ export const CATEGORIES: CatalogCategory[] = [
     ],
   },
   {
-    id: "fixadores",
-    title: "Funilaria & Fixadores",
-    short: "Funilaria & Fixadores",
+    id: "calhas",
+    title: "Calhas, Rufos & Funilaria",
+    short: "Calhas & Rufos",
     description:
-      "Calhas e rufos galvanizados sob medida, além da linha completa de fixação, vedação e isolamento.",
+      "Calhas Alge e Aquapluv, rufos galvanizados e mantas térmicas e asfálticas.",
     image: rufos,
+    ctaLabel: "Ver Produtos",
     items: [
       {
         slug: "rufos-calhas-pingadeiras",
@@ -630,21 +631,17 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
       },
       {
-        slug: "kits-fixacao-vedacao",
-        name: "Kits de Fixação e Vedações",
-        image: acessorios,
-        gallery: [acessorios, vedacao],
+        slug: "mantas-vedacao",
+        name: "Mantas Térmicas e Asfálticas",
+        image: vedacao,
         summary:
-          "Linha completa para qualquer estrutura metálica ou de madeira: parafusos, pregos, mantas e fitas.",
+          "Manta térmica de alumínio dupla face e fitas asfálticas para vedação completa da cobertura.",
         showQty: true,
         selectors: [
           {
             key: "Item",
             label: "Escolha o item",
             options: [
-              { value: "Parafuso Autobrocante PVC/Fibrocimento", label: "Parafuso Autobrocante PVC/Fibrocimento", image: acessorios, note: "Com arruela de vedação" },
-              { value: "Parafuso Soberbo com Vedação", label: "Parafuso Soberbo com Vedação", image: acessorios, note: "Fixação em madeiramento" },
-              { value: "Pregos com/sem cabeça", label: "Pregos com/sem cabeça", image: acessorios, note: "Todas as bitolas, a granel ou em caixa" },
               { value: "Manta Térmica Alumínio Dupla Face", label: "Manta Térmica Alumínio Dupla Face", image: vedacao, note: "Rolos de 25 m² e 50 m²" },
               { value: "Fita Asfáltica Multiuso", label: "Fita Asfáltica Multiuso", image: vedacao, note: "Vedação de rufos, calhas e trincas" },
             ],
@@ -656,15 +653,61 @@ export const CATEGORIES: CatalogCategory[] = [
               { value: "Unidade / metro", label: "Unidade / metro" },
               { value: "Rolo 25 m²", label: "Rolo 25 m²" },
               { value: "Rolo 50 m²", label: "Rolo 50 m²" },
+            ],
+          },
+        ],
+        specs: [
+          { label: "Manta Térmica", value: "Alumínio dupla face (25 e 50 m²)" },
+          { label: "Fita Asfáltica", value: "Multiuso para vedação e calhas" },
+          { label: "Aplicação", value: "Coberturas, rufos e trincas" },
+          { label: "Disponibilidade", value: "Pronta entrega" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "fixadores",
+    title: "Fixadores & Acessórios",
+    short: "Fixadores",
+    description:
+      "Parafusos para telha, pregos, espigões, kits de fixação e acessórios de instalação.",
+    image: acessorios,
+    ctaLabel: "Ver Produtos",
+    items: [
+      {
+        slug: "kits-fixacao-vedacao",
+        name: "Kits de Fixação e Vedações",
+        image: acessorios,
+        gallery: [acessorios, vedacao],
+        summary:
+          "Linha completa para qualquer estrutura metálica ou de madeira: parafusos, pregos e kits.",
+        showQty: true,
+        selectors: [
+          {
+            key: "Item",
+            label: "Escolha o item",
+            options: [
+              { value: "Parafuso Autobrocante PVC/Fibrocimento", label: "Parafuso Autobrocante PVC/Fibrocimento", image: acessorios, note: "Com arruela de vedação" },
+              { value: "Parafuso Soberbo com Vedação", label: "Parafuso Soberbo com Vedação", image: acessorios, note: "Fixação em madeiramento" },
+              { value: "Pregos com/sem cabeça", label: "Pregos com/sem cabeça", image: acessorios, note: "Todas as bitolas, a granel ou em caixa" },
+              { value: "Espigão / Gancho", label: "Espigão / Gancho", image: acessorios, note: "Acessórios de instalação" },
+            ],
+          },
+          {
+            key: "Volume",
+            label: "Volume",
+            options: [
+              { value: "Unidade / metro", label: "Unidade / metro" },
               { value: "Caixa fechada", label: "Caixa fechada" },
+              { value: "Pacote", label: "Pacote" },
             ],
           },
         ],
         specs: [
           { label: "Parafusos", value: "Soberbos e autobrocantes com arruela de vedação" },
           { label: "Pregos", value: "Com e sem cabeça, todas as bitolas" },
-          { label: "Isolamento", value: "Manta térmica de alumínio dupla face (25 e 50 m²)" },
-          { label: "Vedação", value: "Fitas asfálticas e kits para pregos" },
+          { label: "Acessórios", value: "Espigões, ganchos e kits de instalação" },
+          { label: "Vedação", value: "Arruelas e fitas complementares" },
         ],
         badges: ["Linha completa em estoque"],
       },
