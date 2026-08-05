@@ -15,6 +15,7 @@ import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
+import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
@@ -51,6 +52,12 @@ const CatalogoTelhasFibrocimentoRoute =
     path: '/catalogo/telhas/fibrocimento',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoTelhasColonialPvcRoute =
+  CatalogoTelhasColonialPvcRouteImport.update({
+    id: '/catalogo/telhas/colonial-pvc',
+    path: '/catalogo/telhas/colonial-pvc',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoCambaraRoute =
   CatalogoMadeiramentoCambaraRouteImport.update({
     id: '/catalogo/madeiramento/cambara',
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
@@ -80,6 +88,7 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
 }
@@ -91,6 +100,7 @@ export interface FileRoutesById {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
@@ -103,6 +113,7 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug/'
   fileRoutesByTo: FileRoutesByTo
@@ -112,6 +123,7 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug'
   id:
@@ -122,6 +134,7 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/$categoriaSlug/'
   fileRoutesById: FileRoutesById
@@ -132,6 +145,7 @@ export interface RootRouteChildren {
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
+  CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
 }
 
@@ -179,6 +193,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoTelhasFibrocimentoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/telhas/colonial-pvc': {
+      id: '/catalogo/telhas/colonial-pvc'
+      path: '/catalogo/telhas/colonial-pvc'
+      fullPath: '/catalogo/telhas/colonial-pvc'
+      preLoaderRoute: typeof CatalogoTelhasColonialPvcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/cambara': {
       id: '/catalogo/madeiramento/cambara'
       path: '/catalogo/madeiramento/cambara'
@@ -219,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
+  CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
 }
 export const routeTree = rootRouteImport
