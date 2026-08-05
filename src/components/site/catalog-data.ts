@@ -60,6 +60,10 @@ export type CatalogCategory = {
   description: string;
   image: string;
   items: CatalogItem[];
+  /** Selo de campeão de vendas no card de categoria. */
+  bestseller?: string;
+  /** Texto do CTA no card de categoria. */
+  ctaLabel: string;
 };
 
 const COMPRIMENTOS_MADEIRA: VariantOption[] = Array.from({ length: 13 }, (_, i) => {
