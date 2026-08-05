@@ -1,11 +1,17 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Crown } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
+import { SectionHeading } from "@/components/site/shared";
 import { CATEGORIES } from "@/components/site/catalog-data";
-import { ProductCatalogCard } from "@/components/site/ProductCard";
-import { CalculadoraTelhas } from "@/components/site/Calculadora";
+
+const EMOJI: Record<string, string> = {
+  telhas: "🧱",
+  madeiramento: "🪵",
+  tintas: "🎨",
+  calhas: "🌧️",
+  fixadores: "🔩",
+};
 
 export const Route = createFileRoute("/catalogo/")({
   head: () => ({
@@ -14,13 +20,13 @@ export const Route = createFileRoute("/catalogo/")({
       {
         name: "description",
         content:
-          "Campeões de venda em telhas de fibrocimento, PVC e madeira cambará, com seletores de bitola, cor e dimensão. Monte seu orçamento e cote pelo WhatsApp.",
+          "Navegue pelas categorias da Rocha Telhas: telhas, madeiramento, tintas, calhas e fixadores. Escolha a categoria e monte seu orçamento via WhatsApp.",
       },
-      { property: "og:title", content: "Catálogo completo — Rocha Telhas" },
+      { property: "og:title", content: "Catálogo — Rocha Telhas" },
       {
         property: "og:description",
         content:
-          "Telhas, madeiramento aparelhado, tintas e funilaria com seletores de variação e cotação direta no WhatsApp.",
+          "Telhas, madeiramento aparelhado, tintas, calhas e fixadores com cotação direta no WhatsApp.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -30,9 +36,6 @@ export const Route = createFileRoute("/catalogo/")({
 });
 
 function CatalogoPage() {
-  const [filtro, setFiltro] = useState<string>("todas");
-  const visible = filtro === "todas" ? CATEGORIES : CATEGORIES.filter((c) => c.id === filtro);
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -48,104 +51,56 @@ function CatalogoPage() {
               Voltar para a home
             </Link>
             <h1 className="mt-6 max-w-3xl text-4xl leading-tight font-extrabold text-primary-foreground md:text-6xl">
-              Catálogo <span className="text-gradient-accent">completo</span> de telhas,
-              madeiramento e acabamentos
+              Catálogo <span className="text-gradient-accent">Rocha Telhas</span>
             </h1>
             <p className="mt-5 max-w-2xl text-base text-primary-foreground/75 md:text-lg">
-              Os campeões de venda vêm primeiro, com seletor de dimensão, cor e bitola. Escolha a
-              variação exata, adicione ao orçamento e receba a cotação no WhatsApp — sem preços no
-              site, sempre a melhor condição para a sua obra.
+              Escolha uma categoria e encontre a ficha técnica completa de cada produto. Selecione
+              bitola, cor e dimensão e envie seu orçamento pelo WhatsApp — sem preços no site,
+              sempre a melhor condição para a sua obra.
             </p>
           </div>
         </section>
 
-        <div className="sticky top-24 z-30 border-b border-border bg-card/95 backdrop-blur">
-          <div className="mx-auto flex max-w-7xl flex-wrap gap-2 px-5 py-4">
-            {[{ id: "todas", short: "Todas as Categorias" }, ...CATEGORIES].map((c) => (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => setFiltro(c.id)}
-                className={`rounded-full px-5 py-2.5 text-sm font-bold transition-all ${
-                  filtro === c.id
-                    ? "bg-primary text-primary-foreground shadow-[var(--shadow-card)]"
-                    : "border border-border bg-card text-primary/70 hover:border-accent hover:text-accent"
-                }`}
-              >
-                {c.short}
-              </button>
-            ))}
-          </div>
-        </div>
+        <section className="bg-background py-20">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHeading
+              kicker="Navegue por Categoria"
+              title="O que você precisa para sua obra?"
+              subtitle="Clique em uma categoria para ver todos os produtos, variações e especificações técnicas."
+            />
 
-        {visible.map((cat) => {
-          const destaques = cat.items.filter((i) => i.featured);
-          const demais = cat.items.filter((i) => !i.featured);
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {CATEGORIES.map((c) => (
+                <Link
+                  key={c.id}
+                  to="/catalogo/$categoriaSlug"
+                  params={{ categoriaSlug: c.id }}
+                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+                >
+                  {c.bestseller ? (
+                    <span className="absolute top-4 right-4 inline-flex items-center rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
+                      {c.bestseller}
+                    </span>
+                  ) : null}
 
-          return (
-            <section
-              key={cat.id}
-              id={cat.id}
-              className="scroll-mt-44 border-b border-border bg-background py-20 last:border-b-0"
-            >
-              <div className="mx-auto max-w-7xl px-5">
-                <div className="max-w-3xl">
-                  <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-4 py-1 text-xs font-bold tracking-[0.18em] text-accent uppercase">
-                    Categoria
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary text-3xl">
+                    {EMOJI[c.id]}
+                  </div>
+
+                  <h2 className="mt-5 text-2xl font-extrabold text-primary">{c.title}</h2>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {c.description}
+                  </p>
+
+                  <span className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-5 py-3 text-sm font-extrabold text-white transition-all group-hover:bg-[#EA580C]">
+                    {c.ctaLabel}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
-                  <h2 className="mt-4 text-3xl font-extrabold text-primary md:text-4xl">
-                    {cat.title}
-                  </h2>
-                  <p className="mt-3 text-base text-muted-foreground">{cat.description}</p>
-                </div>
-
-                {destaques.length ? (
-                  <>
-                    <div className="mt-10 flex items-center gap-2 text-sm font-extrabold tracking-[0.14em] text-accent uppercase">
-                      <Crown className="h-4 w-4" />
-                      Destaques e campeões de venda
-                    </div>
-                    <div className="mt-5 grid gap-7 xl:grid-cols-2">
-                      {destaques.map((item) => (
-                        <ProductCatalogCard
-                          key={item.slug}
-                          item={item}
-                          categoryShort={cat.short}
-                          expansive
-                        />
-                      ))}
-                    </div>
-                  </>
-                ) : null}
-
-                {demais.length ? (
-                  <>
-                    <div className="mt-14 text-sm font-extrabold tracking-[0.14em] text-primary/60 uppercase">
-                      Demais opções da categoria
-                    </div>
-                    <div className="mt-5 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-                      {demais.map((item) => (
-                        <ProductCatalogCard
-                          key={item.slug}
-                          item={item}
-                          categoryShort={cat.short}
-                        />
-                      ))}
-                    </div>
-                  </>
-                ) : null}
-              </div>
-            </section>
-          );
-        })}
-
-        {filtro === "todas" || filtro === "telhas" ? (
-          <section className="bg-secondary py-20">
-            <div className="mx-auto max-w-3xl px-5">
-              <CalculadoraTelhas />
+                </Link>
+              ))}
             </div>
-          </section>
-        ) : null}
+          </div>
+        </section>
       </main>
 
       <Footer />

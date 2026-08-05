@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { waLink } from "@/components/site/shared";
-import { findProduct } from "@/components/site/catalog-data";
+import { CATEGORIES } from "@/components/site/catalog-data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductConfigurator } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
@@ -35,11 +35,13 @@ function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
 }
 
 
-export const Route = createFileRoute("/catalogo/$produtoSlug")({
+export const Route = createFileRoute("/catalogo/$categoriaSlug/$produtoSlug")({
   loader: ({ params }) => {
-    const found = findProduct(params.produtoSlug);
-    if (!found) throw notFound();
-    return { name: found.item.name, summary: found.item.summary };
+    const category = CATEGORIES.find((c) => c.id === params.categoriaSlug);
+    if (!category) throw notFound();
+    const item = category.items.find((i) => i.slug === params.produtoSlug);
+    if (!item) throw notFound();
+    return { name: item.name, summary: item.summary };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -84,10 +86,11 @@ function ProdutoNotFound() {
 }
 
 function ProdutoPage() {
-  const { produtoSlug } = Route.useParams();
-  const found = findProduct(produtoSlug);
-  if (!found) return <ProdutoNotFound />;
-  const { category, item } = found;
+  const { categoriaSlug, produtoSlug } = Route.useParams();
+  const category = CATEGORIES.find((c) => c.id === categoriaSlug);
+  const item = category?.items.find((i) => i.slug === produtoSlug);
+  if (!category || !item) return <ProdutoNotFound />;
+  const found = { category, item };
   const gallery = item.gallery?.length ? item.gallery : [item.image, category.image];
 
   return (
@@ -98,11 +101,12 @@ function ProdutoPage() {
         <section className="surface-dark pt-40 pb-14">
           <div className="mx-auto max-w-7xl px-5">
             <Link
-              to="/catalogo"
+              to="/catalogo/$categoriaSlug"
+              params={{ categoriaSlug: category.id }}
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/70 transition-colors hover:text-accent"
             >
               <ArrowLeft className="h-4 w-4" />
-              Voltar ao catálogo
+              Voltar para {category.short}
             </Link>
             <span className="mt-6 inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-4 py-1 text-xs font-bold tracking-[0.18em] text-accent uppercase">
               {category.short}
@@ -129,7 +133,7 @@ function ProdutoPage() {
                 />
               </div>
               <div className="grid grid-cols-2 gap-5">
-                {gallery.slice(1).map((src) => (
+                {gallery.slice(1).map((src: string) => (
                   <div
                     key={src}
                     className="overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)]"
@@ -150,7 +154,7 @@ function ProdutoPage() {
             <div>
               {item.badges?.length ? (
                 <ul className="flex flex-wrap gap-2">
-                  {item.badges.map((b) => (
+                  {item.badges.map((b: string) => (
                     <li
                       key={b}
                       className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-bold text-accent"
@@ -195,7 +199,7 @@ function ProdutoPage() {
 
                 <TabsContent value="uso">
                   <ul className="mt-4 space-y-3 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-                    {(item.instrucoes ?? INSTRUCOES_PADRAO).map((tip) => (
+                    {(item.instrucoes ?? INSTRUCOES_PADRAO).map((tip: string) => (
                       <li key={tip} className="flex gap-3 text-sm leading-relaxed text-foreground/80">
                         <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                         {tip}

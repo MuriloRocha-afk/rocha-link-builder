@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as CalculadoraRouteImport } from './routes/calculadora'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
-import { Route as CatalogoProdutoSlugRouteImport } from './routes/catalogo.$produtoSlug'
+import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
+import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
+import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
 const CalculadoraRoute = CalculadoraRouteImport.update({
   id: '/calculadora',
@@ -29,48 +31,79 @@ const CatalogoIndexRoute = CatalogoIndexRouteImport.update({
   path: '/catalogo/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CatalogoProdutoSlugRoute = CatalogoProdutoSlugRouteImport.update({
-  id: '/catalogo/$produtoSlug',
-  path: '/catalogo/$produtoSlug',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const CatalogoCategoriaSlugRouteRoute =
+  CatalogoCategoriaSlugRouteRouteImport.update({
+    id: '/catalogo/$categoriaSlug',
+    path: '/catalogo/$categoriaSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCategoriaSlugIndexRoute =
+  CatalogoCategoriaSlugIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
+  } as any)
+const CatalogoCategoriaSlugProdutoSlugRoute =
+  CatalogoCategoriaSlugProdutoSlugRouteImport.update({
+    id: '/$produtoSlug',
+    path: '/$produtoSlug',
+    getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculadora': typeof CalculadoraRoute
-  '/catalogo/$produtoSlug': typeof CatalogoProdutoSlugRoute
+  '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
+  '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculadora': typeof CalculadoraRoute
-  '/catalogo/$produtoSlug': typeof CatalogoProdutoSlugRoute
   '/catalogo': typeof CatalogoIndexRoute
+  '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calculadora': typeof CalculadoraRoute
-  '/catalogo/$produtoSlug': typeof CatalogoProdutoSlugRoute
+  '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
+  '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calculadora' | '/catalogo/$produtoSlug' | '/catalogo/'
+  fullPaths:
+    | '/'
+    | '/calculadora'
+    | '/catalogo/$categoriaSlug'
+    | '/catalogo/'
+    | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/$categoriaSlug/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calculadora' | '/catalogo/$produtoSlug' | '/catalogo'
+  to:
+    | '/'
+    | '/calculadora'
+    | '/catalogo'
+    | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/$categoriaSlug'
   id:
     | '__root__'
     | '/'
     | '/calculadora'
-    | '/catalogo/$produtoSlug'
+    | '/catalogo/$categoriaSlug'
     | '/catalogo/'
+    | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/$categoriaSlug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculadoraRoute: typeof CalculadoraRoute
-  CatalogoProdutoSlugRoute: typeof CatalogoProdutoSlugRoute
+  CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
 }
 
@@ -97,22 +130,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/catalogo/$produtoSlug': {
-      id: '/catalogo/$produtoSlug'
-      path: '/catalogo/$produtoSlug'
-      fullPath: '/catalogo/$produtoSlug'
-      preLoaderRoute: typeof CatalogoProdutoSlugRouteImport
+    '/catalogo/$categoriaSlug': {
+      id: '/catalogo/$categoriaSlug'
+      path: '/catalogo/$categoriaSlug'
+      fullPath: '/catalogo/$categoriaSlug'
+      preLoaderRoute: typeof CatalogoCategoriaSlugRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/$categoriaSlug/': {
+      id: '/catalogo/$categoriaSlug/'
+      path: '/'
+      fullPath: '/catalogo/$categoriaSlug/'
+      preLoaderRoute: typeof CatalogoCategoriaSlugIndexRouteImport
+      parentRoute: typeof CatalogoCategoriaSlugRouteRoute
+    }
+    '/catalogo/$categoriaSlug/$produtoSlug': {
+      id: '/catalogo/$categoriaSlug/$produtoSlug'
+      path: '/$produtoSlug'
+      fullPath: '/catalogo/$categoriaSlug/$produtoSlug'
+      preLoaderRoute: typeof CatalogoCategoriaSlugProdutoSlugRouteImport
+      parentRoute: typeof CatalogoCategoriaSlugRouteRoute
     }
   }
 }
 
+interface CatalogoCategoriaSlugRouteRouteChildren {
+  CatalogoCategoriaSlugProdutoSlugRoute: typeof CatalogoCategoriaSlugProdutoSlugRoute
+  CatalogoCategoriaSlugIndexRoute: typeof CatalogoCategoriaSlugIndexRoute
+}
+
+const CatalogoCategoriaSlugRouteRouteChildren: CatalogoCategoriaSlugRouteRouteChildren =
+  {
+    CatalogoCategoriaSlugProdutoSlugRoute:
+      CatalogoCategoriaSlugProdutoSlugRoute,
+    CatalogoCategoriaSlugIndexRoute: CatalogoCategoriaSlugIndexRoute,
+  }
+
+const CatalogoCategoriaSlugRouteRouteWithChildren =
+  CatalogoCategoriaSlugRouteRoute._addFileChildren(
+    CatalogoCategoriaSlugRouteRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculadoraRoute: CalculadoraRoute,
-  CatalogoProdutoSlugRoute: CatalogoProdutoSlugRoute,
+  CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

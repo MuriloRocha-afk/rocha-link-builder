@@ -19,12 +19,16 @@ function BestsellerBadge({ label }: { label: string }) {
 export function ProductCatalogCard({
   item,
   categoryShort,
+  categoryId,
   expansive = false,
 }: {
   item: CatalogItem;
   categoryShort: string;
+  categoryId: string;
   expansive?: boolean;
 }) {
+  const productLink = { to: "/catalogo/$categoriaSlug/$produtoSlug" as const, params: { categoriaSlug: categoryId, produtoSlug: item.slug } };
+
   return (
     <article
       className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] ${
@@ -32,8 +36,8 @@ export function ProductCatalogCard({
       } ${expansive ? "lg:flex-row" : ""}`}
     >
       <Link
-        to="/catalogo/$produtoSlug"
-        params={{ produtoSlug: item.slug }}
+        to={productLink.to}
+        params={productLink.params}
         aria-label={`Ver ficha técnica de ${item.name}`}
         className="absolute inset-0 z-10"
       />
@@ -84,7 +88,7 @@ export function ProductCatalogCard({
             variant={item.bestseller ? "cta" : "outlineAccent"}
             className="h-12 w-full"
           >
-            <Link to="/catalogo/$produtoSlug" params={{ produtoSlug: item.slug }}>
+            <Link to={productLink.to} params={productLink.params}>
               Ver Ficha Técnica Completa
               <ArrowRight />
             </Link>

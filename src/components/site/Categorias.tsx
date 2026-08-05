@@ -7,6 +7,7 @@ const EMOJI: Record<string, string> = {
   telhas: "🧱",
   madeiramento: "🪵",
   tintas: "🎨",
+  calhas: "🌧️",
   fixadores: "🔩",
 };
 
@@ -20,7 +21,7 @@ export function Categorias() {
           subtitle="Escolha uma categoria e veja as fichas técnicas completas no nosso catálogo."
         />
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((c) => (
             <Link
               key={c.id}
