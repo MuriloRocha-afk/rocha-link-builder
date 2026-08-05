@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import Fibrocimento from "@/pages/catalogo/telhas/Fibrocimento";
+import Policarbonato from "@/pages/catalogo/telhas/Policarbonato";
 
-const TITLE = "Telha Fibrocimento Ondulada INFIBRA | Rocha Telhas";
+const TITLE = "Telha de Policarbonato Alveolar e Compacta | Rocha Telhas";
 const DESCRIPTION =
-  "Configure sua telha de fibrocimento ondulada INFIBRA: comprimentos de 1,53 m a 3,66 m, espessuras 5, 6 e 8 mm, com cobertura estimada em tempo real e cotação no WhatsApp.";
+  "Policarbonato alveolar e compacto para cobertura translúcida: espessuras, cores e comprimentos disponíveis. Monte seu orçamento e cote no WhatsApp.";
 
-export const Route = createFileRoute("/catalogo/telhas/fibrocimento")({
+export const Route = createFileRoute("/catalogo/telhas/policarbonato")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -18,15 +18,15 @@ export const Route = createFileRoute("/catalogo/telhas/fibrocimento")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: FibrocimentoRoute,
+  component: PolicarbonatoRoute,
 });
 
-function FibrocimentoRoute() {
+function PolicarbonatoRoute() {
   return (
     <>
       <Header />
       <div className="pt-24">
-        <Fibrocimento />
+        <Policarbonato />
       </div>
       <Footer />
       <FloatingWhats />

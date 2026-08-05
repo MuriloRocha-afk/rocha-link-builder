@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import Fibrocimento from "@/pages/catalogo/telhas/Fibrocimento";
+import ForroPVC from "@/pages/catalogo/madeiramento/ForroPVC";
 
-const TITLE = "Telha Fibrocimento Ondulada INFIBRA | Rocha Telhas";
+const TITLE = "Forro de PVC — Réguas e Acabamentos | Rocha Telhas";
 const DESCRIPTION =
-  "Configure sua telha de fibrocimento ondulada INFIBRA: comprimentos de 1,53 m a 3,66 m, espessuras 5, 6 e 8 mm, com cobertura estimada em tempo real e cotação no WhatsApp.";
+  "Forro de PVC em réguas: largura, comprimento e acabamentos. Calcule a área, monte seu orçamento e cote direto no WhatsApp com a Rocha Telhas.";
 
-export const Route = createFileRoute("/catalogo/telhas/fibrocimento")({
+export const Route = createFileRoute("/catalogo/madeiramento/forro-pvc")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -18,15 +18,15 @@ export const Route = createFileRoute("/catalogo/telhas/fibrocimento")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: FibrocimentoRoute,
+  component: ForroPvcRoute,
 });
 
-function FibrocimentoRoute() {
+function ForroPvcRoute() {
   return (
     <>
       <Header />
       <div className="pt-24">
-        <Fibrocimento />
+        <ForroPVC />
       </div>
       <Footer />
       <FloatingWhats />
