@@ -86,10 +86,11 @@ function ProdutoNotFound() {
 }
 
 function ProdutoPage() {
-  const { produtoSlug } = Route.useParams();
-  const found = findProduct(produtoSlug);
-  if (!found) return <ProdutoNotFound />;
-  const { category, item } = found;
+  const { categoriaSlug, produtoSlug } = Route.useParams();
+  const category = CATEGORIES.find((c) => c.id === categoriaSlug);
+  const item = category?.items.find((i) => i.slug === produtoSlug);
+  if (!category || !item) return <ProdutoNotFound />;
+  const found = { category, item };
   const gallery = item.gallery?.length ? item.gallery : [item.image, category.image];
 
   return (
