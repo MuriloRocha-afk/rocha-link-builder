@@ -6,7 +6,7 @@ import { CATEGORIES, type CatalogItem } from "@/components/site/catalog-data";
 import { ProductCatalogCard } from "@/components/site/ProductCard";
 import { CalculadoraTelhas } from "@/components/site/Calculadora";
 
-export const Route = createFileRoute("/catalogo/$categoriaSlug")({
+export const Route = createFileRoute("/catalogo/$categoriaSlug/")({
   loader: ({ params }) => {
     const category = CATEGORIES.find((c) => c.id === params.categoriaSlug);
     if (!category) throw notFound();
