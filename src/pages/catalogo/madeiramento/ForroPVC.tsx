@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import { CROSS_SELL } from "../../../data/crossSell";
+import GaleriaProduto from "../../../components/GaleriaProduto";
 
 const COMPRIMENTOS = [
   "1,0m","1,5m","2,0m","2,5m","3,0m","3,5m",
@@ -77,6 +78,8 @@ export default function ForroPVC() {
             ))}
           </div>
         </div>
+        {/* GALERIA */}
+        <GaleriaProduto titulo="Forro PVC Branco" imagens={[{ src: "", alt: "Forro PVC branco em réguas de 20cm" }]} />
 
         {/* Comprimento */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
