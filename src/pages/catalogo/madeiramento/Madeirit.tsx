@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
+import GaleriaProduto from "../../../components/GaleriaProduto";
 
 const PRODUTOS = [
   { id: "madeirit-preto-10mm", nome: "Madeirit Plastificado Preto 10mm", desc: "220cm × 110cm", badge: "★ Mais vendido", cor: "Preto" },
@@ -57,6 +58,8 @@ export default function Madeirit() {
           <h1 className="text-2xl font-bold text-gray-900">📋 Madeirit & Compensado</h1>
           <p className="text-gray-500 mt-1 text-sm">Chapas estruturais para formas, forros e revestimentos. Madeirit preto e rosa, OSB e compensado em várias espessuras.</p>
         </div>
+        {/* GALERIA */}
+        <GaleriaProduto titulo="Madeirit & Compensado" imagens={[{ src: "", alt: "Chapas de madeirit e compensado" }]} />
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>

@@ -3,6 +3,7 @@ import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
+import GaleriaProduto from "../../../components/GaleriaProduto";
 
 const PRODUTOS = [
   { id: "sarrafo-5cm", nome: "Sarrafo 05cm × 3,0m", tipo: "Sarrafo", bitola: "05cm", comp: "3,0m", unidade: "Pc" },
@@ -61,6 +62,8 @@ export default function Pinus() {
           <h1 className="text-2xl font-bold text-gray-900">🌲 Pinus</h1>
           <p className="text-gray-500 mt-1 text-sm">Sarrafos, tábuas e pontaletes de reflorestamento. Custo-benefício para caixaria e estruturas secundárias.</p>
         </div>
+        {/* GALERIA */}
+        <GaleriaProduto titulo="Pinus — Sarrafos, Tábuas e Pontaletes" imagens={[{ src: "", alt: "Madeira de pinus de reflorestamento" }]} />
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>

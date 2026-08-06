@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import { CROSS_SELL } from "../../../data/crossSell";
+import GaleriaProduto from "../../../components/GaleriaProduto";
 
 const COMPRIMENTOS = [
   { valor: "183 × 110 cm", area: 1.83 * 0.98 },
@@ -85,6 +86,8 @@ export default function Policarbonato() {
             Translúcida, leve e resistente. Iluminação natural para galpões, áreas de serviço e garagens.
           </p>
         </div>
+        {/* GALERIA */}
+        <GaleriaProduto titulo="Telha Policarbonato" imagens={[{ src: "", alt: "Telha de policarbonato translúcida" }]} />
 
         {/* Versão */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">

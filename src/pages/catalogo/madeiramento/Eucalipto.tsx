@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronRight, MessageCircle, ShoppingCart, Check } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
+import GaleriaProduto from "../../../components/GaleriaProduto";
 
 const WHATSAPP = "5511971761003";
 
@@ -90,6 +91,8 @@ export default function Eucalipto() {
             Pontaletes roliços tratados e vigas serradas. Reflorestamento certificado.
           </p>
         </div>
+        {/* GALERIA */}
+        <GaleriaProduto titulo="Eucalipto & Pontaletes" imagens={[{ src: "", alt: "Pontalete roliço de eucalipto tratado" }]} />
 
         {/* Seleção do produto */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
