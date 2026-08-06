@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Logo, WhatsAppButton } from "./shared";
-import { SobreModal } from "./SobreModal";
 import { QuoteCartButton } from "./quote-cart";
 
 type NavItem = { label: string; hash?: string; to?: string };
@@ -43,7 +42,6 @@ function NavLink({
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [sobre, setSobre] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -73,13 +71,6 @@ export function Header() {
               className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
             />
           ))}
-          <button
-            type="button"
-            onClick={() => setSobre(true)}
-            className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
-          >
-            Sobre Nós
-          </button>
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
@@ -117,16 +108,6 @@ export function Header() {
                 className="text-base font-semibold text-primary"
               />
             ))}
-            <button
-              type="button"
-              onClick={() => {
-                setOpen(false);
-                setSobre(true);
-              }}
-              className="text-left text-base font-semibold text-primary"
-            >
-              Sobre Nós
-            </button>
           </nav>
           <div className="mt-5">
             <WhatsAppButton
@@ -139,8 +120,6 @@ export function Header() {
           </div>
         </div>
       ) : null}
-
-      <SobreModal open={sobre} onOpenChange={setSobre} />
     </header>
   );
 }

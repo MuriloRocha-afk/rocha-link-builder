@@ -1,171 +1,97 @@
-import { useState } from "react";
-import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
-import { useOrcamento } from "../../context/OrcamentoContext";
-import CrossSellModal from "../../components/CrossSellModal";
-import ModalCotarWhatsApp from "../../components/ModalCotarWhatsApp";
+import { ArrowRight, ChevronRight } from "lucide-react";
 
-const SECOES = [
+const SUBCARDS = [
   {
-    titulo: "Calhas",
+    slug: "calha-alge",
+    titulo: "Calha Alge — Moldura e Platibanda",
+    descricao: "Calha galvanizada nos cortes Moldura e Platibanda de 2,0m a 6,0m. A mais vendida para telhados residenciais.",
     emoji: "🌧️",
-    produtos: [
-      { id: "calha-alge-moldura-2m", nome: "Calha Alge — Moldura Corte 33 · 2,0m", unidade: "Pc" },
-      { id: "calha-alge-moldura-3m", nome: "Calha Alge — Moldura Corte 33 · 3,0m", unidade: "Pc" },
-      { id: "calha-alge-moldura-4m", nome: "Calha Alge — Moldura Corte 33 · 4,0m", unidade: "Pc" },
-      { id: "calha-alge-moldura-5m", nome: "Calha Alge — Moldura Corte 33 · 5,0m", unidade: "Pc" },
-      { id: "calha-alge-moldura-6m", nome: "Calha Alge — Moldura Corte 33 · 6,0m", unidade: "Pc" },
-      { id: "calha-alge-platibanda-2m", nome: "Calha Alge — Platibanda Corte 33 · 2,0m", unidade: "Pc" },
-      { id: "calha-alge-platibanda-3m", nome: "Calha Alge — Platibanda Corte 33 · 3,0m", unidade: "Pc" },
-      { id: "calha-alge-platibanda-4m", nome: "Calha Alge — Platibanda Corte 33 · 4,0m", unidade: "Pc" },
-      { id: "calha-alge-platibanda-5m", nome: "Calha Alge — Platibanda Corte 33 · 5,0m", unidade: "Pc" },
-      { id: "calha-alge-platibanda-6m", nome: "Calha Alge — Platibanda Corte 33 · 6,0m", unidade: "Pc" },
-      { id: "calha-aquapluv-cinza", nome: "Calha Aquapluv — Cinza", unidade: "Un" },
-      { id: "calha-aquapluv-style", nome: "Calha Aquapluv Style — Retangular", unidade: "Un" },
-    ],
+    tags: ["Galvanizada", "2m a 6m"],
+    badge: "★ Mais vendida",
   },
   {
-    titulo: "Rufos",
+    slug: "calha-aquapluv",
+    titulo: "Calha Aquapluv & Style",
+    descricao: "Calhas PVC Bege e Cinza da linha Aquapluv e Aquapluv Style Retangular. Não enferruja, fácil instalação.",
+    emoji: "🔵",
+    tags: ["PVC", "Bege e Cinza"],
+    badge: null,
+  },
+  {
+    slug: "rufo",
+    titulo: "Rufos Galvanizados",
+    descricao: "Rufo Alge galvanizado de 2,0m a 6,0m. Arremate entre telhado e parede, impermeabilização definitiva.",
     emoji: "🏠",
-    produtos: [
-      { id: "rufo-alge-2m", nome: "Rufo Alge — Corte 33 · 2,0m", unidade: "Pc" },
-      { id: "rufo-alge-3m", nome: "Rufo Alge — Corte 33 · 3,0m", unidade: "Pc" },
-      { id: "rufo-alge-4m", nome: "Rufo Alge — Corte 33 · 4,0m", unidade: "Pc" },
-      { id: "rufo-alge-5m", nome: "Rufo Alge — Corte 33 · 5,0m", unidade: "Pc" },
-      { id: "rufo-alge-6m", nome: "Rufo Alge — Corte 33 · 6,0m", unidade: "Pc" },
-    ],
+    tags: ["Galvanizado", "2m a 6m"],
+    badge: null,
   },
   {
-    titulo: "Manta Térmica",
+    slug: "manta-termica",
+    titulo: "Manta Térmica Aluminizada",
+    descricao: "1 face e 2 faces, de 10m² a 50m². Reduz até 70% do calor radiante. Essencial sob telhas metálicas e fibrocimento.",
     emoji: "🌡️",
-    produtos: [
-      { id: "manta-1f-10m2", nome: "Manta Térmica Aluminizada 1F × 10m²", unidade: "Un" },
-      { id: "manta-1f-25m2", nome: "Manta Térmica Aluminizada 1F × 25m²", unidade: "Un" },
-      { id: "manta-1f-50m2", nome: "Manta Térmica Aluminizada 1F × 50m²", unidade: "Un" },
-      { id: "manta-2f-10m2", nome: "Manta Térmica Aluminizada 2F × 10m²", unidade: "Un" },
-      { id: "manta-2f-25m2", nome: "Manta Térmica Aluminizada 2F × 25m²", unidade: "Un" },
-      { id: "manta-2f-50m2", nome: "Manta Térmica Aluminizada 2F × 50m²", unidade: "Un" },
-    ],
+    tags: ["1F e 2F", "10 a 50m²"],
+    badge: null,
   },
   {
+    slug: "manta-asfaltica",
     titulo: "Manta Asfáltica",
+    descricao: "Aluminizada Terracota em 10cm e 20cm de largura por 10m. Impermeabilização de calhas, rufos e junções.",
     emoji: "🛡️",
-    produtos: [
-      { id: "manta-asf-10x10", nome: "Manta Asfáltica Aluminizada — Terracota 10cm × 10m", unidade: "Un" },
-      { id: "manta-asf-20x10", nome: "Manta Asfáltica Aluminizada — Terracota 20cm × 10m", unidade: "Un" },
-    ],
+    tags: ["Impermeabilização"],
+    badge: null,
   },
-];
-
-const CROSS_CALHAS = [
-  { id: "suporte-calha-moldura", nome: "Suporte Calha Moldura 28/33", descricao: "Fixação da calha na estrutura. 1 suporte a cada 60cm.", emoji: "🔩", unidade: "Un", quantidadeSugerida: 6, categoria: "Calhas" },
-  { id: "saida-central-moldura", nome: "Saída Central Moldura 28/33", descricao: "Saída d'água central da calha.", emoji: "🔽", unidade: "Un", quantidadeSugerida: 1, categoria: "Calhas" },
-  { id: "cabeceira-moldura-d", nome: "Cabeceira Moldura 28/33 — Direita", descricao: "Tampa lateral direita da calha.", emoji: "➡️", unidade: "Un", quantidadeSugerida: 1, categoria: "Calhas" },
-  { id: "cabeceira-moldura-e", nome: "Cabeceira Moldura 28/33 — Esquerda", descricao: "Tampa lateral esquerda da calha.", emoji: "⬅️", unidade: "Un", quantidadeSugerida: 1, categoria: "Calhas" },
+  {
+    slug: "acessorios-calha",
+    titulo: "Acessórios de Calha",
+    descricao: "Suportes, cabeceiras, saídas centrais, emendas e bocais para calhas Alge e Aquapluv.",
+    emoji: "🔧",
+    tags: ["Alge", "Aquapluv"],
+    badge: null,
+  },
 ];
 
 export default function Calhas() {
-  const { adicionar } = useOrcamento();
-  const [secaoId, setSecaoId] = useState<number | null>(null);
-  const [produtoId, setProdutoId] = useState<string | null>(null);
-  const [quantidade, setQuantidade] = useState(3);
-  const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
-  const [modalWppAberto, setModalWppAberto] = useState(false);
-
-  const secao = secaoId !== null ? SECOES[secaoId] : null;
-  const produto = secao?.produtos.find((p) => p.id === produtoId);
-  const pronto = produtoId && quantidade >= 1;
-  const corpoMsgWpp = pronto && produto ? `🌧️ *${produto.nome}*\n• Quantidade: ${quantidade} ${produto.unidade}` : "";
-
-  const handleAdicionar = () => {
-    if (!pronto || !produto) return;
-    adicionar({ id: produtoId!, nome: produto.nome, variacao: `${quantidade} ${produto.unidade}`, quantidade, unidade: produto.unidade, categoria: "Calhas" });
-    setAdicionado(true);
-    setTimeout(() => {
-      setAdicionado(false);
-      if (secaoId === 0) setCrossSellAberto(true);
-    }, 800);
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white border-b px-4 py-3">
-        <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-          <a href="/catalogo" className="hover:text-orange-500">Catálogo</a>
+        <div className="max-w-5xl mx-auto flex items-center gap-1 text-xs text-gray-500">
+          <a href="/catalogo" className="hover:text-orange-500 transition-colors">Catálogo</a>
           <ChevronRight size={12} />
           <span className="text-gray-900 font-medium">Calhas, Rufos & Funilaria</span>
         </div>
       </div>
-      <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
-        <div>
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">🌧️ Calhas, Rufos & Funilaria</h1>
-          <p className="text-gray-500 mt-1 text-sm">Calhas Alge e Aquapluv, rufos galvanizados, mantas térmicas e asfálticas para qualquer cobertura.</p>
+          <p className="text-gray-500 mt-1 text-sm">
+            Calhas Alge e Aquapluv, rufos galvanizados, mantas térmicas e asfálticas. Escolha o produto para configurar.
+          </p>
         </div>
-        {/* Seleção de seção */}
-        <section className="bg-white rounded-2xl p-5 shadow-sm">
-          <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
-            Categoria de Produto
-          </h2>
-          <div className="grid grid-cols-2 gap-3">
-            {SECOES.map((s, i) => (
-              <button key={i} onClick={() => { setSecaoId(i); setProdutoId(null); }}
-                className={`p-4 rounded-xl border text-center transition-all ${secaoId === i ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`}>
-                <span className="text-2xl">{s.emoji}</span>
-                <p className="font-semibold text-gray-900 text-sm mt-1">{s.titulo}</p>
-              </button>
-            ))}
-          </div>
-        </section>
-        {secao && (
-          <section className="bg-white rounded-2xl p-5 shadow-sm">
-            <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
-              {secao.titulo}
-            </h2>
-            <div className="space-y-2">
-              {secao.produtos.map((p) => (
-                <button key={p.id} onClick={() => setProdutoId(p.id)}
-                  className={`w-full text-left p-3.5 rounded-xl border flex items-center justify-between transition-all ${produtoId === p.id ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`}>
-                  <span className="font-semibold text-gray-900 text-sm">{p.nome}</span>
-                  <span className="text-xs text-gray-400">{p.unidade}</span>
-                </button>
-              ))}
-            </div>
-          </section>
-        )}
-        {produtoId && (
-          <section className="bg-white rounded-2xl p-5 shadow-sm">
-            <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">3</span>
-              Quantidade
-            </h2>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden">
-                <button onClick={() => setQuantidade(q => Math.max(1, q - 1))} className="px-3 py-2 hover:bg-gray-100 text-lg font-bold text-gray-600">−</button>
-                <input type="number" value={quantidade} onChange={(e) => setQuantidade(Math.max(1, Number(e.target.value)))} className="w-20 py-2 text-center font-bold text-gray-900 border-x border-gray-200 focus:outline-none" />
-                <button onClick={() => setQuantidade(q => q + 1)} className="px-3 py-2 hover:bg-gray-100 text-lg font-bold text-gray-600">+</button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {SUBCARDS.map((card) => (
+            <a key={card.slug} href={`/catalogo/calhas/${card.slug}`}
+              className="group bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:border-orange-300 hover:shadow-md transition-all duration-200 flex flex-col relative overflow-hidden">
+              {card.badge && (
+                <span className="absolute top-3 right-3 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">{card.badge}</span>
+              )}
+              <span className="text-3xl mb-3">{card.emoji}</span>
+              <h2 className="font-bold text-gray-900 text-sm mb-1 leading-snug pr-20">{card.titulo}</h2>
+              <p className="text-gray-500 text-sm flex-1 leading-relaxed">{card.descricao}</p>
+              {card.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {card.tags.map((tag) => (
+                    <span key={tag} className="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full">{tag}</span>
+                  ))}
+                </div>
+              )}
+              <div className="mt-4 flex items-center gap-1 text-orange-500 font-semibold text-sm group-hover:gap-2 transition-all">
+                Escolher e cotar <ArrowRight size={16} />
               </div>
-              <span className="text-sm text-gray-500">{produto?.unidade}</span>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-4 mb-5">
-              <p className="text-xs text-gray-500 font-medium mb-1">RESUMO</p>
-              <p className="font-bold text-gray-900">{produto?.nome}</p>
-              <p className="text-orange-600 font-semibold text-sm mt-1">{quantidade} {produto?.unidade}</p>
-            </div>
-            <div className="space-y-3">
-              <button onClick={handleAdicionar} className={`w-full font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all text-sm ${adicionado ? "bg-green-600 text-white" : "bg-orange-500 hover:bg-orange-600 text-white"}`}>
-                {adicionado ? <><Check size={18} /> Adicionado!</> : <><ShoppingCart size={18} /> Adicionar ao Orçamento</>}
-              </button>
-              <button onClick={() => pronto && setModalWppAberto(true)} disabled={!pronto} className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors text-sm">
-                <MessageCircle size={18} /> Cotar no WhatsApp
-              </button>
-            </div>
-          </section>
-        )}
+            </a>
+          ))}
+        </div>
       </div>
-      <CrossSellModal aberto={crossSellAberto} onFechar={() => setCrossSellAberto(false)} produtoPrincipal="Calha" relacionados={CROSS_CALHAS} />
-      <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto={produto?.nome ?? "Calha"} corpoMensagem={corpoMsgWpp} />
     </div>
   );
 }
