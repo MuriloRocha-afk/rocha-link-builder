@@ -4,6 +4,9 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import { CROSS_SELL } from "../../../data/crossSell";
+import GaleriaProduto from "../../../components/GaleriaProduto";
+import { imagensCambara } from "../../../data/imagensProduto";
+
 
 const TIPOS = ["Viga", "Caibro", "Ripa", "Ripão", "Dormente"] as const;
 type Tipo = typeof TIPOS[number];
@@ -146,6 +149,18 @@ export default function Cambara() {
             ))}
           </div>
         </div>
+
+        {/* GALERIA — troca conforme o tipo selecionado */}
+        <GaleriaProduto
+          titulo={tipo ? `Cambará Rosa — ${tipo}` : "Selecione um tipo de peça para ver as fotos"}
+          imagens={
+            (tipo && imagensCambara[tipo]) || [
+              { src: "", alt: "Cambará Rosa no pátio da Rocha Telhas" },
+            ]
+          }
+        />
+
+
 
         {/* ETAPA 1 — Tipo */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
