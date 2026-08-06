@@ -13,13 +13,20 @@ import { Route as CalculadoraRouteImport } from './routes/calculadora'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
+import { Route as CatalogoTintasIndexRouteImport } from './routes/catalogo.tintas.index'
+import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fixadores.index'
+import { Route as CatalogoCalhasIndexRouteImport } from './routes/catalogo.calhas.index'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
 import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
 import { Route as CatalogoTelhasCeramicaRouteImport } from './routes/catalogo.telhas.ceramica'
+import { Route as CatalogoMadeiramentoPinusRouteImport } from './routes/catalogo.madeiramento.pinus'
+import { Route as CatalogoMadeiramentoMadeiritRouteImport } from './routes/catalogo.madeiramento.madeirit'
 import { Route as CatalogoMadeiramentoForroPvcRouteImport } from './routes/catalogo.madeiramento.forro-pvc'
+import { Route as CatalogoMadeiramentoForroCedrinhoRouteImport } from './routes/catalogo.madeiramento.forro-cedrinho'
 import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
+import { Route as CatalogoMadeiramentoCedrinhoRouteImport } from './routes/catalogo.madeiramento.cedrinho'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
@@ -44,6 +51,21 @@ const CatalogoCategoriaSlugRouteRoute =
     path: '/catalogo/$categoriaSlug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoTintasIndexRoute = CatalogoTintasIndexRouteImport.update({
+  id: '/catalogo/tintas/',
+  path: '/catalogo/tintas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoFixadoresIndexRoute = CatalogoFixadoresIndexRouteImport.update({
+  id: '/catalogo/fixadores/',
+  path: '/catalogo/fixadores/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoCalhasIndexRoute = CatalogoCalhasIndexRouteImport.update({
+  id: '/catalogo/calhas/',
+  path: '/catalogo/calhas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoCategoriaSlugIndexRoute =
   CatalogoCategoriaSlugIndexRouteImport.update({
     id: '/',
@@ -73,16 +95,40 @@ const CatalogoTelhasCeramicaRoute = CatalogoTelhasCeramicaRouteImport.update({
   path: '/catalogo/telhas/ceramica',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoMadeiramentoPinusRoute =
+  CatalogoMadeiramentoPinusRouteImport.update({
+    id: '/catalogo/madeiramento/pinus',
+    path: '/catalogo/madeiramento/pinus',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoMadeiramentoMadeiritRoute =
+  CatalogoMadeiramentoMadeiritRouteImport.update({
+    id: '/catalogo/madeiramento/madeirit',
+    path: '/catalogo/madeiramento/madeirit',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoForroPvcRoute =
   CatalogoMadeiramentoForroPvcRouteImport.update({
     id: '/catalogo/madeiramento/forro-pvc',
     path: '/catalogo/madeiramento/forro-pvc',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoMadeiramentoForroCedrinhoRoute =
+  CatalogoMadeiramentoForroCedrinhoRouteImport.update({
+    id: '/catalogo/madeiramento/forro-cedrinho',
+    path: '/catalogo/madeiramento/forro-cedrinho',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoEucaliptoRoute =
   CatalogoMadeiramentoEucaliptoRouteImport.update({
     id: '/catalogo/madeiramento/eucalipto',
     path: '/catalogo/madeiramento/eucalipto',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoMadeiramentoCedrinhoRoute =
+  CatalogoMadeiramentoCedrinhoRouteImport.update({
+    id: '/catalogo/madeiramento/cedrinho',
+    path: '/catalogo/madeiramento/cedrinho',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoMadeiramentoCambaraRoute =
@@ -105,13 +151,20 @@ export interface FileRoutesByFullPath {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
+  '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
+  '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
+  '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
+  '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
+  '/catalogo/tintas/': typeof CatalogoTintasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,13 +172,20 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
+  '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
+  '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
+  '/catalogo/calhas': typeof CatalogoCalhasIndexRoute
+  '/catalogo/fixadores': typeof CatalogoFixadoresIndexRoute
+  '/catalogo/tintas': typeof CatalogoTintasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -135,13 +195,20 @@ export interface FileRoutesById {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
+  '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
+  '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
+  '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
+  '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
+  '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
+  '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
+  '/catalogo/tintas/': typeof CatalogoTintasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -152,13 +219,20 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/madeiramento/forro-cedrinho'
     | '/catalogo/madeiramento/forro-pvc'
+    | '/catalogo/madeiramento/madeirit'
+    | '/catalogo/madeiramento/pinus'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/$categoriaSlug/'
+    | '/catalogo/calhas/'
+    | '/catalogo/fixadores/'
+    | '/catalogo/tintas/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,13 +240,20 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/madeiramento/forro-cedrinho'
     | '/catalogo/madeiramento/forro-pvc'
+    | '/catalogo/madeiramento/madeirit'
+    | '/catalogo/madeiramento/pinus'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/$categoriaSlug'
+    | '/catalogo/calhas'
+    | '/catalogo/fixadores'
+    | '/catalogo/tintas'
   id:
     | '__root__'
     | '/'
@@ -181,13 +262,20 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
+    | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
+    | '/catalogo/madeiramento/forro-cedrinho'
     | '/catalogo/madeiramento/forro-pvc'
+    | '/catalogo/madeiramento/madeirit'
+    | '/catalogo/madeiramento/pinus'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/$categoriaSlug/'
+    | '/catalogo/calhas/'
+    | '/catalogo/fixadores/'
+    | '/catalogo/tintas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -196,12 +284,19 @@ export interface RootRouteChildren {
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
+  CatalogoMadeiramentoCedrinhoRoute: typeof CatalogoMadeiramentoCedrinhoRoute
   CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
+  CatalogoMadeiramentoForroCedrinhoRoute: typeof CatalogoMadeiramentoForroCedrinhoRoute
   CatalogoMadeiramentoForroPvcRoute: typeof CatalogoMadeiramentoForroPvcRoute
+  CatalogoMadeiramentoMadeiritRoute: typeof CatalogoMadeiramentoMadeiritRoute
+  CatalogoMadeiramentoPinusRoute: typeof CatalogoMadeiramentoPinusRoute
   CatalogoTelhasCeramicaRoute: typeof CatalogoTelhasCeramicaRoute
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
   CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
+  CatalogoCalhasIndexRoute: typeof CatalogoCalhasIndexRoute
+  CatalogoFixadoresIndexRoute: typeof CatalogoFixadoresIndexRoute
+  CatalogoTintasIndexRoute: typeof CatalogoTintasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +327,27 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/$categoriaSlug'
       fullPath: '/catalogo/$categoriaSlug'
       preLoaderRoute: typeof CatalogoCategoriaSlugRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/': {
+      id: '/catalogo/tintas/'
+      path: '/catalogo/tintas'
+      fullPath: '/catalogo/tintas/'
+      preLoaderRoute: typeof CatalogoTintasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/fixadores/': {
+      id: '/catalogo/fixadores/'
+      path: '/catalogo/fixadores'
+      fullPath: '/catalogo/fixadores/'
+      preLoaderRoute: typeof CatalogoFixadoresIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/': {
+      id: '/catalogo/calhas/'
+      path: '/catalogo/calhas'
+      fullPath: '/catalogo/calhas/'
+      preLoaderRoute: typeof CatalogoCalhasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/$categoriaSlug/': {
@@ -269,6 +385,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoTelhasCeramicaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/pinus': {
+      id: '/catalogo/madeiramento/pinus'
+      path: '/catalogo/madeiramento/pinus'
+      fullPath: '/catalogo/madeiramento/pinus'
+      preLoaderRoute: typeof CatalogoMadeiramentoPinusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/madeirit': {
+      id: '/catalogo/madeiramento/madeirit'
+      path: '/catalogo/madeiramento/madeirit'
+      fullPath: '/catalogo/madeiramento/madeirit'
+      preLoaderRoute: typeof CatalogoMadeiramentoMadeiritRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/forro-pvc': {
       id: '/catalogo/madeiramento/forro-pvc'
       path: '/catalogo/madeiramento/forro-pvc'
@@ -276,11 +406,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoForroPvcRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/forro-cedrinho': {
+      id: '/catalogo/madeiramento/forro-cedrinho'
+      path: '/catalogo/madeiramento/forro-cedrinho'
+      fullPath: '/catalogo/madeiramento/forro-cedrinho'
+      preLoaderRoute: typeof CatalogoMadeiramentoForroCedrinhoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/eucalipto': {
       id: '/catalogo/madeiramento/eucalipto'
       path: '/catalogo/madeiramento/eucalipto'
       fullPath: '/catalogo/madeiramento/eucalipto'
       preLoaderRoute: typeof CatalogoMadeiramentoEucaliptoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/cedrinho': {
+      id: '/catalogo/madeiramento/cedrinho'
+      path: '/catalogo/madeiramento/cedrinho'
+      fullPath: '/catalogo/madeiramento/cedrinho'
+      preLoaderRoute: typeof CatalogoMadeiramentoCedrinhoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/madeiramento/cambara': {
@@ -323,12 +467,20 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
+  CatalogoMadeiramentoCedrinhoRoute: CatalogoMadeiramentoCedrinhoRoute,
   CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
+  CatalogoMadeiramentoForroCedrinhoRoute:
+    CatalogoMadeiramentoForroCedrinhoRoute,
   CatalogoMadeiramentoForroPvcRoute: CatalogoMadeiramentoForroPvcRoute,
+  CatalogoMadeiramentoMadeiritRoute: CatalogoMadeiramentoMadeiritRoute,
+  CatalogoMadeiramentoPinusRoute: CatalogoMadeiramentoPinusRoute,
   CatalogoTelhasCeramicaRoute: CatalogoTelhasCeramicaRoute,
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
   CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
+  CatalogoCalhasIndexRoute: CatalogoCalhasIndexRoute,
+  CatalogoFixadoresIndexRoute: CatalogoFixadoresIndexRoute,
+  CatalogoTintasIndexRoute: CatalogoTintasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
