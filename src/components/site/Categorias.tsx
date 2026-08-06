@@ -4,11 +4,11 @@ import { SectionHeading } from "./shared";
 import { CATEGORIES } from "./catalog-data";
 
 const EMOJI: Record<string, string> = {
-  telhas: "🧱",
-  madeiramento: "🪵",
-  tintas: "🎨",
-  calhas: "🌧️",
-  fixadores: "🔩",
+  telhas: "",
+  madeiramento: "",
+  tintas: "",
+  calhas: "",
+  fixadores: "",
 };
 
 export function Categorias() {
