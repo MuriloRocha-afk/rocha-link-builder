@@ -4,7 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
-import { imagensCambara } from "../../../data/imagensProduto";
+import { imagensCambara, IMG } from "../../../data/imagensProduto";
 
 
 const TIPOS = ["Viga", "Caibro", "Ripa", "Ripão", "Dormente"] as const;
