@@ -332,29 +332,14 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
           </section>
         )}
 
-        {config.especificacoes?.length ? (
-          <section className="bg-white rounded-2xl p-5 shadow-sm">
-            <h2 className="font-bold text-gray-900 mb-3">Especificações Técnicas</h2>
-            <table className="w-full text-sm">
-              <tbody className="divide-y divide-gray-100">
-                {config.especificacoes.map(([k, v]) => (
-                  <tr key={k}>
-                    <td className="py-2.5 text-gray-500">{k}</td>
-                    <td className="py-2.5 text-gray-900 font-medium text-right">{v}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        ) : null}
-      </div>
-
-      <ModalCotarWhatsApp
-        aberto={modalWppAberto}
-        onFechar={() => setModalWppAberto(false)}
-        nomeProduto={config.resumoNome(sel)}
-        corpoMensagem={corpoMsgWpp}
-      />
-    </div>
+        <ModalCotarWhatsApp
+          aberto={modalWppAberto}
+          onFechar={() => setModalWppAberto(false)}
+          nomeProduto={config.resumoNome(sel)}
+          corpoMensagem={corpoMsgWpp}
+        />
+      </>
+    </ProdutoLayout>
   );
 }
+
