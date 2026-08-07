@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Hammer, MessageCircle } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import { waLink } from "@/components/site/shared";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 
 export function EmBreveProduto({
   categoriaSlug,

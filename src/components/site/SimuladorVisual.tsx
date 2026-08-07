@@ -45,7 +45,7 @@ export function SimuladorVisual() {
   const [parede, setParede] = useState<(typeof PAREDES)[number]>(PAREDES[0]);
   const [telhado, setTelhado] = useState<(typeof TELHADOS)[number]>(TELHADOS[0]);
   const imagem = IMAGENS[`${parede.id}-${telhado.id}`] ?? brancoBarro;
-  const mensagem = `Simulação do Provador Visual\n- Fachada: ${parede.label} com telhado ${telhado.label}. Gostaria de receber orientação e orçamento para esta combinação.`;
+  const mensagem = `Simulação do Provador Visual\n- Fachada: ${parede.label}\n- Telhado: ${telhado.label}`;
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
