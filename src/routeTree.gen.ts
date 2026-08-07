@@ -29,6 +29,7 @@ import { Route as CatalogoMadeiramentoForroCedrinhoRouteImport } from './routes/
 import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
 import { Route as CatalogoMadeiramentoCedrinhoRouteImport } from './routes/catalogo.madeiramento.cedrinho'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
+import { Route as CatalogoFixadoresProdutoSlugRouteImport } from './routes/catalogo.fixadores.$produtoSlug'
 import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo.calhas.$produtoSlug'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
@@ -145,6 +146,12 @@ const CatalogoMadeiramentoCambaraRoute =
     path: '/catalogo/madeiramento/cambara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoFixadoresProdutoSlugRoute =
+  CatalogoFixadoresProdutoSlugRouteImport.update({
+    id: '/catalogo/fixadores/$produtoSlug',
+    path: '/catalogo/fixadores/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoCalhasProdutoSlugRoute =
   CatalogoCalhasProdutoSlugRouteImport.update({
     id: '/catalogo/calhas/$produtoSlug',
@@ -165,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -188,6 +196,7 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -213,6 +222,7 @@ export interface FileRoutesById {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -262,6 +273,7 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -286,6 +298,7 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -310,6 +323,7 @@ export interface RootRouteChildren {
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoCalhasProdutoSlugRoute: typeof CatalogoCalhasProdutoSlugRoute
+  CatalogoFixadoresProdutoSlugRoute: typeof CatalogoFixadoresProdutoSlugRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
   CatalogoMadeiramentoCedrinhoRoute: typeof CatalogoMadeiramentoCedrinhoRoute
   CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
@@ -469,6 +483,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoCambaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/fixadores/$produtoSlug': {
+      id: '/catalogo/fixadores/$produtoSlug'
+      path: '/catalogo/fixadores/$produtoSlug'
+      fullPath: '/catalogo/fixadores/$produtoSlug'
+      preLoaderRoute: typeof CatalogoFixadoresProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/calhas/$produtoSlug': {
       id: '/catalogo/calhas/$produtoSlug'
       path: '/catalogo/calhas/$produtoSlug'
@@ -509,6 +530,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoCalhasProdutoSlugRoute: CatalogoCalhasProdutoSlugRoute,
+  CatalogoFixadoresProdutoSlugRoute: CatalogoFixadoresProdutoSlugRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
   CatalogoMadeiramentoCedrinhoRoute: CatalogoMadeiramentoCedrinhoRoute,
   CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
@@ -529,3 +551,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
