@@ -6,6 +6,7 @@ import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
+import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensFibrocimento } from "../../../data/imagensProduto";
 
 const COMPRIMENTOS = [
