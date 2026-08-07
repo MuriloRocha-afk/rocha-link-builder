@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronRight, MessageCircle, ShoppingCart, Check } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 import GaleriaProduto from "../../../components/GaleriaProduto";
+import { imagensEucalipto } from "../../../data/imagensProduto";
 
 const WHATSAPP = "5511971761003";
 
@@ -92,7 +93,11 @@ export default function Eucalipto() {
           </p>
         </div>
         {/* GALERIA */}
-        <GaleriaProduto titulo="Eucalipto & Pontaletes" imagens={[{ src: "", alt: "Pontalete roliço de eucalipto tratado" }]} />
+        <GaleriaProduto
+          titulo={produto ? `Eucalipto — ${produto.nome}` : "Eucalipto"}
+          subtitulo={produto ? "Foto em breve" : "Selecione o produto para ver as fotos"}
+          imagens={imagensEucalipto[produtoId] ?? []}
+        />
 
         {/* Seleção do produto */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">

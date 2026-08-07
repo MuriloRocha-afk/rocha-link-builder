@@ -152,12 +152,9 @@ export default function Cambara() {
 
         {/* GALERIA — troca conforme o tipo selecionado */}
         <GaleriaProduto
-          titulo={tipo ? `Cambará Rosa — ${tipo}` : "Selecione um tipo de peça para ver as fotos"}
-          imagens={
-            (tipo && imagensCambara[tipo]) || [
-              { src: "", alt: "Cambará Rosa no pátio da Rocha Telhas" },
-            ]
-          }
+          titulo={tipo ? `Cambará Rosa — ${tipo}` : "Cambará Rosa"}
+          subtitulo={tipo ? "Foto em breve" : "Selecione o tipo de peça para ver as fotos"}
+          imagens={(tipo && imagensCambara[tipo]) || []}
         />
 
 

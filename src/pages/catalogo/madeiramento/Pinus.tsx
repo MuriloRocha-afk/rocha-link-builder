@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
+import { imagensPinus } from "../../../data/imagensProduto";
 
 const PRODUTOS = [
   { id: "sarrafo-5cm", nome: "Sarrafo 05cm × 3,0m", tipo: "Sarrafo", bitola: "05cm", comp: "3,0m", unidade: "Pc" },
@@ -63,7 +64,11 @@ export default function Pinus() {
           <p className="text-gray-500 mt-1 text-sm">Sarrafos, tábuas e pontaletes de reflorestamento. Custo-benefício para caixaria e estruturas secundárias.</p>
         </div>
         {/* GALERIA */}
-        <GaleriaProduto titulo="Pinus — Sarrafos, Tábuas e Pontaletes" imagens={[{ src: "", alt: "Madeira de pinus de reflorestamento" }]} />
+        <GaleriaProduto
+          titulo={produto ? `Pinus — ${produto.tipo}` : aba !== "Todos" ? `Pinus — ${aba}` : "Pinus"}
+          subtitulo={produto || aba !== "Todos" ? "Foto em breve" : "Selecione o produto para ver as fotos"}
+          imagens={imagensPinus[produto ? produto.tipo : aba] ?? []}
+        />
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>

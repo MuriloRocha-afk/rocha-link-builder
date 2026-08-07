@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
+import { imagensCedrinho } from "../../../data/imagensProduto";
 
 const TIPOS = [
   { id: "sarrafo", nome: "Sarrafo", unidade: "Mt" },
@@ -62,7 +63,11 @@ export default function Cedrinho() {
           <p className="text-gray-500 mt-1 text-sm">Sarrafos e tábuas em bruto ou aparelhado. Leve e ideal para forros e estruturas internas.</p>
         </div>
         {/* GALERIA */}
-        <GaleriaProduto titulo="Cedrinho — Sarrafos e Tábuas" imagens={[{ src: "", alt: "Sarrafos e tábuas de cedrinho" }]} />
+        <GaleriaProduto
+          titulo={tipoObj ? `Cedrinho — ${tipoObj.nome}` : "Cedrinho"}
+          subtitulo={tipoObj ? "Foto em breve" : "Selecione o tipo para ver as fotos"}
+          imagens={tipo ? (imagensCedrinho[tipo] ?? []) : []}
+        />
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>

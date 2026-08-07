@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
+import { imagensForroCedrinho } from "../../../data/imagensProduto";
 
 const MODELOS = [
   { id: "mesclado-curto", nome: "Cedrinho Mesclado — 1cm × 10cm", desc: "Peças curtas encaixadas. Venda por m². O mais vendido.", lider: true },
@@ -56,7 +57,11 @@ export default function ForroCedrinho() {
           <p className="text-gray-500 mt-1 text-sm">Acabamento natural nobre para tetos e ambientes internos. Vendido por m², com 10% de perda já calculado.</p>
         </div>
         {/* GALERIA */}
-        <GaleriaProduto titulo="Forro Cedrinho Mesclado" imagens={[{ src: "", alt: "Forro de cedrinho mesclado instalado" }]} />
+        <GaleriaProduto
+          titulo="Forro Cedrinho Mesclado"
+          subtitulo="1cm × 10cm · Foto em breve"
+          imagens={imagensForroCedrinho}
+        />
 
         {/* Modelo */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">

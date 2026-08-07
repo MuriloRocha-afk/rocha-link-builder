@@ -5,6 +5,7 @@ import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import { CROSS_SELL } from "../../../data/crossSell";
 import GaleriaProduto from "../../../components/GaleriaProduto";
+import { imagensPolicarbonato } from "../../../data/imagensProduto";
 
 const COMPRIMENTOS = [
   { valor: "183 × 110 cm", area: 1.83 * 0.98 },
@@ -87,7 +88,11 @@ export default function Policarbonato() {
           </p>
         </div>
         {/* GALERIA */}
-        <GaleriaProduto titulo="Telha Policarbonato" imagens={[{ src: "", alt: "Telha de policarbonato translúcida" }]} />
+        <GaleriaProduto
+          titulo={versaoObj ? `Telha Policarbonato — ${versaoObj.nome}` : "Telha Policarbonato"}
+          subtitulo={versaoObj ? "Foto em breve" : "Selecione uma versão para ver as fotos"}
+          imagens={versao ? (imagensPolicarbonato[versao] ?? []) : []}
+        />
 
         {/* Versão */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
