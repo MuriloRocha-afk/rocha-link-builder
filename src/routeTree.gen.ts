@@ -29,6 +29,7 @@ import { Route as CatalogoMadeiramentoForroCedrinhoRouteImport } from './routes/
 import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
 import { Route as CatalogoMadeiramentoCedrinhoRouteImport } from './routes/catalogo.madeiramento.cedrinho'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
+import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo.calhas.$produtoSlug'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
 const CalculadoraRoute = CalculadoraRouteImport.update({
@@ -144,6 +145,12 @@ const CatalogoMadeiramentoCambaraRoute =
     path: '/catalogo/madeiramento/cambara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoCalhasProdutoSlugRoute =
+  CatalogoCalhasProdutoSlugRouteImport.update({
+    id: '/catalogo/calhas/$produtoSlug',
+    path: '/catalogo/calhas/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoCategoriaSlugProdutoSlugRoute =
   CatalogoCategoriaSlugProdutoSlugRouteImport.update({
     id: '/$produtoSlug',
@@ -157,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -179,6 +187,7 @@ export interface FileRoutesByTo {
   '/calculadora': typeof CalculadoraRoute
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -203,6 +212,7 @@ export interface FileRoutesById {
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -273,6 +285,7 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -296,6 +309,7 @@ export interface RootRouteChildren {
   CalculadoraRoute: typeof CalculadoraRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
+  CatalogoCalhasProdutoSlugRoute: typeof CatalogoCalhasProdutoSlugRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
   CatalogoMadeiramentoCedrinhoRoute: typeof CatalogoMadeiramentoCedrinhoRoute
   CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
@@ -455,6 +469,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoCambaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/calhas/$produtoSlug': {
+      id: '/catalogo/calhas/$produtoSlug'
+      path: '/catalogo/calhas/$produtoSlug'
+      fullPath: '/catalogo/calhas/$produtoSlug'
+      preLoaderRoute: typeof CatalogoCalhasProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/$categoriaSlug/$produtoSlug': {
       id: '/catalogo/$categoriaSlug/$produtoSlug'
       path: '/$produtoSlug'
@@ -487,6 +508,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculadoraRoute: CalculadoraRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
+  CatalogoCalhasProdutoSlugRoute: CatalogoCalhasProdutoSlugRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
   CatalogoMadeiramentoCedrinhoRoute: CatalogoMadeiramentoCedrinhoRoute,
   CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
