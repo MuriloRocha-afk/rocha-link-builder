@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensCeramica } from "../../../data/imagensProduto";
-import { CROSS_SELL } from "../../../data/crossSell";
 
 const MODELOS = [
   { id: "portuguesa-isotec",     nome: "Portuguesa Resinada — Isotec",         badge: "★ Campeão #1",  marca: "Isotec" },
@@ -16,14 +14,12 @@ const MODELOS = [
   { id: "americana-resinada",    nome: "Americana Resinada — Cerâmica",          badge: null,            marca: null },
 ];
 
-const CROSS_CERAMICA = CROSS_SELL["ceramica"];
 
 export default function Ceramica() {
   const { adicionar } = useOrcamento();
   const [modeloId, setModeloId] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(100);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const modelo = MODELOS.find((m) => m.id === modeloId);
@@ -40,7 +36,7 @@ export default function Ceramica() {
     if (!pronto || !modelo) return;
     adicionar({ id: `ceramica-${modeloId}`, nome: "Telha Cerâmica", variacao: modelo.nome, quantidade, unidade: "peças", categoria: "Telhas" });
     setAdicionado(true);
-    setTimeout(() => { setAdicionado(false); setCrossSellAberto(true); }, 800);
+    setTimeout(() => { setAdicionado(false); }, 800);
   };
 
   return (
@@ -138,8 +134,7 @@ export default function Ceramica() {
         </section>
       </div>
 
-      <CrossSellModal aberto={crossSellAberto} onFechar={() => setCrossSellAberto(false)} produtoPrincipal="Telha Cerâmica" relacionados={CROSS_CERAMICA} />
-      <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Cerâmica" corpoMensagem={corpoMsgWpp} />
+            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Cerâmica" corpoMensagem={corpoMsgWpp} />
     </div>
   );
 }

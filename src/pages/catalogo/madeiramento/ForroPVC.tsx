@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
-import { CROSS_SELL } from "../../../data/crossSell";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensForroPVC } from "../../../data/imagensProduto";
 
@@ -23,7 +21,6 @@ export default function ForroPVC() {
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(20);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const pronto = comprimento && quantidade >= 1;
@@ -50,7 +47,6 @@ export default function ForroPVC() {
     setAdicionado(true);
     setTimeout(() => {
       setAdicionado(false);
-      setCrossSellAberto(true);
     }, 800);
   };
 
@@ -188,13 +184,7 @@ export default function ForroPVC() {
         </section>
       </div>
 
-      <CrossSellModal
-        aberto={crossSellAberto}
-        onFechar={() => setCrossSellAberto(false)}
-        produtoPrincipal="Forro PVC Branco"
-        relacionados={CROSS_SELL["forro-pvc"]}
-      />
-      <ModalCotarWhatsApp
+            <ModalCotarWhatsApp
         aberto={modalWppAberto}
         onFechar={() => setModalWppAberto(false)}
         nomeProduto="Forro PVC Branco"

@@ -4,11 +4,9 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensFibrocimento } from "../../../data/imagensProduto";
-import { CROSS_SELL } from "../../../data/crossSell";
 
 const COMPRIMENTOS = [
   { valor: "153 × 110 cm", larguraUtil: 1.05, sobreposicao: 0.14 },
@@ -37,7 +35,6 @@ export default function Fibrocimento() {
   const [espessura, setEspessura] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(50);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const pronto = comprimento && espessura && quantidade >= 1;
@@ -54,7 +51,7 @@ export default function Fibrocimento() {
     if (!pronto) return;
     adicionar({ id: `fibro-${comprimento}-${espessura}`, nome: "Telha Fibrocimento INFIBRA", variacao: `${comprimento} · ${espessura}`, quantidade, unidade: "peças", categoria: "Telhas" });
     setAdicionado(true);
-    setTimeout(() => { setAdicionado(false); setCrossSellAberto(true); }, 800);
+    setTimeout(() => { setAdicionado(false); }, 800);
   };
 
   return (
@@ -173,8 +170,7 @@ export default function Fibrocimento() {
         </section>
       </div>
 
-      <CrossSellModal aberto={crossSellAberto} onFechar={() => setCrossSellAberto(false)} produtoPrincipal="Telha Fibrocimento INFIBRA" relacionados={CROSS_SELL["fibrocimento"]} />
-      <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Fibrocimento INFIBRA" corpoMensagem={corpoMsgWpp} />
+            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Fibrocimento INFIBRA" corpoMensagem={corpoMsgWpp} />
     </div>
   );
 }
