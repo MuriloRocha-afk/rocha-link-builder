@@ -194,6 +194,7 @@ const COMPRIMENTOS_MOURAO = [
 ];
 
 export const CONFIG_MOURAO: ConfiguradorConfig = {
+  produtoKey: "mourao",
   breadcrumb: BC("Mourão Tratado"),
   titulo: "🌾 Mourão Tratado",
   subtitulo:

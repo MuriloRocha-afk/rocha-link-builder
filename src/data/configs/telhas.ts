@@ -13,6 +13,7 @@ const CORES_CONCRETO = [
 ];
 
 export const CONFIG_CONCRETO: ConfiguradorConfig = {
+  produtoKey: "concreto",
   breadcrumb: BC("Telha de Concreto"),
   titulo: "🏗️ Telha de Concreto",
   subtitulo:
