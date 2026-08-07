@@ -6,10 +6,10 @@ import { getRelacionados } from "@/data/crossSell";
 export default function CrossSellHost() {
   const { crossSell, closeCrossSell } = useQuoteCart();
   if (!crossSell) return null;
-  const relacionados = getRelacionados(crossSell.nome, crossSell.qtd);
+  const relacionados = getRelacionados(crossSell.nome, crossSell.qtd, crossSell.detail);
   return (
     <CrossSellModal
-      key={`${crossSell.nome}-${crossSell.qtd}`}
+      key={`${crossSell.nome}-${crossSell.qtd}-${crossSell.detail ?? ""}`}
       aberto
       onFechar={closeCrossSell}
       produtoPrincipal={crossSell.nome}

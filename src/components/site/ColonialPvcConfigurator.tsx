@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, MessageCircle, Minus, Plus, ShoppingCart, Star } from "lucide-react";
+import { Check, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
 import { waLink } from "./shared";
@@ -50,7 +50,7 @@ function Passo({ n, title, children }: { n: number; title: string; children: Rea
 }
 
 export function ColonialPvcConfigurator() {
-  const { addItem, setOpen } = useQuoteCart();
+  const { addItem } = useQuoteCart();
   const [cor, setCor] = useState(CORES[0].value);
   const [dimensao, setDimensao] = useState(COMPRIMENTOS[5].value);
   const [qty, setQty] = useState(10);
@@ -69,37 +69,6 @@ export function ColonialPvcConfigurator() {
 - Quantidade: ${qty} peças
 
 Poderia verificar estoque e frete?`;
-
-  const acessorios = [
-    {
-      id: `pvc-kit-fixacao--${cor}`,
-      name: `Kit de Fixação e Vedação — ${cor}`,
-      detail: `Kit ${cor} · parafuso + vedação para telha Colonial PVC`,
-      text: `Parafusos com vedação na mesma cor da telha (${cor}).`,
-      unit: "kits",
-    },
-    {
-      id: `pvc-cumeeira-central--${cor}`,
-      name: `Cumeeira PVC Central Fixa — ${cor}`,
-      detail: `Cumeeira central fixa · cor ${cor}`,
-      text: "Acabamento do cumeamento, mesma cor da telha.",
-      unit: "peças",
-    },
-    {
-      id: `pvc-cumeeira-triangular--${cor}`,
-      name: `Cumeeira PVC Triangular — ${cor}`,
-      detail: `Cumeeira triangular · cor ${cor}`,
-      text: "Acabamento triangular, mesma cor da telha.",
-      unit: "peças",
-    },
-    {
-      id: "pvc-calha-aquapluv",
-      name: "Calha Aquapluv (Bege ou Cinza)",
-      detail: "Calha Aquapluv · bege ou cinza",
-      text: "Sistema de captação de água — disponível em bege ou cinza.",
-      unit: "peças",
-    },
-  ];
 
   return (
     <ProdutoLayout
@@ -120,27 +89,6 @@ Poderia verificar estoque e frete?`;
           imagens={cor ? (imagensColonialPVC[cor] ?? []) : []}
         />
       }
-      acessorios={acessorios.map((a) => (
-        <div
-          key={a.id}
-          className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
-        >
-          <h3 className="text-base font-extrabold text-primary">{a.name}</h3>
-          <p className="mt-2 mb-4 text-sm text-muted-foreground">{a.text}</p>
-          <Button
-            type="button"
-            variant="outlineAccent"
-            className="mt-auto h-11 w-full"
-            onClick={() => {
-              addItem({ id: a.id, name: a.name, detail: a.detail, qty: 1, unit: a.unit });
-              setOpen(true);
-            }}
-          >
-            <Plus />
-            Adicionar ao Orçamento
-          </Button>
-        </div>
-      ))}
     >
       <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
         <div className="space-y-10">
@@ -283,7 +231,6 @@ Poderia verificar estoque e frete?`;
                     qty,
                     unit: "peças",
                   });
-                  setOpen(true);
                 }}
               >
                 <ShoppingCart />

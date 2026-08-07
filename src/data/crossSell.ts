@@ -11,8 +11,18 @@ export type ProdutoRelacionado = {
 type Regra = {
   /** termos que devem aparecer no nome/categoria do produto adicionado */
   match: RegExp;
-  itens: (qtd: number) => ProdutoRelacionado[];
+  itens: (qtd: number, detail?: string) => ProdutoRelacionado[];
 };
+
+/** Extrai a cor da telha PVC a partir do detalhe do item adicionado. */
+function corTelhaPvc(detail?: string) {
+  const d = detail ?? "";
+  if (/transl[úu]cida|transparente/i.test(d)) return "Transparente";
+  if (/marfim/i.test(d)) return "Marfim";
+  if (/cinza/i.test(d)) return "Cinza";
+  if (/cer[âa]mica/i.test(d)) return "Cerâmica";
+  return "mesma cor da telha";
+}
 
 const REGRAS: Regra[] = [
   {
@@ -58,44 +68,47 @@ const REGRAS: Regra[] = [
   },
   {
     match: /colonial|pvc.*telha|telha.*pvc/i,
-    itens: () => [
-      {
-        id: "kit-fixacao-vedacao-cor",
-        nome: "Kit Fixação e Vedação — mesma cor da telha",
-        descricao: "Parafusos e vedação coloridos para PVC",
-        emoji: "🧰",
-        unidade: "kit",
-        quantidadeSugerida: 2,
-        categoria: "Fixadores",
-      },
-      {
-        id: "cumeeira-pvc-central-fixa",
-        nome: "Cumeeira PVC Central Fixa — mesma cor",
-        descricao: "Arremate do cumeamento na cor da telha",
-        emoji: "🔺",
-        unidade: "un",
-        quantidadeSugerida: 3,
-        categoria: "Telhas",
-      },
-      {
-        id: "manta-termica-1f-10m2",
-        nome: "Manta Térmica Aluminizada 1F × 10m²",
-        descricao: "Conforto térmico extra sob a telha PVC",
-        emoji: "🌡️",
-        unidade: "un",
-        quantidadeSugerida: 1,
-        categoria: "Calhas",
-      },
-      {
-        id: "calha-aquapluv-cinza",
-        nome: "Calha Aquapluv — Cinza",
-        descricao: "Sistema de captação de água pluvial",
-        emoji: "🌧️",
-        unidade: "un",
-        quantidadeSugerida: 2,
-        categoria: "Calhas",
-      },
-    ],
+    itens: (_qtd, detail) => {
+      const cor = corTelhaPvc(detail);
+      return [
+        {
+          id: `kit-fixacao-vedacao-${cor}`,
+          nome: `Kit Fixação e Vedação — ${cor}`,
+          descricao: "Parafusos coloridos na cor da telha. Necessário para fixação correta.",
+          emoji: "🧰",
+          unidade: "kit",
+          quantidadeSugerida: 2,
+          categoria: "Fixadores",
+        },
+        {
+          id: `cumeeira-pvc-central-fixa-${cor}`,
+          nome: `Cumeeira PVC Central Fixa — ${cor}`,
+          descricao: "Arremate do cumeamento na cor da telha.",
+          emoji: "🔺",
+          unidade: "un",
+          quantidadeSugerida: 3,
+          categoria: "Telhas",
+        },
+        {
+          id: "manta-termica-1f-10m2",
+          nome: "Manta Térmica Aluminizada 1F × 10m²",
+          descricao: "Reduz até 70% do calor. Recomendada sob telha PVC.",
+          emoji: "🌡️",
+          unidade: "un",
+          quantidadeSugerida: 1,
+          categoria: "Calhas",
+        },
+        {
+          id: "calha-aquapluv-cinza",
+          nome: "Calha Aquapluv — Cinza",
+          descricao: "Sistema de captação de água pluvial.",
+          emoji: "🌧️",
+          unidade: "un",
+          quantidadeSugerida: 2,
+          categoria: "Calhas",
+        },
+      ];
+    },
   },
   {
     match: /cer[âa]mica|portuguesa|romana|barro/i,
@@ -290,11 +303,15 @@ const GENERICOS: ProdutoRelacionado[] = [
 ];
 
 /** Retorna no máximo 4 produtos relacionados ao item adicionado. */
-export function getRelacionados(nomeProduto: string, qtd = 1): ProdutoRelacionado[] {
+export function getRelacionados(
+  nomeProduto: string,
+  qtd = 1,
+  detail?: string,
+): ProdutoRelacionado[] {
   const alvo = nomeProduto ?? "";
   // forro cedrinho / forro pvc precisam ter prioridade sobre regras mais amplas
   const ordenadas = [...REGRAS].sort((a, b) => b.match.source.length - a.match.source.length);
   const regra = ordenadas.find((r) => r.match.test(alvo));
-  const itens = regra ? regra.itens(qtd) : GENERICOS;
+  const itens = regra ? regra.itens(qtd, detail) : GENERICOS;
   return itens.slice(0, 4);
 }
