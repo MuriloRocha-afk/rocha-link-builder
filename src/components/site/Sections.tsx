@@ -211,51 +211,8 @@ export function Depoimentos() {
   );
 }
 
-const FAQ = [
-  {
-    q: "Como funciona o descarregamento do material no local?",
-    a: "A entrega e o descarregamento são feitos na frente do imóvel ou no endereço acordado, sempre no nível do solo (térreo). Por segurança da equipe, os motoristas e ajudantes não realizam transporte manual interno, subida de escadas, elevadores ou rampas. Se a obra precisar de içamento ou movimentação interna, recomendamos combinar ajudantes no local.",
-  },
-  {
-    q: "Quais regiões a Rocha Telhas atende?",
-    a: "Atendemos Franco da Rocha, Caieiras, Francisco Morato, Mairiporã, Cajamar, Perus, Pirituba e toda a Grande São Paulo com frota própria. Para obras no interior, consulte o comercial pelo WhatsApp.",
-  },
-  {
-    q: "Quais as formas de pagamento aceitas?",
-    a: "Aceitamos PIX, cartões de crédito e débito, dinheiro e pagamento presencial no ato da entrega através da maquininha do motorista. Para construtoras e obras de grande porte trabalhamos com condições especiais.",
-  },
-  {
-    q: "Vocês vendem madeira sob medida?",
-    a: "Sim. Cortamos e aparelhamos vigas, caibros, ripas, pranchas e sarrafos nas medidas do seu projeto, direto no nosso pátio, em plaina industrial de alta precisão. Envie a lista ou a planta pelo WhatsApp e a nossa equipe técnica calcula as peças.",
-  },
-];
+export { Faq } from "./FaqSection";
 
-
-export function Faq() {
-  return (
-    <section id="faq" className="scroll-mt-24 bg-background py-24">
-      <div className="mx-auto max-w-3xl px-5">
-        <SectionHeading kicker="FAQ" title="Dúvidas frequentes" />
-        <Accordion type="single" collapsible className="mt-10">
-          {FAQ.map((item) => (
-            <AccordionItem
-              key={item.q}
-              value={item.q}
-              className="mb-3 rounded-xl border border-border bg-card px-5"
-            >
-              <AccordionTrigger className="text-left text-base font-bold text-primary hover:no-underline">
-                {item.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                {item.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
-  );
-}
 
 const UNIT = {
   name: "Rocha Telhas — Franco da Rocha",
