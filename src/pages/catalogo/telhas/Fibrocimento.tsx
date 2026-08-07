@@ -78,7 +78,8 @@ export default function Fibrocimento() {
 
         {/* GALERIA — troca ao mudar comprimento */}
         <GaleriaProduto
-          titulo={comprimento ? `Fibrocimento INFIBRA ${comprimento}` : "Selecione um comprimento para ver as fotos"}
+          titulo={comprimento ? `Fibrocimento INFIBRA ${comprimento}` : "Telha Fibrocimento INFIBRA"}
+          subtitulo={comprimento ? "Foto em breve" : "Selecione um comprimento para ver as fotos"}
           imagens={imagens}
         />
 

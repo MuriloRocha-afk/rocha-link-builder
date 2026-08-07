@@ -63,7 +63,8 @@ export default function Ceramica() {
 
         {/* GALERIA — troca ao mudar modelo */}
         <GaleriaProduto
-          titulo={modelo ? modelo.nome : "Telha Cerâmica — selecione um modelo abaixo"}
+          titulo={modelo ? modelo.nome : "Telha Cerâmica"}
+          subtitulo={modelo ? "Foto em breve" : "Selecione um modelo para ver as fotos"}
           imagens={imagens}
         />
 

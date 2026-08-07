@@ -13,23 +13,23 @@ import { ImagemProduto } from "../components/GaleriaProduto";
 // TELHAS CERÂMICA
 export const imagensCeramica: Record<string, ImagemProduto[]> = {
   "portuguesa-isotec": [
-    { src: "", alt: "Telha Portuguesa Resinada Isotec", legenda: "Telha Portuguesa Resinada — Marca Isotec" },
-    { src: "", alt: "Detalhe do encaixe da telha portuguesa Isotec", legenda: "Encaixe de precisão" },
+    { src: "", alt: "Telha Portuguesa Resinada Isotec" },
+    { src: "", alt: "Detalhe do encaixe — Portuguesa Isotec" },
   ],
   "portuguesa-rodrigues": [
-    { src: "", alt: "Telha Portuguesa Rodrigues", legenda: "Telha Portuguesa Mesclada Resinada — Rodrigues" },
+    { src: "", alt: "Telha Portuguesa Resinada Rodrigues" },
   ],
   "portuguesa-mesclada": [
-    { src: "", alt: "Telha Portuguesa Mesclada", legenda: "Mesclada Resinada" },
+    { src: "", alt: "Telha Portuguesa Mesclada Resinada" },
   ],
   "romana-resinada": [
-    { src: "", alt: "Telha Romana Resinada Laranjal", legenda: "Telha Romana Resinada — Laranjal" },
+    { src: "", alt: "Telha Romana Resinada Laranjal" },
   ],
   "romana-top": [
-    { src: "", alt: "Telha Romana Top Telha Terracota Prime", legenda: "Romana Top Telha — Terracota Prime" },
+    { src: "", alt: "Telha Romana Top Telha Terracota Prime" },
   ],
   "americana-resinada": [
-    { src: "", alt: "Telha Americana Resinada Cerâmica", legenda: "Telha Americana — Cerâmica Resinada" },
+    { src: "", alt: "Telha Americana Resinada Cerâmica" },
   ],
 };
 
@@ -55,63 +55,61 @@ export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
 
 // TELHA COLONIAL PVC
 export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
-  Cerâmica: [
-    { src: "/assets/prod-pvc-BAaVR7pV.jpg", alt: "Telha Colonial PVC Cerâmica", legenda: "Colonial PVC — Cor Cerâmica" },
+  "Cerâmica": [
+    { src: "", alt: "Telha Colonial PVC Cerâmica" },
+    { src: "", alt: "Detalhe do encaixe — Colonial PVC Cerâmica" },
   ],
   Cinza: [
-    { src: "", alt: "Telha Colonial PVC Cinza", legenda: "Colonial PVC — Cor Cinza" },
+    { src: "", alt: "Telha Colonial PVC Cinza" },
   ],
   Marfim: [
-    { src: "", alt: "Telha Colonial PVC Marfim", legenda: "Colonial PVC — Cor Marfim" },
+    { src: "", alt: "Telha Colonial PVC Marfim" },
   ],
-  Translúcida: [
-    { src: "", alt: "Telha Colonial PVC Translúcida", legenda: "Colonial PVC — Translúcida" },
+  "Translúcida": [
+    { src: "", alt: "Telha Colonial PVC Translúcida" },
   ],
 };
 
 // CAMBARÁ — por tipo
 export const imagensCambara: Record<string, ImagemProduto[]> = {
   Viga: [
-    { src: "", alt: "Viga de Cambará Rosa no pátio", legenda: "Vigas de Cambará Rosa — Aparelhadas em Plaina" },
-    { src: "", alt: "Detalhe da seção transversal da viga Cambará" },
+    { src: "", alt: "Viga Cambará Rosa no pátio" },
+    { src: "", alt: "Detalhe seção transversal — Viga Cambará" },
   ],
   Caibro: [
-    { src: "", alt: "Caibros de Cambará Rosa", legenda: "Caibros Cambará — 5×5cm e 5×7cm" },
+    { src: "", alt: "Caibros Cambará Rosa 5x5cm e 5x7cm" },
   ],
   Ripa: [
-    { src: "", alt: "Ripas de Cambará Rosa", legenda: "Ripas Cambará — 1,5×5cm" },
+    { src: "", alt: "Ripas Cambará Rosa 1,5x5cm" },
   ],
-  Ripão: [
-    { src: "", alt: "Ripões de Cambará Rosa", legenda: "Ripões Cambará — 2×5cm" },
+  "Ripão": [
+    { src: "", alt: "Ripões Cambará Rosa 2x5cm" },
   ],
   Dormente: [
-    { src: "", alt: "Dormentes de Cambará Rosa", legenda: "Dormentes Cambará" },
+    { src: "", alt: "Dormentes Cambará Rosa" },
   ],
 };
 
 // PONTALETES EUCALIPTO
 export const imagensEucalipto: Record<string, ImagemProduto[]> = {
   "pontalete-eucalipto": [
-    { src: "", alt: "Pontalete roliço eucalipto tratado", legenda: "Pontalete Roliço Eucalipto — Autoclave" },
-    { src: "", alt: "Pilha de pontaletes de eucalipto no pátio" },
+    { src: "", alt: "Pontalete Roliço Eucalipto Tratado" },
+    { src: "", alt: "Pilha de pontaletes no pátio" },
   ],
   "viga-eucalipto": [
-    { src: "", alt: "Viga serrada eucalipto", legenda: "Viga Serrada Eucalipto" },
+    { src: "", alt: "Viga Serrada Eucalipto" },
   ],
 };
 
 // FORRO PVC
-export const imagensForroPVC: Record<string, ImagemProduto[]> = {
-  default: [
-    { src: "", alt: "Forro PVC Branco instalado", legenda: "Forro PVC Branco — Régua 20cm" },
-    { src: "", alt: "Detalhe do encaixe das réguas PVC" },
-  ],
-};
+export const imagensForroPVC: ImagemProduto[] = [
+  { src: "", alt: "Forro PVC Branco instalado" },
+];
 
 // FORRO CEDRINHO
 export const imagensForroCedrinho: ImagemProduto[] = [
-  { src: "", alt: "Forro cedrinho mesclado instalado", legenda: "Forro Cedrinho Mesclado — 1cm × 10cm" },
-  { src: "", alt: "Detalhe do forro cedrinho antes da instalação" },
+  { src: "", alt: "Forro Cedrinho Mesclado instalado" },
+  { src: "", alt: "Detalhe régua Forro Cedrinho" },
 ];
 
 // TINTAS — por subcategoria
@@ -159,4 +157,40 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
   "acessorios-calha": [
     { src: "", alt: "Acessórios para calha Alge e Aquapluv", legenda: "Acessórios — Suportes, Cabeceiras e Saídas" },
   ],
+};
+
+
+// TELHA POLICARBONATO — por versão
+export const imagensPolicarbonato: Record<string, ImagemProduto[]> = {
+  cristal: [
+    { src: "", alt: "Telha Policarbonato Cristal" },
+    { src: "", alt: "Detalhe da transparência — Policarbonato Cristal" },
+  ],
+  "bronze-grecca": [
+    { src: "", alt: "Telha Policarbonato Bronze Grecca 244cm" },
+  ],
+};
+
+// CEDRINHO — por tipo
+export const imagensCedrinho: Record<string, ImagemProduto[]> = {
+  sarrafo: [{ src: "", alt: "Sarrafo Cedrinho no pátio" }],
+  tabua: [{ src: "", alt: "Tábua Cedrinho bruto e aparelhado" }],
+};
+
+// PINUS — por tipo de peça
+export const imagensPinus: Record<string, ImagemProduto[]> = {
+  Sarrafo: [{ src: "", alt: "Sarrafo Pinus no pátio" }],
+  "Tábua": [{ src: "", alt: "Tábua Pinus bruto 30cm" }],
+  Pontalete: [{ src: "", alt: "Pontalete Pinus 6x6cm" }],
+};
+
+// MADEIRIT & COMPENSADO — por categoria
+export const imagensMadeirit: Record<string, ImagemProduto[]> = {
+  Preto: [
+    { src: "", alt: "Madeirit Plastificado Preto" },
+    { src: "", alt: "Detalhe superfície plastificada preta" },
+  ],
+  Rosa: [{ src: "", alt: "Madeirit Rosa" }],
+  OSB: [{ src: "", alt: "OSB Multiplac" }],
+  Compensado: [{ src: "", alt: "Compensado estrutural" }],
 };
