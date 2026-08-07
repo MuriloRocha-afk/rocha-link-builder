@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensCedrinho } from "../../../data/imagensProduto";
@@ -18,11 +17,6 @@ const ACABAMENTOS = [
   { id: "bruto", nome: "Bruto", desc: "Superfície natural da serra · Mais econômico" },
   { id: "aparelhado", nome: "Aparelhado", desc: "Superfície lisa e padronizada · Pronto para envernizar", recomendado: true },
 ];
-const CROSS_CEDRINHO = [
-  { id: "anjo-stain-ipe", nome: "Anjo Stain Casa — Ipê 3,6L", descricao: "Proteção e cor para madeira. Alta penetração.", emoji: "🎨", unidade: "un", quantidadeSugerida: 1, categoria: "Tintas" },
-  { id: "prego-17x21", nome: "Prego Polido 17×21 com Cabeça", descricao: "Fixação de sarrafos e tábuas.", emoji: "🔨", unidade: "Kg", quantidadeSugerida: 1, categoria: "Fixadores" },
-  { id: "anjo-verniz-3-6", nome: "Anjo Verniz Dura Mais — Natural 3,6L", descricao: "Verniz brilhante para acabamento.", emoji: "✨", unidade: "un", quantidadeSugerida: 1, categoria: "Tintas" },
-];
 
 export default function Cedrinho() {
   const { adicionar } = useOrcamento();
@@ -31,7 +25,6 @@ export default function Cedrinho() {
   const [acabamento, setAcabamento] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(10);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const pronto = tipo && bitola && acabamento && quantidade >= 1;
@@ -43,7 +36,7 @@ export default function Cedrinho() {
     if (!pronto) return;
     adicionar({ id: `cedrinho-${tipo}-${bitola}-${acabamento}`, nome: `Cedrinho — ${tipoObj?.nome}`, variacao: variacaoTexto, quantidade, unidade: tipoObj?.unidade ?? "Mt", categoria: "Madeiramento" });
     setAdicionado(true);
-    setTimeout(() => { setAdicionado(false); setCrossSellAberto(true); }, 800);
+    setTimeout(() => { setAdicionado(false); }, 800);
   };
 
   return (
@@ -148,8 +141,7 @@ export default function Cedrinho() {
           </section>
         )}
       </div>
-      <CrossSellModal aberto={crossSellAberto} onFechar={() => setCrossSellAberto(false)} produtoPrincipal="Cedrinho" relacionados={CROSS_CEDRINHO} />
-      <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Cedrinho" corpoMensagem={corpoMsgWpp} />
+            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Cedrinho" corpoMensagem={corpoMsgWpp} />
     </div>
   );
 }

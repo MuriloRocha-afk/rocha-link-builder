@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensForroCedrinho } from "../../../data/imagensProduto";
@@ -23,7 +22,6 @@ export default function ForroCedrinho() {
   const [modeloId, setModeloId] = useState<string>("mesclado-curto");
   const [area, setArea] = useState<number>(20);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const modelo = MODELOS.find(m => m.id === modeloId)!;
@@ -35,7 +33,7 @@ export default function ForroCedrinho() {
   const handleAdicionar = () => {
     adicionar({ id: `forro-cedrinho-${modeloId}`, nome: "Forro Cedrinho Mesclado", variacao: `${modelo.nome} · ${area} m²`, quantidade: areaComPerda, unidade: "m²", categoria: "Madeiramento" });
     setAdicionado(true);
-    setTimeout(() => { setAdicionado(false); setCrossSellAberto(true); }, 800);
+    setTimeout(() => { setAdicionado(false); }, 800);
   };
 
   return (
@@ -124,8 +122,7 @@ export default function ForroCedrinho() {
         </section>
       </div>
 
-      <CrossSellModal aberto={crossSellAberto} onFechar={() => setCrossSellAberto(false)} produtoPrincipal="Forro Cedrinho" relacionados={RELACIONADOS_FORRO_CED} />
-      <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Forro Cedrinho Mesclado" corpoMensagem={corpoMsg} />
+            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Forro Cedrinho Mesclado" corpoMensagem={corpoMsg} />
     </div>
   );
 }
