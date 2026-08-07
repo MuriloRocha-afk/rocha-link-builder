@@ -34,7 +34,7 @@ type QuoteCartContext = {
   open: boolean;
   setOpen: (v: boolean) => void;
   addItem: (item: Omit<QuoteItem, "qty"> & { qty?: number }, opts?: { silent?: boolean }) => void;
-  crossSell: { nome: string; qtd: number } | null;
+  crossSell: { nome: string; qtd: number; detail?: string } | null;
   closeCrossSell: () => void;
   updateQty: (id: string, qty: number) => void;
   removeItem: (id: string) => void;
@@ -55,7 +55,7 @@ export function QuoteCartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<QuoteItem[]>([]);
   const [open, setOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
-  const [crossSell, setCrossSell] = useState<{ nome: string; qtd: number } | null>(null);
+  const [crossSell, setCrossSell] = useState<{ nome: string; qtd: number; detail?: string } | null>(null);
 
   useEffect(() => {
     try {
@@ -88,7 +88,7 @@ export function QuoteCartProvider({ children }: { children: ReactNode }) {
     });
     if (opts?.silent) return;
     // pop-up de produtos relacionados 800ms após adicionar
-    setTimeout(() => setCrossSell({ nome: item.name, qtd: item.qty ?? 1 }), 800);
+    setTimeout(() => setCrossSell({ nome: item.name, qtd: item.qty ?? 1, detail: item.detail }), 800);
   }, []);
 
   const closeCrossSell = useCallback(() => setCrossSell(null), []);
