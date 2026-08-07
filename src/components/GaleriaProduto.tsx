@@ -38,7 +38,7 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
             <Camera size={48} />
             <div>
               <p className="text-sm font-medium text-gray-400">{titulo}</p>
-              <p className="text-xs text-gray-400 mt-1">Foto em breve</p>
+              <p className="text-xs text-gray-400 mt-1">{subtitulo}</p>
             </div>
           </div>
         ) : (
@@ -46,13 +46,13 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
             key={imagemAtiva.src}
             src={imagemAtiva.src}
             alt={imagemAtiva.alt}
-            onError={() => setErros((e) => ({ ...e, [indexAtivo]: true }))}
+            onError={() => setErros((e) => ({ ...e, [index]: true }))}
             className="w-full h-full object-cover transition-opacity duration-300"
           />
         )}
 
         {/* Setas de navegação — só aparecem com 2+ imagens */}
-        {imagens.length > 1 && !temErro && (
+        {lista.length > 1 && !temErro && (
           <>
             <button onClick={anterior}
               className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center transition-colors">
@@ -64,7 +64,7 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
             </button>
             {/* Contador */}
             <span className="absolute bottom-2 right-3 bg-black/50 text-white text-xs px-2 py-0.5 rounded-full">
-              {indexAtivo + 1}/{imagens.length}
+              {index + 1}/{lista.length}
             </span>
           </>
         )}
@@ -78,12 +78,12 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
       </div>
 
       {/* Miniaturas — só com 2+ imagens */}
-      {imagens.length > 1 && (
+      {lista.length > 1 && (
         <div className="flex gap-2 p-3 overflow-x-auto">
-          {imagens.map((img, i) => (
+          {lista.map((img, i) => (
             <button key={i} onClick={() => setIndexAtivo(i)}
-              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${indexAtivo === i ? "border-orange-500" : "border-transparent hover:border-orange-300"}`}>
-              {erros[i] ? (
+              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${index === i ? "border-orange-500" : "border-transparent hover:border-orange-300"}`}>
+              {!img.src || erros[i] ? (
                 <div className="w-full h-full bg-gray-100 flex items-center justify-center">
                   <Camera size={16} className="text-gray-300" />
                 </div>
