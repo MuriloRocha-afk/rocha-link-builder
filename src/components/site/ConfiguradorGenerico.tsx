@@ -3,6 +3,7 @@ import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "@/context/OrcamentoContext";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto, { type ImagemProduto } from "@/components/GaleriaProduto";
+import ProdutoLayout from "@/components/site/ProdutoLayout";
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
@@ -41,6 +42,7 @@ export type ConfiguradorConfig = {
   imagens: (sel: Selecao) => ImagemProduto[];
   passos: PassoConfig[];
   especificacoes?: [string, string][];
+  produtoKey?: string;
   tagInfo?: string;
   categoria: string;
   unidadeResumo: (sel: Selecao, qtds: Quantidades) => string;
