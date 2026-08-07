@@ -113,25 +113,28 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
   let bloqueado = false;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b px-4 py-3">
-        <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500 flex-wrap">
-          {config.breadcrumb.map((b, i) => (
-            <span key={b.label} className="flex items-center gap-1">
-              {i > 0 && <ChevronRight size={12} />}
-              {b.href ? (
-                <a href={b.href} className="hover:text-orange-500">
-                  {b.label}
-                </a>
-              ) : (
-                <span className="text-gray-900 font-medium">{b.label}</span>
-              )}
-            </span>
-          ))}
+    <ProdutoLayout
+      produtoKey={config.produtoKey}
+      especificacoes={config.especificacoes}
+      breadcrumb={
+        <div className="bg-white border-b px-4 py-3">
+          <div className="max-w-6xl mx-auto flex items-center gap-1 text-xs text-gray-500 flex-wrap">
+            {config.breadcrumb.map((b, i) => (
+              <span key={b.label} className="flex items-center gap-1">
+                {i > 0 && <ChevronRight size={12} />}
+                {b.href ? (
+                  <a href={b.href} className="hover:text-orange-500">
+                    {b.label}
+                  </a>
+                ) : (
+                  <span className="text-gray-900 font-medium">{b.label}</span>
+                )}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      }
+      cabecalho={
         <div>
           {config.badge && (
             <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
@@ -146,12 +149,17 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
             </span>
           )}
         </div>
-
+      }
+      galeria={
         <GaleriaProduto
           titulo={config.galeriaTitulo}
           subtitulo={temSelecao ? "Foto em breve" : config.galeriaPlaceholder}
           imagens={imagens}
         />
+      }
+    >
+      <>
+
 
         {passosVisiveis.map((p) => {
           if (bloqueado) return null;
