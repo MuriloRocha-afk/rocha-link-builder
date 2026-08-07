@@ -171,19 +171,9 @@ export default function Fibrocimento() {
           </section>
         )}
 
-        <section className="bg-white rounded-2xl p-5 shadow-sm">
-          <h2 className="font-bold text-gray-900 mb-3">Especificações Técnicas</h2>
-          <table className="w-full text-sm">
-            <tbody className="divide-y divide-gray-100">
-              {[["Inclinação mínima","10%"],["Sobreposição lateral","1 onda"],["Sobreposição longitudinal","14 cm"],["Largura útil","1,05 m (total 1,10 m)"],["Fixação","Parafuso com vedação 110mm"]].map(([k,v])=>(
-                <tr key={k}><td className="py-2.5 text-gray-500">{k}</td><td className="py-2.5 text-gray-900 font-medium text-right">{v}</td></tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      </div>
-
-            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Fibrocimento INFIBRA" corpoMensagem={corpoMsgWpp} />
-    </div>
+        <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Fibrocimento INFIBRA" corpoMensagem={corpoMsgWpp} />
+      </>
+    </ProdutoLayout>
   );
 }
+
