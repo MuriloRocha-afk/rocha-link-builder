@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AlertCircle, ArrowRight, Check, ChevronDown, Crown, MessageCircle, Minus, Plus } from "lucide-react";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
 import { waLink } from "./shared";
 import { useQuoteCart } from "./quote-cart";
@@ -288,22 +289,12 @@ export function ProductConfigurator({
           <Plus />Adicionar ao Orçamento
         </Button>
 
-        <Button asChild variant="whats" size="xl" className="w-full">
-          <a
-            href={waLink(
-              `Olá, gostaria de um orçamento sobre ${item.name}${
-                activeOptions.length
-                  ? ` (${activeOptions.map((a) => `${a.selector.key}: ${a.option.value}`).join(", ")})`
-                  : ""
-              }.`,
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageCircle />
-            {item.cta ?? "Cotar no WhatsApp"}
-          </a>
-        </Button>
+        <BotaoCotarWhatsApp
+          nomeProduto={item.name}
+          corpoMensagem={`${item.name}${activeOptions.length ? `\n${activeOptions.map((a) => `- ${a.selector.key}: ${a.option.value}`).join("\n")}` : ""}`}
+        >
+          {item.cta ?? "Cotar no WhatsApp"}
+        </BotaoCotarWhatsApp>
       </div>
     </div>
   );

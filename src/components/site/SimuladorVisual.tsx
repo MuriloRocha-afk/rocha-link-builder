@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Check, Home, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { waLink } from "@/constants/whatsapp";
 
 import brancoBarro from "@/assets/sim/base-branco-barro.jpg.asset.json";
@@ -45,7 +45,7 @@ export function SimuladorVisual() {
   const [parede, setParede] = useState<(typeof PAREDES)[number]>(PAREDES[0]);
   const [telhado, setTelhado] = useState<(typeof TELHADOS)[number]>(TELHADOS[0]);
   const imagem = IMAGENS[`${parede.id}-${telhado.id}`] ?? brancoBarro;
-  const mensagem = `Olá, Rocha Telhas! Fiz uma simulação no Provador Visual e escolhi fachada ${parede.label} com telhado ${telhado.label}. Gostaria de receber orientação e orçamento para esta combinação.`;
+  const mensagem = `Simulação do Provador Visual\n- Fachada: ${parede.label} com telhado ${telhado.label}. Gostaria de receber orientação e orçamento para esta combinação.`;
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
@@ -77,7 +77,7 @@ export function SimuladorVisual() {
 
       <footer className="border-t border-border bg-secondary/60 p-6 md:flex md:items-center md:justify-between md:gap-6 md:px-8">
         <div><p className="text-xs font-bold tracking-[0.16em] text-accent uppercase">Resolução do Estilo</p><p className="mt-1 font-extrabold text-primary">Fachada {parede.label} + Telhado {telhado.label}</p></div>
-        <Button asChild variant="whats" size="lg" className="mt-4 w-full md:mt-0 md:w-auto"><a href={waLink(mensagem)} target="_blank" rel="noopener noreferrer"><MessageCircle />Enviar Combinação Escolhida para o WhatsApp</a></Button>
+        <div className="mt-4 md:mt-0 md:w-auto"><BotaoCotarWhatsApp nomeProduto="Simulação de cobertura" corpoMensagem={mensagem}>Enviar Combinação Escolhida</BotaoCotarWhatsApp></div>
       </footer>
     </div>
   );

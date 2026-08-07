@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Check, MessageCircle, Info } from "lucide-react";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
@@ -217,18 +218,12 @@ function ProdutoPage() {
                 {item.selectors?.length ? (
                   <ProductConfigurator item={item} categoryShort={category.short} />
                 ) : (
-                  <Button asChild variant="whats" size="xl" className="w-full">
-                    <a
-                      href={waLink(
-                        `Olá, gostaria de um orçamento sobre ${item.name} (${category.short}).`,
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <MessageCircle />
-                      Solicitar Cotação deste Produto no WhatsApp
-                    </a>
-                  </Button>
+                  <BotaoCotarWhatsApp
+                    nomeProduto={item.name}
+                    corpoMensagem={`${item.name}\n- Categoria: ${category.short}`}
+                  >
+                    Solicitar Cotação deste Produto no WhatsApp
+                  </BotaoCotarWhatsApp>
                 )}
               </div>
             </div>
