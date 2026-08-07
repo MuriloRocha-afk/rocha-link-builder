@@ -17,6 +17,7 @@ import { Route as CatalogoTintasIndexRouteImport } from './routes/catalogo.tinta
 import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fixadores.index'
 import { Route as CatalogoCalhasIndexRouteImport } from './routes/catalogo.calhas.index'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
+import { Route as CatalogoTintasProdutoSlugRouteImport } from './routes/catalogo.tintas.$produtoSlug'
 import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
@@ -28,6 +29,8 @@ import { Route as CatalogoMadeiramentoForroCedrinhoRouteImport } from './routes/
 import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
 import { Route as CatalogoMadeiramentoCedrinhoRouteImport } from './routes/catalogo.madeiramento.cedrinho'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
+import { Route as CatalogoFixadoresProdutoSlugRouteImport } from './routes/catalogo.fixadores.$produtoSlug'
+import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo.calhas.$produtoSlug'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
 const CalculadoraRoute = CalculadoraRouteImport.update({
@@ -71,6 +74,12 @@ const CatalogoCategoriaSlugIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
+  } as any)
+const CatalogoTintasProdutoSlugRoute =
+  CatalogoTintasProdutoSlugRouteImport.update({
+    id: '/catalogo/tintas/$produtoSlug',
+    path: '/catalogo/tintas/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoTelhasPolicarbonatoRoute =
   CatalogoTelhasPolicarbonatoRouteImport.update({
@@ -137,6 +146,18 @@ const CatalogoMadeiramentoCambaraRoute =
     path: '/catalogo/madeiramento/cambara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoFixadoresProdutoSlugRoute =
+  CatalogoFixadoresProdutoSlugRouteImport.update({
+    id: '/catalogo/fixadores/$produtoSlug',
+    path: '/catalogo/fixadores/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCalhasProdutoSlugRoute =
+  CatalogoCalhasProdutoSlugRouteImport.update({
+    id: '/catalogo/calhas/$produtoSlug',
+    path: '/catalogo/calhas/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoCategoriaSlugProdutoSlugRoute =
   CatalogoCategoriaSlugProdutoSlugRouteImport.update({
     id: '/$produtoSlug',
@@ -150,6 +171,8 @@ export interface FileRoutesByFullPath {
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -161,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
@@ -171,6 +195,8 @@ export interface FileRoutesByTo {
   '/calculadora': typeof CalculadoraRoute
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -182,6 +208,7 @@ export interface FileRoutesByTo {
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores': typeof CatalogoFixadoresIndexRoute
@@ -194,6 +221,8 @@ export interface FileRoutesById {
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
+  '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
@@ -205,6 +234,7 @@ export interface FileRoutesById {
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
@@ -218,6 +248,8 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -229,6 +261,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
     | '/catalogo/fixadores/'
@@ -239,6 +272,8 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -250,6 +285,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/calhas'
     | '/catalogo/fixadores'
@@ -261,6 +297,8 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
+    | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
@@ -272,6 +310,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
     | '/catalogo/fixadores/'
@@ -283,6 +322,8 @@ export interface RootRouteChildren {
   CalculadoraRoute: typeof CalculadoraRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
+  CatalogoCalhasProdutoSlugRoute: typeof CatalogoCalhasProdutoSlugRoute
+  CatalogoFixadoresProdutoSlugRoute: typeof CatalogoFixadoresProdutoSlugRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
   CatalogoMadeiramentoCedrinhoRoute: typeof CatalogoMadeiramentoCedrinhoRoute
   CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
@@ -294,6 +335,7 @@ export interface RootRouteChildren {
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
   CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
+  CatalogoTintasProdutoSlugRoute: typeof CatalogoTintasProdutoSlugRoute
   CatalogoCalhasIndexRoute: typeof CatalogoCalhasIndexRoute
   CatalogoFixadoresIndexRoute: typeof CatalogoFixadoresIndexRoute
   CatalogoTintasIndexRoute: typeof CatalogoTintasIndexRoute
@@ -356,6 +398,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/catalogo/$categoriaSlug/'
       preLoaderRoute: typeof CatalogoCategoriaSlugIndexRouteImport
       parentRoute: typeof CatalogoCategoriaSlugRouteRoute
+    }
+    '/catalogo/tintas/$produtoSlug': {
+      id: '/catalogo/tintas/$produtoSlug'
+      path: '/catalogo/tintas/$produtoSlug'
+      fullPath: '/catalogo/tintas/$produtoSlug'
+      preLoaderRoute: typeof CatalogoTintasProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/catalogo/telhas/policarbonato': {
       id: '/catalogo/telhas/policarbonato'
@@ -434,6 +483,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoCambaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/fixadores/$produtoSlug': {
+      id: '/catalogo/fixadores/$produtoSlug'
+      path: '/catalogo/fixadores/$produtoSlug'
+      fullPath: '/catalogo/fixadores/$produtoSlug'
+      preLoaderRoute: typeof CatalogoFixadoresProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/$produtoSlug': {
+      id: '/catalogo/calhas/$produtoSlug'
+      path: '/catalogo/calhas/$produtoSlug'
+      fullPath: '/catalogo/calhas/$produtoSlug'
+      preLoaderRoute: typeof CatalogoCalhasProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/$categoriaSlug/$produtoSlug': {
       id: '/catalogo/$categoriaSlug/$produtoSlug'
       path: '/$produtoSlug'
@@ -466,6 +529,8 @@ const rootRouteChildren: RootRouteChildren = {
   CalculadoraRoute: CalculadoraRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
+  CatalogoCalhasProdutoSlugRoute: CatalogoCalhasProdutoSlugRoute,
+  CatalogoFixadoresProdutoSlugRoute: CatalogoFixadoresProdutoSlugRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
   CatalogoMadeiramentoCedrinhoRoute: CatalogoMadeiramentoCedrinhoRoute,
   CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
@@ -478,6 +543,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
   CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
+  CatalogoTintasProdutoSlugRoute: CatalogoTintasProdutoSlugRoute,
   CatalogoCalhasIndexRoute: CatalogoCalhasIndexRoute,
   CatalogoFixadoresIndexRoute: CatalogoFixadoresIndexRoute,
   CatalogoTintasIndexRoute: CatalogoTintasIndexRoute,
@@ -485,13 +551,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
