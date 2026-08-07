@@ -151,7 +151,11 @@ export default function Cambara() {
         <GaleriaProduto
           titulo={tipo ? `Cambará Rosa — ${tipo}` : "Cambará Rosa"}
           subtitulo={tipo ? "Foto em breve" : "Selecione o tipo de peça para ver as fotos"}
-          imagens={(tipo && imagensCambara[tipo]) || []}
+          imagens={
+            (tipo && imagensCambara[tipo]?.some((i) => i.src) && imagensCambara[tipo]) || [
+              { src: IMG.caibroCambara, alt: "Peça de Cambará Rosa aparelhada" },
+            ]
+          }
         />
       }
     >
