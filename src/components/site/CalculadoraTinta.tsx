@@ -149,15 +149,13 @@ export function CalculadoraTinta() {
 
   const mensagem = res
     ? [
-        `🎨 *Cálculo de tinta & verniz — Rocha Telhas*`,
-        `• Superfície: ${alvo.label} · ${res.acab.label}`,
-        `• Área: ${fmt(res.m2)} m² · ${res.demaos} demão(s)`,
-        ...(res.preparo.length
-          ? ["", "*Preparação:*", ...res.preparo.map((p) => `• ${p.emb} embalagem(ns) — ${p.nome}`)]
-          : []),
-        "",
-        "*Acabamento (opções):*",
-        ...res.acabamento.map((p) => `• ${p.emb} embalagem(ns) — ${p.nome}`),
+        `Tinta e Verniz`,
+        `- Superfície: ${alvo.label} — ${res.acab.label}`,
+        `- Área: ${fmt(res.m2)} m² × ${res.demaos} demão(s)`,
+        ``,
+        `📋 *MATERIAIS ESTIMADOS*`,
+        ...res.preparo.map((p) => `- ${p.nome} — Qtd: ${p.emb} embalagem(ns)`),
+        ...res.acabamento.map((p) => `- ${p.nome} — Qtd: ${p.emb} embalagem(ns)`),
       ].join("\n")
     : "";
 
