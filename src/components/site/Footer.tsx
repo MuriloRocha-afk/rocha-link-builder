@@ -1,4 +1,4 @@
-import { Clock, Facebook, Instagram, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { CONTATO, Logo, WhatsAppButton, waLink } from "./shared";
 
@@ -31,24 +31,6 @@ export function Footer() {
               </li>
             </ul>
             <div className="mt-6 flex gap-3">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary-foreground/20 text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              >
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-primary-foreground/20 text-primary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              >
-                <Facebook className="h-4 w-4" />
-              </a>
               <a
                 href={waLink("Olá! Vim pelo site da Rocha Telhas.")}
                 target="_blank"

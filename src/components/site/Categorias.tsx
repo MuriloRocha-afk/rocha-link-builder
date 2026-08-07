@@ -25,8 +25,8 @@ export function Categorias() {
           {CATEGORIES.map((c) => (
             <Link
               key={c.id}
-              to="/catalogo"
-              hash={c.id}
+              to="/catalogo/$categoriaSlug"
+              params={{ categoriaSlug: c.id }}
               className="group relative flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
             >
               <img
