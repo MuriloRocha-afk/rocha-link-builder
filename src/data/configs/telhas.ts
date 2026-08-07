@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import { imagensConcreto } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -21,7 +22,9 @@ export const CONFIG_CONCRETO: ConfiguradorConfig = {
   galeriaTitulo: "Telha de Concreto Eurotop",
   galeriaPlaceholder: "Selecione uma cor para ver as fotos",
   imagens: (s) =>
-    s.cor ? [{ src: "", alt: `Telha de Concreto ${s.cor} Eurotop` }] : [],
+    s.cor
+      ? (imagensConcreto[s.cor] ?? [{ src: "", alt: `Telha de Concreto ${s.cor} Eurotop` }])
+      : [],
   categoria: "Telhas",
   passos: [
     { chave: "cor", titulo: "Cor / Acabamento", tipo: "grid3", opcoes: CORES_CONCRETO },

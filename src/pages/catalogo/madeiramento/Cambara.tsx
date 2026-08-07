@@ -118,6 +118,7 @@ export default function Cambara() {
 
   return (
     <ProdutoLayout
+      galeriaSticky={false}
       produtoKey="cambara"
       breadcrumb={
       <div className="bg-white border-b px-4 py-3">

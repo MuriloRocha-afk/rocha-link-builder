@@ -1,4 +1,26 @@
 import { ImagemProduto } from "../components/GaleriaProduto";
+import imgCeramicaAmericana from "@/assets/produtos/telha_ceramica_americana.webp.asset.json";
+import imgCeramicaMesclada from "@/assets/produtos/telha_ceramica_mesclada.jpg.asset.json";
+import imgColonialPvc from "@/assets/produtos/Telha_Colonial_PVC.png.asset.json";
+import imgPvcCinzaTelhado from "@/assets/produtos/telha_colonial_pvc_cinza_telhado.webp.asset.json";
+import imgPvcMarfim from "@/assets/produtos/telha_colonial_pvc_marfim.webp.asset.json";
+import imgPvcMarfimTelhado from "@/assets/produtos/telha_colonial_pvc_marfim_telhado.webp.asset.json";
+import imgPvcMarfimTelhado2 from "@/assets/produtos/telha_colonial_pvc_marfim_telhado_2.webp.asset.json";
+import imgConcretoGrafiteTelhado from "@/assets/produtos/telha_concreto_grafite_telhado.jfif.asset.json";
+import imgCaibroCambara from "@/assets/produtos/caibro_de_cambara.webp.asset.json";
+
+export const IMG = {
+  ceramicaAmericana: imgCeramicaAmericana.url,
+  ceramicaMesclada: imgCeramicaMesclada.url,
+  colonialPvc: imgColonialPvc.url,
+  pvcCinzaTelhado: imgPvcCinzaTelhado.url,
+  pvcMarfim: imgPvcMarfim.url,
+  pvcMarfimTelhado: imgPvcMarfimTelhado.url,
+  pvcMarfimTelhado2: imgPvcMarfimTelhado2.url,
+  concretoGrafiteTelhado: imgConcretoGrafiteTelhado.url,
+  caibroCambara: imgCaibroCambara.url,
+};
+
 
 // ─────────────────────────────────────────────────────────────
 // COMO USAR:
@@ -20,7 +42,7 @@ export const imagensCeramica: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Telha Portuguesa Resinada Rodrigues" },
   ],
   "portuguesa-mesclada": [
-    { src: "", alt: "Telha Portuguesa Mesclada Resinada" },
+    { src: imgCeramicaMesclada.url, alt: "Telha Cerâmica Mesclada", legenda: "Telhado colonial mesclado" },
   ],
   "romana-resinada": [
     { src: "", alt: "Telha Romana Resinada Laranjal" },
@@ -29,7 +51,8 @@ export const imagensCeramica: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Telha Romana Top Telha Terracota Prime" },
   ],
   "americana-resinada": [
-    { src: "", alt: "Telha Americana Resinada Cerâmica" },
+    { src: imgCeramicaAmericana.url, alt: "Telha Cerâmica Americana Resinada" },
+    { src: imgColonialPvc.url, alt: "Telhado com telha cerâmica americana", legenda: "Aplicação em telhado" },
   ],
 };
 
@@ -60,10 +83,13 @@ export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Detalhe do encaixe — Colonial PVC Cerâmica" },
   ],
   Cinza: [
-    { src: "", alt: "Telha Colonial PVC Cinza" },
+    { src: imgColonialPvc.url, alt: "Telha Colonial PVC" },
+    { src: imgPvcCinzaTelhado.url, alt: "Telhado com Telha Colonial PVC Cinza", legenda: "Aplicação em telhado" },
   ],
   Marfim: [
-    { src: "", alt: "Telha Colonial PVC Marfim" },
+    { src: imgPvcMarfim.url, alt: "Telha Colonial PVC Marfim" },
+    { src: imgPvcMarfimTelhado.url, alt: "Telhado com Telha Colonial PVC Marfim", legenda: "Aplicação em telhado" },
+    { src: imgPvcMarfimTelhado2.url, alt: "Telhado com Telha Colonial PVC Marfim — obra", legenda: "Instalação em estrutura metálica" },
   ],
   "Translúcida": [
     { src: "", alt: "Telha Colonial PVC Translúcida" },
@@ -77,7 +103,7 @@ export const imagensCambara: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Detalhe seção transversal — Viga Cambará" },
   ],
   Caibro: [
-    { src: "", alt: "Caibros Cambará Rosa 5x5cm e 5x7cm" },
+    { src: imgCaibroCambara.url, alt: "Caibros Cambará Rosa 5x5cm e 5x7cm" },
   ],
   Ripa: [
     { src: "", alt: "Ripas Cambará Rosa 1,5x5cm" },
@@ -193,4 +219,11 @@ export const imagensMadeirit: Record<string, ImagemProduto[]> = {
   Rosa: [{ src: "", alt: "Madeirit Rosa" }],
   OSB: [{ src: "", alt: "OSB Multiplac" }],
   Compensado: [{ src: "", alt: "Compensado estrutural" }],
+};
+
+// TELHA DE CONCRETO — por cor
+export const imagensConcreto: Record<string, ImagemProduto[]> = {
+  Grafite: [
+    { src: imgConcretoGrafiteTelhado.url, alt: "Telhado com Telha de Concreto Grafite", legenda: "Aplicação em telhado" },
+  ],
 };
