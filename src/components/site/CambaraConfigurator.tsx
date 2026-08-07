@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Minus, Plus, MessageCircle, ShoppingCart, Check, Star } from "lucide-react";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
 import { waLink } from "@/constants/whatsapp";
 import { useQuoteCart } from "@/components/site/quote-cart";
@@ -295,23 +296,9 @@ Poderia verificar disponibilidade e frete?`;
             <ShoppingCart className="h-5 w-5" />
             Adicionar ao Orçamento
           </Button>
-          <Button asChild variant="whats" size="xl" disabled={!completo}>
-            <a
-              href={completo ? waLink(mensagem) : undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={!completo}
-              onClick={(e) => {
-                if (!completo) {
-                  e.preventDefault();
-                  toast.error("Complete todas as etapas do configurador.");
-                }
-              }}
-            >
-              <MessageCircle className="h-5 w-5" />
-              Cotar agora no WhatsApp
-            </a>
-          </Button>
+          <BotaoCotarWhatsApp nomeProduto="Cambará Rosa" corpoMensagem={mensagem} disabled={!completo}>
+            Cotar agora no WhatsApp
+          </BotaoCotarWhatsApp>
         </div>
       </div>
     </div>
