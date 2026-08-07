@@ -117,11 +117,9 @@ export default function Cambara() {
   };
 
   return (
-    <>
     <ProdutoLayout
       produtoKey="cambara"
       breadcrumb={
-      {/* Breadcrumb */}
       <div className="bg-white border-b px-4 py-3">
         <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
           <a href="/catalogo" className="hover:text-orange-500 transition-colors">Catálogo</a>
