@@ -3,6 +3,8 @@ import { Check, MessageCircle, Minus, Plus, ShoppingCart, Star } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { waLink } from "./shared";
 import { useQuoteCart } from "./quote-cart";
+import GaleriaProduto from "@/components/GaleriaProduto";
+import { imagensColonialPVC } from "@/data/imagensProduto";
 
 const CORES = [
   { value: "Cerâmica", hex: "#C1440E", badge: "Mais vendida" },
@@ -99,6 +101,12 @@ Poderia verificar estoque e frete?`;
 
   return (
     <div className="space-y-12">
+      <GaleriaProduto
+        titulo={cor ? `Telha Colonial PVC — ${cor}` : "Telha Colonial PVC"}
+        subtitulo={cor ? "Foto em breve" : "Selecione uma cor para ver as fotos"}
+        imagens={cor ? (imagensColonialPVC[cor] ?? []) : []}
+      />
+
       <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] md:p-8">
         <div className="space-y-10">
           <Passo n={1} title="Cor / Acabamento">
