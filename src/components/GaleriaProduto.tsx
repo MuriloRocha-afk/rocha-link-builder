@@ -10,19 +10,23 @@ export type ImagemProduto = {
 type Props = {
   imagens: ImagemProduto[];
   titulo: string;
+  /** Texto secundário do placeholder (padrão: "Foto em breve") */
+  subtitulo?: string;
 };
 
-export default function GaleriaProduto({ imagens, titulo }: Props) {
+export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em breve" }: Props) {
   const [indexAtivo, setIndexAtivo] = useState(0);
   const [erros, setErros] = useState<Record<number, boolean>>({});
 
-  if (imagens.length === 0) return null;
+  const lista: ImagemProduto[] =
+    imagens.length > 0 ? imagens : [{ src: "", alt: titulo }];
+  const index = Math.min(indexAtivo, lista.length - 1);
 
-  const anterior = () => setIndexAtivo((i) => (i - 1 + imagens.length) % imagens.length);
-  const proximo = () => setIndexAtivo((i) => (i + 1) % imagens.length);
+  const anterior = () => setIndexAtivo((i) => (i - 1 + lista.length) % lista.length);
+  const proximo = () => setIndexAtivo((i) => (i + 1) % lista.length);
 
-  const imagemAtiva = imagens[indexAtivo];
-  const temErro = erros[indexAtivo];
+  const imagemAtiva = lista[index];
+  const temErro = !imagemAtiva.src || erros[index];
 
   return (
     <section className="bg-white rounded-2xl overflow-hidden shadow-sm">
