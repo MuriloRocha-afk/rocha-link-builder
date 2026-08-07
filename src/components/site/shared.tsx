@@ -1,6 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink, WHATSAPP_NUMBER } from "@/constants/whatsapp";
+import logoRocha from "@/assets/produtos/Logo_Rocha_Telhas.jfif.asset.json";
 
 export { waLink, WHATSAPP_NUMBER };
 
