@@ -401,6 +401,7 @@ export function CalculadoraTelhado() {
         aberto={modal}
         onFechar={() => setModal(false)}
         corpoMensagem={mensagem}
+        tipo="calculadora"
         nomeProduto="Cálculo de telhado"
       />
     </div>

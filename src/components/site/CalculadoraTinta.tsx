@@ -328,6 +328,7 @@ export function CalculadoraTinta() {
         aberto={modal}
         onFechar={() => setModal(false)}
         corpoMensagem={mensagem}
+        tipo="calculadora"
         nomeProduto="Cálculo de tinta & verniz"
       />
     </div>
