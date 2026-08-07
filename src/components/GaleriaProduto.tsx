@@ -31,7 +31,7 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
   return (
     <section className="bg-white rounded-2xl overflow-hidden shadow-sm">
       {/* Imagem principal */}
-      <div className="relative bg-gray-100 aspect-[4/3] sm:aspect-[16/9] flex items-center justify-center overflow-hidden">
+      <div className="relative bg-gray-100 aspect-video sm:aspect-auto sm:h-[360px] flex items-center justify-center overflow-hidden">
         {temErro ? (
           /* Placeholder quando a imagem falha ou não foi adicionada ainda */
           <div className="flex flex-col items-center gap-3 text-gray-300 p-8 text-center">
@@ -76,6 +76,20 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
           </div>
         )}
       </div>
+
+      {/* Dots indicadores */}
+      {lista.length > 1 && (
+        <div className="flex justify-center gap-2 pt-3">
+          {lista.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndexAtivo(i)}
+              aria-label={`Ir para imagem ${i + 1}`}
+              className={`h-2 rounded-full transition-all ${index === i ? "w-5 bg-orange-500" : "w-2 bg-gray-300 hover:bg-gray-400"}`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Miniaturas — só com 2+ imagens */}
       {lista.length > 1 && (

@@ -1,6 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink, WHATSAPP_NUMBER } from "@/constants/whatsapp";
+import logoRocha from "@/assets/produtos/Logo_Rocha_Telhas.jfif.asset.json";
 
 export { waLink, WHATSAPP_NUMBER };
 
@@ -33,7 +34,6 @@ export function WhatsAppButton({
 }
 
 export function Logo({
-  compact = false,
   size = "lg",
 }: {
   compact?: boolean;
@@ -41,51 +41,11 @@ export function Logo({
 }) {
   const big = size === "lg";
   return (
-    <span className="flex items-center gap-3">
-      <span
-        className={`flex items-center justify-center rounded-xl bg-accent text-accent-foreground shadow-[var(--shadow-card)] ${
-          big ? "h-14 w-14" : "h-11 w-11"
-        }`}
-      >
-        <svg
-          viewBox="0 0 24 24"
-          className={big ? "h-9 w-9" : "h-7 w-7"}
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M2 11 12 4l10 7"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M4.5 13.5 12 8.5l7.5 5M4.5 17.5 12 12.5l7.5 5"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            opacity="0.75"
-          />
-        </svg>
-      </span>
-      <span
-        className={`font-display leading-none font-extrabold tracking-tight ${
-          big ? "text-2xl md:text-3xl" : "text-xl"
-        }`}
-      >
-        <span className="text-accent">ROCHA</span>
-        <span className={compact ? "text-primary-foreground" : "text-primary"}> TELHAS</span>
-        <span
-          className={`mt-1 block font-semibold tracking-[0.24em] ${
-            big ? "text-[11px]" : "text-[10px]"
-          } ${compact ? "text-primary-foreground/60" : "text-muted-foreground"}`}
-        >
-          DESDE 1998
-        </span>
-      </span>
-    </span>
+    <img
+      src={logoRocha.url}
+      alt="Rocha Telhas & Madeiras"
+      className={`w-auto object-contain ${big ? "h-16" : "h-12"}`}
+    />
   );
 }
 

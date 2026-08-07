@@ -4,7 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
-import { imagensCambara } from "../../../data/imagensProduto";
+import { imagensCambara, IMG } from "../../../data/imagensProduto";
 
 
 const TIPOS = ["Viga", "Caibro", "Ripa", "Ripão", "Dormente"] as const;
@@ -118,6 +118,7 @@ export default function Cambara() {
 
   return (
     <ProdutoLayout
+      galeriaSticky={false}
       produtoKey="cambara"
       breadcrumb={
       <div className="bg-white border-b px-4 py-3">
@@ -150,7 +151,11 @@ export default function Cambara() {
         <GaleriaProduto
           titulo={tipo ? `Cambará Rosa — ${tipo}` : "Cambará Rosa"}
           subtitulo={tipo ? "Foto em breve" : "Selecione o tipo de peça para ver as fotos"}
-          imagens={(tipo && imagensCambara[tipo]) || []}
+          imagens={
+            (tipo && imagensCambara[tipo]?.some((i) => i.src) && imagensCambara[tipo]) || [
+              { src: IMG.caibroCambara, alt: "Peça de Cambará Rosa aparelhada" },
+            ]
+          }
         />
       }
     >
