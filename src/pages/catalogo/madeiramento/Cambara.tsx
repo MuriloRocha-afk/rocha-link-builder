@@ -340,7 +340,6 @@ export default function Cambara() {
               </div>
             ))}
           </section>
-      </div>
 
               <ModalCotarWhatsApp
           aberto={modalWppAberto}
