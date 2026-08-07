@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { ColonialPvcConfigurator } from "@/components/site/ColonialPvcConfigurator";
-import pvcImg from "@/assets/prod-pvc.jpg";
 
 const TITLE = "Telha Colonial PVC | Rocha Telhas";
 const DESCRIPTION =
