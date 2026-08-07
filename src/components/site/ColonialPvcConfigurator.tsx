@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { waLink } from "./shared";
 import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
+import ProdutoLayout from "@/components/site/ProdutoLayout";
 import { imagensColonialPVC } from "@/data/imagensProduto";
 
 const CORES = [
