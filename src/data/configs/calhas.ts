@@ -1,0 +1,250 @@
+import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+
+const BC = (nome: string) => [
+  { label: "Catálogo", href: "/catalogo" },
+  { label: "Calhas", href: "/catalogo/calhas" },
+  { label: nome },
+];
+
+const COMPRIMENTOS = ["2,0m", "3,0m", "4,0m", "5,0m", "6,0m"];
+
+export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
+  breadcrumb: BC("Calha Alge"),
+  titulo: "🌧️ Calha Alge — Moldura e Platibanda",
+  badge: "★ Campeão de Vendas",
+  subtitulo: "Calha galvanizada nos cortes Moldura e Platibanda de 2,0m a 6,0m.",
+  galeriaTitulo: "Calha Alge",
+  galeriaPlaceholder: "Selecione o corte para ver as fotos",
+  imagens: (s) =>
+    s.corte
+      ? [
+          {
+            src: "",
+            alt:
+              s.corte === "Moldura Corte 33"
+                ? "Calha Alge Moldura galvanizada"
+                : "Calha Alge Platibanda",
+          },
+        ]
+      : [],
+  categoria: "Calhas",
+  passos: [
+    {
+      chave: "corte",
+      titulo: "Corte",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Moldura Corte 33", emoji: "📐", sub: "Encaixe em telhados com beira" },
+        { valor: "Platibanda Corte 33", emoji: "📏", sub: "Para telhados com platibanda" },
+      ],
+    },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento",
+      tipo: "grid3",
+      opcoes: COMPRIMENTOS.map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
+  ],
+  resumoNome: () => "Calha Alge",
+  resumoDetalhe: (s, q) => `${s.corte} · ${s.comprimento} · ${q.qtd ?? 4} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `calha-alge-${s.corte}-${s.comprimento}`,
+  mensagem: (s, q) =>
+    `🌧️ *Calha Alge*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
+};
+
+export const CONFIG_CALHA_AQUAPLUV: ConfiguradorConfig = {
+  breadcrumb: BC("Calha Aquapluv"),
+  titulo: "🔵 Calha Aquapluv & Style",
+  subtitulo:
+    "Calhas PVC Bege e Cinza. Não enferruja, fácil instalação, sistema completo de acessórios.",
+  galeriaTitulo: "Calha Aquapluv",
+  galeriaPlaceholder: "Selecione a linha para ver as fotos",
+  imagens: (s) => (s.linha ? [{ src: "", alt: `${s.linha}` }] : []),
+  categoria: "Calhas",
+  passos: [
+    {
+      chave: "linha",
+      titulo: "Linha",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Aquapluv Calha — Cinza", emoji: "🔵", sub: "Calha redonda clássica" },
+        { valor: "Aquapluv Style — Retangular", emoji: "⬛", sub: "Design moderno" },
+      ],
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
+  ],
+  resumoNome: () => "Calha Aquapluv",
+  resumoDetalhe: (s, q) => `${s.linha} · ${q.qtd ?? 4} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `aquapluv-${s.linha}`,
+  mensagem: (s, q) =>
+    `🔵 *Calha Aquapluv*\n• Linha: ${s.linha}\n• Quantidade: ${q.qtd ?? 4} peças`,
+};
+
+export const CONFIG_RUFO: ConfiguradorConfig = {
+  breadcrumb: BC("Rufos Galvanizados"),
+  titulo: "🏠 Rufos Galvanizados — Alge",
+  subtitulo:
+    "Arremate entre telhado e parede. Impermeabilização definitiva em qualquer cobertura.",
+  galeriaTitulo: "Rufo Galvanizado Alge",
+  galeriaPlaceholder: "Foto em breve",
+  imagens: () => [{ src: "", alt: "Rufo galvanizado Alge instalado" }],
+  categoria: "Calhas",
+  passos: [
+    {
+      chave: "comprimento",
+      titulo: "Comprimento",
+      tipo: "grid3",
+      opcoes: COMPRIMENTOS.map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
+  ],
+  resumoNome: () => "Rufo Galvanizado Alge",
+  resumoDetalhe: (s, q) => `${s.comprimento} · ${q.qtd ?? 4} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `rufo-${s.comprimento}`,
+  mensagem: (s, q) =>
+    `🏠 *Rufo Galvanizado Alge*\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
+};
+
+export const CONFIG_MANTA_TERMICA: ConfiguradorConfig = {
+  breadcrumb: BC("Manta Térmica"),
+  titulo: "🌡️ Manta Térmica Aluminizada",
+  subtitulo: "Reduz até 70% do calor radiante. 1 face e 2 faces, de 10m² a 50m².",
+  galeriaTitulo: "Manta Térmica Aluminizada",
+  galeriaPlaceholder: "Selecione o tipo para ver as fotos",
+  imagens: (s) =>
+    s.faces
+      ? [{ src: "", alt: `Manta Térmica Aluminizada ${s.faces === "1F" ? "1 Face" : "2 Faces"}` }]
+      : [],
+  categoria: "Calhas",
+  passos: [
+    {
+      chave: "faces",
+      titulo: "Faces",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "1F", sub: "Uma face aluminizada (econômica)" },
+        { valor: "2F", sub: "Isolamento térmico superior", badge: "★ Mais eficiente" },
+      ],
+    },
+    {
+      chave: "tamanho",
+      titulo: "Tamanho do rolo",
+      tipo: "grid3",
+      opcoes: ["10 m²", "25 m²", "50 m²"].map((v) => ({ valor: v })),
+    },
+    {
+      chave: "qtd",
+      titulo: "Quantidade",
+      tipo: "quantidade",
+      unidade: "rolos",
+      padrao: 1,
+      nota: (s, q) =>
+        `Cobertura total com ${q} rolos: ~${q * parseFloat(s.tamanho)} m²`,
+    },
+  ],
+  resumoNome: () => "Manta Térmica Aluminizada",
+  resumoDetalhe: (s, q) =>
+    `${s.faces} · rolo ${s.tamanho} · ${q.qtd ?? 1} rolos · ~${((q.qtd as number) ?? 1) * parseFloat(s.tamanho)} m²`,
+  unidadeResumo: () => "rolos",
+  idItem: (s) => `manta-termica-${s.faces}-${s.tamanho}`,
+  mensagem: (s, q) =>
+    `🌡️ *Manta Térmica Aluminizada*\n• Tipo: ${s.faces}\n• Tamanho do rolo: ${s.tamanho}\n• Quantidade: ${q.qtd ?? 1} rolos\n• Cobertura total: ~${((q.qtd as number) ?? 1) * parseFloat(s.tamanho)} m²`,
+};
+
+export const CONFIG_MANTA_ASFALTICA: ConfiguradorConfig = {
+  breadcrumb: BC("Manta Asfáltica"),
+  titulo: "🛡️ Manta Asfáltica Aluminizada",
+  subtitulo:
+    "Terracota em 10cm e 20cm de largura × 10m. Impermeabilização de calhas, rufos e junções.",
+  galeriaTitulo: "Manta Asfáltica Aluminizada",
+  galeriaPlaceholder: "Foto em breve",
+  imagens: () => [{ src: "", alt: "Manta Asfáltica Aluminizada Terracota" }],
+  categoria: "Calhas",
+  passos: [
+    {
+      chave: "largura",
+      titulo: "Largura",
+      tipo: "grid2",
+      opcoes: [{ valor: "10 cm" }, { valor: "20 cm" }],
+    },
+    {
+      chave: "qtd",
+      titulo: "Quantidade",
+      tipo: "quantidade",
+      unidade: "rolos de 10m",
+      padrao: 1,
+    },
+  ],
+  resumoNome: () => "Manta Asfáltica Aluminizada — Terracota",
+  resumoDetalhe: (s, q) => `${s.largura} × 10m · ${q.qtd ?? 1} rolos`,
+  unidadeResumo: () => "rolos de 10m",
+  idItem: (s) => `manta-asfaltica-${s.largura}`,
+  mensagem: (s, q) =>
+    `🛡️ *Manta Asfáltica Aluminizada — Terracota*\n• Largura: ${s.largura}\n• Comprimento por rolo: 10m\n• Quantidade: ${q.qtd ?? 1} rolos`,
+};
+
+const ACESSORIOS_ALGE = [
+  "Suporte Calha Moldura 28/33",
+  "Suporte Calha Platibanda 28/33",
+  "Cabeceira Moldura 28/33 — Direita",
+  "Cabeceira Moldura 28/33 — Esquerda",
+  "Cabeceira Platibanda 28/33",
+  "Saída Central Moldura 28/33",
+  "Saída Central Platibanda 28/33",
+  "Saída Lateral Moldura 28/33 — Direita",
+  "Saída Lateral Moldura 28/33 — Esquerda",
+  "Saída Lateral Platibanda 28/33",
+];
+
+const ACESSORIOS_AQUAPLUV = [
+  "Aquapluv — Bocal Cinza",
+  "Aquapluv — Cabeceira Direita/Esquerda Bege",
+  "Aquapluv — Calha Cinza",
+  "Aquapluv Style — Emenda",
+  "Aquapluv Style — Joelho 45° Retangular",
+  "Aquapluv Style — Joelho 90° Retangular",
+  "Aquapluv Style — Suporte PVC",
+  "Aquapluv Style — Condutor Retangular",
+  "Aquapluv — Condutor Circular Bege",
+];
+
+export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
+  breadcrumb: BC("Acessórios de Calha"),
+  titulo: "🔧 Acessórios de Calha",
+  subtitulo: "Suportes, cabeceiras, saídas, emendas e bocais para calhas Alge e Aquapluv.",
+  galeriaTitulo: "Acessórios de Calha",
+  galeriaPlaceholder: "Selecione o sistema para ver as fotos",
+  imagens: (s) => (s.sistema ? [{ src: "", alt: `Acessórios ${s.sistema}` }] : []),
+  categoria: "Calhas",
+  passos: [
+    {
+      chave: "sistema",
+      titulo: "Sistema",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Sistema Alge", emoji: "📐", sub: "Moldura e Platibanda" },
+        { valor: "Sistema Aquapluv", emoji: "🔵", sub: "Calha redonda e Style" },
+      ],
+    },
+    {
+      chave: "acessorio",
+      titulo: "Acessório",
+      tipo: "lista",
+      opcoes: (s) =>
+        (s.sistema === "Sistema Alge" ? ACESSORIOS_ALGE : ACESSORIOS_AQUAPLUV).map((v) => ({
+          valor: v,
+        })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
+  ],
+  resumoNome: () => "Acessório de Calha",
+  resumoDetalhe: (s, q) => `${s.sistema} · ${s.acessorio} · ${q.qtd ?? 4} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `acessorio-calha-${s.acessorio}`,
+  mensagem: (s, q) =>
+    `🔧 *Acessório de Calha*\n• Sistema: ${s.sistema?.replace("Sistema ", "")}\n• Produto: ${s.acessorio}\n• Quantidade: ${q.qtd ?? 4} peças`,
+};

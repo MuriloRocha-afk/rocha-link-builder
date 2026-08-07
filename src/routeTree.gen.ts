@@ -17,19 +17,45 @@ import { Route as CatalogoTintasIndexRouteImport } from './routes/catalogo.tinta
 import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fixadores.index'
 import { Route as CatalogoCalhasIndexRouteImport } from './routes/catalogo.calhas.index'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
+import { Route as CatalogoTintasVernizRouteImport } from './routes/catalogo.tintas.verniz'
+import { Route as CatalogoTintasTintaAcrilicaRouteImport } from './routes/catalogo.tintas.tinta-acrilica'
+import { Route as CatalogoTintasThinnerRouteImport } from './routes/catalogo.tintas.thinner'
+import { Route as CatalogoTintasStainRouteImport } from './routes/catalogo.tintas.stain'
+import { Route as CatalogoTintasSeladoraRouteImport } from './routes/catalogo.tintas.seladora'
+import { Route as CatalogoTintasEsmalteRouteImport } from './routes/catalogo.tintas.esmalte'
+import { Route as CatalogoTintasCupicidaRouteImport } from './routes/catalogo.tintas.cupicida'
 import { Route as CatalogoTintasProdutoSlugRouteImport } from './routes/catalogo.tintas.$produtoSlug'
+import { Route as CatalogoTelhasPolipropilenoRouteImport } from './routes/catalogo.telhas.polipropileno'
 import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
+import { Route as CatalogoTelhasCumeeirasRouteImport } from './routes/catalogo.telhas.cumeeiras'
+import { Route as CatalogoTelhasConcretoRouteImport } from './routes/catalogo.telhas.concreto'
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
 import { Route as CatalogoTelhasCeramicaRouteImport } from './routes/catalogo.telhas.ceramica'
+import { Route as CatalogoMadeiramentoTabeirasDeckRouteImport } from './routes/catalogo.madeiramento.tabeiras-deck'
 import { Route as CatalogoMadeiramentoPinusRouteImport } from './routes/catalogo.madeiramento.pinus'
+import { Route as CatalogoMadeiramentoMouraoRouteImport } from './routes/catalogo.madeiramento.mourao'
 import { Route as CatalogoMadeiramentoMadeiritRouteImport } from './routes/catalogo.madeiramento.madeirit'
+import { Route as CatalogoMadeiramentoGarapeiraRouteImport } from './routes/catalogo.madeiramento.garapeira'
 import { Route as CatalogoMadeiramentoForroPvcRouteImport } from './routes/catalogo.madeiramento.forro-pvc'
 import { Route as CatalogoMadeiramentoForroCedrinhoRouteImport } from './routes/catalogo.madeiramento.forro-cedrinho'
 import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
 import { Route as CatalogoMadeiramentoCedrinhoRouteImport } from './routes/catalogo.madeiramento.cedrinho'
 import { Route as CatalogoMadeiramentoCambaraRouteImport } from './routes/catalogo.madeiramento.cambara'
+import { Route as CatalogoMadeiramentoAmesclaRouteImport } from './routes/catalogo.madeiramento.amescla'
+import { Route as CatalogoFixadoresPregosRouteImport } from './routes/catalogo.fixadores.pregos'
+import { Route as CatalogoFixadoresParafusosTelhaRouteImport } from './routes/catalogo.fixadores.parafusos-telha'
+import { Route as CatalogoFixadoresParafusosMadeiraRouteImport } from './routes/catalogo.fixadores.parafusos-madeira'
+import { Route as CatalogoFixadoresEspigoesRouteImport } from './routes/catalogo.fixadores.espigoes'
+import { Route as CatalogoFixadoresBuchasArruelasRouteImport } from './routes/catalogo.fixadores.buchas-arruelas'
+import { Route as CatalogoFixadoresAramesRouteImport } from './routes/catalogo.fixadores.arames'
 import { Route as CatalogoFixadoresProdutoSlugRouteImport } from './routes/catalogo.fixadores.$produtoSlug'
+import { Route as CatalogoCalhasRufoRouteImport } from './routes/catalogo.calhas.rufo'
+import { Route as CatalogoCalhasMantaTermicaRouteImport } from './routes/catalogo.calhas.manta-termica'
+import { Route as CatalogoCalhasMantaAsfalticaRouteImport } from './routes/catalogo.calhas.manta-asfaltica'
+import { Route as CatalogoCalhasCalhaAquapluvRouteImport } from './routes/catalogo.calhas.calha-aquapluv'
+import { Route as CatalogoCalhasCalhaAlgeRouteImport } from './routes/catalogo.calhas.calha-alge'
+import { Route as CatalogoCalhasAcessoriosCalhaRouteImport } from './routes/catalogo.calhas.acessorios-calha'
 import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo.calhas.$produtoSlug'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
@@ -75,10 +101,52 @@ const CatalogoCategoriaSlugIndexRoute =
     path: '/',
     getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
   } as any)
+const CatalogoTintasVernizRoute = CatalogoTintasVernizRouteImport.update({
+  id: '/catalogo/tintas/verniz',
+  path: '/catalogo/tintas/verniz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoTintasTintaAcrilicaRoute =
+  CatalogoTintasTintaAcrilicaRouteImport.update({
+    id: '/catalogo/tintas/tinta-acrilica',
+    path: '/catalogo/tintas/tinta-acrilica',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoTintasThinnerRoute = CatalogoTintasThinnerRouteImport.update({
+  id: '/catalogo/tintas/thinner',
+  path: '/catalogo/tintas/thinner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoTintasStainRoute = CatalogoTintasStainRouteImport.update({
+  id: '/catalogo/tintas/stain',
+  path: '/catalogo/tintas/stain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoTintasSeladoraRoute = CatalogoTintasSeladoraRouteImport.update({
+  id: '/catalogo/tintas/seladora',
+  path: '/catalogo/tintas/seladora',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoTintasEsmalteRoute = CatalogoTintasEsmalteRouteImport.update({
+  id: '/catalogo/tintas/esmalte',
+  path: '/catalogo/tintas/esmalte',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoTintasCupicidaRoute = CatalogoTintasCupicidaRouteImport.update({
+  id: '/catalogo/tintas/cupicida',
+  path: '/catalogo/tintas/cupicida',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoTintasProdutoSlugRoute =
   CatalogoTintasProdutoSlugRouteImport.update({
     id: '/catalogo/tintas/$produtoSlug',
     path: '/catalogo/tintas/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoTelhasPolipropilenoRoute =
+  CatalogoTelhasPolipropilenoRouteImport.update({
+    id: '/catalogo/telhas/polipropileno',
+    path: '/catalogo/telhas/polipropileno',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoTelhasPolicarbonatoRoute =
@@ -93,6 +161,16 @@ const CatalogoTelhasFibrocimentoRoute =
     path: '/catalogo/telhas/fibrocimento',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoTelhasCumeeirasRoute = CatalogoTelhasCumeeirasRouteImport.update({
+  id: '/catalogo/telhas/cumeeiras',
+  path: '/catalogo/telhas/cumeeiras',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoTelhasConcretoRoute = CatalogoTelhasConcretoRouteImport.update({
+  id: '/catalogo/telhas/concreto',
+  path: '/catalogo/telhas/concreto',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoTelhasColonialPvcRoute =
   CatalogoTelhasColonialPvcRouteImport.update({
     id: '/catalogo/telhas/colonial-pvc',
@@ -104,16 +182,34 @@ const CatalogoTelhasCeramicaRoute = CatalogoTelhasCeramicaRouteImport.update({
   path: '/catalogo/telhas/ceramica',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoMadeiramentoTabeirasDeckRoute =
+  CatalogoMadeiramentoTabeirasDeckRouteImport.update({
+    id: '/catalogo/madeiramento/tabeiras-deck',
+    path: '/catalogo/madeiramento/tabeiras-deck',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoPinusRoute =
   CatalogoMadeiramentoPinusRouteImport.update({
     id: '/catalogo/madeiramento/pinus',
     path: '/catalogo/madeiramento/pinus',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoMadeiramentoMouraoRoute =
+  CatalogoMadeiramentoMouraoRouteImport.update({
+    id: '/catalogo/madeiramento/mourao',
+    path: '/catalogo/madeiramento/mourao',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoMadeiritRoute =
   CatalogoMadeiramentoMadeiritRouteImport.update({
     id: '/catalogo/madeiramento/madeirit',
     path: '/catalogo/madeiramento/madeirit',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoMadeiramentoGarapeiraRoute =
+  CatalogoMadeiramentoGarapeiraRouteImport.update({
+    id: '/catalogo/madeiramento/garapeira',
+    path: '/catalogo/madeiramento/garapeira',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoMadeiramentoForroPvcRoute =
@@ -146,10 +242,84 @@ const CatalogoMadeiramentoCambaraRoute =
     path: '/catalogo/madeiramento/cambara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoMadeiramentoAmesclaRoute =
+  CatalogoMadeiramentoAmesclaRouteImport.update({
+    id: '/catalogo/madeiramento/amescla',
+    path: '/catalogo/madeiramento/amescla',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoFixadoresPregosRoute = CatalogoFixadoresPregosRouteImport.update({
+  id: '/catalogo/fixadores/pregos',
+  path: '/catalogo/fixadores/pregos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoFixadoresParafusosTelhaRoute =
+  CatalogoFixadoresParafusosTelhaRouteImport.update({
+    id: '/catalogo/fixadores/parafusos-telha',
+    path: '/catalogo/fixadores/parafusos-telha',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoFixadoresParafusosMadeiraRoute =
+  CatalogoFixadoresParafusosMadeiraRouteImport.update({
+    id: '/catalogo/fixadores/parafusos-madeira',
+    path: '/catalogo/fixadores/parafusos-madeira',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoFixadoresEspigoesRoute =
+  CatalogoFixadoresEspigoesRouteImport.update({
+    id: '/catalogo/fixadores/espigoes',
+    path: '/catalogo/fixadores/espigoes',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoFixadoresBuchasArruelasRoute =
+  CatalogoFixadoresBuchasArruelasRouteImport.update({
+    id: '/catalogo/fixadores/buchas-arruelas',
+    path: '/catalogo/fixadores/buchas-arruelas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoFixadoresAramesRoute = CatalogoFixadoresAramesRouteImport.update({
+  id: '/catalogo/fixadores/arames',
+  path: '/catalogo/fixadores/arames',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoFixadoresProdutoSlugRoute =
   CatalogoFixadoresProdutoSlugRouteImport.update({
     id: '/catalogo/fixadores/$produtoSlug',
     path: '/catalogo/fixadores/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCalhasRufoRoute = CatalogoCalhasRufoRouteImport.update({
+  id: '/catalogo/calhas/rufo',
+  path: '/catalogo/calhas/rufo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoCalhasMantaTermicaRoute =
+  CatalogoCalhasMantaTermicaRouteImport.update({
+    id: '/catalogo/calhas/manta-termica',
+    path: '/catalogo/calhas/manta-termica',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCalhasMantaAsfalticaRoute =
+  CatalogoCalhasMantaAsfalticaRouteImport.update({
+    id: '/catalogo/calhas/manta-asfaltica',
+    path: '/catalogo/calhas/manta-asfaltica',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCalhasCalhaAquapluvRoute =
+  CatalogoCalhasCalhaAquapluvRouteImport.update({
+    id: '/catalogo/calhas/calha-aquapluv',
+    path: '/catalogo/calhas/calha-aquapluv',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCalhasCalhaAlgeRoute = CatalogoCalhasCalhaAlgeRouteImport.update({
+  id: '/catalogo/calhas/calha-alge',
+  path: '/catalogo/calhas/calha-alge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoCalhasAcessoriosCalhaRoute =
+  CatalogoCalhasAcessoriosCalhaRouteImport.update({
+    id: '/catalogo/calhas/acessorios-calha',
+    path: '/catalogo/calhas/acessorios-calha',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoCalhasProdutoSlugRoute =
@@ -172,19 +342,45 @@ export interface FileRoutesByFullPath {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/calhas/acessorios-calha': typeof CatalogoCalhasAcessoriosCalhaRoute
+  '/catalogo/calhas/calha-alge': typeof CatalogoCalhasCalhaAlgeRoute
+  '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
+  '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
+  '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
+  '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
+  '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
+  '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
+  '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
+  '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
+  '/catalogo/fixadores/pregos': typeof CatalogoFixadoresPregosRoute
+  '/catalogo/madeiramento/amescla': typeof CatalogoMadeiramentoAmesclaRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
   '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
+  '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
+  '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
+  '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
+  '/catalogo/telhas/concreto': typeof CatalogoTelhasConcretoRoute
+  '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
+  '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
+  '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
+  '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
+  '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
+  '/catalogo/tintas/thinner': typeof CatalogoTintasThinnerRoute
+  '/catalogo/tintas/tinta-acrilica': typeof CatalogoTintasTintaAcrilicaRoute
+  '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
@@ -196,19 +392,45 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/calhas/acessorios-calha': typeof CatalogoCalhasAcessoriosCalhaRoute
+  '/catalogo/calhas/calha-alge': typeof CatalogoCalhasCalhaAlgeRoute
+  '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
+  '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
+  '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
+  '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
+  '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
+  '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
+  '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
+  '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
+  '/catalogo/fixadores/pregos': typeof CatalogoFixadoresPregosRoute
+  '/catalogo/madeiramento/amescla': typeof CatalogoMadeiramentoAmesclaRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
   '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
+  '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
+  '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
+  '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
+  '/catalogo/telhas/concreto': typeof CatalogoTelhasConcretoRoute
+  '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
+  '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
+  '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
+  '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
+  '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
+  '/catalogo/tintas/thinner': typeof CatalogoTintasThinnerRoute
+  '/catalogo/tintas/tinta-acrilica': typeof CatalogoTintasTintaAcrilicaRoute
+  '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores': typeof CatalogoFixadoresIndexRoute
@@ -222,19 +444,45 @@ export interface FileRoutesById {
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
+  '/catalogo/calhas/acessorios-calha': typeof CatalogoCalhasAcessoriosCalhaRoute
+  '/catalogo/calhas/calha-alge': typeof CatalogoCalhasCalhaAlgeRoute
+  '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
+  '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
+  '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
+  '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
+  '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
+  '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
+  '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
+  '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
+  '/catalogo/fixadores/pregos': typeof CatalogoFixadoresPregosRoute
+  '/catalogo/madeiramento/amescla': typeof CatalogoMadeiramentoAmesclaRoute
   '/catalogo/madeiramento/cambara': typeof CatalogoMadeiramentoCambaraRoute
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
   '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
+  '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
+  '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
+  '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
+  '/catalogo/telhas/concreto': typeof CatalogoTelhasConcretoRoute
+  '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
+  '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
+  '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
+  '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
+  '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
+  '/catalogo/tintas/thinner': typeof CatalogoTintasThinnerRoute
+  '/catalogo/tintas/tinta-acrilica': typeof CatalogoTintasTintaAcrilicaRoute
+  '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
@@ -249,19 +497,45 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/calhas/acessorios-calha'
+    | '/catalogo/calhas/calha-alge'
+    | '/catalogo/calhas/calha-aquapluv'
+    | '/catalogo/calhas/manta-asfaltica'
+    | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
+    | '/catalogo/fixadores/arames'
+    | '/catalogo/fixadores/buchas-arruelas'
+    | '/catalogo/fixadores/espigoes'
+    | '/catalogo/fixadores/parafusos-madeira'
+    | '/catalogo/fixadores/parafusos-telha'
+    | '/catalogo/fixadores/pregos'
+    | '/catalogo/madeiramento/amescla'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
     | '/catalogo/madeiramento/forro-cedrinho'
     | '/catalogo/madeiramento/forro-pvc'
+    | '/catalogo/madeiramento/garapeira'
     | '/catalogo/madeiramento/madeirit'
+    | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/pinus'
+    | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
+    | '/catalogo/telhas/concreto'
+    | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/telhas/polipropileno'
     | '/catalogo/tintas/$produtoSlug'
+    | '/catalogo/tintas/cupicida'
+    | '/catalogo/tintas/esmalte'
+    | '/catalogo/tintas/seladora'
+    | '/catalogo/tintas/stain'
+    | '/catalogo/tintas/thinner'
+    | '/catalogo/tintas/tinta-acrilica'
+    | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
     | '/catalogo/fixadores/'
@@ -273,19 +547,45 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/calhas/acessorios-calha'
+    | '/catalogo/calhas/calha-alge'
+    | '/catalogo/calhas/calha-aquapluv'
+    | '/catalogo/calhas/manta-asfaltica'
+    | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
+    | '/catalogo/fixadores/arames'
+    | '/catalogo/fixadores/buchas-arruelas'
+    | '/catalogo/fixadores/espigoes'
+    | '/catalogo/fixadores/parafusos-madeira'
+    | '/catalogo/fixadores/parafusos-telha'
+    | '/catalogo/fixadores/pregos'
+    | '/catalogo/madeiramento/amescla'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
     | '/catalogo/madeiramento/forro-cedrinho'
     | '/catalogo/madeiramento/forro-pvc'
+    | '/catalogo/madeiramento/garapeira'
     | '/catalogo/madeiramento/madeirit'
+    | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/pinus'
+    | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
+    | '/catalogo/telhas/concreto'
+    | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/telhas/polipropileno'
     | '/catalogo/tintas/$produtoSlug'
+    | '/catalogo/tintas/cupicida'
+    | '/catalogo/tintas/esmalte'
+    | '/catalogo/tintas/seladora'
+    | '/catalogo/tintas/stain'
+    | '/catalogo/tintas/thinner'
+    | '/catalogo/tintas/tinta-acrilica'
+    | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/calhas'
     | '/catalogo/fixadores'
@@ -298,19 +598,45 @@ export interface FileRouteTypes {
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
+    | '/catalogo/calhas/acessorios-calha'
+    | '/catalogo/calhas/calha-alge'
+    | '/catalogo/calhas/calha-aquapluv'
+    | '/catalogo/calhas/manta-asfaltica'
+    | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
+    | '/catalogo/fixadores/arames'
+    | '/catalogo/fixadores/buchas-arruelas'
+    | '/catalogo/fixadores/espigoes'
+    | '/catalogo/fixadores/parafusos-madeira'
+    | '/catalogo/fixadores/parafusos-telha'
+    | '/catalogo/fixadores/pregos'
+    | '/catalogo/madeiramento/amescla'
     | '/catalogo/madeiramento/cambara'
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
     | '/catalogo/madeiramento/forro-cedrinho'
     | '/catalogo/madeiramento/forro-pvc'
+    | '/catalogo/madeiramento/garapeira'
     | '/catalogo/madeiramento/madeirit'
+    | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/pinus'
+    | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
+    | '/catalogo/telhas/concreto'
+    | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/telhas/polipropileno'
     | '/catalogo/tintas/$produtoSlug'
+    | '/catalogo/tintas/cupicida'
+    | '/catalogo/tintas/esmalte'
+    | '/catalogo/tintas/seladora'
+    | '/catalogo/tintas/stain'
+    | '/catalogo/tintas/thinner'
+    | '/catalogo/tintas/tinta-acrilica'
+    | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
     | '/catalogo/fixadores/'
@@ -323,19 +649,45 @@ export interface RootRouteChildren {
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoCalhasProdutoSlugRoute: typeof CatalogoCalhasProdutoSlugRoute
+  CatalogoCalhasAcessoriosCalhaRoute: typeof CatalogoCalhasAcessoriosCalhaRoute
+  CatalogoCalhasCalhaAlgeRoute: typeof CatalogoCalhasCalhaAlgeRoute
+  CatalogoCalhasCalhaAquapluvRoute: typeof CatalogoCalhasCalhaAquapluvRoute
+  CatalogoCalhasMantaAsfalticaRoute: typeof CatalogoCalhasMantaAsfalticaRoute
+  CatalogoCalhasMantaTermicaRoute: typeof CatalogoCalhasMantaTermicaRoute
+  CatalogoCalhasRufoRoute: typeof CatalogoCalhasRufoRoute
   CatalogoFixadoresProdutoSlugRoute: typeof CatalogoFixadoresProdutoSlugRoute
+  CatalogoFixadoresAramesRoute: typeof CatalogoFixadoresAramesRoute
+  CatalogoFixadoresBuchasArruelasRoute: typeof CatalogoFixadoresBuchasArruelasRoute
+  CatalogoFixadoresEspigoesRoute: typeof CatalogoFixadoresEspigoesRoute
+  CatalogoFixadoresParafusosMadeiraRoute: typeof CatalogoFixadoresParafusosMadeiraRoute
+  CatalogoFixadoresParafusosTelhaRoute: typeof CatalogoFixadoresParafusosTelhaRoute
+  CatalogoFixadoresPregosRoute: typeof CatalogoFixadoresPregosRoute
+  CatalogoMadeiramentoAmesclaRoute: typeof CatalogoMadeiramentoAmesclaRoute
   CatalogoMadeiramentoCambaraRoute: typeof CatalogoMadeiramentoCambaraRoute
   CatalogoMadeiramentoCedrinhoRoute: typeof CatalogoMadeiramentoCedrinhoRoute
   CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
   CatalogoMadeiramentoForroCedrinhoRoute: typeof CatalogoMadeiramentoForroCedrinhoRoute
   CatalogoMadeiramentoForroPvcRoute: typeof CatalogoMadeiramentoForroPvcRoute
+  CatalogoMadeiramentoGarapeiraRoute: typeof CatalogoMadeiramentoGarapeiraRoute
   CatalogoMadeiramentoMadeiritRoute: typeof CatalogoMadeiramentoMadeiritRoute
+  CatalogoMadeiramentoMouraoRoute: typeof CatalogoMadeiramentoMouraoRoute
   CatalogoMadeiramentoPinusRoute: typeof CatalogoMadeiramentoPinusRoute
+  CatalogoMadeiramentoTabeirasDeckRoute: typeof CatalogoMadeiramentoTabeirasDeckRoute
   CatalogoTelhasCeramicaRoute: typeof CatalogoTelhasCeramicaRoute
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
+  CatalogoTelhasConcretoRoute: typeof CatalogoTelhasConcretoRoute
+  CatalogoTelhasCumeeirasRoute: typeof CatalogoTelhasCumeeirasRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
   CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
+  CatalogoTelhasPolipropilenoRoute: typeof CatalogoTelhasPolipropilenoRoute
   CatalogoTintasProdutoSlugRoute: typeof CatalogoTintasProdutoSlugRoute
+  CatalogoTintasCupicidaRoute: typeof CatalogoTintasCupicidaRoute
+  CatalogoTintasEsmalteRoute: typeof CatalogoTintasEsmalteRoute
+  CatalogoTintasSeladoraRoute: typeof CatalogoTintasSeladoraRoute
+  CatalogoTintasStainRoute: typeof CatalogoTintasStainRoute
+  CatalogoTintasThinnerRoute: typeof CatalogoTintasThinnerRoute
+  CatalogoTintasTintaAcrilicaRoute: typeof CatalogoTintasTintaAcrilicaRoute
+  CatalogoTintasVernizRoute: typeof CatalogoTintasVernizRoute
   CatalogoCalhasIndexRoute: typeof CatalogoCalhasIndexRoute
   CatalogoFixadoresIndexRoute: typeof CatalogoFixadoresIndexRoute
   CatalogoTintasIndexRoute: typeof CatalogoTintasIndexRoute
@@ -399,11 +751,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoCategoriaSlugIndexRouteImport
       parentRoute: typeof CatalogoCategoriaSlugRouteRoute
     }
+    '/catalogo/tintas/verniz': {
+      id: '/catalogo/tintas/verniz'
+      path: '/catalogo/tintas/verniz'
+      fullPath: '/catalogo/tintas/verniz'
+      preLoaderRoute: typeof CatalogoTintasVernizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/tinta-acrilica': {
+      id: '/catalogo/tintas/tinta-acrilica'
+      path: '/catalogo/tintas/tinta-acrilica'
+      fullPath: '/catalogo/tintas/tinta-acrilica'
+      preLoaderRoute: typeof CatalogoTintasTintaAcrilicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/thinner': {
+      id: '/catalogo/tintas/thinner'
+      path: '/catalogo/tintas/thinner'
+      fullPath: '/catalogo/tintas/thinner'
+      preLoaderRoute: typeof CatalogoTintasThinnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/stain': {
+      id: '/catalogo/tintas/stain'
+      path: '/catalogo/tintas/stain'
+      fullPath: '/catalogo/tintas/stain'
+      preLoaderRoute: typeof CatalogoTintasStainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/seladora': {
+      id: '/catalogo/tintas/seladora'
+      path: '/catalogo/tintas/seladora'
+      fullPath: '/catalogo/tintas/seladora'
+      preLoaderRoute: typeof CatalogoTintasSeladoraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/esmalte': {
+      id: '/catalogo/tintas/esmalte'
+      path: '/catalogo/tintas/esmalte'
+      fullPath: '/catalogo/tintas/esmalte'
+      preLoaderRoute: typeof CatalogoTintasEsmalteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/cupicida': {
+      id: '/catalogo/tintas/cupicida'
+      path: '/catalogo/tintas/cupicida'
+      fullPath: '/catalogo/tintas/cupicida'
+      preLoaderRoute: typeof CatalogoTintasCupicidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/tintas/$produtoSlug': {
       id: '/catalogo/tintas/$produtoSlug'
       path: '/catalogo/tintas/$produtoSlug'
       fullPath: '/catalogo/tintas/$produtoSlug'
       preLoaderRoute: typeof CatalogoTintasProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/telhas/polipropileno': {
+      id: '/catalogo/telhas/polipropileno'
+      path: '/catalogo/telhas/polipropileno'
+      fullPath: '/catalogo/telhas/polipropileno'
+      preLoaderRoute: typeof CatalogoTelhasPolipropilenoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/telhas/policarbonato': {
@@ -420,6 +828,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoTelhasFibrocimentoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/telhas/cumeeiras': {
+      id: '/catalogo/telhas/cumeeiras'
+      path: '/catalogo/telhas/cumeeiras'
+      fullPath: '/catalogo/telhas/cumeeiras'
+      preLoaderRoute: typeof CatalogoTelhasCumeeirasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/telhas/concreto': {
+      id: '/catalogo/telhas/concreto'
+      path: '/catalogo/telhas/concreto'
+      fullPath: '/catalogo/telhas/concreto'
+      preLoaderRoute: typeof CatalogoTelhasConcretoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/telhas/colonial-pvc': {
       id: '/catalogo/telhas/colonial-pvc'
       path: '/catalogo/telhas/colonial-pvc'
@@ -434,6 +856,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoTelhasCeramicaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/tabeiras-deck': {
+      id: '/catalogo/madeiramento/tabeiras-deck'
+      path: '/catalogo/madeiramento/tabeiras-deck'
+      fullPath: '/catalogo/madeiramento/tabeiras-deck'
+      preLoaderRoute: typeof CatalogoMadeiramentoTabeirasDeckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/pinus': {
       id: '/catalogo/madeiramento/pinus'
       path: '/catalogo/madeiramento/pinus'
@@ -441,11 +870,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoPinusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/mourao': {
+      id: '/catalogo/madeiramento/mourao'
+      path: '/catalogo/madeiramento/mourao'
+      fullPath: '/catalogo/madeiramento/mourao'
+      preLoaderRoute: typeof CatalogoMadeiramentoMouraoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/madeirit': {
       id: '/catalogo/madeiramento/madeirit'
       path: '/catalogo/madeiramento/madeirit'
       fullPath: '/catalogo/madeiramento/madeirit'
       preLoaderRoute: typeof CatalogoMadeiramentoMadeiritRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/garapeira': {
+      id: '/catalogo/madeiramento/garapeira'
+      path: '/catalogo/madeiramento/garapeira'
+      fullPath: '/catalogo/madeiramento/garapeira'
+      preLoaderRoute: typeof CatalogoMadeiramentoGarapeiraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/madeiramento/forro-pvc': {
@@ -483,11 +926,102 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoCambaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/amescla': {
+      id: '/catalogo/madeiramento/amescla'
+      path: '/catalogo/madeiramento/amescla'
+      fullPath: '/catalogo/madeiramento/amescla'
+      preLoaderRoute: typeof CatalogoMadeiramentoAmesclaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/fixadores/pregos': {
+      id: '/catalogo/fixadores/pregos'
+      path: '/catalogo/fixadores/pregos'
+      fullPath: '/catalogo/fixadores/pregos'
+      preLoaderRoute: typeof CatalogoFixadoresPregosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/fixadores/parafusos-telha': {
+      id: '/catalogo/fixadores/parafusos-telha'
+      path: '/catalogo/fixadores/parafusos-telha'
+      fullPath: '/catalogo/fixadores/parafusos-telha'
+      preLoaderRoute: typeof CatalogoFixadoresParafusosTelhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/fixadores/parafusos-madeira': {
+      id: '/catalogo/fixadores/parafusos-madeira'
+      path: '/catalogo/fixadores/parafusos-madeira'
+      fullPath: '/catalogo/fixadores/parafusos-madeira'
+      preLoaderRoute: typeof CatalogoFixadoresParafusosMadeiraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/fixadores/espigoes': {
+      id: '/catalogo/fixadores/espigoes'
+      path: '/catalogo/fixadores/espigoes'
+      fullPath: '/catalogo/fixadores/espigoes'
+      preLoaderRoute: typeof CatalogoFixadoresEspigoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/fixadores/buchas-arruelas': {
+      id: '/catalogo/fixadores/buchas-arruelas'
+      path: '/catalogo/fixadores/buchas-arruelas'
+      fullPath: '/catalogo/fixadores/buchas-arruelas'
+      preLoaderRoute: typeof CatalogoFixadoresBuchasArruelasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/fixadores/arames': {
+      id: '/catalogo/fixadores/arames'
+      path: '/catalogo/fixadores/arames'
+      fullPath: '/catalogo/fixadores/arames'
+      preLoaderRoute: typeof CatalogoFixadoresAramesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/fixadores/$produtoSlug': {
       id: '/catalogo/fixadores/$produtoSlug'
       path: '/catalogo/fixadores/$produtoSlug'
       fullPath: '/catalogo/fixadores/$produtoSlug'
       preLoaderRoute: typeof CatalogoFixadoresProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/rufo': {
+      id: '/catalogo/calhas/rufo'
+      path: '/catalogo/calhas/rufo'
+      fullPath: '/catalogo/calhas/rufo'
+      preLoaderRoute: typeof CatalogoCalhasRufoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/manta-termica': {
+      id: '/catalogo/calhas/manta-termica'
+      path: '/catalogo/calhas/manta-termica'
+      fullPath: '/catalogo/calhas/manta-termica'
+      preLoaderRoute: typeof CatalogoCalhasMantaTermicaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/manta-asfaltica': {
+      id: '/catalogo/calhas/manta-asfaltica'
+      path: '/catalogo/calhas/manta-asfaltica'
+      fullPath: '/catalogo/calhas/manta-asfaltica'
+      preLoaderRoute: typeof CatalogoCalhasMantaAsfalticaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/calha-aquapluv': {
+      id: '/catalogo/calhas/calha-aquapluv'
+      path: '/catalogo/calhas/calha-aquapluv'
+      fullPath: '/catalogo/calhas/calha-aquapluv'
+      preLoaderRoute: typeof CatalogoCalhasCalhaAquapluvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/calha-alge': {
+      id: '/catalogo/calhas/calha-alge'
+      path: '/catalogo/calhas/calha-alge'
+      fullPath: '/catalogo/calhas/calha-alge'
+      preLoaderRoute: typeof CatalogoCalhasCalhaAlgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/acessorios-calha': {
+      id: '/catalogo/calhas/acessorios-calha'
+      path: '/catalogo/calhas/acessorios-calha'
+      fullPath: '/catalogo/calhas/acessorios-calha'
+      preLoaderRoute: typeof CatalogoCalhasAcessoriosCalhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/calhas/$produtoSlug': {
@@ -530,20 +1064,47 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoCalhasProdutoSlugRoute: CatalogoCalhasProdutoSlugRoute,
+  CatalogoCalhasAcessoriosCalhaRoute: CatalogoCalhasAcessoriosCalhaRoute,
+  CatalogoCalhasCalhaAlgeRoute: CatalogoCalhasCalhaAlgeRoute,
+  CatalogoCalhasCalhaAquapluvRoute: CatalogoCalhasCalhaAquapluvRoute,
+  CatalogoCalhasMantaAsfalticaRoute: CatalogoCalhasMantaAsfalticaRoute,
+  CatalogoCalhasMantaTermicaRoute: CatalogoCalhasMantaTermicaRoute,
+  CatalogoCalhasRufoRoute: CatalogoCalhasRufoRoute,
   CatalogoFixadoresProdutoSlugRoute: CatalogoFixadoresProdutoSlugRoute,
+  CatalogoFixadoresAramesRoute: CatalogoFixadoresAramesRoute,
+  CatalogoFixadoresBuchasArruelasRoute: CatalogoFixadoresBuchasArruelasRoute,
+  CatalogoFixadoresEspigoesRoute: CatalogoFixadoresEspigoesRoute,
+  CatalogoFixadoresParafusosMadeiraRoute:
+    CatalogoFixadoresParafusosMadeiraRoute,
+  CatalogoFixadoresParafusosTelhaRoute: CatalogoFixadoresParafusosTelhaRoute,
+  CatalogoFixadoresPregosRoute: CatalogoFixadoresPregosRoute,
+  CatalogoMadeiramentoAmesclaRoute: CatalogoMadeiramentoAmesclaRoute,
   CatalogoMadeiramentoCambaraRoute: CatalogoMadeiramentoCambaraRoute,
   CatalogoMadeiramentoCedrinhoRoute: CatalogoMadeiramentoCedrinhoRoute,
   CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
   CatalogoMadeiramentoForroCedrinhoRoute:
     CatalogoMadeiramentoForroCedrinhoRoute,
   CatalogoMadeiramentoForroPvcRoute: CatalogoMadeiramentoForroPvcRoute,
+  CatalogoMadeiramentoGarapeiraRoute: CatalogoMadeiramentoGarapeiraRoute,
   CatalogoMadeiramentoMadeiritRoute: CatalogoMadeiramentoMadeiritRoute,
+  CatalogoMadeiramentoMouraoRoute: CatalogoMadeiramentoMouraoRoute,
   CatalogoMadeiramentoPinusRoute: CatalogoMadeiramentoPinusRoute,
+  CatalogoMadeiramentoTabeirasDeckRoute: CatalogoMadeiramentoTabeirasDeckRoute,
   CatalogoTelhasCeramicaRoute: CatalogoTelhasCeramicaRoute,
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
+  CatalogoTelhasConcretoRoute: CatalogoTelhasConcretoRoute,
+  CatalogoTelhasCumeeirasRoute: CatalogoTelhasCumeeirasRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
   CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
+  CatalogoTelhasPolipropilenoRoute: CatalogoTelhasPolipropilenoRoute,
   CatalogoTintasProdutoSlugRoute: CatalogoTintasProdutoSlugRoute,
+  CatalogoTintasCupicidaRoute: CatalogoTintasCupicidaRoute,
+  CatalogoTintasEsmalteRoute: CatalogoTintasEsmalteRoute,
+  CatalogoTintasSeladoraRoute: CatalogoTintasSeladoraRoute,
+  CatalogoTintasStainRoute: CatalogoTintasStainRoute,
+  CatalogoTintasThinnerRoute: CatalogoTintasThinnerRoute,
+  CatalogoTintasTintaAcrilicaRoute: CatalogoTintasTintaAcrilicaRoute,
+  CatalogoTintasVernizRoute: CatalogoTintasVernizRoute,
   CatalogoCalhasIndexRoute: CatalogoCalhasIndexRoute,
   CatalogoFixadoresIndexRoute: CatalogoFixadoresIndexRoute,
   CatalogoTintasIndexRoute: CatalogoTintasIndexRoute,
