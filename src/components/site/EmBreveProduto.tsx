@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Hammer, MessageCircle } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import { waLink } from "@/components/site/shared";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 
 export function EmBreveProduto({
   categoriaSlug,
@@ -32,15 +32,13 @@ export function EmBreveProduto({
           WhatsApp que montamos seu orçamento na hora.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href={waLink(`Olá! Quero cotar ${nome} (${categoriaNome}).`)}
-            target="_blank"
-            rel="noreferrer"
+          <BotaoCotarWhatsApp
+            nomeProduto={nome}
+            corpoMensagem={`${nome}\n- Categoria: ${categoriaNome}`}
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F97316] px-6 py-3 text-sm font-extrabold text-white transition-colors hover:bg-[#EA580C]"
           >
-            <MessageCircle className="h-4 w-4" />
             Cotar no WhatsApp
-          </a>
+          </BotaoCotarWhatsApp>
           <Link
             to="/catalogo/$categoriaSlug"
             params={{ categoriaSlug }}

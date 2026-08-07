@@ -33,7 +33,9 @@ type QuoteCartContext = {
   count: number;
   open: boolean;
   setOpen: (v: boolean) => void;
-  addItem: (item: Omit<QuoteItem, "qty"> & { qty?: number }) => void;
+  addItem: (item: Omit<QuoteItem, "qty"> & { qty?: number }, opts?: { silent?: boolean }) => void;
+  crossSell: { nome: string; qtd: number } | null;
+  closeCrossSell: () => void;
   updateQty: (id: string, qty: number) => void;
   removeItem: (id: string) => void;
   clear: () => void;
@@ -53,6 +55,7 @@ export function QuoteCartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<QuoteItem[]>([]);
   const [open, setOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [crossSell, setCrossSell] = useState<{ nome: string; qtd: number } | null>(null);
 
   useEffect(() => {
     try {
@@ -73,7 +76,7 @@ export function QuoteCartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, hydrated]);
 
-  const addItem = useCallback<QuoteCartContext["addItem"]>((item) => {
+  const addItem = useCallback<QuoteCartContext["addItem"]>((item, opts) => {
     setItems((prev) => {
       const found = prev.find((i) => i.id === item.id);
       if (found) {
@@ -83,8 +86,12 @@ export function QuoteCartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...item, qty: item.qty ?? 1 }];
     });
-    setOpen(true);
+    if (opts?.silent) return;
+    // pop-up de produtos relacionados 800ms após adicionar
+    setTimeout(() => setCrossSell({ nome: item.name, qtd: item.qty ?? 1 }), 800);
   }, []);
+
+  const closeCrossSell = useCallback(() => setCrossSell(null), []);
 
   const updateQty = useCallback((id: string, qty: number) => {
     setItems((prev) =>
@@ -105,11 +112,13 @@ export function QuoteCartProvider({ children }: { children: ReactNode }) {
       open,
       setOpen,
       addItem,
+      crossSell,
+      closeCrossSell,
       updateQty,
       removeItem,
       clear,
     }),
-    [items, open, addItem, updateQty, removeItem, clear],
+    [items, open, crossSell, closeCrossSell, addItem, updateQty, removeItem, clear],
   );
 
   return (
@@ -142,22 +151,28 @@ export function QuoteCartButton({ className }: { className?: string }) {
 
 function buildMessage(items: QuoteItem[], nome: string, local: string) {
   const linhas = items
-    .map((i) => `• ${i.qty}${i.unit ? ` ${i.unit}` : "x"} — ${i.name}${i.detail ? ` (${i.detail})` : ""}`)
+    .map(
+      (i) =>
+        `- ${i.name}${i.detail ? ` — ${i.detail}` : ""} — Qtd: ${i.qty} ${i.unit ?? "un"}`,
+    )
     .join("\n");
-  const extras = [
-    nome.trim() ? `Nome: ${nome.trim()}` : "",
-    local.trim() ? `Bairro / Cidade de entrega: ${local.trim()}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
+
   return [
-    "Olá, Rocha Telhas! Gostaria de uma cotação dos itens abaixo:",
+    "Olá, equipe Rocha Telhas!",
+    `Meu nome é ${nome.trim() || "[nome]"} e estou em ${local.trim() || "[cidade/bairro]"}.`,
+    "Gostaria de solicitar uma cotação para os itens abaixo:",
     "",
+    "📋 *LISTA DE MATERIAIS*",
     linhas,
-    extras ? `\n${extras}` : "",
-  ]
-    .join("\n")
-    .trim();
+    "",
+    "📍 *LOCAL DE ENTREGA*",
+    local.trim() || "[cidade/bairro]",
+    "",
+    "💬 *Informações adicionais*",
+    "Poderia verificar a disponibilidade em estoque, o prazo de entrega e o valor do frete para minha região?",
+    "",
+    "Aguardo retorno. Obrigado!",
+  ].join("\n");
 }
 
 function QuoteDrawer() {

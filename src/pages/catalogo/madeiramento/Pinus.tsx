@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensPinus } from "../../../data/imagensProduto";
@@ -21,10 +20,6 @@ const PRODUTOS = [
 
 const ABAS = ["Todos", "Sarrafo", "Tábua", "Pontalete"];
 
-const CROSS_PINUS = [
-  { id: "prego-18x27-kg", nome: "Prego Polido 18×27 com Cabeça", descricao: "O mais usado em caixaria e estruturas de pinus.", emoji: "🔨", unidade: "Kg", quantidadeSugerida: 2, categoria: "Fixadores" },
-  { id: "lona-preta-4x1-12kg", nome: "Lona Preta 4m × 1m — 12kg", descricao: "Proteção da madeira durante obra e transporte.", emoji: "🛡️", unidade: "Mt", quantidadeSugerida: 10, categoria: "Fixadores" },
-];
 
 export default function Pinus() {
   const { adicionar } = useOrcamento();
@@ -32,7 +27,6 @@ export default function Pinus() {
   const [produtoId, setProdutoId] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(10);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const filtrados = aba === "Todos" ? PRODUTOS : PRODUTOS.filter((p) => p.tipo === aba);
@@ -44,7 +38,7 @@ export default function Pinus() {
     if (!pronto || !produto) return;
     adicionar({ id: `pinus-${produtoId}`, nome: `Pinus — ${produto.nome}`, variacao: `${produto.bitola} · ${produto.comp} · Bruto`, quantidade, unidade: produto.unidade, categoria: "Madeiramento" });
     setAdicionado(true);
-    setTimeout(() => { setAdicionado(false); setCrossSellAberto(true); }, 800);
+    setTimeout(() => { setAdicionado(false); }, 800);
   };
 
   return (
@@ -126,8 +120,7 @@ export default function Pinus() {
           </section>
         )}
       </div>
-      <CrossSellModal aberto={crossSellAberto} onFechar={() => setCrossSellAberto(false)} produtoPrincipal="Pinus" relacionados={CROSS_PINUS} />
-      <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Pinus" corpoMensagem={corpoMsgWpp} />
+            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Pinus" corpoMensagem={corpoMsgWpp} />
     </div>
   );
 }

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
-import { CROSS_SELL } from "../../../data/crossSell";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensPolicarbonato } from "../../../data/imagensProduto";
 
@@ -35,7 +33,6 @@ export default function Policarbonato() {
   const [versao, setVersao] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(5);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const pronto = comprimento && versao && quantidade >= 1;
@@ -64,7 +61,6 @@ export default function Policarbonato() {
     setAdicionado(true);
     setTimeout(() => {
       setAdicionado(false);
-      setCrossSellAberto(true);
     }, 800);
   };
 
@@ -188,8 +184,7 @@ export default function Policarbonato() {
         </section>
       </div>
 
-      <CrossSellModal aberto={crossSellAberto} onFechar={() => setCrossSellAberto(false)} produtoPrincipal="Telha Policarbonato" relacionados={CROSS_SELL["policarbonato"]} />
-      <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Policarbonato" corpoMensagem={corpoMsgWpp} />
+            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Policarbonato" corpoMensagem={corpoMsgWpp} />
     </div>
   );
 }

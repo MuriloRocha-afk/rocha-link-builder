@@ -159,14 +159,18 @@ export function CalculadoraTelhado() {
 
   const mensagem = res
     ? [
-        `🏠 *Cálculo de telhado — Rocha Telhas*`,
-        `• Tipo: ${TIPOS.find((t) => t.id === tipo)!.label} · inclinação ${incl}%`,
-        `• Área da base: ${fmt(res.areaBase)} m² · área inclinada: ${fmt(res.areaIncl)} m²`,
+        `Telhado`,
+        `- Área da base: ${fmt(res.areaBase)} m²`,
+        `- Área inclinada: ${fmt(res.areaIncl)} m²`,
+        `- Tipo: ${TIPOS.find((t) => t.id === tipo)!.label} — Inclinação ${incl}%`,
+        `- Telha escolhida: ${res.telha.label} (${res.telha.grupo})`,
         ``,
-        `*Materiais:*`,
-        `• ${res.telhas} un — ${res.telha.label} (${res.telha.grupo})`,
-        ...res.itens.map((i) => `• ${i.qtd} — ${i.nome}`),
-        ...(res.estrutura.length ? ["", "*Estrutura de madeira:*", ...res.estrutura.map((i) => `• ${i.qtd} — ${i.nome}`)] : []),
+        `📋 *MATERIAIS ESTIMADOS*`,
+        `- ${res.telha.label} — Qtd: ${res.telhas} un`,
+        ...res.itens.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`),
+        ...(res.estrutura.length
+          ? ["", "*Estrutura de madeira:*", ...res.estrutura.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
+          : []),
       ].join("\n")
     : "";
 
@@ -401,6 +405,7 @@ export function CalculadoraTelhado() {
         aberto={modal}
         onFechar={() => setModal(false)}
         corpoMensagem={mensagem}
+        tipo="calculadora"
         nomeProduto="Cálculo de telhado"
       />
     </div>

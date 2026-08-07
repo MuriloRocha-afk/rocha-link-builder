@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Check, MessageCircle, Minus, Plus, ShoppingCart, Star } from "lucide-react";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
 import { waLink } from "./shared";
 import { useQuoteCart } from "./quote-cart";
@@ -253,12 +254,9 @@ Poderia verificar estoque e frete?`;
                 <ShoppingCart />
                 Adicionar ao Orçamento
               </Button>
-              <Button asChild variant="whats" size="xl">
-                <a href={waLink(mensagem)} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle />
-                  Cotar no WhatsApp
-                </a>
-              </Button>
+              <BotaoCotarWhatsApp nomeProduto="Telha Colonial PVC" corpoMensagem={mensagem}>
+                Cotar no WhatsApp
+              </BotaoCotarWhatsApp>
             </div>
           </div>
         </div>

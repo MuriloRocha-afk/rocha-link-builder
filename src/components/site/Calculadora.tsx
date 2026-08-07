@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Calculator, MessageCircle, Plus } from "lucide-react";
+import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -328,12 +329,21 @@ export function CalculadoraTelhas({ modeloPadrao }: { modeloPadrao?: string }) {
           </div>
 
           <div className="mt-5 grid gap-3 lg:grid-cols-2">
-            <Button asChild variant="outlineAccent" size="xl" className="w-full">
-              <a href={waLink(`Olá, Rocha Telhas! Gostaria de orçar apenas as telhas do cálculo: ${total} ${modelo.unit} de ${modelo.name}, dimensão ${dimensao.label}, para ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (inclui 5% de margem).`)} target="_blank" rel="noopener noreferrer"><MessageCircle />Orçar Apenas Telhas no WhatsApp</a>
-            </Button>
-            <Button asChild variant="whats" size="xl" className="w-full">
-              <a href={waLink(listaWhats())} target="_blank" rel="noopener noreferrer"><MessageCircle />Orçar Cobertura Completa + Acessórios no WhatsApp</a>
-            </Button>
+            <BotaoCotarWhatsApp
+              tipo="calculadora"
+              nomeProduto="Cálculo de telhas"
+              corpoMensagem={`Telhas\n- Modelo: ${modelo.name}\n- Dimensão: ${dimensao.label}\n- Área: ${metros.toLocaleString("pt-BR", { maximumFractionDigits: 2 })} m² (inclui 5% de margem)\n\n📋 *MATERIAIS ESTIMADOS*\n- ${modelo.name} — Qtd: ${total} ${modelo.unit}`}
+              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#F97316] py-3.5 text-sm font-extrabold text-[#F97316] transition-colors hover:bg-orange-50"
+            >
+              Orçar Apenas Telhas no WhatsApp
+            </BotaoCotarWhatsApp>
+            <BotaoCotarWhatsApp
+              tipo="calculadora"
+              nomeProduto="Cobertura completa"
+              corpoMensagem={listaWhats()}
+            >
+              Orçar Cobertura Completa + Acessórios
+            </BotaoCotarWhatsApp>
           </div>
         </div>
       ) : null}

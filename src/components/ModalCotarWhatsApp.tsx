@@ -10,9 +10,11 @@ type Props = {
   // ex: "🧱 *Telha Fibrocimento*\n• Dimensão: 244x110cm\n• Qtd: 50 peças"
   corpoMensagem: string;
   nomeProduto: string;
+  /** "produto" (configuradores) ou "calculadora" */
+  tipo?: "produto" | "calculadora";
 };
 
-export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, nomeProduto }: Props) {
+export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, nomeProduto, tipo = "produto" }: Props) {
   const [nome, setNome] = useState("");
   const [cidade, setCidade] = useState("");
   const [enviando, setEnviando] = useState(false);
@@ -24,10 +26,32 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
     setEnviando(true);
 
     const mensagemCompleta =
-      `Olá! Meu nome é ${nome.trim()} e estou em ${cidade.trim()}.\n\n` +
-      `Gostaria de um orçamento:\n\n` +
-      corpoMensagem +
-      `\n\nPoderia verificar disponibilidade em estoque e o valor do frete para minha região? Obrigado!`;
+      tipo === "calculadora"
+        ? [
+            "Olá, equipe Rocha Telhas!",
+            `Meu nome é ${nome.trim()} e utilizei a calculadora do site.`,
+            "",
+            "📐 *RESULTADO DO CÁLCULO*",
+            corpoMensagem,
+            "",
+            "📍 *LOCAL DE ENTREGA*",
+            cidade.trim(),
+            "",
+            "Poderia confirmar as quantidades e enviar a cotação completa? Obrigado!",
+          ].join("\n")
+        : [
+            "Olá, equipe Rocha Telhas!",
+            `Meu nome é ${nome.trim()} e estou em ${cidade.trim()}.`,
+            "Gostaria de cotar o seguinte produto:",
+            "",
+            "🏷️ *PRODUTO SOLICITADO*",
+            corpoMensagem,
+            "",
+            "📍 *LOCAL DE ENTREGA*",
+            cidade.trim(),
+            "",
+            "Poderia me informar disponibilidade, valor e prazo? Obrigado!",
+          ].join("\n");
 
     window.open(
       `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagemCompleta)}`,

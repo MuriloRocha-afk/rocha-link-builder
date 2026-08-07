@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { ChevronRight, ShoppingCart, Check } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
-import CrossSellModal from "../../../components/CrossSellModal";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
-import { CROSS_SELL } from "../../../data/crossSell";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import { imagensCambara } from "../../../data/imagensProduto";
 
@@ -74,7 +72,6 @@ export default function Cambara() {
   const [acabamento, setAcabamento] = useState<"Bruto" | "Aparelhado" | null>(null);
   const [quantidade, setQuantidade] = useState(1);
   const [adicionado, setAdicionado] = useState(false);
-  const [crossSellAberto, setCrossSellAberto] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
   const resetar = (etapa: number) => {
@@ -115,7 +112,6 @@ export default function Cambara() {
     setAdicionado(true);
     setTimeout(() => {
       setAdicionado(false);
-      setCrossSellAberto(true);
     }, 800);
   };
 
@@ -344,13 +340,7 @@ export default function Cambara() {
       </div>
     </div>
 
-      <CrossSellModal
-        aberto={crossSellAberto}
-        onFechar={() => setCrossSellAberto(false)}
-        produtoPrincipal="Cambará Rosa"
-        relacionados={CROSS_SELL["cambara"]}
-      />
-      <ModalCotarWhatsApp
+            <ModalCotarWhatsApp
         aberto={modalWppAberto}
         onFechar={() => setModalWppAberto(false)}
         nomeProduto="Cambará Rosa"
