@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { QuoteCartProvider } from "@/components/site/quote-cart";
+import CrossSellHost from "@/components/CrossSellHost";
 
 
 function NotFoundComponent() {
@@ -131,6 +132,7 @@ function RootComponent() {
       <QuoteCartProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
+        <CrossSellHost />
       </QuoteCartProvider>
     </QueryClientProvider>
   );
