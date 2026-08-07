@@ -101,15 +101,49 @@ Poderia verificar estoque e frete?`;
   ];
 
   return (
-    <div className="space-y-12">
-      <GaleriaProduto
-        titulo={cor ? `Telha Colonial PVC — ${cor}` : "Telha Colonial PVC"}
-        subtitulo={cor ? "Foto em breve" : "Selecione uma cor para ver as fotos"}
-        imagens={cor ? (imagensColonialPVC[cor] ?? []) : []}
-      />
-
-      <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] md:p-8">
+    <ProdutoLayout
+      produtoKey="colonial-pvc"
+      especificacoes={SPECS.map((s) => [s.label, s.value] as [string, string])}
+      cabecalho={
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">Telha Colonial PVC</h1>
+          <p className="mt-2 text-sm text-gray-500">
+            Leveza, conforto térmico e instalação rápida. Não enferruja, não precisa de pintura.
+          </p>
+        </div>
+      }
+      galeria={
+        <GaleriaProduto
+          titulo={cor ? `Telha Colonial PVC — ${cor}` : "Telha Colonial PVC"}
+          subtitulo={cor ? "Foto em breve" : "Selecione uma cor para ver as fotos"}
+          imagens={cor ? (imagensColonialPVC[cor] ?? []) : []}
+        />
+      }
+      acessorios={acessorios.map((a) => (
+        <div
+          key={a.id}
+          className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
+        >
+          <h3 className="text-base font-extrabold text-primary">{a.name}</h3>
+          <p className="mt-2 mb-4 text-sm text-muted-foreground">{a.text}</p>
+          <Button
+            type="button"
+            variant="outlineAccent"
+            className="mt-auto h-11 w-full"
+            onClick={() => {
+              addItem({ id: a.id, name: a.name, detail: a.detail, qty: 1, unit: a.unit });
+              setOpen(true);
+            }}
+          >
+            <Plus />
+            Adicionar ao Orçamento
+          </Button>
+        </div>
+      ))}
+    >
+      <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
         <div className="space-y-10">
+
           <Passo n={1} title="Cor / Acabamento">
             <div className="grid gap-3 sm:grid-cols-2">
               {CORES.map((c) => {
