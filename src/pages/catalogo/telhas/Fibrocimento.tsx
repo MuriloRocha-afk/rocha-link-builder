@@ -6,6 +6,7 @@ import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
+import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensFibrocimento } from "../../../data/imagensProduto";
 
 const COMPRIMENTOS = [
@@ -55,30 +56,43 @@ export default function Fibrocimento() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b px-4 py-3">
-        <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-          <a href="/catalogo" className="hover:text-orange-500">Catálogo</a>
-          <ChevronRight size={12} />
-          <a href="/catalogo/telhas" className="hover:text-orange-500">Telhas</a>
-          <ChevronRight size={12} />
-          <span className="text-gray-900 font-medium">Fibrocimento INFIBRA</span>
+    <ProdutoLayout
+      produtoKey="fibrocimento"
+      especificacoes={[
+        ["Inclinação mínima", "10%"],
+        ["Sobreposição lateral", "1 onda"],
+        ["Sobreposição longitudinal", "14 cm"],
+        ["Largura útil", "1,05 m (total 1,10 m)"],
+        ["Fixação", "Parafuso com vedação 110mm"],
+      ]}
+      breadcrumb={
+        <div className="bg-white border-b px-4 py-3">
+          <div className="max-w-6xl mx-auto flex items-center gap-1 text-xs text-gray-500">
+            <a href="/catalogo" className="hover:text-orange-500">Catálogo</a>
+            <ChevronRight size={12} />
+            <a href="/catalogo/telhas" className="hover:text-orange-500">Telhas</a>
+            <ChevronRight size={12} />
+            <span className="text-gray-900 font-medium">Fibrocimento INFIBRA</span>
+          </div>
         </div>
-      </div>
-
-      <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      }
+      cabecalho={
         <div>
           <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">★ Campeão de Vendas #1</span>
           <h1 className="text-2xl font-bold text-gray-900 mt-1">Telha Fibrocimento Ondulada — INFIBRA</h1>
           <p className="text-gray-500 mt-1 text-sm">Selecione o comprimento para ver a foto e configurar seu pedido.</p>
         </div>
-
-        {/* GALERIA — troca ao mudar comprimento */}
+      }
+      galeria={
         <GaleriaProduto
           titulo={comprimento ? `Fibrocimento INFIBRA ${comprimento}` : "Telha Fibrocimento INFIBRA"}
           subtitulo={comprimento ? "Foto em breve" : "Selecione um comprimento para ver as fotos"}
           imagens={imagens}
         />
+      }
+    >
+      <>
+
 
         {/* Comprimento */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
@@ -158,19 +172,9 @@ export default function Fibrocimento() {
           </section>
         )}
 
-        <section className="bg-white rounded-2xl p-5 shadow-sm">
-          <h2 className="font-bold text-gray-900 mb-3">Especificações Técnicas</h2>
-          <table className="w-full text-sm">
-            <tbody className="divide-y divide-gray-100">
-              {[["Inclinação mínima","10%"],["Sobreposição lateral","1 onda"],["Sobreposição longitudinal","14 cm"],["Largura útil","1,05 m (total 1,10 m)"],["Fixação","Parafuso com vedação 110mm"]].map(([k,v])=>(
-                <tr key={k}><td className="py-2.5 text-gray-500">{k}</td><td className="py-2.5 text-gray-900 font-medium text-right">{v}</td></tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      </div>
-
-            <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Fibrocimento INFIBRA" corpoMensagem={corpoMsgWpp} />
-    </div>
+        <ModalCotarWhatsApp aberto={modalWppAberto} onFechar={() => setModalWppAberto(false)} nomeProduto="Telha Fibrocimento INFIBRA" corpoMensagem={corpoMsgWpp} />
+      </>
+    </ProdutoLayout>
   );
 }
+

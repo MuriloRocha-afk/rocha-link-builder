@@ -3,6 +3,7 @@ import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "@/context/OrcamentoContext";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto, { type ImagemProduto } from "@/components/GaleriaProduto";
+import ProdutoLayout from "@/components/site/ProdutoLayout";
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
@@ -41,6 +42,7 @@ export type ConfiguradorConfig = {
   imagens: (sel: Selecao) => ImagemProduto[];
   passos: PassoConfig[];
   especificacoes?: [string, string][];
+  produtoKey?: string;
   tagInfo?: string;
   categoria: string;
   unidadeResumo: (sel: Selecao, qtds: Quantidades) => string;
@@ -113,25 +115,28 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
   let bloqueado = false;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b px-4 py-3">
-        <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500 flex-wrap">
-          {config.breadcrumb.map((b, i) => (
-            <span key={b.label} className="flex items-center gap-1">
-              {i > 0 && <ChevronRight size={12} />}
-              {b.href ? (
-                <a href={b.href} className="hover:text-orange-500">
-                  {b.label}
-                </a>
-              ) : (
-                <span className="text-gray-900 font-medium">{b.label}</span>
-              )}
-            </span>
-          ))}
+    <ProdutoLayout
+      produtoKey={config.produtoKey}
+      especificacoes={config.especificacoes}
+      breadcrumb={
+        <div className="bg-white border-b px-4 py-3">
+          <div className="max-w-6xl mx-auto flex items-center gap-1 text-xs text-gray-500 flex-wrap">
+            {config.breadcrumb.map((b, i) => (
+              <span key={b.label} className="flex items-center gap-1">
+                {i > 0 && <ChevronRight size={12} />}
+                {b.href ? (
+                  <a href={b.href} className="hover:text-orange-500">
+                    {b.label}
+                  </a>
+                ) : (
+                  <span className="text-gray-900 font-medium">{b.label}</span>
+                )}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+      }
+      cabecalho={
         <div>
           {config.badge && (
             <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
@@ -146,12 +151,17 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
             </span>
           )}
         </div>
-
+      }
+      galeria={
         <GaleriaProduto
           titulo={config.galeriaTitulo}
           subtitulo={temSelecao ? "Foto em breve" : config.galeriaPlaceholder}
           imagens={imagens}
         />
+      }
+    >
+      <>
+
 
         {passosVisiveis.map((p) => {
           if (bloqueado) return null;
@@ -324,29 +334,14 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
           </section>
         )}
 
-        {config.especificacoes?.length ? (
-          <section className="bg-white rounded-2xl p-5 shadow-sm">
-            <h2 className="font-bold text-gray-900 mb-3">Especificações Técnicas</h2>
-            <table className="w-full text-sm">
-              <tbody className="divide-y divide-gray-100">
-                {config.especificacoes.map(([k, v]) => (
-                  <tr key={k}>
-                    <td className="py-2.5 text-gray-500">{k}</td>
-                    <td className="py-2.5 text-gray-900 font-medium text-right">{v}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        ) : null}
-      </div>
-
-      <ModalCotarWhatsApp
-        aberto={modalWppAberto}
-        onFechar={() => setModalWppAberto(false)}
-        nomeProduto={config.resumoNome(sel)}
-        corpoMensagem={corpoMsgWpp}
-      />
-    </div>
+        <ModalCotarWhatsApp
+          aberto={modalWppAberto}
+          onFechar={() => setModalWppAberto(false)}
+          nomeProduto={config.resumoNome(sel)}
+          corpoMensagem={corpoMsgWpp}
+        />
+      </>
+    </ProdutoLayout>
   );
 }
+

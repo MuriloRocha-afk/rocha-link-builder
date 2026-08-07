@@ -9,6 +9,7 @@ const BC = (nome: string) => [
 const COMPRIMENTOS = ["2,0m", "3,0m", "4,0m", "5,0m", "6,0m"];
 
 export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
+  produtoKey: "calha-alge",
   breadcrumb: BC("Calha Alge"),
   titulo: "🌧️ Calha Alge — Moldura e Platibanda",
   badge: "★ Campeão de Vendas",
@@ -110,6 +111,7 @@ export const CONFIG_RUFO: ConfiguradorConfig = {
 };
 
 export const CONFIG_MANTA_TERMICA: ConfiguradorConfig = {
+  produtoKey: "manta-termica",
   breadcrumb: BC("Manta Térmica"),
   titulo: "🌡️ Manta Térmica Aluminizada",
   subtitulo: "Reduz até 70% do calor radiante. 1 face e 2 faces, de 10m² a 50m².",

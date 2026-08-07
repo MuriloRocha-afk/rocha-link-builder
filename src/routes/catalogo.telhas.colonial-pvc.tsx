@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { ColonialPvcConfigurator } from "@/components/site/ColonialPvcConfigurator";
-import pvcImg from "@/assets/prod-pvc.jpg";
 
 const TITLE = "Telha Colonial PVC | Rocha Telhas";
 const DESCRIPTION =
@@ -25,68 +24,32 @@ export const Route = createFileRoute("/catalogo/telhas/colonial-pvc")({
 
 function ColonialPvcPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gray-50">
       <Header />
 
-      <main>
-        <section className="surface-dark pt-40 pb-14">
-          <div className="mx-auto max-w-7xl px-5">
-            <nav
-              aria-label="Breadcrumb"
-              className="flex flex-wrap items-center gap-2 text-sm font-semibold text-primary-foreground/70"
-            >
-              <Link to="/catalogo" className="transition-colors hover:text-accent">
-                Catálogo
-              </Link>
-              <ChevronRight className="h-4 w-4 opacity-60" />
-              <Link
-                to="/catalogo/$categoriaSlug"
-                params={{ categoriaSlug: "telhas" }}
-                className="transition-colors hover:text-accent"
-              >
-                Telhas
-              </Link>
-              <ChevronRight className="h-4 w-4 opacity-60" />
-              <span className="text-accent">Colonial PVC</span>
-            </nav>
-
+      <main className="pt-24">
+        <div className="border-b bg-white px-4 py-3">
+          <nav
+            aria-label="Breadcrumb"
+            className="mx-auto flex max-w-6xl flex-wrap items-center gap-1 text-xs text-gray-500"
+          >
+            <Link to="/catalogo" className="hover:text-orange-500">
+              Catálogo
+            </Link>
+            <ChevronRight className="h-3 w-3" />
             <Link
               to="/catalogo/$categoriaSlug"
               params={{ categoriaSlug: "telhas" }}
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-foreground/70 transition-colors hover:text-accent"
+              className="hover:text-orange-500"
             >
-              <ArrowLeft className="h-4 w-4" />
-              Voltar para Telhas
+              Telhas
             </Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="font-medium text-gray-900">Colonial PVC</span>
+          </nav>
+        </div>
 
-            <div className="mt-6 grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
-              <div>
-                <h1 className="max-w-3xl text-3xl leading-tight font-extrabold text-primary-foreground md:text-5xl">
-                  Telha Colonial PVC
-                </h1>
-                <p className="mt-4 max-w-2xl text-base text-primary-foreground/75 md:text-lg">
-                  Leveza, conforto térmico e instalação rápida. Não enferruja, não precisa de
-                  pintura.
-                </p>
-              </div>
-              <div className="overflow-hidden rounded-3xl border border-white/10 shadow-[var(--shadow-lift)]">
-                <img
-                  src={pvcImg}
-                  alt="Telhas coloniais de PVC empilhadas no pátio da Rocha Telhas"
-                  width={1024}
-                  height={768}
-                  className="aspect-[4/3] w-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-background py-16">
-          <div className="mx-auto max-w-5xl px-5">
-            <ColonialPvcConfigurator />
-          </div>
-        </section>
+        <ColonialPvcConfigurator />
       </main>
 
       <Footer />
@@ -94,3 +57,4 @@ function ColonialPvcPage() {
     </div>
   );
 }
+
