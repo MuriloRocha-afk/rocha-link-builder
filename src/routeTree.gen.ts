@@ -17,6 +17,7 @@ import { Route as CatalogoTintasIndexRouteImport } from './routes/catalogo.tinta
 import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fixadores.index'
 import { Route as CatalogoCalhasIndexRouteImport } from './routes/catalogo.calhas.index'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
+import { Route as CatalogoTintasProdutoSlugRouteImport } from './routes/catalogo.tintas.$produtoSlug'
 import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
@@ -71,6 +72,12 @@ const CatalogoCategoriaSlugIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
+  } as any)
+const CatalogoTintasProdutoSlugRoute =
+  CatalogoTintasProdutoSlugRouteImport.update({
+    id: '/catalogo/tintas/$produtoSlug',
+    path: '/catalogo/tintas/$produtoSlug',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoTelhasPolicarbonatoRoute =
   CatalogoTelhasPolicarbonatoRouteImport.update({
@@ -161,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
@@ -182,6 +190,7 @@ export interface FileRoutesByTo {
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores': typeof CatalogoFixadoresIndexRoute
@@ -205,6 +214,7 @@ export interface FileRoutesById {
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
+  '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
   '/catalogo/fixadores/': typeof CatalogoFixadoresIndexRoute
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
     | '/catalogo/fixadores/'
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/calhas'
     | '/catalogo/fixadores'
@@ -272,6 +284,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/colonial-pvc'
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
+    | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
     | '/catalogo/fixadores/'
@@ -294,6 +307,7 @@ export interface RootRouteChildren {
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
   CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
+  CatalogoTintasProdutoSlugRoute: typeof CatalogoTintasProdutoSlugRoute
   CatalogoCalhasIndexRoute: typeof CatalogoCalhasIndexRoute
   CatalogoFixadoresIndexRoute: typeof CatalogoFixadoresIndexRoute
   CatalogoTintasIndexRoute: typeof CatalogoTintasIndexRoute
@@ -356,6 +370,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/catalogo/$categoriaSlug/'
       preLoaderRoute: typeof CatalogoCategoriaSlugIndexRouteImport
       parentRoute: typeof CatalogoCategoriaSlugRouteRoute
+    }
+    '/catalogo/tintas/$produtoSlug': {
+      id: '/catalogo/tintas/$produtoSlug'
+      path: '/catalogo/tintas/$produtoSlug'
+      fullPath: '/catalogo/tintas/$produtoSlug'
+      preLoaderRoute: typeof CatalogoTintasProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/catalogo/telhas/policarbonato': {
       id: '/catalogo/telhas/policarbonato'
@@ -478,6 +499,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
   CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
+  CatalogoTintasProdutoSlugRoute: CatalogoTintasProdutoSlugRoute,
   CatalogoCalhasIndexRoute: CatalogoCalhasIndexRoute,
   CatalogoFixadoresIndexRoute: CatalogoFixadoresIndexRoute,
   CatalogoTintasIndexRoute: CatalogoTintasIndexRoute,
@@ -485,13 +507,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
