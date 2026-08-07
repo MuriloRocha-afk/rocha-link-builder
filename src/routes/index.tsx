@@ -52,7 +52,7 @@ function Index() {
             alt="Pátio logístico da Rocha Telhas com caminhões carregando madeira e telhas"
             width={1920}
             height={1088}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-[linear-gradient(100deg,var(--primary-deep)_18%,color-mix(in_oklab,var(--primary-deep)_78%,transparent)_55%,color-mix(in_oklab,var(--primary-deep)_45%,transparent)_100%)]" />
 
