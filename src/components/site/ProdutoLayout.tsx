@@ -12,6 +12,8 @@ type Props = {
   especificacoes?: [string, string][];
   acessorios?: ReactNode;
   tituloAcessorios?: string;
+  /** desativa o comportamento sticky da coluna da galeria */
+  galeriaSticky?: boolean;
 };
 
 export default function ProdutoLayout({
@@ -23,6 +25,7 @@ export default function ProdutoLayout({
   especificacoes,
   acessorios,
   tituloAcessorios = "Complemente seu pedido",
+  galeriaSticky = true,
 }: Props) {
   const destaques = getDestaques(produtoKey);
   const specs = especificacoes?.length ? especificacoes : destaques?.especificacoes;
@@ -34,7 +37,7 @@ export default function ProdutoLayout({
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-5 md:items-start">
           {/* COLUNA ESQUERDA — galeria + badges (sticky no desktop) */}
-          <div className="space-y-5 md:col-span-3 md:row-start-1 md:sticky md:top-20">
+          <div className={`space-y-5 md:col-span-3 md:row-start-1 ${galeriaSticky ? "md:sticky md:top-20" : ""}`}>
             {galeria}
 
             {destaques?.badges?.length ? (
