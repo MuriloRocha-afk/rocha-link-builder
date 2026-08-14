@@ -328,6 +328,32 @@ function QuoteDrawer() {
                 className="mt-1.5"
               />
             </div>
+            <div>
+              <Label htmlFor="quote-tel" className="text-xs font-bold text-primary/80">
+                Telefone / WhatsApp
+              </Label>
+              <Input
+                id="quote-tel"
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
+                placeholder="(11) 90000-0000"
+                maxLength={40}
+                className="mt-1.5"
+              />
+            </div>
+            <div>
+              <Label htmlFor="quote-end" className="text-xs font-bold text-primary/80">
+                Endereço de entrega
+              </Label>
+              <Input
+                id="quote-end"
+                value={endereco}
+                onChange={(e) => setEndereco(e.target.value)}
+                placeholder="Rua, número"
+                maxLength={120}
+                className="mt-1.5"
+              />
+            </div>
           </div>
 
           {items.length > 0 && !pronto ? (
@@ -337,11 +363,28 @@ function QuoteDrawer() {
             </p>
           ) : null}
 
+          {erro ? (
+            <p className="mt-3 flex items-start gap-2 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-2.5 text-xs font-semibold text-destructive">
+              <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+              {erro}
+            </p>
+          ) : null}
+
+          <Button
+            type="button"
+            size="xl"
+            onClick={handleEnviar}
+            disabled={items.length === 0 || !pronto || enviando}
+            className="mt-4 w-full"
+          >
+            {enviando ? "ENVIANDO..." : "SOLICITAR ORÇAMENTO"}
+          </Button>
+
           <Button
             asChild
             variant="whats"
             size="xl"
-            className={`mt-4 w-full ${items.length === 0 || !pronto ? "pointer-events-none opacity-50" : ""}`}
+            className={`mt-2 w-full ${items.length === 0 || !pronto ? "pointer-events-none opacity-50" : ""}`}
           >
             <a
               href={waLink(buildMessage(items, nome, local))}
@@ -353,6 +396,7 @@ function QuoteDrawer() {
               ENVIAR COTAÇÃO VIA WHATSAPP
             </a>
           </Button>
+
 
           <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
             <span>{count} item(ns) na lista</span>
