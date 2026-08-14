@@ -179,7 +179,46 @@ function QuoteDrawer() {
   const { items, open, setOpen, updateQty, removeItem, clear, count } = useQuoteCart();
   const [nome, setNome] = useState("");
   const [local, setLocal] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [enviando, setEnviando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+  const [sucesso, setSucesso] = useState<{ numero: string } | null>(null);
+  const enviarPedido = useServerFn(enviarPedidoTiny);
   const pronto = nome.trim().length >= 2 && local.trim().length >= 2;
+
+  const handleEnviar = async () => {
+    if (!pronto || items.length === 0 || enviando) return;
+    setEnviando(true);
+    setErro(null);
+    try {
+      const res = await enviarPedido({
+        data: {
+          nome: nome.trim(),
+          telefone: telefone.trim(),
+          endereco: endereco.trim(),
+          cidade: local.trim(),
+          observacoes: "Orçamento solicitado pelo site Rocha Telhas",
+          itens: items.map((i) => ({
+            descricao: `${i.name}${i.detail ? ` — ${i.detail}` : ""}`,
+            quantidade: i.qty,
+            unidade: (i.unit ?? "un").slice(0, 10),
+          })),
+        },
+      });
+      if (res.ok) {
+        setSucesso({ numero: res.numeroPedido });
+        clear();
+      } else {
+        setErro(res.erro);
+      }
+    } catch {
+      setErro("Não foi possível enviar agora. Tente novamente ou fale no WhatsApp.");
+    } finally {
+      setEnviando(false);
+    }
+  };
+
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
