@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { AlertCircle, Minus, Plus, ShoppingCart, Trash2, MessageCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, Minus, Plus, ShoppingCart, Trash2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
