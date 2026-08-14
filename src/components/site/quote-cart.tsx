@@ -413,7 +413,50 @@ function QuoteDrawer() {
             )}
           </div>
         </div>
+
+        {sucesso ? (
+          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-background/97 px-8 text-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+              <CheckCircle2 className="h-8 w-8 text-green-600" />
+            </div>
+            <h3 className="text-lg font-extrabold text-primary">
+              Orçamento enviado com sucesso!
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Em breve nossa equipe entrará em contato.
+              {sucesso.numero ? (
+                <>
+                  {" "}
+                  Número do pedido: <strong className="text-primary">{sucesso.numero}</strong>
+                </>
+              ) : null}
+            </p>
+            <Button asChild variant="whats" size="xl" className="w-full">
+              <a
+                href={waLink(
+                  `Olá, equipe Rocha Telhas! Sou ${nome.trim()} e acabei de enviar um orçamento pelo site${sucesso.numero ? ` (pedido nº ${sucesso.numero})` : ""}. Poderiam dar andamento?`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle />
+                CHAMAR NO WHATSAPP
+              </a>
+            </Button>
+            <button
+              type="button"
+              onClick={() => {
+                setSucesso(null);
+                setOpen(false);
+              }}
+              className="text-xs font-semibold text-muted-foreground hover:text-primary"
+            >
+              Fechar
+            </button>
+          </div>
+        ) : null}
       </SheetContent>
+
     </Sheet>
   );
 }
