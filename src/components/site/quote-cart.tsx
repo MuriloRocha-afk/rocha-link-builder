@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { AlertCircle, Minus, Plus, ShoppingCart, Trash2, MessageCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2, Minus, Plus, ShoppingCart, Trash2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,7 +18,10 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { useServerFn } from "@tanstack/react-start";
+import { enviarPedidoTiny } from "@/lib/tiny.functions";
 import { waLink, CONTATO } from "./shared";
+
 
 export type QuoteItem = {
   id: string;
@@ -179,7 +182,46 @@ function QuoteDrawer() {
   const { items, open, setOpen, updateQty, removeItem, clear, count } = useQuoteCart();
   const [nome, setNome] = useState("");
   const [local, setLocal] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [enviando, setEnviando] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
+  const [sucesso, setSucesso] = useState<{ numero: string } | null>(null);
+  const enviarPedido = useServerFn(enviarPedidoTiny);
   const pronto = nome.trim().length >= 2 && local.trim().length >= 2;
+
+  const handleEnviar = async () => {
+    if (!pronto || items.length === 0 || enviando) return;
+    setEnviando(true);
+    setErro(null);
+    try {
+      const res = await enviarPedido({
+        data: {
+          nome: nome.trim(),
+          telefone: telefone.trim(),
+          endereco: endereco.trim(),
+          cidade: local.trim(),
+          observacoes: "Orçamento solicitado pelo site Rocha Telhas",
+          itens: items.map((i) => ({
+            descricao: `${i.name}${i.detail ? ` — ${i.detail}` : ""}`,
+            quantidade: i.qty,
+            unidade: (i.unit ?? "un").slice(0, 10),
+          })),
+        },
+      });
+      if (res.ok) {
+        setSucesso({ numero: res.numeroPedido });
+        clear();
+      } else {
+        setErro(res.erro);
+      }
+    } catch {
+      setErro("Não foi possível enviar agora. Tente novamente ou fale no WhatsApp.");
+    } finally {
+      setEnviando(false);
+    }
+  };
+
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -286,6 +328,32 @@ function QuoteDrawer() {
                 className="mt-1.5"
               />
             </div>
+            <div>
+              <Label htmlFor="quote-tel" className="text-xs font-bold text-primary/80">
+                Telefone / WhatsApp
+              </Label>
+              <Input
+                id="quote-tel"
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
+                placeholder="(11) 90000-0000"
+                maxLength={40}
+                className="mt-1.5"
+              />
+            </div>
+            <div>
+              <Label htmlFor="quote-end" className="text-xs font-bold text-primary/80">
+                Endereço de entrega
+              </Label>
+              <Input
+                id="quote-end"
+                value={endereco}
+                onChange={(e) => setEndereco(e.target.value)}
+                placeholder="Rua, número"
+                maxLength={120}
+                className="mt-1.5"
+              />
+            </div>
           </div>
 
           {items.length > 0 && !pronto ? (
@@ -295,11 +363,28 @@ function QuoteDrawer() {
             </p>
           ) : null}
 
+          {erro ? (
+            <p className="mt-3 flex items-start gap-2 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-2.5 text-xs font-semibold text-destructive">
+              <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+              {erro}
+            </p>
+          ) : null}
+
+          <Button
+            type="button"
+            size="xl"
+            onClick={handleEnviar}
+            disabled={items.length === 0 || !pronto || enviando}
+            className="mt-4 w-full"
+          >
+            {enviando ? "ENVIANDO..." : "SOLICITAR ORÇAMENTO"}
+          </Button>
+
           <Button
             asChild
             variant="whats"
             size="xl"
-            className={`mt-4 w-full ${items.length === 0 || !pronto ? "pointer-events-none opacity-50" : ""}`}
+            className={`mt-2 w-full ${items.length === 0 || !pronto ? "pointer-events-none opacity-50" : ""}`}
           >
             <a
               href={waLink(buildMessage(items, nome, local))}
@@ -311,6 +396,7 @@ function QuoteDrawer() {
               ENVIAR COTAÇÃO VIA WHATSAPP
             </a>
           </Button>
+
 
           <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
             <span>{count} item(ns) na lista</span>
@@ -327,7 +413,50 @@ function QuoteDrawer() {
             )}
           </div>
         </div>
+
+        {sucesso ? (
+          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-background/97 px-8 text-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+              <CheckCircle2 className="h-8 w-8 text-green-600" />
+            </div>
+            <h3 className="text-lg font-extrabold text-primary">
+              Orçamento enviado com sucesso!
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Em breve nossa equipe entrará em contato.
+              {sucesso.numero ? (
+                <>
+                  {" "}
+                  Número do pedido: <strong className="text-primary">{sucesso.numero}</strong>
+                </>
+              ) : null}
+            </p>
+            <Button asChild variant="whats" size="xl" className="w-full">
+              <a
+                href={waLink(
+                  `Olá, equipe Rocha Telhas! Sou ${nome.trim()} e acabei de enviar um orçamento pelo site${sucesso.numero ? ` (pedido nº ${sucesso.numero})` : ""}. Poderiam dar andamento?`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle />
+                CHAMAR NO WHATSAPP
+              </a>
+            </Button>
+            <button
+              type="button"
+              onClick={() => {
+                setSucesso(null);
+                setOpen(false);
+              }}
+              className="text-xs font-semibold text-muted-foreground hover:text-primary"
+            >
+              Fechar
+            </button>
+          </div>
+        ) : null}
       </SheetContent>
+
     </Sheet>
   );
 }
