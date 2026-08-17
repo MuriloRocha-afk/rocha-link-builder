@@ -342,6 +342,20 @@ function QuoteDrawer() {
               />
             </div>
             <div>
+              <Label htmlFor="quote-email" className="text-xs font-bold text-primary/80">
+                E-mail
+              </Label>
+              <Input
+                id="quote-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="voce@email.com"
+                maxLength={160}
+                className="mt-1.5"
+              />
+            </div>
+            <div>
               <Label htmlFor="quote-end" className="text-xs font-bold text-primary/80">
                 Endereço de entrega
               </Label>
