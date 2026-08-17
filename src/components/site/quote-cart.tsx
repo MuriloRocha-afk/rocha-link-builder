@@ -183,6 +183,7 @@ function QuoteDrawer() {
   const [nome, setNome] = useState("");
   const [local, setLocal] = useState("");
   const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
   const [endereco, setEndereco] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
