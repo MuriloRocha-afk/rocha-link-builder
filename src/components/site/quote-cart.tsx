@@ -183,6 +183,7 @@ function QuoteDrawer() {
   const [nome, setNome] = useState("");
   const [local, setLocal] = useState("");
   const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
   const [endereco, setEndereco] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
@@ -199,6 +200,7 @@ function QuoteDrawer() {
         data: {
           nome: nome.trim(),
           telefone: telefone.trim(),
+          email: email.trim(),
           endereco: endereco.trim(),
           cidade: local.trim(),
           observacoes: "Orçamento solicitado pelo site Rocha Telhas",
@@ -338,6 +340,20 @@ function QuoteDrawer() {
                 onChange={(e) => setTelefone(e.target.value)}
                 placeholder="(11) 90000-0000"
                 maxLength={40}
+                className="mt-1.5"
+              />
+            </div>
+            <div>
+              <Label htmlFor="quote-email" className="text-xs font-bold text-primary/80">
+                E-mail
+              </Label>
+              <Input
+                id="quote-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="voce@email.com"
+                maxLength={160}
                 className="mt-1.5"
               />
             </div>
