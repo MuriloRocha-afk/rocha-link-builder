@@ -110,12 +110,19 @@ export const enviarPedidoTiny = createServerFn({ method: "POST" })
       }
 
       console.error("Olist ERP erro:", res.status, text.slice(0, 500));
+      if (res.status === 401 || res.status === 403) {
+        return {
+          ok: false as const,
+          erro: "Token do Olist recusado (401). A API v3 exige um access token OAuth2 válido.",
+        };
+      }
       const erro =
         json?.mensagem ??
         json?.message ??
         json?.erros?.[0]?.mensagem ??
         "Não foi possível registrar o orçamento no sistema.";
       return { ok: false as const, erro: String(erro) };
+
     } catch (e) {
       console.error("Olist ERP falha de rede:", e);
       return { ok: false as const, erro: "Falha de comunicação com o sistema." };
