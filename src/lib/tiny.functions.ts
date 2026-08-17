@@ -24,14 +24,6 @@ const schema = z.object({
 
 export type TinyPedidoInput = z.infer<typeof schema>;
 
-function formatarItemTexto(
-  descricao: string,
-  quantidade: number,
-  unidade: string,
-): string {
-  return `- ${descricao} · ${quantidade} ${unidade || "un"}`;
-}
-
 export const enviarPedidoTiny = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => schema.parse(input))
   .handler(async ({ data }) => {
@@ -40,17 +32,23 @@ export const enviarPedidoTiny = createServerFn({ method: "POST" })
       return { ok: false as const, erro: "Integração não configurada." };
     }
 
+    const nome = data.nome;
+    const telefone = data.telefone;
+    const email = data.email;
+    const endereco = data.endereco;
+    const bairro = data.cidade;
+
     const itensTexto = data.itens
-      .map((i) => formatarItemTexto(i.descricao, i.quantidade, i.unidade || "un"))
+      .map((item) => `- ${item.descricao} · ${item.quantidade} ${item.unidade || "un"}`)
       .join("\n");
 
-    const observacoes = [
+    const obs = [
       "Orçamento via site",
-      `Cliente: ${data.nome}`,
-      data.telefone ? `Tel: ${data.telefone}` : "",
-      data.email ? `Email: ${data.email}` : "Email: não informado",
-      `Bairro/cidade: ${data.cidade}`,
-      data.endereco ? `Endereço: ${data.endereco}` : "",
+      `Cliente: ${nome}`,
+      `Tel: ${telefone || "não informado"}`,
+      `Email: ${email || "não informado"}`,
+      `Bairro/cidade: ${bairro}`,
+      `Endereço: ${endereco || "não informado"}`,
       data.observacoes ? `Observações: ${data.observacoes}` : "",
       "",
       "Produtos:",
@@ -60,71 +58,59 @@ export const enviarPedidoTiny = createServerFn({ method: "POST" })
       .join("\n")
       .slice(0, 4000);
 
-    const pedido = {
+    const pedidoObj = {
       pedido: {
         situacao: "Em aberto",
-        obs: observacoes,
+        obs,
         cliente: {
-          nome: data.nome,
-          fone: data.telefone,
-          email: data.email ?? "",
-          tipoPessoa: "F",
+          nome,
+          fone: telefone,
+          email: email || "",
+          tipo_pessoa: "F",
         },
-        itens: {
-          item: [] as Array<Record<string, unknown>>,
-        },
+        itens: data.itens.map((item) => ({
+          item: {
+            descricao: item.descricao,
+            unidade: "PC",
+            quantidade: item.quantidade,
+            valor_unitario: "0.00",
+          },
+        })),
       },
     };
 
-    const params = new URLSearchParams({
-      token,
-      formato: "JSON",
-      pedido: JSON.stringify(pedido),
-    });
+    const body = new URLSearchParams();
+    body.append("token", token);
+    body.append("formato", "JSON");
+    body.append("pedido", JSON.stringify(pedidoObj));
 
     try {
-      const res = await fetch("https://api.tiny.com.br/api2/pedido.incluir.php", {
+      const response = await fetch("https://api.tiny.com.br/api2/pedido.incluir.php", {
         method: "POST",
-        body: params,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
       });
 
-      const text = await res.text();
-      let json: any = null;
-      try {
-        json = JSON.parse(text);
-      } catch {
-        /* resposta não-JSON */
+      const resposta = await response.json();
+      console.log("Retorno completo Olist:", JSON.stringify(resposta, null, 2));
+
+      if (resposta?.retorno?.status !== "OK") {
+        const erros = resposta?.retorno?.erros
+          ?.map((e: { erro?: string; mensagem?: string }) => e.erro || e.mensagem)
+          .filter(Boolean)
+          .join(", ");
+        return {
+          ok: false as const,
+          erro: `Olist rejeitou: ${erros || "erro desconhecido"}`,
+        };
       }
 
-      const retorno = json?.retorno;
-      const codigoResultado = retorno?.codigo_resultado;
-      const status = retorno?.status;
+      const numero =
+        resposta?.retorno?.pedido?.numero_pedido ??
+        resposta?.retorno?.pedido?.numero ??
+        "";
 
-      if (res.ok && (codigoResultado === "0" || codigoResultado === 0 || status === "OK")) {
-        const numero =
-          retorno?.pedido?.numero_pedido ??
-          retorno?.pedido?.numero ??
-          retorno?.numero_pedido ??
-          retorno?.numero ??
-          "";
-        return { ok: true as const, numeroPedido: String(numero) };
-      }
-
-      console.error("Tiny ERP v2 erro:", res.status, text.slice(0, 1000));
-
-      const erroMensagem =
-        retorno?.erros?.[0]?.erro ??
-        retorno?.erros?.[0]?.mensagem ??
-        retorno?.mensagem ??
-        json?.mensagem ??
-        (res.status === 401 || res.status === 403
-          ? "Token do Tiny recusado. Verifique o OLIST_API_TOKEN."
-          : "Não foi possível registrar o orçamento no sistema.");
-
-      return {
-        ok: false as const,
-        erro: `Olist retornou erro ${codigoResultado ?? res.status}: ${String(erroMensagem)}`,
-      };
+      return { ok: true as const, numeroPedido: String(numero) };
     } catch (e) {
       console.error("Tiny ERP v2 falha de rede:", e);
       return { ok: false as const, erro: "Falha de comunicação com o sistema." };
