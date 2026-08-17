@@ -32,6 +32,19 @@ export const enviarPedidoTiny = createServerFn({ method: "POST" })
       return { ok: false as const, erro: "Integração não configurada." };
     }
 
+    // Produtos com cadastro no Olist (id do produto no ERP)
+    const PRODUTO_IDS: { match: RegExp; id: number }[] = [
+      { match: /cambar[áa]/i, id: 341009801 },
+    ];
+
+    const resolverId = (descricao: string) =>
+      PRODUTO_IDS.find((p) => p.match.test(descricao))?.id ?? null;
+
+    const mapeados = data.itens
+      .map((i) => ({ ...i, produtoId: resolverId(i.descricao) }))
+      .filter((i) => i.produtoId !== null);
+    const naoMapeados = data.itens.filter((i) => resolverId(i.descricao) === null);
+
     const observacoes = [
       "Orçamento vindo do Site",
       `Cliente: ${data.nome}`,
@@ -43,6 +56,15 @@ export const enviarPedidoTiny = createServerFn({ method: "POST" })
       "",
       "Itens:",
       ...data.itens.map((i) => `- ${i.descricao} — ${i.quantidade} ${i.unidade || "un"}`),
+      ...(naoMapeados.length
+        ? [
+            "",
+            "Itens sem cadastro no ERP (definir produto e preço):",
+            ...naoMapeados.map(
+              (i) => `- ${i.descricao} — ${i.quantidade} ${i.unidade || "un"}`,
+            ),
+          ]
+        : []),
     ]
       .filter(Boolean)
       .join("\n")
@@ -52,14 +74,16 @@ export const enviarPedidoTiny = createServerFn({ method: "POST" })
       situacao: 0,
       observacoes,
       consumidorFinal: { clienteConsumidorFinal: true },
-      itens: data.itens.map((i) => ({
-        ...(i.id ? { id: i.id } : {}),
+      itens: mapeados.map((i) => ({
+        produto: { id: i.produtoId },
+        id: i.produtoId,
         descricao: i.descricao,
         unidade: i.unidade || "un",
         quantidade: i.quantidade,
-        valorUnitario: i.valorUnitario ?? 0,
+        valorUnitario: 0,
       })),
     };
+
 
     try {
       const res = await fetch("https://api.tiny.com.br/public-api/v3/pedidos", {
