@@ -200,7 +200,7 @@ function QuoteDrawer() {
         data: {
           nome: nome.trim(),
           telefone: telefone.trim(),
-          endereco: endereco.trim(),
+          email: email.trim(),
           cidade: local.trim(),
           observacoes: "Orçamento solicitado pelo site Rocha Telhas",
           itens: items.map((i) => ({
