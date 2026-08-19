@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           <div>
             <div className="inline-block rounded-2xl bg-primary-foreground/95 p-4">
-              <Logo size="md" />
+              <Logo size="md" invert />
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
               Distribuidora e madeireira com mais de 25 anos de tradição. Atendemos Franco da
