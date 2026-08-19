@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import Policarbonato from "@/pages/catalogo/telhas/Policarbonato";
+import { PolicarbonatoConfigurator } from "@/components/site/catalogo.telhas.ceramica";
 
 const TITLE = "Telha de Policarbonato Alveolar e Compacta | Rocha Telhas";
 const DESCRIPTION =
@@ -26,7 +26,7 @@ function PolicarbonatoRoute() {
     <>
       <Header />
       <div className="pt-24">
-        <Policarbonato />
+        <PolicarbonatoConfigurator />
       </div>
       <Footer />
       <FloatingWhats />
