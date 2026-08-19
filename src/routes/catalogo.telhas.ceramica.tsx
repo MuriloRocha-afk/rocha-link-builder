@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import Ceramica from "@/pages/catalogo/telhas/Ceramica";
+import { CeramicaConfigurator } from "@/components/site/catalogo.telhas.policarbonato";
 
 const TITLE = "Telha Cerâmica — Portuguesa e Romana | Rocha Telhas";
 const DESCRIPTION =
@@ -26,7 +26,7 @@ function CeramicaRoute() {
     <>
       <Header />
       <div className="pt-24">
-        <Ceramica />
+        <CeramicaConfigurator />
       </div>
       <Footer />
       <FloatingWhats />

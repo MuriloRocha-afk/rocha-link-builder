@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import Fibrocimento from "@/pages/catalogo/telhas/Fibrocimento";
+import { FibrocimentoConfigurator } from "@/components/site/FibrocimentoConfigurator";
 
 const TITLE = "Telha Fibrocimento Ondulada INFIBRA | Rocha Telhas";
 const DESCRIPTION =
@@ -26,7 +26,7 @@ function FibrocimentoRoute() {
     <>
       <Header />
       <div className="pt-24">
-        <Fibrocimento />
+        <FibrocimentoConfigurator />
       </div>
       <Footer />
       <FloatingWhats />
