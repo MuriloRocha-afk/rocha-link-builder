@@ -40,7 +40,7 @@ export function Logo({
   size?: "md" | "lg";
   invert?: boolean;
 }) {
-  const heightClass = size === "lg" ? "h-14 md:h-18" : "h-11 md:h-13";
+  const heightClass = size === "lg" ? "h-16 md:h-20" : "h-12 md:h-14";
   return (
     <RochaLogoMark invert={invert} className={`w-auto ${heightClass}`} />
   );
