@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Check, MessageCircle, Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
-import { waLink } from "./shared";
 import { useQuoteCart } from "./quote-cart";
+import GaleriaProduto from "@/components/GaleriaProduto";
+import ProdutoLayout from "@/components/site/ProdutoLayout";
+import { imagensFibrocimento } from "@/data/imagensProduto";
 
 const COMPRIMENTOS = [
   { value: "153 x 110 cm", comprimento: "1,53 m", area: 1.53 * 1.05 },
@@ -90,7 +92,53 @@ export function FibrocimentoConfigurator() {
 Poderia verificar estoque e frete para minha região?`;
 
   return (
-    <div className="space-y-12">
+    <ProdutoLayout
+      produtoKey="fibrocimento"
+      especificacoes={SPECS.map((s) => [s.label, s.value] as [string, string])}
+      cabecalho={
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Telha Fibrocimento Ondulada INFIBRA
+          </h1>
+          <p className="mt-2 text-sm text-gray-500">
+            Telha ondulada em fibrocimento com alta resistência. Escolha o comprimento, a espessura
+            e a quantidade para estimar a cobertura.
+          </p>
+        </div>
+      }
+      galeria={
+        <GaleriaProduto
+          titulo={`Telha Fibrocimento INFIBRA — ${dimensao}`}
+          subtitulo="Foto em breve"
+          imagens={imagensFibrocimento[dimensao] ?? []}
+        />
+      }
+      acessorios={
+        <>
+          {ACESSORIOS.map((a) => (
+            <div
+              key={a.id}
+              className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
+            >
+              <h3 className="text-base font-extrabold text-primary">{a.name}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{a.text}</p>
+              <Button
+                type="button"
+                variant="outlineAccent"
+                className="mt-auto h-11 w-full"
+                onClick={() => {
+                  addItem({ id: a.id, name: a.name, detail: a.detail, qty: 1, unit: a.unit });
+                  setOpen(true);
+                }}
+              >
+                <Plus />
+                Adicionar ao Orçamento
+              </Button>
+            </div>
+          ))}
+        </>
+      }
+    >
       <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] md:p-8">
         <div className="space-y-10">
           <Passo n={1} title="Comprimento da chapa">
@@ -237,51 +285,6 @@ Poderia verificar estoque e frete para minha região?`;
           </div>
         </div>
       </div>
-
-      <div>
-        <h2 className="text-2xl font-extrabold text-primary md:text-3xl">Especificações Técnicas</h2>
-        <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
-          <table className="w-full text-sm">
-            <tbody>
-              {SPECS.map((s) => (
-                <tr key={s.label} className="border-b border-border last:border-b-0">
-                  <th className="w-1/2 px-5 py-3.5 text-left font-bold text-primary/80">
-                    {s.label}
-                  </th>
-                  <td className="px-5 py-3.5 text-right text-muted-foreground">{s.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div>
-        <h2 className="text-2xl font-extrabold text-primary md:text-3xl">Acessórios relacionados</h2>
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          {ACESSORIOS.map((a) => (
-            <div
-              key={a.id}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
-            >
-              <h3 className="text-base font-extrabold text-primary">{a.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{a.text}</p>
-              <Button
-                type="button"
-                variant="outlineAccent"
-                className="mt-auto h-11 w-full"
-                onClick={() => {
-                  addItem({ id: a.id, name: a.name, detail: a.detail, qty: 1, unit: a.unit });
-                  setOpen(true);
-                }}
-              >
-                <Plus />
-                Adicionar ao Orçamento
-              </Button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    </ProdutoLayout>
   );
 }
