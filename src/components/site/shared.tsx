@@ -35,13 +35,14 @@ export function WhatsAppButton({
 
 export function Logo({
   size = "lg",
+  invert = false,
 }: {
-  compact?: boolean;
   size?: "md" | "lg";
+  invert?: boolean;
 }) {
-  const big = size === "lg";
+  const heightClass = size === "lg" ? "h-14 md:h-18" : "h-11 md:h-13";
   return (
-    <RochaLogoMark className={`w-auto object-contain ${big ? "h-16" : "h-12"}`} />
+    <RochaLogoMark invert={invert} className={`w-auto ${heightClass}`} />
   );
 }
 
