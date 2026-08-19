@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink, WHATSAPP_NUMBER } from "@/constants/whatsapp";
-import logoRocha from "@/assets/produtos/Logo_Rocha_Telhas.jfif.asset.json";
+import { RochaLogoMark } from "./RochaLogoMark";
 
 export { waLink, WHATSAPP_NUMBER };
 
@@ -41,11 +41,7 @@ export function Logo({
 }) {
   const big = size === "lg";
   return (
-    <img
-      src={logoRocha.url}
-      alt="Rocha Telhas & Madeiras"
-      className={`w-auto object-contain ${big ? "h-16" : "h-12"}`}
-    />
+    <RochaLogoMark className={`w-auto object-contain ${big ? "h-16" : "h-12"}`} />
   );
 }
 
