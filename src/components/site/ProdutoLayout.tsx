@@ -25,7 +25,7 @@ export default function ProdutoLayout({
   especificacoes,
   acessorios,
   tituloAcessorios = "Complemente seu pedido",
-  galeriaSticky = true,
+  galeriaSticky = false,
 }: Props) {
   const destaques = getDestaques(produtoKey);
   const specs = especificacoes?.length ? especificacoes : destaques?.especificacoes;
