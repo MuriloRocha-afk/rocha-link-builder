@@ -1,7 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink, WHATSAPP_NUMBER } from "@/constants/whatsapp";
-import { RochaLogoMark } from "./RochaLogoMark";
+import { RochaLogoHorizontal } from "./RochaLogoMark";
 
 export { waLink, WHATSAPP_NUMBER };
 
@@ -35,15 +35,12 @@ export function WhatsAppButton({
 
 export function Logo({
   size = "lg",
-  invert = false,
 }: {
+  compact?: boolean;
   size?: "md" | "lg";
-  invert?: boolean;
 }) {
-  const heightClass = size === "lg" ? "h-16 md:h-20" : "h-12 md:h-14";
-  return (
-    <RochaLogoMark invert={invert} className={`w-auto ${heightClass}`} />
-  );
+  const big = size === "lg";
+  return <RochaLogoHorizontal className={big ? "h-20" : "h-14"} />;
 }
 
 
