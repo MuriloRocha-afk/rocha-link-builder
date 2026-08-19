@@ -37,14 +37,14 @@ export function RochaLogoMark({ className, invert = false }: RochaLogoMarkProps)
         />
       </svg>
 
-      <div className="flex flex-col leading-[0.9]">
+      <div className="flex flex-col leading-[0.92]">
         <span
-          className={`font-display text-[0.62em] font-extrabold tracking-tight ${textColor}`}
+          className={`font-display text-[0.58em] font-extrabold tracking-tight ${textColor}`}
         >
           ROCHA
         </span>
         <span
-          className={`font-body text-[0.32em] font-bold tracking-[0.14em] uppercase ${accentColor}`}
+          className={`font-body text-[0.40em] font-bold tracking-[0.10em] uppercase ${accentColor}`}
         >
           Telhas & Madeiras
         </span>
