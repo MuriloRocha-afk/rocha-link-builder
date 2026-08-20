@@ -9,7 +9,9 @@ import { AvisoEntrega } from "@/components/site/AvisoEntrega";
 import { Ferramentas } from "@/components/site/Ferramentas";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/shared";
-import hero from "@/assets/hero-patio.jpg";
+import heroAsset from "@/assets/IMG_1476.jpg.asset.json";
+
+const hero = heroAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
