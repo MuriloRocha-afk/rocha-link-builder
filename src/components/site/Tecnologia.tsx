@@ -1,7 +1,10 @@
 import { Cog, ShieldCheck } from "lucide-react";
 import { SectionHeading, WhatsAppButton } from "./shared";
-import serra from "@/assets/tec-serra.jpg";
-import plaina from "@/assets/tec-plaina.jpg";
+import serraAsset from "@/assets/IMG_1499.jpg.asset.json";
+import plainaAsset from "@/assets/IMG_1496.jpg.asset.json";
+
+const serra = serraAsset.url;
+const plaina = plainaAsset.url;
 
 const ITEMS = [
   {

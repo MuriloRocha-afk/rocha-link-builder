@@ -1,4 +1,6 @@
 import ceramica from "@/assets/prod-ceramica.jpg";
+import fotoTelhasPatio from "@/assets/IMG_1486.jpg.asset.json";
+import fotoMadeiraPatio from "@/assets/IMG_1490.jpg.asset.json";
 import isotec from "@/assets/prod-isotec.jpg";
 import pvc from "@/assets/prod-pvc.jpg";
 import fibro from "@/assets/prod-fibro.jpg";
@@ -105,7 +107,7 @@ export const CATEGORIES: CatalogCategory[] = [
     short: "Telhas & Coberturas",
     description:
       "Fibrocimento, Colonial PVC, Cerâmica, Policarbonato e mais — todos os tipos para sua obra.",
-    image: ceramica,
+    image: fotoTelhasPatio.url,
     bestseller: "Campeão de Vendas",
     ctaLabel: "Ver Tipos de Telha",
     items: [
@@ -312,7 +314,7 @@ export const CATEGORIES: CatalogCategory[] = [
     short: "Madeiramento",
     description:
       "Cambará, Eucalipto, Cedrinho, Pinus e mais — cortado e aparelhado no nosso pátio.",
-    image: cambara,
+    image: fotoMadeiraPatio.url,
     bestseller: "Campeão de Vendas",
     ctaLabel: "Ver Espécies de Madeira",
     items: [
