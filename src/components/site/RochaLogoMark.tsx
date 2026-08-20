@@ -112,7 +112,7 @@ export function RochaWordmark({ className }: { className?: string }) {
 export function RochaLogoHorizontal({
   className,
   iconClassName = "h-full w-auto",
-  wordClassName = "h-[77%] w-auto",
+  wordClassName = "h-[92%] w-auto",
 }: {
   className?: string;
   iconClassName?: string;
