@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Star } from "lucide-react";
-import cambara from "@/assets/prod-cambara.jpg";
+import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucalipto from "@/assets/prod-eucalipto.jpg";
 import cedrinho from "@/assets/prod-cedrinho.jpg";
 import pinus from "@/assets/prod-pinus.jpg";
@@ -11,6 +11,8 @@ import forroCedrinho from "@/assets/prod-forro-cedrinho.jpg";
 import madeirite from "@/assets/prod-madeirite.jpg";
 import tabeira from "@/assets/prod-tabeira.jpg";
 import mourao from "@/assets/prod-mourao.jpg";
+
+const cambara = cambaraAsset.url;
 
 type Subcard = {
   slug: string;
