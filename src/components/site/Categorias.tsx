@@ -37,7 +37,6 @@ export function Categorias() {
                 height={768}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/55" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <div className="relative p-6">
                 <span className="text-3xl">{EMOJI[c.id]}</span>
