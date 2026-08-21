@@ -1,5 +1,6 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { imagensConcreto } from "@/data/imagensProduto";
+import { imagensConcreto, imagensEsmaltada } from "@/data/imagensProduto";
+import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -51,8 +52,142 @@ export const CONFIG_CONCRETO: ConfiguradorConfig = {
     `${s.cor} · ${q.qtd ?? 100} peças · ~${(((q.qtd ?? 100) as number) * 0.063).toFixed(1)} m²`,
   unidadeResumo: () => "peças",
   idItem: (s) => `concreto-${s.cor}`,
+  tituloAcessorios: "Acessórios para Telha de Concreto",
+  acessorios: (s, q) => acessoriosConcreto(s.cor ?? "Areia", (q.qtd as number) ?? 100),
   mensagem: (s, q) =>
     `🏗️ *Telha de Concreto Eurotop*\n• Cor: ${s.cor}\n• Quantidade: ${q.qtd ?? 100} peças\n• Cobertura estimada: ~${(((q.qtd ?? 100) as number) * 0.063).toFixed(1)} m²`,
+};
+
+const acessoriosConcreto = (cor: string, qtd: number): AcessorioItem[] => [
+  {
+    id: `cumeeira-concreto-${cor}`,
+    nome: `Cumeeira de Concreto — ${cor}`,
+    descricao: "Arremate do cumeamento na mesma cor da telha.",
+    emoji: "🔺",
+    unidade: "un",
+    categoria: "Telhas",
+    quantidadeSugerida: Math.max(3, Math.ceil(qtd * 0.05)),
+  },
+  {
+    id: "prego-telheiro-500g",
+    nome: "Prego Telheiro 18×27 — 500g",
+    descricao: "Fixação das telhas nas ripas.",
+    emoji: "🔨",
+    unidade: "emb",
+    categoria: "Fixadores",
+    quantidadeSugerida: Math.max(1, Math.ceil(qtd / 150)),
+  },
+  {
+    id: "manta-termica-1f-10m2",
+    nome: "Manta Térmica Aluminizada 1F × 10m²",
+    descricao: "Reduz o calor sob a cobertura.",
+    emoji: "🌡️",
+    unidade: "un",
+    categoria: "Calhas",
+    quantidadeSugerida: Math.max(1, Math.ceil((qtd * 0.063) / 10)),
+  },
+  {
+    id: "calha-aquapluv-cinza",
+    nome: "Calha Aquapluv — Cinza",
+    descricao: "Sistema de captação de água pluvial.",
+    emoji: "🌧️",
+    unidade: "un",
+    categoria: "Calhas",
+    quantidadeSugerida: 2,
+  },
+];
+
+const CORES_ESMALTADA = [
+  { valor: "Vermelho", cor: "#B4372A" },
+  { valor: "Branco", cor: "#F2F2EF" },
+  { valor: "Preto", cor: "#2B2B2B" },
+  { valor: "Azul", cor: "#2E5D8C" },
+  { valor: "Verde", cor: "#2F6B4F" },
+  { valor: "Marrom", cor: "#6B4530" },
+];
+
+const acessoriosEsmaltada = (cor: string, qtd: number): AcessorioItem[] => [
+  {
+    id: `cumeeira-esmaltada-${cor}`,
+    nome: `Cumeeira Esmaltada — ${cor}`,
+    descricao: "Cumeeira no mesmo esmalte e cor da telha.",
+    emoji: "🔺",
+    unidade: "un",
+    categoria: "Telhas",
+    quantidadeSugerida: Math.max(3, Math.ceil(qtd * 0.05)),
+  },
+  {
+    id: `arremate-esmaltado-${cor}`,
+    nome: `Arremate / Espigão Esmaltado — ${cor}`,
+    descricao: "Acabamento de espigão e rincão da cobertura.",
+    emoji: "📐",
+    unidade: "un",
+    categoria: "Telhas",
+    quantidadeSugerida: Math.max(2, Math.ceil(qtd * 0.02)),
+  },
+  {
+    id: "prego-telheiro-500g",
+    nome: "Prego Telheiro 18×27 — 500g",
+    descricao: "Fixação das telhas esmaltadas nas ripas.",
+    emoji: "🔨",
+    unidade: "emb",
+    categoria: "Fixadores",
+    quantidadeSugerida: Math.max(1, Math.ceil(qtd / 150)),
+  },
+  {
+    id: "manta-termica-1f-10m2",
+    nome: "Manta Térmica Aluminizada 1F × 10m²",
+    descricao: "Conforto térmico sob a telha esmaltada.",
+    emoji: "🌡️",
+    unidade: "un",
+    categoria: "Calhas",
+    quantidadeSugerida: Math.max(1, Math.ceil((qtd * 0.058) / 10)),
+  },
+];
+
+export const CONFIG_ESMALTADA: ConfiguradorConfig = {
+  produtoKey: "esmaltada",
+  breadcrumb: BC("Telha Esmaltada"),
+  titulo: "✨ Telha Esmaltada",
+  subtitulo:
+    "Telha cerâmica com esmalte vitrificado: cor viva e permanente, superfície impermeável e fácil de limpar.",
+  galeriaTitulo: "Telha Esmaltada",
+  galeriaPlaceholder: "Selecione uma cor para ver as fotos",
+  imagens: (s) =>
+    s.cor
+      ? (imagensEsmaltada[s.cor] ?? [{ src: "", alt: `Telha Esmaltada ${s.cor}` }])
+      : [],
+  categoria: "Telhas",
+  passos: [
+    { chave: "cor", titulo: "Cor do Esmalte", tipo: "grid3", opcoes: CORES_ESMALTADA },
+    {
+      chave: "qtd",
+      titulo: "Quantidade",
+      tipo: "quantidade",
+      unidade: "peças",
+      padrao: 100,
+      passo: 10,
+      nota: (_s, q) =>
+        `Cobertura estimada: ~${(q * 0.058).toFixed(1)} m² (~17 telhas por m²)`,
+    },
+  ],
+  especificacoes: [
+    ["Material", "Cerâmica esmaltada (vitrificada)"],
+    ["Peças por m²", "~17 peças"],
+    ["Inclinação mínima", "30%"],
+    ["Absorção de água", "Muito baixa (esmalte impermeável)"],
+    ["Acabamento", "Brilhante"],
+    ["Fixação", "Prego telheiro ou arame"],
+  ],
+  tituloAcessorios: "Acessórios para Telha Esmaltada",
+  acessorios: (s, q) => acessoriosEsmaltada(s.cor ?? "Vermelho", (q.qtd as number) ?? 100),
+  resumoNome: () => "Telha Esmaltada",
+  resumoDetalhe: (s, q) =>
+    `${s.cor} · ${q.qtd ?? 100} peças · ~${(((q.qtd ?? 100) as number) * 0.058).toFixed(1)} m²`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `esmaltada-${s.cor}`,
+  mensagem: (s, q) =>
+    `✨ *Telha Esmaltada*\n• Cor: ${s.cor}\n• Quantidade: ${q.qtd ?? 100} peças\n• Cobertura estimada: ~${(((q.qtd ?? 100) as number) * 0.058).toFixed(1)} m²`,
 };
 
 const COMPRIMENTOS_PP = [
