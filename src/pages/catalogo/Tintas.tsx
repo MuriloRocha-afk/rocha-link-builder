@@ -109,6 +109,15 @@ const CARDS: EmojiSubcard[] = [
       "Selante poliuretano para emendas de calhas, rufos e água furtada. Alta aderência e resistência a UV.",
     cta: "Ver produtos e cotar",
   },
+  {
+    slug: "lona-plastica",
+    name: "Lona Plástica",
+    emoji: "🟦",
+    tags: ["Preta", "Leitosa", "Encerada"],
+    description:
+      "Lona preta, leitosa, azul e encerada em várias medidas e espessuras. Proteção de obra, pintura e cobertura provisória.",
+    cta: "Ver produtos e cotar",
+  },
 ];
 
 export default function Tintas() {
