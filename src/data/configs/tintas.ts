@@ -538,3 +538,52 @@ export const CONFIG_PU_CALHA: ConfiguradorConfig = {
   mensagem: (s, q) =>
     `🛠️ *${s.produto}*${s.cor ? `\n• Cor: ${s.cor}` : ""}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
+
+/* ---------------- Lona Plástica ---------------- */
+
+const LONAS: { nome: string; medidas: string[] }[] = [
+  { nome: "Lona Plástica Preta", medidas: ["4x5 m", "6x8 m", "8x10 m", "Metro linear (4 m larg.)"] },
+  { nome: "Lona Plástica Branca/Leitosa", medidas: ["4x5 m", "6x8 m", "Metro linear (4 m larg.)"] },
+  { nome: "Lona Plástica Azul", medidas: ["3x4 m", "5x6 m", "8x10 m"] },
+  { nome: "Lona Encerada / Reforçada", medidas: ["4x5 m", "5x8 m", "8x10 m"] },
+];
+
+export const CONFIG_LONA: ConfiguradorConfig = {
+  breadcrumb: BC("Lona Plástica"),
+  titulo: "🟦 Lona Plástica",
+  subtitulo:
+    "Lona preta, leitosa, azul e encerada para proteção de obra, cobertura provisória e pintura.",
+  galeriaTitulo: "Lona Plástica",
+  galeriaPlaceholder: "Selecione o tipo para ver as fotos",
+  imagens: (s) => (s.tipo ? [{ src: "", alt: s.tipo }] : []),
+  categoria: "Tintas",
+  passos: [
+    {
+      chave: "tipo",
+      titulo: "Tipo de lona",
+      tipo: "lista",
+      opcoes: LONAS.map((l) => ({ valor: l.nome, sub: l.medidas.join(" · ") })),
+    },
+    {
+      chave: "espessura",
+      titulo: "Espessura",
+      tipo: "chips",
+      opcoes: ["Leve (100 micras)", "Média (150 micras)", "Reforçada (200 micras)"].map((v) => ({
+        valor: v,
+      })),
+    },
+    {
+      chave: "medida",
+      titulo: "Medida",
+      tipo: "grid2",
+      opcoes: (s) => (LONAS.find((l) => l.nome === s.tipo)?.medidas ?? []).map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
+  ],
+  resumoNome: (s) => s.tipo ?? "Lona Plástica",
+  resumoDetalhe: (s, q) => `${s.espessura} · ${s.medida} · ${q.qtd ?? 1} un`,
+  unidadeResumo: () => "un",
+  idItem: (s) => `lona-${s.tipo}-${s.espessura}-${s.medida}`,
+  mensagem: (s, q) =>
+    `🟦 *${s.tipo}*\n• Espessura: ${s.espessura}\n• Medida: ${s.medida}\n• Quantidade: ${q.qtd ?? 1} un`,
+};

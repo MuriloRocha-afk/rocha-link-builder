@@ -337,3 +337,92 @@ export const CONFIG_PARAFUSOS_MADEIRA: ConfiguradorConfig = {
   mensagem: (s, q) =>
     `🪛 *${s.tipo} ${s.bitola}*\n• Quantidade: ${q.qtd ?? 20} un`,
 };
+
+/* ---------------- Ferramentas Bestfer ---------------- */
+
+const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
+  {
+    nome: "Serra / Serrote",
+    opcoes: ['Serrote 20"', 'Serrote 24"', "Serra Copo", "Arco de Serra", "Serra Tico-Tico"],
+  },
+  {
+    nome: "Disco de Serra",
+    opcoes: [
+      '4.3/8" 24 dentes',
+      '7.1/4" 24 dentes',
+      '7.1/4" 40 dentes',
+      '10" 60 dentes',
+      '12" 80 dentes',
+    ],
+  },
+  {
+    nome: "Martelo",
+    opcoes: ["Unha 25mm", "Unha 27mm", "Unha 29mm", "Bola 500g", "Marreta 1kg", "Marreta 3kg"],
+  },
+  { nome: "Trena", opcoes: ["3 m", "5 m", "7,5 m", "10 m", "30 m (fita)"] },
+  { nome: "Esquadro", opcoes: ['8"', '12"', "Esquadro de Combinação"] },
+  {
+    nome: "Furadeira / Parafusadeira",
+    opcoes: ["Furadeira de Impacto 1/2", "Parafusadeira a Bateria 12V", "Parafusadeira 20V"],
+  },
+  {
+    nome: "Brocas",
+    opcoes: [
+      "Jogo p/ Madeira",
+      "Jogo p/ Concreto",
+      "Jogo p/ Metal",
+      "Broca Chata p/ Madeira",
+      "Broca SDS",
+    ],
+  },
+  { nome: "Nível", opcoes: ['9"', '12"', '18"', '24"', "Nível de Mangueira", "Nível a Laser"] },
+  {
+    nome: "Chaves",
+    opcoes: [
+      "Jogo Chave de Fenda/Phillips",
+      "Chave Inglesa 8-12",
+      "Jogo Chave Combinada",
+      "Chave Catraca",
+      "Jogo Chave Allen",
+    ],
+  },
+  {
+    nome: "Alicate",
+    opcoes: ["Universal 8", "Bico Meia-Cana", "Corte Diagonal", "Pressão 10", "Rebitador"],
+  },
+  { nome: "Formão / Talhadeira", opcoes: ['1/2"', '3/4"', '1"', "Talhadeira 12"] },
+  { nome: "Prumo, Linha e Riscador", opcoes: ["Prumo de Face", "Linha de Pedreiro", "Lápis de Carpinteiro"] },
+];
+
+export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
+  breadcrumb: BC("Ferramentas Bestfer"),
+  titulo: "🧰 Ferramentas Bestfer",
+  subtitulo:
+    "Linha Bestfer para carpintaria e obra: serras, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves e alicates.",
+  galeriaTitulo: "Ferramentas Bestfer",
+  galeriaPlaceholder: "Selecione a ferramenta para ver as fotos",
+  imagens: (s) => (s.ferramenta ? [{ src: "", alt: `Bestfer ${s.ferramenta}` }] : []),
+  categoria: "Fixadores",
+  passos: [
+    {
+      chave: "ferramenta",
+      titulo: "Ferramenta",
+      tipo: "lista",
+      opcoes: FERRAMENTAS.map((f) => ({ valor: f.nome, sub: f.opcoes.join(" · ") })),
+    },
+    {
+      chave: "modelo",
+      titulo: "Modelo / Medida",
+      tipo: "chips",
+      opcoes: (s) =>
+        (FERRAMENTAS.find((f) => f.nome === s.ferramenta)?.opcoes ?? []).map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
+  ],
+  resumoNome: (s) => `Bestfer — ${s.ferramenta ?? "Ferramenta"}`,
+  resumoDetalhe: (s, q) => `${s.modelo} · ${q.qtd ?? 1} un`,
+  unidadeResumo: () => "un",
+  idItem: (s) => `ferramenta-${s.ferramenta}-${s.modelo}`,
+  mensagem: (s, q) =>
+    `🧰 *Bestfer — ${s.ferramenta}*\n• Modelo: ${s.modelo}\n• Quantidade: ${q.qtd ?? 1} un`,
+};
