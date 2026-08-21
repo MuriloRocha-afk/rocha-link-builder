@@ -9,16 +9,25 @@ const BC = (nome: string) => [
 const BITOLAS_PEROBA: Record<string, string[]> = {
   Viga: ["5x11cm", "5x15cm", "5x20cm", "6x12cm", "8x16cm", "8x20cm"],
   Caibro: ["5x5cm", "5x6cm", "5x7cm"],
-  "Caibrão": ["6x8cm", "7x9cm", "8x8cm"],
+  Caibrão: ["6x8cm", "7x9cm", "8x8cm"],
   Ripa: ["1,5x5cm"],
   Ripão: ["2x5cm", "2x7cm"],
   Sarrafo: ["2,5x5cm", "2,5x7cm", "2,5x10cm"],
-  "Tábua": ["2,5x20cm", "2,5x25cm", "2,5x30cm"],
+  Tábua: ["2,5x20cm", "2,5x25cm", "2,5x30cm"],
 };
 
 const COMPRIMENTOS_PEROBA = [
-  "1,0m", "1,5m", "2,0m", "2,5m", "3,0m", "3,5m", "4,0m",
-  "4,5m", "5,0m", "5,5m", "6,0m",
+  "1,0m",
+  "1,5m",
+  "2,0m",
+  "2,5m",
+  "3,0m",
+  "3,5m",
+  "4,0m",
+  "4,5m",
+  "5,0m",
+  "5,5m",
+  "6,0m",
 ];
 
 export const CONFIG_PEROBA: ConfiguradorConfig = {
