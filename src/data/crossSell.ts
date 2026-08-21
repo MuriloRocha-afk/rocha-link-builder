@@ -239,6 +239,47 @@ const REGRAS: Regra[] = [
     ],
   },
   {
+    match: /forro\s*(de\s*)?pinus|pinus\s*forro/i,
+    itens: () => [
+      {
+        id: "meia-cana-pinus",
+        nome: "Meia Cana Pinus — por metro",
+        descricao: "Arremate perimetral do forro de pinus",
+        emoji: "📐",
+        unidade: "m",
+        quantidadeSugerida: 10,
+        categoria: "Madeiramento",
+      },
+      {
+        id: "sarrafo-pinus-apoio",
+        nome: "Sarrafo Pinus 2cm × 5cm — por metro",
+        descricao: "Ripas de apoio para fixar o forro",
+        emoji: "🪚",
+        unidade: "m",
+        quantidadeSugerida: 20,
+        categoria: "Madeiramento",
+      },
+      {
+        id: "prego-polido-15x15",
+        nome: "Prego Polido 15×15 sem Cabeça — Kg",
+        descricao: "Fixação discreta das réguas de pinus",
+        emoji: "🔨",
+        unidade: "Kg",
+        quantidadeSugerida: 1,
+        categoria: "Fixadores",
+      },
+      {
+        id: "anjo-verniz-dura-mais",
+        nome: "Anjo Verniz Dura Mais — Natural 3,6L",
+        descricao: "Protege o pinus contra umidade e amarelamento",
+        emoji: "✨",
+        unidade: "un",
+        quantidadeSugerida: 1,
+        categoria: "Tintas",
+      },
+    ],
+  },
+  {
     match: /forro\s*cedrinho|cedrinho\s*forro/i,
     itens: () => [
       {

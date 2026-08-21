@@ -7,22 +7,22 @@ import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensMadeirit } from "../../../data/imagensProduto";
 
 const PRODUTOS = [
-  { id: "madeirit-preto-10mm", nome: "Madeirit Plastificado Preto 10mm", desc: "220cm × 110cm", badge: "★ Mais vendido", cor: "Preto" },
-  { id: "madeirit-preto-12mm", nome: "Madeirit Plastificado Preto 12mm", desc: "220cm × 110cm", badge: null, cor: "Preto" },
-  { id: "madeirit-preto-14mm", nome: "Madeirit Plastificado Preto 14mm", desc: "220cm × 110cm", badge: null, cor: "Preto" },
-  { id: "madeirit-preto-16mm", nome: "Madeirit Plastificado Preto 16mm", desc: "220cm × 110cm", badge: null, cor: "Preto" },
-  { id: "madeirit-preto-18mm", nome: "Madeirit Plastificado Preto 18mm", desc: "220cm × 110cm", badge: null, cor: "Preto" },
-  { id: "madeirit-preto-20mm", nome: "Madeirit Plastificado Preto 20mm", desc: "220cm × 110cm", badge: null, cor: "Preto" },
-  { id: "madeirit-rosa-5mm", nome: "Madeirit Rosa 5mm", desc: "220cm × 110cm", badge: null, cor: "Rosa" },
-  { id: "madeirit-rosa-9mm", nome: "Madeirit Rosa 9mm", desc: "220cm × 110cm", badge: null, cor: "Rosa" },
-  { id: "madeirit-rosa-12mm", nome: "Madeirit Rosa 12mm", desc: "220cm × 110cm", badge: null, cor: "Rosa" },
+  { id: "madeirit-preto-10mm", nome: "Madeirit Plastificado 10mm", desc: "220cm × 110cm", badge: "★ Mais vendido", cor: "Plastificado" },
+  { id: "madeirit-preto-12mm", nome: "Madeirit Plastificado 12mm", desc: "220cm × 110cm", badge: null, cor: "Plastificado" },
+  { id: "madeirit-preto-14mm", nome: "Madeirit Plastificado 14mm", desc: "220cm × 110cm", badge: null, cor: "Plastificado" },
+  { id: "madeirit-preto-16mm", nome: "Madeirit Plastificado 16mm", desc: "220cm × 110cm", badge: null, cor: "Plastificado" },
+  { id: "madeirit-preto-18mm", nome: "Madeirit Plastificado 18mm", desc: "220cm × 110cm", badge: null, cor: "Plastificado" },
+  { id: "madeirit-preto-20mm", nome: "Madeirit Plastificado 20mm", desc: "220cm × 110cm", badge: null, cor: "Plastificado" },
+  { id: "madeirit-rosa-5mm", nome: "Madeirit Resinado/Vermelho 5mm", desc: "220cm × 110cm", badge: null, cor: "Resinado/Vermelho" },
+  { id: "madeirit-rosa-9mm", nome: "Madeirit Resinado/Vermelho 9mm", desc: "220cm × 110cm", badge: null, cor: "Resinado/Vermelho" },
+  { id: "madeirit-rosa-12mm", nome: "Madeirit Resinado/Vermelho 12mm", desc: "220cm × 110cm", badge: null, cor: "Resinado/Vermelho" },
   { id: "osb-10mm", nome: "OSB Multiplac 10mm", desc: "220cm × 122cm", badge: null, cor: "OSB" },
   { id: "compensado-9mm", nome: "Compensado 9mm", desc: "220cm × 160cm", badge: null, cor: "Compensado" },
   { id: "compensado-11mm", nome: "Compensado 11mm", desc: "220cm × 160cm", badge: null, cor: "Compensado" },
   { id: "compensado-15mm", nome: "Compensado 15mm", desc: "220cm × 160cm", badge: null, cor: "Compensado" },
 ];
 
-const FILTROS = ["Todos", "Preto", "Rosa", "OSB", "Compensado"];
+const FILTROS = ["Todos", "Plastificado", "Resinado/Vermelho", "OSB", "Compensado"];
 
 export default function Madeirit() {
   const { adicionar } = useOrcamento();
@@ -61,7 +61,7 @@ export default function Madeirit() {
       cabecalho={
           <div>
             <h1 className="text-2xl font-bold text-gray-900">📋 Madeirit & Compensado</h1>
-            <p className="text-gray-500 mt-1 text-sm">Chapas estruturais para formas, forros e revestimentos. Madeirit preto e rosa, OSB e compensado em várias espessuras.</p>
+            <p className="text-gray-500 mt-1 text-sm">Chapas estruturais para formas, forros e revestimentos. Madeirit plastificado e resinado/vermelho, OSB e compensado em várias espessuras.</p>
           </div>
       }
       galeria={

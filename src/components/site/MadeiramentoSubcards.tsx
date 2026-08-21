@@ -103,10 +103,18 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     cta: "Cotar em m²",
   },
   {
+    slug: "forro-pinus",
+    name: "Forro Pinus",
+    image: forroCedrinho,
+    description:
+      "Réguas de pinus macho-fêmea 1cm x 10cm, vendido por m². Claro e fácil de envernizar.",
+    cta: "Cotar em m²",
+  },
+  {
     slug: "madeirit",
     name: "Madeirit & Compensado",
     image: madeirite,
-    description: "Madeirit plastificado preto e rosa, OSB e compensado 9mm a 15mm.",
+    description: "Madeirit plastificado e resinado/vermelho, OSB e compensado 9mm a 15mm.",
     cta: "Ver Espessuras",
   },
   {
