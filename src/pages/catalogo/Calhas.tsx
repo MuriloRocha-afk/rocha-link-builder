@@ -30,6 +30,15 @@ const CARDS: EmojiSubcard[] = [
     cta: "Escolher e cotar",
   },
   {
+    slug: "agua-furtada",
+    name: "Água Furtada Galvanizada",
+    emoji: "💧",
+    tags: ["Galvanizada", "Corte 33 e 50"],
+    description:
+      "Calha de rincão para o encontro entre duas águas do telhado. Galvanizada, de 2,0m a 6,0m nos cortes 33 e 50.",
+    cta: "Escolher e cotar",
+  },
+  {
     slug: "manta-termica",
     name: "Manta Térmica Aluminizada",
     emoji: "🌡️",
