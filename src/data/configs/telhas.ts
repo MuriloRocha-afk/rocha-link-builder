@@ -244,9 +244,44 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     `💡 *Telha Translúcida Polipropileno*\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 5} peças\n• Cobertura estimada: ~${coberturaPP(s.comprimento, (q.qtd as number) ?? 5)} m²`,
 };
 
+const FORMATOS_VIDRO = [
+  { valor: "Portuguesa", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica portuguesa" },
+  { valor: "Romana", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica romana" },
+  { valor: "Americana", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica americana" },
+];
+
+export const CONFIG_VIDRO: ConfiguradorConfig = {
+  breadcrumb: BC("Telha de Vidro"),
+  titulo: "🔷 Telha de Vidro",
+  subtitulo:
+    "Iluminação natural ponto a ponto. Formatos Portuguesa, Romana e Americana, com encaixe idêntico ao da telha cerâmica.",
+  galeriaTitulo: "Telha de Vidro",
+  galeriaPlaceholder: "Selecione um formato para ver as fotos",
+  imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
+  categoria: "Telhas",
+  passos: [
+    { chave: "formato", titulo: "Formato", tipo: "lista", opcoes: FORMATOS_VIDRO },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 6 },
+  ],
+  especificacoes: [
+    ["Material", "Vidro temperado transparente"],
+    ["Formatos", "Portuguesa, Romana e Americana"],
+    ["Compatibilidade", "Encaixe igual ao da telha cerâmica do mesmo formato"],
+    ["Uso indicado", "Pontos de luz natural na cobertura"],
+    ["Recomendação", "1 a 2 telhas de vidro a cada 4 m² de ambiente"],
+  ],
+  resumoNome: () => "Telha de Vidro",
+  resumoDetalhe: (s, q) => `${s.formato} · ${q.qtd ?? 6} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `vidro-${s.formato}`,
+  mensagem: (s, q) =>
+    `🔷 *Telha de Vidro*\n• Formato: ${s.formato}\n• Quantidade: ${q.qtd ?? 6} peças`,
+};
+
 const TIPOS_CUMEEIRA = [
   { valor: "Barro Resinada", emoji: "🪨", sub: "Mesclada ou Larga Resinada" },
   { valor: "Concreto", emoji: "🏗️", sub: "3 Vias, Inicial, Cinza, Cores, Tabaco" },
+  { valor: "Esmaltada", emoji: "✨", sub: "Vitrificada · Vermelho, Branco, Preto, Azul, Verde ou Marrom" },
   { valor: "PVC Central Fixa", emoji: "🟧", sub: "53cm × 86cm · Cerâmica, Cinza ou Marfim" },
   { valor: "PVC Central Articulada", emoji: "🟧", sub: "53cm × 86cm · Cerâmica, Cinza ou Marfim" },
   { valor: "PVC Lateral Articulada", emoji: "🟧", sub: "53cm × 103cm · Cerâmica, Cinza ou Marfim" },
@@ -261,8 +296,10 @@ const variacoesCumeeira = (tipo: string) => {
   if (tipo?.startsWith("PVC")) return ["Cerâmica", "Cinza", "Marfim"];
   if (tipo === "Concreto") return ["3 Vias", "Inicial", "Cinza", "Cores", "Tabaco"];
   if (tipo === "Barro Resinada") return ["Mesclada", "Larga Resinada"];
+  if (tipo === "Esmaltada") return ["Vermelho", "Branco", "Preto", "Azul", "Verde", "Marrom"];
   return [];
 };
+
 
 export const CONFIG_CUMEEIRAS: ConfiguradorConfig = {
   breadcrumb: BC("Cumeeiras & Acessórios"),
