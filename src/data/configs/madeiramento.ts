@@ -6,6 +6,86 @@ const BC = (nome: string) => [
   { label: nome },
 ];
 
+const BITOLAS_PEROBA: Record<string, string[]> = {
+  Viga: ["5x11cm", "5x15cm", "5x20cm", "6x12cm", "8x16cm", "8x20cm"],
+  Caibro: ["5x5cm", "5x6cm", "5x7cm"],
+  Caibrão: ["6x8cm", "7x9cm", "8x8cm"],
+  Ripa: ["1,5x5cm"],
+  Ripão: ["2x5cm", "2x7cm"],
+  Sarrafo: ["2,5x5cm", "2,5x7cm", "2,5x10cm"],
+  Tábua: ["2,5x20cm", "2,5x25cm", "2,5x30cm"],
+};
+
+const COMPRIMENTOS_PEROBA = [
+  "1,0m",
+  "1,5m",
+  "2,0m",
+  "2,5m",
+  "3,0m",
+  "3,5m",
+  "4,0m",
+  "4,5m",
+  "5,0m",
+  "5,5m",
+  "6,0m",
+];
+
+export const CONFIG_PEROBA: ConfiguradorConfig = {
+  breadcrumb: BC("Peroba do Norte / D'Água"),
+  titulo: "🌳 Peroba do Norte / D'Água",
+  subtitulo:
+    "Madeira nativa de alta resistência para estruturas de telhado. Bruta ou aparelhada em plaina no nosso pátio.",
+  galeriaTitulo: "Peroba do Norte / D'Água",
+  galeriaPlaceholder: "Selecione o tipo de peça para ver as fotos",
+  imagens: (s) => (s.peca ? [{ src: "", alt: `Peroba do Norte — ${s.peca}` }] : []),
+  categoria: "Madeiramento",
+  passos: [
+    {
+      chave: "peca",
+      titulo: "Tipo de Peça",
+      tipo: "lista",
+      opcoes: Object.keys(BITOLAS_PEROBA).map((v) => ({ valor: v })),
+    },
+    {
+      chave: "bitola",
+      titulo: "Bitola (Espessura × Largura)",
+      tipo: "chips",
+      visivel: (s) => Boolean(s.peca),
+      opcoes: (s) => (BITOLAS_PEROBA[s.peca] ?? []).map((v) => ({ valor: v })),
+    },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento",
+      tipo: "chips",
+      opcoes: COMPRIMENTOS_PEROBA.map((v) => ({ valor: v })),
+    },
+    {
+      chave: "acabamento",
+      titulo: "Aparelhagem",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Bruto", sub: "Superfície natural da serra · mais econômico" },
+        { valor: "Aparelhado", sub: "Aparelhado em plaina industrial", badge: "★ Recomendado" },
+      ],
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 10 },
+  ],
+  especificacoes: [
+    ["Espécie", "Peroba do Norte / Peroba d'Água"],
+    ["Peças", "Viga, Caibro, Caibrão, Ripa, Ripão, Sarrafo e Tábua"],
+    ["Comprimentos", "1,0m a 6,0m"],
+    ["Aparelhagem", "Bruto ou aparelhado em plaina"],
+    ["Origem", "DOF/IBAMA legalizado"],
+  ],
+  resumoNome: () => "Peroba do Norte / D'Água",
+  resumoDetalhe: (s, q) =>
+    `${s.peca} ${s.bitola ?? ""} · ${s.comprimento} · ${s.acabamento} · ${q.qtd ?? 10} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `peroba-${s.peca}-${s.bitola}-${s.comprimento}-${s.acabamento}`,
+  mensagem: (s, q) =>
+    `🌳 *Peroba do Norte / D'Água*\n• Tipo: ${s.peca}\n• Bitola: ${s.bitola}\n• Comprimento: ${s.comprimento}\n• Aparelhagem: ${s.acabamento}\n• Quantidade: ${q.qtd ?? 10} peças`,
+};
+
 const PECAS_GARAPEIRA = [
   "Sarrafo 05cm × 2,3cm",
   "Sarrafo 07cm × 2,3cm",

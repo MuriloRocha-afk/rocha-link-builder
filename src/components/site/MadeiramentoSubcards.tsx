@@ -64,32 +64,37 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     slug: "pinus",
     name: "Pinus",
     image: pinus,
-    description:
-      "Sarrafo, tábua e pontalete com largura, espessura e comprimento próprios.",
+    description: "Sarrafo, tábua e pontalete com largura, espessura e comprimento próprios.",
     cta: "Ver Produtos",
+  },
+  {
+    slug: "peroba",
+    name: "Peroba do Norte / D'Água",
+    image: garapeira,
+    description:
+      "Viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada em plaina.",
+    tag: "DOF/IBAMA · Madeira de Lei",
+    cta: "Ver Bitolas",
   },
   {
     slug: "garapeira",
     name: "Garapeira",
     image: garapeira,
-    description:
-      "Madeira dura nativa: barrotes, caibros, vigas e dormentes para alta resistência.",
+    description: "Madeira dura nativa: barrotes, caibros, vigas e dormentes para alta resistência.",
     cta: "Ver Bitolas",
   },
   {
     slug: "amescla",
     name: "Amescla",
     image: amescla,
-    description:
-      "Sarrafos e tábuas em bruto. Opção econômica para estruturas secundárias.",
+    description: "Sarrafos e tábuas em bruto. Opção econômica para estruturas secundárias.",
     cta: "Ver Bitolas",
   },
   {
     slug: "forro-pvc",
     name: "Forro PVC",
     image: forroPvc,
-    description:
-      "Réguas brancas de 20cm de largura, do 1m ao 7m de comprimento. Pronta entrega.",
+    description: "Réguas brancas de 20cm de largura, do 1m ao 7m de comprimento. Pronta entrega.",
     badge: "★ Campeão de Vendas",
     cta: "Escolher Comprimento",
   },
@@ -97,8 +102,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     slug: "forro-cedrinho",
     name: "Forro Cedrinho",
     image: forroCedrinho,
-    description:
-      "Forro de cedrinho mesclado 1cm x 10cm, vendido por m². Acabamento natural nobre.",
+    description: "Forro de cedrinho mesclado 1cm x 10cm, vendido por m². Acabamento natural nobre.",
     badge: "★ Campeão de Vendas",
     cta: "Cotar em m²",
   },
@@ -121,16 +125,14 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     slug: "tabeiras-deck",
     name: "Tabeiras & Deck",
     image: tabeira,
-    description:
-      "Tabeiras desenhadas de 15cm a 30cm e deck de cumaru, garapeia e pinus tratado.",
+    description: "Tabeiras desenhadas de 15cm a 30cm e deck de cumaru, garapeia e pinus tratado.",
     cta: "Ver Modelos",
   },
   {
     slug: "mourao",
     name: "Mourão Tratado",
     image: mourao,
-    description:
-      "Mourão autoclave de 4cm a 20cm de diâmetro e 2,20m a 10m de comprimento.",
+    description: "Mourão autoclave de 4cm a 20cm de diâmetro e 2,20m a 10m de comprimento.",
     cta: "Configurar Mourão",
   },
 ];
