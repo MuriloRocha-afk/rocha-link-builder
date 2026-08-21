@@ -25,6 +25,7 @@ import { Route as CatalogoTintasSeladoraRouteImport } from './routes/catalogo.ti
 import { Route as CatalogoTintasEsmalteRouteImport } from './routes/catalogo.tintas.esmalte'
 import { Route as CatalogoTintasCupicidaRouteImport } from './routes/catalogo.tintas.cupicida'
 import { Route as CatalogoTintasProdutoSlugRouteImport } from './routes/catalogo.tintas.$produtoSlug'
+import { Route as CatalogoTelhasVidroRouteImport } from './routes/catalogo.telhas.vidro'
 import { Route as CatalogoTelhasPolipropilenoRouteImport } from './routes/catalogo.telhas.polipropileno'
 import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
@@ -146,6 +147,11 @@ const CatalogoTintasProdutoSlugRoute =
     path: '/catalogo/tintas/$produtoSlug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoTelhasVidroRoute = CatalogoTelhasVidroRouteImport.update({
+  id: '/catalogo/telhas/vidro',
+  path: '/catalogo/telhas/vidro',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoTelhasPolipropilenoRoute =
   CatalogoTelhasPolipropilenoRouteImport.update({
     id: '/catalogo/telhas/polipropileno',
@@ -396,6 +402,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
+  '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
@@ -449,6 +456,7 @@ export interface FileRoutesByTo {
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
+  '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
@@ -504,6 +512,7 @@ export interface FileRoutesById {
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
+  '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
@@ -560,6 +569,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
+    | '/catalogo/telhas/vidro'
     | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/esmalte'
@@ -613,6 +623,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
+    | '/catalogo/telhas/vidro'
     | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/esmalte'
@@ -667,6 +678,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/fibrocimento'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
+    | '/catalogo/telhas/vidro'
     | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/esmalte'
@@ -721,6 +733,7 @@ export interface RootRouteChildren {
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
   CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
   CatalogoTelhasPolipropilenoRoute: typeof CatalogoTelhasPolipropilenoRoute
+  CatalogoTelhasVidroRoute: typeof CatalogoTelhasVidroRoute
   CatalogoTintasProdutoSlugRoute: typeof CatalogoTintasProdutoSlugRoute
   CatalogoTintasCupicidaRoute: typeof CatalogoTintasCupicidaRoute
   CatalogoTintasEsmalteRoute: typeof CatalogoTintasEsmalteRoute
@@ -846,6 +859,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/tintas/$produtoSlug'
       fullPath: '/catalogo/tintas/$produtoSlug'
       preLoaderRoute: typeof CatalogoTintasProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/telhas/vidro': {
+      id: '/catalogo/telhas/vidro'
+      path: '/catalogo/telhas/vidro'
+      fullPath: '/catalogo/telhas/vidro'
+      preLoaderRoute: typeof CatalogoTelhasVidroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/telhas/polipropileno': {
@@ -1163,6 +1183,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
   CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
   CatalogoTelhasPolipropilenoRoute: CatalogoTelhasPolipropilenoRoute,
+  CatalogoTelhasVidroRoute: CatalogoTelhasVidroRoute,
   CatalogoTintasProdutoSlugRoute: CatalogoTintasProdutoSlugRoute,
   CatalogoTintasCupicidaRoute: CatalogoTintasCupicidaRoute,
   CatalogoTintasEsmalteRoute: CatalogoTintasEsmalteRoute,

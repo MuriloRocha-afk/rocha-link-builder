@@ -2,12 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
-import { CONFIG_CUMEEIRAS } from "@/data/configs/telhas";
+import { CONFIG_VIDRO } from "@/data/configs/telhas";
 
-const TITLE = "Cumeeiras & Acessórios de Cobertura | Rocha Telhas";
-const DESCRIPTION = "Cumeeiras de barro, concreto, esmaltada, PVC e fibrocimento. Escolha o tipo, a variação e cote direto no WhatsApp.";
+const TITLE = "Telha de Vidro — Portuguesa, Romana e Americana | Rocha Telhas";
+const DESCRIPTION =
+  "Telha de vidro nos formatos Portuguesa, Romana e Americana, com encaixe compatível com a telha cerâmica. Escolha o formato e cote no WhatsApp.";
 
-export const Route = createFileRoute("/catalogo/telhas/cumeeiras")({
+export const Route = createFileRoute("/catalogo/telhas/vidro")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -18,15 +19,15 @@ export const Route = createFileRoute("/catalogo/telhas/cumeeiras")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: TelhasCumeeirasRoute,
+  component: TelhaVidroRoute,
 });
 
-function TelhasCumeeirasRoute() {
+function TelhaVidroRoute() {
   return (
     <>
       <Header />
       <div className="pt-24">
-        <ConfiguradorGenerico config={CONFIG_CUMEEIRAS} />
+        <ConfiguradorGenerico config={CONFIG_VIDRO} />
       </div>
       <Footer />
       <FloatingWhats />
