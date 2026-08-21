@@ -6,6 +6,8 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import { imagensFibrocimento } from "@/data/imagensProduto";
+import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import { acessoriosFibrocimento } from "@/data/acessoriosTelhas";
 
 const COMPRIMENTOS = [
   { value: "153 x 110 cm", comprimento: "1,53 m", area: 1.53 * 1.05 },
@@ -20,30 +22,6 @@ const ESPESSURAS = [
   { value: "5 mm", badge: "Mais vendida" },
   { value: "6 mm" },
   { value: "8 mm", label: "Maior resistência" },
-];
-
-const ACESSORIOS = [
-  {
-    id: "fibro-parafuso-110",
-    name: "Parafuso com Vedação 110mm",
-    detail: "Necessário para fixação das telhas de fibrocimento",
-    text: "Necessário para fixação.",
-    unit: "kits",
-  },
-  {
-    id: "fibro-cumeeira",
-    name: "Cumeeira Fibrocimento",
-    detail: "Acabamento do cumeamento da cobertura",
-    text: "Para o acabamento do cumeamento.",
-    unit: "peças",
-  },
-  {
-    id: "fibro-espigao-120",
-    name: "Espigão 120cm",
-    detail: "Vedação lateral da cobertura em fibrocimento",
-    text: "Vedação lateral.",
-    unit: "peças",
-  },
 ];
 
 const SPECS = [
@@ -113,31 +91,8 @@ Poderia verificar estoque e frete para minha região?`;
           imagens={imagensFibrocimento[dimensao] ?? []}
         />
       }
-      acessorios={
-        <>
-          {ACESSORIOS.map((a) => (
-            <div
-              key={a.id}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
-            >
-              <h3 className="text-base font-extrabold text-primary">{a.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{a.text}</p>
-              <Button
-                type="button"
-                variant="outlineAccent"
-                className="mt-auto h-11 w-full"
-                onClick={() => {
-                  addItem({ id: a.id, name: a.name, detail: a.detail, qty: 1, unit: a.unit });
-                  setOpen(true);
-                }}
-              >
-                <Plus />
-                Adicionar ao Orçamento
-              </Button>
-            </div>
-          ))}
-        </>
-      }
+      tituloAcessorios="Acessórios para Telha de Fibrocimento"
+      acessorios={<BlocoAcessorios itens={acessoriosFibrocimento(qty)} contexto={detail} />}
     >
       <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] md:p-8">
         <div className="space-y-10">

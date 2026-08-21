@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Check, Plus } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Check, Plus } from "lucide-react";
 import { useOrcamento } from "@/context/OrcamentoContext";
 
 export type AcessorioItem = {
@@ -10,6 +11,8 @@ export type AcessorioItem = {
   unidade: string;
   categoria: string;
   quantidadeSugerida: number;
+  /** quando definido, o item vira um link para outra ficha em vez de botão "Add" */
+  href?: string;
 };
 
 export default function BlocoAcessorios({
@@ -40,38 +43,51 @@ export default function BlocoAcessorios({
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-gray-900">{a.nome}</p>
               <p className="text-xs text-gray-500">{a.descricao}</p>
-              <p className="mt-0.5 text-xs font-semibold text-orange-600">
-                Sugerido: {a.quantidadeSugerida} {a.unidade}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                adicionar({
-                  id: a.id,
-                  nome: a.nome,
-                  variacao: contexto ?? a.descricao,
-                  quantidade: a.quantidadeSugerida,
-                  unidade: a.unidade,
-                  categoria: a.categoria,
-                });
-                setAddId(a.id);
-                setTimeout(() => setAddId(null), 1200);
-              }}
-              className={`flex shrink-0 items-center gap-1 rounded-lg px-3 py-2 text-xs font-bold transition-colors ${
-                ok ? "bg-green-600 text-white" : "bg-orange-50 text-orange-600 hover:bg-orange-100"
-              }`}
-            >
-              {ok ? (
-                <>
-                  <Check size={14} /> Ok
-                </>
-              ) : (
-                <>
-                  <Plus size={14} /> Add
-                </>
+              {a.href ? null : (
+                <p className="mt-0.5 text-xs font-semibold text-orange-600">
+                  Sugerido: {a.quantidadeSugerida} {a.unidade}
+                </p>
               )}
-            </button>
+            </div>
+            {a.href ? (
+              <Link
+                to={a.href as never}
+                className="flex shrink-0 items-center gap-1 rounded-lg bg-orange-50 px-3 py-2 text-xs font-bold text-orange-600 transition-colors hover:bg-orange-100"
+              >
+                Ver <ArrowRight size={14} />
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  adicionar({
+                    id: a.id,
+                    nome: a.nome,
+                    variacao: contexto ?? a.descricao,
+                    quantidade: a.quantidadeSugerida,
+                    unidade: a.unidade,
+                    categoria: a.categoria,
+                  });
+                  setAddId(a.id);
+                  setTimeout(() => setAddId(null), 1200);
+                }}
+                className={`flex shrink-0 items-center gap-1 rounded-lg px-3 py-2 text-xs font-bold transition-colors ${
+                  ok
+                    ? "bg-green-600 text-white"
+                    : "bg-orange-50 text-orange-600 hover:bg-orange-100"
+                }`}
+              >
+                {ok ? (
+                  <>
+                    <Check size={14} /> Ok
+                  </>
+                ) : (
+                  <>
+                    <Plus size={14} /> Add
+                  </>
+                )}
+              </button>
+            )}
           </div>
         );
       })}

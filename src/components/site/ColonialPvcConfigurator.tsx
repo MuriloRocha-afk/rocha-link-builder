@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
-import BlocoAcessorios, { type AcessorioItem } from "@/components/site/BlocoAcessorios";
+import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import { acessoriosPvc } from "@/data/acessoriosTelhas";
 import { imagensColonialPVC } from "@/data/imagensProduto";
 
 type Variante = "Colonial" | "Plan";
@@ -66,53 +67,6 @@ const ESPESSURAS: Record<Variante, { value: string; sub: string }[]> = {
 };
 
 const SOBREPOSICAO = 0.08;
-
-const acessoriosPvc = (
-  variante: Variante,
-  cor: string,
-  qtd: number,
-  area: number,
-): AcessorioItem[] => {
-  const corAcessorio = cor === "Translúcida" ? "Cerâmica" : cor;
-  return [
-    {
-      id: `kit-fixacao-vedacao-${corAcessorio}`,
-      nome: `Kit Fixação e Vedação — ${corAcessorio}`,
-      descricao: "Parafuso, arruela e vedação na cor da telha.",
-      emoji: "🧰",
-      unidade: "kit",
-      categoria: "Fixadores",
-      quantidadeSugerida: Math.max(1, Math.ceil(qtd / 5)),
-    },
-    {
-      id: `cumeeira-pvc-central-fixa-${corAcessorio}`,
-      nome: `Cumeeira PVC Central Fixa — ${corAcessorio}`,
-      descricao: `53cm × 86cm · compatível com o perfil ${variante}.`,
-      emoji: "🔺",
-      unidade: "un",
-      categoria: "Telhas",
-      quantidadeSugerida: Math.max(2, Math.ceil(qtd * 0.2)),
-    },
-    {
-      id: `cumeeira-pvc-lateral-articulada-${corAcessorio}`,
-      nome: `Cumeeira PVC Lateral Articulada — ${corAcessorio}`,
-      descricao: "53cm × 103cm · arremate de espigão e rincão.",
-      emoji: "📐",
-      unidade: "un",
-      categoria: "Telhas",
-      quantidadeSugerida: 2,
-    },
-    {
-      id: `testeira-pvc-${corAcessorio}`,
-      nome: `Testeira / Acabamento Frontal PVC — ${corAcessorio}`,
-      descricao: "Fecha a frente do beiral com o mesmo acabamento.",
-      emoji: "🧱",
-      unidade: "un",
-      categoria: "Telhas",
-      quantidadeSugerida: Math.max(2, Math.ceil(area / 10)),
-    },
-  ];
-};
 
 function Passo({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
@@ -189,15 +143,12 @@ Poderia verificar estoque e frete?`;
         ["Fixação", "Kit parafuso + vedação na cor"],
       ]}
       tituloAcessorios={`Acessórios de PVC ${variante} — ${cor === "Translúcida" ? "Cerâmica" : cor}`}
-      acessorios={
-        <BlocoAcessorios
-          itens={acessoriosPvc(variante, cor, qty, cobertura)}
-          contexto={detail}
-        />
-      }
+      acessorios={<BlocoAcessorios itens={acessoriosPvc(variante, cor, qty)} contexto={detail} />}
       cabecalho={
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">Telha PVC — Colonial e Plan</h1>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Telha PVC — Colonial e Plan
+          </h1>
           <p className="mt-2 text-sm text-gray-500">
             Leveza, conforto térmico e instalação rápida. Não enferruja, não precisa de pintura.
           </p>
@@ -386,7 +337,8 @@ Poderia verificar estoque e frete?`;
             <p className="mt-3 rounded-xl bg-secondary px-4 py-3 text-sm font-semibold text-primary">
               Cobertura estimada: {cobertura} m²{" "}
               <span className="font-normal text-muted-foreground">
-                (largura útil {larguraSel.util.toString().replace(".", ",")} m e sobreposição de 8 cm)
+                (largura útil {larguraSel.util.toString().replace(".", ",")} m e sobreposição de 8
+                cm)
               </span>
             </p>
           </Passo>
