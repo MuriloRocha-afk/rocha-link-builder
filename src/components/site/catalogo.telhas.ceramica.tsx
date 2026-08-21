@@ -6,6 +6,8 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import { imagensPolicarbonato } from "@/data/imagensProduto";
+import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import { acessoriosPlastico } from "@/data/acessoriosTelhas";
 
 const VERSOES = [
   {
@@ -93,6 +95,8 @@ Poderia verificar estoque e frete?`;
           imagens={imagensPolicarbonato[versaoId] ?? []}
         />
       }
+      tituloAcessorios="Acessórios para Telha Plástica"
+      acessorios={<BlocoAcessorios itens={acessoriosPlastico(qty)} contexto={detail} />}
     >
       <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
         <div className="space-y-10">
