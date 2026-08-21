@@ -64,6 +64,51 @@ const CARDS: EmojiSubcard[] = [
       "Anjo Thinner, Aguarraz Mineral e Diluente Premium. Para limpeza e diluição de tintas e vernizes.",
     cta: "Ver produtos e cotar",
   },
+  {
+    slug: "aguarras",
+    name: "Aguarrás",
+    emoji: "🧴",
+    tags: ["Mineral", "Vegetal"],
+    description:
+      "Aguarrás mineral e vegetal para diluir esmaltes e vernizes e limpar ferramentas de pintura.",
+    cta: "Ver produtos e cotar",
+  },
+  {
+    slug: "acessorios-pintura",
+    name: "Acessórios de Aplicação",
+    emoji: "🖌️",
+    tags: ["Rolos", "Pincéis", "Extensores"],
+    description:
+      "Rolos de lã e espuma, pincéis, trinchas, brochas, extensores telescópicos, bandejas e fitas.",
+    cta: "Ver produtos e cotar",
+  },
+  {
+    slug: "lixas",
+    name: "Lixas para Madeira",
+    emoji: "🧽",
+    tags: ["Grãos 50 a 600", "Rolo e folha"],
+    description:
+      "Lixas para madeira, lixa d'água, lixa de massa e esponja abrasiva em todos os grãos.",
+    cta: "Ver produtos e cotar",
+  },
+  {
+    slug: "cola",
+    name: "Colas & Adesivos",
+    emoji: "🧷",
+    tags: ["PVA", "Contato", "PU"],
+    description:
+      "Cola branca PVA, cola de madeira extra, cola de contato, cola PU, super cola e cola para PVC.",
+    cta: "Ver produtos e cotar",
+  },
+  {
+    slug: "pu-calha",
+    name: "PU para Calha",
+    emoji: "🛠️",
+    tags: ["Selante", "4 cores"],
+    description:
+      "Selante poliuretano para emendas de calhas, rufos e água furtada. Alta aderência e resistência a UV.",
+    cta: "Ver produtos e cotar",
+  },
 ];
 
 export default function Tintas() {
