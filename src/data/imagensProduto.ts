@@ -230,6 +230,16 @@ export const imagensMadeirit: Record<string, ImagemProduto[]> = {
   Compensado: [{ src: "", alt: "Compensado estrutural" }],
 };
 
+// TELHA ESMALTADA — por cor
+export const imagensEsmaltada: Record<string, ImagemProduto[]> = {
+  Vermelho: [{ src: "", alt: "Telha Esmaltada Vermelha" }],
+  Branco: [{ src: "", alt: "Telha Esmaltada Branca" }],
+  Preto: [{ src: "", alt: "Telha Esmaltada Preta" }],
+  Azul: [{ src: "", alt: "Telha Esmaltada Azul" }],
+  Verde: [{ src: "", alt: "Telha Esmaltada Verde" }],
+  Marrom: [{ src: "", alt: "Telha Esmaltada Marrom" }],
+};
+
 // TELHA DE CONCRETO — por cor
 export const imagensConcreto: Record<string, ImagemProduto[]> = {
   Grafite: [

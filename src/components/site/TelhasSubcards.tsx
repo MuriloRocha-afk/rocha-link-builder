@@ -27,12 +27,12 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   },
   {
     slug: "colonial-pvc",
-    name: "Telha Colonial PVC",
+    name: "Telha PVC — Colonial e Plan",
     image: pvc,
     description:
-      "Leveza e conforto térmico. Comprimentos de 230cm a 525cm nas cores Cerâmica, Cinza e Marfim.",
+      "Modelos Colonial e Plan. Comprimento, largura e espessura nas cores Cerâmica, Marfim e Cinza.",
     badge: "★ Campeão de Vendas #3",
-    cta: "Escolher Cor e Comprimento",
+    cta: "Escolher Modelo e Cor",
   },
   {
     slug: "ceramica",
@@ -66,6 +66,14 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     description:
       "Areia, Cinza e Grafite — linha Eurotop. Durabilidade e acabamento premium.",
     cta: "Escolher Modelo",
+  },
+  {
+    slug: "esmaltada",
+    name: "Telha Esmaltada",
+    image: ceramica,
+    description:
+      "Cerâmica vitrificada em 6 cores. Cor permanente, impermeável e fácil de limpar.",
+    cta: "Escolher Cor",
   },
   {
     slug: "cumeeiras",

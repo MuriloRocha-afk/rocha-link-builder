@@ -287,6 +287,38 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["NCM", "44071100"],
     ],
   },
+  esmaltada: {
+    badges: [
+      { icone: "✨", texto: "Esmalte vitrificado" },
+      { icone: "🎨", texto: "6 cores" },
+      { icone: "💧", texto: "Impermeável" },
+      { icone: "🧹", texto: "Fácil de limpar" },
+    ],
+    motivos: [
+      {
+        titulo: "Cor que não desbota",
+        descricao: "O esmalte é queimado junto à peça: a cor é permanente, sem pintura.",
+      },
+      {
+        titulo: "Superfície impermeável",
+        descricao: "Praticamente não absorve água, evitando limo, musgo e infiltração.",
+      },
+      {
+        titulo: "Acabamento de alto padrão",
+        descricao: "Brilho uniforme que valoriza projetos arquitetônicos.",
+      },
+      {
+        titulo: "Manutenção mínima",
+        descricao: "Basta lavar com água para recuperar o brilho original.",
+      },
+    ],
+    especificacoes: [
+      ["Material", "Cerâmica esmaltada"],
+      ["Peças por m²", "~17"],
+      ["Inclinação mínima", "30%"],
+      ["Acabamento", "Brilhante"],
+    ],
+  },
   "forro-pvc": {
     badges: [
       { icone: "💧", texto: "Impermeável" },
