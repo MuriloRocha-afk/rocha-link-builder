@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Check, Plus } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Check, Plus } from "lucide-react";
 import { useOrcamento } from "@/context/OrcamentoContext";
 
 export type AcessorioItem = {
@@ -10,6 +11,8 @@ export type AcessorioItem = {
   unidade: string;
   categoria: string;
   quantidadeSugerida: number;
+  /** quando definido, o item vira um link para outra ficha em vez de botão "Add" */
+  href?: string;
 };
 
 export default function BlocoAcessorios({
