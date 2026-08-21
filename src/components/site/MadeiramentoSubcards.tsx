@@ -69,6 +69,15 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     cta: "Ver Produtos",
   },
   {
+    slug: "peroba",
+    name: "Peroba do Norte / D'Água",
+    image: garapeira,
+    description:
+      "Viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada em plaina.",
+    tag: "DOF/IBAMA · Madeira de Lei",
+    cta: "Ver Bitolas",
+  },
+  {
     slug: "garapeira",
     name: "Garapeira",
     image: garapeira,

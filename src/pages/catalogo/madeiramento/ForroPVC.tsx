@@ -4,6 +4,8 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroPVC } from "../../../data/imagensProduto";
 
 const COMPRIMENTOS = [
@@ -78,6 +80,10 @@ export default function ForroPVC() {
               ))}
             </div>
           </div>
+      }
+      tituloAcessorios="Acessórios de Forro de Madeira"
+      acessorios={
+        <BlocoAcessorios itens={acessoriosForroMadeira(area)} contexto={"Forro PVC Branco"} />
       }
       galeria={
         <GaleriaProduto

@@ -4,6 +4,8 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroCedrinho } from "../../../data/imagensProduto";
 
 const MODELOS = [
@@ -57,6 +59,10 @@ export default function ForroCedrinho() {
             <h1 className="text-2xl font-bold text-gray-900 mt-1">✨ Forro Cedrinho Mesclado</h1>
             <p className="text-gray-500 mt-1 text-sm">Acabamento natural nobre para tetos e ambientes internos. Vendido por m², com 10% de perda já calculado.</p>
           </div>
+      }
+      tituloAcessorios="Acessórios de Forro de Madeira"
+      acessorios={
+        <BlocoAcessorios itens={acessoriosForroMadeira(areaComPerda)} contexto={"Forro Cedrinho Mesclado"} />
       }
       galeria={
         <GaleriaProduto

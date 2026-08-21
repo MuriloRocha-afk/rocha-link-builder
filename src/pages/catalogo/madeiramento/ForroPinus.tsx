@@ -4,6 +4,8 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroPinus } from "../../../data/imagensProduto";
 
 const MODELOS = [
@@ -93,6 +95,10 @@ export default function ForroPinus() {
             ))}
           </div>
         </div>
+      }
+      tituloAcessorios="Acessórios de Forro de Madeira"
+      acessorios={
+        <BlocoAcessorios itens={acessoriosForroMadeira(areaComPerda)} contexto={"Forro de Pinus"} />
       }
       galeria={
         <GaleriaProduto titulo="Forro de Pinus" subtitulo="1cm × 10cm · Foto em breve" imagens={imagensForroPinus} />
