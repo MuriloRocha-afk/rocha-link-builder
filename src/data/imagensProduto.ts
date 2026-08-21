@@ -122,8 +122,11 @@ export const imagensEucalipto: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Pontalete Roliço Eucalipto Tratado" },
     { src: "", alt: "Pilha de pontaletes no pátio" },
   ],
-  "viga-eucalipto": [
-    { src: "", alt: "Viga Serrada Eucalipto" },
+  "eucalipto-in-natura": [
+    { src: "", alt: "Eucalipto roliço in natura" },
+  ],
+  "eucalipto-tratado": [
+    { src: "", alt: "Eucalipto tratado em autoclave" },
   ],
 };
 

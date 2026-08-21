@@ -7,18 +7,31 @@ import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensCambara, IMG } from "../../../data/imagensProduto";
 
 
-const TIPOS = ["Viga", "Caibro", "Ripa", "Ripão", "Dormente"] as const;
+const TIPOS = [
+  "Viga",
+  "Caibro",
+  "Caibrão",
+  "Ripa",
+  "Ripão",
+  "Sarrafo",
+  "Tábua",
+  "Dormente",
+] as const;
 type Tipo = typeof TIPOS[number];
 
+/** Bitolas no formato Espessura × Largura */
 const BITOLAS: Record<Tipo, string[]> = {
   Viga: [
     "5x11cm","5x15cm","5x20cm","5x25cm","5x30cm",
     "8x10cm","8x15cm","8x20cm","8x25cm","8x30cm","8x40cm","8x50cm",
     "10x20cm","10x30cm","10x40cm",
   ],
-  Caibro: ["5x5cm","5x7cm"],
+  Caibro: ["5x5cm","5x6cm","5x7cm"],
+  "Caibrão": ["6x8cm","7x9cm","8x8cm"],
   Ripa: ["1,5x5cm"],
-  Ripão: ["2x5cm"],
+  Ripão: ["2x5cm","2x7cm"],
+  Sarrafo: ["2,5x5cm","2,5x7cm","2,5x10cm","2,5x15cm"],
+  "Tábua": ["2,5x20cm","2,5x25cm","2,5x30cm"],
   Dormente: ["8x8cm","10x10cm","15x15cm","20x20cm"],
 };
 
@@ -30,8 +43,11 @@ const COMPRIMENTOS = [
 const ICONES: Record<Tipo, string> = {
   Viga: "🏗️",
   Caibro: "📐",
+  "Caibrão": "📏",
   Ripa: "〰️",
-  Ripão: "〰️",
+  Ripão: "➖",
+  Sarrafo: "📋",
+  "Tábua": "🪵",
   Dormente: "🪨",
 };
 
@@ -169,7 +185,7 @@ export default function Cambara() {
               <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
               Tipo de Peça
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {TIPOS.map((t) => (
                 <button
                   key={t}
@@ -192,7 +208,7 @@ export default function Cambara() {
             <section className="bg-white rounded-2xl p-5 shadow-sm">
               <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
-                Bitola — {tipo}
+                Espessura × Largura — {tipo}
               </h2>
               <div className="flex flex-wrap gap-2">
                 {BITOLAS[tipo].map((b) => (

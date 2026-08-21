@@ -33,6 +33,7 @@ import { Route as CatalogoTelhasConcretoRouteImport } from './routes/catalogo.te
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
 import { Route as CatalogoTelhasCeramicaRouteImport } from './routes/catalogo.telhas.ceramica'
 import { Route as CatalogoMadeiramentoTabeirasDeckRouteImport } from './routes/catalogo.madeiramento.tabeiras-deck'
+import { Route as CatalogoMadeiramentoPontaleteEucaliptoRouteImport } from './routes/catalogo.madeiramento.pontalete-eucalipto'
 import { Route as CatalogoMadeiramentoPinusRouteImport } from './routes/catalogo.madeiramento.pinus'
 import { Route as CatalogoMadeiramentoMouraoRouteImport } from './routes/catalogo.madeiramento.mourao'
 import { Route as CatalogoMadeiramentoMadeiritRouteImport } from './routes/catalogo.madeiramento.madeirit'
@@ -186,6 +187,12 @@ const CatalogoMadeiramentoTabeirasDeckRoute =
   CatalogoMadeiramentoTabeirasDeckRouteImport.update({
     id: '/catalogo/madeiramento/tabeiras-deck',
     path: '/catalogo/madeiramento/tabeiras-deck',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoMadeiramentoPontaleteEucaliptoRoute =
+  CatalogoMadeiramentoPontaleteEucaliptoRouteImport.update({
+    id: '/catalogo/madeiramento/pontalete-eucalipto',
+    path: '/catalogo/madeiramento/pontalete-eucalipto',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoMadeiramentoPinusRoute =
@@ -365,6 +372,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
+  '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
   '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
@@ -415,6 +423,7 @@ export interface FileRoutesByTo {
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
+  '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
   '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
@@ -467,6 +476,7 @@ export interface FileRoutesById {
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
+  '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
   '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
@@ -520,6 +530,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/pinus'
+    | '/catalogo/madeiramento/pontalete-eucalipto'
     | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
@@ -570,6 +581,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/pinus'
+    | '/catalogo/madeiramento/pontalete-eucalipto'
     | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
@@ -621,6 +633,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/pinus'
+    | '/catalogo/madeiramento/pontalete-eucalipto'
     | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
@@ -672,6 +685,7 @@ export interface RootRouteChildren {
   CatalogoMadeiramentoMadeiritRoute: typeof CatalogoMadeiramentoMadeiritRoute
   CatalogoMadeiramentoMouraoRoute: typeof CatalogoMadeiramentoMouraoRoute
   CatalogoMadeiramentoPinusRoute: typeof CatalogoMadeiramentoPinusRoute
+  CatalogoMadeiramentoPontaleteEucaliptoRoute: typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
   CatalogoMadeiramentoTabeirasDeckRoute: typeof CatalogoMadeiramentoTabeirasDeckRoute
   CatalogoTelhasCeramicaRoute: typeof CatalogoTelhasCeramicaRoute
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
@@ -861,6 +875,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/madeiramento/tabeiras-deck'
       fullPath: '/catalogo/madeiramento/tabeiras-deck'
       preLoaderRoute: typeof CatalogoMadeiramentoTabeirasDeckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/pontalete-eucalipto': {
+      id: '/catalogo/madeiramento/pontalete-eucalipto'
+      path: '/catalogo/madeiramento/pontalete-eucalipto'
+      fullPath: '/catalogo/madeiramento/pontalete-eucalipto'
+      preLoaderRoute: typeof CatalogoMadeiramentoPontaleteEucaliptoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/madeiramento/pinus': {
@@ -1089,6 +1110,8 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoMadeiramentoMadeiritRoute: CatalogoMadeiramentoMadeiritRoute,
   CatalogoMadeiramentoMouraoRoute: CatalogoMadeiramentoMouraoRoute,
   CatalogoMadeiramentoPinusRoute: CatalogoMadeiramentoPinusRoute,
+  CatalogoMadeiramentoPontaleteEucaliptoRoute:
+    CatalogoMadeiramentoPontaleteEucaliptoRoute,
   CatalogoMadeiramentoTabeirasDeckRoute: CatalogoMadeiramentoTabeirasDeckRoute,
   CatalogoTelhasCeramicaRoute: CatalogoTelhasCeramicaRoute,
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,
