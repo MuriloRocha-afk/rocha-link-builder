@@ -1,6 +1,7 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
 import { imagensConcreto, imagensEsmaltada } from "@/data/imagensProduto";
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
+import { acessoriosPlastico, chumbador } from "@/data/acessoriosTelhas";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -237,6 +238,8 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     ["Fixação", "Parafuso com vedação 110mm"],
     ["Compatibilidade", "100% com telha fibrocimento INFIBRA"],
   ],
+  tituloAcessorios: "Acessórios para Telha Plástica",
+  acessorios: (_s, q) => acessoriosPlastico((q.qtd as number) ?? 5),
   resumoNome: () => "Telha Translúcida Polipropileno",
   resumoDetalhe: (s, q) =>
     `${s.comprimento} · ${q.qtd ?? 5} peças · ~${coberturaPP(s.comprimento, (q.qtd as number) ?? 5)} m²`,
