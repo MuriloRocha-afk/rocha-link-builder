@@ -39,6 +39,7 @@ import { Route as CatalogoMadeiramentoMouraoRouteImport } from './routes/catalog
 import { Route as CatalogoMadeiramentoMadeiritRouteImport } from './routes/catalogo.madeiramento.madeirit'
 import { Route as CatalogoMadeiramentoGarapeiraRouteImport } from './routes/catalogo.madeiramento.garapeira'
 import { Route as CatalogoMadeiramentoForroPvcRouteImport } from './routes/catalogo.madeiramento.forro-pvc'
+import { Route as CatalogoMadeiramentoForroPinusRouteImport } from './routes/catalogo.madeiramento.forro-pinus'
 import { Route as CatalogoMadeiramentoForroCedrinhoRouteImport } from './routes/catalogo.madeiramento.forro-cedrinho'
 import { Route as CatalogoMadeiramentoEucaliptoRouteImport } from './routes/catalogo.madeiramento.eucalipto'
 import { Route as CatalogoMadeiramentoCedrinhoRouteImport } from './routes/catalogo.madeiramento.cedrinho'
@@ -225,6 +226,12 @@ const CatalogoMadeiramentoForroPvcRoute =
     path: '/catalogo/madeiramento/forro-pvc',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoMadeiramentoForroPinusRoute =
+  CatalogoMadeiramentoForroPinusRouteImport.update({
+    id: '/catalogo/madeiramento/forro-pinus',
+    path: '/catalogo/madeiramento/forro-pinus',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoForroCedrinhoRoute =
   CatalogoMadeiramentoForroCedrinhoRouteImport.update({
     id: '/catalogo/madeiramento/forro-cedrinho',
@@ -367,6 +374,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
   '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
+  '/catalogo/madeiramento/forro-pinus': typeof CatalogoMadeiramentoForroPinusRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
@@ -418,6 +426,7 @@ export interface FileRoutesByTo {
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
   '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
+  '/catalogo/madeiramento/forro-pinus': typeof CatalogoMadeiramentoForroPinusRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
@@ -471,6 +480,7 @@ export interface FileRoutesById {
   '/catalogo/madeiramento/cedrinho': typeof CatalogoMadeiramentoCedrinhoRoute
   '/catalogo/madeiramento/eucalipto': typeof CatalogoMadeiramentoEucaliptoRoute
   '/catalogo/madeiramento/forro-cedrinho': typeof CatalogoMadeiramentoForroCedrinhoRoute
+  '/catalogo/madeiramento/forro-pinus': typeof CatalogoMadeiramentoForroPinusRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
@@ -525,6 +535,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
     | '/catalogo/madeiramento/forro-cedrinho'
+    | '/catalogo/madeiramento/forro-pinus'
     | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/madeiramento/garapeira'
     | '/catalogo/madeiramento/madeirit'
@@ -576,6 +587,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
     | '/catalogo/madeiramento/forro-cedrinho'
+    | '/catalogo/madeiramento/forro-pinus'
     | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/madeiramento/garapeira'
     | '/catalogo/madeiramento/madeirit'
@@ -628,6 +640,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/cedrinho'
     | '/catalogo/madeiramento/eucalipto'
     | '/catalogo/madeiramento/forro-cedrinho'
+    | '/catalogo/madeiramento/forro-pinus'
     | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/madeiramento/garapeira'
     | '/catalogo/madeiramento/madeirit'
@@ -680,6 +693,7 @@ export interface RootRouteChildren {
   CatalogoMadeiramentoCedrinhoRoute: typeof CatalogoMadeiramentoCedrinhoRoute
   CatalogoMadeiramentoEucaliptoRoute: typeof CatalogoMadeiramentoEucaliptoRoute
   CatalogoMadeiramentoForroCedrinhoRoute: typeof CatalogoMadeiramentoForroCedrinhoRoute
+  CatalogoMadeiramentoForroPinusRoute: typeof CatalogoMadeiramentoForroPinusRoute
   CatalogoMadeiramentoForroPvcRoute: typeof CatalogoMadeiramentoForroPvcRoute
   CatalogoMadeiramentoGarapeiraRoute: typeof CatalogoMadeiramentoGarapeiraRoute
   CatalogoMadeiramentoMadeiritRoute: typeof CatalogoMadeiramentoMadeiritRoute
@@ -919,6 +933,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoForroPvcRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/forro-pinus': {
+      id: '/catalogo/madeiramento/forro-pinus'
+      path: '/catalogo/madeiramento/forro-pinus'
+      fullPath: '/catalogo/madeiramento/forro-pinus'
+      preLoaderRoute: typeof CatalogoMadeiramentoForroPinusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/forro-cedrinho': {
       id: '/catalogo/madeiramento/forro-cedrinho'
       path: '/catalogo/madeiramento/forro-cedrinho'
@@ -1105,6 +1126,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoMadeiramentoEucaliptoRoute: CatalogoMadeiramentoEucaliptoRoute,
   CatalogoMadeiramentoForroCedrinhoRoute:
     CatalogoMadeiramentoForroCedrinhoRoute,
+  CatalogoMadeiramentoForroPinusRoute: CatalogoMadeiramentoForroPinusRoute,
   CatalogoMadeiramentoForroPvcRoute: CatalogoMadeiramentoForroPvcRoute,
   CatalogoMadeiramentoGarapeiraRoute: CatalogoMadeiramentoGarapeiraRoute,
   CatalogoMadeiramentoMadeiritRoute: CatalogoMadeiramentoMadeiritRoute,
