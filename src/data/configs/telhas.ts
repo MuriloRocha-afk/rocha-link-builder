@@ -135,14 +135,16 @@ const acessoriosEsmaltada = (cor: string, qtd: number): AcessorioItem[] => [
     quantidadeSugerida: Math.max(1, Math.ceil(qtd / 150)),
   },
   {
-    id: "manta-termica-1f-10m2",
-    nome: "Manta Térmica Aluminizada 1F × 10m²",
-    descricao: "Conforto térmico sob a telha esmaltada.",
-    emoji: "🌡️",
+    id: "ver-cumeeiras-esmaltadas",
+    nome: "Ver todas as Cumeeiras Esmaltadas",
+    descricao: "Bloco completo de cumeeiras: barro, concreto, esmaltada, PVC e fibrocimento.",
+    emoji: "🔺",
     unidade: "un",
-    categoria: "Calhas",
-    quantidadeSugerida: Math.max(1, Math.ceil((qtd * 0.058) / 10)),
+    categoria: "Telhas",
+    quantidadeSugerida: 0,
+    href: "/catalogo/telhas/cumeeiras",
   },
+  chumbador(qtd),
 ];
 
 export const CONFIG_ESMALTADA: ConfiguradorConfig = {
