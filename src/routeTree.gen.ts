@@ -23,6 +23,7 @@ import { Route as CatalogoTintasThinnerRouteImport } from './routes/catalogo.tin
 import { Route as CatalogoTintasStainRouteImport } from './routes/catalogo.tintas.stain'
 import { Route as CatalogoTintasSeladoraRouteImport } from './routes/catalogo.tintas.seladora'
 import { Route as CatalogoTintasPuCalhaRouteImport } from './routes/catalogo.tintas.pu-calha'
+import { Route as CatalogoTintasLonaPlasticaRouteImport } from './routes/catalogo.tintas.lona-plastica'
 import { Route as CatalogoTintasLixasRouteImport } from './routes/catalogo.tintas.lixas'
 import { Route as CatalogoTintasEsmalteRouteImport } from './routes/catalogo.tintas.esmalte'
 import { Route as CatalogoTintasCupicidaRouteImport } from './routes/catalogo.tintas.cupicida'
@@ -56,6 +57,7 @@ import { Route as CatalogoMadeiramentoAmesclaRouteImport } from './routes/catalo
 import { Route as CatalogoFixadoresPregosRouteImport } from './routes/catalogo.fixadores.pregos'
 import { Route as CatalogoFixadoresParafusosTelhaRouteImport } from './routes/catalogo.fixadores.parafusos-telha'
 import { Route as CatalogoFixadoresParafusosMadeiraRouteImport } from './routes/catalogo.fixadores.parafusos-madeira'
+import { Route as CatalogoFixadoresFerramentasRouteImport } from './routes/catalogo.fixadores.ferramentas'
 import { Route as CatalogoFixadoresEspigoesRouteImport } from './routes/catalogo.fixadores.espigoes'
 import { Route as CatalogoFixadoresBuchasArruelasRouteImport } from './routes/catalogo.fixadores.buchas-arruelas'
 import { Route as CatalogoFixadoresAramesRouteImport } from './routes/catalogo.fixadores.arames'
@@ -143,6 +145,12 @@ const CatalogoTintasPuCalhaRoute = CatalogoTintasPuCalhaRouteImport.update({
   path: '/catalogo/tintas/pu-calha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoTintasLonaPlasticaRoute =
+  CatalogoTintasLonaPlasticaRouteImport.update({
+    id: '/catalogo/tintas/lona-plastica',
+    path: '/catalogo/tintas/lona-plastica',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoTintasLixasRoute = CatalogoTintasLixasRouteImport.update({
   id: '/catalogo/tintas/lixas',
   path: '/catalogo/tintas/lixas',
@@ -330,6 +338,12 @@ const CatalogoFixadoresParafusosMadeiraRoute =
     path: '/catalogo/fixadores/parafusos-madeira',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoFixadoresFerramentasRoute =
+  CatalogoFixadoresFerramentasRouteImport.update({
+    id: '/catalogo/fixadores/ferramentas',
+    path: '/catalogo/fixadores/ferramentas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoFixadoresEspigoesRoute =
   CatalogoFixadoresEspigoesRouteImport.update({
     id: '/catalogo/fixadores/espigoes',
@@ -424,6 +438,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
   '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
   '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
+  '/catalogo/fixadores/ferramentas': typeof CatalogoFixadoresFerramentasRoute
   '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
   '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
   '/catalogo/fixadores/pregos': typeof CatalogoFixadoresPregosRoute
@@ -457,6 +472,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
+  '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
@@ -485,6 +501,7 @@ export interface FileRoutesByTo {
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
   '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
   '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
+  '/catalogo/fixadores/ferramentas': typeof CatalogoFixadoresFerramentasRoute
   '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
   '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
   '/catalogo/fixadores/pregos': typeof CatalogoFixadoresPregosRoute
@@ -518,6 +535,7 @@ export interface FileRoutesByTo {
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
+  '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
@@ -548,6 +566,7 @@ export interface FileRoutesById {
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
   '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
   '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
+  '/catalogo/fixadores/ferramentas': typeof CatalogoFixadoresFerramentasRoute
   '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
   '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
   '/catalogo/fixadores/pregos': typeof CatalogoFixadoresPregosRoute
@@ -581,6 +600,7 @@ export interface FileRoutesById {
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
+  '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
@@ -612,6 +632,7 @@ export interface FileRouteTypes {
     | '/catalogo/fixadores/arames'
     | '/catalogo/fixadores/buchas-arruelas'
     | '/catalogo/fixadores/espigoes'
+    | '/catalogo/fixadores/ferramentas'
     | '/catalogo/fixadores/parafusos-madeira'
     | '/catalogo/fixadores/parafusos-telha'
     | '/catalogo/fixadores/pregos'
@@ -645,6 +666,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/esmalte'
     | '/catalogo/tintas/lixas'
+    | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/seladora'
     | '/catalogo/tintas/stain'
@@ -673,6 +695,7 @@ export interface FileRouteTypes {
     | '/catalogo/fixadores/arames'
     | '/catalogo/fixadores/buchas-arruelas'
     | '/catalogo/fixadores/espigoes'
+    | '/catalogo/fixadores/ferramentas'
     | '/catalogo/fixadores/parafusos-madeira'
     | '/catalogo/fixadores/parafusos-telha'
     | '/catalogo/fixadores/pregos'
@@ -706,6 +729,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/esmalte'
     | '/catalogo/tintas/lixas'
+    | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/seladora'
     | '/catalogo/tintas/stain'
@@ -735,6 +759,7 @@ export interface FileRouteTypes {
     | '/catalogo/fixadores/arames'
     | '/catalogo/fixadores/buchas-arruelas'
     | '/catalogo/fixadores/espigoes'
+    | '/catalogo/fixadores/ferramentas'
     | '/catalogo/fixadores/parafusos-madeira'
     | '/catalogo/fixadores/parafusos-telha'
     | '/catalogo/fixadores/pregos'
@@ -768,6 +793,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/esmalte'
     | '/catalogo/tintas/lixas'
+    | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/seladora'
     | '/catalogo/tintas/stain'
@@ -797,6 +823,7 @@ export interface RootRouteChildren {
   CatalogoFixadoresAramesRoute: typeof CatalogoFixadoresAramesRoute
   CatalogoFixadoresBuchasArruelasRoute: typeof CatalogoFixadoresBuchasArruelasRoute
   CatalogoFixadoresEspigoesRoute: typeof CatalogoFixadoresEspigoesRoute
+  CatalogoFixadoresFerramentasRoute: typeof CatalogoFixadoresFerramentasRoute
   CatalogoFixadoresParafusosMadeiraRoute: typeof CatalogoFixadoresParafusosMadeiraRoute
   CatalogoFixadoresParafusosTelhaRoute: typeof CatalogoFixadoresParafusosTelhaRoute
   CatalogoFixadoresPregosRoute: typeof CatalogoFixadoresPregosRoute
@@ -830,6 +857,7 @@ export interface RootRouteChildren {
   CatalogoTintasCupicidaRoute: typeof CatalogoTintasCupicidaRoute
   CatalogoTintasEsmalteRoute: typeof CatalogoTintasEsmalteRoute
   CatalogoTintasLixasRoute: typeof CatalogoTintasLixasRoute
+  CatalogoTintasLonaPlasticaRoute: typeof CatalogoTintasLonaPlasticaRoute
   CatalogoTintasPuCalhaRoute: typeof CatalogoTintasPuCalhaRoute
   CatalogoTintasSeladoraRoute: typeof CatalogoTintasSeladoraRoute
   CatalogoTintasStainRoute: typeof CatalogoTintasStainRoute
@@ -939,6 +967,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/tintas/pu-calha'
       fullPath: '/catalogo/tintas/pu-calha'
       preLoaderRoute: typeof CatalogoTintasPuCalhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/lona-plastica': {
+      id: '/catalogo/tintas/lona-plastica'
+      path: '/catalogo/tintas/lona-plastica'
+      fullPath: '/catalogo/tintas/lona-plastica'
+      preLoaderRoute: typeof CatalogoTintasLonaPlasticaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/tintas/lixas': {
@@ -1172,6 +1207,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoFixadoresParafusosMadeiraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/fixadores/ferramentas': {
+      id: '/catalogo/fixadores/ferramentas'
+      path: '/catalogo/fixadores/ferramentas'
+      fullPath: '/catalogo/fixadores/ferramentas'
+      preLoaderRoute: typeof CatalogoFixadoresFerramentasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/fixadores/espigoes': {
       id: '/catalogo/fixadores/espigoes'
       path: '/catalogo/fixadores/espigoes'
@@ -1300,6 +1342,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoFixadoresAramesRoute: CatalogoFixadoresAramesRoute,
   CatalogoFixadoresBuchasArruelasRoute: CatalogoFixadoresBuchasArruelasRoute,
   CatalogoFixadoresEspigoesRoute: CatalogoFixadoresEspigoesRoute,
+  CatalogoFixadoresFerramentasRoute: CatalogoFixadoresFerramentasRoute,
   CatalogoFixadoresParafusosMadeiraRoute:
     CatalogoFixadoresParafusosMadeiraRoute,
   CatalogoFixadoresParafusosTelhaRoute: CatalogoFixadoresParafusosTelhaRoute,
@@ -1336,6 +1379,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTintasCupicidaRoute: CatalogoTintasCupicidaRoute,
   CatalogoTintasEsmalteRoute: CatalogoTintasEsmalteRoute,
   CatalogoTintasLixasRoute: CatalogoTintasLixasRoute,
+  CatalogoTintasLonaPlasticaRoute: CatalogoTintasLonaPlasticaRoute,
   CatalogoTintasPuCalhaRoute: CatalogoTintasPuCalhaRoute,
   CatalogoTintasSeladoraRoute: CatalogoTintasSeladoraRoute,
   CatalogoTintasStainRoute: CatalogoTintasStainRoute,

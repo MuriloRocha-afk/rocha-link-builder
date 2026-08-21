@@ -56,6 +56,15 @@ const CARDS: EmojiSubcard[] = [
       "Parafuso Chipboard, Autobrocante e Frances Completo em diversas bitolas para estruturas e caixaria.",
     cta: "Escolher e cotar",
   },
+  {
+    slug: "ferramentas",
+    name: "Ferramentas Bestfer",
+    emoji: "🧰",
+    tags: ["Bestfer", "Serras", "Furadeiras"],
+    description:
+      "Serras e discos de serra, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves e alicates da linha Bestfer.",
+    cta: "Escolher e cotar",
+  },
 ];
 
 export default function Fixadores() {
