@@ -59,6 +59,7 @@ import { Route as CatalogoCalhasMantaTermicaRouteImport } from './routes/catalog
 import { Route as CatalogoCalhasMantaAsfalticaRouteImport } from './routes/catalogo.calhas.manta-asfaltica'
 import { Route as CatalogoCalhasCalhaAquapluvRouteImport } from './routes/catalogo.calhas.calha-aquapluv'
 import { Route as CatalogoCalhasCalhaAlgeRouteImport } from './routes/catalogo.calhas.calha-alge'
+import { Route as CatalogoCalhasAguaFurtadaRouteImport } from './routes/catalogo.calhas.agua-furtada'
 import { Route as CatalogoCalhasAcessoriosCalhaRouteImport } from './routes/catalogo.calhas.acessorios-calha'
 import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo.calhas.$produtoSlug'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
@@ -342,6 +343,12 @@ const CatalogoCalhasCalhaAlgeRoute = CatalogoCalhasCalhaAlgeRouteImport.update({
   path: '/catalogo/calhas/calha-alge',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoCalhasAguaFurtadaRoute =
+  CatalogoCalhasAguaFurtadaRouteImport.update({
+    id: '/catalogo/calhas/agua-furtada',
+    path: '/catalogo/calhas/agua-furtada',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoCalhasAcessoriosCalhaRoute =
   CatalogoCalhasAcessoriosCalhaRouteImport.update({
     id: '/catalogo/calhas/acessorios-calha',
@@ -369,6 +376,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/calhas/acessorios-calha': typeof CatalogoCalhasAcessoriosCalhaRoute
+  '/catalogo/calhas/agua-furtada': typeof CatalogoCalhasAguaFurtadaRoute
   '/catalogo/calhas/calha-alge': typeof CatalogoCalhasCalhaAlgeRoute
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
@@ -423,6 +431,7 @@ export interface FileRoutesByTo {
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/calhas/acessorios-calha': typeof CatalogoCalhasAcessoriosCalhaRoute
+  '/catalogo/calhas/agua-furtada': typeof CatalogoCalhasAguaFurtadaRoute
   '/catalogo/calhas/calha-alge': typeof CatalogoCalhasCalhaAlgeRoute
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
@@ -479,6 +488,7 @@ export interface FileRoutesById {
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/calhas/acessorios-calha': typeof CatalogoCalhasAcessoriosCalhaRoute
+  '/catalogo/calhas/agua-furtada': typeof CatalogoCalhasAguaFurtadaRoute
   '/catalogo/calhas/calha-alge': typeof CatalogoCalhasCalhaAlgeRoute
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
@@ -536,6 +546,7 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/calhas/acessorios-calha'
+    | '/catalogo/calhas/agua-furtada'
     | '/catalogo/calhas/calha-alge'
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
@@ -590,6 +601,7 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/calhas/acessorios-calha'
+    | '/catalogo/calhas/agua-furtada'
     | '/catalogo/calhas/calha-alge'
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
@@ -645,6 +657,7 @@ export interface FileRouteTypes {
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/calhas/acessorios-calha'
+    | '/catalogo/calhas/agua-furtada'
     | '/catalogo/calhas/calha-alge'
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
@@ -700,6 +713,7 @@ export interface RootRouteChildren {
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoCalhasProdutoSlugRoute: typeof CatalogoCalhasProdutoSlugRoute
   CatalogoCalhasAcessoriosCalhaRoute: typeof CatalogoCalhasAcessoriosCalhaRoute
+  CatalogoCalhasAguaFurtadaRoute: typeof CatalogoCalhasAguaFurtadaRoute
   CatalogoCalhasCalhaAlgeRoute: typeof CatalogoCalhasCalhaAlgeRoute
   CatalogoCalhasCalhaAquapluvRoute: typeof CatalogoCalhasCalhaAquapluvRoute
   CatalogoCalhasMantaAsfalticaRoute: typeof CatalogoCalhasMantaAsfalticaRoute
@@ -1099,6 +1113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoCalhasCalhaAlgeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/calhas/agua-furtada': {
+      id: '/catalogo/calhas/agua-furtada'
+      path: '/catalogo/calhas/agua-furtada'
+      fullPath: '/catalogo/calhas/agua-furtada'
+      preLoaderRoute: typeof CatalogoCalhasAguaFurtadaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/calhas/acessorios-calha': {
       id: '/catalogo/calhas/acessorios-calha'
       path: '/catalogo/calhas/acessorios-calha'
@@ -1147,6 +1168,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoCalhasProdutoSlugRoute: CatalogoCalhasProdutoSlugRoute,
   CatalogoCalhasAcessoriosCalhaRoute: CatalogoCalhasAcessoriosCalhaRoute,
+  CatalogoCalhasAguaFurtadaRoute: CatalogoCalhasAguaFurtadaRoute,
   CatalogoCalhasCalhaAlgeRoute: CatalogoCalhasCalhaAlgeRoute,
   CatalogoCalhasCalhaAquapluvRoute: CatalogoCalhasCalhaAquapluvRoute,
   CatalogoCalhasMantaAsfalticaRoute: CatalogoCalhasMantaAsfalticaRoute,
