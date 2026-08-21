@@ -185,7 +185,7 @@ export default function Cambara() {
               <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
               Tipo de Peça
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {TIPOS.map((t) => (
                 <button
                   key={t}
@@ -208,7 +208,7 @@ export default function Cambara() {
             <section className="bg-white rounded-2xl p-5 shadow-sm">
               <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
-                Bitola — {tipo}
+                Espessura × Largura — {tipo}
               </h2>
               <div className="flex flex-wrap gap-2">
                 {BITOLAS[tipo].map((b) => (
