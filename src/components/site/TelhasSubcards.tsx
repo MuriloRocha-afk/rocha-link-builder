@@ -36,13 +36,22 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   },
   {
     slug: "ceramica",
-    name: "Telha Cerâmica — Portuguesa e Romana",
+    name: "Telha Cerâmica — 5 Formatos",
     image: ceramica,
     description:
-      "Portuguesa Resinada (Isotec e Rodrigues) e Romana Resinada. Beleza e tradição.",
+      "Portuguesa, Romana, Americana, Francesa e Mediterrânea — natural ou resinada. Marcas Isotec, Rodrigues, Laranjal e Top Telha.",
     badge: "★ Campeão de Vendas",
-    cta: "Escolher Modelo e Cotar",
+    cta: "Escolher Formato e Cotar",
   },
+  {
+    slug: "vidro",
+    name: "Telha de Vidro",
+    image: ceramica,
+    description:
+      "Formatos Portuguesa, Romana e Americana. Ponto de luz natural com encaixe igual ao da telha cerâmica.",
+    cta: "Escolher Formato",
+  },
+
   {
     slug: "policarbonato",
     name: "Telha Policarbonato",
