@@ -92,9 +92,7 @@ Poderia verificar estoque e frete para minha região?`;
         />
       }
       tituloAcessorios="Acessórios para Telha de Fibrocimento"
-      acessorios={
-        <BlocoAcessorios itens={acessoriosFibrocimento(qty)} contexto={detail} />
-      }
+      acessorios={<BlocoAcessorios itens={acessoriosFibrocimento(qty)} contexto={detail} />}
     >
       <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] md:p-8">
         <div className="space-y-10">

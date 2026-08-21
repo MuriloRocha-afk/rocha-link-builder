@@ -4,7 +4,8 @@ import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 export const chumbador = (qtd: number): AcessorioItem => ({
   id: "chumbador-parabolt",
   nome: "Chumbador (Parabolt)",
-  descricao: "Fixação geral de estrutura e perfis em alvenaria ou concreto. Serve para qualquer tipo de telha.",
+  descricao:
+    "Fixação geral de estrutura e perfis em alvenaria ou concreto. Serve para qualquer tipo de telha.",
   emoji: "🔩",
   unidade: "un",
   categoria: "Fixadores",
@@ -12,11 +13,7 @@ export const chumbador = (qtd: number): AcessorioItem => ({
 });
 
 /** Telha PVC (Colonial e Plan): espigão, calço, kit de fixação e vedação. */
-export const acessoriosPvc = (
-  variante: string,
-  cor: string,
-  qtd: number,
-): AcessorioItem[] => {
+export const acessoriosPvc = (variante: string, cor: string, qtd: number): AcessorioItem[] => {
   const c = cor === "Translúcida" ? "Cerâmica" : cor;
   return [
     {

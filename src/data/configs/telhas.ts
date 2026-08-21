@@ -19,8 +19,7 @@ export const CONFIG_CONCRETO: ConfiguradorConfig = {
   produtoKey: "concreto",
   breadcrumb: BC("Telha de Concreto"),
   titulo: "🏗️ Telha de Concreto",
-  subtitulo:
-    "Areia, Cinza e Grafite — linha Eurotop. Durabilidade máxima e acabamento premium.",
+  subtitulo: "Areia, Cinza e Grafite — linha Eurotop. Durabilidade máxima e acabamento premium.",
   galeriaTitulo: "Telha de Concreto Eurotop",
   galeriaPlaceholder: "Selecione uma cor para ver as fotos",
   imagens: (s) =>
@@ -157,9 +156,7 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
   galeriaTitulo: "Telha Esmaltada",
   galeriaPlaceholder: "Selecione uma cor para ver as fotos",
   imagens: (s) =>
-    s.cor
-      ? (imagensEsmaltada[s.cor] ?? [{ src: "", alt: `Telha Esmaltada ${s.cor}` }])
-      : [],
+    s.cor ? (imagensEsmaltada[s.cor] ?? [{ src: "", alt: `Telha Esmaltada ${s.cor}` }]) : [],
   categoria: "Telhas",
   passos: [
     { chave: "cor", titulo: "Cor do Esmalte", tipo: "grid3", opcoes: CORES_ESMALTADA },
@@ -170,8 +167,7 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
       unidade: "peças",
       padrao: 100,
       passo: 10,
-      nota: (_s, q) =>
-        `Cobertura estimada: ~${(q * 0.058).toFixed(1)} m² (~17 telhas por m²)`,
+      nota: (_s, q) => `Cobertura estimada: ~${(q * 0.058).toFixed(1)} m² (~17 telhas por m²)`,
     },
   ],
   especificacoes: [
@@ -215,9 +211,7 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
   galeriaTitulo: "Telha Translúcida Polipropileno",
   galeriaPlaceholder: "Selecione um comprimento para ver as fotos",
   imagens: (s) =>
-    s.comprimento
-      ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }]
-      : [],
+    s.comprimento ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }] : [],
   categoria: "Telhas",
   passos: [
     { chave: "comprimento", titulo: "Comprimento", tipo: "lista", opcoes: COMPRIMENTOS_PP },
@@ -286,7 +280,11 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
 const TIPOS_CUMEEIRA = [
   { valor: "Barro Resinada", emoji: "🪨", sub: "Mesclada ou Larga Resinada" },
   { valor: "Concreto", emoji: "🏗️", sub: "3 Vias, Inicial, Cinza, Cores, Tabaco" },
-  { valor: "Esmaltada", emoji: "✨", sub: "Vitrificada · Vermelho, Branco, Preto, Azul, Verde ou Marrom" },
+  {
+    valor: "Esmaltada",
+    emoji: "✨",
+    sub: "Vitrificada · Vermelho, Branco, Preto, Azul, Verde ou Marrom",
+  },
   { valor: "PVC Central Fixa", emoji: "🟧", sub: "53cm × 86cm · Cerâmica, Cinza ou Marfim" },
   { valor: "PVC Central Articulada", emoji: "🟧", sub: "53cm × 86cm · Cerâmica, Cinza ou Marfim" },
   { valor: "PVC Lateral Articulada", emoji: "🟧", sub: "53cm × 103cm · Cerâmica, Cinza ou Marfim" },
@@ -304,7 +302,6 @@ const variacoesCumeeira = (tipo: string) => {
   if (tipo === "Esmaltada") return ["Vermelho", "Branco", "Preto", "Azul", "Verde", "Marrom"];
   return [];
 };
-
 
 export const CONFIG_CUMEEIRAS: ConfiguradorConfig = {
   breadcrumb: BC("Cumeeiras & Acessórios"),

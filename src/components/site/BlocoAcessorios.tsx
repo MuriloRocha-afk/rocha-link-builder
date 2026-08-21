@@ -57,34 +57,36 @@ export default function BlocoAcessorios({
                 Ver <ArrowRight size={14} />
               </Link>
             ) : (
-            <button
-              type="button"
-              onClick={() => {
-                adicionar({
-                  id: a.id,
-                  nome: a.nome,
-                  variacao: contexto ?? a.descricao,
-                  quantidade: a.quantidadeSugerida,
-                  unidade: a.unidade,
-                  categoria: a.categoria,
-                });
-                setAddId(a.id);
-                setTimeout(() => setAddId(null), 1200);
-              }}
-              className={`flex shrink-0 items-center gap-1 rounded-lg px-3 py-2 text-xs font-bold transition-colors ${
-                ok ? "bg-green-600 text-white" : "bg-orange-50 text-orange-600 hover:bg-orange-100"
-              }`}
-            >
-              {ok ? (
-                <>
-                  <Check size={14} /> Ok
-                </>
-              ) : (
-                <>
-                  <Plus size={14} /> Add
-                </>
-              )}
-            </button>
+              <button
+                type="button"
+                onClick={() => {
+                  adicionar({
+                    id: a.id,
+                    nome: a.nome,
+                    variacao: contexto ?? a.descricao,
+                    quantidade: a.quantidadeSugerida,
+                    unidade: a.unidade,
+                    categoria: a.categoria,
+                  });
+                  setAddId(a.id);
+                  setTimeout(() => setAddId(null), 1200);
+                }}
+                className={`flex shrink-0 items-center gap-1 rounded-lg px-3 py-2 text-xs font-bold transition-colors ${
+                  ok
+                    ? "bg-green-600 text-white"
+                    : "bg-orange-50 text-orange-600 hover:bg-orange-100"
+                }`}
+              >
+                {ok ? (
+                  <>
+                    <Check size={14} /> Ok
+                  </>
+                ) : (
+                  <>
+                    <Plus size={14} /> Add
+                  </>
+                )}
+              </button>
             )}
           </div>
         );

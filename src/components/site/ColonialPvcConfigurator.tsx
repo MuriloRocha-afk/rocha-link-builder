@@ -143,15 +143,12 @@ Poderia verificar estoque e frete?`;
         ["Fixação", "Kit parafuso + vedação na cor"],
       ]}
       tituloAcessorios={`Acessórios de PVC ${variante} — ${cor === "Translúcida" ? "Cerâmica" : cor}`}
-      acessorios={
-        <BlocoAcessorios
-          itens={acessoriosPvc(variante, cor, qty)}
-          contexto={detail}
-        />
-      }
+      acessorios={<BlocoAcessorios itens={acessoriosPvc(variante, cor, qty)} contexto={detail} />}
       cabecalho={
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">Telha PVC — Colonial e Plan</h1>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            Telha PVC — Colonial e Plan
+          </h1>
           <p className="mt-2 text-sm text-gray-500">
             Leveza, conforto térmico e instalação rápida. Não enferruja, não precisa de pintura.
           </p>
@@ -340,7 +337,8 @@ Poderia verificar estoque e frete?`;
             <p className="mt-3 rounded-xl bg-secondary px-4 py-3 text-sm font-semibold text-primary">
               Cobertura estimada: {cobertura} m²{" "}
               <span className="font-normal text-muted-foreground">
-                (largura útil {larguraSel.util.toString().replace(".", ",")} m e sobreposição de 8 cm)
+                (largura útil {larguraSel.util.toString().replace(".", ",")} m e sobreposição de 8
+                cm)
               </span>
             </p>
           </Passo>
