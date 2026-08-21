@@ -4,6 +4,7 @@ import { useOrcamento } from "@/context/OrcamentoContext";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto, { type ImagemProduto } from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
+import BlocoAcessorios, { type AcessorioItem } from "@/components/site/BlocoAcessorios";
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
@@ -50,6 +51,9 @@ export type ConfiguradorConfig = {
   resumoDetalhe: (sel: Selecao, qtds: Quantidades) => string;
   mensagem: (sel: Selecao, qtds: Quantidades) => string;
   idItem: (sel: Selecao) => string;
+  /** bloco de acessórios exibido no fim da ficha */
+  acessorios?: (sel: Selecao, qtds: Quantidades) => AcessorioItem[];
+  tituloAcessorios?: string;
 };
 
 function resolverOpcoes(passo: PassoConfig, sel: Selecao): OpcaoConfig[] {
@@ -111,6 +115,8 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
   const baseBtn = (ativo: boolean) =>
     `transition-all ${ativo ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`;
 
+  const acessorios = config.acessorios ? config.acessorios(sel, qtds) : [];
+
   let numero = 0;
   let bloqueado = false;
 
@@ -118,6 +124,12 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
     <ProdutoLayout
       produtoKey={config.produtoKey}
       especificacoes={config.especificacoes}
+      tituloAcessorios={config.tituloAcessorios ?? "Complemente seu pedido"}
+      acessorios={
+        acessorios.length ? (
+          <BlocoAcessorios itens={acessorios} contexto={config.resumoDetalhe(sel, qtds)} />
+        ) : undefined
+      }
       breadcrumb={
         <div className="bg-white border-b px-4 py-3">
           <div className="max-w-6xl mx-auto flex items-center gap-1 text-xs text-gray-500 flex-wrap">
