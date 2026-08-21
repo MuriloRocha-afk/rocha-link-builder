@@ -141,6 +141,12 @@ export const imagensForroCedrinho: ImagemProduto[] = [
   { src: "", alt: "Detalhe régua Forro Cedrinho" },
 ];
 
+// FORRO PINUS
+export const imagensForroPinus: ImagemProduto[] = [
+  { src: "", alt: "Forro de Pinus instalado" },
+  { src: "", alt: "Detalhe régua macho-fêmea de Pinus" },
+];
+
 // TINTAS — por subcategoria
 export const imagensTintas: Record<string, ImagemProduto[]> = {
   verniz: [
@@ -215,11 +221,11 @@ export const imagensPinus: Record<string, ImagemProduto[]> = {
 
 // MADEIRIT & COMPENSADO — por categoria
 export const imagensMadeirit: Record<string, ImagemProduto[]> = {
-  Preto: [
-    { src: "", alt: "Madeirit Plastificado Preto" },
-    { src: "", alt: "Detalhe superfície plastificada preta" },
+  Plastificado: [
+    { src: "", alt: "Madeirit Plastificado" },
+    { src: "", alt: "Detalhe superfície plastificada" },
   ],
-  Rosa: [{ src: "", alt: "Madeirit Rosa" }],
+  "Resinado/Vermelho": [{ src: "", alt: "Madeirit Resinado/Vermelho" }],
   OSB: [{ src: "", alt: "OSB Multiplac" }],
   Compensado: [{ src: "", alt: "Compensado estrutural" }],
 };

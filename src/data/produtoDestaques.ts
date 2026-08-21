@@ -323,6 +323,41 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["NCM", "39162000"],
     ],
   },
+  "forro-pinus": {
+    badges: [
+      { icone: "🌲", texto: "Reflorestamento" },
+      { icone: "🪶", texto: "Leve" },
+      { icone: "🎨", texto: "Aceita verniz e stain" },
+      { icone: "📐", texto: "Vendido em m²" },
+    ],
+    motivos: [
+      {
+        titulo: "Custo-benefício em madeira",
+        descricao:
+          "O forro de madeira mais acessível, com aparência clara e uniforme.",
+      },
+      {
+        titulo: "Encaixe macho-fêmea",
+        descricao: "Instalação rápida, sem frestas e com acabamento limpo.",
+      },
+      {
+        titulo: "Aceita qualquer acabamento",
+        descricao: "Verniz, stain ou esmalte aderem bem à superfície do pinus.",
+      },
+      {
+        titulo: "Leve para a estrutura",
+        descricao: "Baixa carga sobre o madeiramento e o teto existente.",
+      },
+    ],
+    especificacoes: [
+      ["Espécie", "Pinus (reflorestamento)"],
+      ["Espessura", "1 cm"],
+      ["Larguras", "10 cm e 20 cm"],
+      ["Comprimentos", "2,0m a 4,0m"],
+      ["Unidade de venda", "m²"],
+      ["NCM", "44071000"],
+    ],
+  },
   "forro-cedrinho": {
     badges: [
       { icone: "🌳", texto: "Madeira nobre" },
