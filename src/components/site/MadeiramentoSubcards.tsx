@@ -30,19 +30,27 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     name: "Cambará Rosa",
     image: cambara,
     description:
-      "A madeira mais vendida do pátio. Vigas, caibros, ripas e dormentes — bruto ou aparelhado.",
+      "Viga, caibro, caibrão, ripa, ripão, sarrafo, tábua e dormente — bruto ou aparelhado.",
     badge: "★ Campeão de Vendas",
     tag: "DOF/IBAMA · Aparelhado em Plaina",
     cta: "Configurar Bitola e Comprimento",
   },
   {
     slug: "eucalipto",
-    name: "Eucalipto & Pontaletes",
+    name: "Eucalipto",
     image: eucalipto,
     description:
-      "Pontalete roliço tratado de 3m a 6m e vigas serradas. Reflorestamento certificado.",
+      "Eucalipto in natura e tratado em autoclave, de 2m a 6m. Reflorestamento certificado.",
     badge: "★ Campeão de Vendas",
     cta: "Escolher Comprimento",
+  },
+  {
+    slug: "pontalete-eucalipto",
+    name: "Pontalete de Eucalipto",
+    image: eucalipto,
+    description:
+      "Pontalete roliço tratado em autoclave, bitolas de 6cm a 18cm e 2m a 6m de comprimento.",
+    cta: "Configurar Bitola",
   },
   {
     slug: "cedrinho",
@@ -57,7 +65,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     name: "Pinus",
     image: pinus,
     description:
-      "Sarrafos, tábuas e pontaletes de reflorestamento. Custo-benefício para caixaria.",
+      "Sarrafo, tábua e pontalete com largura, espessura e comprimento próprios.",
     cta: "Ver Produtos",
   },
   {
