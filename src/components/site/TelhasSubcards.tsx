@@ -89,7 +89,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     name: "Cumeeiras & Acessórios de Cobertura",
     image: fibro,
     description:
-      "Cumeeiras de barro, concreto, PVC e fibrocimento. Tudo para fechar a cobertura.",
+      "Cumeeiras de barro, concreto, esmaltada, PVC e fibrocimento. Tudo para fechar a cobertura.",
     cta: "Ver Cumeeiras",
   },
 ];

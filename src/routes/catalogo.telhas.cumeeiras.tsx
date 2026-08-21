@@ -5,7 +5,7 @@ import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_CUMEEIRAS } from "@/data/configs/telhas";
 
 const TITLE = "Cumeeiras & Acessórios de Cobertura | Rocha Telhas";
-const DESCRIPTION = "Cumeeiras de barro, concreto, PVC e fibrocimento. Escolha o tipo, a variação e cote direto no WhatsApp.";
+const DESCRIPTION = "Cumeeiras de barro, concreto, esmaltada, PVC e fibrocimento. Escolha o tipo, a variação e cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/cumeeiras")({
   head: () => ({

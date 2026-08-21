@@ -305,7 +305,7 @@ export const CONFIG_CUMEEIRAS: ConfiguradorConfig = {
   breadcrumb: BC("Cumeeiras & Acessórios"),
   titulo: "🔺 Cumeeiras & Acessórios de Cobertura",
   subtitulo:
-    "Barro, concreto, PVC e fibrocimento. Tudo para fechar e arrematar qualquer cobertura.",
+    "Barro, concreto, esmaltada, PVC e fibrocimento. Tudo para fechar e arrematar qualquer cobertura.",
   galeriaTitulo: "Cumeeiras",
   galeriaPlaceholder: "Selecione um tipo para ver as fotos",
   imagens: (s) => (s.tipo ? [{ src: "", alt: `Cumeeira ${s.tipo}` }] : []),
