@@ -15,7 +15,16 @@ const VOLUMES_VERNIZ: Record<string, string[]> = {
 };
 
 const CORES_VERNIZ: Record<string, string[]> = {
+  "Anjo Verniz Dura Mais — Natural Brilhante": [
+    "Natural",
+    "Imbuia",
+    "Mogno",
+    "Cerejeira",
+    "Castanho",
+  ],
+  "Anjo Verniz Marítimo Premium — Natural": ["Natural", "Imbuia", "Mogno"],
   "Sayerlack Polisten": ["Imbuia", "Mogno Inglês", "Transparente"],
+  "Sayerlack Sayermar Verniz Marítimo": ["Natural", "Imbuia", "Mogno"],
   "Irajá Verniz": ["Cerejeira", "Imbuia", "Incolor"],
 };
 
