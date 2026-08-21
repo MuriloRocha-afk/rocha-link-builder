@@ -43,10 +43,20 @@ export default function BlocoAcessorios({
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-gray-900">{a.nome}</p>
               <p className="text-xs text-gray-500">{a.descricao}</p>
-              <p className="mt-0.5 text-xs font-semibold text-orange-600">
-                Sugerido: {a.quantidadeSugerida} {a.unidade}
-              </p>
+              {a.href ? null : (
+                <p className="mt-0.5 text-xs font-semibold text-orange-600">
+                  Sugerido: {a.quantidadeSugerida} {a.unidade}
+                </p>
+              )}
             </div>
+            {a.href ? (
+              <Link
+                to={a.href}
+                className="flex shrink-0 items-center gap-1 rounded-lg bg-orange-50 px-3 py-2 text-xs font-bold text-orange-600 transition-colors hover:bg-orange-100"
+              >
+                Ver <ArrowRight size={14} />
+              </Link>
+            ) : (
             <button
               type="button"
               onClick={() => {
