@@ -110,6 +110,49 @@ export const CONFIG_RUFO: ConfiguradorConfig = {
     `🏠 *Rufo Galvanizado Alge*\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
 };
 
+export const CONFIG_AGUA_FURTADA: ConfiguradorConfig = {
+  breadcrumb: BC("Água Furtada"),
+  titulo: "💧 Água Furtada Galvanizada",
+  subtitulo:
+    "Calha de encontro entre duas águas do telhado (rincão). Galvanizada, de 2,0m a 6,0m, nos cortes 33 e 50.",
+  galeriaTitulo: "Água Furtada Galvanizada",
+  galeriaPlaceholder: "Selecione o corte para ver as fotos",
+  imagens: (s) =>
+    s.corte ? [{ src: "", alt: `Água Furtada Galvanizada ${s.corte}` }] : [],
+  categoria: "Calhas",
+  passos: [
+    {
+      chave: "corte",
+      titulo: "Corte / Desenvolvimento",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Corte 33", emoji: "📐", sub: "Telhados residenciais padrão" },
+        { valor: "Corte 50", emoji: "📏", sub: "Maior vazão, telhados grandes" },
+      ],
+    },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento",
+      tipo: "grid3",
+      opcoes: COMPRIMENTOS.map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 2 },
+  ],
+  especificacoes: [
+    ["Material", "Chapa galvanizada"],
+    ["Cortes", "33 e 50"],
+    ["Comprimentos", "2,0m a 6,0m"],
+    ["Aplicação", "Rincão — encontro entre duas águas do telhado"],
+    ["Sobreposição", "~10 cm entre peças"],
+  ],
+  resumoNome: () => "Água Furtada Galvanizada",
+  resumoDetalhe: (s, q) => `${s.corte} · ${s.comprimento} · ${q.qtd ?? 2} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `agua-furtada-${s.corte}-${s.comprimento}`,
+  mensagem: (s, q) =>
+    `💧 *Água Furtada Galvanizada*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 2} peças`,
+};
+
 export const CONFIG_MANTA_TERMICA: ConfiguradorConfig = {
   produtoKey: "manta-termica",
   breadcrumb: BC("Manta Térmica"),
