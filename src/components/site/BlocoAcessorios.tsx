@@ -51,7 +51,7 @@ export default function BlocoAcessorios({
             </div>
             {a.href ? (
               <Link
-                to={a.href}
+                to={a.href as never}
                 className="flex shrink-0 items-center gap-1 rounded-lg bg-orange-50 px-3 py-2 text-xs font-bold text-orange-600 transition-colors hover:bg-orange-100"
               >
                 Ver <ArrowRight size={14} />
