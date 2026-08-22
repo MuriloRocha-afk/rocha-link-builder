@@ -259,7 +259,31 @@ export function CalculadoraTinta() {
       </div>
 
       <div className={card}>
-        <p className={passo}>Passo 3 · Área a pintar</p>
+        <p className={passo}>Passo 3 · Estado da superfície</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {superficies.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => {
+                setSuperficie(s.id);
+                setRes(null);
+              }}
+              className={chip(sup.id === s.id)}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+        <p className="mt-3 text-xs text-gray-500">
+          Superfícies porosas absorvem mais produto — ajustamos o consumo em {Math.round((sup.fator - 1) * 100)}%
+          {sup.fator === 1 ? " (consumo padrão)" : ""}.
+        </p>
+      </div>
+
+      <div className={card}>
+        <p className={passo}>Passo 4 · Área a pintar</p>
+
         <div className="mt-3 flex gap-2">
           {(
             [
