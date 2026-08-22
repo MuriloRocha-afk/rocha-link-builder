@@ -132,14 +132,24 @@ export function QuoteCartProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function QuoteCartButton({ className }: { className?: string }) {
+export function QuoteCartButton({
+  className,
+  dark = false,
+}: {
+  className?: string;
+  dark?: boolean;
+}) {
   const { count, setOpen } = useQuoteCart();
   return (
     <button
       type="button"
       onClick={() => setOpen(true)}
       aria-label={`Abrir carrinho de cotação com ${count} itens`}
-      className={`relative flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary transition-colors hover:border-accent hover:text-accent ${className ?? ""}`}
+      className={`relative flex h-11 w-11 items-center justify-center rounded-lg border transition-colors hover:border-accent hover:text-accent ${
+        dark
+          ? "border-primary-foreground/40 text-primary-foreground"
+          : "border-border text-primary"
+      } ${className ?? ""}`}
     >
       <ShoppingCart className="h-5 w-5" />
       {count > 0 ? (
