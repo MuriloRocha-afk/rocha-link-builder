@@ -46,6 +46,7 @@ import { Route as CatalogoMadeiramentoPinusRouteImport } from './routes/catalogo
 import { Route as CatalogoMadeiramentoPerobaRouteImport } from './routes/catalogo.madeiramento.peroba'
 import { Route as CatalogoMadeiramentoMouraoRouteImport } from './routes/catalogo.madeiramento.mourao'
 import { Route as CatalogoMadeiramentoMadeiritRouteImport } from './routes/catalogo.madeiramento.madeirit'
+import { Route as CatalogoMadeiramentoJatobaRouteImport } from './routes/catalogo.madeiramento.jatoba'
 import { Route as CatalogoMadeiramentoGarapeiraRouteImport } from './routes/catalogo.madeiramento.garapeira'
 import { Route as CatalogoMadeiramentoForroPvcRouteImport } from './routes/catalogo.madeiramento.forro-pvc'
 import { Route as CatalogoMadeiramentoForroPinusRouteImport } from './routes/catalogo.madeiramento.forro-pinus'
@@ -273,6 +274,12 @@ const CatalogoMadeiramentoMadeiritRoute =
     path: '/catalogo/madeiramento/madeirit',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoMadeiramentoJatobaRoute =
+  CatalogoMadeiramentoJatobaRouteImport.update({
+    id: '/catalogo/madeiramento/jatoba',
+    path: '/catalogo/madeiramento/jatoba',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoGarapeiraRoute =
   CatalogoMadeiramentoGarapeiraRouteImport.update({
     id: '/catalogo/madeiramento/garapeira',
@@ -450,6 +457,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/madeiramento/forro-pinus': typeof CatalogoMadeiramentoForroPinusRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
+  '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
@@ -513,6 +521,7 @@ export interface FileRoutesByTo {
   '/catalogo/madeiramento/forro-pinus': typeof CatalogoMadeiramentoForroPinusRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
+  '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
@@ -578,6 +587,7 @@ export interface FileRoutesById {
   '/catalogo/madeiramento/forro-pinus': typeof CatalogoMadeiramentoForroPinusRoute
   '/catalogo/madeiramento/forro-pvc': typeof CatalogoMadeiramentoForroPvcRoute
   '/catalogo/madeiramento/garapeira': typeof CatalogoMadeiramentoGarapeiraRoute
+  '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
@@ -644,6 +654,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/forro-pinus'
     | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/madeiramento/garapeira'
+    | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/peroba'
@@ -707,6 +718,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/forro-pinus'
     | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/madeiramento/garapeira'
+    | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/peroba'
@@ -771,6 +783,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/forro-pinus'
     | '/catalogo/madeiramento/forro-pvc'
     | '/catalogo/madeiramento/garapeira'
+    | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
     | '/catalogo/madeiramento/peroba'
@@ -835,6 +848,7 @@ export interface RootRouteChildren {
   CatalogoMadeiramentoForroPinusRoute: typeof CatalogoMadeiramentoForroPinusRoute
   CatalogoMadeiramentoForroPvcRoute: typeof CatalogoMadeiramentoForroPvcRoute
   CatalogoMadeiramentoGarapeiraRoute: typeof CatalogoMadeiramentoGarapeiraRoute
+  CatalogoMadeiramentoJatobaRoute: typeof CatalogoMadeiramentoJatobaRoute
   CatalogoMadeiramentoMadeiritRoute: typeof CatalogoMadeiramentoMadeiritRoute
   CatalogoMadeiramentoMouraoRoute: typeof CatalogoMadeiramentoMouraoRoute
   CatalogoMadeiramentoPerobaRoute: typeof CatalogoMadeiramentoPerobaRoute
@@ -1130,6 +1144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoMadeiritRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/jatoba': {
+      id: '/catalogo/madeiramento/jatoba'
+      path: '/catalogo/madeiramento/jatoba'
+      fullPath: '/catalogo/madeiramento/jatoba'
+      preLoaderRoute: typeof CatalogoMadeiramentoJatobaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/garapeira': {
       id: '/catalogo/madeiramento/garapeira'
       path: '/catalogo/madeiramento/garapeira'
@@ -1356,6 +1377,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoMadeiramentoForroPinusRoute: CatalogoMadeiramentoForroPinusRoute,
   CatalogoMadeiramentoForroPvcRoute: CatalogoMadeiramentoForroPvcRoute,
   CatalogoMadeiramentoGarapeiraRoute: CatalogoMadeiramentoGarapeiraRoute,
+  CatalogoMadeiramentoJatobaRoute: CatalogoMadeiramentoJatobaRoute,
   CatalogoMadeiramentoMadeiritRoute: CatalogoMadeiramentoMadeiritRoute,
   CatalogoMadeiramentoMouraoRoute: CatalogoMadeiramentoMouraoRoute,
   CatalogoMadeiramentoPerobaRoute: CatalogoMadeiramentoPerobaRoute,
