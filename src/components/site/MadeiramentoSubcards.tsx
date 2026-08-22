@@ -134,7 +134,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     grupo: "gerais",
   },
   {
-    slug: "mourao",
+    slug: "mourao-tratado",
     name: "Mourão Tratado",
     image: mourao,
     description: "Mourão autoclave de 4cm a 20cm de diâmetro e 2,20m a 10m de comprimento.",
