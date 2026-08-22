@@ -311,3 +311,78 @@ export const CONFIG_MOURAO: ConfiguradorConfig = {
   mensagem: (s, q) =>
     `🌾 *Mourão Tratado*\n• Diâmetro: ${s.diametro}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 10} peças`,
 };
+
+const BITOLAS_JATOBA: Record<string, string[]> = {
+  Viga: ["5x11cm", "5x15cm", "6x12cm", "6x16cm", "8x16cm"],
+  Caibro: ["5x5cm", "5x6cm", "5x7cm"],
+  Caibrão: ["6x8cm", "7x9cm", "8x8cm"],
+  Ripa: ["1,5x5cm"],
+  Ripão: ["2x5cm", "2x7cm"],
+  Sarrafo: ["2,5x5cm", "2,5x7cm", "2,5x10cm"],
+  Tábua: ["2,5x20cm", "2,5x25cm", "2,5x30cm"],
+};
+
+export const CONFIG_JATOBA: ConfiguradorConfig = {
+  breadcrumb: BC("Jatobá"),
+  titulo: "🪵 Jatobá",
+  subtitulo:
+    "Madeira de lei de altíssima densidade para estruturas e acabamentos nobres. Bruta ou aparelhada em plaina. Sob consulta.",
+  tagInfo: "✓ Sob Consulta · DOF/IBAMA · Madeira de Lei",
+  galeriaTitulo: "Jatobá",
+  galeriaPlaceholder: "Selecione o tipo de peça para ver as fotos",
+  imagens: (s) => (s.peca ? [{ src: "", alt: `Jatobá — ${s.peca}` }] : []),
+  categoria: "Madeiramento",
+  passos: [
+    {
+      chave: "peca",
+      titulo: "Tipo de Peça",
+      tipo: "lista",
+      opcoes: Object.keys(BITOLAS_JATOBA).map((v) => ({ valor: v })),
+    },
+    {
+      chave: "bitola",
+      titulo: "Bitola (Espessura × Largura)",
+      tipo: "chips",
+      visivel: (s) => Boolean(s.peca),
+      opcoes: (s) => (BITOLAS_JATOBA[s.peca] ?? []).map((v) => ({ valor: v })),
+    },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento",
+      tipo: "chips",
+      opcoes: COMPRIMENTOS_PEROBA.map((v) => ({ valor: v })),
+    },
+    {
+      chave: "acabamento",
+      titulo: "Aparelhagem",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Bruto", sub: "Superfície natural da serra · mais econômico" },
+        { valor: "Aparelhado", sub: "Aparelhado em plaina industrial", badge: "★ Recomendado" },
+      ],
+    },
+    {
+      chave: "qtd",
+      titulo: "Quantidade",
+      tipo: "quantidade",
+      unidade: "peças",
+      padrao: 10,
+      aviso: "Item sob consulta — disponibilidade confirmada por WhatsApp",
+    },
+  ],
+  especificacoes: [
+    ["Espécie", "Jatobá (Hymenaea courbaril)"],
+    ["Peças", "Viga, Caibro, Caibrão, Ripa, Ripão, Sarrafo e Tábua"],
+    ["Comprimentos", "1,0m a 6,0m"],
+    ["Aparelhagem", "Bruto ou aparelhado em plaina"],
+    ["Densidade", "Altíssima — madeira de lei"],
+    ["Origem", "DOF/IBAMA legalizado"],
+  ],
+  resumoNome: () => "Jatobá",
+  resumoDetalhe: (s, q) =>
+    `${s.peca} ${s.bitola ?? ""} · ${s.comprimento} · ${s.acabamento} · ${q.qtd ?? 10} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `jatoba-${s.peca}-${s.bitola}-${s.comprimento}-${s.acabamento}`,
+  mensagem: (s, q) =>
+    `🪵 *Jatobá (sob consulta)*\n• Tipo: ${s.peca}\n• Bitola: ${s.bitola}\n• Comprimento: ${s.comprimento}\n• Aparelhagem: ${s.acabamento}\n• Quantidade: ${q.qtd ?? 10} peças`,
+};
