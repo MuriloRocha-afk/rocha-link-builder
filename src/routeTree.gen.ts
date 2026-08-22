@@ -46,6 +46,7 @@ import { Route as CatalogoMadeiramentoTabeirasDeckRouteImport } from './routes/c
 import { Route as CatalogoMadeiramentoPontaleteEucaliptoRouteImport } from './routes/catalogo.madeiramento.pontalete-eucalipto'
 import { Route as CatalogoMadeiramentoPinusRouteImport } from './routes/catalogo.madeiramento.pinus'
 import { Route as CatalogoMadeiramentoPerobaRouteImport } from './routes/catalogo.madeiramento.peroba'
+import { Route as CatalogoMadeiramentoMouraoTratadoRouteImport } from './routes/catalogo.madeiramento.mourao-tratado'
 import { Route as CatalogoMadeiramentoMouraoRouteImport } from './routes/catalogo.madeiramento.mourao'
 import { Route as CatalogoMadeiramentoMadeiritRouteImport } from './routes/catalogo.madeiramento.madeirit'
 import { Route as CatalogoMadeiramentoJatobaRouteImport } from './routes/catalogo.madeiramento.jatoba'
@@ -277,6 +278,12 @@ const CatalogoMadeiramentoPerobaRoute =
     path: '/catalogo/madeiramento/peroba',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoMadeiramentoMouraoTratadoRoute =
+  CatalogoMadeiramentoMouraoTratadoRouteImport.update({
+    id: '/catalogo/madeiramento/mourao-tratado',
+    path: '/catalogo/madeiramento/mourao-tratado',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoMadeiramentoMouraoRoute =
   CatalogoMadeiramentoMouraoRouteImport.update({
     id: '/catalogo/madeiramento/mourao',
@@ -495,6 +502,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
+  '/catalogo/madeiramento/mourao-tratado': typeof CatalogoMadeiramentoMouraoTratadoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -564,6 +572,7 @@ export interface FileRoutesByTo {
   '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
+  '/catalogo/madeiramento/mourao-tratado': typeof CatalogoMadeiramentoMouraoTratadoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -635,6 +644,7 @@ export interface FileRoutesById {
   '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
+  '/catalogo/madeiramento/mourao-tratado': typeof CatalogoMadeiramentoMouraoTratadoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -707,6 +717,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
+    | '/catalogo/madeiramento/mourao-tratado'
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
@@ -776,6 +787,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
+    | '/catalogo/madeiramento/mourao-tratado'
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
@@ -846,6 +858,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
+    | '/catalogo/madeiramento/mourao-tratado'
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
@@ -916,6 +929,7 @@ export interface RootRouteChildren {
   CatalogoMadeiramentoJatobaRoute: typeof CatalogoMadeiramentoJatobaRoute
   CatalogoMadeiramentoMadeiritRoute: typeof CatalogoMadeiramentoMadeiritRoute
   CatalogoMadeiramentoMouraoRoute: typeof CatalogoMadeiramentoMouraoRoute
+  CatalogoMadeiramentoMouraoTratadoRoute: typeof CatalogoMadeiramentoMouraoTratadoRoute
   CatalogoMadeiramentoPerobaRoute: typeof CatalogoMadeiramentoPerobaRoute
   CatalogoMadeiramentoPinusRoute: typeof CatalogoMadeiramentoPinusRoute
   CatalogoMadeiramentoPontaleteEucaliptoRoute: typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -1210,6 +1224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoMadeiramentoPerobaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/madeiramento/mourao-tratado': {
+      id: '/catalogo/madeiramento/mourao-tratado'
+      path: '/catalogo/madeiramento/mourao-tratado'
+      fullPath: '/catalogo/madeiramento/mourao-tratado'
+      preLoaderRoute: typeof CatalogoMadeiramentoMouraoTratadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/madeiramento/mourao': {
       id: '/catalogo/madeiramento/mourao'
       path: '/catalogo/madeiramento/mourao'
@@ -1485,6 +1506,8 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoMadeiramentoJatobaRoute: CatalogoMadeiramentoJatobaRoute,
   CatalogoMadeiramentoMadeiritRoute: CatalogoMadeiramentoMadeiritRoute,
   CatalogoMadeiramentoMouraoRoute: CatalogoMadeiramentoMouraoRoute,
+  CatalogoMadeiramentoMouraoTratadoRoute:
+    CatalogoMadeiramentoMouraoTratadoRoute,
   CatalogoMadeiramentoPerobaRoute: CatalogoMadeiramentoPerobaRoute,
   CatalogoMadeiramentoPinusRoute: CatalogoMadeiramentoPinusRoute,
   CatalogoMadeiramentoPontaleteEucaliptoRoute:
