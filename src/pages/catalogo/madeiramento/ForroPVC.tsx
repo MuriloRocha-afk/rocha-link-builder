@@ -181,13 +181,14 @@ export default function ForroPVC() {
             * Largura de 20cm — largura útil ~17,5cm após encaixe
           </p>
         </section>
+        )}
 
         {/* Quantidade */}
-        {comprimento && (
+        {modelo && comprimento && (
           <section className="bg-white rounded-2xl p-5 shadow-sm">
             <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
-                2
+                3
               </span>
               Quantidade de réguas
             </h2>
@@ -227,7 +228,7 @@ export default function ForroPVC() {
             <div className="bg-gray-50 rounded-xl p-4 mb-5">
               <p className="text-xs text-gray-500 font-medium mb-1">RESUMO</p>
               <p className="font-bold text-gray-900">Forro PVC Branco</p>
-              <p className="text-gray-600 text-sm">Régua 20cm × {comprimento}</p>
+              <p className="text-gray-600 text-sm">{modelo} · Régua 20cm × {comprimento}</p>
               <p className="text-orange-600 font-semibold text-sm mt-1">
                 {quantidade} réguas · ~{area} m²
               </p>
