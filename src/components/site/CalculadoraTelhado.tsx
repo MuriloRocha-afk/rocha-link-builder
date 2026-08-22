@@ -343,7 +343,7 @@ export function CalculadoraTelhado() {
   <div class="box"><span>Área inclinada</span><b>${fmt(res.areaIncl)} m²</b></div>
   <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
   <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
-  <div class="box"><span>Investimento estimado</span><b>${brl(res.custoMin)} – ${brl(res.custoMax)}</b></div>
+  <div class="box"><span>Investimento estimado</span><b>${brl(res.faixa.min)} – ${brl(res.faixa.max)}</b></div>
 </div>
 ${bloco("Cobertura", [{ nome: res.telha.label, qtd: `${res.telhas} un` }, ...res.itens])}
 ${bloco("Calhas e rufos", res.calhas)}
