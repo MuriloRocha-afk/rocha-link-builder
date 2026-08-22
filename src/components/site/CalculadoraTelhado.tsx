@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCalcDims } from "@/components/site/calc-dims";
 import { Calculator, MessageCircle, AlertTriangle, Download, Scale, Wallet } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 
@@ -99,6 +100,7 @@ type Comparativo = {
 };
 
 export function CalculadoraTelhado() {
+  const { setDims } = useCalcDims();
   const [tipo, setTipo] = useState<Tipo>("2aguas");
   const [comprimento, setComprimento] = useState("");
   const [largura, setLargura] = useState("");
@@ -130,6 +132,19 @@ export function CalculadoraTelhado() {
   const avisoIncl = incl < telha.min;
 
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
+
+  const larguraNum = num(largura);
+  const comprimentoNum = num(comprimento);
+  useEffect(() => {
+    if (larguraNum > 0 && comprimentoNum > 0) {
+      setDims({
+        largura: larguraNum,
+        comprimento: comprimentoNum,
+        inclinacao: incl,
+        aguas: tipo === "1agua" ? "1" : tipo === "4aguas" ? "4" : "2",
+      });
+    }
+  }, [larguraNum, comprimentoNum, incl, tipo, setDims]);
 
   const calcular = () => {
     const c = num(comprimento);

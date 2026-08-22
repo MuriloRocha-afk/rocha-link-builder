@@ -11,7 +11,7 @@ const NAV: NavItem[] = [
   { label: "Catálogo", to: "/catalogo" },
   { label: "Estrutura & Pátio", hash: "tecnologia" },
   { label: "Calculadora", to: "/calculadora" },
-  { label: "Ferramentas", to: "/ferramentas" },
+  { label: "Guias", to: "/ferramentas" },
   { label: "FAQ", hash: "faq" },
   { label: "Contato", hash: "contato" },
 ];
