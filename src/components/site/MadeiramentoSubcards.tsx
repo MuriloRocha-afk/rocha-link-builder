@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Flame, Star } from "lucide-react";
 import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucalipto from "@/assets/prod-eucalipto.jpg";
 import cedrinho from "@/assets/prod-cedrinho.jpg";
@@ -30,10 +30,26 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     name: "Cambará Rosa",
     image: cambara,
     description:
-      "Viga, caibro, caibrão, ripa, ripão, sarrafo, tábua e dormente — bruto ou aparelhado.",
-    badge: "★ Campeão de Vendas",
+      "Ripão, viga, caibro, caibrão, ripa, sarrafo, tábua e dormente — bruto ou aparelhado. Ripão e viga são os formatos mais vendidos.",
+    badge: "Mais Vendido",
     tag: "DOF/IBAMA · Aparelhado em Plaina",
     cta: "Configurar Bitola e Comprimento",
+  },
+  {
+    slug: "pinus",
+    name: "Pinus",
+    image: pinus,
+    description:
+      "Sarrafo, tábua e pontalete com largura, espessura e comprimento próprios. Pinus tábua é um dos mais procurados.",
+    badge: "Mais Vendido",
+    cta: "Ver Produtos",
+  },
+  {
+    slug: "garapeira",
+    name: "Garapeira",
+    image: garapeira,
+    description: "Madeira dura nativa: barrotes, caibros, vigas e dormentes para alta resistência.",
+    cta: "Ver Bitolas",
   },
   {
     slug: "eucalipto",
@@ -41,7 +57,6 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     image: eucalipto,
     description:
       "Eucalipto in natura e tratado em autoclave, de 2m a 6m. Reflorestamento certificado.",
-    badge: "★ Campeão de Vendas",
     cta: "Escolher Comprimento",
   },
   {
@@ -49,7 +64,8 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     name: "Pontalete de Eucalipto",
     image: eucalipto,
     description:
-      "Pontalete roliço tratado em autoclave, bitolas de 6cm a 18cm e 2m a 6m de comprimento.",
+      "Pontalete roliço tratado em autoclave, bitolas de 6cm a 18cm e 2m a 6m de comprimento. Roliço é o mais vendido.",
+    badge: "Mais Vendido",
     cta: "Configurar Bitola",
   },
   {
@@ -61,29 +77,6 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     cta: "Ver Bitolas",
   },
   {
-    slug: "pinus",
-    name: "Pinus",
-    image: pinus,
-    description: "Sarrafo, tábua e pontalete com largura, espessura e comprimento próprios.",
-    cta: "Ver Produtos",
-  },
-  {
-    slug: "peroba",
-    name: "Peroba do Norte / D'Água",
-    image: garapeira,
-    description:
-      "Viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada em plaina.",
-    tag: "DOF/IBAMA · Madeira de Lei",
-    cta: "Ver Bitolas",
-  },
-  {
-    slug: "garapeira",
-    name: "Garapeira",
-    image: garapeira,
-    description: "Madeira dura nativa: barrotes, caibros, vigas e dormentes para alta resistência.",
-    cta: "Ver Bitolas",
-  },
-  {
     slug: "amescla",
     name: "Amescla",
     image: amescla,
@@ -91,19 +84,11 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     cta: "Ver Bitolas",
   },
   {
-    slug: "forro-pvc",
-    name: "Forro PVC",
-    image: forroPvc,
-    description: "Réguas brancas de 20cm de largura, do 1m ao 7m de comprimento. Pronta entrega.",
-    badge: "★ Campeão de Vendas",
-    cta: "Escolher Comprimento",
-  },
-  {
     slug: "forro-cedrinho",
     name: "Forro Cedrinho",
     image: forroCedrinho,
     description: "Forro de cedrinho mesclado 1cm x 10cm, vendido por m². Acabamento natural nobre.",
-    badge: "★ Campeão de Vendas",
+    badge: "Mais Vendido",
     cta: "Cotar em m²",
   },
   {
@@ -113,6 +98,13 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     description:
       "Réguas de pinus macho-fêmea 1cm x 10cm, vendido por m². Claro e fácil de envernizar.",
     cta: "Cotar em m²",
+  },
+  {
+    slug: "forro-pvc",
+    name: "Forro PVC",
+    image: forroPvc,
+    description: "Réguas brancas de 20cm de largura, do 1m ao 7m de comprimento. Pronta entrega.",
+    cta: "Escolher Comprimento",
   },
   {
     slug: "madeirit",
@@ -134,6 +126,15 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     image: mourao,
     description: "Mourão autoclave de 4cm a 20cm de diâmetro e 2,20m a 10m de comprimento.",
     cta: "Configurar Mourão",
+  },
+  {
+    slug: "peroba",
+    name: "Peroba do Norte / D'Água",
+    image: garapeira,
+    description:
+      "Viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada em plaina. Sob consulta.",
+    tag: "Sob Consulta · DOF/IBAMA · Madeira de Lei",
+    cta: "Ver Bitolas",
   },
 ];
 
@@ -158,7 +159,11 @@ export function MadeiramentoSubcardGrid() {
             />
             {card.badge ? (
               <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
-                <Star className="h-3 w-3 fill-current" />
+                {card.badge === "Mais Vendido" ? (
+                  <Flame className="h-3 w-3 fill-current" />
+                ) : (
+                  <Star className="h-3 w-3 fill-current" />
+                )}
                 {card.badge.replace("★ ", "")}
               </span>
             ) : null}
@@ -186,3 +191,4 @@ export function MadeiramentoSubcardGrid() {
     </div>
   );
 }
+
