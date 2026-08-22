@@ -144,11 +144,15 @@ export function CalculadoraTinta() {
     m2: number;
     demaos: number;
     acab: Acabamento;
+    superficie: string;
+    fator: number;
     preparo: { nome: string; emb: number; litros: number; rend: number }[];
     acabamento: { nome: string; emb: number; litros: number; rend: number }[];
   }>(null);
 
   const alvo = ALVOS.find((a) => a.id === alvoId)!;
+  const superficies = SUPERFICIES[alvoId];
+  const sup = superficies.find((s) => s.id === superficie) ?? superficies[0];
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
 
   const m2 = useMemo(
@@ -159,6 +163,7 @@ export function CalculadoraTinta() {
   const escolherAlvo = (id: string) => {
     setAlvoId(id);
     setAcabId(ALVOS.find((a) => a.id === id)!.acabamentos[0]);
+    setSuperficie(SUPERFICIES[id][0].id);
     setRes(null);
   };
 
@@ -166,11 +171,19 @@ export function CalculadoraTinta() {
     if (m2 <= 0) return;
     const acab = ACABAMENTOS[acabId];
     const calc = (p: Produto, dem: number) => {
-      const litros = (m2 * dem) / p.rendimento;
+      const litros = (m2 * dem * sup.fator) / p.rendimento;
       return { nome: p.nome, litros, rend: p.rendimento, emb: Math.ceil(litros / p.volume) };
     };
     const preparo = !SEM_PRIMER.includes(acabId) && acab.primer ? acab.primer.map((p) => calc(p, 1)) : [];
-    setRes({ m2, demaos, acab, preparo, acabamento: acab.produtos.map((p) => calc(p, demaos)) });
+    setRes({
+      m2,
+      demaos,
+      acab,
+      superficie: sup.label,
+      fator: sup.fator,
+      preparo,
+      acabamento: acab.produtos.map((p) => calc(p, demaos)),
+    });
   };
 
   const fmt = (n: number, d = 1) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
@@ -178,8 +191,9 @@ export function CalculadoraTinta() {
   const mensagem = res
     ? [
         `Tinta e Verniz`,
-        `- Superfície: ${alvo.label} — ${res.acab.label}`,
+        `- Superfície: ${alvo.label} (${res.superficie}) — ${res.acab.label}`,
         `- Área: ${fmt(res.m2)} m² × ${res.demaos} demão(s)`,
+
         ``,
         `📋 *MATERIAIS ESTIMADOS*`,
         ...res.preparo.map((p) => `- ${p.nome} — Qtd: ${p.emb} embalagem(ns)`),
