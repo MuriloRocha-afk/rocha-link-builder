@@ -90,7 +90,14 @@ const TIPOS: { id: Tipo; label: string }[] = [
   { id: "4aguas", label: "4 águas" },
 ];
 
-type Item = { nome: string; qtd: string };
+type Item = {
+  nome: string;
+  qtd: string;
+  /** chave de preço na tabela real da loja */
+  chave?: string | null;
+  /** quantidade numérica na unidade da tabela de preços */
+  valor?: number;
+};
 
 type Comparativo = {
   telha: Telha;
@@ -98,7 +105,9 @@ type Comparativo = {
   peso: number;
   custoMin: number;
   custoMax: number;
+  semPreco: boolean;
 };
+
 
 export function CalculadoraTelhado() {
   const { setDims } = useCalcDims();
