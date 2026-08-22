@@ -40,7 +40,7 @@ function NavLink({
   );
 }
 
-export function Header({ overDark = false }: { overDark?: boolean }) {
+export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -51,15 +51,9 @@ export function Header({ overDark = false }: { overDark?: boolean }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const darkTop = overDark && !scrolled;
-
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all ${
-        scrolled
-          ? "bg-card/95 shadow-[var(--shadow-card)] backdrop-blur"
-          : "bg-card/80 backdrop-blur"
-      }`}
+      className="fixed inset-x-0 top-0 z-50 bg-card/95 shadow-[var(--shadow-card)] backdrop-blur transition-all"
     >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-5">
         <Link to="/" aria-label="Rocha Telhas — início">
@@ -71,15 +65,13 @@ export function Header({ overDark = false }: { overDark?: boolean }) {
             <NavLink
               key={item.label}
               item={item}
-              className={`text-sm font-semibold transition-colors hover:text-accent ${
-                darkTop ? "text-primary-foreground" : "text-primary/80 hover:text-accent"
-              }`}
+              className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
             />
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <QuoteCartButton dark={darkTop} />
+          <QuoteCartButton />
           <WhatsAppButton
             size="lg"
             message="Olá! Gostaria de solicitar um orçamento na Rocha Telhas."
@@ -89,16 +81,12 @@ export function Header({ overDark = false }: { overDark?: boolean }) {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <QuoteCartButton dark={darkTop} />
+          <QuoteCartButton />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label="Abrir menu"
-            className={`flex h-11 w-11 items-center justify-center rounded-lg border transition-colors ${
-              darkTop
-                ? "border-primary-foreground/40 text-primary-foreground"
-                : "border-border text-primary"
-            }`}
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
