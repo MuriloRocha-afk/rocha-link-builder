@@ -103,24 +103,56 @@ const ALVOS: { id: string; label: string; acabamentos: string[] }[] = [
 
 const SEM_PRIMER = ["stain", "cupicida"];
 
+/** Absorção da superfície — multiplica o consumo estimado de produto. */
+const SUPERFICIES: Record<string, { id: string; label: string; fator: number }[]> = {
+  "mad-ext": [
+    { id: "bruta", label: "Madeira bruta / serrada", fator: 1.35 },
+    { id: "aparelhada", label: "Madeira aparelhada / lixada", fator: 1 },
+    { id: "pintada", label: "Já pintada / repintura", fator: 0.85 },
+  ],
+  "mad-int": [
+    { id: "bruta", label: "Madeira bruta / serrada", fator: 1.35 },
+    { id: "aparelhada", label: "Madeira aparelhada / lixada", fator: 1 },
+    { id: "pintada", label: "Já pintada / repintura", fator: 0.85 },
+  ],
+  telhado: [
+    { id: "telha-porosa", label: "Telha cerâmica / fibrocimento", fator: 1.25 },
+    { id: "laje", label: "Laje / concreto liso", fator: 1.05 },
+  ],
+  parede: [
+    { id: "reboco", label: "Alvenaria / reboco novo", fator: 1.2 },
+    { id: "pintada", label: "Parede já pintada", fator: 0.9 },
+  ],
+  ferro: [
+    { id: "ferro-novo", label: "Metal novo / galvanizado", fator: 1 },
+    { id: "ferro-oxidado", label: "Metal oxidado / lixado", fator: 1.15 },
+  ],
+};
+
 export function CalculadoraTinta() {
   const [alvoId, setAlvoId] = useState("mad-ext");
   const [acabId, setAcabId] = useState("verniz");
+  const [superficie, setSuperficie] = useState("bruta");
   const [modo, setModo] = useState<"area" | "medidas">("area");
   const [area, setArea] = useState("");
   const [larg, setLarg] = useState("");
   const [comp, setComp] = useState("");
   const [demaos, setDemaos] = useState(2);
   const [modal, setModal] = useState(false);
+
   const [res, setRes] = useState<null | {
     m2: number;
     demaos: number;
     acab: Acabamento;
+    superficie: string;
+    fator: number;
     preparo: { nome: string; emb: number; litros: number; rend: number }[];
     acabamento: { nome: string; emb: number; litros: number; rend: number }[];
   }>(null);
 
   const alvo = ALVOS.find((a) => a.id === alvoId)!;
+  const superficies = SUPERFICIES[alvoId];
+  const sup = superficies.find((s) => s.id === superficie) ?? superficies[0];
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
 
   const m2 = useMemo(
@@ -131,6 +163,7 @@ export function CalculadoraTinta() {
   const escolherAlvo = (id: string) => {
     setAlvoId(id);
     setAcabId(ALVOS.find((a) => a.id === id)!.acabamentos[0]);
+    setSuperficie(SUPERFICIES[id][0].id);
     setRes(null);
   };
 
@@ -138,11 +171,19 @@ export function CalculadoraTinta() {
     if (m2 <= 0) return;
     const acab = ACABAMENTOS[acabId];
     const calc = (p: Produto, dem: number) => {
-      const litros = (m2 * dem) / p.rendimento;
+      const litros = (m2 * dem * sup.fator) / p.rendimento;
       return { nome: p.nome, litros, rend: p.rendimento, emb: Math.ceil(litros / p.volume) };
     };
     const preparo = !SEM_PRIMER.includes(acabId) && acab.primer ? acab.primer.map((p) => calc(p, 1)) : [];
-    setRes({ m2, demaos, acab, preparo, acabamento: acab.produtos.map((p) => calc(p, demaos)) });
+    setRes({
+      m2,
+      demaos,
+      acab,
+      superficie: sup.label,
+      fator: sup.fator,
+      preparo,
+      acabamento: acab.produtos.map((p) => calc(p, demaos)),
+    });
   };
 
   const fmt = (n: number, d = 1) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
@@ -150,8 +191,9 @@ export function CalculadoraTinta() {
   const mensagem = res
     ? [
         `Tinta e Verniz`,
-        `- Superfície: ${alvo.label} — ${res.acab.label}`,
+        `- Superfície: ${alvo.label} (${res.superficie}) — ${res.acab.label}`,
         `- Área: ${fmt(res.m2)} m² × ${res.demaos} demão(s)`,
+
         ``,
         `📋 *MATERIAIS ESTIMADOS*`,
         ...res.preparo.map((p) => `- ${p.nome} — Qtd: ${p.emb} embalagem(ns)`),
@@ -217,7 +259,31 @@ export function CalculadoraTinta() {
       </div>
 
       <div className={card}>
-        <p className={passo}>Passo 3 · Área a pintar</p>
+        <p className={passo}>Passo 3 · Estado da superfície</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {superficies.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => {
+                setSuperficie(s.id);
+                setRes(null);
+              }}
+              className={chip(sup.id === s.id)}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+        <p className="mt-3 text-xs text-gray-500">
+          Superfícies porosas absorvem mais produto — ajustamos o consumo em {Math.round((sup.fator - 1) * 100)}%
+          {sup.fator === 1 ? " (consumo padrão)" : ""}.
+        </p>
+      </div>
+
+      <div className={card}>
+        <p className={passo}>Passo 4 · Área a pintar</p>
+
         <div className="mt-3 flex gap-2">
           {(
             [
@@ -270,7 +336,7 @@ export function CalculadoraTinta() {
       </div>
 
       <div className={card}>
-        <p className={passo}>Passo 4 · Número de demãos</p>
+        <p className={passo}>Passo 5 · Número de demãos</p>
         <div className="mt-3 flex gap-2">
           {[1, 2, 3].map((d) => (
             <button key={d} type="button" onClick={() => setDemaos(d)} className={chip(demaos === d)}>
@@ -307,9 +373,11 @@ export function CalculadoraTinta() {
           <Lista itens={res.acabamento} />
 
           <p className="mt-4 text-[11px] text-gray-500">
-            {fmt(res.m2)} m² × {res.demaos} demão{res.demaos > 1 ? "s" : ""} = {fmt(res.m2 * res.demaos)} m² de tinta ·
-            rendimento ~{res.acabamento[0].rend} m²/L
+            {fmt(res.m2)} m² × {res.demaos} demão{res.demaos > 1 ? "s" : ""} · {res.superficie} (fator{" "}
+            {fmt(res.fator)}×) = {fmt(res.m2 * res.demaos * res.fator)} m² de tinta · rendimento ~
+            {res.acabamento[0].rend} m²/L
           </p>
+
 
           <button
             type="button"
