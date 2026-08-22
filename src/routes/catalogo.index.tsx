@@ -84,39 +84,38 @@ function CatalogoPage() {
               {[...CATEGORIES]
                 .sort((a, b) => ORDEM.indexOf(a.id) - ORDEM.indexOf(b.id))
                 .map((c) => (
-                <Link
-                  key={c.id}
-                  to="/catalogo/$categoriaSlug"
-                  params={{ categoriaSlug: c.id }}
-                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-                >
-                  {c.bestseller ? (
-                    <span className="absolute top-4 right-4 inline-flex items-center rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
-                      {c.bestseller}
-                    </span>
-                  ) : null}
+                  <Link
+                    key={c.id}
+                    to="/catalogo/$categoriaSlug"
+                    params={{ categoriaSlug: c.id }}
+                    className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+                  >
+                    {c.bestseller ? (
+                      <span className="absolute top-4 right-4 inline-flex items-center rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
+                        {c.bestseller}
+                      </span>
+                    ) : null}
 
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary text-3xl">
-                    {EMOJI[c.id]}
-                  </div>
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary text-3xl">
+                      {EMOJI[c.id]}
+                    </div>
 
-                  <h2 className="mt-5 text-2xl font-extrabold text-primary">{c.title}</h2>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {c.description}
-                  </p>
-                  {MAIS_VENDIDOS[c.id] ? (
-                    <p className="mt-3 text-xs leading-snug font-semibold text-muted-foreground/80">
-                      ★ {MAIS_VENDIDOS[c.id]}
+                    <h2 className="mt-5 text-2xl font-extrabold text-primary">{c.title}</h2>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      {c.description}
                     </p>
-                  ) : null}
+                    {MAIS_VENDIDOS[c.id] ? (
+                      <p className="mt-3 text-xs leading-snug font-semibold text-muted-foreground/80">
+                        ★ {MAIS_VENDIDOS[c.id]}
+                      </p>
+                    ) : null}
 
-
-                  <span className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-5 py-3 text-sm font-extrabold text-white transition-all group-hover:bg-[#EA580C]">
-                    {c.ctaLabel}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              ))}
+                    <span className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-5 py-3 text-sm font-extrabold text-white transition-all group-hover:bg-[#EA580C]">
+                      {c.ctaLabel}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                ))}
             </div>
           </div>
         </section>
