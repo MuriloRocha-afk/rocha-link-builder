@@ -1,5 +1,7 @@
 interface TipoCardProps {
   icone?: string;
+  /** swatch de cor (hex/css) exibido no lugar do ícone */
+  cor?: string;
   nome: string;
   descricao?: string;
   badge?: string;
@@ -13,6 +15,7 @@ interface TipoCardProps {
  */
 export default function TipoCard({
   icone,
+  cor,
   nome,
   descricao,
   badge,
@@ -34,6 +37,13 @@ export default function TipoCard({
         </span>
       )}
       {icone && <span className="text-3xl leading-none">{icone}</span>}
+      {cor && (
+        <span
+          aria-hidden
+          className="h-9 w-9 shrink-0 rounded-full border border-black/10"
+          style={{ background: cor }}
+        />
+      )}
       <span className="w-full min-w-0 whitespace-normal break-words text-sm font-semibold leading-snug text-gray-900">
         {nome}
       </span>

@@ -21,6 +21,33 @@ const CARDS: EmojiSubcard[] = [
     cta: "Escolher e cotar",
   },
   {
+    slug: "platibanda",
+    name: "Calha Platibanda Galvanizada",
+    emoji: "🧱",
+    tags: ["Galvanizada", "Cortes 25, 33 e 50"],
+    description:
+      "Calha embutida atrás da platibanda, com aba alta. De 2,0m a 6,0m, com saídas, suportes e selante.",
+    cta: "Escolher e cotar",
+  },
+  {
+    slug: "moldura",
+    name: "Calha Moldura Galvanizada",
+    emoji: "🏠",
+    tags: ["Galvanizada", "Cortes 25, 33 e 50"],
+    description:
+      "Calha aparente na beira do telhado, com dobra frontal de acabamento. De 2,0m a 6,0m.",
+    cta: "Escolher e cotar",
+  },
+  {
+    slug: "pvc",
+    name: "Calha PVC",
+    emoji: "💧",
+    tags: ["PVC", "Bege e Cinza"],
+    description:
+      "Linhas Aquapluv Beira e Style em PVC: não enferruja, encaixe sem solda, com saídas e suportes.",
+    cta: "Escolher e cotar",
+  },
+  {
     slug: "rufo",
     name: "Rufos Galvanizados",
     emoji: "🏠",

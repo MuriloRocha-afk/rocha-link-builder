@@ -25,11 +25,19 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   },
   {
     slug: "colonial-pvc",
-    name: "Telha PVC — Colonial e Plan",
+    name: "Telha Colonial PVC",
     image: pvc,
     description:
-      "Modelos Colonial e Plan. Comprimento, largura e espessura nas cores Cerâmica, Marfim e Cinza.",
+      "Perfil ondulado com visual de barro. Comprimento, largura e espessura nas cores Cerâmica, Marfim, Cinza e Translúcida.",
     badge: "Top Venda #2",
+    cta: "Escolher Modelo e Cor",
+  },
+  {
+    slug: "plan-pvc",
+    name: "Telha Plan PVC",
+    image: pvc,
+    description:
+      "Perfil plano e moderno de encaixe reto. Comprimento, largura e espessura nas cores Cerâmica, Marfim e Cinza.",
     cta: "Escolher Modelo e Cor",
   },
   {

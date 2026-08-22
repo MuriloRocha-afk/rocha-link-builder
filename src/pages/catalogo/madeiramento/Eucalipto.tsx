@@ -4,12 +4,14 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import TipoCard from "../../../components/site/TipoCard";
 import { imagensEucalipto } from "../../../data/imagensProduto";
 
 type Ficha = {
   id: string;
   nome: string;
   descricao: string;
+  icone: string;
   badge?: string;
   comprimentos: string[];
   espessuras?: string[];
@@ -19,12 +21,14 @@ const FICHAS: Ficha[] = [
   {
     id: "eucalipto-in-natura",
     nome: "Eucalipto In Natura",
+    icone: "🌱",
     descricao: "Roliço sem tratamento químico. Uso temporário e escoramentos.",
     comprimentos: ["2,0m", "2,5m", "3,0m", "4,0m", "5,0m", "6,0m"],
   },
   {
     id: "eucalipto-tratado",
     nome: "Eucalipto Tratado",
+    icone: "🛡️",
     descricao: "Tratado em autoclave CCA. Reflorestamento certificado.",
     badge: "★ Campeão de Vendas",
     comprimentos: ["2,0m", "2,5m", "3,0m", "4,0m", "5,0m", "6,0m"],
@@ -104,22 +108,17 @@ export default function Eucalipto() {
               <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
               Tipo de Eucalipto
             </h2>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {FICHAS.map((f) => (
-                <button
+                <TipoCard
                   key={f.id}
+                  icone={f.icone}
+                  nome={f.nome}
+                  descricao={f.descricao}
+                  badge={f.badge}
+                  selected={fichaId === f.id}
                   onClick={() => { setFichaId(f.id); setComprimento(null); setEspessura(null); }}
-                  className={`w-full text-left p-4 rounded-xl border transition-all relative
-                    ${fichaId === f.id ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`}
-                >
-                  {f.badge && (
-                    <span className="absolute top-2 right-2 bg-orange-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
-                      {f.badge}
-                    </span>
-                  )}
-                  <p className="font-semibold text-gray-900 text-sm pr-24">{f.nome}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{f.descricao}</p>
-                </button>
+                />
               ))}
             </div>
           </section>

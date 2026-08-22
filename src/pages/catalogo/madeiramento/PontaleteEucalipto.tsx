@@ -4,7 +4,22 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import TipoCard from "../../../components/site/TipoCard";
 import { imagensEucalipto } from "../../../data/imagensProduto";
+
+const TIPOS = [
+  {
+    id: "Tratado em Autoclave",
+    icone: "🛡️",
+    desc: "CCA Tipo C · contato com solo e uso prolongado",
+    badge: "★ Mais vendido",
+  },
+  {
+    id: "In Natura",
+    icone: "🌱",
+    desc: "Sem tratamento químico · escoramento temporário",
+  },
+];
 
 const BITOLAS = [
   "6cm a 8cm",
@@ -26,22 +41,23 @@ const ESPECIFICACOES: [string, string][] = [
 
 export default function PontaleteEucalipto() {
   const { adicionar } = useOrcamento();
+  const [tipo, setTipo] = useState<string | null>(null);
   const [bitola, setBitola] = useState<string | null>(null);
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(10);
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
-  const pronto = Boolean(bitola && comprimento && quantidade >= 1);
-  const variacao = pronto ? `Ø ${bitola} · ${comprimento} · Tratado em Autoclave` : "";
+  const pronto = Boolean(tipo && bitola && comprimento && quantidade >= 1);
+  const variacao = pronto ? `Ø ${bitola} · ${comprimento} · ${tipo}` : "";
   const corpoMsgWpp = pronto
-    ? `🪵 *Pontalete de Eucalipto Tratado*\n• Bitola/Diâmetro: ${bitola}\n• Comprimento: ${comprimento}\n• Quantidade: ${quantidade} peças`
+    ? `🪵 *Pontalete de Eucalipto*\n• Tipo: ${tipo}\n• Bitola/Diâmetro: ${bitola}\n• Comprimento: ${comprimento}\n• Quantidade: ${quantidade} peças`
     : "";
 
   const handleAdicionar = () => {
     if (!pronto) return;
     adicionar({
-      id: `pontalete-eucalipto-${bitola}-${comprimento}`,
+      id: `pontalete-eucalipto-${tipo}-${bitola}-${comprimento}`,
       nome: "Pontalete de Eucalipto Tratado",
       variacao,
       quantidade,
@@ -87,6 +103,27 @@ export default function PontaleteEucalipto() {
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
+            Tipo de Pontalete
+          </h2>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {TIPOS.map((t) => (
+              <TipoCard
+                key={t.id}
+                icone={t.icone}
+                nome={t.id}
+                descricao={t.desc}
+                badge={t.badge}
+                selected={tipo === t.id}
+                onClick={() => { setTipo(t.id); setBitola(null); setComprimento(null); }}
+              />
+            ))}
+          </div>
+        </section>
+
+        {tipo && (
+        <section className="bg-white rounded-2xl p-5 shadow-sm">
+          <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
             Bitola / Diâmetro
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -98,11 +135,12 @@ export default function PontaleteEucalipto() {
             ))}
           </div>
         </section>
+        )}
 
-        {bitola && (
+        {tipo && bitola && (
           <section className="bg-white rounded-2xl p-5 shadow-sm">
             <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">3</span>
               Comprimento
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -119,7 +157,7 @@ export default function PontaleteEucalipto() {
         {pronto && (
           <section className="bg-white rounded-2xl p-5 shadow-sm">
             <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">3</span>
+              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">4</span>
               Quantidade
             </h2>
             <div className="flex items-center gap-3 mb-5">

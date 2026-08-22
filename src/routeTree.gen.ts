@@ -35,6 +35,7 @@ import { Route as CatalogoTintasProdutoSlugRouteImport } from './routes/catalogo
 import { Route as CatalogoTelhasVidroRouteImport } from './routes/catalogo.telhas.vidro'
 import { Route as CatalogoTelhasPolipropilenoRouteImport } from './routes/catalogo.telhas.polipropileno'
 import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
+import { Route as CatalogoTelhasPlanPvcRouteImport } from './routes/catalogo.telhas.plan-pvc'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoTelhasEsmaltadaRouteImport } from './routes/catalogo.telhas.esmaltada'
 import { Route as CatalogoTelhasCumeeirasRouteImport } from './routes/catalogo.telhas.cumeeiras'
@@ -45,6 +46,7 @@ import { Route as CatalogoMadeiramentoTabeirasDeckRouteImport } from './routes/c
 import { Route as CatalogoMadeiramentoPontaleteEucaliptoRouteImport } from './routes/catalogo.madeiramento.pontalete-eucalipto'
 import { Route as CatalogoMadeiramentoPinusRouteImport } from './routes/catalogo.madeiramento.pinus'
 import { Route as CatalogoMadeiramentoPerobaRouteImport } from './routes/catalogo.madeiramento.peroba'
+import { Route as CatalogoMadeiramentoMouraoTratadoRouteImport } from './routes/catalogo.madeiramento.mourao-tratado'
 import { Route as CatalogoMadeiramentoMouraoRouteImport } from './routes/catalogo.madeiramento.mourao'
 import { Route as CatalogoMadeiramentoMadeiritRouteImport } from './routes/catalogo.madeiramento.madeirit'
 import { Route as CatalogoMadeiramentoJatobaRouteImport } from './routes/catalogo.madeiramento.jatoba'
@@ -65,6 +67,9 @@ import { Route as CatalogoFixadoresBuchasArruelasRouteImport } from './routes/ca
 import { Route as CatalogoFixadoresAramesRouteImport } from './routes/catalogo.fixadores.arames'
 import { Route as CatalogoFixadoresProdutoSlugRouteImport } from './routes/catalogo.fixadores.$produtoSlug'
 import { Route as CatalogoCalhasRufoRouteImport } from './routes/catalogo.calhas.rufo'
+import { Route as CatalogoCalhasPvcRouteImport } from './routes/catalogo.calhas.pvc'
+import { Route as CatalogoCalhasPlatibandaRouteImport } from './routes/catalogo.calhas.platibanda'
+import { Route as CatalogoCalhasMolduraRouteImport } from './routes/catalogo.calhas.moldura'
 import { Route as CatalogoCalhasMantaTermicaRouteImport } from './routes/catalogo.calhas.manta-termica'
 import { Route as CatalogoCalhasMantaAsfalticaRouteImport } from './routes/catalogo.calhas.manta-asfaltica'
 import { Route as CatalogoCalhasCalhaAquapluvRouteImport } from './routes/catalogo.calhas.calha-aquapluv'
@@ -212,6 +217,11 @@ const CatalogoTelhasPolicarbonatoRoute =
     path: '/catalogo/telhas/policarbonato',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoTelhasPlanPvcRoute = CatalogoTelhasPlanPvcRouteImport.update({
+  id: '/catalogo/telhas/plan-pvc',
+  path: '/catalogo/telhas/plan-pvc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoTelhasFibrocimentoRoute =
   CatalogoTelhasFibrocimentoRouteImport.update({
     id: '/catalogo/telhas/fibrocimento',
@@ -266,6 +276,12 @@ const CatalogoMadeiramentoPerobaRoute =
   CatalogoMadeiramentoPerobaRouteImport.update({
     id: '/catalogo/madeiramento/peroba',
     path: '/catalogo/madeiramento/peroba',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoMadeiramentoMouraoTratadoRoute =
+  CatalogoMadeiramentoMouraoTratadoRouteImport.update({
+    id: '/catalogo/madeiramento/mourao-tratado',
+    path: '/catalogo/madeiramento/mourao-tratado',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoMadeiramentoMouraoRoute =
@@ -385,6 +401,22 @@ const CatalogoCalhasRufoRoute = CatalogoCalhasRufoRouteImport.update({
   path: '/catalogo/calhas/rufo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoCalhasPvcRoute = CatalogoCalhasPvcRouteImport.update({
+  id: '/catalogo/calhas/pvc',
+  path: '/catalogo/calhas/pvc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoCalhasPlatibandaRoute =
+  CatalogoCalhasPlatibandaRouteImport.update({
+    id: '/catalogo/calhas/platibanda',
+    path: '/catalogo/calhas/platibanda',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCalhasMolduraRoute = CatalogoCalhasMolduraRouteImport.update({
+  id: '/catalogo/calhas/moldura',
+  path: '/catalogo/calhas/moldura',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoCalhasMantaTermicaRoute =
   CatalogoCalhasMantaTermicaRouteImport.update({
     id: '/catalogo/calhas/manta-termica',
@@ -447,6 +479,9 @@ export interface FileRoutesByFullPath {
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
   '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/moldura': typeof CatalogoCalhasMolduraRoute
+  '/catalogo/calhas/platibanda': typeof CatalogoCalhasPlatibandaRoute
+  '/catalogo/calhas/pvc': typeof CatalogoCalhasPvcRoute
   '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
@@ -467,6 +502,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
+  '/catalogo/madeiramento/mourao-tratado': typeof CatalogoMadeiramentoMouraoTratadoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -477,6 +513,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/esmaltada': typeof CatalogoTelhasEsmaltadaRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/plan-pvc': typeof CatalogoTelhasPlanPvcRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
@@ -512,6 +549,9 @@ export interface FileRoutesByTo {
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
   '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/moldura': typeof CatalogoCalhasMolduraRoute
+  '/catalogo/calhas/platibanda': typeof CatalogoCalhasPlatibandaRoute
+  '/catalogo/calhas/pvc': typeof CatalogoCalhasPvcRoute
   '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
@@ -532,6 +572,7 @@ export interface FileRoutesByTo {
   '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
+  '/catalogo/madeiramento/mourao-tratado': typeof CatalogoMadeiramentoMouraoTratadoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -542,6 +583,7 @@ export interface FileRoutesByTo {
   '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/esmaltada': typeof CatalogoTelhasEsmaltadaRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/plan-pvc': typeof CatalogoTelhasPlanPvcRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
@@ -579,6 +621,9 @@ export interface FileRoutesById {
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
   '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/moldura': typeof CatalogoCalhasMolduraRoute
+  '/catalogo/calhas/platibanda': typeof CatalogoCalhasPlatibandaRoute
+  '/catalogo/calhas/pvc': typeof CatalogoCalhasPvcRoute
   '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
@@ -599,6 +644,7 @@ export interface FileRoutesById {
   '/catalogo/madeiramento/jatoba': typeof CatalogoMadeiramentoJatobaRoute
   '/catalogo/madeiramento/madeirit': typeof CatalogoMadeiramentoMadeiritRoute
   '/catalogo/madeiramento/mourao': typeof CatalogoMadeiramentoMouraoRoute
+  '/catalogo/madeiramento/mourao-tratado': typeof CatalogoMadeiramentoMouraoTratadoRoute
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -609,6 +655,7 @@ export interface FileRoutesById {
   '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/esmaltada': typeof CatalogoTelhasEsmaltadaRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/plan-pvc': typeof CatalogoTelhasPlanPvcRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
@@ -647,6 +694,9 @@ export interface FileRouteTypes {
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
     | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/moldura'
+    | '/catalogo/calhas/platibanda'
+    | '/catalogo/calhas/pvc'
     | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
@@ -667,6 +717,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
+    | '/catalogo/madeiramento/mourao-tratado'
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
@@ -677,6 +728,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/esmaltada'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/plan-pvc'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
     | '/catalogo/telhas/vidro'
@@ -712,6 +764,9 @@ export interface FileRouteTypes {
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
     | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/moldura'
+    | '/catalogo/calhas/platibanda'
+    | '/catalogo/calhas/pvc'
     | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
@@ -732,6 +787,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
+    | '/catalogo/madeiramento/mourao-tratado'
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
@@ -742,6 +798,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/esmaltada'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/plan-pvc'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
     | '/catalogo/telhas/vidro'
@@ -778,6 +835,9 @@ export interface FileRouteTypes {
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
     | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/moldura'
+    | '/catalogo/calhas/platibanda'
+    | '/catalogo/calhas/pvc'
     | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
@@ -798,6 +858,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/jatoba'
     | '/catalogo/madeiramento/madeirit'
     | '/catalogo/madeiramento/mourao'
+    | '/catalogo/madeiramento/mourao-tratado'
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
@@ -808,6 +869,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/esmaltada'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/plan-pvc'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
     | '/catalogo/telhas/vidro'
@@ -844,6 +906,9 @@ export interface RootRouteChildren {
   CatalogoCalhasCalhaAquapluvRoute: typeof CatalogoCalhasCalhaAquapluvRoute
   CatalogoCalhasMantaAsfalticaRoute: typeof CatalogoCalhasMantaAsfalticaRoute
   CatalogoCalhasMantaTermicaRoute: typeof CatalogoCalhasMantaTermicaRoute
+  CatalogoCalhasMolduraRoute: typeof CatalogoCalhasMolduraRoute
+  CatalogoCalhasPlatibandaRoute: typeof CatalogoCalhasPlatibandaRoute
+  CatalogoCalhasPvcRoute: typeof CatalogoCalhasPvcRoute
   CatalogoCalhasRufoRoute: typeof CatalogoCalhasRufoRoute
   CatalogoFixadoresProdutoSlugRoute: typeof CatalogoFixadoresProdutoSlugRoute
   CatalogoFixadoresAramesRoute: typeof CatalogoFixadoresAramesRoute
@@ -864,6 +929,7 @@ export interface RootRouteChildren {
   CatalogoMadeiramentoJatobaRoute: typeof CatalogoMadeiramentoJatobaRoute
   CatalogoMadeiramentoMadeiritRoute: typeof CatalogoMadeiramentoMadeiritRoute
   CatalogoMadeiramentoMouraoRoute: typeof CatalogoMadeiramentoMouraoRoute
+  CatalogoMadeiramentoMouraoTratadoRoute: typeof CatalogoMadeiramentoMouraoTratadoRoute
   CatalogoMadeiramentoPerobaRoute: typeof CatalogoMadeiramentoPerobaRoute
   CatalogoMadeiramentoPinusRoute: typeof CatalogoMadeiramentoPinusRoute
   CatalogoMadeiramentoPontaleteEucaliptoRoute: typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
@@ -874,6 +940,7 @@ export interface RootRouteChildren {
   CatalogoTelhasCumeeirasRoute: typeof CatalogoTelhasCumeeirasRoute
   CatalogoTelhasEsmaltadaRoute: typeof CatalogoTelhasEsmaltadaRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
+  CatalogoTelhasPlanPvcRoute: typeof CatalogoTelhasPlanPvcRoute
   CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
   CatalogoTelhasPolipropilenoRoute: typeof CatalogoTelhasPolipropilenoRoute
   CatalogoTelhasVidroRoute: typeof CatalogoTelhasVidroRoute
@@ -1080,6 +1147,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoTelhasPolicarbonatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/telhas/plan-pvc': {
+      id: '/catalogo/telhas/plan-pvc'
+      path: '/catalogo/telhas/plan-pvc'
+      fullPath: '/catalogo/telhas/plan-pvc'
+      preLoaderRoute: typeof CatalogoTelhasPlanPvcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/telhas/fibrocimento': {
       id: '/catalogo/telhas/fibrocimento'
       path: '/catalogo/telhas/fibrocimento'
@@ -1148,6 +1222,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/madeiramento/peroba'
       fullPath: '/catalogo/madeiramento/peroba'
       preLoaderRoute: typeof CatalogoMadeiramentoPerobaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/mourao-tratado': {
+      id: '/catalogo/madeiramento/mourao-tratado'
+      path: '/catalogo/madeiramento/mourao-tratado'
+      fullPath: '/catalogo/madeiramento/mourao-tratado'
+      preLoaderRoute: typeof CatalogoMadeiramentoMouraoTratadoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/madeiramento/mourao': {
@@ -1290,6 +1371,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoCalhasRufoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/calhas/pvc': {
+      id: '/catalogo/calhas/pvc'
+      path: '/catalogo/calhas/pvc'
+      fullPath: '/catalogo/calhas/pvc'
+      preLoaderRoute: typeof CatalogoCalhasPvcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/platibanda': {
+      id: '/catalogo/calhas/platibanda'
+      path: '/catalogo/calhas/platibanda'
+      fullPath: '/catalogo/calhas/platibanda'
+      preLoaderRoute: typeof CatalogoCalhasPlatibandaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/moldura': {
+      id: '/catalogo/calhas/moldura'
+      path: '/catalogo/calhas/moldura'
+      fullPath: '/catalogo/calhas/moldura'
+      preLoaderRoute: typeof CatalogoCalhasMolduraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/calhas/manta-termica': {
       id: '/catalogo/calhas/manta-termica'
       path: '/catalogo/calhas/manta-termica'
@@ -1379,6 +1481,9 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCalhasCalhaAquapluvRoute: CatalogoCalhasCalhaAquapluvRoute,
   CatalogoCalhasMantaAsfalticaRoute: CatalogoCalhasMantaAsfalticaRoute,
   CatalogoCalhasMantaTermicaRoute: CatalogoCalhasMantaTermicaRoute,
+  CatalogoCalhasMolduraRoute: CatalogoCalhasMolduraRoute,
+  CatalogoCalhasPlatibandaRoute: CatalogoCalhasPlatibandaRoute,
+  CatalogoCalhasPvcRoute: CatalogoCalhasPvcRoute,
   CatalogoCalhasRufoRoute: CatalogoCalhasRufoRoute,
   CatalogoFixadoresProdutoSlugRoute: CatalogoFixadoresProdutoSlugRoute,
   CatalogoFixadoresAramesRoute: CatalogoFixadoresAramesRoute,
@@ -1401,6 +1506,8 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoMadeiramentoJatobaRoute: CatalogoMadeiramentoJatobaRoute,
   CatalogoMadeiramentoMadeiritRoute: CatalogoMadeiramentoMadeiritRoute,
   CatalogoMadeiramentoMouraoRoute: CatalogoMadeiramentoMouraoRoute,
+  CatalogoMadeiramentoMouraoTratadoRoute:
+    CatalogoMadeiramentoMouraoTratadoRoute,
   CatalogoMadeiramentoPerobaRoute: CatalogoMadeiramentoPerobaRoute,
   CatalogoMadeiramentoPinusRoute: CatalogoMadeiramentoPinusRoute,
   CatalogoMadeiramentoPontaleteEucaliptoRoute:
@@ -1412,6 +1519,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTelhasCumeeirasRoute: CatalogoTelhasCumeeirasRoute,
   CatalogoTelhasEsmaltadaRoute: CatalogoTelhasEsmaltadaRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
+  CatalogoTelhasPlanPvcRoute: CatalogoTelhasPlanPvcRoute,
   CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
   CatalogoTelhasPolipropilenoRoute: CatalogoTelhasPolipropilenoRoute,
   CatalogoTelhasVidroRoute: CatalogoTelhasVidroRoute,

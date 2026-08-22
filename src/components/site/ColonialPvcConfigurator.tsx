@@ -82,12 +82,16 @@ function Passo({ n, title, children }: { n: number; title: string; children: Rea
   );
 }
 
-export function ColonialPvcConfigurator() {
+export function ColonialPvcConfigurator({
+  varianteInicial = "Colonial",
+}: {
+  varianteInicial?: Variante;
+} = {}) {
   const { addItem } = useQuoteCart();
-  const [variante, setVariante] = useState<Variante>("Colonial");
+  const [variante, setVariante] = useState<Variante>(varianteInicial);
   const [cor, setCor] = useState(CORES[0].value);
   const [dimensao, setDimensao] = useState("525 cm");
-  const [largura, setLargura] = useState(LARGURAS.Colonial[0].value);
+  const [largura, setLargura] = useState(LARGURAS[varianteInicial][0].value);
   const [espessura, setEspessura] = useState("1,6 mm");
   const [qty, setQty] = useState(10);
 

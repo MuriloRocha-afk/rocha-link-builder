@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -292,4 +293,200 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   idItem: (s) => `acessorio-calha-${s.acessorio}`,
   mensagem: (s, q) =>
     `🔧 *Acessório de Calha*\n• Sistema: ${s.sistema?.replace("Sistema ", "")}\n• Produto: ${s.acessorio}\n• Quantidade: ${q.qtd ?? 4} peças`,
+};
+
+/* ------------------------------------------------------------------ */
+/* Platibanda · Moldura · Calha PVC — fichas próprias                   */
+/* ------------------------------------------------------------------ */
+
+const acessoriosCalha = (
+  prefixo: string,
+  material: string,
+  qtdPecas: number,
+): AcessorioItem[] => [
+  {
+    id: `${prefixo}-saida-central`,
+    nome: `Saída Central ${material}`,
+    descricao: "Bocal de descida no meio da calha. Escoamento equilibrado dos dois lados.",
+    emoji: "⬇️",
+    unidade: "un",
+    categoria: "Calhas",
+    quantidadeSugerida: Math.max(1, Math.ceil(qtdPecas / 4)),
+  },
+  {
+    id: `${prefixo}-saida-lateral`,
+    nome: `Saída Lateral ${material}`,
+    descricao: "Bocal de descida na extremidade da calha, junto à cabeceira.",
+    emoji: "↘️",
+    unidade: "un",
+    categoria: "Calhas",
+    quantidadeSugerida: Math.max(1, Math.ceil(qtdPecas / 6)),
+  },
+  {
+    id: `${prefixo}-suporte`,
+    nome: `Suporte / Braçadeira ${material}`,
+    descricao: "Sustentação da calha a cada 60cm a 80cm. Evita barriga e desnível.",
+    emoji: "🔩",
+    unidade: "un",
+    categoria: "Calhas",
+    quantidadeSugerida: Math.max(4, Math.ceil(qtdPecas * 4)),
+  },
+  {
+    id: `${prefixo}-selante`,
+    nome: "Selante PU para Calha",
+    descricao: "Veda emendas, cabeceiras e saídas. Cura flexível, resistente a chuva e sol.",
+    emoji: "🧴",
+    unidade: "un",
+    categoria: "Calhas",
+    quantidadeSugerida: Math.max(1, Math.ceil(qtdPecas / 5)),
+    href: "/catalogo/tintas/pu-calha",
+  },
+];
+
+const CORTES_PLATIBANDA = [
+  { valor: "Corte 25", emoji: "📏", sub: "Platibandas estreitas e telhados menores" },
+  { valor: "Corte 33", emoji: "📐", sub: "Padrão residencial — o mais pedido", badge: "★ Mais vendida" },
+  { valor: "Corte 50", emoji: "🧱", sub: "Grandes áreas e alto volume de chuva" },
+];
+
+export const CONFIG_PLATIBANDA: ConfiguradorConfig = {
+  produtoKey: "calha-alge",
+  breadcrumb: BC("Calha Platibanda"),
+  titulo: "🧱 Calha Platibanda Galvanizada",
+  subtitulo:
+    "Calha embutida atrás da platibanda, com aba alta para conter a água. Chapa galvanizada de 2,0m a 6,0m.",
+  tagInfo: "✓ Chapa galvanizada · Cortes 25, 33 e 50",
+  galeriaTitulo: "Calha Platibanda",
+  galeriaPlaceholder: "Selecione o corte para ver as fotos",
+  imagens: (s) => (s.corte ? [{ src: "", alt: `Calha Platibanda galvanizada ${s.corte}` }] : []),
+  categoria: "Calhas",
+  passos: [
+    { chave: "corte", titulo: "Corte da Chapa", tipo: "grid3", opcoes: CORTES_PLATIBANDA },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento da Peça",
+      tipo: "grid3",
+      opcoes: COMPRIMENTOS.map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
+  ],
+  especificacoes: [
+    ["Material", "Chapa galvanizada"],
+    ["Cortes", "25, 33 e 50"],
+    ["Comprimentos", "2,0m a 6,0m"],
+    ["Aplicação", "Calha embutida atrás da platibanda"],
+    ["Emendas", "Rebite + selante PU"],
+    ["Suportes", "A cada 60cm a 80cm"],
+  ],
+  tituloAcessorios: "Complemente sua Calha Platibanda",
+  acessorios: (_s, q) => acessoriosCalha("platibanda", "Galvanizada", (q.qtd as number) ?? 4),
+  resumoNome: () => "Calha Platibanda Galvanizada",
+  resumoDetalhe: (s, q) => `${s.corte} · ${s.comprimento} · ${q.qtd ?? 4} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `platibanda-${s.corte}-${s.comprimento}`,
+  mensagem: (s, q) =>
+    `🧱 *Calha Platibanda Galvanizada*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
+};
+
+const CORTES_MOLDURA = [
+  { valor: "Corte 25", emoji: "📏", sub: "Beirais curtos e coberturas pequenas" },
+  { valor: "Corte 33", emoji: "📐", sub: "Padrão residencial — o mais pedido", badge: "★ Mais vendida" },
+  { valor: "Corte 50", emoji: "🏠", sub: "Telhados amplos e galpões" },
+];
+
+export const CONFIG_MOLDURA: ConfiguradorConfig = {
+  produtoKey: "calha-alge",
+  breadcrumb: BC("Calha Moldura"),
+  titulo: "🏠 Calha Moldura Galvanizada",
+  subtitulo:
+    "Calha aparente fixada na beira do telhado, com dobra frontal de acabamento. Galvanizada de 2,0m a 6,0m.",
+  tagInfo: "✓ Chapa galvanizada · Cortes 25, 33 e 50",
+  galeriaTitulo: "Calha Moldura",
+  galeriaPlaceholder: "Selecione o corte para ver as fotos",
+  imagens: (s) => (s.corte ? [{ src: "", alt: `Calha Moldura galvanizada ${s.corte}` }] : []),
+  categoria: "Calhas",
+  passos: [
+    { chave: "corte", titulo: "Corte da Chapa", tipo: "grid3", opcoes: CORTES_MOLDURA },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento da Peça",
+      tipo: "grid3",
+      opcoes: COMPRIMENTOS.map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
+  ],
+  especificacoes: [
+    ["Material", "Chapa galvanizada"],
+    ["Cortes", "25, 33 e 50"],
+    ["Comprimentos", "2,0m a 6,0m"],
+    ["Aplicação", "Calha aparente na beira do telhado"],
+    ["Acabamento", "Dobra frontal de moldura"],
+    ["Suportes", "A cada 60cm a 80cm"],
+  ],
+  tituloAcessorios: "Complemente sua Calha Moldura",
+  acessorios: (_s, q) => acessoriosCalha("moldura", "Galvanizada", (q.qtd as number) ?? 4),
+  resumoNome: () => "Calha Moldura Galvanizada",
+  resumoDetalhe: (s, q) => `${s.corte} · ${s.comprimento} · ${q.qtd ?? 4} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `moldura-${s.corte}-${s.comprimento}`,
+  mensagem: (s, q) =>
+    `🏠 *Calha Moldura Galvanizada*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
+};
+
+const LINHAS_PVC = [
+  {
+    valor: "Aquapluv Beira",
+    emoji: "🔵",
+    sub: "Perfil arredondado tradicional — Bege ou Cinza",
+    badge: "★ Mais vendida",
+  },
+  { valor: "Aquapluv Style", emoji: "⬜", sub: "Perfil retangular moderno — Bege ou Cinza" },
+];
+
+export const CONFIG_CALHA_PVC: ConfiguradorConfig = {
+  produtoKey: "calha-aquapluv",
+  breadcrumb: BC("Calha PVC"),
+  titulo: "💧 Calha PVC",
+  subtitulo:
+    "Calha em PVC que não enferruja e dispensa pintura. Linhas Aquapluv Beira e Aquapluv Style, nas cores Bege e Cinza.",
+  tagInfo: "✓ Não enferruja · Encaixe sem solda",
+  galeriaTitulo: "Calha PVC",
+  galeriaPlaceholder: "Selecione a linha para ver as fotos",
+  imagens: (s) => (s.linha ? [{ src: "", alt: `Calha PVC ${s.linha} ${s.cor ?? ""}` }] : []),
+  categoria: "Calhas",
+  passos: [
+    { chave: "linha", titulo: "Linha do Perfil", tipo: "grid2", opcoes: LINHAS_PVC },
+    {
+      chave: "cor",
+      titulo: "Cor",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Bege", cor: "#E4D5B7" },
+        { valor: "Cinza", cor: "#9AA0A6" },
+      ],
+    },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento da Peça",
+      tipo: "grid3",
+      opcoes: ["2,0m", "3,0m", "4,0m"].map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
+  ],
+  especificacoes: [
+    ["Material", "PVC rígido"],
+    ["Linhas", "Aquapluv Beira e Aquapluv Style"],
+    ["Cores", "Bege e Cinza"],
+    ["Comprimentos", "2,0m · 3,0m · 4,0m"],
+    ["Montagem", "Encaixe com anel de vedação"],
+    ["Manutenção", "Não enferruja e não precisa de pintura"],
+  ],
+  tituloAcessorios: "Complemente sua Calha PVC",
+  acessorios: (_s, q) => acessoriosCalha("calha-pvc", "PVC", (q.qtd as number) ?? 4),
+  resumoNome: (s) => `Calha PVC ${s.linha ?? ""}`.trim(),
+  resumoDetalhe: (s, q) => `${s.linha} · ${s.cor} · ${s.comprimento} · ${q.qtd ?? 4} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `calha-pvc-${s.linha}-${s.cor}-${s.comprimento}`,
+  mensagem: (s, q) =>
+    `💧 *Calha PVC*\n• Linha: ${s.linha}\n• Cor: ${s.cor}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
 };
