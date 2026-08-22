@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import TipoCard from "../../../components/site/TipoCard";
 import { imagensPinus } from "../../../data/imagensProduto";
 
 type Produto = {
@@ -30,13 +31,17 @@ const PRODUTOS: Produto[] = [
   { id: "pontalete-7x7", nome: "Pontalete 7cm × 7cm", tipo: "Pontalete", largura: "7cm", espessura: "7cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc" },
 ];
 
-const ABAS = ["Todos", "Sarrafo", "Tábua", "Pontalete"];
+const TIPOS = [
+  { id: "Sarrafo", icone: "📐", desc: "5cm a 15cm · travamento e forro" },
+  { id: "Tábua", icone: "🪚", desc: "20cm a 30cm · fechamento e tabeira" },
+  { id: "Pontalete", icone: "🪧", desc: "6×6 e 7×7 · escoras e pilaretes" },
+];
 const ACABAMENTOS = ["Bruto", "Aparelhado em Plaina"] as const;
 type Acabamento = typeof ACABAMENTOS[number];
 
 export default function Pinus() {
   const { adicionar } = useOrcamento();
-  const [aba, setAba] = useState("Todos");
+  const [aba, setAba] = useState<string | null>(null);
   const [produtoId, setProdutoId] = useState<string | null>(null);
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [acabamento, setAcabamento] = useState<Acabamento | null>(null);
@@ -44,7 +49,7 @@ export default function Pinus() {
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
-  const filtrados = aba === "Todos" ? PRODUTOS : PRODUTOS.filter((p) => p.tipo === aba);
+  const filtrados = aba ? PRODUTOS.filter((p) => p.tipo === aba) : [];
   const produto = PRODUTOS.find((p) => p.id === produtoId);
   const pronto = Boolean(produto && comprimento && acabamento && quantidade >= 1);
   const variacao = produto && comprimento && acabamento
@@ -96,9 +101,9 @@ export default function Pinus() {
       }
       galeria={
         <GaleriaProduto
-          titulo={produto ? `Pinus — ${produto.tipo}` : aba !== "Todos" ? `Pinus — ${aba}` : "Pinus"}
-          subtitulo={produto || aba !== "Todos" ? "Foto em breve" : "Selecione o produto para ver as fotos"}
-          imagens={imagensPinus[produto ? produto.tipo : aba] ?? []}
+          titulo={produto ? `Pinus — ${produto.tipo}` : aba ? `Pinus — ${aba}` : "Pinus"}
+          subtitulo={produto || aba ? "Foto em breve" : "Selecione o tipo de peça para ver as fotos"}
+          imagens={imagensPinus[produto ? produto.tipo : (aba ?? "")] ?? []}
         />
       }
     >
@@ -106,17 +111,28 @@ export default function Pinus() {
           <section className="bg-white rounded-2xl p-5 shadow-sm">
             <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
-              Selecione a Peça
+              Tipo de Peça
             </h2>
-            {/* Abas de filtro */}
-            <div className="flex gap-2 mb-4 flex-wrap">
-              {ABAS.map((a) => (
-                <button key={a} onClick={() => { setAba(a); setProdutoId(null); setComprimento(null); setAcabamento(null); }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all border ${aba === a ? "bg-orange-500 text-white border-orange-500" : "border-gray-200 text-gray-600 hover:border-orange-300"}`}>
-                  {a}
-                </button>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {TIPOS.map((t) => (
+                <TipoCard
+                  key={t.id}
+                  icone={t.icone}
+                  nome={t.id}
+                  descricao={t.desc}
+                  selected={aba === t.id}
+                  onClick={() => { setAba(t.id); setProdutoId(null); setComprimento(null); setAcabamento(null); }}
+                />
               ))}
             </div>
+          </section>
+
+          {aba && (
+          <section className="bg-white rounded-2xl p-5 shadow-sm">
+            <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+              Bitola — {aba}
+            </h2>
             <div className="space-y-2">
               {filtrados.map((p) => (
                 <button key={p.id} onClick={() => selecionarProduto(p)}
@@ -133,6 +149,7 @@ export default function Pinus() {
               ))}
             </div>
           </section>
+          )}
 
           {produto && (
             <section className="bg-white rounded-2xl p-5 shadow-sm">
