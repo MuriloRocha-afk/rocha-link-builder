@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import TipoCard from "../../../components/site/TipoCard";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroPinus } from "../../../data/imagensProduto";
@@ -11,18 +12,21 @@ import { imagensForroPinus } from "../../../data/imagensProduto";
 const MODELOS = [
   {
     id: "macho-femea-10",
+    icone: "🪵",
     nome: "Forro Pinus Macho-Fêmea — 1cm × 10cm",
     desc: "Encaixe macho-fêmea. O mais pedido para forro interno.",
     lider: true,
   },
   {
     id: "frisado-10",
+    icone: "〰️",
     nome: "Forro Pinus Frisado — 1cm × 10cm",
     desc: "Friso central que disfarça as emendas entre réguas.",
     lider: false,
   },
   {
     id: "macho-femea-20",
+    icone: "📏",
     nome: "Forro Pinus Macho-Fêmea — 1cm × 20cm",
     desc: "Régua larga: instalação mais rápida em áreas grandes.",
     lider: false,
@@ -176,21 +180,17 @@ export default function ForroPinus() {
             </span>
             Modelo
           </h2>
-          <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {MODELOS.map((m) => (
-              <button
+              <TipoCard
                 key={m.id}
+                icone={(m as { icone?: string }).icone ?? "🪵"}
+                nome={m.nome}
+                descricao={m.desc}
+                badge={m.lider ? "★ Mais Vendido" : undefined}
+                selected={modeloId === m.id}
                 onClick={() => setModeloId(m.id)}
-                className={`w-full text-left p-4 rounded-xl border transition-all relative ${modeloId === m.id ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`}
-              >
-                {m.lider && (
-                  <span className="absolute top-2 right-2 bg-orange-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
-                    ★ Mais Vendido
-                  </span>
-                )}
-                <p className="font-semibold text-gray-900 text-sm pr-20">{m.nome}</p>
-                <p className="text-gray-500 text-xs mt-0.5">{m.desc}</p>
-              </button>
+              />
             ))}
           </div>
         </section>

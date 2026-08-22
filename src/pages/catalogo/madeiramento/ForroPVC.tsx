@@ -4,9 +4,24 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import TipoCard from "../../../components/site/TipoCard";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroPVC } from "../../../data/imagensProduto";
+
+const MODELOS = [
+  {
+    id: "Liso 20cm",
+    icone: "⬜",
+    desc: "Régua lisa branca de 20cm — o padrão mais pedido",
+    badge: "★ Mais Vendido",
+  },
+  {
+    id: "Frisado 20cm",
+    icone: "〰️",
+    desc: "Friso central que disfarça as emendas entre réguas",
+  },
+];
 
 const COMPRIMENTOS = [
   "1,0m",
@@ -32,16 +47,18 @@ function calcularArea(comprimento: string, quantidade: number): number {
 
 export default function ForroPVC() {
   const { adicionar } = useOrcamento();
+  const [modelo, setModelo] = useState<string | null>(null);
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(20);
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
-  const pronto = comprimento && quantidade >= 1;
+  const pronto = modelo && comprimento && quantidade >= 1;
   const area = comprimento ? calcularArea(comprimento, quantidade) : 0;
 
   const corpoMsgWpp = pronto
     ? `🏠 *Forro PVC Branco*\n` +
+      `• Modelo: ${modelo}\n` +
       `• Largura da régua: 20cm\n` +
       `• Comprimento: ${comprimento}\n` +
       `• Quantidade: ${quantidade} réguas\n` +
@@ -51,9 +68,9 @@ export default function ForroPVC() {
   const handleAdicionar = () => {
     if (!pronto) return;
     adicionar({
-      id: `forro-pvc-${comprimento}`,
+      id: `forro-pvc-${modelo}-${comprimento}`,
       nome: "Forro PVC Branco",
-      variacao: `Régua 20cm × ${comprimento}`,
+      variacao: `${modelo} · Régua 20cm × ${comprimento}`,
       quantidade,
       unidade: "réguas",
       categoria: "Madeiramento",
@@ -116,11 +133,35 @@ export default function ForroPVC() {
       }
     >
       <>
-        {/* Comprimento */}
+        {/* Modelo */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
               1
+            </span>
+            Modelo da régua
+          </h2>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {MODELOS.map((m) => (
+              <TipoCard
+                key={m.id}
+                icone={m.icone}
+                nome={m.id}
+                descricao={m.desc}
+                badge={m.badge}
+                selected={modelo === m.id}
+                onClick={() => { setModelo(m.id); setComprimento(null); }}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Comprimento */}
+        {modelo && (
+        <section className="bg-white rounded-2xl p-5 shadow-sm">
+          <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
+              2
             </span>
             Comprimento da régua
           </h2>
