@@ -1,10 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ChevronRight, Crown } from "lucide-react";
+import { ArrowLeft, Calculator, ChevronRight, Crown } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { CATEGORIES, type CatalogItem } from "@/components/site/catalog-data";
 import { ProductCatalogCard } from "@/components/site/ProductCard";
-import { CalculadoraTelhas } from "@/components/site/Calculadora";
 import { TelhasSubcardGrid } from "@/components/site/TelhasSubcards";
 import { MadeiramentoSubcardGrid } from "@/components/site/MadeiramentoSubcards";
 
@@ -151,9 +150,21 @@ function CategoriaPage() {
 
 
         {category.id === "telhas" ? (
-          <section className="bg-secondary py-20">
-            <div className="mx-auto max-w-3xl px-5">
-              <CalculadoraTelhas />
+          <section className="surface-dark py-16">
+            <div className="mx-auto max-w-4xl px-5 text-center">
+              <h2 className="text-2xl leading-tight font-extrabold text-primary-foreground md:text-3xl">
+                Calcule telhas, madeira e inclinação em um só lugar
+              </h2>
+              <p className="mt-3 text-sm text-primary-foreground/75 md:text-base">
+                Nossa calculadora completa estima a quantidade de telhas, estrutura de madeira, tintas e vernizes com base nas medidas reais do seu telhado.
+              </p>
+              <Link
+                to="/calculadora"
+                className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#F97316] px-6 py-3 text-sm font-extrabold text-white transition-colors hover:bg-[#EA580C]"
+              >
+                <Calculator className="h-4 w-4" />
+                Calcular meu telhado
+              </Link>
             </div>
           </section>
         ) : null}
