@@ -1,28 +1,26 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { BookOpen, Compass, Hammer, PanelTop, Table2 } from "lucide-react";
+import { BookOpen, Compass, Table2 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { GuiaTelha } from "@/components/site/ferramentas/GuiaTelha";
-import { CalculadoraMadeiramento } from "@/components/site/ferramentas/CalculadoraMadeiramento";
-import { CalculadoraForro } from "@/components/site/ferramentas/CalculadoraForro";
 import { TabelaComparativa } from "@/components/site/ferramentas/TabelaComparativa";
 import { Glossario } from "@/components/site/ferramentas/Glossario";
 
 export const Route = createFileRoute("/ferramentas")({
   head: () => ({
     meta: [
-      { title: "Ferramentas & Utilidades para Telhado | Rocha Telhas" },
+      { title: "Guias & Informações sobre Telhas | Rocha Telhas" },
       {
         name: "description",
         content:
-          "Guia qual telha escolher, calculadora de madeiramento e de forro, tabela comparativa de telhas e glossário técnico da Rocha Telhas.",
+          "Guia de qual telha escolher, tabela comparativa de telhas e glossário técnico de obra da Rocha Telhas.",
       },
-      { property: "og:title", content: "Ferramentas & Utilidades — Rocha Telhas" },
+      { property: "og:title", content: "Guias & Informações — Rocha Telhas" },
       {
         property: "og:description",
         content:
-          "Quiz de escolha de telha, cálculo de vigas, caibros e ripas, quantidade de forro, comparativo técnico e glossário de obra.",
+          "Quiz de escolha de telha, comparativo técnico entre modelos e glossário de termos de obra.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -33,8 +31,6 @@ export const Route = createFileRoute("/ferramentas")({
 
 const ABAS = [
   { id: "guia", label: "Qual telha escolher", icon: Compass },
-  { id: "madeiramento", label: "Madeiramento", icon: Hammer },
-  { id: "forro", label: "Forro", icon: PanelTop },
   { id: "comparativo", label: "Comparativo", icon: Table2 },
   { id: "glossario", label: "Glossário", icon: BookOpen },
 ] as const;
@@ -51,11 +47,11 @@ function FerramentasPage() {
         <section className="surface-dark pt-32 pb-14 md:pt-40 md:pb-16">
           <div className="mx-auto max-w-7xl px-5">
             <h1 className="max-w-3xl text-3xl leading-tight font-extrabold text-primary-foreground md:text-5xl">
-              Ferramentas &amp; <span className="text-gradient-accent">Utilidades</span>
+              Guias &amp; <span className="text-gradient-accent">Informações</span>
             </h1>
             <p className="mt-4 max-w-2xl text-sm text-primary-foreground/75 md:text-lg">
-              Muito além de um catálogo: descubra qual telha combina com a sua obra, calcule
-              madeiramento e forro, compare tipos de telha e entenda os termos técnicos.
+              Descubra qual telha combina com a sua obra, compare tipos de telha lado a lado e
+              entenda os termos técnicos usados no catálogo.
             </p>
           </div>
         </section>
@@ -83,8 +79,6 @@ function FerramentasPage() {
 
             <div className="mt-6">
               {aba === "guia" ? <GuiaTelha /> : null}
-              {aba === "madeiramento" ? <CalculadoraMadeiramento /> : null}
-              {aba === "forro" ? <CalculadoraForro /> : null}
               {aba === "comparativo" ? <TabelaComparativa /> : null}
               {aba === "glossario" ? <Glossario /> : null}
             </div>
