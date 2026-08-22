@@ -298,7 +298,10 @@ export function CalculadoraTelhado() {
         `- Tipo: ${TIPOS.find((t) => t.id === tipo)!.label} — Inclinação ${incl}%`,
         `- Telha escolhida: ${res.telha.label} (${res.telha.grupo})`,
         `- Peso estimado da cobertura: ${fmt(res.peso, 0)} kg`,
-        `- Faixa estimada de investimento: ${brl(res.custoMin)} a ${brl(res.custoMax)}`,
+        `- Faixa estimada de investimento (tabela Rocha & Telhas): ${brl(res.faixa.min)} a ${brl(res.faixa.max)}`,
+        ...(res.faixa.naoEncontrados.length
+          ? [`- Obs.: valor de ${res.faixa.naoEncontrados.length} item(ns) não incluído na estimativa, sujeito a cotação`]
+          : []),
         ``,
         `📋 *MATERIAIS ESTIMADOS*`,
         `- ${res.telha.label} — Qtd: ${res.telhas} un`,
