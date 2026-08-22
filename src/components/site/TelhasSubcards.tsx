@@ -22,7 +22,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     image: fibro,
     description:
       "A mais vendida do pátio. Disponível de 153cm a 366cm, espessura 5mm, 6mm e 8mm.",
-    badge: "🔥 Top Venda #1",
+    badge: "Top Venda #1",
     cta: "Escolher Dimensão e Cotar",
   },
   {
@@ -31,7 +31,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     image: pvc,
     description:
       "Modelos Colonial e Plan. Comprimento, largura e espessura nas cores Cerâmica, Marfim e Cinza.",
-    badge: "🔥 Top Venda #2",
+    badge: "Top Venda #2",
     cta: "Escolher Modelo e Cor",
   },
   {
@@ -40,7 +40,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     image: ceramica,
     description:
       "As mais vendidas de barro. Romana e Portuguesa Resinada — natural ou esmaltada também disponível.",
-    badge: "🔥 Top Venda #3",
+    badge: "Top Venda #3",
     cta: "Escolher Formato e Cotar",
   },
   {
