@@ -6,6 +6,28 @@ const BC = (nome: string) => [
   { label: nome },
 ];
 
+
+/** Ícone padrão por tipo de peça de madeira (seleção visual do wizard). */
+export const ICONE_PECA: Record<string, string> = {
+  Viga: "🟫",
+  Vigote: "🟫",
+  Barrote: "🟫",
+  Caibro: "🪵",
+  "Caibrão": "🪵",
+  Ripa: "📏",
+  "Ripão": "📏",
+  Sarrafo: "📐",
+  "Tábua": "🪚",
+  Dormente: "🚧",
+  Pontalete: "🪧",
+  Prancha: "🪵",
+};
+
+export const iconePeca = (nome: string) => {
+  const chave = Object.keys(ICONE_PECA).find((k) => nome.toLowerCase().startsWith(k.toLowerCase()));
+  return chave ? ICONE_PECA[chave] : "🪵";
+};
+
 const BITOLAS_PEROBA: Record<string, string[]> = {
   Viga: ["5x11cm", "5x15cm", "5x20cm", "6x12cm", "8x16cm", "8x20cm"],
   Caibro: ["5x5cm", "5x6cm", "5x7cm"],
@@ -109,8 +131,8 @@ export const CONFIG_GARAPEIRA: ConfiguradorConfig = {
     {
       chave: "peca",
       titulo: "Tipo de Peça",
-      tipo: "lista",
-      opcoes: PECAS_GARAPEIRA.map((v) => ({ valor: v })),
+      tipo: "grid2",
+      opcoes: PECAS_GARAPEIRA.map((v) => ({ valor: v, emoji: iconePeca(v) })),
     },
     {
       chave: "acabamento",
@@ -152,8 +174,8 @@ export const CONFIG_AMESCLA: ConfiguradorConfig = {
     {
       chave: "peca",
       titulo: "Tipo de Peça",
-      tipo: "lista",
-      opcoes: PECAS_AMESCLA.map((v) => ({ valor: v })),
+      tipo: "grid2",
+      opcoes: PECAS_AMESCLA.map((v) => ({ valor: v, emoji: iconePeca(v) })),
     },
     {
       chave: "qtd",
@@ -286,6 +308,17 @@ export const CONFIG_MOURAO: ConfiguradorConfig = {
   categoria: "Madeiramento",
   passos: [
     {
+      chave: "aplicacao",
+      titulo: "Aplicação",
+      tipo: "grid2",
+      opcoes: [
+        { valor: "Cerca / Divisa", emoji: "🚧", sub: "Mourões de cerca rural e divisas" },
+        { valor: "Estrutura / Pergolado", emoji: "🏗️", sub: "Pilares, pergolados e coberturas" },
+        { valor: "Curral / Baia", emoji: "🐄", sub: "Currais, baias e manejo de animais" },
+        { valor: "Paisagismo", emoji: "🌿", sub: "Contenção, canteiros e decoração" },
+      ],
+    },
+    {
       chave: "diametro",
       titulo: "Diâmetro",
       tipo: "chips",
@@ -305,11 +338,12 @@ export const CONFIG_MOURAO: ConfiguradorConfig = {
     ["Durabilidade", "10 a 25 anos no solo"],
   ],
   resumoNome: () => "Mourão Tratado",
-  resumoDetalhe: (s, q) => `${s.diametro} · ${s.comprimento} · ${q.qtd ?? 10} peças`,
+  resumoDetalhe: (s, q) =>
+    `${s.aplicacao} · ${s.diametro} · ${s.comprimento} · ${q.qtd ?? 10} peças`,
   unidadeResumo: () => "peças",
   idItem: (s) => `mourao-${s.diametro}-${s.comprimento}`,
   mensagem: (s, q) =>
-    `🌾 *Mourão Tratado*\n• Diâmetro: ${s.diametro}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 10} peças`,
+    `🌾 *Mourão Tratado*\n• Aplicação: ${s.aplicacao}\n• Diâmetro: ${s.diametro}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 10} peças`,
 };
 
 const BITOLAS_JATOBA: Record<string, string[]> = {

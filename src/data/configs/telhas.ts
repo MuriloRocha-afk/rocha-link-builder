@@ -28,7 +28,12 @@ export const CONFIG_CONCRETO: ConfiguradorConfig = {
       : [],
   categoria: "Telhas",
   passos: [
-    { chave: "cor", titulo: "Cor / Acabamento", tipo: "grid3", opcoes: CORES_CONCRETO },
+    {
+      chave: "cor",
+      titulo: "Cor / Acabamento",
+      tipo: "grid3",
+      opcoes: CORES_CONCRETO.map((c) => ({ ...c, sub: "Linha Eurotop" })),
+    },
     {
       chave: "qtd",
       titulo: "Quantidade",
@@ -214,7 +219,12 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     s.comprimento ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }] : [],
   categoria: "Telhas",
   passos: [
-    { chave: "comprimento", titulo: "Comprimento", tipo: "lista", opcoes: COMPRIMENTOS_PP },
+    {
+      chave: "comprimento",
+      titulo: "Comprimento da Telha",
+      tipo: "grid2",
+      opcoes: COMPRIMENTOS_PP.map((o) => ({ ...o, emoji: "📏" })),
+    },
     {
       chave: "qtd",
       titulo: "Quantidade",
@@ -259,7 +269,7 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
   categoria: "Telhas",
   passos: [
-    { chave: "formato", titulo: "Formato", tipo: "lista", opcoes: FORMATOS_VIDRO },
+    { chave: "formato", titulo: "Formato", tipo: "grid2", opcoes: FORMATOS_VIDRO },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 6 },
   ],
   especificacoes: [
