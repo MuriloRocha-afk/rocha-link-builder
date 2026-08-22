@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Flame, Star } from "lucide-react";
 import ceramica from "@/assets/prod-ceramica.jpg";
 import pvc from "@/assets/prod-pvc.jpg";
 import fibro from "@/assets/prod-fibro.jpg";
@@ -22,7 +22,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     image: fibro,
     description:
       "A mais vendida do pátio. Disponível de 153cm a 366cm, espessura 5mm, 6mm e 8mm.",
-    badge: "★ Campeão de Vendas #1",
+    badge: "Top Venda #1",
     cta: "Escolher Dimensão e Cotar",
   },
   {
@@ -31,34 +31,17 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     image: pvc,
     description:
       "Modelos Colonial e Plan. Comprimento, largura e espessura nas cores Cerâmica, Marfim e Cinza.",
-    badge: "★ Campeão de Vendas #3",
+    badge: "Top Venda #2",
     cta: "Escolher Modelo e Cor",
   },
   {
     slug: "ceramica",
-    name: "Telha Cerâmica — 5 Formatos",
+    name: "Telha de Barro — Romana e Portuguesa Resinada",
     image: ceramica,
     description:
-      "Portuguesa, Romana, Americana, Francesa e Mediterrânea — natural ou resinada. Marcas Isotec, Rodrigues, Laranjal e Top Telha.",
-    badge: "★ Campeão de Vendas",
+      "As mais vendidas de barro. Romana e Portuguesa Resinada — natural ou esmaltada também disponível.",
+    badge: "Top Venda #3",
     cta: "Escolher Formato e Cotar",
-  },
-  {
-    slug: "vidro",
-    name: "Telha de Vidro",
-    image: ceramica,
-    description:
-      "Formatos Portuguesa, Romana e Americana. Ponto de luz natural com encaixe igual ao da telha cerâmica.",
-    cta: "Escolher Formato",
-  },
-
-  {
-    slug: "policarbonato",
-    name: "Telha Policarbonato",
-    image: translucida,
-    description:
-      "Translúcida cristal em 183cm, 244cm, 305cm e 366cm. Para iluminação natural em galpões.",
-    cta: "Escolher Dimensão",
   },
   {
     slug: "polipropileno",
@@ -83,6 +66,22 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     description:
       "Cerâmica vitrificada em 6 cores. Cor permanente, impermeável e fácil de limpar.",
     cta: "Escolher Cor",
+  },
+  {
+    slug: "policarbonato",
+    name: "Telha Policarbonato",
+    image: translucida,
+    description:
+      "Translúcida cristal em 183cm, 244cm, 305cm e 366cm. Para iluminação natural em galpões.",
+    cta: "Escolher Dimensão",
+  },
+  {
+    slug: "vidro",
+    name: "Telha de Vidro",
+    image: ceramica,
+    description:
+      "Formatos Portuguesa, Romana e Americana. Ponto de luz natural com encaixe igual ao da telha cerâmica.",
+    cta: "Escolher Formato",
   },
   {
     slug: "cumeeiras",
@@ -115,7 +114,11 @@ export function TelhasSubcardGrid() {
             />
             {card.badge ? (
               <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
-                <Star className="h-3 w-3 fill-current" />
+                {card.badge.startsWith("★") ? (
+                  <Star className="h-3 w-3 fill-current" />
+                ) : (
+                  <Flame className="h-3 w-3 fill-current" />
+                )}
                 {card.badge.replace("★ ", "")}
               </span>
             ) : null}
