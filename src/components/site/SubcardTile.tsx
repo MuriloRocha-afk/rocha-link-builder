@@ -56,7 +56,9 @@ export function SubcardTile({
       <div
         aria-hidden="true"
         className={`absolute inset-0 bg-gradient-to-t ${
-          image ? "from-primary via-primary/80 to-primary/20" : "from-primary via-primary/85 to-transparent"
+          image
+            ? "from-primary via-primary/80 to-primary/20"
+            : "from-primary via-primary/85 to-transparent"
         }`}
       />
 
