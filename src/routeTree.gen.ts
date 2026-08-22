@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as CalculadoraRouteImport } from './routes/calculadora'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
@@ -73,6 +74,11 @@ import { Route as CatalogoCalhasAcessoriosCalhaRouteImport } from './routes/cata
 import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo.calhas.$produtoSlug'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 
+const FerramentasRoute = FerramentasRouteImport.update({
+  id: '/ferramentas',
+  path: '/ferramentas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CalculadoraRoute = CalculadoraRouteImport.update({
   id: '/calculadora',
   path: '/calculadora',
@@ -430,6 +436,7 @@ const CatalogoCategoriaSlugProdutoSlugRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculadora': typeof CalculadoraRoute
+  '/ferramentas': typeof FerramentasRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
@@ -495,6 +502,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculadora': typeof CalculadoraRoute
+  '/ferramentas': typeof FerramentasRoute
   '/catalogo': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
@@ -560,6 +568,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calculadora': typeof CalculadoraRoute
+  '/ferramentas': typeof FerramentasRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
@@ -627,6 +636,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/calculadora'
+    | '/ferramentas'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
@@ -692,6 +702,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/calculadora'
+    | '/ferramentas'
     | '/catalogo'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
@@ -756,6 +767,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/calculadora'
+    | '/ferramentas'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
     | '/catalogo/$categoriaSlug/$produtoSlug'
@@ -822,6 +834,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculadoraRoute: typeof CalculadoraRoute
+  FerramentasRoute: typeof FerramentasRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   CatalogoCalhasProdutoSlugRoute: typeof CatalogoCalhasProdutoSlugRoute
@@ -885,6 +898,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/ferramentas': {
+      id: '/ferramentas'
+      path: '/ferramentas'
+      fullPath: '/ferramentas'
+      preLoaderRoute: typeof FerramentasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/calculadora': {
       id: '/calculadora'
       path: '/calculadora'
@@ -1349,6 +1369,7 @@ const CatalogoCategoriaSlugRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculadoraRoute: CalculadoraRoute,
+  FerramentasRoute: FerramentasRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoIndexRoute: CatalogoIndexRoute,
   CatalogoCalhasProdutoSlugRoute: CatalogoCalhasProdutoSlugRoute,
