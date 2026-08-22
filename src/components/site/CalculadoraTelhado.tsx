@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCalcDims } from "@/components/site/calc-dims";
 import { Calculator, MessageCircle, AlertTriangle, Download, Scale, Wallet } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
+import { estimarFaixa, type ItemCusto, type ResultadoFaixa } from "@/data/precosLoja";
 
 type Telha = {
   id: string;
@@ -14,37 +15,37 @@ type Telha = {
   familia: "fibrocimento" | "pvc" | "ceramica" | "policarbonato" | "concreto" | "translucida";
   /** peso aproximado da cobertura em kg por m² */
   pesoM2: number;
-  /** faixa aproximada de investimento em R$ por m² (somente telha) */
-  precoMin: number;
-  precoMax: number;
+  /** chave na tabela de preços real da loja (null = produto não tabelado) */
+  chavePreco: string | null;
 };
 
 const TELHAS: Telha[] = [
-  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.67, min: 10, familia: "fibrocimento", pesoM2: 18, precoMin: 35, precoMax: 55 },
-  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.56, min: 10, familia: "fibrocimento", pesoM2: 18, precoMin: 35, precoMax: 55 },
-  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", rendimento: 0.42, min: 10, familia: "fibrocimento", pesoM2: 18, precoMin: 35, precoMax: 55 },
-  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.34, min: 10, familia: "fibrocimento", pesoM2: 18, precoMin: 35, precoMax: 55 },
-  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.28, min: 10, familia: "fibrocimento", pesoM2: 18, precoMin: 35, precoMax: 55 },
+  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.67, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-153" },
+  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.56, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-183" },
+  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", rendimento: 0.42, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-244" },
+  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.34, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-305" },
+  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.28, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-366" },
 
-  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", rendimento: 0.58, min: 15, familia: "pvc", pesoM2: 9, precoMin: 75, precoMax: 110 },
-  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", rendimento: 0.41, min: 15, familia: "pvc", pesoM2: 9, precoMin: 75, precoMax: 110 },
-  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", rendimento: 0.3, min: 15, familia: "pvc", pesoM2: 9, precoMin: 75, precoMax: 110 },
-  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", rendimento: 0.26, min: 15, familia: "pvc", pesoM2: 9, precoMin: 75, precoMax: 110 },
+  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", rendimento: 0.58, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-230" },
+  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", rendimento: 0.41, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-328" },
+  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", rendimento: 0.3, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-459" },
+  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", rendimento: 0.26, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-525" },
 
-  { id: "cer-port", label: "Portuguesa Resinada (Isotec)", grupo: "Cerâmica", rendimento: 17, min: 30, familia: "ceramica", pesoM2: 45, precoMin: 45, precoMax: 75 },
-  { id: "cer-romana", label: "Romana", grupo: "Cerâmica", rendimento: 16, min: 30, familia: "ceramica", pesoM2: 45, precoMin: 45, precoMax: 75 },
-  { id: "cer-amer", label: "Americana", grupo: "Cerâmica", rendimento: 12.5, min: 30, familia: "ceramica", pesoM2: 42, precoMin: 45, precoMax: 75 },
+  { id: "cer-port", label: "Portuguesa Resinada (Isotec)", grupo: "Cerâmica", rendimento: 17, min: 30, familia: "ceramica", pesoM2: 45, chavePreco: "telha.cer-port" },
+  { id: "cer-romana", label: "Romana", grupo: "Cerâmica", rendimento: 16, min: 30, familia: "ceramica", pesoM2: 45, chavePreco: "telha.cer-romana" },
+  { id: "cer-amer", label: "Americana", grupo: "Cerâmica", rendimento: 12.5, min: 30, familia: "ceramica", pesoM2: 42, chavePreco: "telha.cer-amer" },
 
-  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", rendimento: 0.56, min: 10, familia: "policarbonato", pesoM2: 3.5, precoMin: 120, precoMax: 190 },
-  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", rendimento: 0.42, min: 10, familia: "policarbonato", pesoM2: 3.5, precoMin: 120, precoMax: 190 },
-  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", rendimento: 0.34, min: 10, familia: "policarbonato", pesoM2: 3.5, precoMin: 120, precoMax: 190 },
-  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", rendimento: 0.28, min: 10, familia: "policarbonato", pesoM2: 3.5, precoMin: 120, precoMax: 190 },
+  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", rendimento: 0.56, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-183" },
+  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", rendimento: 0.42, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-244" },
+  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", rendimento: 0.34, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-305" },
+  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", rendimento: 0.28, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-366" },
 
-  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", rendimento: 10.5, min: 30, familia: "concreto", pesoM2: 48, precoMin: 55, precoMax: 85 },
+  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", rendimento: 10.5, min: 30, familia: "concreto", pesoM2: 48, chavePreco: "telha.con-euro" },
 
-  { id: "tra-244", label: "Translúcida Polipropileno 2,44 m", grupo: "Translúcida", rendimento: 0.42, min: 10, familia: "translucida", pesoM2: 3, precoMin: 90, precoMax: 140 },
-  { id: "tra-366", label: "Translúcida Polipropileno 3,66 m", grupo: "Translúcida", rendimento: 0.28, min: 10, familia: "translucida", pesoM2: 3, precoMin: 90, precoMax: 140 },
+  { id: "tra-244", label: "Translúcida Polipropileno 2,44 m", grupo: "Translúcida", rendimento: 0.42, min: 10, familia: "translucida", pesoM2: 3, chavePreco: null },
+  { id: "tra-366", label: "Translúcida Polipropileno 3,66 m", grupo: "Translúcida", rendimento: 0.28, min: 10, familia: "translucida", pesoM2: 3, chavePreco: null },
 ];
+
 
 const GRUPOS = Array.from(new Set(TELHAS.map((t) => t.grupo)));
 
