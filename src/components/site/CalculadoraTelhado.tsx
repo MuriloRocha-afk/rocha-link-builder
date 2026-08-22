@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCalcDims } from "@/components/site/calc-dims";
 import { Calculator, MessageCircle, AlertTriangle, Download, Scale, Wallet } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 
