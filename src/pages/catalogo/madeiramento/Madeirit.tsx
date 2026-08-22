@@ -4,6 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import TipoCard from "../../../components/site/TipoCard";
 import { imagensMadeirit } from "../../../data/imagensProduto";
 
 type Tipo = "Plastificado" | "Resinado/Vermelho" | "OSB" | "Compensado";
