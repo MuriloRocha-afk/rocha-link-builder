@@ -45,7 +45,7 @@ const KPIS = [
 function Index() {
   return (
     <div className="min-h-screen bg-background">
-      <Header overDark />
+      <Header />
 
       <main>
         <section id="inicio" className="relative flex min-h-[92vh] items-center pt-24">
