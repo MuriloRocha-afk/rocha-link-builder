@@ -139,6 +139,7 @@ export function CalculadoraTelhado() {
   const [modal, setModal] = useState(false);
 
   const telha = TELHAS.find((t) => t.id === telhaId)!;
+  const precoTelha = telha.chavePreco ? TABELA_PRECOS[telha.chavePreco] : undefined;
   const avisoIncl = incl < telha.min;
 
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
