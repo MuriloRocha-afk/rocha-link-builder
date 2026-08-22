@@ -171,15 +171,21 @@ export function CalculadoraTelhado() {
 
     const itens: Item[] = [];
     if (telha.familia === "fibrocimento" || telha.familia === "policarbonato" || telha.familia === "translucida") {
-      itens.push({ nome: "Parafuso 8x110mm com vedação", qtd: `${Math.ceil(telhas * 2.2)} un` });
-      itens.push({ nome: "Manta térmica aluminizada", qtd: `${Math.ceil(areaIncl)} m²` });
-      itens.push({ nome: "Cumeeira normal fibrocimento", qtd: `${Math.ceil(c / 0.9)} un` });
+      const parafusos = Math.ceil(telhas * 2.2);
+      const mantaM2 = Math.ceil(areaIncl);
+      const cumeeiras = Math.ceil(c / 0.9);
+      itens.push({ nome: "Parafuso 8x110mm com vedação", qtd: `${parafusos} un`, chave: "parafuso.vedacao", valor: parafusos });
+      itens.push({ nome: "Manta térmica aluminizada", qtd: `${mantaM2} m²`, chave: "manta.termica.m2", valor: mantaM2 });
+      itens.push({ nome: "Cumeeira normal fibrocimento", qtd: `${cumeeiras} un`, chave: "cumeeira.fibrocimento", valor: cumeeiras });
     } else if (telha.familia === "pvc") {
-      itens.push({ nome: "Kit de fixação PVC (parafuso + vedação)", qtd: `${Math.ceil(telhas / 20)} kit(s)` });
-      itens.push({ nome: "Cumeeira Colonial PVC", qtd: `${Math.ceil(c / 0.86)} un` });
+      const kits = Math.ceil(telhas / 20);
+      const cumeeiras = Math.ceil(c / 0.86);
+      itens.push({ nome: "Kit de fixação PVC (parafuso + vedação)", qtd: `${kits} kit(s)`, chave: "kit.fixacao.pvc", valor: kits });
+      itens.push({ nome: "Cumeeira Colonial PVC", qtd: `${cumeeiras} un`, chave: "cumeeira.pvc", valor: cumeeiras });
     } else {
-      itens.push({ nome: "Prego telheiro / arame de amarração", qtd: `${Math.ceil(areaIncl * 1.5)} un` });
-      itens.push({ nome: "Cumeeira de barro", qtd: `${Math.ceil(c / 0.33)} un` });
+      const cumeeiras = Math.ceil(c / 0.33);
+      itens.push({ nome: "Prego telheiro / arame de amarração", qtd: `${Math.ceil(areaIncl * 1.5)} un`, chave: null });
+      itens.push({ nome: "Cumeeira de barro", qtd: `${cumeeiras} un`, chave: "cumeeira.barro", valor: cumeeiras });
     }
 
     const estrutura: Item[] = [];
@@ -188,14 +194,23 @@ export function CalculadoraTelhado() {
       const nomeEsp = ESPECIES.find((e) => e.id === especie)!.label.replace(" ★", "");
       const linhasCaibro = Math.ceil(c / esp) + 1;
       const aguas = tipo === "1agua" ? 1 : 2;
-      const mCaibro = linhasCaibro * caibro * aguas;
-      const mViga = c * (tipo === "1agua" ? 2 : 3);
-      const mRipa = areaIncl / 0.35;
+      const mCaibro = Math.ceil(linhasCaibro * caibro * aguas);
+      const mViga = Math.ceil(c * (tipo === "1agua" ? 2 : 3));
+      const mRipa = Math.ceil(areaIncl / 0.35);
       const kgPregos = areaIncl * 0.12;
-      estrutura.push({ nome: `Caibro 5x7 cm — ${nomeEsp}`, qtd: `${Math.ceil(mCaibro)} m lineares` });
-      estrutura.push({ nome: `Viga 5x15 cm — ${nomeEsp}`, qtd: `${Math.ceil(mViga)} m lineares` });
-      estrutura.push({ nome: `Ripa 1,5x5 cm — ${nomeEsp}`, qtd: `${Math.ceil(mRipa)} m lineares` });
-      estrutura.push({ nome: "Prego polido 18x27", qtd: `${kgPregos.toFixed(1)} kg` });
+      const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => {
+        const k = `madeira.${especie}.${peca}`;
+        return ["madeira.cambara.caibro", "madeira.cambara.viga", "madeira.cambara.ripa",
+          "madeira.eucalipto.caibro", "madeira.eucalipto.viga",
+          "madeira.peroba.caibro", "madeira.peroba.viga", "madeira.peroba.ripa",
+          "madeira.garapeira.ripa"].includes(k)
+          ? k
+          : null;
+      };
+      estrutura.push({ nome: `Caibro 5x7 cm — ${nomeEsp}`, qtd: `${mCaibro} m lineares`, chave: chaveMadeira("caibro"), valor: mCaibro });
+      estrutura.push({ nome: `Viga 5x15 cm — ${nomeEsp}`, qtd: `${mViga} m lineares`, chave: chaveMadeira("viga"), valor: mViga });
+      estrutura.push({ nome: `Ripa 1,5x5 cm — ${nomeEsp}`, qtd: `${mRipa} m lineares`, chave: chaveMadeira("ripa"), valor: mRipa });
+      estrutura.push({ nome: "Prego polido 18x27", qtd: `${kgPregos.toFixed(1)} kg`, chave: "prego.18x27", valor: Number(kgPregos.toFixed(1)) });
     }
 
     // ---- Calhas e rufos ----
@@ -209,20 +224,30 @@ export function CalculadoraTelhado() {
       const saidas = Math.max(1, Math.ceil(mCalha / 10));
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
       const condutor = Math.ceil(saidas * 3);
+      const vedaCalha = Math.max(1, Math.ceil(lances / 2));
 
-      calhas.push({ nome: "Calha (metro linear)", qtd: `${Math.ceil(mCalha)} m` });
-      if (mRufo > 0) calhas.push({ nome: "Rufo / testeira (metro linear)", qtd: `${Math.ceil(mRufo)} m` });
-      if (tipo === "4aguas") calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m` });
-      calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un` });
-      calhas.push({ nome: "Saída / bocal de calha", qtd: `${saidas} un` });
-      if (cabeceiras > 0) calhas.push({ nome: "Cabeceira (tampa de extremidade)", qtd: `${cabeceiras} un` });
-      calhas.push({ nome: "Tubo condutor de descida", qtd: `${condutor} m` });
-      calhas.push({ nome: "Veda calha PU / silicone", qtd: `${Math.max(1, Math.ceil(lances / 2))} un` });
+      calhas.push({ nome: "Calha (metro linear)", qtd: `${Math.ceil(mCalha)} m`, chave: "calha.m", valor: Math.ceil(mCalha) });
+      if (mRufo > 0) calhas.push({ nome: "Rufo / testeira (metro linear)", qtd: `${Math.ceil(mRufo)} m`, chave: "rufo.m", valor: Math.ceil(mRufo) });
+      if (tipo === "4aguas") calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m`, chave: "aguafurtada.m", valor: Math.ceil(l) });
+      calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
+      calhas.push({ nome: "Saída / bocal de calha", qtd: `${saidas} un`, chave: "saida.calha", valor: saidas });
+      if (cabeceiras > 0) calhas.push({ nome: "Cabeceira (tampa de extremidade)", qtd: `${cabeceiras} un`, chave: "cabeceira.calha", valor: cabeceiras });
+      calhas.push({ nome: "Tubo condutor de descida", qtd: `${condutor} m`, chave: null });
+      calhas.push({ nome: "Veda calha PU / silicone", qtd: `${vedaCalha} un`, chave: "vedacalha", valor: vedaCalha });
     }
 
     const peso = areaIncl * telha.pesoM2;
-    const custoMin = areaIncl * telha.precoMin;
-    const custoMax = areaIncl * telha.precoMax * (comEstrutura ? 1.45 : 1.15);
+
+    // Faixa de investimento: soma real (quantidade × preço de tabela) de cada item
+    const listaCusto: ItemCusto[] = [
+      { chave: telha.chavePreco, nome: telha.label, qtd: telhas },
+      ...[...itens, ...calhas, ...estrutura].map((i) => ({
+        chave: i.chave ?? null,
+        nome: i.nome,
+        qtd: i.valor ?? 0,
+      })),
+    ];
+    const faixa = estimarFaixa(listaCusto);
 
     const baseComparacao = ["fib-244", "pvc-328", "cer-port"];
     const idsComp = baseComparacao.includes(telha.id)
@@ -230,12 +255,15 @@ export function CalculadoraTelhado() {
       : [telha.id, ...baseComparacao].slice(0, 3);
     const comparativo: Comparativo[] = idsComp.map((id) => {
       const t = TELHAS.find((x) => x.id === id)!;
+      const pecas = Math.ceil(areaIncl * t.rendimento * 1.1);
+      const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
       return {
         telha: t,
-        pecas: Math.ceil(areaIncl * t.rendimento * 1.1),
+        pecas,
         peso: areaIncl * t.pesoM2,
-        custoMin: areaIncl * t.precoMin,
-        custoMax: areaIncl * t.precoMax,
+        custoMin: f.min,
+        custoMax: f.max,
+        semPreco: f.naoEncontrados.length > 0,
       };
     });
 
@@ -251,10 +279,10 @@ export function CalculadoraTelhado() {
       calhas,
       telha,
       peso,
-      custoMin,
-      custoMax,
+      faixa,
       comparativo,
     });
+
   };
 
   const fmt = (n: number, d = 2) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
