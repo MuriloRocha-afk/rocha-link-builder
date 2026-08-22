@@ -4,11 +4,12 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
+import TipoCard from "../../../components/site/TipoCard";
 import { imagensCedrinho } from "../../../data/imagensProduto";
 
 const TIPOS = [
-  { id: "sarrafo", nome: "Sarrafo", unidade: "Mt" },
-  { id: "tabua", nome: "Tábua", unidade: "Mt" },
+  { id: "sarrafo", nome: "Sarrafo", unidade: "Mt", icone: "📐", desc: "Peças estreitas para forro e travamento" },
+  { id: "tabua", nome: "Tábua", unidade: "Mt", icone: "🪚", desc: "Peças largas para fechamento e forro" },
 ];
 const BITOLAS: Record<string, string[]> = {
   sarrafo: ["5cm × 2,3cm", "7cm × 2,3cm", "10cm × 2,3cm", "15cm × 2,3cm"],
@@ -76,11 +77,14 @@ export default function Cedrinho() {
             </h2>
             <div className="grid grid-cols-2 gap-3">
               {TIPOS.map((t) => (
-                <button key={t.id} onClick={() => { setTipo(t.id); setBitola(null); setAcabamento(null); }}
-                  className={`p-4 rounded-xl border text-center transition-all ${tipo === t.id ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`}>
-                  <p className="font-semibold text-gray-900">{t.nome}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">por {t.unidade}</p>
-                </button>
+                <TipoCard
+                  key={t.id}
+                  icone={t.icone}
+                  nome={t.nome}
+                  descricao={`${t.desc} · por ${t.unidade}`}
+                  selected={tipo === t.id}
+                  onClick={() => { setTipo(t.id); setBitola(null); setAcabamento(null); }}
+                />
               ))}
             </div>
           </section>
