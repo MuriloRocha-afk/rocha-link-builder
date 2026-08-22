@@ -5,6 +5,7 @@ import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto, { type ImagemProduto } from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import BlocoAcessorios, { type AcessorioItem } from "@/components/site/BlocoAcessorios";
+import TipoCard from "@/components/site/TipoCard";
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
@@ -285,28 +286,20 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
                   ))}
                 </div>
               ) : (
-                <div className={`grid gap-3 ${p.tipo === "grid3" ? "grid-cols-3" : "grid-cols-2"}`}>
+                <div
+                  className={`grid gap-3 ${p.tipo === "grid3" ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"}`}
+                >
                   {opcoes.map((o) => (
-                    <button
+                    <TipoCard
                       key={o.valor}
+                      icone={o.emoji}
+                      cor={o.cor}
+                      nome={o.label ?? o.valor}
+                      descricao={o.sub}
+                      badge={o.badge}
+                      selected={sel[p.chave] === o.valor}
                       onClick={() => escolher(p.chave, o.valor)}
-                      className={`relative p-3 rounded-xl border text-center ${baseBtn(sel[p.chave] === o.valor)}`}
-                    >
-                      {o.badge && (
-                        <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap">
-                          {o.badge}
-                        </span>
-                      )}
-                      {o.emoji && <p className="text-2xl mt-1">{o.emoji}</p>}
-                      {o.cor && (
-                        <span
-                          className="mx-auto mt-1 block w-8 h-8 rounded-full border border-black/10"
-                          style={{ background: o.cor }}
-                        />
-                      )}
-                      <p className="font-bold text-gray-900 text-sm mt-1">{o.label ?? o.valor}</p>
-                      {o.sub && <p className="text-xs text-gray-500 mt-0.5">{o.sub}</p>}
-                    </button>
+                    />
                   ))}
                 </div>
               )}

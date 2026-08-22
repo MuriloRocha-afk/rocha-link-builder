@@ -66,6 +66,9 @@ import { Route as CatalogoFixadoresBuchasArruelasRouteImport } from './routes/ca
 import { Route as CatalogoFixadoresAramesRouteImport } from './routes/catalogo.fixadores.arames'
 import { Route as CatalogoFixadoresProdutoSlugRouteImport } from './routes/catalogo.fixadores.$produtoSlug'
 import { Route as CatalogoCalhasRufoRouteImport } from './routes/catalogo.calhas.rufo'
+import { Route as CatalogoCalhasPvcRouteImport } from './routes/catalogo.calhas.pvc'
+import { Route as CatalogoCalhasPlatibandaRouteImport } from './routes/catalogo.calhas.platibanda'
+import { Route as CatalogoCalhasMolduraRouteImport } from './routes/catalogo.calhas.moldura'
 import { Route as CatalogoCalhasMantaTermicaRouteImport } from './routes/catalogo.calhas.manta-termica'
 import { Route as CatalogoCalhasMantaAsfalticaRouteImport } from './routes/catalogo.calhas.manta-asfaltica'
 import { Route as CatalogoCalhasCalhaAquapluvRouteImport } from './routes/catalogo.calhas.calha-aquapluv'
@@ -391,6 +394,22 @@ const CatalogoCalhasRufoRoute = CatalogoCalhasRufoRouteImport.update({
   path: '/catalogo/calhas/rufo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoCalhasPvcRoute = CatalogoCalhasPvcRouteImport.update({
+  id: '/catalogo/calhas/pvc',
+  path: '/catalogo/calhas/pvc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoCalhasPlatibandaRoute =
+  CatalogoCalhasPlatibandaRouteImport.update({
+    id: '/catalogo/calhas/platibanda',
+    path: '/catalogo/calhas/platibanda',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoCalhasMolduraRoute = CatalogoCalhasMolduraRouteImport.update({
+  id: '/catalogo/calhas/moldura',
+  path: '/catalogo/calhas/moldura',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoCalhasMantaTermicaRoute =
   CatalogoCalhasMantaTermicaRouteImport.update({
     id: '/catalogo/calhas/manta-termica',
@@ -453,6 +472,9 @@ export interface FileRoutesByFullPath {
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
   '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/moldura': typeof CatalogoCalhasMolduraRoute
+  '/catalogo/calhas/platibanda': typeof CatalogoCalhasPlatibandaRoute
+  '/catalogo/calhas/pvc': typeof CatalogoCalhasPvcRoute
   '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
@@ -519,6 +541,9 @@ export interface FileRoutesByTo {
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
   '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/moldura': typeof CatalogoCalhasMolduraRoute
+  '/catalogo/calhas/platibanda': typeof CatalogoCalhasPlatibandaRoute
+  '/catalogo/calhas/pvc': typeof CatalogoCalhasPvcRoute
   '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
@@ -587,6 +612,9 @@ export interface FileRoutesById {
   '/catalogo/calhas/calha-aquapluv': typeof CatalogoCalhasCalhaAquapluvRoute
   '/catalogo/calhas/manta-asfaltica': typeof CatalogoCalhasMantaAsfalticaRoute
   '/catalogo/calhas/manta-termica': typeof CatalogoCalhasMantaTermicaRoute
+  '/catalogo/calhas/moldura': typeof CatalogoCalhasMolduraRoute
+  '/catalogo/calhas/platibanda': typeof CatalogoCalhasPlatibandaRoute
+  '/catalogo/calhas/pvc': typeof CatalogoCalhasPvcRoute
   '/catalogo/calhas/rufo': typeof CatalogoCalhasRufoRoute
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
@@ -656,6 +684,9 @@ export interface FileRouteTypes {
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
     | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/moldura'
+    | '/catalogo/calhas/platibanda'
+    | '/catalogo/calhas/pvc'
     | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
@@ -722,6 +753,9 @@ export interface FileRouteTypes {
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
     | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/moldura'
+    | '/catalogo/calhas/platibanda'
+    | '/catalogo/calhas/pvc'
     | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
@@ -789,6 +823,9 @@ export interface FileRouteTypes {
     | '/catalogo/calhas/calha-aquapluv'
     | '/catalogo/calhas/manta-asfaltica'
     | '/catalogo/calhas/manta-termica'
+    | '/catalogo/calhas/moldura'
+    | '/catalogo/calhas/platibanda'
+    | '/catalogo/calhas/pvc'
     | '/catalogo/calhas/rufo'
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
@@ -856,6 +893,9 @@ export interface RootRouteChildren {
   CatalogoCalhasCalhaAquapluvRoute: typeof CatalogoCalhasCalhaAquapluvRoute
   CatalogoCalhasMantaAsfalticaRoute: typeof CatalogoCalhasMantaAsfalticaRoute
   CatalogoCalhasMantaTermicaRoute: typeof CatalogoCalhasMantaTermicaRoute
+  CatalogoCalhasMolduraRoute: typeof CatalogoCalhasMolduraRoute
+  CatalogoCalhasPlatibandaRoute: typeof CatalogoCalhasPlatibandaRoute
+  CatalogoCalhasPvcRoute: typeof CatalogoCalhasPvcRoute
   CatalogoCalhasRufoRoute: typeof CatalogoCalhasRufoRoute
   CatalogoFixadoresProdutoSlugRoute: typeof CatalogoFixadoresProdutoSlugRoute
   CatalogoFixadoresAramesRoute: typeof CatalogoFixadoresAramesRoute
@@ -1310,6 +1350,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoCalhasRufoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo/calhas/pvc': {
+      id: '/catalogo/calhas/pvc'
+      path: '/catalogo/calhas/pvc'
+      fullPath: '/catalogo/calhas/pvc'
+      preLoaderRoute: typeof CatalogoCalhasPvcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/platibanda': {
+      id: '/catalogo/calhas/platibanda'
+      path: '/catalogo/calhas/platibanda'
+      fullPath: '/catalogo/calhas/platibanda'
+      preLoaderRoute: typeof CatalogoCalhasPlatibandaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/calhas/moldura': {
+      id: '/catalogo/calhas/moldura'
+      path: '/catalogo/calhas/moldura'
+      fullPath: '/catalogo/calhas/moldura'
+      preLoaderRoute: typeof CatalogoCalhasMolduraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/calhas/manta-termica': {
       id: '/catalogo/calhas/manta-termica'
       path: '/catalogo/calhas/manta-termica'
@@ -1399,6 +1460,9 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoCalhasCalhaAquapluvRoute: CatalogoCalhasCalhaAquapluvRoute,
   CatalogoCalhasMantaAsfalticaRoute: CatalogoCalhasMantaAsfalticaRoute,
   CatalogoCalhasMantaTermicaRoute: CatalogoCalhasMantaTermicaRoute,
+  CatalogoCalhasMolduraRoute: CatalogoCalhasMolduraRoute,
+  CatalogoCalhasPlatibandaRoute: CatalogoCalhasPlatibandaRoute,
+  CatalogoCalhasPvcRoute: CatalogoCalhasPvcRoute,
   CatalogoCalhasRufoRoute: CatalogoCalhasRufoRoute,
   CatalogoFixadoresProdutoSlugRoute: CatalogoFixadoresProdutoSlugRoute,
   CatalogoFixadoresAramesRoute: CatalogoFixadoresAramesRoute,
