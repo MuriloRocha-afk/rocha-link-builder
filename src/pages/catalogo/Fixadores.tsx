@@ -67,6 +67,30 @@ const CARDS: EmojiSubcard[] = [
   },
 ];
 
+const GRUPOS = [
+  {
+    id: "fixacao",
+    label: "Fixação & Ferragens",
+    descricao:
+      "Parafusos, pregos, arames, espigões, buchas, arruelas e barras roscadas para telhas e estruturas.",
+    slugs: [
+      "parafusos-telha",
+      "espigoes",
+      "pregos",
+      "arames",
+      "buchas-arruelas",
+      "parafusos-madeira",
+    ],
+  },
+  {
+    id: "ferramentas",
+    label: "Ferramentas & Utilidades de Obra",
+    descricao:
+      "Linha Bestfer: serras e discos, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves e alicates.",
+    slugs: ["ferramentas"],
+  },
+];
+
 export default function Fixadores() {
   return (
     <CategoriaSubcardPage
@@ -75,8 +99,10 @@ export default function Fixadores() {
       breadcrumb="Fixadores & Acessórios"
       eyebrow="Escolha a categoria"
       cards={CARDS}
+      grupos={GRUPOS}
       categoriaSlug="fixadores"
       tagTone="gray"
     />
   );
 }
+
