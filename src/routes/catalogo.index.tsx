@@ -104,6 +104,12 @@ function CatalogoPage() {
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {c.description}
                   </p>
+                  {MAIS_VENDIDOS[c.id] ? (
+                    <p className="mt-3 text-xs leading-snug font-semibold text-muted-foreground/80">
+                      ★ {MAIS_VENDIDOS[c.id]}
+                    </p>
+                  ) : null}
+
 
                   <span className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-5 py-3 text-sm font-extrabold text-white transition-all group-hover:bg-[#EA580C]">
                     {c.ctaLabel}
