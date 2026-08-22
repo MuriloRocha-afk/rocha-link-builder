@@ -484,9 +484,17 @@ ${bloco("Estrutura de madeira", res.estrutura)}
         </select>
         <p className="mt-3 text-xs text-gray-500">
           Inclinação mínima desta telha: <b className="text-gray-700">{telha.min}%</b> · peso aproximado{" "}
-          <b className="text-gray-700">{telha.pesoM2} kg/m²</b> · a partir de{" "}
-          <b className="text-gray-700">{brl(telha.precoMin)}/m²</b>
+          <b className="text-gray-700">{telha.pesoM2} kg/m²</b>
+          {precoTelha ? (
+            <>
+              {" "}· preço de tabela a partir de{" "}
+              <b className="text-gray-700">{brl(precoTelha.min.preco)}/peça</b>
+            </>
+          ) : (
+            <> · preço não tabelado — sujeito a cotação</>
+          )}
         </p>
+
       </div>
 
       {/* Passo 5 */}
