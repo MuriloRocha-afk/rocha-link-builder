@@ -100,6 +100,7 @@ type Comparativo = {
 };
 
 export function CalculadoraTelhado() {
+  const { setDims } = useCalcDims();
   const [tipo, setTipo] = useState<Tipo>("2aguas");
   const [comprimento, setComprimento] = useState("");
   const [largura, setLargura] = useState("");
