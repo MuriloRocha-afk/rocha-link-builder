@@ -40,7 +40,7 @@ function NavLink({
   );
 }
 
-export function Header() {
+export function Header({ overDark = false }: { overDark?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -50,6 +50,8 @@ export function Header() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const darkTop = overDark && !scrolled;
 
   return (
     <header
@@ -69,13 +71,15 @@ export function Header() {
             <NavLink
               key={item.label}
               item={item}
-              className="text-sm font-semibold text-primary/80 transition-colors hover:text-accent"
+              className={`text-sm font-semibold transition-colors hover:text-accent ${
+                darkTop ? "text-primary-foreground" : "text-primary/80 hover:text-accent"
+              }`}
             />
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <QuoteCartButton />
+          <QuoteCartButton dark={darkTop} />
           <WhatsAppButton
             size="lg"
             message="Olá! Gostaria de solicitar um orçamento na Rocha Telhas."
@@ -85,12 +89,16 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <QuoteCartButton />
+          <QuoteCartButton dark={darkTop} />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label="Abrir menu"
-            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary"
+            className={`flex h-11 w-11 items-center justify-center rounded-lg border transition-colors ${
+              darkTop
+                ? "border-primary-foreground/40 text-primary-foreground"
+                : "border-border text-primary"
+            }`}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
