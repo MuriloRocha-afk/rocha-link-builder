@@ -373,7 +373,10 @@ export function CalculadoraTinta() {
           <Lista itens={res.acabamento} />
 
           <p className="mt-4 text-[11px] text-gray-500">
-            {fmt(res.m2)} m² × {res.demaos} demão{res.demaos > 1 ? "s" : ""} = {fmt(res.m2 * res.demaos)} m² de tinta ·
+            {fmt(res.m2)} m² × {res.demaos} demão{res.demaos > 1 ? "s" : ""} · {res.superficie} (fator{" "}
+            {fmt(res.fator)}×) = {fmt(res.m2 * res.demaos * res.fator)} m² de tinta · rendimento ~
+            {res.acabamento[0].rend} m²/L
+
             rendimento ~{res.acabamento[0].rend} m²/L
           </p>
 
