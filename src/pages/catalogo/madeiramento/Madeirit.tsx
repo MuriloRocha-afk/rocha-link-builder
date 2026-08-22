@@ -140,26 +140,17 @@ export default function Madeirit() {
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">1</span>
             Tipo de Chapa
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {TIPOS.map((t) => (
-              <button
+              <TipoCard
                 key={t.id}
+                icone={t.icone}
+                nome={t.nome}
+                descricao={t.descricao}
+                badge={t.badge}
+                selected={tipo === t.id}
                 onClick={() => { setTipo(t.id); setEspessura(null); }}
-                className={`relative flex flex-col items-center gap-2 p-4 rounded-xl border transition-all duration-150 text-center
-                  ${tipo === t.id
-                    ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200"
-                    : "border-gray-200 hover:border-orange-300 hover:bg-orange-50/50"
-                  }`}
-              >
-                {t.badge && (
-                  <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full leading-none whitespace-nowrap">
-                    {t.badge}
-                  </span>
-                )}
-                <span className="text-3xl">{t.icone}</span>
-                <span className="text-sm font-semibold text-gray-900">{t.nome}</span>
-                <span className="text-xs text-gray-500 leading-tight">{t.descricao}</span>
-              </button>
+              />
             ))}
           </div>
         </section>
