@@ -1,5 +1,4 @@
-import { Link } from "@tanstack/react-router";
-import { ArrowRight, Flame, Star } from "lucide-react";
+import { SubcardTile } from "@/components/site/SubcardTile";
 import ceramica from "@/assets/prod-ceramica.jpg";
 import pvc from "@/assets/prod-pvc.jpg";
 import fibro from "@/assets/prod-fibro.jpg";
@@ -20,8 +19,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     slug: "fibrocimento",
     name: "Telha Fibrocimento Ondulada — INFIBRA",
     image: fibro,
-    description:
-      "A mais vendida do pátio. Disponível de 153cm a 366cm, espessura 5mm, 6mm e 8mm.",
+    description: "A mais vendida do pátio. Disponível de 153cm a 366cm, espessura 5mm, 6mm e 8mm.",
     badge: "Top Venda #1",
     cta: "Escolher Dimensão e Cotar",
   },
@@ -47,24 +45,21 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     slug: "polipropileno",
     name: "Telha Translúcida Polipropileno",
     image: translucida,
-    description:
-      "Onda Alta 177/51 Translúcida de 153cm a 366cm. Compatível com fibrocimento.",
+    description: "Onda Alta 177/51 Translúcida de 153cm a 366cm. Compatível com fibrocimento.",
     cta: "Ver Comprimentos",
   },
   {
     slug: "concreto",
     name: "Telha de Concreto",
     image: concreto,
-    description:
-      "Areia, Cinza e Grafite — linha Eurotop. Durabilidade e acabamento premium.",
+    description: "Areia, Cinza e Grafite — linha Eurotop. Durabilidade e acabamento premium.",
     cta: "Escolher Modelo",
   },
   {
     slug: "esmaltada",
     name: "Telha Esmaltada",
     image: ceramica,
-    description:
-      "Cerâmica vitrificada em 6 cores. Cor permanente, impermeável e fácil de limpar.",
+    description: "Cerâmica vitrificada em 6 cores. Cor permanente, impermeável e fácil de limpar.",
     cta: "Escolher Cor",
   },
   {
@@ -97,46 +92,16 @@ export function TelhasSubcardGrid() {
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
       {TELHAS_SUBCARDS.map((card) => (
-        <Link
+        <SubcardTile
           key={card.slug}
-          to="/catalogo/$categoriaSlug/$produtoSlug"
-          params={{ categoriaSlug: "telhas", produtoSlug: card.slug }}
-          className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-        >
-          <div className="relative overflow-hidden">
-            <img
-              src={card.image}
-              alt={card.name}
-              loading="lazy"
-              width={1024}
-              height={768}
-              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            {card.badge ? (
-              <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
-                {card.badge.startsWith("★") ? (
-                  <Star className="h-3 w-3 fill-current" />
-                ) : (
-                  <Flame className="h-3 w-3 fill-current" />
-                )}
-                {card.badge.replace("★ ", "")}
-              </span>
-            ) : null}
-          </div>
-
-          <div className="flex flex-1 flex-col p-5">
-            <h3 className="text-base leading-snug font-extrabold text-primary sm:text-lg">
-              {card.name}
-            </h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-              {card.description}
-            </p>
-            <span className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-4 py-3 text-xs font-extrabold text-white transition-all group-hover:bg-[#EA580C] sm:text-sm">
-              {card.cta}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </span>
-          </div>
-        </Link>
+          categoriaSlug="telhas"
+          produtoSlug={card.slug}
+          name={card.name}
+          description={card.description}
+          image={card.image}
+          badge={card.badge}
+          cta={card.cta}
+        />
       ))}
     </div>
   );

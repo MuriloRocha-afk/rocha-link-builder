@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { ArrowRight, Flame, Star } from "lucide-react";
+import { SubcardTile } from "@/components/site/SubcardTile";
 import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucalipto from "@/assets/prod-eucalipto.jpg";
 import cedrinho from "@/assets/prod-cedrinho.jpg";
@@ -168,51 +167,17 @@ function SubcardGrid({ cards }: { cards: Subcard[] }) {
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
       {cards.map((card) => (
-        <Link
+        <SubcardTile
           key={card.slug}
-          to="/catalogo/$categoriaSlug/$produtoSlug"
-          params={{ categoriaSlug: "madeiramento", produtoSlug: card.slug }}
-          className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-        >
-          <div className="relative overflow-hidden">
-            <img
-              src={card.image}
-              alt={card.name}
-              loading="lazy"
-              width={1024}
-              height={768}
-              className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            {card.badge ? (
-              <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
-                {card.badge === "Mais Vendido" ? (
-                  <Flame className="h-3 w-3 fill-current" />
-                ) : (
-                  <Star className="h-3 w-3 fill-current" />
-                )}
-                {card.badge.replace("\u2605 ", "")}
-              </span>
-            ) : null}
-          </div>
-
-          <div className="flex flex-1 flex-col p-5">
-            <h3 className="text-base leading-snug font-extrabold text-primary sm:text-lg">
-              {card.name}
-            </h3>
-            {card.tag ? (
-              <span className="mt-2 inline-flex w-fit rounded-full bg-primary/5 px-3 py-1 text-[10px] font-bold tracking-wide text-primary/70 uppercase">
-                {card.tag}
-              </span>
-            ) : null}
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-              {card.description}
-            </p>
-            <span className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-4 py-3 text-center text-xs font-extrabold text-white transition-all group-hover:bg-[#EA580C] sm:text-sm">
-              {card.cta}
-              <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" />
-            </span>
-          </div>
-        </Link>
+          categoriaSlug="madeiramento"
+          produtoSlug={card.slug}
+          name={card.name}
+          description={card.description}
+          image={card.image}
+          badge={card.badge}
+          tags={card.tag ? [card.tag] : undefined}
+          cta={card.cta}
+        />
       ))}
     </div>
   );
@@ -236,8 +201,7 @@ const ABAS = [
   {
     id: "gerais" as const,
     label: "Madeiras & Beneficiados",
-    descricao:
-      "Reflorestamento, forros, chapas e tratados para o dia a dia da obra.",
+    descricao: "Reflorestamento, forros, chapas e tratados para o dia a dia da obra.",
     cards: GERAIS,
   },
 ];

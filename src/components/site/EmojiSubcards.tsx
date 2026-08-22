@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, ChevronRight, Crown, Star } from "lucide-react";
+import { ArrowLeft, ChevronRight, Crown } from "lucide-react";
+import { SubcardTile } from "@/components/site/SubcardTile";
 
 export type EmojiSubcard = {
   slug: string;
@@ -11,18 +12,11 @@ export type EmojiSubcard = {
   cta: string;
 };
 
-const TAG_TONES = {
-  purple: "bg-purple-50 text-purple-700 border-purple-200",
-  blue: "bg-blue-50 text-blue-700 border-blue-200",
-  gray: "bg-primary/5 text-primary/70 border-border",
-} as const;
-
-export type TagTone = keyof typeof TAG_TONES;
+export type TagTone = "purple" | "blue" | "gray";
 
 export function EmojiSubcardGrid({
   cards,
   categoriaSlug,
-  tagTone = "gray",
 }: {
   cards: EmojiSubcard[];
   categoriaSlug: string;
@@ -31,49 +25,17 @@ export function EmojiSubcardGrid({
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
       {cards.map((card) => (
-        <Link
+        <SubcardTile
           key={card.slug}
-          to="/catalogo/$categoriaSlug/$produtoSlug"
-          params={{ categoriaSlug, produtoSlug: card.slug }}
-          className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-        >
-          <div className="relative flex aspect-[4/3] w-full items-center justify-center bg-secondary">
-            <span className="text-5xl transition-transform duration-500 group-hover:scale-110 sm:text-6xl">
-              {card.emoji}
-            </span>
-            {card.badge ? (
-              <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
-                <Star className="h-3 w-3 fill-current" />
-                {card.badge}
-              </span>
-            ) : null}
-          </div>
-
-          <div className="flex flex-1 flex-col p-5">
-            <h3 className="text-base leading-snug font-extrabold text-primary sm:text-lg">
-              {card.name}
-            </h3>
-            {card.tags?.length ? (
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {card.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className={`inline-flex rounded-full border px-2.5 py-0.5 text-[10px] font-bold tracking-wide uppercase ${TAG_TONES[tagTone]}`}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            ) : null}
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-              {card.description}
-            </p>
-            <span className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F97316] px-4 py-3 text-center text-xs font-extrabold text-white transition-all group-hover:bg-[#EA580C] sm:text-sm">
-              {card.cta}
-              <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" />
-            </span>
-          </div>
-        </Link>
+          categoriaSlug={categoriaSlug}
+          produtoSlug={card.slug}
+          name={card.name}
+          description={card.description}
+          emoji={card.emoji}
+          badge={card.badge}
+          tags={card.tags}
+          cta={card.cta}
+        />
       ))}
     </div>
   );
