@@ -336,7 +336,7 @@ export function CalculadoraTinta() {
       </div>
 
       <div className={card}>
-        <p className={passo}>Passo 4 · Número de demãos</p>
+        <p className={passo}>Passo 5 · Número de demãos</p>
         <div className="mt-3 flex gap-2">
           {[1, 2, 3].map((d) => (
             <button key={d} type="button" onClick={() => setDemaos(d)} className={chip(demaos === d)}>
