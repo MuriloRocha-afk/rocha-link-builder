@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
+import { useCalcDims } from "@/components/site/calc-dims";
 
 const TELHADOS = [
   { id: "1", label: "1 água", fator: 1 },
@@ -57,6 +58,7 @@ function Campo({
 }
 
 export function CalculadoraMadeiramento() {
+  const { dims } = useCalcDims();
   const [aguas, setAguas] = useState<string>("2");
   const [largura, setLargura] = useState(8);
   const [comprimento, setComprimento] = useState(10);
@@ -69,6 +71,18 @@ export function CalculadoraMadeiramento() {
   const [espCaibro, setEspCaibro] = useState(0.5);
   const [espRipa, setEspRipa] = useState(0.33);
   const [perda, setPerda] = useState(10);
+
+  const aplicado = useRef<string>("");
+  useEffect(() => {
+    if (!dims) return;
+    const chave = `${dims.largura}|${dims.comprimento}|${dims.inclinacao}|${dims.aguas}`;
+    if (aplicado.current === chave) return;
+    aplicado.current = chave;
+    setLargura(dims.largura);
+    setComprimento(dims.comprimento);
+    setInclinacao(dims.inclinacao);
+    setAguas(dims.aguas);
+  }, [dims]);
 
   const telhaSel = TELHAS.find((t) => t.id === telha) ?? TELHAS[0];
   const madeiraSel = MADEIRAS.find((m) => m.id === madeira) ?? MADEIRAS[0];
@@ -167,6 +181,12 @@ export function CalculadoraMadeiramento() {
         Estime terças, caibros e ripas do seu telhado com espaçamento configurável e conecte direto
         com o catálogo de madeiramento.
       </p>
+
+      {dims ? (
+        <p className="mt-4 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3 text-xs font-semibold text-orange-700">
+          Medidas preenchidas automaticamente a partir da aba Telhado. Você pode ajustá-las abaixo.
+        </p>
+      ) : null}
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
