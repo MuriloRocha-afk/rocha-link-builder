@@ -286,8 +286,8 @@ export function GuiaTelha() {
                 <p className="mt-3 text-lg font-extrabold text-primary">{t.nome}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{t.resumo}</p>
                 <Link
-                  to="/catalogo/telhas/$produtoSlug"
-                  params={{ produtoSlug: t.slug }}
+                  to="/catalogo/$categoriaSlug/$produtoSlug"
+                  params={{ categoriaSlug: "telhas", produtoSlug: t.slug }}
                   className="mt-4 inline-flex items-center gap-2 rounded-xl bg-orange-600 px-5 py-3 text-sm font-extrabold text-white transition-colors hover:bg-orange-700"
                 >
                   Ver ficha da {t.nome}
