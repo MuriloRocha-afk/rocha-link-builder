@@ -35,6 +35,7 @@ import { Route as CatalogoTintasProdutoSlugRouteImport } from './routes/catalogo
 import { Route as CatalogoTelhasVidroRouteImport } from './routes/catalogo.telhas.vidro'
 import { Route as CatalogoTelhasPolipropilenoRouteImport } from './routes/catalogo.telhas.polipropileno'
 import { Route as CatalogoTelhasPolicarbonatoRouteImport } from './routes/catalogo.telhas.policarbonato'
+import { Route as CatalogoTelhasPlanPvcRouteImport } from './routes/catalogo.telhas.plan-pvc'
 import { Route as CatalogoTelhasFibrocimentoRouteImport } from './routes/catalogo.telhas.fibrocimento'
 import { Route as CatalogoTelhasEsmaltadaRouteImport } from './routes/catalogo.telhas.esmaltada'
 import { Route as CatalogoTelhasCumeeirasRouteImport } from './routes/catalogo.telhas.cumeeiras'
@@ -212,6 +213,11 @@ const CatalogoTelhasPolicarbonatoRoute =
     path: '/catalogo/telhas/policarbonato',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CatalogoTelhasPlanPvcRoute = CatalogoTelhasPlanPvcRouteImport.update({
+  id: '/catalogo/telhas/plan-pvc',
+  path: '/catalogo/telhas/plan-pvc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoTelhasFibrocimentoRoute =
   CatalogoTelhasFibrocimentoRouteImport.update({
     id: '/catalogo/telhas/fibrocimento',
@@ -477,6 +483,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/esmaltada': typeof CatalogoTelhasEsmaltadaRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/plan-pvc': typeof CatalogoTelhasPlanPvcRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
@@ -542,6 +549,7 @@ export interface FileRoutesByTo {
   '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/esmaltada': typeof CatalogoTelhasEsmaltadaRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/plan-pvc': typeof CatalogoTelhasPlanPvcRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
@@ -609,6 +617,7 @@ export interface FileRoutesById {
   '/catalogo/telhas/cumeeiras': typeof CatalogoTelhasCumeeirasRoute
   '/catalogo/telhas/esmaltada': typeof CatalogoTelhasEsmaltadaRoute
   '/catalogo/telhas/fibrocimento': typeof CatalogoTelhasFibrocimentoRoute
+  '/catalogo/telhas/plan-pvc': typeof CatalogoTelhasPlanPvcRoute
   '/catalogo/telhas/policarbonato': typeof CatalogoTelhasPolicarbonatoRoute
   '/catalogo/telhas/polipropileno': typeof CatalogoTelhasPolipropilenoRoute
   '/catalogo/telhas/vidro': typeof CatalogoTelhasVidroRoute
@@ -677,6 +686,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/esmaltada'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/plan-pvc'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
     | '/catalogo/telhas/vidro'
@@ -742,6 +752,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/esmaltada'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/plan-pvc'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
     | '/catalogo/telhas/vidro'
@@ -808,6 +819,7 @@ export interface FileRouteTypes {
     | '/catalogo/telhas/cumeeiras'
     | '/catalogo/telhas/esmaltada'
     | '/catalogo/telhas/fibrocimento'
+    | '/catalogo/telhas/plan-pvc'
     | '/catalogo/telhas/policarbonato'
     | '/catalogo/telhas/polipropileno'
     | '/catalogo/telhas/vidro'
@@ -874,6 +886,7 @@ export interface RootRouteChildren {
   CatalogoTelhasCumeeirasRoute: typeof CatalogoTelhasCumeeirasRoute
   CatalogoTelhasEsmaltadaRoute: typeof CatalogoTelhasEsmaltadaRoute
   CatalogoTelhasFibrocimentoRoute: typeof CatalogoTelhasFibrocimentoRoute
+  CatalogoTelhasPlanPvcRoute: typeof CatalogoTelhasPlanPvcRoute
   CatalogoTelhasPolicarbonatoRoute: typeof CatalogoTelhasPolicarbonatoRoute
   CatalogoTelhasPolipropilenoRoute: typeof CatalogoTelhasPolipropilenoRoute
   CatalogoTelhasVidroRoute: typeof CatalogoTelhasVidroRoute
@@ -1078,6 +1091,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/telhas/policarbonato'
       fullPath: '/catalogo/telhas/policarbonato'
       preLoaderRoute: typeof CatalogoTelhasPolicarbonatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/telhas/plan-pvc': {
+      id: '/catalogo/telhas/plan-pvc'
+      path: '/catalogo/telhas/plan-pvc'
+      fullPath: '/catalogo/telhas/plan-pvc'
+      preLoaderRoute: typeof CatalogoTelhasPlanPvcRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/telhas/fibrocimento': {
@@ -1412,6 +1432,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTelhasCumeeirasRoute: CatalogoTelhasCumeeirasRoute,
   CatalogoTelhasEsmaltadaRoute: CatalogoTelhasEsmaltadaRoute,
   CatalogoTelhasFibrocimentoRoute: CatalogoTelhasFibrocimentoRoute,
+  CatalogoTelhasPlanPvcRoute: CatalogoTelhasPlanPvcRoute,
   CatalogoTelhasPolicarbonatoRoute: CatalogoTelhasPolicarbonatoRoute,
   CatalogoTelhasPolipropilenoRoute: CatalogoTelhasPolipropilenoRoute,
   CatalogoTelhasVidroRoute: CatalogoTelhasVidroRoute,
