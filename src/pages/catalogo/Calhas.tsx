@@ -94,6 +94,32 @@ const CARDS: EmojiSubcard[] = [
   },
 ];
 
+const GRUPOS = [
+  {
+    id: "calhas",
+    label: "Calhas & Rufos",
+    descricao:
+      "Calhas galvanizadas e de PVC, rufos, água furtada e todos os acessórios para fechar o sistema de captação.",
+    slugs: [
+      "platibanda",
+      "moldura",
+      "pvc",
+      "calha-alge",
+      "calha-aquapluv",
+      "rufo",
+      "agua-furtada",
+      "acessorios-calha",
+    ],
+  },
+  {
+    id: "mantas",
+    label: "Mantas & Impermeabilização",
+    descricao:
+      "Manta térmica aluminizada e manta asfáltica para conforto térmico e vedação definitiva.",
+    slugs: ["manta-termica", "manta-asfaltica"],
+  },
+];
+
 export default function Calhas() {
   return (
     <CategoriaSubcardPage
@@ -102,8 +128,10 @@ export default function Calhas() {
       breadcrumb="Calhas, Rufos & Funilaria"
       eyebrow="Escolha o produto"
       cards={CARDS}
+      grupos={GRUPOS}
       categoriaSlug="calhas"
       tagTone="blue"
     />
   );
 }
+
