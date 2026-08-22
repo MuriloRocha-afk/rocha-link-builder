@@ -604,16 +604,25 @@ ${bloco("Estrutura de madeira", res.estrutura)}
               <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">Faixa estimada de investimento</p>
             </div>
             <p className="mt-2 text-2xl font-extrabold text-gray-900">
-              {brl(res.custoMin)} <span className="text-base font-bold text-gray-400">a</span> {brl(res.custoMax)}
+              {brl(res.faixa.min)} <span className="text-base font-bold text-gray-400">a</span> {brl(res.faixa.max)}
             </p>
             <p className="mt-1 flex items-center gap-1.5 text-xs text-gray-500">
               <Scale size={13} /> Peso estimado da cobertura: <b className="text-gray-700">{fmt(res.peso, 0)} kg</b>
             </p>
+            {res.faixa.naoEncontrados.length > 0 ? (
+              <p className="mt-2 text-[11px] font-semibold text-orange-700">
+                Valor de {res.faixa.naoEncontrados.length} item(ns) não incluído na estimativa, sujeito a cotação:{" "}
+                {res.faixa.naoEncontrados.join(", ")}.
+              </p>
+            ) : null}
             <p className="mt-2 text-[11px] text-gray-500">
-              Valor de referência “a partir de”, considerando telha{comCalhas ? ", calhas" : ""}
+              Cálculo feito com os preços da tabela da Rocha &amp; Telhas (quantidade × preço unitário); a faixa reflete
+              a variação real entre as especificações mais comuns de cada produto. Valor de referência “a partir de”,
+              considerando telha{comCalhas ? ", calhas" : ""}
               {comEstrutura ? " e estrutura" : " e acessórios básicos"}. Não é preço fechado — o valor final sai na
               cotação.
             </p>
+
           </div>
 
           <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
