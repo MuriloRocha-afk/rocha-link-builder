@@ -103,15 +103,43 @@ const ALVOS: { id: string; label: string; acabamentos: string[] }[] = [
 
 const SEM_PRIMER = ["stain", "cupicida"];
 
+/** Absorção da superfície — multiplica o consumo estimado de produto. */
+const SUPERFICIES: Record<string, { id: string; label: string; fator: number }[]> = {
+  "mad-ext": [
+    { id: "bruta", label: "Madeira bruta / serrada", fator: 1.35 },
+    { id: "aparelhada", label: "Madeira aparelhada / lixada", fator: 1 },
+    { id: "pintada", label: "Já pintada / repintura", fator: 0.85 },
+  ],
+  "mad-int": [
+    { id: "bruta", label: "Madeira bruta / serrada", fator: 1.35 },
+    { id: "aparelhada", label: "Madeira aparelhada / lixada", fator: 1 },
+    { id: "pintada", label: "Já pintada / repintura", fator: 0.85 },
+  ],
+  telhado: [
+    { id: "telha-porosa", label: "Telha cerâmica / fibrocimento", fator: 1.25 },
+    { id: "laje", label: "Laje / concreto liso", fator: 1.05 },
+  ],
+  parede: [
+    { id: "reboco", label: "Alvenaria / reboco novo", fator: 1.2 },
+    { id: "pintada", label: "Parede já pintada", fator: 0.9 },
+  ],
+  ferro: [
+    { id: "ferro-novo", label: "Metal novo / galvanizado", fator: 1 },
+    { id: "ferro-oxidado", label: "Metal oxidado / lixado", fator: 1.15 },
+  ],
+};
+
 export function CalculadoraTinta() {
   const [alvoId, setAlvoId] = useState("mad-ext");
   const [acabId, setAcabId] = useState("verniz");
+  const [superficie, setSuperficie] = useState("bruta");
   const [modo, setModo] = useState<"area" | "medidas">("area");
   const [area, setArea] = useState("");
   const [larg, setLarg] = useState("");
   const [comp, setComp] = useState("");
   const [demaos, setDemaos] = useState(2);
   const [modal, setModal] = useState(false);
+
   const [res, setRes] = useState<null | {
     m2: number;
     demaos: number;
