@@ -116,7 +116,9 @@ export function TelhasSubcardGrid() {
               <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-[#F97316] px-3 py-1 text-[10px] font-extrabold tracking-wider text-white uppercase shadow-sm">
                 {card.badge.startsWith("★") ? (
                   <Star className="h-3 w-3 fill-current" />
-                ) : null}
+                ) : (
+                  <Flame className="h-3 w-3 fill-current" />
+                )}
                 {card.badge.replace("★ ", "")}
               </span>
             ) : null}
