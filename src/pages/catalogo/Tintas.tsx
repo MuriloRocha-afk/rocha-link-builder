@@ -120,6 +120,31 @@ const CARDS: EmojiSubcard[] = [
   },
 ];
 
+const GRUPOS = [
+  {
+    id: "madeira",
+    label: "Acabamento & Proteção de Madeira",
+    descricao:
+      "Stain, verniz, seladora, esmalte, cupicida, lixas e acessórios de aplicação para tratar e acabar madeira.",
+    slugs: [
+      "stain",
+      "verniz",
+      "seladora",
+      "esmalte",
+      "cupicida",
+      "lixas",
+      "acessorios-pintura",
+    ],
+  },
+  {
+    id: "construcao",
+    label: "Tintas & Vedação para Construção",
+    descricao:
+      "Tinta acrílica e emborrachada, diluentes, colas, selante PU para calha e lona plástica de obra.",
+    slugs: ["tinta-acrilica", "thinner", "aguarras", "cola", "pu-calha", "lona-plastica"],
+  },
+];
+
 export default function Tintas() {
   return (
     <CategoriaSubcardPage
@@ -128,8 +153,10 @@ export default function Tintas() {
       breadcrumb="Tintas, Vernizes & Proteção"
       eyebrow="Escolha o tipo de produto"
       cards={CARDS}
+      grupos={GRUPOS}
       categoriaSlug="tintas"
       tagTone="purple"
     />
   );
 }
+
