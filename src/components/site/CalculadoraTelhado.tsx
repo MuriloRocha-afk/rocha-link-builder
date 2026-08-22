@@ -132,9 +132,9 @@ export function CalculadoraTelhado() {
     calhas: Item[];
     telha: Telha;
     peso: number;
-    custoMin: number;
-    custoMax: number;
+    faixa: ResultadoFaixa;
     comparativo: Comparativo[];
+
   }>(null);
   const [modal, setModal] = useState(false);
 
