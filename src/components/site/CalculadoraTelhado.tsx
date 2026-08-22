@@ -133,6 +133,19 @@ export function CalculadoraTelhado() {
 
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
 
+  const larguraNum = num(largura);
+  const comprimentoNum = num(comprimento);
+  useEffect(() => {
+    if (larguraNum > 0 && comprimentoNum > 0) {
+      setDims({
+        largura: larguraNum,
+        comprimento: comprimentoNum,
+        inclinacao: incl,
+        aguas: tipo === "1agua" ? "1" : tipo === "4aguas" ? "4" : "2",
+      });
+    }
+  }, [larguraNum, comprimentoNum, incl, tipo, setDims]);
+
   const calcular = () => {
     const c = num(comprimento);
     const l = num(largura);
