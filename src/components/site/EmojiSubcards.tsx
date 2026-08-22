@@ -164,8 +164,18 @@ export function CategoriaSubcardPage({
             {eyebrow}
           </div>
           <div className="mt-6">
-            <EmojiSubcardGrid cards={cards} categoriaSlug={categoriaSlug} tagTone={tagTone} />
+            {grupos && grupos.length > 0 ? (
+              <GruposTabs
+                grupos={grupos}
+                cards={cards}
+                categoriaSlug={categoriaSlug}
+                tagTone={tagTone}
+              />
+            ) : (
+              <EmojiSubcardGrid cards={cards} categoriaSlug={categoriaSlug} tagTone={tagTone} />
+            )}
           </div>
+
         </div>
       </section>
     </div>
