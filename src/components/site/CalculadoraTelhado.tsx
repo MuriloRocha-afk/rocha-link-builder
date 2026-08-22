@@ -701,7 +701,13 @@ ${bloco("Estrutura de madeira", res.estrutura)}
                       <td className="p-3 font-semibold text-gray-700">{c.pecas} un</td>
                       <td className="p-3 font-semibold text-gray-700">{fmt(c.peso, 0)} kg</td>
                       <td className="p-3 font-bold whitespace-nowrap text-orange-600">
-                        {brl(c.custoMin)} – {brl(c.custoMax)}
+                        {c.semPreco ? (
+                          <span className="text-gray-500">Sob cotação</span>
+                        ) : (
+                          <>
+                            {brl(c.custoMin)} – {brl(c.custoMax)}
+                          </>
+                        )}
                       </td>
                     </tr>
                   );
