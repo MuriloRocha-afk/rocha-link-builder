@@ -4,7 +4,6 @@ import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { CATEGORIES, type CatalogItem } from "@/components/site/catalog-data";
 import { ProductCatalogCard } from "@/components/site/ProductCard";
-import { CalculadoraTelhas } from "@/components/site/Calculadora";
 import { TelhasSubcardGrid } from "@/components/site/TelhasSubcards";
 import { MadeiramentoSubcardGrid } from "@/components/site/MadeiramentoSubcards";
 
