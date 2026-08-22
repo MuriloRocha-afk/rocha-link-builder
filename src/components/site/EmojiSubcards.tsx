@@ -41,6 +41,71 @@ export function EmojiSubcardGrid({
   );
 }
 
+export type SubcardGrupo = {
+  id: string;
+  label: string;
+  descricao: string;
+  slugs: string[];
+};
+
+function GruposTabs({
+  grupos,
+  cards,
+  categoriaSlug,
+  tagTone,
+}: {
+  grupos: SubcardGrupo[];
+  cards: EmojiSubcard[];
+  categoriaSlug: string;
+  tagTone?: TagTone;
+}) {
+  const [aba, setAba] = useState(grupos[0]?.id);
+
+  return (
+    <div>
+      <div
+        role="tablist"
+        aria-label="Grupos de produtos"
+        className="flex flex-wrap gap-2 rounded-2xl border border-border bg-card p-2 shadow-[var(--shadow-card)]"
+      >
+        {grupos.map((g) => (
+          <button
+            key={g.id}
+            type="button"
+            role="tab"
+            aria-selected={aba === g.id}
+            aria-controls={`painel-${g.id}`}
+            onClick={() => setAba(g.id)}
+            className={`flex-1 rounded-xl px-4 py-3 text-xs font-extrabold tracking-wide uppercase transition-colors sm:text-sm ${
+              aba === g.id ? "bg-[#F97316] text-white shadow-sm" : "text-primary/70 hover:bg-primary/5"
+            }`}
+          >
+            {g.label}
+          </button>
+        ))}
+      </div>
+
+      {grupos.map((g) => (
+        <section
+          key={g.id}
+          id={`painel-${g.id}`}
+          role="tabpanel"
+          aria-label={g.label}
+          className={aba === g.id ? "mt-6" : "hidden"}
+        >
+          <h2 className="sr-only">{g.label}</h2>
+          <p className="mb-6 text-sm text-muted-foreground">{g.descricao}</p>
+          <EmojiSubcardGrid
+            cards={g.slugs.map((s) => cards.find((c) => c.slug === s)!).filter(Boolean)}
+            categoriaSlug={categoriaSlug}
+            tagTone={tagTone}
+          />
+        </section>
+      ))}
+    </div>
+  );
+}
+
 export function CategoriaSubcardPage({
   titulo,
   subtitulo,
@@ -49,6 +114,7 @@ export function CategoriaSubcardPage({
   cards,
   categoriaSlug,
   tagTone,
+  grupos,
 }: {
   titulo: string;
   subtitulo: string;
@@ -57,7 +123,9 @@ export function CategoriaSubcardPage({
   cards: EmojiSubcard[];
   categoriaSlug: string;
   tagTone?: TagTone;
+  grupos?: SubcardGrupo[];
 }) {
+
   return (
     <div className="min-h-screen bg-background">
       <section className="surface-dark pt-16 pb-16">
