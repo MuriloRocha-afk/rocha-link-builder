@@ -30,7 +30,7 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
         a: "Segunda a sexta das 08h às 18h e sábados das 08h às 13h. Fora desse horário, você pode enviar mensagem no WhatsApp e respondemos assim que a loja abrir.",
       },
       {
-        q: "Vocês têm estoque pronto ou trabalham sob encomenda?",
+        q: "Vocês têm estoque pronto ou é preciso verificar disponibilidade?",
         a: "Trabalhamos com estoque permanente dos produtos mais vendidos — fibrocimento, cambará, pontaletes, forro PVC e tintas Anjo. Para produtos específicos ou grandes volumes, consulte disponibilidade.",
       },
     ],

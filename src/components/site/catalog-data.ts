@@ -276,7 +276,7 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
         specs: [
           { label: "Modelos", value: "Concreto, galvanizada, mediterrânea, termoacústica e translúcida" },
-          { label: "Medidas", value: "Padrão de fábrica ou sob encomenda" },
+          { label: "Medidas", value: "Padrão de fábrica ou verificar disponibilidade" },
           { label: "Indicação", value: "Projetos específicos e complementos de cobertura" },
           { label: "Entrega", value: "Estoque e encomenda rápida" },
         ],
