@@ -36,6 +36,28 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
+  "plan-pvc": {
+    badges: [
+      { icone: "🚫", texto: "Não enferruja" },
+      { icone: "🎨", texto: "4 cores" },
+      { icone: "📐", texto: "3 comprimentos" },
+      { icone: "⚡", texto: "Fácil instalação" },
+    ],
+    motivos: [
+      {
+        titulo: "Perfil plano e moderno",
+        descricao: "Encaixe reto, ideal para projetos de linhas contemporâneas.",
+      },
+      {
+        titulo: "Sem manutenção",
+        descricao: "Não enferruja, não precisa de pintura e mantém a cor por décadas.",
+      },
+      {
+        titulo: "Conforto térmico",
+        descricao: "Reduz o calor interno comparado ao fibrocimento sem manta.",
+      },
+    ],
+  },
   fibrocimento: {
     badges: [
       { icone: "⭐", texto: "Mais vendida" },
