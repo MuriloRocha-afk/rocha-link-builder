@@ -11,16 +11,16 @@ import { imagensColonialPVC } from "@/data/imagensProduto";
 
 type Variante = "Colonial" | "Plan";
 
-const VARIANTES: { value: Variante; sub: string; badge?: string }[] = [
-  { value: "Colonial", sub: "Onda tradicional, visual de telha de barro", badge: "Mais vendida" },
-  { value: "Plan", sub: "Perfil plano e moderno, encaixe reto" },
-];
-
 const CORES = [
-  { value: "Cerâmica", hex: "#C1440E", badge: "Mais vendida" },
-  { value: "Marfim", hex: "#F5F0DC" },
-  { value: "Cinza", hex: "#808080" },
-  { value: "Translúcida", hex: "transparent", translucida: true, apenas: "Colonial" as Variante },
+  { value: "Cerâmica", hex: "#C1440E", badge: "Pronta entrega" },
+  { value: "Marfim", hex: "#F5F0DC", nota: "Verificar disponibilidade" },
+  { value: "Cinza", hex: "#808080", nota: "Verificar disponibilidade" },
+  {
+    value: "Translúcida",
+    hex: "transparent",
+    translucida: true,
+    nota: "Verificar disponibilidade",
+  },
 ];
 
 const COMPRIMENTOS: Record<Variante, { value: string; metros: number; badge?: string }[]> = {
@@ -33,44 +33,27 @@ const COMPRIMENTOS: Record<Variante, { value: string; metros: number; badge?: st
     { value: "525 cm", metros: 5.25, badge: "Líder de Vendas" },
   ],
   Plan: [
-    { value: "230 cm", metros: 2.3 },
-    { value: "262 cm", metros: 2.62 },
-    { value: "328 cm", metros: 3.28, badge: "Líder" },
-    { value: "394 cm", metros: 3.94 },
-    { value: "459 cm", metros: 4.59 },
-    { value: "525 cm", metros: 5.25, badge: "Líder de Vendas" },
+    { value: "198 cm", metros: 1.98 },
+    { value: "242 cm", metros: 2.42, badge: "Líder" },
+    { value: "330 cm", metros: 3.3, badge: "Líder de Vendas" },
   ],
 };
 
-const LARGURAS: Record<Variante, { value: string; util: number }[]> = {
-  Colonial: [
-    { value: "86 cm", util: 0.79 },
-    { value: "110 cm", util: 1.02 },
-  ],
-  Plan: [
-    { value: "88 cm", util: 0.8 },
-    { value: "110 cm", util: 1.02 },
-  ],
+const LARGURA: Record<Variante, { value: string; util: number }> = {
+  Colonial: { value: "86 cm", util: 0.79 },
+  Plan: { value: "88 cm", util: 0.8 },
 };
 
-const ESPESSURAS: Record<Variante, { value: string; sub: string }[]> = {
-  Colonial: [
-    { value: "1,6 mm", sub: "Padrão residencial" },
-    { value: "2,0 mm", sub: "Reforçada" },
-    { value: "2,4 mm", sub: "Uso intenso / vãos maiores" },
-  ],
-  Plan: [
-    { value: "1,6 mm", sub: "Padrão residencial" },
-    { value: "2,0 mm", sub: "Reforçada" },
-    { value: "2,4 mm", sub: "Uso intenso / vãos maiores" },
-  ],
+const ESPESSURA_NOTA: Record<Variante, string> = {
+  Colonial: "2 mm (variação natural do processo, podendo variar até 10%)",
+  Plan: "1,6 mm (variação natural do processo, podendo variar até 10%)",
 };
 
 const SOBREPOSICAO = 0.08;
 
 function Passo({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
-    <div>
+    <div className="animate-fade-in">
       <div className="flex items-center gap-3">
         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-sm font-extrabold text-accent-foreground">
           {n}
@@ -87,42 +70,31 @@ export function ColonialPvcConfigurator({
 }: {
   varianteInicial?: Variante;
 } = {}) {
+  const variante = varianteInicial;
   const { addItem } = useQuoteCart();
-  const [variante, setVariante] = useState<Variante>(varianteInicial);
-  const [cor, setCor] = useState(CORES[0].value);
-  const [dimensao, setDimensao] = useState("525 cm");
-  const [largura, setLargura] = useState(LARGURAS[varianteInicial][0].value);
-  const [espessura, setEspessura] = useState("1,6 mm");
+  const [cor, setCor] = useState<string | null>(null);
+  const [dimensao, setDimensao] = useState<string | null>(null);
   const [qty, setQty] = useState(10);
 
-  const coresDisponiveis = CORES.filter((c) => !c.apenas || c.apenas === variante);
   const comprimentos = COMPRIMENTOS[variante];
-  const larguras = LARGURAS[variante];
-  const espessuras = ESPESSURAS[variante];
-
-  const trocarVariante = (v: Variante) => {
-    setVariante(v);
-    setLargura(LARGURAS[v][0].value);
-    if (!CORES.some((c) => c.value === cor && (!c.apenas || c.apenas === v))) {
-      setCor(CORES[0].value);
-    }
-  };
+  const largura = LARGURA[variante];
+  const espessuraNota = ESPESSURA_NOTA[variante];
 
   const selecionado = comprimentos.find((c) => c.value === dimensao) ?? comprimentos[0];
-  const larguraSel = larguras.find((l) => l.value === largura) ?? larguras[0];
-  const areaPorPeca = Math.max(0, (selecionado.metros - SOBREPOSICAO) * larguraSel.util);
+  const areaPorPeca = Math.max(0, (selecionado.metros - SOBREPOSICAO) * largura.util);
   const cobertura = Math.round(areaPorPeca * qty * 10) / 10;
 
   const nomeProduto = `Telha ${variante} PVC`;
-  const detail = `${variante} PVC · ${cor} · ${dimensao} × ${largura} · ${espessura} · cobertura ~${cobertura} m²`;
+  const espessuraLabel = variante === "Colonial" ? "2 mm" : "1,6 mm";
+  const detail = `${variante} PVC · ${cor ?? "-"} · ${dimensao ?? "-"} × ${largura.value} · ${espessuraLabel} · cobertura ~${cobertura} m²`;
 
   const mensagem = `Olá! Gostaria de um orçamento:
 
 🧱 *${nomeProduto}*
 - Cor: ${cor}
 - Comprimento: ${dimensao}
-- Largura: ${largura}
-- Espessura: ${espessura}
+- Largura: ${largura.value}
+- Espessura: ${espessuraLabel} (variação natural de até 10%)
 - Quantidade: ${qty} peças
 - Cobertura estimada: ~${cobertura} m²
 
@@ -135,70 +107,47 @@ Poderia verificar estoque e frete?`;
 
   return (
     <ProdutoLayout
-      produtoKey="colonial-pvc"
+      produtoKey={variante === "Colonial" ? "colonial-pvc" : "plan-pvc"}
       especificacoes={[
-        ["Modelos", "Colonial (ondulada) e Plan (plana)"],
-        ["Espessuras", "1,6 mm · 2,0 mm · 2,4 mm"],
-        ["Larguras", "86/88 cm e 110 cm"],
-        ["Comprimentos", "230 cm a 525 cm"],
+        ["Modelo", variante === "Colonial" ? "Colonial (ondulada)" : "Plan (plana)"],
+        ["Espessura", espessuraNota],
+        ["Largura", largura.value],
+        [
+          "Comprimentos",
+          comprimentos.map((c) => c.value).join(" · "),
+        ],
         ["Inclinação mínima", "15%"],
         ["Sobreposição", "8 cm"],
-        ["Cores", "Cerâmica, Marfim e Cinza"],
+        ["Cores", "Cerâmica (pronta entrega), Marfim, Cinza e Translúcida"],
         ["Fixação", "Kit parafuso + vedação na cor"],
       ]}
-      tituloAcessorios={`Acessórios de PVC ${variante} — ${cor === "Translúcida" ? "Cerâmica" : cor}`}
-      acessorios={<BlocoAcessorios itens={acessoriosPvc(variante, cor, qty)} contexto={detail} />}
+      tituloAcessorios={`Acessórios de PVC ${variante} — ${!cor || cor === "Translúcida" ? "Cerâmica" : cor}`}
+      acessorios={
+        <BlocoAcessorios itens={acessoriosPvc(variante, cor ?? "Cerâmica", qty)} contexto={detail} />
+      }
       cabecalho={
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
-            Telha PVC — Colonial e Plan
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">{nomeProduto}</h1>
           <p className="mt-2 text-sm text-gray-500">
-            Leveza, conforto térmico e instalação rápida. Não enferruja, não precisa de pintura.
+            {variante === "Colonial"
+              ? "Perfil ondulado com visual de telha de barro. Leveza, conforto térmico e instalação rápida."
+              : "Perfil plano e moderno de encaixe reto. Leveza, conforto térmico e instalação rápida."}
           </p>
         </div>
       }
       galeria={
         <GaleriaProduto
-          titulo={`${nomeProduto} — ${cor}`}
+          titulo={`${nomeProduto} — ${cor ?? "Cerâmica"}`}
           subtitulo="Foto em breve"
-          imagens={imagensColonialPVC[cor] ?? []}
+          imagens={imagensColonialPVC[cor ?? "Cerâmica"] ?? []}
         />
       }
     >
       <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
         <div className="space-y-10">
-          <Passo n={1} title="Modelo do perfil">
+          <Passo n={1} title="Cor / Acabamento">
             <div className="grid gap-3 sm:grid-cols-2">
-              {VARIANTES.map((v) => {
-                const active = variante === v.value;
-                return (
-                  <button
-                    key={v.value}
-                    type="button"
-                    onClick={() => trocarVariante(v.value)}
-                    aria-pressed={active}
-                    className={`rounded-2xl border px-5 py-4 text-left transition-all ${btn(active)}`}
-                  >
-                    <span className="block text-base font-extrabold text-primary">
-                      Telha {v.value} PVC
-                    </span>
-                    <span className="mt-1 block text-xs text-muted-foreground">{v.sub}</span>
-                    {v.badge ? (
-                      <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-0.5 text-[10px] font-extrabold tracking-wider text-accent-foreground uppercase">
-                        <Star className="h-3 w-3" />
-                        {v.badge}
-                      </span>
-                    ) : null}
-                  </button>
-                );
-              })}
-            </div>
-          </Passo>
-
-          <Passo n={2} title="Cor / Acabamento">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {coresDisponiveis.map((c) => {
+              {CORES.map((c) => {
                 const active = cor === c.value;
                 return (
                   <button
@@ -225,6 +174,11 @@ Poderia verificar estoque e frete?`;
                           {c.badge}
                         </span>
                       ) : null}
+                      {c.nota ? (
+                        <span className="mt-1 block text-xs font-semibold text-muted-foreground">
+                          {c.nota}
+                        </span>
+                      ) : null}
                     </span>
                     {active ? <Check className="h-5 w-5 text-accent" /> : null}
                   </button>
@@ -233,152 +187,119 @@ Poderia verificar estoque e frete?`;
             </div>
           </Passo>
 
-          <Passo n={3} title={`Comprimento disponível em ${cor}`}>
-            <div className="grid gap-3">
-              {comprimentos.map((c) => {
-                const active = dimensao === c.value;
-                return (
-                  <button
-                    key={c.value}
-                    type="button"
-                    onClick={() => setDimensao(c.value)}
-                    aria-pressed={active}
-                    className={`flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-5 py-4 text-left transition-all ${btn(active)}`}
-                  >
-                    <span>
-                      <span className="block text-base font-extrabold text-primary">{c.value}</span>
-                      <span className="mt-1 block text-xs text-muted-foreground">
-                        Sobreposição de 8 cm entre peças
-                      </span>
-                    </span>
-                    <span className="flex items-center gap-2">
-                      {c.badge ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-[10px] font-extrabold tracking-wider text-accent-foreground uppercase">
-                          <Star className="h-3 w-3" />
-                          {c.badge}
+          {cor ? (
+            <Passo n={2} title={`Comprimento disponível em ${cor}`}>
+              <div className="grid gap-3">
+                {comprimentos.map((c) => {
+                  const active = dimensao === c.value;
+                  return (
+                    <button
+                      key={c.value}
+                      type="button"
+                      onClick={() => setDimensao(c.value)}
+                      aria-pressed={active}
+                      className={`flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-5 py-4 text-left transition-all ${btn(active)}`}
+                    >
+                      <span>
+                        <span className="block text-base font-extrabold text-primary">
+                          {c.value} × {largura.value}
                         </span>
-                      ) : null}
-                      {active ? <Check className="h-5 w-5 text-accent" /> : null}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </Passo>
+                        <span className="mt-1 block text-xs text-muted-foreground">
+                          Largura útil {largura.util.toString().replace(".", ",")} m · sobreposição
+                          de 8 cm
+                        </span>
+                      </span>
+                      <span className="flex items-center gap-2">
+                        {c.badge ? (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-[10px] font-extrabold tracking-wider text-accent-foreground uppercase">
+                            <Star className="h-3 w-3" />
+                            {c.badge}
+                          </span>
+                        ) : null}
+                        {active ? <Check className="h-5 w-5 text-accent" /> : null}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </Passo>
+          ) : null}
 
-          <Passo n={4} title="Largura da telha">
-            <div className="flex flex-wrap gap-3">
-              {larguras.map((l) => {
-                const active = largura === l.value;
-                return (
-                  <button
-                    key={l.value}
-                    type="button"
-                    onClick={() => setLargura(l.value)}
-                    aria-pressed={active}
-                    className={`rounded-2xl border px-5 py-3 text-left transition-all ${btn(active)}`}
-                  >
-                    <span className="block text-sm font-extrabold text-primary">{l.value}</span>
-                    <span className="block text-xs text-muted-foreground">
-                      Largura útil {l.util.toString().replace(".", ",")} m
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </Passo>
+          {cor && dimensao ? (
+            <Passo n={3} title="Quantidade">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold tracking-[0.14em] text-primary/60 uppercase">
+                  Nº de peças
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setQty((q) => Math.max(1, q - 1))}
+                  aria-label="Diminuir quantidade"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-primary hover:border-accent hover:text-accent"
+                >
+                  <Minus className="h-4 w-4" />
+                </button>
+                <input
+                  type="number"
+                  min={1}
+                  value={qty}
+                  onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))}
+                  aria-label="Número de peças"
+                  className="h-10 w-24 rounded-lg border border-border bg-background text-center text-sm font-bold text-primary"
+                />
+                <button
+                  type="button"
+                  onClick={() => setQty((q) => q + 1)}
+                  aria-label="Aumentar quantidade"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-primary hover:border-accent hover:text-accent"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+              <p className="mt-3 rounded-xl bg-secondary px-4 py-3 text-sm font-semibold text-primary">
+                Cobertura estimada: {cobertura} m²{" "}
+                <span className="font-normal text-muted-foreground">
+                  (largura útil {largura.util.toString().replace(".", ",")} m e sobreposição de 8 cm)
+                </span>
+              </p>
+            </Passo>
+          ) : null}
 
-          <Passo n={5} title="Espessura">
-            <div className="flex flex-wrap gap-3">
-              {espessuras.map((e) => {
-                const active = espessura === e.value;
-                return (
-                  <button
-                    key={e.value}
-                    type="button"
-                    onClick={() => setEspessura(e.value)}
-                    aria-pressed={active}
-                    className={`rounded-2xl border px-5 py-3 text-left transition-all ${btn(active)}`}
-                  >
-                    <span className="block text-sm font-extrabold text-primary">{e.value}</span>
-                    <span className="block text-xs text-muted-foreground">{e.sub}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </Passo>
+          {cor && dimensao ? (
+            <div className="animate-fade-in rounded-2xl border border-accent/40 bg-accent/5 p-6">
+              <p className="text-xs font-bold tracking-[0.16em] text-accent uppercase">Resumo</p>
+              <p className="mt-2 text-lg font-extrabold text-primary">
+                {nomeProduto} · {cor} · {dimensao} × {largura.value}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {qty} peças · Cobertura: ~{cobertura} m²
+              </p>
+              <p className="mt-2 text-xs text-muted-foreground">Espessura {espessuraNota}.</p>
 
-          <Passo n={6} title="Quantidade">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold tracking-[0.14em] text-primary/60 uppercase">
-                Nº de peças
-              </span>
-              <button
-                type="button"
-                onClick={() => setQty((q) => Math.max(1, q - 1))}
-                aria-label="Diminuir quantidade"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-primary hover:border-accent hover:text-accent"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
-              <input
-                type="number"
-                min={1}
-                value={qty}
-                onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))}
-                aria-label="Número de peças"
-                className="h-10 w-24 rounded-lg border border-border bg-background text-center text-sm font-bold text-primary"
-              />
-              <button
-                type="button"
-                onClick={() => setQty((q) => q + 1)}
-                aria-label="Aumentar quantidade"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-primary hover:border-accent hover:text-accent"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <Button
+                  type="button"
+                  variant="cta"
+                  size="xl"
+                  onClick={() => {
+                    addItem({
+                      id: `${variante.toLowerCase()}-pvc--${cor}--${dimensao}--${largura.value}`,
+                      name: nomeProduto,
+                      detail,
+                      qty,
+                      unit: "peças",
+                    });
+                  }}
+                >
+                  <ShoppingCart />
+                  Adicionar ao Orçamento
+                </Button>
+                <BotaoCotarWhatsApp nomeProduto={nomeProduto} corpoMensagem={mensagem}>
+                  Cotar no WhatsApp
+                </BotaoCotarWhatsApp>
+              </div>
             </div>
-            <p className="mt-3 rounded-xl bg-secondary px-4 py-3 text-sm font-semibold text-primary">
-              Cobertura estimada: {cobertura} m²{" "}
-              <span className="font-normal text-muted-foreground">
-                (largura útil {larguraSel.util.toString().replace(".", ",")} m e sobreposição de 8
-                cm)
-              </span>
-            </p>
-          </Passo>
-
-          <div className="rounded-2xl border border-accent/40 bg-accent/5 p-6">
-            <p className="text-xs font-bold tracking-[0.16em] text-accent uppercase">Resumo</p>
-            <p className="mt-2 text-lg font-extrabold text-primary">
-              {nomeProduto} · {cor} · {dimensao} × {largura}
-            </p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Espessura {espessura} · {qty} peças · Cobertura: ~{cobertura} m²
-            </p>
-
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <Button
-                type="button"
-                variant="cta"
-                size="xl"
-                onClick={() => {
-                  addItem({
-                    id: `${variante.toLowerCase()}-pvc--${cor}--${dimensao}--${largura}--${espessura}`,
-                    name: nomeProduto,
-                    detail,
-                    qty,
-                    unit: "peças",
-                  });
-                }}
-              >
-                <ShoppingCart />
-                Adicionar ao Orçamento
-              </Button>
-              <BotaoCotarWhatsApp nomeProduto={nomeProduto} corpoMensagem={mensagem}>
-                Cotar no WhatsApp
-              </BotaoCotarWhatsApp>
-            </div>
-          </div>
+          ) : null}
         </div>
       </div>
     </ProdutoLayout>
