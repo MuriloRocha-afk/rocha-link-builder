@@ -212,7 +212,7 @@ export const CONFIG_AMESCLA: ConfiguradorConfig = {
       chave: "peca",
       titulo: "Tipo de Peça",
       tipo: "grid2",
-      opcoes: PECAS_AMESCLA.map((v) => ({ valor: v, emoji: iconePeca(v) })),
+      opcoes: PECAS_AMESCLA.map((v) => ({ valor: v })),
     },
     {
       chave: "qtd",
