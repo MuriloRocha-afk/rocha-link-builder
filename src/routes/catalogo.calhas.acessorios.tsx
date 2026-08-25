@@ -7,7 +7,7 @@ import { CONFIG_ACESSORIOS_CALHA } from "@/data/configs/calhas";
 const TITLE = "Acessórios de Calha Galvanizada | Rocha Telhas";
 const DESCRIPTION = "Suportes, cabeceiras, saídas, água furtada e pingadeira para calha galvanizada. Escolha o acessório e cote no WhatsApp.";
 
-export const Route = createFileRoute("/catalogo/calhas/acessorios-calha")({
+export const Route = createFileRoute("/catalogo/calhas/acessorios")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -18,10 +18,10 @@ export const Route = createFileRoute("/catalogo/calhas/acessorios-calha")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: CalhasAcessoriosCalhaRoute,
+  component: CalhasAcessoriosRoute,
 });
 
-function CalhasAcessoriosCalhaRoute() {
+function CalhasAcessoriosRoute() {
   return (
     <>
       <Header />

@@ -189,7 +189,7 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
   "manta-asfaltica": [
     { src: "", alt: "Manta asfáltica terracota", legenda: "Manta Asfáltica Aluminizada" },
   ],
-  "acessorios-calha": [
+  "acessorios": [
     { src: "", alt: "Acessórios para calha Alge e Aquapluv", legenda: "Acessórios — Suportes, Cabeceiras e Saídas" },
   ],
 };
