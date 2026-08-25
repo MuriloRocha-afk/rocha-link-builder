@@ -10,7 +10,7 @@ import {
   Info,
 } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
-import { estimarFaixa, type ItemCusto } from "@/data/precosLoja";
+import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 import {
   TELHAS_CATALOGO,
