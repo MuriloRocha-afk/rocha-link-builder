@@ -244,9 +244,10 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     },
   ],
   especificacoes: [
+    ["Espessura", "1,2 mm (única)"],
     ["Inclinação mínima", "10%"],
     ["Sobreposição", "14 cm (igual ao fibrocimento)"],
-    ["Largura útil", "1,05 m"],
+    ["Larguras", "110 cm · 92 cm e 50 cm (apenas no comprimento 244 cm)"],
     ["Fixação", "Parafuso com vedação 110mm"],
     ["Compatibilidade", "100% com telha fibrocimento INFIBRA"],
   ],
