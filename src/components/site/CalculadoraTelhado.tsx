@@ -128,7 +128,7 @@ export function CalculadoraTelhado() {
   const [espacamento, setEspacamento] = useState("0.50");
   const [compA, setCompA] = useState("fib-244");
   const [compB, setCompB] = useState("pvc-328");
-  const [mostrarCusto, setMostrarCusto] = useState(true);
+  const [compC, setCompC] = useState("");
   const [res, setRes] = useState<null | {
     areaBase: number;
     areaIncl: number;
@@ -290,8 +290,6 @@ export function CalculadoraTelhado() {
 
     const peso = areaIncl * telha.pesoM2;
 
-    const peso = areaIncl * telha.pesoM2;
-
     setCompA(telha.id);
     const compativeis = TELHAS.filter((t) => t.id !== telha.id && t.min <= incl);
     const sugB =
@@ -377,10 +375,18 @@ export function CalculadoraTelhado() {
         `- Margem de recorte/reposição: ${res.margem}%`,
         `- Telha escolhida: ${res.telha.label} (${res.telha.grupo})`,
         `- Peso estimado da cobertura: ${fmt(res.peso, 0)} kg`,
-        `- Faixa estimada de investimento (tabela Rocha & Telhas): ${brl(res.faixa.min)} a ${brl(res.faixa.max)}`,
-        ...(res.faixa.naoEncontrados.length
-          ? [`- Obs.: valor de ${res.faixa.naoEncontrados.length} item(ns) não incluído na estimativa, sujeito a cotação`]
+        ...(comparativo.length > 1
+          ? [
+              ``,
+              `⚖️ *COMPARATIVO ENTRE TELHAS*`,
+              ...comparativo.map(
+                (c) =>
+                  `- ${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}: ${c.pecas} un · ${fmt(c.peso, 0)} kg · ${textoComparativo(c)}`,
+              ),
+            ]
           : []),
+        ``,
+        `Obs.: a calculadora não informa valores — o preço final sai na cotação com o vendedor.`,
         ``,
         `📋 *MATERIAIS ESTIMADOS*`,
         `- ${res.telha.label} — Qtd: ${res.telhas} un`,
@@ -404,15 +410,11 @@ export function CalculadoraTelhado() {
       itens.length ? `<h2>${titulo}</h2><table>${itens.map(linha).join("")}</table>` : "";
     const comparaHtml = comparativo.length
       ? `<h2>Comparativo entre telhas</h2><table>
-        <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso${mostrarCusto ? "</td><td class=\"q\">Custo estimado" : ""}</td></tr>
+        <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso</td><td class="q">Comparação relativa</td></tr>
         ${comparativo
           .map(
             (c) =>
-              `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td>${
-                mostrarCusto
-                  ? `<td class="q">${c.semPreco ? "Sob cotação" : `${brl(c.custoMin)} – ${brl(c.custoMax)}`}</td>`
-                  : ""
-              }</tr>`,
+              `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td><td class="q">${textoComparativo(c)}</td></tr>`,
           )
           .join("")}
       </table>`
@@ -440,14 +442,13 @@ export function CalculadoraTelhado() {
   <div class="box"><span>Área inclinada</span><b>${fmt(res.areaIncl)} m²</b></div>
   <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
   <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
-  <div class="box"><span>Investimento estimado</span><b>${brl(res.faixa.min)} – ${brl(res.faixa.max)}</b></div>
 </div>
 ${bloco("Cobertura", [{ nome: res.telha.label, qtd: `${res.telhas} un` }, ...res.itens])}
 ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
 ${bloco("Calhas e rufos", res.calhas)}
 ${bloco("Estrutura de madeira", res.estrutura)}
 ${comparaHtml}
-<p class="small">Estimativa de referência gerada automaticamente. Valores e quantidades são conferidos pela equipe técnica na cotação final.</p>
+<p class="small">Estimativa de referência gerada automaticamente. Este material não apresenta valores: o preço final sai apenas na cotação com o vendedor, que também confere as quantidades.</p>
 </body></html>`;
     const w = window.open("", "_blank");
     if (!w) return;
@@ -567,12 +568,10 @@ ${comparaHtml}
             ))}
           </div>
           <p className="mt-2 text-[11px] text-gray-500">
-            Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b>
-            {precoTelha ? (
-              <> · preço de tabela a partir de <b className="text-gray-700">{brl(precoTelha.min.preco)}/peça</b></>
-            ) : (
-              <> · preço não tabelado — sujeito a cotação</>
-            )}
+            Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b> ·{" "}
+            <a href={telha.href} className="font-bold text-orange-600 hover:underline">
+              ver ficha completa no catálogo →
+            </a>
           </p>
         </div>
       </div>
