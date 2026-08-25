@@ -88,21 +88,27 @@ type Comparativo = {
   telha: Telha;
   pecas: number;
   peso: number;
-  custoMin: number;
-  custoMax: number;
+  /** custo médio interno (só para calcular o percentual relativo) */
+  custoRef: number;
   semPreco: boolean;
   compativel: boolean;
+  /** percentual a mais em relação à opção mais barata (0 = referência) */
+  percentual: number | null;
 };
 
+type CfgAcabamento = { nome: string; util: number; chave: string };
+
 /** dados de cumeeira/espigão por família de telha (catálogo de acabamentos) */
-const ACABAMENTO = {
+const ACABAMENTO: Record<FamiliaTelha, CfgAcabamento> = {
   fibrocimento: { nome: "Cumeeira normal fibrocimento", util: 0.9, chave: "cumeeira.fibrocimento" },
   policarbonato: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
   translucida: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
   pvc: { nome: "Cumeeira Colonial PVC", util: 0.86, chave: "cumeeira.pvc" },
   ceramica: { nome: "Cumeeira de barro", util: 0.33, chave: "cumeeira.barro" },
   concreto: { nome: "Cumeeira de concreto", util: 0.33, chave: "cumeeira.barro" },
-} as const;
+  vidro: { nome: "Cumeeira de barro (compatível)", util: 0.33, chave: "cumeeira.barro" },
+};
+
 
 export function CalculadoraTelhado() {
   const { setDims } = useCalcDims();
