@@ -5,7 +5,7 @@ import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_GARAPEIRA } from "@/data/configs/madeiramento";
 
 const TITLE = "Garapeira — Sarrafos, Tábuas e Vigas | Rocha Telhas";
-const DESCRIPTION = "Garapeira, madeira dura nativa em sarrafos e tábuas, bruta ou aparelhada. Cote por metro linear no WhatsApp.";
+const DESCRIPTION = "Garapeira em viga, caibro, caibrão, ripa, ripão, sarrafo, tábua e dormente, bruta ou aparelhada. Verificar disponibilidade.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/garapeira")({
   head: () => ({

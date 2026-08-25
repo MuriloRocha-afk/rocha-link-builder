@@ -28,17 +28,43 @@ export const iconePeca = (nome: string) => {
   return chave ? ICONE_PECA[chave] : "🪵";
 };
 
-const BITOLAS_PEROBA: Record<string, string[]> = {
-  Viga: ["5x11cm", "5x15cm", "5x20cm", "6x12cm", "8x16cm", "8x20cm"],
-  Caibro: ["5x5cm", "5x6cm", "5x7cm"],
-  Caibrão: ["6x8cm", "7x9cm", "8x8cm"],
+/** Tipos de peça padrão das madeiras nativas (mesma estrutura do Cambará). */
+export const TIPOS_MADEIRA = [
+  "Viga",
+  "Caibro",
+  "Caibrão",
+  "Ripa",
+  "Ripão",
+  "Sarrafo",
+  "Tábua",
+  "Dormente",
+] as const;
+
+/** Bitolas (Espessura × Largura) em ordem crescente. */
+export const BITOLAS_MADEIRA: Record<string, string[]> = {
+  Viga: [
+    "5x11cm",
+    "5x15cm",
+    "5x20cm",
+    "5x25cm",
+    "5x30cm",
+    "8x10cm",
+    "8x15cm",
+    "8x20cm",
+    "8x25cm",
+    "8x30cm",
+    "8x40cm",
+  ],
+  Caibro: ["5x5cm"],
+  Caibrão: ["5x7cm"],
   Ripa: ["1,5x5cm"],
   Ripão: ["2x5cm", "2x7cm"],
-  Sarrafo: ["2,5x5cm", "2,5x7cm", "2,5x10cm"],
-  Tábua: ["2,5x20cm", "2,5x25cm", "2,5x30cm"],
+  Sarrafo: ["2,5x5cm", "2,5x7cm", "2,5x10cm", "2,5x15cm"],
+  Tábua: ["2,3x20cm", "2,3x25cm", "2,3x30cm"],
+  Dormente: ["8x8cm", "10x10cm", "15x15cm", "20x20cm"],
 };
 
-const COMPRIMENTOS_PEROBA = [
+export const COMPRIMENTOS_MADEIRA = [
   "1,0m",
   "1,5m",
   "2,0m",
@@ -50,108 +76,119 @@ const COMPRIMENTOS_PEROBA = [
   "5,0m",
   "5,5m",
   "6,0m",
+  "6,5m",
+  "7,0m",
+  "7,5m",
+  "8,0m",
+  "8,5m",
 ];
 
-export const CONFIG_PEROBA: ConfiguradorConfig = {
-  breadcrumb: BC("Peroba do Norte / D'Água"),
-  titulo: "🌳 Peroba do Norte / D'Água",
-  subtitulo:
-    "Madeira nativa de alta resistência para estruturas de telhado. Bruta ou aparelhada em plaina no nosso pátio.",
-  galeriaTitulo: "Peroba do Norte / D'Água",
-  galeriaPlaceholder: "Selecione o tipo de peça para ver as fotos",
-  imagens: (s) => (s.peca ? [{ src: "", alt: `Peroba do Norte — ${s.peca}` }] : []),
-  categoria: "Madeiramento",
-  passos: [
-    {
-      chave: "peca",
-      titulo: "Tipo de Peça",
-      tipo: "lista",
-      opcoes: Object.keys(BITOLAS_PEROBA).map((v) => ({ valor: v })),
-    },
-    {
-      chave: "bitola",
-      titulo: "Bitola (Espessura × Largura)",
-      tipo: "chips",
-      visivel: (s) => Boolean(s.peca),
-      opcoes: (s) => (BITOLAS_PEROBA[s.peca] ?? []).map((v) => ({ valor: v })),
-    },
-    {
-      chave: "comprimento",
-      titulo: "Comprimento",
-      tipo: "chips",
-      opcoes: COMPRIMENTOS_PEROBA.map((v) => ({ valor: v })),
-    },
-    {
-      chave: "acabamento",
-      titulo: "Aparelhagem",
-      tipo: "grid2",
-      opcoes: [
-        { valor: "Bruto", sub: "Superfície natural da serra · mais econômico" },
-        { valor: "Aparelhado", sub: "Aparelhado em plaina industrial", badge: "★ Recomendado" },
-      ],
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 10 },
-  ],
-  especificacoes: [
-    ["Espécie", "Peroba do Norte / Peroba d'Água"],
-    ["Peças", "Viga, Caibro, Caibrão, Ripa, Ripão, Sarrafo e Tábua"],
-    ["Comprimentos", "1,0m a 6,0m"],
-    ["Aparelhagem", "Bruto ou aparelhado em plaina"],
-    ["Origem", "DOF/IBAMA legalizado"],
-  ],
-  resumoNome: () => "Peroba do Norte / D'Água",
-  resumoDetalhe: (s, q) =>
-    `${s.peca} ${s.bitola ?? ""} · ${s.comprimento} · ${s.acabamento} · ${q.qtd ?? 10} peças`,
-  unidadeResumo: () => "peças",
-  idItem: (s) => `peroba-${s.peca}-${s.bitola}-${s.comprimento}-${s.acabamento}`,
-  mensagem: (s, q) =>
-    `🌳 *Peroba do Norte / D'Água*\n• Tipo: ${s.peca}\n• Bitola: ${s.bitola}\n• Comprimento: ${s.comprimento}\n• Aparelhagem: ${s.acabamento}\n• Quantidade: ${q.qtd ?? 10} peças`,
-};
+const CONSULTA = "Verificar disponibilidade";
 
-const PECAS_GARAPEIRA = [
-  "Sarrafo 05cm × 2,3cm",
-  "Sarrafo 07cm × 2,3cm",
-  "Sarrafo 10cm × 2,3cm",
-  "Sarrafo 15cm × 2,3cm",
-  "Tábua 2,3cm × 20cm",
-  "Tábua 2,3cm × 25cm",
-  "Tábua 2,3cm × 30cm",
-];
+/**
+ * Gera um configurador de madeira nativa no padrão do Cambará:
+ * Tipo de peça → Bitola → Comprimento → Acabamento → Quantidade.
+ * Quando `consulta` é true, todas as peças e bitolas recebem o selo
+ * "Verificar disponibilidade".
+ */
+export function criarConfigMadeiraNativa(opcoes: {
+  nome: string;
+  slug: string;
+  titulo: string;
+  subtitulo: string;
+  tagInfo?: string;
+  consulta?: boolean;
+  especificacoes?: [string, string][];
+}): ConfiguradorConfig {
+  const { nome, slug, titulo, subtitulo, tagInfo, consulta, especificacoes } = opcoes;
+  const badge = consulta ? CONSULTA : undefined;
 
-export const CONFIG_GARAPEIRA: ConfiguradorConfig = {
-  breadcrumb: BC("Garapeira"),
-  titulo: "💪 Garapeira",
+  return {
+    breadcrumb: BC(nome),
+    titulo,
+    subtitulo,
+    tagInfo,
+    galeriaTitulo: nome,
+    galeriaPlaceholder: "Selecione o tipo de peça para ver as fotos",
+    imagens: (s) => (s.peca ? [{ src: "", alt: `${nome} — ${s.peca}` }] : []),
+    categoria: "Madeiramento",
+    passos: [
+      {
+        chave: "peca",
+        titulo: "Tipo de Peça",
+        tipo: "lista",
+        opcoes: TIPOS_MADEIRA.map((v) => ({ valor: v, badge })),
+      },
+      {
+        chave: "bitola",
+        titulo: "Bitola (Espessura × Largura)",
+        tipo: "chips",
+        visivel: (s) => Boolean(s.peca),
+        opcoes: (s) => (BITOLAS_MADEIRA[s.peca] ?? []).map((v) => ({ valor: v, badge })),
+      },
+      {
+        chave: "comprimento",
+        titulo: "Comprimento",
+        tipo: "chips",
+        opcoes: COMPRIMENTOS_MADEIRA.map((v) => ({ valor: v })),
+      },
+      {
+        chave: "acabamento",
+        titulo: "Acabamento",
+        tipo: "grid2",
+        opcoes: [
+          { valor: "Bruto", sub: "Superfície natural da serra · mais econômico" },
+          { valor: "Aparelhado", sub: "Aparelhado em plaina industrial", badge: "★ Recomendado" },
+        ],
+      },
+      {
+        chave: "qtd",
+        titulo: "Quantidade",
+        tipo: "quantidade",
+        unidade: "peças",
+        padrao: 10,
+        ...(consulta
+          ? { aviso: "Verificar disponibilidade — confirmamos estoque e prazo por WhatsApp" }
+          : {}),
+      },
+    ],
+    especificacoes: especificacoes ?? [
+      ["Peças", "Viga, Caibro, Caibrão, Ripa, Ripão, Sarrafo, Tábua e Dormente"],
+      ["Comprimentos", "1,0m a 8,5m"],
+      ["Acabamento", "Bruto ou aparelhado em plaina"],
+      ["Disponibilidade", consulta ? "Verificar disponibilidade" : "Consulte o estoque"],
+      ["Origem", "DOF/IBAMA legalizado"],
+    ],
+    resumoNome: () => nome,
+    resumoDetalhe: (s, q) =>
+      `${s.peca} ${s.bitola ?? ""} · ${s.comprimento} · ${s.acabamento} · ${q.qtd ?? 10} peças`,
+    unidadeResumo: () => "peças",
+    idItem: (s) => `${slug}-${s.peca}-${s.bitola}-${s.comprimento}-${s.acabamento}`,
+    mensagem: (s, q) =>
+      `*${nome}${consulta ? " (verificar disponibilidade)" : ""}*\n• Tipo: ${s.peca}\n• Bitola: ${s.bitola}\n• Comprimento: ${s.comprimento}\n• Acabamento: ${s.acabamento}\n• Quantidade: ${q.qtd ?? 10} peças`,
+  };
+}
+
+export const CONFIG_PEROBA: ConfiguradorConfig = criarConfigMadeiraNativa({
+  nome: "Peroba do Norte / D'Água",
+  slug: "peroba",
+  titulo: "Peroba do Norte / D'Água",
   subtitulo:
-    "Madeira dura nativa. Barrotes, caibros, vigas e dormentes para estruturas de alta resistência.",
-  galeriaTitulo: "Garapeira",
-  galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.peca ? [{ src: "", alt: `Garapeira — ${s.peca}` }] : []),
-  categoria: "Madeiramento",
-  passos: [
-    {
-      chave: "peca",
-      titulo: "Tipo de Peça",
-      tipo: "grid2",
-      opcoes: PECAS_GARAPEIRA.map((v) => ({ valor: v, emoji: iconePeca(v) })),
-    },
-    {
-      chave: "acabamento",
-      titulo: "Acabamento",
-      tipo: "grid2",
-      opcoes: [
-        { valor: "Bruto", sub: "mais econômico" },
-        { valor: "Aparelhado", badge: "★ Recomendado" },
-      ],
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "Mt", padrao: 10 },
-  ],
-  resumoNome: () => "Garapeira",
-  resumoDetalhe: (s, q) => `${s.peca} · ${s.acabamento} · ${q.qtd ?? 10} Mt`,
-  unidadeResumo: () => "Mt",
-  idItem: (s) => `garapeira-${s.peca}-${s.acabamento}`,
-  mensagem: (s, q) =>
-    `💪 *Garapeira*\n• Peça: ${s.peca}\n• Acabamento: ${s.acabamento}\n• Quantidade: ${q.qtd ?? 10} Mt`,
-};
+    "Madeira nativa de alta resistência para estruturas de telhado. Bruta ou aparelhada em plaina no nosso pátio. Todos os itens sujeitos a verificação de disponibilidade.",
+  tagInfo: "Verificar disponibilidade · DOF/IBAMA",
+  consulta: true,
+});
+
+export const CONFIG_GARAPEIRA: ConfiguradorConfig = criarConfigMadeiraNativa({
+  nome: "Garapeira",
+  slug: "garapeira",
+  titulo: "Garapeira",
+  subtitulo:
+    "Madeira dura nativa para estruturas de alta resistência. Bruta ou aparelhada em plaina. Todos os itens sujeitos a verificação de disponibilidade.",
+  tagInfo: "Verificar disponibilidade · DOF/IBAMA",
+  consulta: true,
+});
+
 
 const PECAS_AMESCLA = [
   "Sarrafo 05cm × 2,3cm",
@@ -346,77 +383,22 @@ export const CONFIG_MOURAO: ConfiguradorConfig = {
     `🌾 *Mourão Tratado*\n• Aplicação: ${s.aplicacao}\n• Diâmetro: ${s.diametro}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 10} peças`,
 };
 
-const BITOLAS_JATOBA: Record<string, string[]> = {
-  Viga: ["5x11cm", "5x15cm", "6x12cm", "6x16cm", "8x16cm"],
-  Caibro: ["5x5cm", "5x6cm", "5x7cm"],
-  Caibrão: ["6x8cm", "7x9cm", "8x8cm"],
-  Ripa: ["1,5x5cm"],
-  Ripão: ["2x5cm", "2x7cm"],
-  Sarrafo: ["2,5x5cm", "2,5x7cm", "2,5x10cm"],
-  Tábua: ["2,5x20cm", "2,5x25cm", "2,5x30cm"],
-};
-
-export const CONFIG_JATOBA: ConfiguradorConfig = {
-  breadcrumb: BC("Jatobá"),
-  titulo: "🪵 Jatobá",
+export const CONFIG_JATOBA: ConfiguradorConfig = criarConfigMadeiraNativa({
+  nome: "Jatobá",
+  slug: "jatoba",
+  titulo: "Jatobá",
   subtitulo:
-    "Madeira de lei de altíssima densidade para estruturas e acabamentos nobres. Bruta ou aparelhada em plaina. Sob consulta.",
-  tagInfo: "✓ Sob Consulta · DOF/IBAMA · Madeira de Lei",
-  galeriaTitulo: "Jatobá",
-  galeriaPlaceholder: "Selecione o tipo de peça para ver as fotos",
-  imagens: (s) => (s.peca ? [{ src: "", alt: `Jatobá — ${s.peca}` }] : []),
-  categoria: "Madeiramento",
-  passos: [
-    {
-      chave: "peca",
-      titulo: "Tipo de Peça",
-      tipo: "lista",
-      opcoes: Object.keys(BITOLAS_JATOBA).map((v) => ({ valor: v })),
-    },
-    {
-      chave: "bitola",
-      titulo: "Bitola (Espessura × Largura)",
-      tipo: "chips",
-      visivel: (s) => Boolean(s.peca),
-      opcoes: (s) => (BITOLAS_JATOBA[s.peca] ?? []).map((v) => ({ valor: v })),
-    },
-    {
-      chave: "comprimento",
-      titulo: "Comprimento",
-      tipo: "chips",
-      opcoes: COMPRIMENTOS_PEROBA.map((v) => ({ valor: v })),
-    },
-    {
-      chave: "acabamento",
-      titulo: "Aparelhagem",
-      tipo: "grid2",
-      opcoes: [
-        { valor: "Bruto", sub: "Superfície natural da serra · mais econômico" },
-        { valor: "Aparelhado", sub: "Aparelhado em plaina industrial", badge: "★ Recomendado" },
-      ],
-    },
-    {
-      chave: "qtd",
-      titulo: "Quantidade",
-      tipo: "quantidade",
-      unidade: "peças",
-      padrao: 10,
-      aviso: "Item sob consulta — disponibilidade confirmada por WhatsApp",
-    },
-  ],
+    "Madeira de lei de altíssima densidade para estruturas e acabamentos nobres. Bruta ou aparelhada em plaina. Todos os itens sujeitos a verificação de disponibilidade.",
+  tagInfo: "Verificar disponibilidade · DOF/IBAMA · Madeira de Lei",
+  consulta: true,
   especificacoes: [
     ["Espécie", "Jatobá (Hymenaea courbaril)"],
-    ["Peças", "Viga, Caibro, Caibrão, Ripa, Ripão, Sarrafo e Tábua"],
-    ["Comprimentos", "1,0m a 6,0m"],
-    ["Aparelhagem", "Bruto ou aparelhado em plaina"],
+    ["Peças", "Viga, Caibro, Caibrão, Ripa, Ripão, Sarrafo, Tábua e Dormente"],
+    ["Comprimentos", "1,0m a 8,5m"],
+    ["Acabamento", "Bruto ou aparelhado em plaina"],
     ["Densidade", "Altíssima — madeira de lei"],
+    ["Disponibilidade", "Verificar disponibilidade"],
     ["Origem", "DOF/IBAMA legalizado"],
   ],
-  resumoNome: () => "Jatobá",
-  resumoDetalhe: (s, q) =>
-    `${s.peca} ${s.bitola ?? ""} · ${s.comprimento} · ${s.acabamento} · ${q.qtd ?? 10} peças`,
-  unidadeResumo: () => "peças",
-  idItem: (s) => `jatoba-${s.peca}-${s.bitola}-${s.comprimento}-${s.acabamento}`,
-  mensagem: (s, q) =>
-    `🪵 *Jatobá (sob consulta)*\n• Tipo: ${s.peca}\n• Bitola: ${s.bitola}\n• Comprimento: ${s.comprimento}\n• Aparelhagem: ${s.acabamento}\n• Quantidade: ${q.qtd ?? 10} peças`,
-};
+});
+
