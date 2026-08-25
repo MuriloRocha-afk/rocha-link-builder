@@ -118,15 +118,23 @@ function Passo({ n, title, children }: { n: number; title: string; children: Rea
 export function CeramicaConfigurator() {
   const { addItem, setOpen } = useQuoteCart();
   const [formatoId, setFormatoId] = useState(FORMATOS[0].value);
-  const [acabamento, setAcabamento] = useState(FORMATOS[0].acabamentos[0]);
+  const [cor, setCor] = useState(FORMATOS[0].cores[0].nome);
+  const [acabamento, setAcabamento] = useState(FORMATOS[0].acabamentos[0].nome);
+  const [rendimento, setRendimento] = useState<string | null>(null);
   const [qty, setQty] = useState(100);
 
   const formato = FORMATOS.find((f) => f.value === formatoId)!;
-  const acabamentoAtivo = formato.acabamentos.includes(acabamento)
-    ? acabamento
-    : formato.acabamentos[0];
-  const cobertura = Math.round((qty / formato.pecasPorM2) * 10) / 10;
-  const nomeCompleto = `${formato.nome} ${acabamentoAtivo}`;
+  const corAtiva = formato.cores.find((c) => c.nome === cor) ?? formato.cores[0];
+  const acabamentoAtivo =
+    formato.acabamentos.find((a) => a.nome === acabamento) ?? formato.acabamentos[0];
+  const rendimentoAtivo =
+    formato.rendimentos?.find((r) => r.nome === rendimento) ?? formato.rendimentos?.[0] ?? null;
+  const pecasPorM2 = rendimentoAtivo?.pecasPorM2 ?? formato.pecasPorM2;
+  const cobertura = Math.round((qty / pecasPorM2) * 10) / 10;
+  const nomeCompleto = `${formato.nome} ${acabamentoAtivo.nome} · ${corAtiva.nome}${
+    rendimentoAtivo ? ` · ${rendimentoAtivo.nome}` : ""
+  }`;
+  const precisaVerificar = corAtiva.verificar || acabamentoAtivo.verificar;
 
   const detail = `Telha Cerâmica · ${nomeCompleto} · cobertura ~${cobertura} m²`;
 
@@ -134,7 +142,8 @@ export function CeramicaConfigurator() {
 
 🪨 *Telha Cerâmica*
 - Formato: ${formato.nome}
-- Acabamento: ${acabamentoAtivo}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
+- Cor: ${corAtiva.nome}
+- Acabamento: ${acabamentoAtivo.nome}${rendimentoAtivo ? `\n- Rendimento: ${rendimentoAtivo.nome} (${rendimentoAtivo.pecasPorM2} pçs/m²)` : ""}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
 - Quantidade: ${qty} peças
 - Cobertura estimada: ~${cobertura} m²
 
