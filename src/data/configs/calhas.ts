@@ -207,8 +207,12 @@ const TIPOS_ACESSORIO = [
   { valor: "Pingadeira", sub: "Arremate de borda, direciona o gotejamento" },
 ];
 
-const precisaLado = (s: Record<string, string>) =>
-  (s.acessorio === "Cabeceira" && s.tipoCalha === "Moldura") || s.acessorio === "Saída";
+const posicaoAcessorio = (s: Record<string, string>) => {
+  if (s.acessorio === "Cabeceira" && s.tipoCalha === "Moldura") return s.ladoCabeceira;
+  if (s.acessorio === "Saída" && s.tipoCalha === "Moldura") return s.posicaoSaidaMoldura;
+  if (s.acessorio === "Saída" && s.tipoCalha === "Platibanda") return s.posicaoSaidaPlatibanda;
+  return null;
+};
 
 export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   breadcrumb: BC("Acessórios de Calha"),
@@ -242,14 +246,14 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
       opcoes: TIPOS_ACESSORIO,
     },
     {
-      chave: "lado",
+      chave: "ladoCabeceira",
       titulo: "Lado da cabeceira",
       tipo: "grid2",
       visivel: (s) => s.acessorio === "Cabeceira" && s.tipoCalha === "Moldura",
       opcoes: [{ valor: "Esquerda" }, { valor: "Direita" }],
     },
     {
-      chave: "lado",
+      chave: "posicaoSaidaMoldura",
       titulo: "Posição da saída",
       tipo: "grid3",
       visivel: (s) => s.acessorio === "Saída" && s.tipoCalha === "Moldura",
@@ -260,7 +264,7 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
       ],
     },
     {
-      chave: "lado",
+      chave: "posicaoSaidaPlatibanda",
       titulo: "Posição da saída",
       tipo: "grid2",
       visivel: (s) => s.acessorio === "Saída" && s.tipoCalha === "Platibanda",
@@ -276,14 +280,14 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   ],
   resumoNome: (s) => `${s.acessorio ?? "Acessório"} de Calha`,
   resumoDetalhe: (s, q) =>
-    [s.tipoCalha, s.acessorio, precisaLado(s) ? s.lado : null, `${q.qtd ?? 4} peças`]
+    [s.tipoCalha, s.acessorio, posicaoAcessorio(s), `${q.qtd ?? 4} peças`]
       .filter(Boolean)
       .join(" · "),
   unidadeResumo: () => "peças",
   idItem: (s) =>
-    `acessorio-calha-${s.tipoCalha}-${s.acessorio}${precisaLado(s) && s.lado ? `-${s.lado}` : ""}`,
+    `acessorio-calha-${s.tipoCalha}-${s.acessorio}${posicaoAcessorio(s) ? `-${posicaoAcessorio(s)}` : ""}`,
   mensagem: (s, q) =>
     `🔧 *Acessório de Calha*\n• Tipo de calha: ${s.tipoCalha}\n• Acessório: ${s.acessorio}${
-      precisaLado(s) && s.lado ? `\n• Posição: ${s.lado}` : ""
+      posicaoAcessorio(s) ? `\n• Posição: ${posicaoAcessorio(s)}` : ""
     }\n• Quantidade: ${q.qtd ?? 4} peças`,
 };
