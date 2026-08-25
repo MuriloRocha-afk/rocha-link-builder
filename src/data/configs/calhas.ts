@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
+
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
