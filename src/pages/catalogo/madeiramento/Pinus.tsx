@@ -201,7 +201,7 @@ export default function Pinus() {
           {produto && comprimento && (
             <section className="bg-white rounded-2xl p-5 shadow-sm">
               <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">4</span>
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">{aba === "Pontalete" ? 4 : 5}</span>
                 Serviço de Aparelhagem
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -221,7 +221,7 @@ export default function Pinus() {
           {produto && comprimento && acabamento && (
             <section className="bg-white rounded-2xl p-5 shadow-sm">
               <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">5</span>
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">{aba === "Pontalete" ? 5 : 6}</span>
                 Quantidade
               </h2>
               <div className="flex items-center gap-3 mb-5">
