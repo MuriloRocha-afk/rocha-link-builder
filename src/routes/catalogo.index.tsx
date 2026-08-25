@@ -39,7 +39,7 @@ const VARIEDADE: Record<string, string> = {
 const MAIS_VENDIDOS: Record<string, string> = {
   telhas: "Fibrocimento é o nosso mais vendido — Ondulada 244x110cm x 5mm.",
   madeiramento: "Cambará é a madeira mais vendida do pátio, seguida do Pinus.",
-  calhas: "Calha Alge galvanizada e rufos são os campeões da funilaria.",
+  calhas: "Calha galvanizada e rufos são os campeões da funilaria.",
   fixadores: "Parafuso com vedação e prego telheiro saem todos os dias.",
   tintas: "Stain e verniz para madeira são os mais procurados.",
 };
