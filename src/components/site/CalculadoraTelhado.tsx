@@ -758,30 +758,19 @@ ${comparaHtml}
             ))}
           </div>
 
-          {/* Faixa de investimento */}
+          {/* Peso e aviso de cotação (sem valores em R$) */}
           <div className="mt-4 rounded-xl border border-orange-200 bg-white p-4">
-            <div className="flex items-center gap-2">
-              <Wallet size={16} className="text-orange-600" />
-              <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">Faixa estimada de investimento</p>
-            </div>
-            <p className="mt-2 text-2xl font-extrabold text-gray-900">
-              {brl(res.faixa.min)} <span className="text-base font-bold text-gray-400">a</span> {brl(res.faixa.max)}
+            <p className="flex items-center gap-1.5 text-xs text-gray-600">
+              <Scale size={14} className="text-orange-600" /> Peso estimado da cobertura:{" "}
+              <b className="text-gray-900">{fmt(res.peso, 0)} kg</b>
             </p>
-            <p className="mt-1 flex items-center gap-1.5 text-xs text-gray-500">
-              <Scale size={13} /> Peso estimado da cobertura: <b className="text-gray-700">{fmt(res.peso, 0)} kg</b>
-            </p>
-            {res.faixa.naoEncontrados.length > 0 ? (
-              <p className="mt-2 text-[11px] font-semibold text-orange-700">
-                Valor de {res.faixa.naoEncontrados.length} item(ns) não incluído na estimativa, sujeito a cotação:{" "}
-                {res.faixa.naoEncontrados.join(", ")}.
-              </p>
-            ) : null}
             <p className="mt-2 text-[11px] text-gray-500">
-              Cálculo feito com os preços da tabela da Rocha &amp; Telhas (quantidade × preço unitário); a faixa reflete
-              a variação real entre as especificações mais comuns de cada produto. Não é preço fechado — o valor final
-              sai na cotação.
+              A calculadora não exibe preços: o valor final sai somente na cotação com o vendedor, que confere as
+              quantidades e as especificações disponíveis em estoque. No comparativo abaixo, mostramos apenas a
+              diferença relativa (%) entre as telhas escolhidas.
             </p>
           </div>
+
 
           <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
           <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
