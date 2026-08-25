@@ -17,6 +17,7 @@ import {
   GRUPOS_TELHAS,
   acharTelha,
   type TelhaCatalogo,
+  type FamiliaTelha,
 } from "@/data/telhasCatalogo";
 
 type Telha = TelhaCatalogo;
@@ -141,7 +142,6 @@ export function CalculadoraTelhado() {
     calhas: Item[];
     telha: Telha;
     peso: number;
-    faixa: ResultadoFaixa;
     croqui: string;
     tipo: Tipo;
     incl: number;
@@ -149,8 +149,7 @@ export function CalculadoraTelhado() {
   }>(null);
   const [modal, setModal] = useState(false);
 
-  const telha = TELHAS.find((t) => t.id === telhaId)!;
-  const precoTelha = telha.chavePreco ? TABELA_PRECOS[telha.chavePreco] : undefined;
+  const telha = acharTelha(telhaId);
   const avisoIncl = incl < telha.min;
 
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
