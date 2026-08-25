@@ -116,7 +116,7 @@ export default function ForroCedrinho() {
           <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
             ★ Campeão de Vendas
           </span>
-          <h1 className="text-2xl font-bold text-gray-900 mt-1">✨ Forro Cedrinho Mesclado</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mt-1">Forro Cedrinho Mesclado</h1>
           <p className="text-gray-500 mt-1 text-sm">
             Acabamento natural nobre para tetos e ambientes internos. Vendido por m², com 10% de
             perda já calculado.

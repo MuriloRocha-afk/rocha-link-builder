@@ -95,7 +95,7 @@ export default function Pinus() {
       }
       cabecalho={
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">🌲 Pinus</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Pinus</h1>
             <p className="text-gray-500 mt-1 text-sm">Sarrafos, tábuas e pontaletes de reflorestamento. Cada peça com largura, espessura e comprimento próprios.</p>
           </div>
       }

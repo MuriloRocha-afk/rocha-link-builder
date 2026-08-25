@@ -58,6 +58,17 @@ function resolverOpcoes(passo: PassoConfig, sel: Selecao): OpcaoConfig[] {
   return typeof passo.opcoes === "function" ? passo.opcoes(sel) : passo.opcoes;
 }
 
+const EMOJI_INICIAL_RE = /^[\s]*(?:[\u{1F000}-\u{1FAFF}\u2600-\u27BF\u2B00-\u2BFF\u3030]\uFE0F?\s*)+/u;
+
+function tituloSemEmojiDecorativo(titulo: string) {
+  return titulo.replace(EMOJI_INICIAL_RE, "").trim() || titulo;
+}
+
+function deveMostrarEmojiNasOpcoes(opcoes: OpcaoConfig[]) {
+  const emojis = opcoes.map((opcao) => opcao.emoji).filter(Boolean);
+  return emojis.length > 0 && new Set(emojis).size > 1;
+}
+
 export default function ConfiguradorGenerico({ config }: { config: ConfiguradorConfig }) {
   const { adicionar, setAberto } = useOrcamento();
   const [sel, setSel] = useState<Selecao>({});
@@ -144,7 +155,9 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
               {config.badge}
             </span>
           )}
-          <h1 className="mt-1 text-2xl font-bold text-gray-900 md:text-3xl">{config.titulo}</h1>
+          <h1 className="mt-1 text-2xl font-bold text-gray-900 md:text-3xl">
+            {tituloSemEmojiDecorativo(config.titulo)}
+          </h1>
           <p className="mt-2 text-sm text-gray-500">{config.subtitulo}</p>
           {config.tagInfo && (
             <span className="mt-3 inline-flex rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">
@@ -264,7 +277,9 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
                             className={`flex w-full items-center justify-between gap-3 rounded-2xl border px-5 py-4 text-left ${baseBtn(active)}`}
                           >
                             <span className="flex items-center gap-3">
-                              {o.emoji && <span className="text-xl">{o.emoji}</span>}
+                              {deveMostrarEmojiNasOpcoes(opcoes) && o.emoji && (
+                                <span className="text-xl">{o.emoji}</span>
+                              )}
                               {o.cor && (
                                 <span
                                   className="h-5 w-5 rounded-full border border-black/10"
@@ -312,7 +327,9 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
                                 {o.badge}
                               </span>
                             )}
-                            {o.emoji && <p className="mt-1 text-2xl">{o.emoji}</p>}
+                            {deveMostrarEmojiNasOpcoes(opcoes) && o.emoji && (
+                              <p className="mt-1 text-2xl">{o.emoji}</p>
+                            )}
                             {o.cor && (
                               <span
                                 className="mx-auto mt-1 block h-8 w-8 rounded-full border border-black/10"

@@ -57,7 +57,7 @@ export default function Cedrinho() {
       }
       cabecalho={
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">🪚 Cedrinho</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Cedrinho</h1>
             <p className="text-gray-500 mt-1 text-sm">Sarrafos e tábuas em bruto ou aparelhado. Leve e ideal para forros e estruturas internas.</p>
           </div>
       }
