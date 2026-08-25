@@ -12,29 +12,33 @@ type Produto = {
   nome: string;
   tipo: "Sarrafo" | "Tábua" | "Pontalete";
   largura: string;
-  espessura: string;
+  espessuraFixa?: string;
   comprimentos: string[];
   unidade: string;
   lider?: boolean;
 };
 
 const PRODUTOS: Produto[] = [
-  { id: "sarrafo-5cm", nome: "Sarrafo 05cm", tipo: "Sarrafo", largura: "5cm", espessura: "2,0cm", comprimentos: ["2,0m", "2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "sarrafo-7cm", nome: "Sarrafo 07cm", tipo: "Sarrafo", largura: "7cm", espessura: "2,0cm", comprimentos: ["2,0m", "2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "sarrafo-10cm", nome: "Sarrafo 10cm", tipo: "Sarrafo", largura: "10cm", espessura: "2,0cm", comprimentos: ["2,0m", "2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "sarrafo-15cm", nome: "Sarrafo 15cm", tipo: "Sarrafo", largura: "15cm", espessura: "2,0cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "tabua-20cm", nome: "Tábua 20cm", tipo: "Tábua", largura: "20cm", espessura: "2,5cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "tabua-25cm", nome: "Tábua 25cm", tipo: "Tábua", largura: "25cm", espessura: "2,5cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "tabua-28cm", nome: "Tábua 28cm", tipo: "Tábua", largura: "28cm", espessura: "2,5cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "tabua-30cm", nome: "Tábua 30cm", tipo: "Tábua", largura: "30cm", espessura: "2,5cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc", lider: true },
-  { id: "pontalete-6x6", nome: "Pontalete 6cm × 6cm", tipo: "Pontalete", largura: "6cm", espessura: "6cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc" },
-  { id: "pontalete-7x7", nome: "Pontalete 7cm × 7cm", tipo: "Pontalete", largura: "7cm", espessura: "7cm", comprimentos: ["2,5m", "3,0m", "4,0m"], unidade: "Pc" },
+  { id: "sarrafo-5cm", nome: "Sarrafo 05cm", tipo: "Sarrafo", largura: "5cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "sarrafo-7cm", nome: "Sarrafo 07cm", tipo: "Sarrafo", largura: "7cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "sarrafo-10cm", nome: "Sarrafo 10cm", tipo: "Sarrafo", largura: "10cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "sarrafo-15cm", nome: "Sarrafo 15cm", tipo: "Sarrafo", largura: "15cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "tabua-20cm", nome: "Tábua 20cm", tipo: "Tábua", largura: "20cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "tabua-25cm", nome: "Tábua 25cm", tipo: "Tábua", largura: "25cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "tabua-28cm", nome: "Tábua 28cm", tipo: "Tábua", largura: "28cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "tabua-30cm", nome: "Tábua 30cm", tipo: "Tábua", largura: "30cm", comprimentos: ["3,0m"], unidade: "Pc", lider: true },
+  { id: "pontalete-6x6", nome: "Pontalete 6cm × 6cm", tipo: "Pontalete", largura: "6cm", espessuraFixa: "6cm", comprimentos: ["3,0m"], unidade: "Pc" },
+  { id: "pontalete-7x7", nome: "Pontalete 7cm × 7cm", tipo: "Pontalete", largura: "7cm", espessuraFixa: "7cm", comprimentos: ["3,0m"], unidade: "Pc" },
 ];
 
 const TIPOS = [
-  { id: "Sarrafo", icone: "📐", desc: "5cm a 15cm · travamento e forro" },
-  { id: "Tábua", icone: "🪚", desc: "20cm a 30cm · fechamento e tabeira" },
-  { id: "Pontalete", icone: "🪧", desc: "6×6 e 7×7 · escoras e pilaretes" },
+  { id: "Sarrafo", desc: "5cm a 15cm · travamento e forro" },
+  { id: "Tábua", desc: "20cm a 30cm · fechamento e tabeira" },
+  { id: "Pontalete", desc: "6×6 e 7×7 · escoras e pilaretes" },
+];
+const ESPESSURAS = [
+  { valor: "1,8mm", nota: "Padrão · pronta entrega" },
+  { valor: "2,3mm", nota: "Verificar disponibilidade" },
 ];
 const ACABAMENTOS = ["Bruto", "Aparelhado em Plaina"] as const;
 type Acabamento = typeof ACABAMENTOS[number];
@@ -43,6 +47,7 @@ export default function Pinus() {
   const { adicionar } = useOrcamento();
   const [aba, setAba] = useState<string | null>(null);
   const [produtoId, setProdutoId] = useState<string | null>(null);
+  const [espessura, setEspessura] = useState<string>("1,8mm");
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [acabamento, setAcabamento] = useState<Acabamento | null>(null);
   const [quantidade, setQuantidade] = useState(10);
@@ -51,12 +56,14 @@ export default function Pinus() {
 
   const filtrados = aba ? PRODUTOS.filter((p) => p.tipo === aba) : [];
   const produto = PRODUTOS.find((p) => p.id === produtoId);
+  const espessuraFinal = produto?.espessuraFixa ?? espessura;
+  const sobConsulta = !produto?.espessuraFixa && espessura === "2,3mm";
   const pronto = Boolean(produto && comprimento && acabamento && quantidade >= 1);
   const variacao = produto && comprimento && acabamento
-    ? `${produto.largura} × ${produto.espessura} · ${comprimento} · ${acabamento}`
+    ? `${produto.largura} × ${espessuraFinal} · ${comprimento} · ${acabamento}${sobConsulta ? " · Verificar disponibilidade" : ""}`
     : "";
   const corpoMsgWpp = pronto && produto
-    ? `🌲 *Pinus — ${produto.nome}*\n• Largura: ${produto.largura}\n• Espessura: ${produto.espessura}\n• Comprimento: ${comprimento}\n• Acabamento: ${acabamento}\n• Quantidade: ${quantidade} ${produto.unidade}`
+    ? `*Pinus — ${produto.nome}*\n• Largura: ${produto.largura}\n• Espessura: ${espessuraFinal}${sobConsulta ? " (verificar disponibilidade)" : ""}\n• Comprimento: ${comprimento}\n• Acabamento: ${acabamento}\n• Quantidade: ${quantidade} ${produto.unidade}`
     : "";
 
   const selecionarProduto = (p: Produto) => {
