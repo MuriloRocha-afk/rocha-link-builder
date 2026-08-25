@@ -182,7 +182,9 @@ Poderia verificar estoque e frete?`;
                     type="button"
                     onClick={() => {
                       setFormatoId(f.value);
-                      setAcabamento(f.acabamentos[0]);
+                      setCor(f.cores[0].nome);
+                      setAcabamento(f.acabamentos[0].nome);
+                      setRendimento(f.rendimentos?.[0].nome ?? null);
                     }}
                     aria-pressed={active}
                     className={`flex w-full items-center justify-between gap-3 rounded-2xl border px-5 py-4 text-left transition-all ${
