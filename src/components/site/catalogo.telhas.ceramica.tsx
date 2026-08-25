@@ -24,9 +24,12 @@ const VERSOES = [
   },
 ];
 
-const COMPRIMENTOS = [
+type Comprimento = { value: string; area: number; badge?: string; somenteCristal?: boolean };
+
+const COMPRIMENTOS: Comprimento[] = [
   { value: "183 × 110 cm", area: 1.83 * 0.98 },
   { value: "244 × 110 cm", area: 2.44 * 0.98, badge: "Líder" },
+  { value: "244 × 50 cm", area: 2.44 * 0.45, somenteCristal: true },
   { value: "305 × 110 cm", area: 3.05 * 0.98 },
   { value: "366 × 110 cm", area: 3.66 * 0.98 },
 ];
