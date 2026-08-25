@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
+import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
 import { imagensFibrocimento } from "@/data/imagensProduto";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosFibrocimento } from "@/data/acessoriosTelhas";
@@ -290,6 +291,8 @@ Poderia verificar estoque e frete para minha região?`;
               </p>
             </Passo>
           ) : null}
+
+          {selecionado ? <SugestaoCumeeira material="Fibrocimento" /> : null}
 
           {selecionado && espessura ? (
             <div className="animate-fade-in rounded-2xl border border-accent/40 bg-accent/5 p-6">

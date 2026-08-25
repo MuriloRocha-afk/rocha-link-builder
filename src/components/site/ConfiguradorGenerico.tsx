@@ -6,6 +6,7 @@ import GaleriaProduto, { type ImagemProduto } from "@/components/GaleriaProduto"
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import BlocoAcessorios, { type AcessorioItem } from "@/components/site/BlocoAcessorios";
 import TipoCard from "@/components/site/TipoCard";
+import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
@@ -52,6 +53,8 @@ export type ConfiguradorConfig = {
   resumoDetalhe: (sel: Selecao, qtds: Quantidades) => string;
   mensagem: (sel: Selecao, qtds: Quantidades) => string;
   idItem: (sel: Selecao) => string;
+  /** sugestão de cumeeira do mesmo material (cross-sell) */
+  sugestaoCumeeira?: (sel: Selecao) => { material: string; cor?: string; peca?: string } | null;
   /** bloco de acessórios exibido no fim da ficha */
   acessorios?: (sel: Selecao, qtds: Quantidades) => AcessorioItem[];
   tituloAcessorios?: string;
@@ -73,9 +76,15 @@ function deveMostrarEmojiNasOpcoes(opcoes: OpcaoConfig[]) {
   return emojis.length > 0 && new Set(emojis).size > 1;
 }
 
-export default function ConfiguradorGenerico({ config }: { config: ConfiguradorConfig }) {
+export default function ConfiguradorGenerico({
+  config,
+  inicial,
+}: {
+  config: ConfiguradorConfig;
+  inicial?: Selecao;
+}) {
   const { adicionar } = useOrcamento();
-  const [sel, setSel] = useState<Selecao>({});
+  const [sel, setSel] = useState<Selecao>(inicial ?? {});
   const [qtds, setQtds] = useState<Quantidades>({});
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
@@ -128,6 +137,7 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
     `transition-all ${ativo ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`;
 
   const acessorios = config.acessorios ? config.acessorios(sel, qtds) : [];
+  const sugestaoCumeeira = config.sugestaoCumeeira ? config.sugestaoCumeeira(sel) : null;
 
   let numero = 0;
   let bloqueado = false;
@@ -264,6 +274,11 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
                         />
                       )}
                       {o.label ?? o.valor}
+                      {o.badge && (
+                        <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+                          {o.badge}
+                        </span>
+                      )}
                     </button>
                   ))}
                 </div>
@@ -321,6 +336,14 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
             </section>
           );
         })}
+
+        {sugestaoCumeeira && (
+          <SugestaoCumeeira
+            material={sugestaoCumeeira.material}
+            cor={sugestaoCumeeira.cor}
+            peca={sugestaoCumeeira.peca}
+          />
+        )}
 
         {pronto && (
           <section className="bg-white rounded-2xl p-5 shadow-sm">
