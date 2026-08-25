@@ -45,6 +45,7 @@ export type ConfiguradorConfig = {
   imagens: (sel: Selecao) => ImagemProduto[];
   passos: PassoConfig[];
   especificacoes?: [string, string][];
+  informacoes?: { titulo: string; texto: string }[];
   produtoKey?: string;
   tagInfo?: string;
   categoria: string;
@@ -146,6 +147,7 @@ export default function ConfiguradorGenerico({
     <ProdutoLayout
       produtoKey={config.produtoKey}
       especificacoes={config.especificacoes}
+      informacoes={config.informacoes}
       tituloAcessorios={config.tituloAcessorios ?? "Complemente seu pedido"}
       acessorios={
         acessorios.length ? (
