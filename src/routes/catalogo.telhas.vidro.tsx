@@ -4,9 +4,9 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_VIDRO } from "@/data/configs/telhas";
 
-const TITLE = "Telha de Vidro — Portuguesa, Romana e Americana | Rocha Telhas";
+const TITLE = "Telha de Vidro — Portuguesa, Romana e Mediterrânea | Rocha Telhas";
 const DESCRIPTION =
-  "Telha de vidro nos formatos Portuguesa, Romana e Americana, com encaixe compatível com a telha cerâmica. Escolha o formato e cote no WhatsApp.";
+  "Telha de vidro nos formatos Portuguesa, Romana e Mediterrânea, com encaixe compatível com a telha cerâmica. Escolha o formato e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/vidro")({
   head: () => ({

@@ -13,6 +13,8 @@ const CORES_CONCRETO = [
   { valor: "Areia", cor: "#D9C7A3" },
   { valor: "Cinza", cor: "#9AA0A6" },
   { valor: "Grafite", cor: "#3A3F45" },
+  { valor: "Marfim", cor: "#EFE3C8" },
+  { valor: "Tabaco", cor: "#7A4B2A" },
 ];
 
 export const CONFIG_CONCRETO: ConfiguradorConfig = {
@@ -105,10 +107,10 @@ const acessoriosConcreto = (cor: string, qtd: number): AcessorioItem[] => [
 const CORES_ESMALTADA = [
   { valor: "Vermelho", cor: "#B4372A" },
   { valor: "Branco", cor: "#F2F2EF" },
-  { valor: "Preto", cor: "#2B2B2B" },
-  { valor: "Azul", cor: "#2E5D8C" },
-  { valor: "Verde", cor: "#2F6B4F" },
-  { valor: "Marrom", cor: "#6B4530" },
+  { valor: "Preto", cor: "#2B2B2B", badge: "Verificar disponibilidade" },
+  { valor: "Azul", cor: "#2E5D8C", badge: "Verificar disponibilidade" },
+  { valor: "Verde", cor: "#2F6B4F", badge: "Verificar disponibilidade" },
+  { valor: "Marrom", cor: "#6B4530", badge: "Verificar disponibilidade" },
 ];
 
 const acessoriosEsmaltada = (cor: string, qtd: number): AcessorioItem[] => [
@@ -265,14 +267,14 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
 const FORMATOS_VIDRO = [
   { valor: "Portuguesa", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica portuguesa" },
   { valor: "Romana", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica romana" },
-  { valor: "Americana", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica americana" },
+  { valor: "Mediterrânea", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica mediterrânea" },
 ];
 
 export const CONFIG_VIDRO: ConfiguradorConfig = {
   breadcrumb: BC("Telha de Vidro"),
   titulo: "🔷 Telha de Vidro",
   subtitulo:
-    "Iluminação natural ponto a ponto. Formatos Portuguesa, Romana e Americana, com encaixe idêntico ao da telha cerâmica.",
+    "Iluminação natural ponto a ponto. Formatos Portuguesa, Romana e Mediterrânea, com encaixe idêntico ao da telha cerâmica.",
   galeriaTitulo: "Telha de Vidro",
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
   imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
@@ -283,7 +285,7 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   ],
   especificacoes: [
     ["Material", "Vidro temperado transparente"],
-    ["Formatos", "Portuguesa, Romana e Americana"],
+    ["Formatos", "Portuguesa, Romana e Mediterrânea"],
     ["Compatibilidade", "Encaixe igual ao da telha cerâmica do mesmo formato"],
     ["Uso indicado", "Pontos de luz natural na cobertura"],
     ["Recomendação", "1 a 2 telhas de vidro a cada 4 m² de ambiente"],
