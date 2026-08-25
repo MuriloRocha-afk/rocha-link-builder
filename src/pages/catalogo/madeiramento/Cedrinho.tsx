@@ -79,7 +79,7 @@ export default function Cedrinho() {
               {TIPOS.map((t) => (
                 <TipoCard
                   key={t.id}
-                  icone={t.icone}
+
                   nome={t.nome}
                   descricao={`${t.desc} · por ${t.unidade}`}
                   selected={tipo === t.id}
