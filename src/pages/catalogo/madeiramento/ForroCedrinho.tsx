@@ -6,83 +6,45 @@ import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import TipoCard from "../../../components/site/TipoCard";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import AcessoriosForroPergunta, {
+  opcoesMeiaCanaMeioMetro,
+} from "@/components/site/AcessoriosForroPergunta";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroCedrinho } from "../../../data/imagensProduto";
 
-const MODELOS = [
+const CATEGORIAS = [
   {
-    id: "mesclado-curto",
-    icone: "🪵",
-    nome: "Cedrinho Mesclado — 1cm × 10cm",
-    desc: "Peças curtas encaixadas. Venda por m². O mais vendido.",
-    lider: true,
-  },
-  {
-    id: "mesclado-m2",
-    icone: "📐",
-    nome: "Cedrinho Mesclado — m²",
-    desc: "Calculado por área total. Corte sob medida no pátio.",
+    id: "cerne",
+    nome: "Cedrinho Cerne",
+    desc: "Tom uniforme, sem variação entre as réguas.",
     lider: false,
   },
-];
-
-const RELACIONADOS_FORRO_CED = [
   {
-    id: "meia-cana-cedrinho",
-    nome: "Meia Cana Cedrinho — por metro",
-    descricao: "Acabamento perimetral do forro de cedrinho.",
-    emoji: "📐",
-    unidade: "mt",
-    quantidadeSugerida: 10,
-    categoria: "Madeiramento",
-  },
-  {
-    id: "prego-telheiro",
-    nome: "Prego Telheiro 18×27 — 500g",
-    descricao: "Para fixação do forro nas ripas de apoio.",
-    emoji: "🔨",
-    unidade: "emb",
-    quantidadeSugerida: 1,
-    categoria: "Fixadores",
-  },
-  {
-    id: "anjo-verniz-natural",
-    nome: "Anjo Verniz Dura Mais — Natural — 3,6L",
-    descricao: "Verniz brilhante para realçar o forro de cedrinho.",
-    emoji: "✨",
-    unidade: "un",
-    quantidadeSugerida: 1,
-    categoria: "Tintas",
-  },
-  {
-    id: "cedrinho-sarrafo",
-    nome: "Cedrinho Sarrafo — 5cm × 2,3cm",
-    descricao: "Ripas de apoio para instalar o forro.",
-    emoji: "🪚",
-    unidade: "mt",
-    quantidadeSugerida: 20,
-    categoria: "Madeiramento",
+    id: "mesclado",
+    nome: "Cedrinho Mesclado",
+    desc: "Variação natural de tons claros e escuros.",
+    lider: true,
   },
 ];
 
 export default function ForroCedrinho() {
   const { adicionar } = useOrcamento();
-  const [modeloId, setModeloId] = useState<string>("mesclado-curto");
+  const [categoriaId, setCategoriaId] = useState<string>("mesclado");
   const [area, setArea] = useState<number>(20);
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
-  const modelo = MODELOS.find((m) => m.id === modeloId)!;
+  const categoria = CATEGORIAS.find((c) => c.id === categoriaId)!;
   // 10% de perda embutido
   const areaComPerda = Math.ceil(area * 1.1 * 10) / 10;
 
-  const corpoMsg = `✨ *Forro Cedrinho Mesclado*\n• Modelo: ${modelo.nome}\n• Área: ${area} m²\n• Área c/ 10% de perda: ${areaComPerda} m²`;
+  const corpoMsg = `✨ *Forro Cedrinho*\n• Categoria: ${categoria.nome}\n• Área: ${area} m²\n• Área c/ 10% de perda: ${areaComPerda} m²`;
 
   const handleAdicionar = () => {
     adicionar({
-      id: `forro-cedrinho-${modeloId}`,
-      nome: "Forro Cedrinho Mesclado",
-      variacao: `${modelo.nome} · ${area} m²`,
+      id: `forro-cedrinho-${categoriaId}`,
+      nome: "Forro Cedrinho",
+      variacao: `${categoria.nome} · ${area} m²`,
       quantidade: areaComPerda,
       unidade: "m²",
       categoria: "Madeiramento",
@@ -116,7 +78,7 @@ export default function ForroCedrinho() {
           <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
             ★ Campeão de Vendas
           </span>
-          <h1 className="text-2xl font-bold text-gray-900 mt-1">Forro Cedrinho Mesclado</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mt-1">Forro Cedrinho</h1>
           <p className="text-gray-500 mt-1 text-sm">
             Acabamento natural nobre para tetos e ambientes internos. Vendido por m², com 10% de
             perda já calculado.
@@ -125,38 +87,34 @@ export default function ForroCedrinho() {
       }
       tituloAcessorios="Acessórios de Forro de Madeira"
       acessorios={
-        <BlocoAcessorios
-          itens={acessoriosForroMadeira(areaComPerda)}
-          contexto={"Forro Cedrinho Mesclado"}
-        />
+        <BlocoAcessorios itens={acessoriosForroMadeira(areaComPerda)} contexto={"Forro Cedrinho"} />
       }
       galeria={
         <GaleriaProduto
-          titulo="Forro Cedrinho Mesclado"
-          subtitulo="1cm × 10cm · Foto em breve"
+          titulo="Forro Cedrinho"
+          subtitulo="Venda por m² · Foto em breve"
           imagens={imagensForroCedrinho}
         />
       }
     >
       <>
-        {/* Modelo */}
+        {/* Categoria */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
               1
             </span>
-            Modelo
+            Categoria
           </h2>
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {MODELOS.map((m) => (
+            {CATEGORIAS.map((c) => (
               <TipoCard
-                key={m.id}
-                icone={(m as { icone?: string }).icone ?? "🪵"}
-                nome={m.nome}
-                descricao={m.desc}
-                badge={m.lider ? "★ Mais Vendido" : undefined}
-                selected={modeloId === m.id}
-                onClick={() => setModeloId(m.id)}
+                key={c.id}
+                nome={c.nome}
+                descricao={c.desc}
+                badge={c.lider ? "★ Mais Vendido" : undefined}
+                selected={categoriaId === c.id}
+                onClick={() => setCategoriaId(c.id)}
               />
             ))}
           </div>
@@ -203,12 +161,27 @@ export default function ForroCedrinho() {
           </div>
         </section>
 
+        {/* Acessórios de forro */}
+        <AcessoriosForroPergunta
+          passo={3}
+          contexto={`Forro Cedrinho ${categoria.nome}`}
+          grupos={[
+            {
+              id: "meia-cana-cedrinho",
+              nome: "Meia-Cana Cedrinho",
+              descricao: "Acabamento perimetral entre o forro e a parede.",
+              unidade: "peça",
+              opcoes: opcoesMeiaCanaMeioMetro,
+            },
+          ]}
+        />
+
         {/* Resumo + Botões */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <div className="bg-gray-50 rounded-xl p-4 mb-5">
             <p className="text-xs text-gray-500 font-medium mb-1">RESUMO</p>
-            <p className="font-bold text-gray-900">Forro Cedrinho Mesclado</p>
-            <p className="text-gray-600 text-sm">{modelo.nome}</p>
+            <p className="font-bold text-gray-900">Forro Cedrinho</p>
+            <p className="text-gray-600 text-sm">{categoria.nome}</p>
             <p className="text-orange-600 font-semibold text-sm mt-1">
               {area} m² solicitados → {areaComPerda} m² com perda
             </p>
@@ -241,7 +214,7 @@ export default function ForroCedrinho() {
         <ModalCotarWhatsApp
           aberto={modalWppAberto}
           onFechar={() => setModalWppAberto(false)}
-          nomeProduto="Forro Cedrinho Mesclado"
+          nomeProduto="Forro Cedrinho"
           corpoMensagem={corpoMsg}
         />
       </>
