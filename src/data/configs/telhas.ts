@@ -220,16 +220,16 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
   breadcrumb: BC("Telha Translúcida Polipropileno"),
   titulo: "💡 Telha Translúcida Polipropileno",
   subtitulo:
-    "Onda Alta 177/51 Translúcida de 153cm a 366cm. 100% compatível com telha de fibrocimento.",
+    "Onda Alta 177/51 Translúcida de 122cm a 366cm, espessura única de 1,2mm. 100% compatível com telha de fibrocimento.",
   galeriaTitulo: "Telha Translúcida Polipropileno",
-  galeriaPlaceholder: "Selecione um comprimento para ver as fotos",
+  galeriaPlaceholder: "Selecione um tamanho para ver as fotos",
   imagens: (s) =>
     s.comprimento ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }] : [],
   categoria: "Telhas",
   passos: [
     {
       chave: "comprimento",
-      titulo: "Comprimento da Telha",
+      titulo: "Tamanho da Telha (comprimento × largura)",
       tipo: "grid2",
       opcoes: COMPRIMENTOS_PP.map((o) => ({ ...o, emoji: "📏" })),
     },
