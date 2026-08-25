@@ -57,40 +57,13 @@ export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
 };
 
 export const CONFIG_RUFO: ConfiguradorConfig = {
-  breadcrumb: BC("Rufos Galvanizados"),
-  titulo: "🏠 Rufos Galvanizados — Alge",
+  breadcrumb: BC("Rufo Galvanizado"),
+  titulo: "Rufo Galvanizado",
   subtitulo:
     "Arremate entre telhado e parede. Impermeabilização definitiva em qualquer cobertura.",
-  galeriaTitulo: "Rufo Galvanizado Alge",
-  galeriaPlaceholder: "Foto em breve",
-  imagens: () => [{ src: "", alt: "Rufo galvanizado Alge instalado" }],
-  categoria: "Calhas",
-  passos: [
-    {
-      chave: "comprimento",
-      titulo: "Comprimento",
-      tipo: "grid3",
-      opcoes: COMPRIMENTOS.map((v) => ({ valor: v })),
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
-  ],
-  resumoNome: () => "Rufo Galvanizado Alge",
-  resumoDetalhe: (s, q) => `${s.comprimento} · ${q.qtd ?? 4} peças`,
-  unidadeResumo: () => "peças",
-  idItem: (s) => `rufo-${s.comprimento}`,
-  mensagem: (s, q) =>
-    `🏠 *Rufo Galvanizado Alge*\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
-};
-
-export const CONFIG_AGUA_FURTADA: ConfiguradorConfig = {
-  breadcrumb: BC("Água Furtada"),
-  titulo: "💧 Água Furtada Galvanizada",
-  subtitulo:
-    "Calha de encontro entre duas águas do telhado (rincão). Galvanizada, de 2,0m a 6,0m, nos cortes 33 e 50.",
-  galeriaTitulo: "Água Furtada Galvanizada",
+  galeriaTitulo: "Rufo Galvanizado",
   galeriaPlaceholder: "Selecione o corte para ver as fotos",
-  imagens: (s) =>
-    s.corte ? [{ src: "", alt: `Água Furtada Galvanizada ${s.corte}` }] : [],
+  imagens: (s) => (s.corte ? [{ src: "", alt: `Rufo Galvanizado ${s.corte}` }] : []),
   categoria: "Calhas",
   passos: [
     {
@@ -98,8 +71,8 @@ export const CONFIG_AGUA_FURTADA: ConfiguradorConfig = {
       titulo: "Corte / Desenvolvimento",
       tipo: "grid2",
       opcoes: [
-        { valor: "Corte 33", emoji: "📐", sub: "Telhados residenciais padrão" },
-        { valor: "Corte 50", emoji: "📏", sub: "Maior vazão, telhados grandes" },
+        { valor: "Corte 25", sub: "Arremates padrão em paredes" },
+        { valor: "Corte 33", sub: "Maior aba, telhados com mais volume de água" },
       ],
     },
     {
@@ -108,21 +81,43 @@ export const CONFIG_AGUA_FURTADA: ConfiguradorConfig = {
       tipo: "grid3",
       opcoes: COMPRIMENTOS.map((v) => ({ valor: v })),
     },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 2 },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
   ],
   especificacoes: [
     ["Material", "Chapa galvanizada"],
-    ["Cortes", "33 e 50"],
+    ["Cortes", "25 e 33"],
     ["Comprimentos", "2,0m a 6,0m"],
-    ["Aplicação", "Rincão — encontro entre duas águas do telhado"],
+    ["Aplicação", "Encontro entre telhado e parede / alvenaria"],
     ["Sobreposição", "~10 cm entre peças"],
   ],
-  resumoNome: () => "Água Furtada Galvanizada",
-  resumoDetalhe: (s, q) => `${s.corte} · ${s.comprimento} · ${q.qtd ?? 2} peças`,
+  informacoes: [
+    {
+      titulo: "Para que serve o rufo",
+      texto:
+        "O rufo é a peça de arremate instalada no encontro do telhado com paredes, muros e platibandas. Ele impede que a água escorra pela alvenaria e entre por trás das telhas, eliminando infiltrações nesses pontos críticos.",
+    },
+    {
+      titulo: "O que é o corte 33",
+      texto:
+        "O corte (ou desenvolvimento) é a largura da chapa galvanizada antes da dobra. No corte 33, a chapa tem 33 cm de desenvolvimento, o que resulta em abas maiores — uma sobre o telhado e outra encostada na parede. É indicado para telhados com maior volume de água ou quando se deseja uma sobreposição mais generosa sobre a telha. O corte 25 atende arremates residenciais padrão.",
+    },
+    {
+      titulo: "Instalação",
+      texto:
+        "A aba superior é fixada na parede e recebe vedação (manta asfáltica ou selante) na linha de topo; a aba inferior fica sobre a telha, no sentido do escoamento. Entre peças, mantenha sobreposição de aproximadamente 10 cm, sempre no sentido da descida da água.",
+    },
+    {
+      titulo: "Disponibilidade",
+      texto:
+        "Comprimentos de 2,0m a 6,0m. Alguns cortes e comprimentos podem exigir verificar disponibilidade no momento da cotação.",
+    },
+  ],
+  resumoNome: () => "Rufo Galvanizado",
+  resumoDetalhe: (s, q) => `${s.corte} · ${s.comprimento} · ${q.qtd ?? 4} peças`,
   unidadeResumo: () => "peças",
-  idItem: (s) => `agua-furtada-${s.corte}-${s.comprimento}`,
+  idItem: (s) => `rufo-${s.corte}-${s.comprimento}`,
   mensagem: (s, q) =>
-    `💧 *Água Furtada Galvanizada*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 2} peças`,
+    `🏠 *Rufo Galvanizado*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
 };
 
 export const CONFIG_MANTA_TERMICA: ConfiguradorConfig = {
@@ -204,40 +199,36 @@ export const CONFIG_MANTA_ASFALTICA: ConfiguradorConfig = {
     `🛡️ *Manta Asfáltica Aluminizada — Terracota*\n• Largura: ${s.largura}\n• Comprimento por rolo: 10m\n• Quantidade: ${q.qtd ?? 1} rolos`,
 };
 
-const ACESSORIOS_MOLDURA = [
-  "Suporte Calha Moldura 28/33",
-  "Cabeceira Moldura 28/33 — Direita",
-  "Cabeceira Moldura 28/33 — Esquerda",
-  "Saída Central Moldura 28/33",
-  "Saída Lateral Moldura 28/33 — Direita",
-  "Saída Lateral Moldura 28/33 — Esquerda",
-  "Água Furtada 28/33",
-  "Pingadeira 28/33",
+const TIPOS_ACESSORIO = [
+  { valor: "Suporte", sub: "Sustenta a calha na estrutura" },
+  { valor: "Cabeceira", sub: "Fecha a ponta da calha" },
+  { valor: "Saída", sub: "Ponto de descida para o condutor" },
+  { valor: "Água Furtada", sub: "Rincão — encontro entre duas águas" },
+  { valor: "Pingadeira", sub: "Arremate de borda, direciona o gotejamento" },
 ];
 
-const ACESSORIOS_PLATIBANDA = [
-  "Suporte Calha Platibanda 28/33",
-  "Cabeceira Platibanda 28/33 — Direita",
-  "Cabeceira Platibanda 28/33 — Esquerda",
-  "Saída Central Platibanda 28/33",
-  "Saída Lateral Platibanda 28/33",
-  "Água Furtada 28/33",
-  "Pingadeira 28/33",
-];
+const precisaLado = (s: Record<string, string>) =>
+  (s.acessorio === "Cabeceira" && s.tipoCalha === "Moldura") || s.acessorio === "Saída";
 
 export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   breadcrumb: BC("Acessórios de Calha"),
   titulo: "Acessórios de Calha",
   subtitulo:
-    "Suportes, cabeceiras, saídas, água furtada e pingadeira para calha galvanizada Moldura e Platibanda.",
+    "Suporte, cabeceira, saída, água furtada e pingadeira para calha galvanizada Moldura e Platibanda.",
   galeriaTitulo: "Acessórios de Calha",
-  galeriaPlaceholder: "Selecione o corte para ver as fotos",
-  imagens: (s) => (s.sistema ? [{ src: "", alt: `Acessórios ${s.sistema}` }] : []),
+  galeriaPlaceholder: "Selecione o tipo de calha para ver as fotos",
+  produtoKey: "acessorios",
+  imagens: (s) =>
+    s.acessorio
+      ? [{ src: "", alt: `${s.acessorio} para calha ${s.tipoCalha}` }]
+      : s.tipoCalha
+        ? [{ src: "", alt: `Acessórios para calha ${s.tipoCalha}` }]
+        : [],
   categoria: "Calhas",
   passos: [
     {
-      chave: "sistema",
-      titulo: "Corte da Calha",
+      chave: "tipoCalha",
+      titulo: "Tipo de calha",
       tipo: "grid2",
       opcoes: [
         { valor: "Moldura", sub: "Calha aparente na beira do telhado" },
@@ -246,19 +237,53 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
     },
     {
       chave: "acessorio",
-      titulo: "Acessório",
+      titulo: "Tipo de acessório",
       tipo: "lista",
-      opcoes: (s) =>
-        (s.sistema === "Moldura" ? ACESSORIOS_MOLDURA : ACESSORIOS_PLATIBANDA).map((v) => ({
-          valor: v,
-        })),
+      opcoes: TIPOS_ACESSORIO,
+    },
+    {
+      chave: "lado",
+      titulo: "Lado da cabeceira",
+      tipo: "grid2",
+      visivel: (s) => s.acessorio === "Cabeceira" && s.tipoCalha === "Moldura",
+      opcoes: [{ valor: "Esquerda" }, { valor: "Direita" }],
+    },
+    {
+      chave: "lado",
+      titulo: "Posição da saída",
+      tipo: "grid3",
+      visivel: (s) => s.acessorio === "Saída" && s.tipoCalha === "Moldura",
+      opcoes: [
+        { valor: "Central" },
+        { valor: "Lateral Esquerda" },
+        { valor: "Lateral Direita" },
+      ],
+    },
+    {
+      chave: "lado",
+      titulo: "Posição da saída",
+      tipo: "grid2",
+      visivel: (s) => s.acessorio === "Saída" && s.tipoCalha === "Platibanda",
+      opcoes: [{ valor: "Central" }, { valor: "Lateral" }],
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
   ],
-  resumoNome: () => "Acessório de Calha",
-  resumoDetalhe: (s, q) => `${s.sistema} · ${s.acessorio} · ${q.qtd ?? 4} peças`,
+  especificacoes: [
+    ["Material", "Chapa galvanizada"],
+    ["Sistemas", "Moldura e Platibanda"],
+    ["Acessórios", "Suporte, cabeceira, saída, água furtada e pingadeira"],
+    ["Bitola", "28/33"],
+  ],
+  resumoNome: (s) => `${s.acessorio ?? "Acessório"} de Calha`,
+  resumoDetalhe: (s, q) =>
+    [s.tipoCalha, s.acessorio, precisaLado(s) ? s.lado : null, `${q.qtd ?? 4} peças`]
+      .filter(Boolean)
+      .join(" · "),
   unidadeResumo: () => "peças",
-  idItem: (s) => `acessorio-calha-${s.acessorio}`,
+  idItem: (s) =>
+    `acessorio-calha-${s.tipoCalha}-${s.acessorio}${precisaLado(s) && s.lado ? `-${s.lado}` : ""}`,
   mensagem: (s, q) =>
-    `🔧 *Acessório de Calha*\n• Corte: ${s.sistema}\n• Produto: ${s.acessorio}\n• Quantidade: ${q.qtd ?? 4} peças`,
+    `🔧 *Acessório de Calha*\n• Tipo de calha: ${s.tipoCalha}\n• Acessório: ${s.acessorio}${
+      precisaLado(s) && s.lado ? `\n• Posição: ${s.lado}` : ""
+    }\n• Quantidade: ${q.qtd ?? 4} peças`,
 };
