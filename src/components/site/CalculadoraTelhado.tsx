@@ -6,61 +6,24 @@ import {
   AlertTriangle,
   Download,
   Scale,
-  Wallet,
   Ruler,
   Info,
 } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
-import { estimarFaixa, TABELA_PRECOS, type ItemCusto, type ResultadoFaixa } from "@/data/precosLoja";
+import { estimarFaixa, type ItemCusto } from "@/data/precosLoja";
 import { croquiTelhadoSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
+import {
+  TELHAS_CATALOGO,
+  GRUPOS_TELHAS,
+  acharTelha,
+  type TelhaCatalogo,
+} from "@/data/telhasCatalogo";
 
-type Telha = {
-  id: string;
-  label: string;
-  grupo: string;
-  /** peças por m² de telhado inclinado */
-  rendimento: number;
-  /** inclinação mínima em % */
-  min: number;
-  familia: "fibrocimento" | "pvc" | "ceramica" | "policarbonato" | "concreto" | "translucida";
-  /** peso aproximado da cobertura em kg por m² */
-  pesoM2: number;
-  /** peso aproximado de uma peça, em kg */
-  pesoPeca: number;
-  /** galga (distância entre ripas) — só para telhas de encaixe */
-  galga: string | null;
-  /** chave na tabela de preços real da loja (null = produto não tabelado) */
-  chavePreco: string | null;
-};
+type Telha = TelhaCatalogo;
 
-const TELHAS: Telha[] = [
-  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.67, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 18, galga: null, chavePreco: "telha.fib-153" },
-  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.56, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 21.5, galga: null, chavePreco: "telha.fib-183" },
-  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", rendimento: 0.42, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 28.5, galga: null, chavePreco: "telha.fib-244" },
-  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.34, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 35.5, galga: null, chavePreco: "telha.fib-305" },
-  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.28, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 42.5, galga: null, chavePreco: "telha.fib-366" },
+const TELHAS = TELHAS_CATALOGO;
+const GRUPOS = GRUPOS_TELHAS;
 
-  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", rendimento: 0.58, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 6.5, galga: null, chavePreco: "telha.pvc-230" },
-  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", rendimento: 0.41, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 9.2, galga: null, chavePreco: "telha.pvc-328" },
-  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", rendimento: 0.3, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 12.9, galga: null, chavePreco: "telha.pvc-459" },
-  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", rendimento: 0.26, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 14.8, galga: null, chavePreco: "telha.pvc-525" },
-
-  { id: "cer-port", label: "Portuguesa Resinada (Isotec)", grupo: "Cerâmica", rendimento: 17, min: 30, familia: "ceramica", pesoM2: 45, pesoPeca: 2.6, galga: "33 a 35 cm", chavePreco: "telha.cer-port" },
-  { id: "cer-romana", label: "Romana", grupo: "Cerâmica", rendimento: 16, min: 30, familia: "ceramica", pesoM2: 45, pesoPeca: 2.8, galga: "34 a 36 cm", chavePreco: "telha.cer-romana" },
-  { id: "cer-amer", label: "Americana", grupo: "Cerâmica", rendimento: 12.5, min: 30, familia: "ceramica", pesoM2: 42, pesoPeca: 3.3, galga: "38 a 40 cm", chavePreco: "telha.cer-amer" },
-
-  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", rendimento: 0.56, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 2.6, galga: null, chavePreco: "telha.pol-183" },
-  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", rendimento: 0.42, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 3.4, galga: null, chavePreco: "telha.pol-244" },
-  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", rendimento: 0.34, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 4.3, galga: null, chavePreco: "telha.pol-305" },
-  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", rendimento: 0.28, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 5.1, galga: null, chavePreco: "telha.pol-366" },
-
-  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", rendimento: 10.5, min: 30, familia: "concreto", pesoM2: 48, pesoPeca: 4.5, galga: "32 a 34 cm", chavePreco: "telha.con-euro" },
-
-  { id: "tra-244", label: "Translúcida Polipropileno 2,44 m", grupo: "Translúcida", rendimento: 0.42, min: 10, familia: "translucida", pesoM2: 3, pesoPeca: 2.2, galga: null, chavePreco: null },
-  { id: "tra-366", label: "Translúcida Polipropileno 3,66 m", grupo: "Translúcida", rendimento: 0.28, min: 10, familia: "translucida", pesoM2: 3, pesoPeca: 3.3, galga: null, chavePreco: null },
-];
-
-const GRUPOS = Array.from(new Set(TELHAS.map((t) => t.grupo)));
 
 const ESPECIES = [
   { id: "cambara", label: "Cambará Rosa ★" },
