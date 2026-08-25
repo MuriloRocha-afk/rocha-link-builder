@@ -173,24 +173,24 @@ export const CONFIG_CUMEEIRAS: ConfiguradorConfig = {
       opcoes: (s) => materiaisDaPeca(s.peca),
     },
     {
-      chave: "formato",
-      titulo: "Formato",
-      tipo: "chips",
-      visivel: (s) => formatosOpcoes(s).length > 0,
-      opcoes: formatosOpcoes,
-    },
-    {
       chave: "cor",
       titulo: "Cor / Acabamento",
       tipo: "chips",
       visivel: (s) => coresOpcoes(s).length > 0,
       opcoes: coresOpcoes,
     },
+    {
+      chave: "formato",
+      titulo: "Formato",
+      tipo: "chips",
+      visivel: (s) => formatosOpcoes(s).length > 0,
+      opcoes: formatosOpcoes,
+    },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 10 },
   ],
   resumoNome: (s) => `${s.peca ?? "Cumeeira"} ${s.material ?? ""}`.trim(),
   resumoDetalhe: (s, q) =>
-    [s.formato, s.cor, `${q.qtd ?? 10} peças`].filter(Boolean).join(" · "),
+    [s.cor, s.formato, `${q.qtd ?? 10} peças`].filter(Boolean).join(" · "),
   unidadeResumo: () => "peças",
   idItem: (s) => `${norm(s.peca)}-${norm(s.material)}-${norm(s.formato)}-${norm(s.cor)}`,
   mensagem: (s, q) =>
