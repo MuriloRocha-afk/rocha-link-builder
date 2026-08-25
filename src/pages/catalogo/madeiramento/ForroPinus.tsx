@@ -1,123 +1,38 @@
 import { useState } from "react";
-import { ChevronRight, ShoppingCart, Check, MessageCircle, Plus } from "lucide-react";
+import { ChevronRight, ShoppingCart, Check, MessageCircle } from "lucide-react";
 import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
-import TipoCard from "../../../components/site/TipoCard";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import AcessoriosForroPergunta from "@/components/site/AcessoriosForroPergunta";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroPinus } from "../../../data/imagensProduto";
 
-const MODELOS = [
-  {
-    id: "macho-femea-10",
-    icone: "🪵",
-    nome: "Forro Pinus Macho-Fêmea — 1cm × 10cm",
-    desc: "Encaixe macho-fêmea. O mais pedido para forro interno.",
-    lider: true,
-  },
-  {
-    id: "frisado-10",
-    icone: "〰️",
-    nome: "Forro Pinus Frisado — 1cm × 10cm",
-    desc: "Friso central que disfarça as emendas entre réguas.",
-    lider: false,
-  },
-  {
-    id: "macho-femea-20",
-    icone: "📏",
-    nome: "Forro Pinus Macho-Fêmea — 1cm × 20cm",
-    desc: "Régua larga: instalação mais rápida em áreas grandes.",
-    lider: false,
-  },
-];
-
-const COMPRIMENTOS = ["2,0m", "2,5m", "3,0m", "3,5m", "4,0m"];
-
-const ACESSORIOS = [
-  {
-    id: "meia-cana-pinus",
-    nome: "Meia Cana Pinus — por metro",
-    descricao: "Arremate perimetral entre o forro e a parede.",
-    emoji: "📐",
-    unidade: "m",
-    categoria: "Madeiramento",
-    fator: 1.4,
-  },
-  {
-    id: "sarrafo-pinus-apoio",
-    nome: "Sarrafo Pinus 2cm × 5cm — por metro",
-    descricao: "Ripas de apoio para fixar o forro no teto.",
-    emoji: "🪚",
-    unidade: "m",
-    categoria: "Madeiramento",
-    fator: 2.5,
-  },
-  {
-    id: "prego-polido-15x15",
-    nome: "Prego Polido 15×15 sem Cabeça — Kg",
-    descricao: "Fixação discreta das réguas de pinus.",
-    emoji: "🔨",
-    unidade: "Kg",
-    categoria: "Fixadores",
-    fator: 0.05,
-  },
-  {
-    id: "anjo-verniz-pinus",
-    nome: "Anjo Verniz Dura Mais — Natural 3,6L",
-    descricao: "Protege o pinus contra umidade e amarelamento.",
-    emoji: "✨",
-    unidade: "un",
-    categoria: "Tintas",
-    fator: 0.05,
-  },
-];
-
 export default function ForroPinus() {
   const { adicionar } = useOrcamento();
-  const [modeloId, setModeloId] = useState<string>("macho-femea-10");
-  const [comprimento, setComprimento] = useState<string>("3,0m");
   const [area, setArea] = useState<number>(20);
   const [adicionado, setAdicionado] = useState(false);
-  const [addAcessorio, setAddAcessorio] = useState<string | null>(null);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
-  const modelo = MODELOS.find((m) => m.id === modeloId)!;
   const areaComPerda = Math.ceil(area * 1.1 * 10) / 10;
 
   const corpoMsg =
     `🌲 *Forro de Pinus*\n` +
-    `• Modelo: ${modelo.nome}\n` +
-    `• Comprimento da régua: ${comprimento}\n` +
     `• Área: ${area} m²\n` +
     `• Área c/ 10% de perda: ${areaComPerda} m²`;
 
   const handleAdicionar = () => {
     adicionar({
-      id: `forro-pinus-${modeloId}-${comprimento}`,
+      id: "forro-pinus",
       nome: "Forro de Pinus",
-      variacao: `${modelo.nome} · régua ${comprimento} · ${area} m²`,
+      variacao: `${area} m²`,
       quantidade: areaComPerda,
       unidade: "m²",
       categoria: "Madeiramento",
     });
     setAdicionado(true);
     setTimeout(() => setAdicionado(false), 800);
-  };
-
-  const handleAcessorio = (a: (typeof ACESSORIOS)[number]) => {
-    const qtd = Math.max(1, Math.ceil(areaComPerda * a.fator));
-    adicionar({
-      id: a.id,
-      nome: a.nome,
-      variacao: `Para ${areaComPerda} m² de forro de pinus`,
-      quantidade: qtd,
-      unidade: a.unidade,
-      categoria: a.categoria,
-    });
-    setAddAcessorio(a.id);
-    setTimeout(() => setAddAcessorio(null), 1200);
   };
 
   return (
@@ -146,16 +61,14 @@ export default function ForroPinus() {
             calculado.
           </p>
           <div className="flex gap-2 mt-3 flex-wrap">
-            {["Macho-fêmea", "1cm de espessura", "Aceita verniz e stain", "Pronta entrega"].map(
-              (t) => (
-                <span
-                  key={t}
-                  className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full"
-                >
-                  {t}
-                </span>
-              ),
-            )}
+            {["Modelo único", "Venda por m²", "Aceita verniz e stain", "Pronta entrega"].map((t) => (
+              <span
+                key={t}
+                className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full"
+              >
+                {t}
+              </span>
+            ))}
           </div>
         </div>
       }
@@ -166,61 +79,17 @@ export default function ForroPinus() {
       galeria={
         <GaleriaProduto
           titulo="Forro de Pinus"
-          subtitulo="1cm × 10cm · Foto em breve"
+          subtitulo="Venda por m² · Foto em breve"
           imagens={imagensForroPinus}
         />
       }
     >
       <>
-        {/* Modelo */}
-        <section className="bg-white rounded-2xl p-5 shadow-sm">
-          <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
-              1
-            </span>
-            Modelo
-          </h2>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {MODELOS.map((m) => (
-              <TipoCard
-                key={m.id}
-                icone={(m as { icone?: string }).icone ?? "🪵"}
-                nome={m.nome}
-                descricao={m.desc}
-                badge={m.lider ? "★ Mais Vendido" : undefined}
-                selected={modeloId === m.id}
-                onClick={() => setModeloId(m.id)}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* Comprimento */}
-        <section className="bg-white rounded-2xl p-5 shadow-sm">
-          <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
-              2
-            </span>
-            Comprimento da régua
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {COMPRIMENTOS.map((c) => (
-              <button
-                key={c}
-                onClick={() => setComprimento(c)}
-                className={`px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${comprimento === c ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200 text-orange-700" : "border-gray-200 hover:border-orange-300 text-gray-700"}`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </section>
-
         {/* Área */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
-              3
+              1
             </span>
             Área a cobrir (m²)
           </h2>
@@ -257,14 +126,26 @@ export default function ForroPinus() {
           </div>
         </section>
 
+        {/* Acessórios de forro */}
+        <AcessoriosForroPergunta
+          passo={2}
+          contexto="Forro de Pinus"
+          grupos={[
+            {
+              id: "meia-cana-pinus",
+              nome: "Meia-Cana Pinus",
+              descricao: "Acabamento perimetral entre o forro e a parede.",
+              unidade: "peça",
+              opcoes: ["3,0m"],
+            },
+          ]}
+        />
+
         {/* Resumo + Botões */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <div className="bg-gray-50 rounded-xl p-4 mb-5">
             <p className="text-xs text-gray-500 font-medium mb-1">RESUMO</p>
             <p className="font-bold text-gray-900">Forro de Pinus</p>
-            <p className="text-gray-600 text-sm">
-              {modelo.nome} · régua {comprimento}
-            </p>
             <p className="text-orange-600 font-semibold text-sm mt-1">
               {area} m² solicitados → {areaComPerda} m² com perda
             </p>
@@ -294,49 +175,6 @@ export default function ForroPinus() {
           </div>
         </section>
 
-        {/* Acessórios */}
-        <section className="bg-white rounded-2xl p-5 shadow-sm">
-          <h2 className="font-bold text-gray-900 mb-1">Acessórios para o Forro de Pinus</h2>
-          <p className="text-xs text-gray-500 mb-4">
-            Quantidades sugeridas para {areaComPerda} m² de forro.
-          </p>
-          <div className="space-y-2">
-            {ACESSORIOS.map((a) => {
-              const qtd = Math.max(1, Math.ceil(areaComPerda * a.fator));
-              const ok = addAcessorio === a.id;
-              return (
-                <div
-                  key={a.id}
-                  className="flex items-center gap-3 p-3 rounded-xl border border-gray-200"
-                >
-                  <span className="text-xl">{a.emoji}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-900 text-sm">{a.nome}</p>
-                    <p className="text-gray-500 text-xs">{a.descricao}</p>
-                    <p className="text-orange-600 text-xs font-semibold mt-0.5">
-                      Sugerido: {qtd} {a.unidade}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => handleAcessorio(a)}
-                    className={`shrink-0 rounded-lg px-3 py-2 text-xs font-bold flex items-center gap-1 transition-colors ${ok ? "bg-green-600 text-white" : "bg-orange-50 text-orange-600 hover:bg-orange-100"}`}
-                  >
-                    {ok ? (
-                      <>
-                        <Check size={14} /> Ok
-                      </>
-                    ) : (
-                      <>
-                        <Plus size={14} /> Add
-                      </>
-                    )}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
         {/* Especificações */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-3">Especificações Técnicas</h2>
@@ -344,10 +182,6 @@ export default function ForroPinus() {
             <tbody className="divide-y divide-gray-100">
               {[
                 ["Espécie", "Pinus (reflorestamento)"],
-                ["Espessura", "1 cm"],
-                ["Larguras", "10 cm e 20 cm"],
-                ["Comprimentos", "2,0m a 4,0m"],
-                ["Encaixe", "Macho-fêmea / frisado"],
                 ["Unidade de venda", "m²"],
                 ["Acabamento", "Aceita verniz, stain e esmalte"],
               ].map(([k, v]) => (
