@@ -8,8 +8,8 @@ import TipoCard from "../../../components/site/TipoCard";
 import { imagensCedrinho } from "../../../data/imagensProduto";
 
 const TIPOS = [
-  { id: "sarrafo", nome: "Sarrafo", unidade: "Mt", icone: "📐", desc: "Peças estreitas para forro e travamento" },
-  { id: "tabua", nome: "Tábua", unidade: "Mt", icone: "🪚", desc: "Peças largas para fechamento e forro" },
+  { id: "sarrafo", nome: "Sarrafo", unidade: "Mt", desc: "Peças estreitas para forro e travamento" },
+  { id: "tabua", nome: "Tábua", unidade: "Mt", desc: "Peças largas para fechamento e forro" },
 ];
 const BITOLAS: Record<string, string[]> = {
   sarrafo: ["5cm × 2,3cm", "7cm × 2,3cm", "10cm × 2,3cm", "15cm × 2,3cm"],
