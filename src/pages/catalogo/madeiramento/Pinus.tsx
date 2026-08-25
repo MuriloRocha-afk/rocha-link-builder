@@ -124,7 +124,6 @@ export default function Pinus() {
               {TIPOS.map((t) => (
                 <TipoCard
                   key={t.id}
-                  icone={t.icone}
                   nome={t.id}
                   descricao={t.desc}
                   selected={aba === t.id}
@@ -134,10 +133,33 @@ export default function Pinus() {
             </div>
           </section>
 
+          {aba && aba !== "Pontalete" && (
+            <section className="bg-white rounded-2xl p-5 shadow-sm">
+              <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+                Espessura
+              </h2>
+              <div className="grid grid-cols-2 gap-3">
+                {ESPESSURAS.map((e) => (
+                  <button key={e.valor} onClick={() => setEspessura(e.valor)}
+                    className={`text-left p-4 rounded-xl border transition-all ${espessura === e.valor ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`}>
+                    <p className="font-semibold text-gray-900 text-sm">{e.valor}</p>
+                    <p className="text-gray-500 text-xs mt-1">{e.nota}</p>
+                  </button>
+                ))}
+              </div>
+              {espessura === "2,3mm" && (
+                <p className="mt-3 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 text-xs text-amber-800">
+                  Peças de 2,3mm não são pronta entrega — verificar disponibilidade.
+                </p>
+              )}
+            </section>
+          )}
+
           {aba && (
           <section className="bg-white rounded-2xl p-5 shadow-sm">
             <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+              <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">{aba === "Pontalete" ? 2 : 3}</span>
               Bitola — {aba}
             </h2>
             <div className="space-y-2">
@@ -148,7 +170,8 @@ export default function Pinus() {
                     <span className="font-semibold text-gray-900 text-sm">{p.nome}</span>
                     <span className="text-xs text-gray-400 ml-2">por {p.unidade}</span>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      Largura {p.largura} · Espessura {p.espessura} · {p.comprimentos[0]} a {p.comprimentos[p.comprimentos.length - 1]}
+                      Largura {p.largura} · Espessura {p.espessuraFixa ?? espessura} · {p.comprimentos.join(" / ")}
+                      {!p.espessuraFixa && espessura === "2,3mm" ? " · verificar disponibilidade" : ""}
                     </p>
                   </div>
                   {p.lider && <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0">★ Campeão</span>}
@@ -161,7 +184,7 @@ export default function Pinus() {
           {produto && (
             <section className="bg-white rounded-2xl p-5 shadow-sm">
               <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">3</span>
+                <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">{aba === "Pontalete" ? 3 : 4}</span>
                 Comprimento
               </h2>
               <div className="flex flex-wrap gap-2">
