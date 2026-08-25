@@ -147,7 +147,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     image: garapeira,
     description:
       "Viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada em plaina. Sob consulta.",
-    tag: "Sob Consulta · DOF/IBAMA · Madeira de Lei",
+    tag: "Verificar disponibilidade · DOF/IBAMA · Madeira de Lei",
     cta: "Ver Bitolas",
     grupo: "nobres",
   },
@@ -157,7 +157,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
     image: garapeira,
     description:
       "Madeira de lei de altíssima densidade: viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada. Sob consulta.",
-    tag: "Sob Consulta · DOF/IBAMA · Madeira de Lei",
+    tag: "Verificar disponibilidade · DOF/IBAMA · Madeira de Lei",
     cta: "Ver Bitolas",
     grupo: "nobres",
   },
