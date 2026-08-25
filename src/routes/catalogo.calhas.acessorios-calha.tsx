@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_ACESSORIOS_CALHA } from "@/data/configs/calhas";
 
-const TITLE = "Acessórios de Calha Alge e Aquapluv | Rocha Telhas";
-const DESCRIPTION = "Suportes, cabeceiras, saídas, emendas e bocais para calhas Alge e Aquapluv. Escolha o acessório e cote no WhatsApp.";
+const TITLE = "Acessórios de Calha Galvanizada | Rocha Telhas";
+const DESCRIPTION = "Suportes, cabeceiras, saídas, água furtada e pingadeira para calha galvanizada. Escolha o acessório e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/acessorios-calha")({
   head: () => ({

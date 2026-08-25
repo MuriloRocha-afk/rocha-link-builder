@@ -542,7 +542,7 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
           "Menos emendas, instalação mais rápida e acabamento mais limpo.",
       },
       {
-        titulo: "Compatível com todos os acessórios Alge",
+        titulo: "Compatível com todos os acessórios de calha",
         descricao:
           "Suportes, cabeceiras, saídas e emendas disponíveis na Rocha.",
       },

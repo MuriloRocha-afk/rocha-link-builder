@@ -5,7 +5,7 @@ export const Route = createFileRoute("/catalogo/calhas/$produtoSlug")({
   head: () => ({
     meta: [
       { title: "Calhas e Rufos — em breve | Rocha Telhas" },
-      { name: "description", content: "Configurador em preparação. Cote calhas Alge, Aquapluv, rufos e mantas direto no WhatsApp com a Rocha Telhas." },
+      { name: "description", content: "Configurador em preparação. Cote calha galvanizada, rufos e mantas direto no WhatsApp com a Rocha Telhas." },
       { property: "og:title", content: "Calhas e Rufos — em breve | Rocha Telhas" },
       { property: "og:description", content: "Configurador em preparação. Cote calhas, rufos e mantas direto no WhatsApp." },
       { property: "og:type", content: "product" },

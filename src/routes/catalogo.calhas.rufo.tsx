@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_RUFO } from "@/data/configs/calhas";
 
-const TITLE = "Rufos Galvanizados Alge de 2m a 6m | Rocha Telhas";
-const DESCRIPTION = "Rufos galvanizados Alge para arremate entre telhado e parede. Escolha o comprimento e cote no WhatsApp.";
+const TITLE = "Rufos Galvanizados de 2m a 6m | Rocha Telhas";
+const DESCRIPTION = "Rufos galvanizados para arremate entre telhado e parede. Escolha o comprimento e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/rufo")({
   head: () => ({
