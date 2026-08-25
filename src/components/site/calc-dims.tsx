@@ -4,7 +4,7 @@ export type CalcDims = {
   largura: number;
   comprimento: number;
   inclinacao: number;
-  aguas: "1" | "2" | "4";
+  aguas: "1" | "2" | "3" | "4";
 };
 
 type Ctx = {

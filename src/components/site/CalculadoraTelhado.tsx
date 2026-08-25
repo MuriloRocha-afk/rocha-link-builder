@@ -1,8 +1,18 @@
 import { useEffect, useState } from "react";
 import { useCalcDims } from "@/components/site/calc-dims";
-import { Calculator, MessageCircle, AlertTriangle, Download, Scale, Wallet } from "lucide-react";
+import {
+  Calculator,
+  MessageCircle,
+  AlertTriangle,
+  Download,
+  Scale,
+  Wallet,
+  Ruler,
+  Info,
+} from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import { estimarFaixa, TABELA_PRECOS, type ItemCusto, type ResultadoFaixa } from "@/data/precosLoja";
+import { croquiTelhadoSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 
 type Telha = {
   id: string;
@@ -15,37 +25,40 @@ type Telha = {
   familia: "fibrocimento" | "pvc" | "ceramica" | "policarbonato" | "concreto" | "translucida";
   /** peso aproximado da cobertura em kg por m² */
   pesoM2: number;
+  /** peso aproximado de uma peça, em kg */
+  pesoPeca: number;
+  /** galga (distância entre ripas) — só para telhas de encaixe */
+  galga: string | null;
   /** chave na tabela de preços real da loja (null = produto não tabelado) */
   chavePreco: string | null;
 };
 
 const TELHAS: Telha[] = [
-  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.67, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-153" },
-  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.56, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-183" },
-  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", rendimento: 0.42, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-244" },
-  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.34, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-305" },
-  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.28, min: 10, familia: "fibrocimento", pesoM2: 18, chavePreco: "telha.fib-366" },
+  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.67, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 18, galga: null, chavePreco: "telha.fib-153" },
+  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.56, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 21.5, galga: null, chavePreco: "telha.fib-183" },
+  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", rendimento: 0.42, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 28.5, galga: null, chavePreco: "telha.fib-244" },
+  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.34, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 35.5, galga: null, chavePreco: "telha.fib-305" },
+  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.28, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 42.5, galga: null, chavePreco: "telha.fib-366" },
 
-  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", rendimento: 0.58, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-230" },
-  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", rendimento: 0.41, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-328" },
-  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", rendimento: 0.3, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-459" },
-  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", rendimento: 0.26, min: 15, familia: "pvc", pesoM2: 9, chavePreco: "telha.pvc-525" },
+  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", rendimento: 0.58, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 6.5, galga: null, chavePreco: "telha.pvc-230" },
+  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", rendimento: 0.41, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 9.2, galga: null, chavePreco: "telha.pvc-328" },
+  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", rendimento: 0.3, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 12.9, galga: null, chavePreco: "telha.pvc-459" },
+  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", rendimento: 0.26, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 14.8, galga: null, chavePreco: "telha.pvc-525" },
 
-  { id: "cer-port", label: "Portuguesa Resinada (Isotec)", grupo: "Cerâmica", rendimento: 17, min: 30, familia: "ceramica", pesoM2: 45, chavePreco: "telha.cer-port" },
-  { id: "cer-romana", label: "Romana", grupo: "Cerâmica", rendimento: 16, min: 30, familia: "ceramica", pesoM2: 45, chavePreco: "telha.cer-romana" },
-  { id: "cer-amer", label: "Americana", grupo: "Cerâmica", rendimento: 12.5, min: 30, familia: "ceramica", pesoM2: 42, chavePreco: "telha.cer-amer" },
+  { id: "cer-port", label: "Portuguesa Resinada (Isotec)", grupo: "Cerâmica", rendimento: 17, min: 30, familia: "ceramica", pesoM2: 45, pesoPeca: 2.6, galga: "33 a 35 cm", chavePreco: "telha.cer-port" },
+  { id: "cer-romana", label: "Romana", grupo: "Cerâmica", rendimento: 16, min: 30, familia: "ceramica", pesoM2: 45, pesoPeca: 2.8, galga: "34 a 36 cm", chavePreco: "telha.cer-romana" },
+  { id: "cer-amer", label: "Americana", grupo: "Cerâmica", rendimento: 12.5, min: 30, familia: "ceramica", pesoM2: 42, pesoPeca: 3.3, galga: "38 a 40 cm", chavePreco: "telha.cer-amer" },
 
-  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", rendimento: 0.56, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-183" },
-  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", rendimento: 0.42, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-244" },
-  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", rendimento: 0.34, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-305" },
-  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", rendimento: 0.28, min: 10, familia: "policarbonato", pesoM2: 3.5, chavePreco: "telha.pol-366" },
+  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", rendimento: 0.56, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 2.6, galga: null, chavePreco: "telha.pol-183" },
+  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", rendimento: 0.42, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 3.4, galga: null, chavePreco: "telha.pol-244" },
+  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", rendimento: 0.34, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 4.3, galga: null, chavePreco: "telha.pol-305" },
+  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", rendimento: 0.28, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 5.1, galga: null, chavePreco: "telha.pol-366" },
 
-  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", rendimento: 10.5, min: 30, familia: "concreto", pesoM2: 48, chavePreco: "telha.con-euro" },
+  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", rendimento: 10.5, min: 30, familia: "concreto", pesoM2: 48, pesoPeca: 4.5, galga: "32 a 34 cm", chavePreco: "telha.con-euro" },
 
-  { id: "tra-244", label: "Translúcida Polipropileno 2,44 m", grupo: "Translúcida", rendimento: 0.42, min: 10, familia: "translucida", pesoM2: 3, chavePreco: null },
-  { id: "tra-366", label: "Translúcida Polipropileno 3,66 m", grupo: "Translúcida", rendimento: 0.28, min: 10, familia: "translucida", pesoM2: 3, chavePreco: null },
+  { id: "tra-244", label: "Translúcida Polipropileno 2,44 m", grupo: "Translúcida", rendimento: 0.42, min: 10, familia: "translucida", pesoM2: 3, pesoPeca: 2.2, galga: null, chavePreco: null },
+  { id: "tra-366", label: "Translúcida Polipropileno 3,66 m", grupo: "Translúcida", rendimento: 0.28, min: 10, familia: "translucida", pesoM2: 3, pesoPeca: 3.3, galga: null, chavePreco: null },
 ];
-
 
 const GRUPOS = Array.from(new Set(TELHAS.map((t) => t.grupo)));
 
@@ -55,12 +68,12 @@ const ESPECIES = [
   { id: "pinus", label: "Pinus Tratado" },
 ];
 
-type Tipo = "1agua" | "2aguas" | "4aguas";
+type Tipo = TipoTelhado;
 
 function IconTelhado({ tipo, ativo }: { tipo: Tipo; ativo: boolean }) {
   const stroke = ativo ? "#ea580c" : "#94a3b8";
   return (
-    <svg viewBox="0 0 80 48" className="h-12 w-full" fill="none" aria-hidden="true">
+    <svg viewBox="0 0 80 48" className="h-11 w-full" fill="none" aria-hidden="true">
       {tipo === "1agua" && (
         <>
           <path d="M8 36 L72 14" stroke={stroke} strokeWidth="3.5" strokeLinecap="round" />
@@ -71,6 +84,14 @@ function IconTelhado({ tipo, ativo }: { tipo: Tipo; ativo: boolean }) {
         <>
           <path d="M6 36 L40 12 L74 36" stroke={stroke} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M6 36 L6 44 M74 36 L74 44" stroke={stroke} strokeWidth="2.5" strokeLinecap="round" opacity=".5" />
+        </>
+      )}
+      {tipo === "3aguas" && (
+        <>
+          <path d="M6 36 L6 14 L54 14 L74 36 Z" stroke={stroke} strokeWidth="3.5" strokeLinejoin="round" />
+          <path d="M6 14 L54 14" stroke={stroke} strokeWidth="3.5" strokeLinecap="round" />
+          <path d="M54 14 L74 36" stroke={stroke} strokeWidth="2.2" strokeLinecap="round" opacity=".7" />
+          <path d="M6 36 L74 36" stroke={stroke} strokeWidth="2" opacity=".5" />
         </>
       )}
       {tipo === "4aguas" && (
@@ -87,6 +108,7 @@ function IconTelhado({ tipo, ativo }: { tipo: Tipo; ativo: boolean }) {
 const TIPOS: { id: Tipo; label: string }[] = [
   { id: "1agua", label: "1 água" },
   { id: "2aguas", label: "2 águas" },
+  { id: "3aguas", label: "3 águas" },
   { id: "4aguas", label: "4 águas" },
 ];
 
@@ -106,20 +128,37 @@ type Comparativo = {
   custoMin: number;
   custoMax: number;
   semPreco: boolean;
+  compativel: boolean;
 };
 
+/** dados de cumeeira/espigão por família de telha (catálogo de acabamentos) */
+const ACABAMENTO = {
+  fibrocimento: { nome: "Cumeeira normal fibrocimento", util: 0.9, chave: "cumeeira.fibrocimento" },
+  policarbonato: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
+  translucida: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
+  pvc: { nome: "Cumeeira Colonial PVC", util: 0.86, chave: "cumeeira.pvc" },
+  ceramica: { nome: "Cumeeira de barro", util: 0.33, chave: "cumeeira.barro" },
+  concreto: { nome: "Cumeeira de concreto", util: 0.33, chave: "cumeeira.barro" },
+} as const;
 
 export function CalculadoraTelhado() {
   const { setDims } = useCalcDims();
   const [tipo, setTipo] = useState<Tipo>("2aguas");
   const [comprimento, setComprimento] = useState("");
   const [largura, setLargura] = useState("");
+  const [beiral, setBeiral] = useState("0,5");
   const [incl, setIncl] = useState(30);
   const [telhaId, setTelhaId] = useState("fib-244");
   const [comEstrutura, setComEstrutura] = useState(false);
   const [comCalhas, setComCalhas] = useState(true);
+  const [comAcabamento, setComAcabamento] = useState(true);
+  const [margem, setMargem] = useState(10);
+  const [ajustarMargem, setAjustarMargem] = useState(false);
   const [especie, setEspecie] = useState("cambara");
   const [espacamento, setEspacamento] = useState("0.50");
+  const [compA, setCompA] = useState("fib-244");
+  const [compB, setCompB] = useState("pvc-328");
+  const [mostrarCusto, setMostrarCusto] = useState(true);
   const [res, setRes] = useState<null | {
     areaBase: number;
     areaIncl: number;
@@ -128,13 +167,16 @@ export function CalculadoraTelhado() {
     alturaCumeeira: number;
     caibro: number;
     itens: Item[];
+    acabamento: Item[];
     estrutura: Item[];
     calhas: Item[];
     telha: Telha;
     peso: number;
     faixa: ResultadoFaixa;
-    comparativo: Comparativo[];
-
+    croqui: string;
+    tipo: Tipo;
+    incl: number;
+    margem: number;
   }>(null);
   const [modal, setModal] = useState(false);
 
@@ -146,27 +188,44 @@ export function CalculadoraTelhado() {
 
   const larguraNum = num(largura);
   const comprimentoNum = num(comprimento);
+  const beiralNum = num(beiral);
+
+  // Item 4: ao trocar a telha, sugere automaticamente a inclinação mínima (editável)
+  useEffect(() => {
+    setIncl(telha.min);
+  }, [telha.min, telha.id]);
+
   useEffect(() => {
     if (larguraNum > 0 && comprimentoNum > 0) {
       setDims({
         largura: larguraNum,
         comprimento: comprimentoNum,
         inclinacao: incl,
-        aguas: tipo === "1agua" ? "1" : tipo === "4aguas" ? "4" : "2",
+        aguas: tipo === "1agua" ? "1" : tipo === "3aguas" ? "3" : tipo === "4aguas" ? "4" : "2",
       });
     }
   }, [larguraNum, comprimentoNum, incl, tipo, setDims]);
 
+  const croquiAtual = croquiTelhadoSvg({
+    tipo,
+    comprimento: comprimentoNum || undefined,
+    largura: larguraNum || undefined,
+    beiral: beiralNum || undefined,
+  });
+
+  const calcularPecas = (t: Telha, areaIncl: number, m: number) =>
+    Math.ceil(areaIncl * t.rendimento * (1 + m / 100));
+
   const calcular = () => {
-    const c = num(comprimento);
-    const l = num(largura);
-    if (c <= 0 || l <= 0) return;
+    const c = comprimentoNum + 2 * beiralNum;
+    const l = larguraNum + 2 * beiralNum;
+    if (comprimentoNum <= 0 || larguraNum <= 0) return;
 
     const areaBase = c * l;
     const perimetro = 2 * (c + l);
     const fator = Math.sqrt(1 + Math.pow(incl / 100, 2));
-    const areaIncl = areaBase * fator * (tipo === "4aguas" ? 1.08 : 1);
-    const telhas = Math.ceil(areaIncl * telha.rendimento * 1.1);
+    const areaIncl = areaBase * fator * (tipo === "4aguas" ? 1.08 : tipo === "3aguas" ? 1.05 : 1);
+    const telhas = calcularPecas(telha, areaIncl, margem);
     const alturaCumeeira = (l / 2) * (incl / 100);
     const caibro = Math.sqrt(Math.pow(l / 2, 2) + Math.pow(alturaCumeeira, 2));
 
@@ -174,19 +233,43 @@ export function CalculadoraTelhado() {
     if (telha.familia === "fibrocimento" || telha.familia === "policarbonato" || telha.familia === "translucida") {
       const parafusos = Math.ceil(telhas * 2.2);
       const mantaM2 = Math.ceil(areaIncl);
-      const cumeeiras = Math.ceil(c / 0.9);
       itens.push({ nome: "Parafuso 8x110mm com vedação", qtd: `${parafusos} un`, chave: "parafuso.vedacao", valor: parafusos });
       itens.push({ nome: "Manta térmica aluminizada", qtd: `${mantaM2} m²`, chave: "manta.termica.m2", valor: mantaM2 });
-      itens.push({ nome: "Cumeeira normal fibrocimento", qtd: `${cumeeiras} un`, chave: "cumeeira.fibrocimento", valor: cumeeiras });
     } else if (telha.familia === "pvc") {
       const kits = Math.ceil(telhas / 20);
-      const cumeeiras = Math.ceil(c / 0.86);
       itens.push({ nome: "Kit de fixação PVC (parafuso + vedação)", qtd: `${kits} kit(s)`, chave: "kit.fixacao.pvc", valor: kits });
-      itens.push({ nome: "Cumeeira Colonial PVC", qtd: `${cumeeiras} un`, chave: "cumeeira.pvc", valor: cumeeiras });
     } else {
-      const cumeeiras = Math.ceil(c / 0.33);
       itens.push({ nome: "Prego telheiro / arame de amarração", qtd: `${Math.ceil(areaIncl * 1.5)} un`, chave: null });
-      itens.push({ nome: "Cumeeira de barro", qtd: `${cumeeiras} un`, chave: "cumeeira.barro", valor: cumeeiras });
+    }
+
+    // ---- Item 5: telhas de acabamento (cumeeira / espigão) ----
+    const acabamento: Item[] = [];
+    if (comAcabamento) {
+      const cfg = ACABAMENTO[telha.familia];
+      const mCumeeira =
+        tipo === "1agua" ? 0 : tipo === "2aguas" ? c : tipo === "3aguas" ? Math.max(0, c - l / 2) : Math.max(0, c - l);
+      const hip = Math.sqrt(Math.pow(l / 2, 2) * 2 + Math.pow(alturaCumeeira, 2));
+      const mEspigao = tipo === "3aguas" ? 2 * hip : tipo === "4aguas" ? 4 * hip : 0;
+      const totalM = mCumeeira + mEspigao;
+      const pecas = Math.ceil((totalM / cfg.util) * (1 + margem / 100));
+      if (totalM > 0) {
+        acabamento.push({
+          nome: `${cfg.nome} — cumeeira ${fmtN(mCumeeira)} m${mEspigao > 0 ? ` + espigão ${fmtN(mEspigao)} m` : ""}`,
+          qtd: `${pecas} un (${fmtN(totalM)} m lineares)`,
+          chave: cfg.chave,
+          valor: pecas,
+        });
+        if (telha.familia === "ceramica" || telha.familia === "concreto") {
+          const arg = Math.max(1, Math.ceil(totalM / 6));
+          acabamento.push({ nome: "Argamassa / cimento-cola para assentar cumeeira", qtd: `${arg} saco(s)`, chave: null });
+        }
+      } else {
+        acabamento.push({
+          nome: "Telhado de 1 água — sem cumeeira",
+          qtd: "Use rufo de arremate no topo",
+          chave: null,
+        });
+      }
     }
 
     const estrutura: Item[] = [];
@@ -217,10 +300,9 @@ export function CalculadoraTelhado() {
     // ---- Calhas e rufos ----
     const calhas: Item[] = [];
     if (comCalhas) {
-      // beirais que recebem calha e oitões/encontros que recebem rufo
       const mCalha = tipo === "1agua" ? c : tipo === "2aguas" ? c * 2 : perimetro;
-      const mRufo = tipo === "1agua" ? c + 2 * l : tipo === "2aguas" ? 2 * l : 0;
-      const lances = Math.ceil(mCalha / 6); // barras/lances de ~6 m
+      const mRufo = tipo === "1agua" ? c + 2 * l : tipo === "2aguas" ? 2 * l : tipo === "3aguas" ? l : 0;
+      const lances = Math.ceil(mCalha / 6);
       const suportes = Math.ceil(mCalha / 0.8);
       const saidas = Math.max(1, Math.ceil(mCalha / 10));
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
@@ -229,7 +311,8 @@ export function CalculadoraTelhado() {
 
       calhas.push({ nome: "Calha (metro linear)", qtd: `${Math.ceil(mCalha)} m`, chave: "calha.m", valor: Math.ceil(mCalha) });
       if (mRufo > 0) calhas.push({ nome: "Rufo / testeira (metro linear)", qtd: `${Math.ceil(mRufo)} m`, chave: "rufo.m", valor: Math.ceil(mRufo) });
-      if (tipo === "4aguas") calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m`, chave: "aguafurtada.m", valor: Math.ceil(l) });
+      if (tipo === "4aguas" || tipo === "3aguas")
+        calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m`, chave: "aguafurtada.m", valor: Math.ceil(l) });
       calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
       calhas.push({ nome: "Saída / bocal de calha", qtd: `${saidas} un`, chave: "saida.calha", valor: saidas });
       if (cabeceiras > 0) calhas.push({ nome: "Cabeceira (tampa de extremidade)", qtd: `${cabeceiras} un`, chave: "cabeceira.calha", valor: cabeceiras });
@@ -239,10 +322,9 @@ export function CalculadoraTelhado() {
 
     const peso = areaIncl * telha.pesoM2;
 
-    // Faixa de investimento: soma real (quantidade × preço de tabela) de cada item
     const listaCusto: ItemCusto[] = [
       { chave: telha.chavePreco, nome: telha.label, qtd: telhas },
-      ...[...itens, ...calhas, ...estrutura].map((i) => ({
+      ...[...itens, ...acabamento, ...calhas, ...estrutura].map((i) => ({
         chave: i.chave ?? null,
         nome: i.nome,
         qtd: i.valor ?? 0,
@@ -250,23 +332,11 @@ export function CalculadoraTelhado() {
     ];
     const faixa = estimarFaixa(listaCusto);
 
-    const baseComparacao = ["fib-244", "pvc-328", "cer-port"];
-    const idsComp = baseComparacao.includes(telha.id)
-      ? baseComparacao
-      : [telha.id, ...baseComparacao].slice(0, 3);
-    const comparativo: Comparativo[] = idsComp.map((id) => {
-      const t = TELHAS.find((x) => x.id === id)!;
-      const pecas = Math.ceil(areaIncl * t.rendimento * 1.1);
-      const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
-      return {
-        telha: t,
-        pecas,
-        peso: areaIncl * t.pesoM2,
-        custoMin: f.min,
-        custoMax: f.max,
-        semPreco: f.naoEncontrados.length > 0,
-      };
-    });
+    setCompA(telha.id);
+    const sugestao =
+      TELHAS.find((t) => t.grupo !== telha.grupo && t.min <= incl && t.chavePreco) ??
+      TELHAS.find((t) => t.id !== telha.id)!;
+    setCompB(sugestao.id);
 
     setRes({
       areaBase,
@@ -276,27 +346,54 @@ export function CalculadoraTelhado() {
       alturaCumeeira,
       caibro,
       itens,
+      acabamento,
       estrutura,
       calhas,
       telha,
       peso,
       faixa,
-      comparativo,
+      croqui: croquiTelhadoSvg({
+        tipo,
+        comprimento: comprimentoNum,
+        largura: larguraNum,
+        beiral: beiralNum || undefined,
+      }),
+      tipo,
+      incl,
+      margem,
     });
-
   };
 
   const fmt = (n: number, d = 2) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
   const brl = (n: number) =>
     n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 
+  const comparativo: Comparativo[] = res
+    ? [compA, compB].map((id) => {
+        const t = TELHAS.find((x) => x.id === id)!;
+        const pecas = calcularPecas(t, res.areaIncl, res.margem);
+        const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
+        return {
+          telha: t,
+          pecas,
+          peso: res.areaIncl * t.pesoM2,
+          custoMin: f.min,
+          custoMax: f.max,
+          semPreco: f.naoEncontrados.length > 0,
+          compativel: t.min <= res.incl,
+        };
+      })
+    : [];
+
   const mensagem = res
     ? [
         `Telhado`,
-        `- Área da base: ${fmt(res.areaBase)} m²`,
+        `- Área da base (com beiral): ${fmt(res.areaBase)} m²`,
         `- Área inclinada: ${fmt(res.areaIncl)} m²`,
         `- Perímetro: ${fmt(res.perimetro)} m`,
-        `- Tipo: ${TIPOS.find((t) => t.id === tipo)!.label} — Inclinação ${incl}%`,
+        `- Tipo: ${TIPOS.find((t) => t.id === res.tipo)!.label} — Inclinação ${res.incl}%`,
+        `- Medidas: ${fmt(comprimentoNum)} × ${fmt(larguraNum)} m · beiral ${fmt(beiralNum)} m`,
+        `- Margem de recorte/reposição: ${res.margem}%`,
         `- Telha escolhida: ${res.telha.label} (${res.telha.grupo})`,
         `- Peso estimado da cobertura: ${fmt(res.peso, 0)} kg`,
         `- Faixa estimada de investimento (tabela Rocha & Telhas): ${brl(res.faixa.min)} a ${brl(res.faixa.max)}`,
@@ -307,6 +404,9 @@ export function CalculadoraTelhado() {
         `📋 *MATERIAIS ESTIMADOS*`,
         `- ${res.telha.label} — Qtd: ${res.telhas} un`,
         ...res.itens.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`),
+        ...(res.acabamento.length
+          ? ["", "*Acabamento (cumeeira / espigão):*", ...res.acabamento.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
+          : []),
         ...(res.calhas.length
           ? ["", "*Calhas e rufos:*", ...res.calhas.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
           : []),
@@ -320,9 +420,22 @@ export function CalculadoraTelhado() {
     if (!res) return;
     const linha = (i: Item) => `<tr><td>${i.nome}</td><td class="q">${i.qtd}</td></tr>`;
     const bloco = (titulo: string, itens: Item[]) =>
-      itens.length
-        ? `<h2>${titulo}</h2><table>${itens.map(linha).join("")}</table>`
-        : "";
+      itens.length ? `<h2>${titulo}</h2><table>${itens.map(linha).join("")}</table>` : "";
+    const comparaHtml = comparativo.length
+      ? `<h2>Comparativo entre telhas</h2><table>
+        <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso${mostrarCusto ? "</td><td class=\"q\">Custo estimado" : ""}</td></tr>
+        ${comparativo
+          .map(
+            (c) =>
+              `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td>${
+                mostrarCusto
+                  ? `<td class="q">${c.semPreco ? "Sob cotação" : `${brl(c.custoMin)} – ${brl(c.custoMax)}`}</td>`
+                  : ""
+              }</tr>`,
+          )
+          .join("")}
+      </table>`
+      : "";
     const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <title>Calculo de telhado - Rocha Telhas</title>
 <style>
@@ -335,10 +448,12 @@ export function CalculadoraTelhado() {
   .grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .box{border:1px solid #eee;border-radius:8px;padding:8px 12px;min-width:150px}
   .box b{display:block;font-size:15px}
+  .croqui{border:1px solid #eee;border-radius:8px;padding:10px;margin-top:14px;max-width:420px}
   .small{color:#6b7280;font-size:11px;margin-top:18px}
 </style></head><body>
 <h1>Rocha Telhas — Cálculo de telhado</h1>
-<div>${TIPOS.find((t) => t.id === tipo)!.label} · inclinação ${incl}% · ${res.telha.label}</div>
+<div>${TIPOS.find((t) => t.id === res.tipo)!.label} · inclinação ${res.incl}% · ${res.telha.label} · margem ${res.margem}%</div>
+<div class="croqui">${res.croqui}</div>
 <div class="grid">
   <div class="box"><span>Área da base</span><b>${fmt(res.areaBase)} m²</b></div>
   <div class="box"><span>Área inclinada</span><b>${fmt(res.areaIncl)} m²</b></div>
@@ -347,8 +462,10 @@ export function CalculadoraTelhado() {
   <div class="box"><span>Investimento estimado</span><b>${brl(res.faixa.min)} – ${brl(res.faixa.max)}</b></div>
 </div>
 ${bloco("Cobertura", [{ nome: res.telha.label, qtd: `${res.telhas} un` }, ...res.itens])}
+${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
 ${bloco("Calhas e rufos", res.calhas)}
 ${bloco("Estrutura de madeira", res.estrutura)}
+${comparaHtml}
 <p class="small">Estimativa de referência gerada automaticamente. Valores e quantidades são conferidos pela equipe técnica na cotação final.</p>
 </body></html>`;
     const w = window.open("", "_blank");
@@ -361,13 +478,28 @@ ${bloco("Estrutura de madeira", res.estrutura)}
 
   const card = "rounded-xl border border-gray-200 bg-white p-5";
   const passo = "text-xs font-bold uppercase tracking-wider text-orange-600";
+  const input =
+    "w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm focus:border-orange-400 focus:ring-2 focus:ring-orange-100 focus:outline-none";
+
+  const Toggle = ({ on, onClick, label }: { on: boolean; onClick: () => void; label: string }) => (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={on}
+      aria-label={label}
+      onClick={onClick}
+      className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${on ? "bg-orange-600" : "bg-gray-300"}`}
+    >
+      <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${on ? "left-5.5" : "left-0.5"}`} />
+    </button>
+  );
 
   return (
     <div className="space-y-4">
       {/* Passo 1 */}
       <div className={card}>
         <p className={passo}>Passo 1 · Tipo de telhado</p>
-        <div className="mt-3 grid grid-cols-3 gap-2">
+        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
           {TIPOS.map((t) => (
             <button
               key={t.id}
@@ -386,88 +518,36 @@ ${bloco("Estrutura de madeira", res.estrutura)}
         </div>
       </div>
 
-      {/* Passo 2 */}
+      {/* Passo 2 — medidas com croqui */}
       <div className={card}>
-        <p className={passo}>Passo 2 · Dimensões da base</p>
-        <div className="mt-3 grid grid-cols-2 gap-3">
+        <p className={passo}>Passo 2 · Medidas do telhado</p>
+        <div
+          className="mt-3 rounded-xl border border-orange-100 bg-orange-50/40 p-3"
+          dangerouslySetInnerHTML={{ __html: croquiAtual }}
+        />
+        <p className="mt-2 flex items-start gap-1.5 text-[11px] text-gray-500">
+          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da alvenaria (linha tracejada). O beiral é
+          somado automaticamente em todos os lados.
+        </p>
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div>
             <label className="mb-1 block text-xs font-semibold text-gray-700">Comprimento (m)</label>
-            <input
-              inputMode="decimal"
-              value={comprimento}
-              onChange={(e) => setComprimento(e.target.value)}
-              placeholder="Ex.: 12"
-              className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm focus:border-orange-400 focus:ring-2 focus:ring-orange-100 focus:outline-none"
-            />
+            <input inputMode="decimal" value={comprimento} onChange={(e) => setComprimento(e.target.value)} placeholder="Ex.: 12" className={input} />
           </div>
           <div>
             <label className="mb-1 block text-xs font-semibold text-gray-700">Largura (m)</label>
-            <input
-              inputMode="decimal"
-              value={largura}
-              onChange={(e) => setLargura(e.target.value)}
-              placeholder="Ex.: 8"
-              className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm focus:border-orange-400 focus:ring-2 focus:ring-orange-100 focus:outline-none"
-            />
+            <input inputMode="decimal" value={largura} onChange={(e) => setLargura(e.target.value)} placeholder="Ex.: 8" className={input} />
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-semibold text-gray-700">Beiral (m)</label>
+            <input inputMode="decimal" value={beiral} onChange={(e) => setBeiral(e.target.value)} placeholder="Ex.: 0,5" className={input} />
           </div>
         </div>
       </div>
 
-      {/* Passo 3 */}
+      {/* Passo 3 — telha + ficha técnica */}
       <div className={card}>
-        <div className="flex items-center justify-between">
-          <p className={passo}>Passo 3 · Inclinação</p>
-          <span
-            className={`rounded-lg px-2.5 py-1 text-sm font-extrabold ${
-              avisoIncl ? "bg-red-100 text-red-600" : "bg-orange-100 text-orange-600"
-            }`}
-          >
-            {incl}%
-          </span>
-        </div>
-        <input
-          type="range"
-          min={10}
-          max={60}
-          step={5}
-          value={incl}
-          onChange={(e) => setIncl(Number(e.target.value))}
-          className={`mt-3 w-full ${avisoIncl ? "accent-red-600" : "accent-orange-600"}`}
-          aria-label="Inclinação do telhado"
-        />
-        <div className="mt-3 flex flex-wrap gap-2">
-          {["Cerâmica mín. 30%", "Fibrocimento mín. 10%", "PVC Colonial mín. 15%"].map((c) => (
-            <span key={c} className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-500">
-              {c}
-            </span>
-          ))}
-        </div>
-
-        {/* Validação ativa em tempo real */}
-        {avisoIncl && (
-          <div className="mt-3 flex gap-2 rounded-lg border border-red-300 bg-red-50 p-3" role="alert">
-            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
-            <div className="text-xs text-red-800">
-              <p className="font-bold">Inclinação abaixo do mínimo técnico</p>
-              <p className="mt-0.5 font-medium">
-                {telha.label} exige no mínimo <b>{telha.min}%</b> de caimento. Com {incl}% há risco real de retorno de
-                água e infiltração nas emendas.
-              </p>
-              <button
-                type="button"
-                onClick={() => setIncl(Math.ceil(telha.min / 5) * 5)}
-                className="mt-2 rounded-lg bg-red-600 px-3 py-1.5 text-[11px] font-bold text-white hover:bg-red-700"
-              >
-                Ajustar para {Math.ceil(telha.min / 5) * 5}%
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Passo 4 */}
-      <div className={card}>
-        <p className={passo}>Passo 4 · Tipo de telha</p>
+        <p className={passo}>Passo 3 · Tipo de telha</p>
         <select
           value={telhaId}
           onChange={(e) => setTelhaId(e.target.value)}
@@ -483,36 +563,110 @@ ${bloco("Estrutura de madeira", res.estrutura)}
             </optgroup>
           ))}
         </select>
-        <p className="mt-3 text-xs text-gray-500">
-          Inclinação mínima desta telha: <b className="text-gray-700">{telha.min}%</b> · peso aproximado{" "}
-          <b className="text-gray-700">{telha.pesoM2} kg/m²</b>
-          {precoTelha ? (
-            <>
-              {" "}· preço de tabela a partir de{" "}
-              <b className="text-gray-700">{brl(precoTelha.min.preco)}/peça</b>
-            </>
-          ) : (
-            <> · preço não tabelado — sujeito a cotação</>
-          )}
-        </p>
 
+        {/* Ficha técnica automática */}
+        <div className="mt-3 rounded-xl border border-orange-100 bg-orange-50/50 p-3">
+          <p className="flex items-center gap-1.5 text-[11px] font-bold tracking-wider text-orange-700 uppercase">
+            <Info size={13} /> Ficha técnica — {telha.label.replace(" ★", "")}
+          </p>
+          <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {[
+              {
+                l: "Telhas por m²",
+                v: telha.rendimento >= 1 ? `${fmt(telha.rendimento, 1)} un` : `${fmt(telha.rendimento, 2)} un`,
+              },
+              { l: "Galga mínima", v: telha.galga ?? "Não se aplica" },
+              { l: "Peso por peça", v: `${fmt(telha.pesoPeca, 1)} kg` },
+              { l: "Inclinação mínima", v: `${telha.min}%` },
+            ].map((f) => (
+              <div key={f.l} className="rounded-lg bg-white p-2.5">
+                <p className="text-[10px] font-semibold text-gray-500">{f.l}</p>
+                <p className="text-sm font-extrabold text-gray-900">{f.v}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-2 text-[11px] text-gray-500">
+            Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b>
+            {precoTelha ? (
+              <> · preço de tabela a partir de <b className="text-gray-700">{brl(precoTelha.min.preco)}/peça</b></>
+            ) : (
+              <> · preço não tabelado — sujeito a cotação</>
+            )}
+          </p>
+        </div>
       </div>
 
-      {/* Passo 5 */}
+      {/* Passo 4 — inclinação */}
+      <div className={card}>
+        <div className="flex items-center justify-between">
+          <p className={passo}>Passo 4 · Inclinação</p>
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              min={5}
+              max={100}
+              value={incl}
+              onChange={(e) => setIncl(Number(e.target.value))}
+              aria-label="Inclinação em porcentagem"
+              className={`w-20 rounded-lg border px-2 py-1 text-right text-sm font-extrabold ${
+                avisoIncl ? "border-red-300 text-red-600" : "border-orange-200 text-orange-600"
+              }`}
+            />
+            <span className="text-sm font-bold text-gray-500">%</span>
+          </div>
+        </div>
+        <p className="mt-2 text-[11px] text-gray-500">
+          Pré-preenchido com o mínimo recomendado de {telha.label.replace(" ★", "")} ({telha.min}%) — você pode aumentar.
+        </p>
+        <input
+          type="range"
+          min={5}
+          max={80}
+          step={1}
+          value={incl}
+          onChange={(e) => setIncl(Number(e.target.value))}
+          className={`mt-3 w-full ${avisoIncl ? "accent-red-600" : "accent-orange-600"}`}
+          aria-label="Inclinação do telhado"
+        />
+
+        {avisoIncl && (
+          <div className="mt-3 flex gap-2 rounded-lg border border-red-300 bg-red-50 p-3" role="alert">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-600" />
+            <div className="text-xs text-red-800">
+              <p className="font-bold">Inclinação abaixo do mínimo técnico</p>
+              <p className="mt-0.5 font-medium">
+                {telha.label} exige no mínimo <b>{telha.min}%</b> de caimento. Com {incl}% há risco real de retorno de
+                água e infiltração nas emendas.
+              </p>
+              <button
+                type="button"
+                onClick={() => setIncl(telha.min)}
+                className="mt-2 rounded-lg bg-red-600 px-3 py-1.5 text-[11px] font-bold text-white hover:bg-red-700"
+              >
+                Ajustar para {telha.min}%
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Passo 5 — acabamento */}
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
-          <p className={passo}>Passo 5 · Incluir calhas, rufos e acessórios?</p>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={comCalhas}
-            onClick={() => setComCalhas((v) => !v)}
-            className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${comCalhas ? "bg-orange-600" : "bg-gray-300"}`}
-          >
-            <span
-              className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${comCalhas ? "left-5.5" : "left-0.5"}`}
-            />
-          </button>
+          <p className={passo}>Passo 5 · Calcular telhas de acabamento (cumeeira, espigão)?</p>
+          <Toggle on={comAcabamento} onClick={() => setComAcabamento((v) => !v)} label="Calcular acabamento" />
+        </div>
+        <p className="mt-2 text-xs text-gray-500">
+          Calculamos o metro linear de cumeeira e de espigão conforme o número de águas e convertemos em peças pelo
+          rendimento da cumeeira compatível com a sua telha.
+        </p>
+      </div>
+
+      {/* Passo 6 — calhas */}
+      <div className={card}>
+        <div className="flex items-center justify-between gap-3">
+          <p className={passo}>Passo 6 · Incluir calhas, rufos e acessórios?</p>
+          <Toggle on={comCalhas} onClick={() => setComCalhas((v) => !v)} label="Incluir calhas" />
         </div>
         <p className="mt-2 text-xs text-gray-500">
           Calculamos o metro linear de calha e rufo pelo perímetro do telhado e sugerimos suportes, saídas e cabeceiras
@@ -520,31 +674,17 @@ ${bloco("Estrutura de madeira", res.estrutura)}
         </p>
       </div>
 
-      {/* Passo 6 */}
+      {/* Passo 7 — estrutura */}
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
-          <p className={passo}>Passo 6 · Calcular estrutura de madeira também?</p>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={comEstrutura}
-            onClick={() => setComEstrutura((v) => !v)}
-            className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${comEstrutura ? "bg-orange-600" : "bg-gray-300"}`}
-          >
-            <span
-              className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${comEstrutura ? "left-5.5" : "left-0.5"}`}
-            />
-          </button>
+          <p className={passo}>Passo 7 · Calcular estrutura de madeira também?</p>
+          <Toggle on={comEstrutura} onClick={() => setComEstrutura((v) => !v)} label="Calcular estrutura" />
         </div>
         {comEstrutura && (
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-xs font-semibold text-gray-700">Espécie da madeira</label>
-              <select
-                value={especie}
-                onChange={(e) => setEspecie(e.target.value)}
-                className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-orange-400 focus:outline-none"
-              >
+              <select value={especie} onChange={(e) => setEspecie(e.target.value)} className={input}>
                 {ESPECIES.map((e) => (
                   <option key={e.id} value={e.id}>
                     {e.label}
@@ -554,16 +694,51 @@ ${bloco("Estrutura de madeira", res.estrutura)}
             </div>
             <div>
               <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibros</label>
-              <select
-                value={espacamento}
-                onChange={(e) => setEspacamento(e.target.value)}
-                className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm focus:border-orange-400 focus:outline-none"
-              >
+              <select value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input}>
                 <option value="0.40">0,40 m</option>
                 <option value="0.50">0,50 m</option>
                 <option value="0.60">0,60 m</option>
               </select>
             </div>
+          </div>
+        )}
+      </div>
+
+      {/* Margem de recorte */}
+      <div className={card}>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="text-xs font-semibold text-gray-600">
+            Margem de recorte / reposição aplicada: <b className="text-orange-600">{margem}%</b>
+          </p>
+          <button
+            type="button"
+            onClick={() => setAjustarMargem((v) => !v)}
+            className="text-xs font-bold text-orange-600 hover:underline"
+          >
+            {ajustarMargem ? "Fechar" : "Ajustar margem"}
+          </button>
+        </div>
+        {ajustarMargem && (
+          <div className="mt-3 flex items-center gap-3">
+            <input
+              type="range"
+              min={0}
+              max={25}
+              step={1}
+              value={margem}
+              onChange={(e) => setMargem(Number(e.target.value))}
+              className="w-full accent-orange-600"
+              aria-label="Margem de recorte e reposição"
+            />
+            <input
+              type="number"
+              min={0}
+              max={50}
+              value={margem}
+              onChange={(e) => setMargem(Number(e.target.value))}
+              aria-label="Margem em porcentagem"
+              className="w-20 rounded-lg border border-orange-200 px-2 py-1 text-right text-sm font-bold text-orange-600"
+            />
           </div>
         )}
       </div>
@@ -581,12 +756,18 @@ ${bloco("Estrutura de madeira", res.estrutura)}
         <div className="rounded-xl border border-[#fed7aa] bg-[#fff7ed] p-5">
           <p className="text-xs font-bold tracking-wider text-orange-600 uppercase">Resultado estimado</p>
 
+          {/* Croqui com as medidas preenchidas */}
+          <div
+            className="mt-3 rounded-xl border border-orange-100 bg-white p-3"
+            dangerouslySetInnerHTML={{ __html: res.croqui }}
+          />
+
           <div className="mt-3 grid grid-cols-2 gap-3">
             {[
               { l: "Área da base", v: `${fmt(res.areaBase)} m²` },
               { l: "Área inclinada real", v: `${fmt(res.areaIncl)} m²` },
               { l: "Perímetro do telhado", v: `${fmt(res.perimetro)} m` },
-              { l: "Telhas (+10% perda)", v: `${res.telhas} un` },
+              { l: `Telhas (+${res.margem}% margem)`, v: `${res.telhas} un` },
               { l: "Altura da cumeeira", v: `${fmt(res.alturaCumeeira)} m` },
               { l: "Comprimento do caibro", v: `${fmt(res.caibro)} m` },
             ].map((b) => (
@@ -617,12 +798,9 @@ ${bloco("Estrutura de madeira", res.estrutura)}
             ) : null}
             <p className="mt-2 text-[11px] text-gray-500">
               Cálculo feito com os preços da tabela da Rocha &amp; Telhas (quantidade × preço unitário); a faixa reflete
-              a variação real entre as especificações mais comuns de cada produto. Valor de referência “a partir de”,
-              considerando telha{comCalhas ? ", calhas" : ""}
-              {comEstrutura ? " e estrutura" : " e acessórios básicos"}. Não é preço fechado — o valor final sai na
-              cotação.
+              a variação real entre as especificações mais comuns de cada produto. Não é preço fechado — o valor final
+              sai na cotação.
             </p>
-
           </div>
 
           <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
@@ -639,6 +817,28 @@ ${bloco("Estrutura de madeira", res.estrutura)}
             ))}
           </ul>
 
+          {res.acabamento.length > 0 && (
+            <>
+              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">
+                Telhas de acabamento (cumeeira / espigão)
+              </p>
+              <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
+                {res.acabamento.map((i) => (
+                  <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
+                    <span className="text-sm text-gray-700">{i.nome}</span>
+                    <span className="shrink-0 text-right text-sm font-bold text-orange-600">{i.qtd}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/catalogo/telhas/cumeeiras"
+                className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline"
+              >
+                Ver linha completa de cumeeiras e espigões →
+              </a>
+            </>
+          )}
+
           {res.calhas.length > 0 && (
             <>
               <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas, rufos e acessórios</p>
@@ -650,10 +850,7 @@ ${bloco("Estrutura de madeira", res.estrutura)}
                   </li>
                 ))}
               </ul>
-              <a
-                href="/catalogo/calhas"
-                className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline"
-              >
+              <a href="/catalogo/calhas" className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline">
                 Ver linha completa de calhas e rufos →
               </a>
             </>
@@ -673,47 +870,67 @@ ${bloco("Estrutura de madeira", res.estrutura)}
             </>
           )}
 
-          {/* Comparador */}
-          <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">
-            Comparativo para este mesmo telhado
-          </p>
-          <div className="mt-2 overflow-x-auto rounded-lg border border-orange-100 bg-white">
-            <table className="w-full min-w-[420px] text-left text-sm">
-              <thead>
-                <tr className="border-b border-orange-100 text-[11px] tracking-wider text-gray-500 uppercase">
-                  <th className="p-3 font-semibold">Telha</th>
-                  <th className="p-3 font-semibold">Peças</th>
-                  <th className="p-3 font-semibold">Peso total</th>
-                  <th className="p-3 font-semibold">Custo estimado</th>
-                </tr>
-              </thead>
-              <tbody>
-                {res.comparativo.map((c) => {
-                  const atual = c.telha.id === res.telha.id;
-                  return (
-                    <tr key={c.telha.id} className={`border-b border-orange-50 last:border-0 ${atual ? "bg-orange-50" : ""}`}>
-                      <td className="p-3">
-                        <span className="font-bold text-gray-900">{c.telha.grupo}</span>
-                        <span className="block text-[11px] text-gray-500">
-                          {c.telha.label.replace(" ★", "")} · mín. {c.telha.min}%
-                        </span>
-                      </td>
-                      <td className="p-3 font-semibold text-gray-700">{c.pecas} un</td>
-                      <td className="p-3 font-semibold text-gray-700">{fmt(c.peso, 0)} kg</td>
-                      <td className="p-3 font-bold whitespace-nowrap text-orange-600">
-                        {c.semPreco ? (
-                          <span className="text-gray-500">Sob cotação</span>
-                        ) : (
-                          <>
-                            {brl(c.custoMin)} – {brl(c.custoMax)}
-                          </>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          {/* Comparativo lado a lado */}
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">Comparativo entre duas telhas</p>
+            <label className="flex items-center gap-2 text-[11px] font-semibold text-gray-600">
+              Mostrar custo
+              <Toggle on={mostrarCusto} onClick={() => setMostrarCusto((v) => !v)} label="Mostrar custo" />
+            </label>
+          </div>
+          <div className="mt-2 grid gap-3 sm:grid-cols-2">
+            {[
+              { valor: compA, set: setCompA },
+              { valor: compB, set: setCompB },
+            ].map((sel, idx) => {
+              const c = comparativo[idx];
+              return (
+                <div key={idx} className="rounded-xl border border-orange-100 bg-white p-3">
+                  <select
+                    value={sel.valor}
+                    onChange={(e) => sel.set(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-bold focus:border-orange-400 focus:outline-none"
+                    aria-label={`Telha ${idx + 1} do comparativo`}
+                  >
+                    {GRUPOS.map((g) => (
+                      <optgroup key={g} label={g}>
+                        {TELHAS.filter((t) => t.grupo === g).map((t) => (
+                          <option key={t.id} value={t.id}>
+                            {t.label}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
+                  </select>
+                  {c && (
+                    <dl className="mt-3 space-y-1.5 text-sm">
+                      <div className="flex justify-between">
+                        <dt className="text-gray-500">Peças</dt>
+                        <dd className="font-bold text-gray-900">{c.pecas} un</dd>
+                      </div>
+                      <div className="flex justify-between">
+                        <dt className="text-gray-500">Peso total</dt>
+                        <dd className="font-bold text-gray-900">{fmt(c.peso, 0)} kg</dd>
+                      </div>
+                      {mostrarCusto && (
+                        <div className="flex justify-between gap-2">
+                          <dt className="text-gray-500">Custo estimado</dt>
+                          <dd className="text-right font-bold text-orange-600">
+                            {c.semPreco ? <span className="text-gray-500">Sob cotação</span> : `${brl(c.custoMin)} – ${brl(c.custoMax)}`}
+                          </dd>
+                        </div>
+                      )}
+                      <div className="flex justify-between">
+                        <dt className="text-gray-500">Inclinação mínima</dt>
+                        <dd className={`font-bold ${c.compativel ? "text-green-600" : "text-red-600"}`}>
+                          {c.telha.min}% {c.compativel ? "· compatível" : "· acima da sua"}
+                        </dd>
+                      </div>
+                    </dl>
+                  )}
+                </div>
+              );
+            })}
           </div>
           <p className="mt-2 text-[11px] text-gray-500">
             Coberturas mais leves (PVC e policarbonato) exigem menos madeira; cerâmica e concreto pedem estrutura
@@ -754,4 +971,8 @@ ${bloco("Estrutura de madeira", res.estrutura)}
       />
     </div>
   );
+}
+
+function fmtN(n: number) {
+  return n.toLocaleString("pt-BR", { maximumFractionDigits: 1 });
 }
