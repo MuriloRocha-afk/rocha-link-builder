@@ -5,51 +5,16 @@ import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensCambara, IMG } from "../../../data/imagensProduto";
+import { TIPOS_MADEIRA, BITOLAS_MADEIRA, COMPRIMENTOS_MADEIRA } from "../../../data/configs/madeiramento";
 
 
-const TIPOS = [
-  "Viga",
-  "Caibro",
-  "Caibrão",
-  "Ripa",
-  "Ripão",
-  "Sarrafo",
-  "Tábua",
-  "Dormente",
-] as const;
-type Tipo = typeof TIPOS[number];
+const TIPOS = TIPOS_MADEIRA;
+type Tipo = (typeof TIPOS)[number];
 
-/** Bitolas no formato Espessura × Largura */
-const BITOLAS: Record<Tipo, string[]> = {
-  Viga: [
-    "5x11cm","5x15cm","5x20cm","5x25cm","5x30cm",
-    "8x10cm","8x15cm","8x20cm","8x25cm","8x30cm","8x40cm","8x50cm",
-    "10x20cm","10x30cm","10x40cm",
-  ],
-  Caibro: ["5x5cm","5x6cm","5x7cm"],
-  "Caibrão": ["6x8cm","7x9cm","8x8cm"],
-  Ripa: ["1,5x5cm"],
-  Ripão: ["2x5cm","2x7cm"],
-  Sarrafo: ["2,5x5cm","2,5x7cm","2,5x10cm","2,5x15cm"],
-  "Tábua": ["2,5x20cm","2,5x25cm","2,5x30cm"],
-  Dormente: ["8x8cm","10x10cm","15x15cm","20x20cm"],
-};
+/** Bitolas no formato Espessura × Largura (ordem crescente) */
+const BITOLAS = BITOLAS_MADEIRA;
 
-const COMPRIMENTOS = [
-  "1,0m","1,5m","2,0m","2,5m","3,0m","3,5m","4,0m",
-  "4,5m","5,0m","5,5m","6,0m","6,5m","7,0m","7,5m","8,0m","8,5m",
-];
-
-const ICONES: Record<Tipo, string> = {
-  Viga: "🏗️",
-  Caibro: "📐",
-  "Caibrão": "📏",
-  Ripa: "〰️",
-  Ripão: "➖",
-  Sarrafo: "📋",
-  "Tábua": "🪵",
-  Dormente: "🪨",
-};
+const COMPRIMENTOS = COMPRIMENTOS_MADEIRA;
 
 function Chip({
   label,
@@ -196,7 +161,6 @@ export default function Cambara() {
                       : "border-gray-200 hover:border-orange-300 hover:bg-orange-50/50"
                     }`}
                 >
-                  <span className="text-2xl">{ICONES[t]}</span>
                   <span className="text-xs font-medium text-gray-800">{t}</span>
                 </button>
               ))}
