@@ -37,7 +37,7 @@ const COMPRIMENTOS: Comprimento[] = [
 const SPECS = [
   { label: "Inclinação mínima", value: "5%" },
   { label: "Espessura", value: "4mm e 6mm" },
-  { label: "Largura total", value: "1,10m" },
+  { label: "Largura total", value: "1,10m (244cm também em 0,50m, só no Cristal)" },
   { label: "Fixação", value: "Parafuso c/ vedação + perfil H" },
   { label: "Proteção UV", value: "Sim (face superior)" },
 ];
@@ -141,7 +141,7 @@ Poderia verificar estoque e frete?`;
           <Passo n={2} title="Comprimento">
             <div className="grid gap-3">
               {comprimentos.map((c) => {
-                const active = dimensao === c.value;
+                const active = dimensaoAtiva === c.value;
                 return (
                   <button
                     key={c.value}
