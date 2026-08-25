@@ -219,30 +219,91 @@ Poderia verificar estoque e frete?`;
             </div>
           </Passo>
 
-          <Passo n={2} title="Acabamento">
+          <Passo n={2} title="Cor / Tonalidade">
             <div className="flex flex-wrap gap-2">
-              {formato.acabamentos.map((a) => {
-                const active = acabamentoAtivo === a;
+              {formato.cores.map((c) => {
+                const active = corAtiva.nome === c.nome;
                 return (
                   <button
-                    key={a}
+                    key={c.nome}
                     type="button"
-                    onClick={() => setAcabamento(a)}
+                    onClick={() => setCor(c.nome)}
                     aria-pressed={active}
-                    className={`rounded-full border px-4 py-2 text-sm font-bold transition-all ${
+                    className={`rounded-full border px-4 py-2 text-left text-sm font-bold transition-all ${
                       active
                         ? "border-accent bg-accent/10 text-primary ring-1 ring-accent/40"
                         : "border-border bg-background text-muted-foreground hover:border-accent/60"
                     }`}
                   >
-                    {a}
+                    {c.nome}
+                    {c.verificar ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        verificar disponibilidade
+                      </span>
+                    ) : null}
                   </button>
                 );
               })}
             </div>
           </Passo>
 
-          <Passo n={3} title="Quantidade">
+          <Passo n={3} title="Acabamento">
+            <div className="flex flex-wrap gap-2">
+              {formato.acabamentos.map((a) => {
+                const active = acabamentoAtivo.nome === a.nome;
+                return (
+                  <button
+                    key={a.nome}
+                    type="button"
+                    onClick={() => setAcabamento(a.nome)}
+                    aria-pressed={active}
+                    className={`rounded-full border px-4 py-2 text-left text-sm font-bold transition-all ${
+                      active
+                        ? "border-accent bg-accent/10 text-primary ring-1 ring-accent/40"
+                        : "border-border bg-background text-muted-foreground hover:border-accent/60"
+                    }`}
+                  >
+                    {a.nome}
+                    {a.verificar ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        verificar disponibilidade
+                      </span>
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
+          </Passo>
+
+          {formato.rendimentos ? (
+            <Passo n={4} title="Rendimento (telhas por m²)">
+              <div className="grid gap-3 sm:grid-cols-2">
+                {formato.rendimentos.map((r) => {
+                  const active = rendimentoAtivo?.nome === r.nome;
+                  return (
+                    <button
+                      key={r.nome}
+                      type="button"
+                      onClick={() => setRendimento(r.nome)}
+                      aria-pressed={active}
+                      className={`rounded-2xl border px-5 py-4 text-left transition-all ${
+                        active
+                          ? "border-accent bg-accent/10 ring-1 ring-accent/40"
+                          : "border-border bg-background hover:border-accent/60"
+                      }`}
+                    >
+                      <span className="block text-base font-extrabold text-primary">{r.nome}</span>
+                      <span className="mt-0.5 block text-xs text-muted-foreground">
+                        {r.descricao}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </Passo>
+          ) : null}
+
+          <Passo n={formato.rendimentos ? 5 : 4} title="Quantidade">
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold tracking-[0.14em] text-primary/60 uppercase">
                 Nº de peças
