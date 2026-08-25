@@ -39,7 +39,7 @@ const KPIS = [
   { icon: Award, title: "Referência", text: "de tradição e confiança na região" },
   { icon: Truck, title: "Frota Própria", text: "entrega rápida em toda São Paulo" },
   { icon: TreePine, title: "Madeiras Selecionadas", text: "certificadas e conferidas peça a peça" },
-  { icon: CreditCard, title: "Até 6x no Cartão", text: "parcelamento e condições para obras" },
+  { icon: CreditCard, title: "Até 12x no Cartão", text: "consulte nossas condições de parcelamento" },
 ];
 
 function Index() {

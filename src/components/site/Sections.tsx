@@ -215,7 +215,7 @@ export { Faq } from "./FaqSection";
 
 
 const UNIT = {
-  name: "Rocha Telhas — Franco da Rocha",
+  name: "Rocha Telhas - Franco da Rocha",
   address: CONTATO.address,
   hours: CONTATO.hours,
   phone: CONTATO.phone,

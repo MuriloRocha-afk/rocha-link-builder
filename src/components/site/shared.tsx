@@ -8,7 +8,7 @@ export { waLink, WHATSAPP_NUMBER };
 export const CONTATO = {
   address: "R. Dr. Hamilton Prado, 856 — Centro, Franco da Rocha / SP · CEP 07849-070",
   hours: "Segunda a Sexta: 08h00 às 18h00 · Sábado: 08h00 às 13h00",
-  phone: "(11) 97176-1003 — WhatsApp comercial",
+  phone: "(11) 97176-1003 - WhatsApp comercial",
   map: "https://www.google.com/maps?q=R.+Dr.+Hamilton+Prado,+856+-+Centro,+Franco+da+Rocha+-+SP,+07849-070&output=embed",
 };
 
