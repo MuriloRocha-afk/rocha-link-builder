@@ -115,15 +115,20 @@ export const CONFIG_ESPIGOES: ConfiguradorConfig = {
     `📌 *Espigão Telha Fibrocimento*\n• Modelo: ${s.modelo}\n• Quantidade: ${q.qtd ?? 5} peças`,
 };
 
-const ehTelheiro = (s: Record<string, string>) => s.tipo === "Telheiro";
+const ehAco = (s: Record<string, string>) => s.tipo === "Prego de Aço";
 const ehComCabeca = (s: Record<string, string>) => s.tipo === "Polido com Cabeça";
 const ehSemCabeca = (s: Record<string, string>) => s.tipo === "Polido sem Cabeça";
+const emGramas = (s: Record<string, string>) => ehComCabeca(s) || ehSemCabeca(s);
+
+const bitolaPrego = (s: Record<string, string>) =>
+  s.bitolaAco ?? s.bitolaCom ?? s.bitolaSem ?? "";
 
 export const CONFIG_PREGOS: ConfiguradorConfig = {
   breadcrumb: BC("Pregos"),
   titulo: "🔨 Pregos",
+  produtoKey: "pregos",
   subtitulo:
-    "Polido com e sem cabeça, Telheiro e Aço. Vendidos por Kg ou embalagem de 100 unidades.",
+    "Prego de aço em pacote de 100 unidades e pregos polidos com e sem cabeça vendidos a partir de 100g.",
   galeriaTitulo: "Pregos",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
   imagens: (s) => (s.tipo ? [{ src: "", alt: `Prego ${s.tipo}` }] : []),
@@ -133,23 +138,33 @@ export const CONFIG_PREGOS: ConfiguradorConfig = {
       chave: "tipo",
       titulo: "Tipo",
       tipo: "grid3",
-      opcoes: ["Telheiro", "Polido com Cabeça", "Polido sem Cabeça"].map((v) => ({ valor: v })),
+      opcoes: ["Prego de Aço", "Polido com Cabeça", "Polido sem Cabeça"].map((v) => ({ valor: v })),
     },
     {
-      chave: "produto",
-      titulo: "Produto",
-      tipo: "lista",
-      visivel: ehTelheiro,
-      opcoes: [{ valor: "Prego Telheiro 18×27 — 500g" }],
+      chave: "bitolaAco",
+      titulo: "Tamanho",
+      tipo: "grid3",
+      visivel: ehAco,
+      opcoes: ["10×10", "12×12", "15×15", "17×21", "18×27"].map((v) => ({ valor: v })),
+      aviso: "Prego de aço vendido apenas em pacote de 100 unidades.",
     },
     {
       chave: "bitolaCom",
       titulo: "Bitola",
       tipo: "grid3",
       visivel: ehComCabeca,
-      opcoes: ["10×10", "17×21", "18×27", "19×36", "20×48", "22×48", "25×72"].map((v) => ({
-        valor: v,
-      })),
+      opcoes: [
+        "10×10",
+        "12×12",
+        "15×15",
+        "15×21",
+        "17×21",
+        "18×27",
+        "19×36",
+        "20×48",
+        "22×48",
+        "25×72",
+      ].map((v) => ({ valor: v })),
     },
     {
       chave: "bitolaSem",
@@ -159,26 +174,38 @@ export const CONFIG_PREGOS: ConfiguradorConfig = {
       opcoes: ["10×10", "12×12"].map((v) => ({ valor: v })),
     },
     {
-      chave: "embalagem",
-      titulo: "Embalagem",
-      tipo: "grid2",
-      visivel: (s) => ehComCabeca(s) || ehSemCabeca(s),
-      opcoes: [{ valor: "Por Kg" }, { valor: "Por 100 un" }],
+      chave: "qtdAco",
+      titulo: "Quantidade",
+      tipo: "quantidade",
+      visivel: ehAco,
+      unidade: "pacotes de 100 un",
+      padrao: 1,
     },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "embalagens", padrao: 1 },
+    {
+      chave: "qtdGramas",
+      titulo: "Quantidade",
+      tipo: "quantidade",
+      visivel: emGramas,
+      unidade: "gramas",
+      padrao: 100,
+      passo: 100,
+      nota: (_s, q) => `Equivale a ${(q / 100).toFixed(0)} embalagem(ns) de 100g.`,
+      aviso: "Venda em múltiplos de 100g.",
+    },
   ],
-  resumoNome: (s) => (ehTelheiro(s) ? "Prego Telheiro" : `Prego ${s.tipo ?? ""}`),
+  resumoNome: (s) => (ehAco(s) ? "Prego de Aço" : `Prego ${s.tipo ?? ""}`),
   resumoDetalhe: (s, q) =>
-    ehTelheiro(s)
-      ? `${s.produto} · ${q.qtd ?? 1} embalagens`
-      : `${s.bitolaCom ?? s.bitolaSem} · ${s.embalagem} · ${q.qtd ?? 1}`,
-  unidadeResumo: () => "embalagens",
-  idItem: (s) => `prego-${s.tipo}-${s.bitolaCom ?? s.bitolaSem ?? s.produto}`,
+    ehAco(s)
+      ? `${s.bitolaAco} · ${q.qtdAco ?? 1} pacotes de 100 un`
+      : `${bitolaPrego(s)} · ${q.qtdGramas ?? 100}g`,
+  unidadeResumo: (s) => (ehAco(s) ? "pacotes de 100 un" : "gramas"),
+  idItem: (s) => `prego-${s.tipo}-${bitolaPrego(s)}`,
   mensagem: (s, q) =>
-    ehTelheiro(s)
-      ? `🔨 *Prego Telheiro 18×27*\n• Embalagem: 500g\n• Quantidade: ${q.qtd ?? 1}`
-      : `🔨 *Prego ${s.tipo} ${s.bitolaCom ?? s.bitolaSem}*\n• Embalagem: ${s.embalagem?.replace("Por ", "")}\n• Quantidade: ${q.qtd ?? 1}`,
+    ehAco(s)
+      ? `🔨 *Prego de Aço ${s.bitolaAco}*\n• Embalagem: pacote de 100 unidades\n• Quantidade: ${q.qtdAco ?? 1} pacotes`
+      : `🔨 *Prego ${s.tipo} ${bitolaPrego(s)}*\n• Embalagem: múltiplos de 100g\n• Quantidade: ${q.qtdGramas ?? 100}g`,
 };
+
 
 export const CONFIG_ARAMES: ConfiguradorConfig = {
   breadcrumb: BC("Arames"),

@@ -174,6 +174,8 @@ export const CONFIG_MANTA_ASFALTICA: ConfiguradorConfig = {
     "Terracota em 10cm e 20cm de largura × 10m. Impermeabilização de calhas, rufos e junções.",
   galeriaTitulo: "Manta Asfáltica Aluminizada",
   galeriaPlaceholder: "Foto em breve",
+  produtoKey: "manta-asfaltica",
+
   imagens: () => [{ src: "", alt: "Manta Asfáltica Aluminizada Terracota" }],
   categoria: "Calhas",
   passos: [
