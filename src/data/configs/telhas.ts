@@ -195,17 +195,25 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
 };
 
 const COMPRIMENTOS_PP = [
+  { valor: "122 × 110 cm" },
   { valor: "153 × 110 cm" },
   { valor: "183 × 110 cm" },
   { valor: "213 × 110 cm" },
   { valor: "244 × 110 cm", badge: "★ Compatível com Fibro 244cm" },
+  { valor: "244 × 92 cm" },
+  { valor: "244 × 50 cm" },
   { valor: "305 × 110 cm" },
   { valor: "366 × 110 cm" },
 ];
 
+const UTIL_PP: Record<string, number> = { "110": 1.05, "92": 0.87, "50": 0.45 };
+
 const coberturaPP = (comp: string, q: number) => {
-  const metros = parseFloat(comp) / 100;
-  return Math.round((metros - 0.14) * 1.05 * q * 10) / 10;
+  if (!comp) return 0;
+  const [c, l] = comp.replace(/\s|cm/g, "").split("×");
+  const metros = parseFloat(c) / 100;
+  const util = UTIL_PP[l] ?? 1.05;
+  return Math.round((metros - 0.14) * util * q * 10) / 10;
 };
 
 export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
