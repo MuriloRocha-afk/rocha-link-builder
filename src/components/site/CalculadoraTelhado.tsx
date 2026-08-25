@@ -839,20 +839,23 @@ ${comparaHtml}
             </>
           )}
 
-          {/* Comparativo lado a lado */}
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">Comparativo entre duas telhas</p>
-            <label className="flex items-center gap-2 text-[11px] font-semibold text-gray-600">
-              Mostrar custo
-              <Toggle on={mostrarCusto} onClick={() => setMostrarCusto((v) => !v)} label="Mostrar custo" />
-            </label>
+          {/* Comparativo lado a lado — qualquer telha do catálogo */}
+          <div className="mt-5">
+            <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">
+              Comparativo entre telhas do catálogo
+            </p>
+            <p className="mt-1 text-[11px] text-gray-500">
+              Sugerimos telhas compatíveis com a inclinação informada, mas você pode trocar por qualquer outra opção do
+              catálogo — inclusive uma terceira telha.
+            </p>
           </div>
-          <div className="mt-2 grid gap-3 sm:grid-cols-2">
+          <div className="mt-2 grid gap-3 sm:grid-cols-3">
             {[
-              { valor: compA, set: setCompA },
-              { valor: compB, set: setCompB },
+              { valor: compA, set: setCompA, opcional: false },
+              { valor: compB, set: setCompB, opcional: false },
+              { valor: compC, set: setCompC, opcional: true },
             ].map((sel, idx) => {
-              const c = comparativo[idx];
+              const c = comparativo.find((x) => x.telha.id === sel.valor);
               return (
                 <div key={idx} className="rounded-xl border border-orange-100 bg-white p-3">
                   <select
@@ -861,6 +864,7 @@ ${comparaHtml}
                     className="w-full rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-bold focus:border-orange-400 focus:outline-none"
                     aria-label={`Telha ${idx + 1} do comparativo`}
                   >
+                    {sel.opcional && <option value="">+ Comparar uma 3ª telha (opcional)</option>}
                     {GRUPOS.map((g) => (
                       <optgroup key={g} label={g}>
                         {TELHAS.filter((t) => t.grupo === g).map((t) => (
@@ -881,19 +885,23 @@ ${comparaHtml}
                         <dt className="text-gray-500">Peso total</dt>
                         <dd className="font-bold text-gray-900">{fmt(c.peso, 0)} kg</dd>
                       </div>
-                      {mostrarCusto && (
-                        <div className="flex justify-between gap-2">
-                          <dt className="text-gray-500">Custo estimado</dt>
-                          <dd className="text-right font-bold text-orange-600">
-                            {c.semPreco ? <span className="text-gray-500">Sob cotação</span> : `${brl(c.custoMin)} – ${brl(c.custoMax)}`}
-                          </dd>
-                        </div>
-                      )}
                       <div className="flex justify-between">
                         <dt className="text-gray-500">Inclinação mínima</dt>
                         <dd className={`font-bold ${c.compativel ? "text-green-600" : "text-red-600"}`}>
                           {c.telha.min}% {c.compativel ? "· compatível" : "· acima da sua"}
                         </dd>
+                      </div>
+                      <div className="rounded-lg bg-orange-50 p-2">
+                        <p className="text-[10px] font-semibold tracking-wider text-orange-700 uppercase">
+                          Comparação relativa
+                        </p>
+                        <p className="mt-0.5 text-xs font-bold text-gray-800">
+                          {c.percentual === null
+                            ? "Custo sob cotação"
+                            : c.percentual === 0
+                              ? "Referência — opção mais econômica"
+                              : `≈ ${c.percentual}% mais cara que a referência`}
+                        </p>
                       </div>
                     </dl>
                   )}
@@ -902,9 +910,11 @@ ${comparaHtml}
             })}
           </div>
           <p className="mt-2 text-[11px] text-gray-500">
-            Coberturas mais leves (PVC e policarbonato) exigem menos madeira; cerâmica e concreto pedem estrutura
-            reforçada.
+            A diferença percentual é calculada com a tabela interna da loja, sem exibir valores: serve só para comparar
+            as opções entre si. Coberturas mais leves (PVC e policarbonato) exigem menos madeira; cerâmica e concreto
+            pedem estrutura reforçada.
           </p>
+
 
           <p className="mt-4 text-[11px] text-gray-500">
             Estimativa de referência. Nossa equipe técnica confere as quantidades na cotação final.
