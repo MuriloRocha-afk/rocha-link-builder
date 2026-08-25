@@ -336,7 +336,7 @@ Poderia verificar estoque e frete?`;
             <p className="mt-3 rounded-xl bg-secondary px-4 py-3 text-sm font-semibold text-primary">
               Cobertura estimada: {cobertura} m²{" "}
               <span className="font-normal text-muted-foreground">
-                (~{formato.pecasPorM2} peças por m²)
+                (~{pecasPorM2} peças por m²)
               </span>
             </p>
           </Passo>
@@ -358,7 +358,7 @@ Poderia verificar estoque e frete?`;
                 size="xl"
                 onClick={() => {
                   addItem({
-                    id: `ceramica--${formatoId}--${acabamentoAtivo}`,
+                    id: `ceramica--${formatoId}--${corAtiva.nome}--${acabamentoAtivo.nome}${rendimentoAtivo ? `--${rendimentoAtivo.nome}` : ""}`,
                     name: "Telha Cerâmica",
                     detail,
                     qty,
