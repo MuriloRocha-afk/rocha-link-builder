@@ -4,23 +4,14 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
-import TipoCard from "../../../components/site/TipoCard";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
+import AcessoriosForroPergunta from "@/components/site/AcessoriosForroPergunta";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroPVC } from "../../../data/imagensProduto";
 
-const MODELOS = [
-  {
-    id: "Liso 20cm",
-    icone: "⬜",
-    desc: "Régua lisa branca de 20cm — o padrão mais pedido",
-    badge: "★ Mais Vendido",
-  },
-  {
-    id: "Frisado 20cm",
-    icone: "〰️",
-    desc: "Friso central que disfarça as emendas entre réguas",
-  },
+const LARGURAS = [
+  { id: "20cm", util: 0.175, desc: "Régua padrão — a mais pedida" },
+  { id: "25cm", util: 0.225, desc: "Régua larga — instalação mais rápida" },
 ];
 
 const COMPRIMENTOS = [
@@ -39,27 +30,26 @@ const COMPRIMENTOS = [
   "7,0m",
 ];
 
-// Cada régua de 20cm cobre 0,20m de largura por comprimento escolhido
-function calcularArea(comprimento: string, quantidade: number): number {
+function calcularArea(comprimento: string, quantidade: number, util: number): number {
   const m = parseFloat(comprimento.replace(",", ".").replace("m", ""));
-  return Math.round(m * 0.175 * quantidade * 10) / 10; // 17,5cm largura útil
+  return Math.round(m * util * quantidade * 10) / 10;
 }
 
 export default function ForroPVC() {
   const { adicionar } = useOrcamento();
-  const [modelo, setModelo] = useState<string | null>(null);
+  const [larguraId, setLarguraId] = useState<string>("20cm");
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [quantidade, setQuantidade] = useState(20);
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
 
-  const pronto = modelo && comprimento && quantidade >= 1;
-  const area = comprimento ? calcularArea(comprimento, quantidade) : 0;
+  const largura = LARGURAS.find((l) => l.id === larguraId)!;
+  const pronto = Boolean(comprimento) && quantidade >= 1;
+  const area = comprimento ? calcularArea(comprimento, quantidade, largura.util) : 0;
 
   const corpoMsgWpp = pronto
-    ? `🏠 *Forro PVC Branco*\n` +
-      `• Modelo: ${modelo}\n` +
-      `• Largura da régua: 20cm\n` +
+    ? `🏠 *Forro PVC Branco Frisado*\n` +
+      `• Largura da régua: ${largura.id}\n` +
       `• Comprimento: ${comprimento}\n` +
       `• Quantidade: ${quantidade} réguas\n` +
       `• Área estimada: ~${area} m²`
@@ -68,9 +58,9 @@ export default function ForroPVC() {
   const handleAdicionar = () => {
     if (!pronto) return;
     adicionar({
-      id: `forro-pvc-${modelo}-${comprimento}`,
-      nome: "Forro PVC Branco",
-      variacao: `${modelo} · Régua 20cm × ${comprimento}`,
+      id: `forro-pvc-${larguraId}-${comprimento}`,
+      nome: "Forro PVC Branco Frisado",
+      variacao: `Régua ${largura.id} × ${comprimento}`,
       quantidade,
       unidade: "réguas",
       categoria: "Madeiramento",
@@ -104,12 +94,12 @@ export default function ForroPVC() {
           <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
             ★ Campeão de Vendas
           </span>
-          <h1 className="text-2xl font-bold text-gray-900 mt-1">Forro PVC Branco</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mt-1">Forro PVC Branco Frisado</h1>
           <p className="text-gray-500 mt-1 text-sm">
-            Réguas brancas de 20cm de largura. Fácil instalação, sem manutenção, pronta entrega.
+            Réguas brancas frisadas. Fácil instalação, sem manutenção, pronta entrega.
           </p>
           <div className="flex gap-2 mt-3 flex-wrap">
-            {["Largura 20cm fixa", "1,0m a 7,0m de comprimento", "Pronta Entrega"].map((t) => (
+            {["Modelo frisado", "1,0m a 7,0m de comprimento", "Pronta Entrega"].map((t) => (
               <span
                 key={t}
                 className="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full"
@@ -126,38 +116,39 @@ export default function ForroPVC() {
       }
       galeria={
         <GaleriaProduto
-          titulo="Forro PVC Branco"
-          subtitulo="Régua 20cm · Foto em breve"
+          titulo="Forro PVC Branco Frisado"
+          subtitulo="Réguas brancas · Foto em breve"
           imagens={imagensForroPVC}
         />
       }
     >
       <>
-        {/* Modelo */}
+        {/* Largura */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
               1
             </span>
-            Modelo da régua
+            Largura da régua
           </h2>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {MODELOS.map((m) => (
-              <TipoCard
-                key={m.id}
-                icone={m.icone}
-                nome={m.id}
-                descricao={m.desc}
-                badge={m.badge}
-                selected={modelo === m.id}
-                onClick={() => { setModelo(m.id); setComprimento(null); }}
-              />
+          <div className="flex flex-wrap gap-2">
+            {LARGURAS.map((l) => (
+              <button
+                key={l.id}
+                onClick={() => setLarguraId(l.id)}
+                className={`px-4 py-3 rounded-xl border text-left transition-all ${larguraId === l.id ? "border-orange-500 bg-orange-50 ring-2 ring-orange-200" : "border-gray-200 hover:border-orange-300"}`}
+              >
+                <p className="text-sm font-semibold text-gray-900">{l.id}</p>
+                <p className="text-xs text-gray-500">{l.desc}</p>
+              </button>
             ))}
           </div>
+          <p className="text-xs text-gray-400 mt-3">
+            * Largura útil após o encaixe: ~{(largura.util * 100).toFixed(1).replace(".", ",")} cm
+          </p>
         </section>
 
         {/* Comprimento */}
-        {modelo && (
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
             <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
@@ -177,14 +168,10 @@ export default function ForroPVC() {
               </button>
             ))}
           </div>
-          <p className="text-xs text-gray-400 mt-3">
-            * Largura de 20cm — largura útil ~17,5cm após encaixe
-          </p>
         </section>
-        )}
 
         {/* Quantidade */}
-        {modelo && comprimento && (
+        {comprimento && (
           <section className="bg-white rounded-2xl p-5 shadow-sm">
             <h2 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-orange-500 text-white text-xs flex items-center justify-center font-bold">
@@ -227,8 +214,10 @@ export default function ForroPVC() {
 
             <div className="bg-gray-50 rounded-xl p-4 mb-5">
               <p className="text-xs text-gray-500 font-medium mb-1">RESUMO</p>
-              <p className="font-bold text-gray-900">Forro PVC Branco</p>
-              <p className="text-gray-600 text-sm">{modelo} · Régua 20cm × {comprimento}</p>
+              <p className="font-bold text-gray-900">Forro PVC Branco Frisado</p>
+              <p className="text-gray-600 text-sm">
+                Régua {largura.id} × {comprimento}
+              </p>
               <p className="text-orange-600 font-semibold text-sm mt-1">
                 {quantidade} réguas · ~{area} m²
               </p>
@@ -262,17 +251,53 @@ export default function ForroPVC() {
           </section>
         )}
 
+        {/* Acessórios de forro */}
+        <AcessoriosForroPergunta
+          passo={4}
+          contexto="Forro PVC Branco Frisado"
+          grupos={[
+            {
+              id: "canto-pvc",
+              nome: "Canto PVC",
+              descricao: "Acabamento de canto do forro.",
+              unidade: "peça",
+              opcoes: ["Interno", "Externo"],
+            },
+            {
+              id: "emenda-h-pvc",
+              nome: "Emenda H",
+              descricao: "União entre réguas no sentido do comprimento.",
+              unidade: "peça",
+              opcoes: ["3m", "6m"],
+            },
+            {
+              id: "moldura-pvc",
+              nome: "Moldura PVC",
+              descricao: "Arremate perimetral entre o forro e a parede.",
+              unidade: "peça",
+              opcoes: ["2m", "3m", "4m", "5m", "6m"],
+            },
+            {
+              id: "roda-forro-u-pvc",
+              nome: "Roda-forro tipo U",
+              descricao: "Perfil U de acabamento perimetral.",
+              unidade: "peça",
+              opcoes: ["6m"],
+            },
+          ]}
+        />
+
         {/* Especificações */}
         <section className="bg-white rounded-2xl p-5 shadow-sm">
           <h2 className="font-bold text-gray-900 mb-3">Especificações Técnicas</h2>
           <table className="w-full text-sm">
             <tbody className="divide-y divide-gray-100">
               {[
-                ["Largura da régua", "20 cm"],
-                ["Largura útil (após encaixe)", "~17,5 cm"],
+                ["Modelo", "Frisado"],
+                ["Larguras disponíveis", "20 cm e 25 cm"],
                 ["Comprimentos disponíveis", "1,0m a 7,0m"],
                 ["Cor", "Branco"],
-                ["Acessórios", "Emenda H, Canto Meia Cana, Moldura"],
+                ["Acessórios", "Canto, Emenda H, Moldura, Roda-forro U"],
               ].map(([k, v]) => (
                 <tr key={k}>
                   <td className="py-2.5 text-gray-500">{k}</td>
@@ -286,7 +311,7 @@ export default function ForroPVC() {
         <ModalCotarWhatsApp
           aberto={modalWppAberto}
           onFechar={() => setModalWppAberto(false)}
-          nomeProduto="Forro PVC Branco"
+          nomeProduto="Forro PVC Branco Frisado"
           corpoMensagem={corpoMsgWpp}
         />
       </>
