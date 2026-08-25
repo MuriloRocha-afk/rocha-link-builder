@@ -3,48 +3,12 @@ import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/Emoji
 const CARDS: EmojiSubcard[] = [
   {
     slug: "calha-alge",
-    name: "Calha Alge — Moldura e Platibanda",
+    name: "Calha Galvanizada",
     emoji: "🌧️",
     badge: "Campeão de Vendas",
-    tags: ["Galvanizada", "2m a 6m"],
+    tags: ["Galvanizada", "Moldura e Platibanda", "2m a 6m"],
     description:
       "Calha galvanizada nos cortes Moldura e Platibanda de 2,0m a 6,0m. A mais vendida para telhados residenciais.",
-    cta: "Escolher e cotar",
-  },
-  {
-    slug: "calha-aquapluv",
-    name: "Calha Aquapluv & Style",
-    emoji: "🔵",
-    tags: ["PVC", "Bege e Cinza"],
-    description:
-      "Calhas PVC Bege e Cinza da linha Aquapluv e Aquapluv Style Retangular. Não enferruja, fácil instalação.",
-    cta: "Escolher e cotar",
-  },
-  {
-    slug: "platibanda",
-    name: "Calha Platibanda Galvanizada",
-    emoji: "🧱",
-    tags: ["Galvanizada", "Cortes 25, 33 e 50"],
-    description:
-      "Calha embutida atrás da platibanda, com aba alta. De 2,0m a 6,0m, com saídas, suportes e selante.",
-    cta: "Escolher e cotar",
-  },
-  {
-    slug: "moldura",
-    name: "Calha Moldura Galvanizada",
-    emoji: "🏠",
-    tags: ["Galvanizada", "Cortes 25, 33 e 50"],
-    description:
-      "Calha aparente na beira do telhado, com dobra frontal de acabamento. De 2,0m a 6,0m.",
-    cta: "Escolher e cotar",
-  },
-  {
-    slug: "pvc",
-    name: "Calha PVC",
-    emoji: "💧",
-    tags: ["PVC", "Bege e Cinza"],
-    description:
-      "Linhas Aquapluv Beira e Style em PVC: não enferruja, encaixe sem solda, com saídas e suportes.",
     cta: "Escolher e cotar",
   },
   {
@@ -53,7 +17,7 @@ const CARDS: EmojiSubcard[] = [
     emoji: "🏠",
     tags: ["Galvanizado", "2m a 6m"],
     description:
-      "Rufo Alge galvanizado de 2,0m a 6,0m. Arremate entre telhado e parede, impermeabilização definitiva.",
+      "Rufo galvanizado de 2,0m a 6,0m. Arremate entre telhado e parede, impermeabilização definitiva.",
     cta: "Escolher e cotar",
   },
   {
@@ -87,9 +51,9 @@ const CARDS: EmojiSubcard[] = [
     slug: "acessorios-calha",
     name: "Acessórios de Calha",
     emoji: "🔧",
-    tags: ["Alge", "Aquapluv"],
+    tags: ["Moldura", "Platibanda"],
     description:
-      "Suportes, cabeceiras, saídas centrais, emendas e bocais para calhas Alge e Aquapluv. Tudo para fechar o sistema.",
+      "Suportes, cabeceiras, saídas centrais e laterais, água furtada e pingadeira para calha galvanizada.",
     cta: "Escolher e cotar",
   },
 ];
@@ -99,17 +63,8 @@ const GRUPOS = [
     id: "calhas",
     label: "Calhas & Rufos",
     descricao:
-      "Calhas galvanizadas e de PVC, rufos, água furtada e todos os acessórios para fechar o sistema de captação.",
-    slugs: [
-      "platibanda",
-      "moldura",
-      "pvc",
-      "calha-alge",
-      "calha-aquapluv",
-      "rufo",
-      "agua-furtada",
-      "acessorios-calha",
-    ],
+      "Calha galvanizada nos cortes Moldura e Platibanda, rufos, água furtada e todos os acessórios para fechar o sistema de captação.",
+    slugs: ["calha-alge", "rufo", "agua-furtada", "acessorios-calha"],
   },
   {
     id: "mantas",
