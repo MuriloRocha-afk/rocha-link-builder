@@ -85,7 +85,7 @@ export default function PontaleteEucalipto() {
       }
       cabecalho={
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">🪵 Pontalete de Eucalipto</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Pontalete de Eucalipto</h1>
           <p className="text-gray-500 mt-1 text-sm">
             Pontalete roliço tratado em autoclave. Escolha a bitola (diâmetro) e o comprimento.
           </p>

@@ -140,7 +140,7 @@ export default function ForroPinus() {
       }
       cabecalho={
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">🌲 Forro de Pinus</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Forro de Pinus</h1>
           <p className="text-gray-500 mt-1 text-sm">
             Réguas de pinus claro para forros internos. Vendido por m², com 10% de perda já
             calculado.

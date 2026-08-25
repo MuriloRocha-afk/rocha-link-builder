@@ -62,6 +62,17 @@ function resolverOpcoes(passo: PassoConfig, sel: Selecao): OpcaoConfig[] {
   return typeof passo.opcoes === "function" ? passo.opcoes(sel) : passo.opcoes;
 }
 
+const EMOJI_INICIAL_RE = /^[\s]*(?:[\u{1F000}-\u{1FAFF}\u2600-\u27BF\u2B00-\u2BFF\u3030]\uFE0F?\s*)+/u;
+
+function tituloSemEmojiDecorativo(titulo: string) {
+  return titulo.replace(EMOJI_INICIAL_RE, "").trim() || titulo;
+}
+
+function deveMostrarEmojiNasOpcoes(opcoes: OpcaoConfig[]) {
+  const emojis = opcoes.map((opcao) => opcao.emoji).filter(Boolean);
+  return emojis.length > 0 && new Set(emojis).size > 1;
+}
+
 export default function ConfiguradorGenerico({ config }: { config: ConfiguradorConfig }) {
   const { adicionar } = useOrcamento();
   const [sel, setSel] = useState<Selecao>({});
@@ -156,7 +167,9 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
               {config.badge}
             </span>
           )}
-          <h1 className="text-2xl font-bold text-gray-900 mt-1">{config.titulo}</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mt-1">
+            {tituloSemEmojiDecorativo(config.titulo)}
+          </h1>
           <p className="text-gray-500 mt-1 text-sm">{config.subtitulo}</p>
           {config.tagInfo && (
             <span className="inline-flex mt-3 rounded-full bg-green-50 border border-green-200 text-green-700 text-xs font-semibold px-3 py-1">
@@ -263,7 +276,9 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
                       className={`w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 ${baseBtn(sel[p.chave] === o.valor)}`}
                     >
                       <span className="flex items-center gap-3">
-                        {o.emoji && <span className="text-xl">{o.emoji}</span>}
+                        {deveMostrarEmojiNasOpcoes(opcoes) && o.emoji && (
+                          <span className="text-xl">{o.emoji}</span>
+                        )}
                         {o.cor && (
                           <span
                             className="w-5 h-5 rounded-full border border-black/10"
@@ -292,7 +307,7 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
                   {opcoes.map((o) => (
                     <TipoCard
                       key={o.valor}
-                      icone={o.emoji}
+                      icone={deveMostrarEmojiNasOpcoes(opcoes) ? o.emoji : undefined}
                       cor={o.cor}
                       nome={o.label ?? o.valor}
                       descricao={o.sub}
