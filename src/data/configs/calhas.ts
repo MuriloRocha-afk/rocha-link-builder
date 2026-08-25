@@ -11,11 +11,11 @@ const COMPRIMENTOS = ["2,0m", "3,0m", "4,0m", "5,0m", "6,0m"];
 
 export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
   produtoKey: "calha-alge",
-  breadcrumb: BC("Calha Alge"),
-  titulo: "🌧️ Calha Alge — Moldura e Platibanda",
+  breadcrumb: BC("Calha Galvanizada"),
+  titulo: "Calha Galvanizada — Moldura e Platibanda",
   badge: "★ Campeão de Vendas",
   subtitulo: "Calha galvanizada nos cortes Moldura e Platibanda de 2,0m a 6,0m.",
-  galeriaTitulo: "Calha Alge",
+  galeriaTitulo: "Calha Galvanizada",
   galeriaPlaceholder: "Selecione o corte para ver as fotos",
   imagens: (s) =>
     s.corte
@@ -24,8 +24,8 @@ export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
             src: "",
             alt:
               s.corte === "Moldura Corte 33"
-                ? "Calha Alge Moldura galvanizada"
-                : "Calha Alge Platibanda",
+                ? "Calha galvanizada Moldura"
+                : "Calha galvanizada Platibanda",
           },
         ]
       : [],
@@ -36,8 +36,8 @@ export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
       titulo: "Corte",
       tipo: "grid2",
       opcoes: [
-        { valor: "Moldura Corte 33", emoji: "📐", sub: "Encaixe em telhados com beira" },
-        { valor: "Platibanda Corte 33", emoji: "📏", sub: "Para telhados com platibanda" },
+        { valor: "Moldura Corte 33", sub: "Encaixe em telhados com beira" },
+        { valor: "Platibanda Corte 33", sub: "Para telhados com platibanda" },
       ],
     },
     {
@@ -48,41 +48,12 @@ export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
   ],
-  resumoNome: () => "Calha Alge",
+  resumoNome: () => "Calha Galvanizada",
   resumoDetalhe: (s, q) => `${s.corte} · ${s.comprimento} · ${q.qtd ?? 4} peças`,
   unidadeResumo: () => "peças",
-  idItem: (s) => `calha-alge-${s.corte}-${s.comprimento}`,
+  idItem: (s) => `calha-galvanizada-${s.corte}-${s.comprimento}`,
   mensagem: (s, q) =>
-    `🌧️ *Calha Alge*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
-};
-
-export const CONFIG_CALHA_AQUAPLUV: ConfiguradorConfig = {
-  breadcrumb: BC("Calha Aquapluv"),
-  titulo: "🔵 Calha Aquapluv & Style",
-  subtitulo:
-    "Calhas PVC Bege e Cinza. Não enferruja, fácil instalação, sistema completo de acessórios.",
-  galeriaTitulo: "Calha Aquapluv",
-  galeriaPlaceholder: "Selecione a linha para ver as fotos",
-  imagens: (s) => (s.linha ? [{ src: "", alt: `${s.linha}` }] : []),
-  categoria: "Calhas",
-  passos: [
-    {
-      chave: "linha",
-      titulo: "Linha",
-      tipo: "grid2",
-      opcoes: [
-        { valor: "Aquapluv Calha — Cinza", emoji: "🔵", sub: "Calha redonda clássica" },
-        { valor: "Aquapluv Style — Retangular", emoji: "⬛", sub: "Design moderno" },
-      ],
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 4 },
-  ],
-  resumoNome: () => "Calha Aquapluv",
-  resumoDetalhe: (s, q) => `${s.linha} · ${q.qtd ?? 4} peças`,
-  unidadeResumo: () => "peças",
-  idItem: (s) => `aquapluv-${s.linha}`,
-  mensagem: (s, q) =>
-    `🔵 *Calha Aquapluv*\n• Linha: ${s.linha}\n• Quantidade: ${q.qtd ?? 4} peças`,
+    `🌧️ *Calha Galvanizada*\n• Corte: ${s.corte}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 4} peças`,
 };
 
 export const CONFIG_RUFO: ConfiguradorConfig = {
