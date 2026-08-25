@@ -7,12 +7,18 @@ import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import { imagensCeramica } from "@/data/imagensProduto";
 
+type Opcao = { nome: string; verificar?: boolean };
+
+type Rendimento = { nome: string; pecasPorM2: number; descricao: string };
+
 type Formato = {
   value: string;
   nome: string;
   badge?: string;
   marcas?: string;
-  acabamentos: string[];
+  cores: Opcao[];
+  acabamentos: Opcao[];
+  rendimentos?: Rendimento[];
   pecasPorM2: number;
   imagemKey: string;
   descricao: string;
@@ -24,7 +30,12 @@ const FORMATOS: Formato[] = [
     nome: "Portuguesa",
     badge: "Campeão #1",
     marcas: "Isotec e Rodrigues",
-    acabamentos: ["Resinada", "Natural", "Mesclada Resinada"],
+    cores: [
+      { nome: "Barro Vermelho" },
+      { nome: "Barro Branco", verificar: true },
+      { nome: "Mesclado", verificar: true },
+    ],
+    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
     pecasPorM2: 24,
     imagemKey: "portuguesa-isotec",
     descricao: "Encaixe clássico, a mais pedida do pátio.",
@@ -34,8 +45,13 @@ const FORMATOS: Formato[] = [
     nome: "Romana",
     badge: "Campeão",
     marcas: "Laranjal e Top Telha",
-    acabamentos: ["Resinada", "Natural"],
-    pecasPorM2: 16,
+    cores: [{ nome: "Barro Vermelho" }],
+    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
+    rendimentos: [
+      { nome: "R13", pecasPorM2: 13, descricao: "13 telhas por m² — peça maior" },
+      { nome: "R17", pecasPorM2: 17, descricao: "17 telhas por m² — peça menor" },
+    ],
+    pecasPorM2: 13,
     imagemKey: "romana-resinada",
     descricao: "Linhas retas e onda suave, visual contemporâneo.",
   },
@@ -43,7 +59,8 @@ const FORMATOS: Formato[] = [
     value: "americana",
     nome: "Americana",
     marcas: "Rodrigues",
-    acabamentos: ["Resinada", "Natural"],
+    cores: [{ nome: "Barro Vermelho" }],
+    acabamentos: [{ nome: "Resinada" }],
     pecasPorM2: 16,
     imagemKey: "americana-resinada",
     descricao: "Perfil plano com onda larga e alto rendimento.",
@@ -51,7 +68,8 @@ const FORMATOS: Formato[] = [
   {
     value: "francesa",
     nome: "Francesa (Marselha)",
-    acabamentos: ["Natural", "Resinada"],
+    cores: [{ nome: "Barro Vermelho" }],
+    acabamentos: [{ nome: "Natural" }],
     pecasPorM2: 16,
     imagemKey: "portuguesa-mesclada",
     descricao: "Tradicional, com friso marcado e ótima vedação.",
@@ -59,7 +77,15 @@ const FORMATOS: Formato[] = [
   {
     value: "mediterranea",
     nome: "Mediterrânea",
-    acabamentos: ["Resinada", "Natural"],
+    cores: [
+      { nome: "Marfim" },
+      { nome: "Viga", verificar: true },
+      { nome: "Grená", verificar: true },
+      { nome: "Pérola", verificar: true },
+      { nome: "Café", verificar: true },
+      { nome: "Royal", verificar: true },
+    ],
+    acabamentos: [{ nome: "Prime (Resinado)" }],
     pecasPorM2: 13,
     imagemKey: "romana-top",
     descricao: "Onda ampla, cobertura maior por peça.",
@@ -68,7 +94,8 @@ const FORMATOS: Formato[] = [
 
 const SPECS = [
   { label: "Formatos", value: "Portuguesa, Romana, Americana, Francesa e Mediterrânea" },
-  { label: "Acabamentos", value: "Natural, Resinada e Mesclada Resinada" },
+  { label: "Acabamentos", value: "Natural, Resinada e Prime (Resinado)" },
+  { label: "Rendimento Romana", value: "R13 (13 pçs/m²) e R17 (17 pçs/m²)" },
   { label: "Marcas", value: "Isotec, Rodrigues, Laranjal e Top Telha" },
   { label: "Inclinação mínima", value: "30%" },
   { label: "Fixação", value: "Prego telheiro ou arame" },
