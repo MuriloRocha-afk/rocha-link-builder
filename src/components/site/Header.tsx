@@ -9,7 +9,7 @@ type NavItem = { label: string; hash?: string; to?: string };
 const NAV: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Catálogo", to: "/catalogo" },
-  { label: "Estrutura & Pátio", hash: "tecnologia" },
+  { label: "Nossa Estrutura", hash: "tecnologia" },
   { label: "Calculadora", to: "/calculadora" },
   { label: "Guias", to: "/ferramentas" },
   { label: "FAQ", hash: "faq" },
