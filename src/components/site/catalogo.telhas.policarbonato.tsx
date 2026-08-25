@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
+import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
 import { imagensCeramica } from "@/data/imagensProduto";
 
 type Opcao = { nome: string; verificar?: boolean };
@@ -340,6 +341,8 @@ Poderia verificar estoque e frete?`;
               </span>
             </p>
           </Passo>
+
+          <SugestaoCumeeira material="Barro" cor={corAtiva.nome} />
 
           <div className="rounded-2xl border border-accent/40 bg-accent/5 p-6">
             <p className="text-xs font-bold tracking-[0.16em] text-accent uppercase">Resumo</p>
