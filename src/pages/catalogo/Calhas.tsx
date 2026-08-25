@@ -13,20 +13,11 @@ const CARDS: EmojiSubcard[] = [
   },
   {
     slug: "rufo",
-    name: "Rufos Galvanizados",
+    name: "Rufo Galvanizado",
     emoji: "🏠",
-    tags: ["Galvanizado", "2m a 6m"],
+    tags: ["Galvanizado", "Corte 25 e 33", "2m a 6m"],
     description:
-      "Rufo galvanizado de 2,0m a 6,0m. Arremate entre telhado e parede, impermeabilização definitiva.",
-    cta: "Escolher e cotar",
-  },
-  {
-    slug: "agua-furtada",
-    name: "Água Furtada Galvanizada",
-    emoji: "💧",
-    tags: ["Galvanizada", "Corte 33 e 50"],
-    description:
-      "Calha de rincão para o encontro entre duas águas do telhado. Galvanizada, de 2,0m a 6,0m nos cortes 33 e 50.",
+      "Rufo galvanizado nos cortes 25 e 33, de 2,0m a 6,0m. Arremate entre telhado e parede, impermeabilização definitiva.",
     cta: "Escolher e cotar",
   },
   {
@@ -48,12 +39,12 @@ const CARDS: EmojiSubcard[] = [
     cta: "Escolher e cotar",
   },
   {
-    slug: "acessorios-calha",
+    slug: "acessorios",
     name: "Acessórios de Calha",
     emoji: "🔧",
     tags: ["Moldura", "Platibanda"],
     description:
-      "Suportes, cabeceiras, saídas centrais e laterais, água furtada e pingadeira para calha galvanizada.",
+      "Suporte, cabeceira, saída, água furtada e pingadeira para calha galvanizada Moldura e Platibanda.",
     cta: "Escolher e cotar",
   },
 ];
@@ -63,8 +54,8 @@ const GRUPOS = [
     id: "calhas",
     label: "Calhas & Rufos",
     descricao:
-      "Calha galvanizada nos cortes Moldura e Platibanda, rufos, água furtada e todos os acessórios para fechar o sistema de captação.",
-    slugs: ["calha-alge", "rufo", "agua-furtada", "acessorios-calha"],
+      "Calha galvanizada nos cortes Moldura e Platibanda, rufos e todos os acessórios para fechar o sistema de captação.",
+    slugs: ["calha-alge", "rufo", "acessorios"],
   },
   {
     id: "mantas",

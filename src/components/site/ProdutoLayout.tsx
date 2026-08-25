@@ -10,6 +10,7 @@ type Props = {
   /** configurador em passos + resumo (coluna direita) */
   children: ReactNode;
   especificacoes?: [string, string][];
+  informacoes?: { titulo: string; texto: string }[];
   acessorios?: ReactNode;
   tituloAcessorios?: string;
   /** desativa o comportamento sticky da coluna da galeria */
@@ -23,6 +24,7 @@ export default function ProdutoLayout({
   galeria,
   children,
   especificacoes,
+  informacoes,
   acessorios,
   tituloAcessorios = "Complemente seu pedido",
   galeriaSticky = false,
@@ -109,6 +111,23 @@ export default function ProdutoLayout({
                 ))}
               </tbody>
             </table>
+          </section>
+        ) : null}
+
+        {/* INFORMAÇÕES */}
+        {informacoes?.length ? (
+          <section className="mt-10 rounded-2xl bg-white p-5 shadow-sm md:p-6">
+            <h2 className="border-b border-gray-200 pb-3 text-lg font-bold text-gray-900">
+              Informações
+            </h2>
+            <div className="mt-4 space-y-5">
+              {informacoes.map((i) => (
+                <div key={i.titulo}>
+                  <h3 className="text-sm font-bold text-gray-900">{i.titulo}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-gray-600">{i.texto}</p>
+                </div>
+              ))}
+            </div>
           </section>
         ) : null}
 
