@@ -204,47 +204,44 @@ export const CONFIG_MANTA_ASFALTICA: ConfiguradorConfig = {
     `🛡️ *Manta Asfáltica Aluminizada — Terracota*\n• Largura: ${s.largura}\n• Comprimento por rolo: 10m\n• Quantidade: ${q.qtd ?? 1} rolos`,
 };
 
-const ACESSORIOS_ALGE = [
+const ACESSORIOS_MOLDURA = [
   "Suporte Calha Moldura 28/33",
-  "Suporte Calha Platibanda 28/33",
   "Cabeceira Moldura 28/33 — Direita",
   "Cabeceira Moldura 28/33 — Esquerda",
-  "Cabeceira Platibanda 28/33",
   "Saída Central Moldura 28/33",
-  "Saída Central Platibanda 28/33",
   "Saída Lateral Moldura 28/33 — Direita",
   "Saída Lateral Moldura 28/33 — Esquerda",
-  "Saída Lateral Platibanda 28/33",
+  "Água Furtada 28/33",
+  "Pingadeira 28/33",
 ];
 
-const ACESSORIOS_AQUAPLUV = [
-  "Aquapluv — Bocal Cinza",
-  "Aquapluv — Cabeceira Direita/Esquerda Bege",
-  "Aquapluv — Calha Cinza",
-  "Aquapluv Style — Emenda",
-  "Aquapluv Style — Joelho 45° Retangular",
-  "Aquapluv Style — Joelho 90° Retangular",
-  "Aquapluv Style — Suporte PVC",
-  "Aquapluv Style — Condutor Retangular",
-  "Aquapluv — Condutor Circular Bege",
+const ACESSORIOS_PLATIBANDA = [
+  "Suporte Calha Platibanda 28/33",
+  "Cabeceira Platibanda 28/33 — Direita",
+  "Cabeceira Platibanda 28/33 — Esquerda",
+  "Saída Central Platibanda 28/33",
+  "Saída Lateral Platibanda 28/33",
+  "Água Furtada 28/33",
+  "Pingadeira 28/33",
 ];
 
 export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   breadcrumb: BC("Acessórios de Calha"),
-  titulo: "🔧 Acessórios de Calha",
-  subtitulo: "Suportes, cabeceiras, saídas, emendas e bocais para calhas Alge e Aquapluv.",
+  titulo: "Acessórios de Calha",
+  subtitulo:
+    "Suportes, cabeceiras, saídas, água furtada e pingadeira para calha galvanizada Moldura e Platibanda.",
   galeriaTitulo: "Acessórios de Calha",
-  galeriaPlaceholder: "Selecione o sistema para ver as fotos",
+  galeriaPlaceholder: "Selecione o corte para ver as fotos",
   imagens: (s) => (s.sistema ? [{ src: "", alt: `Acessórios ${s.sistema}` }] : []),
   categoria: "Calhas",
   passos: [
     {
       chave: "sistema",
-      titulo: "Sistema",
+      titulo: "Corte da Calha",
       tipo: "grid2",
       opcoes: [
-        { valor: "Sistema Alge", emoji: "📐", sub: "Moldura e Platibanda" },
-        { valor: "Sistema Aquapluv", emoji: "🔵", sub: "Calha redonda e Style" },
+        { valor: "Moldura", sub: "Calha aparente na beira do telhado" },
+        { valor: "Platibanda", sub: "Calha embutida atrás da platibanda" },
       ],
     },
     {
@@ -252,7 +249,7 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
       titulo: "Acessório",
       tipo: "lista",
       opcoes: (s) =>
-        (s.sistema === "Sistema Alge" ? ACESSORIOS_ALGE : ACESSORIOS_AQUAPLUV).map((v) => ({
+        (s.sistema === "Moldura" ? ACESSORIOS_MOLDURA : ACESSORIOS_PLATIBANDA).map((v) => ({
           valor: v,
         })),
     },
@@ -263,7 +260,7 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   unidadeResumo: () => "peças",
   idItem: (s) => `acessorio-calha-${s.acessorio}`,
   mensagem: (s, q) =>
-    `🔧 *Acessório de Calha*\n• Sistema: ${s.sistema?.replace("Sistema ", "")}\n• Produto: ${s.acessorio}\n• Quantidade: ${q.qtd ?? 4} peças`,
+    `🔧 *Acessório de Calha*\n• Corte: ${s.sistema}\n• Produto: ${s.acessorio}\n• Quantidade: ${q.qtd ?? 4} peças`,
 };
 
 /* ------------------------------------------------------------------ */
