@@ -175,13 +175,10 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
 // CALHAS — por subcategoria
 export const imagensCalhas: Record<string, ImagemProduto[]> = {
   "calha-alge": [
-    { src: "", alt: "Calha Alge galvanizada no pátio", legenda: "Calha Alge — Moldura Galvanizada" },
-  ],
-  "calha-aquapluv": [
-    { src: "", alt: "Calha Aquapluv PVC bege", legenda: "Calha Aquapluv — PVC Bege" },
+    { src: "", alt: "Calha galvanizada no pátio", legenda: "Calha Galvanizada — Moldura" },
   ],
   rufo: [
-    { src: "", alt: "Rufo galvanizado Alge", legenda: "Rufo Galvanizado — Alge" },
+    { src: "", alt: "Rufo galvanizado instalado", legenda: "Rufo Galvanizado" },
   ],
   "manta-termica": [
     { src: "", alt: "Manta térmica aluminizada instalada", legenda: "Manta Térmica Aluminizada 2F" },
@@ -190,7 +187,7 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Manta asfáltica terracota", legenda: "Manta Asfáltica Aluminizada" },
   ],
   "acessorios": [
-    { src: "", alt: "Acessórios para calha Alge e Aquapluv", legenda: "Acessórios — Suportes, Cabeceiras e Saídas" },
+    { src: "", alt: "Acessórios para calha galvanizada Moldura e Platibanda", legenda: "Acessórios — Suportes, Cabeceiras e Saídas" },
   ],
 };
 
