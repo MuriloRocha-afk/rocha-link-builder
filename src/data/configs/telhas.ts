@@ -274,7 +274,7 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   breadcrumb: BC("Telha de Vidro"),
   titulo: "🔷 Telha de Vidro",
   subtitulo:
-    "Iluminação natural ponto a ponto. Formatos Portuguesa, Romana e Americana, com encaixe idêntico ao da telha cerâmica.",
+    "Iluminação natural ponto a ponto. Formatos Portuguesa, Romana e Mediterrânea, com encaixe idêntico ao da telha cerâmica.",
   galeriaTitulo: "Telha de Vidro",
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
   imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
@@ -285,7 +285,7 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   ],
   especificacoes: [
     ["Material", "Vidro temperado transparente"],
-    ["Formatos", "Portuguesa, Romana e Americana"],
+    ["Formatos", "Portuguesa, Romana e Mediterrânea"],
     ["Compatibilidade", "Encaixe igual ao da telha cerâmica do mesmo formato"],
     ["Uso indicado", "Pontos de luz natural na cobertura"],
     ["Recomendação", "1 a 2 telhas de vidro a cada 4 m² de ambiente"],
