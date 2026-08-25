@@ -225,7 +225,7 @@ export const imagensMadeirit: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Madeirit Plastificado" },
     { src: "", alt: "Detalhe superfície plastificada" },
   ],
-  "Resinado/Vermelho": [{ src: "", alt: "Madeirit Resinado/Vermelho" }],
+  Rosa: [{ src: "", alt: "Madeirit Rosa" }],
   OSB: [{ src: "", alt: "OSB Multiplac" }],
   Compensado: [{ src: "", alt: "Compensado estrutural" }],
 };
