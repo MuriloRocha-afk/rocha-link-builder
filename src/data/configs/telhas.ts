@@ -195,33 +195,41 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
 };
 
 const COMPRIMENTOS_PP = [
+  { valor: "122 × 110 cm" },
   { valor: "153 × 110 cm" },
   { valor: "183 × 110 cm" },
   { valor: "213 × 110 cm" },
   { valor: "244 × 110 cm", badge: "★ Compatível com Fibro 244cm" },
+  { valor: "244 × 92 cm" },
+  { valor: "244 × 50 cm" },
   { valor: "305 × 110 cm" },
   { valor: "366 × 110 cm" },
 ];
 
+const UTIL_PP: Record<string, number> = { "110": 1.05, "92": 0.87, "50": 0.45 };
+
 const coberturaPP = (comp: string, q: number) => {
-  const metros = parseFloat(comp) / 100;
-  return Math.round((metros - 0.14) * 1.05 * q * 10) / 10;
+  if (!comp) return 0;
+  const [c, l] = comp.replace(/\s|cm/g, "").split("×");
+  const metros = parseFloat(c) / 100;
+  const util = UTIL_PP[l] ?? 1.05;
+  return Math.round((metros - 0.14) * util * q * 10) / 10;
 };
 
 export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
   breadcrumb: BC("Telha Translúcida Polipropileno"),
   titulo: "💡 Telha Translúcida Polipropileno",
   subtitulo:
-    "Onda Alta 177/51 Translúcida de 153cm a 366cm. 100% compatível com telha de fibrocimento.",
+    "Onda Alta 177/51 Translúcida de 122cm a 366cm, espessura única de 1,2mm. 100% compatível com telha de fibrocimento.",
   galeriaTitulo: "Telha Translúcida Polipropileno",
-  galeriaPlaceholder: "Selecione um comprimento para ver as fotos",
+  galeriaPlaceholder: "Selecione um tamanho para ver as fotos",
   imagens: (s) =>
     s.comprimento ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }] : [],
   categoria: "Telhas",
   passos: [
     {
       chave: "comprimento",
-      titulo: "Comprimento da Telha",
+      titulo: "Tamanho da Telha (comprimento × largura)",
       tipo: "grid2",
       opcoes: COMPRIMENTOS_PP.map((o) => ({ ...o, emoji: "📏" })),
     },
@@ -236,9 +244,10 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     },
   ],
   especificacoes: [
+    ["Espessura", "1,2 mm (única)"],
     ["Inclinação mínima", "10%"],
     ["Sobreposição", "14 cm (igual ao fibrocimento)"],
-    ["Largura útil", "1,05 m"],
+    ["Larguras", "110 cm · 92 cm e 50 cm (apenas no comprimento 244 cm)"],
     ["Fixação", "Parafuso com vedação 110mm"],
     ["Compatibilidade", "100% com telha fibrocimento INFIBRA"],
   ],

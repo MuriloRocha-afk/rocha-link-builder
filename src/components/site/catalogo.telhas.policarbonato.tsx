@@ -7,12 +7,18 @@ import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import { imagensCeramica } from "@/data/imagensProduto";
 
+type Opcao = { nome: string; verificar?: boolean };
+
+type Rendimento = { nome: string; pecasPorM2: number; descricao: string };
+
 type Formato = {
   value: string;
   nome: string;
   badge?: string;
   marcas?: string;
-  acabamentos: string[];
+  cores: Opcao[];
+  acabamentos: Opcao[];
+  rendimentos?: Rendimento[];
   pecasPorM2: number;
   imagemKey: string;
   descricao: string;
@@ -24,7 +30,12 @@ const FORMATOS: Formato[] = [
     nome: "Portuguesa",
     badge: "Campeão #1",
     marcas: "Isotec e Rodrigues",
-    acabamentos: ["Resinada", "Natural", "Mesclada Resinada"],
+    cores: [
+      { nome: "Barro Vermelho" },
+      { nome: "Barro Branco", verificar: true },
+      { nome: "Mesclado", verificar: true },
+    ],
+    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
     pecasPorM2: 24,
     imagemKey: "portuguesa-isotec",
     descricao: "Encaixe clássico, a mais pedida do pátio.",
@@ -34,8 +45,13 @@ const FORMATOS: Formato[] = [
     nome: "Romana",
     badge: "Campeão",
     marcas: "Laranjal e Top Telha",
-    acabamentos: ["Resinada", "Natural"],
-    pecasPorM2: 16,
+    cores: [{ nome: "Barro Vermelho" }],
+    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
+    rendimentos: [
+      { nome: "R13", pecasPorM2: 13, descricao: "13 telhas por m² — peça maior" },
+      { nome: "R17", pecasPorM2: 17, descricao: "17 telhas por m² — peça menor" },
+    ],
+    pecasPorM2: 13,
     imagemKey: "romana-resinada",
     descricao: "Linhas retas e onda suave, visual contemporâneo.",
   },
@@ -43,7 +59,8 @@ const FORMATOS: Formato[] = [
     value: "americana",
     nome: "Americana",
     marcas: "Rodrigues",
-    acabamentos: ["Resinada", "Natural"],
+    cores: [{ nome: "Barro Vermelho" }],
+    acabamentos: [{ nome: "Resinada" }],
     pecasPorM2: 16,
     imagemKey: "americana-resinada",
     descricao: "Perfil plano com onda larga e alto rendimento.",
@@ -51,7 +68,8 @@ const FORMATOS: Formato[] = [
   {
     value: "francesa",
     nome: "Francesa (Marselha)",
-    acabamentos: ["Natural", "Resinada"],
+    cores: [{ nome: "Barro Vermelho" }],
+    acabamentos: [{ nome: "Natural" }],
     pecasPorM2: 16,
     imagemKey: "portuguesa-mesclada",
     descricao: "Tradicional, com friso marcado e ótima vedação.",
@@ -59,7 +77,15 @@ const FORMATOS: Formato[] = [
   {
     value: "mediterranea",
     nome: "Mediterrânea",
-    acabamentos: ["Resinada", "Natural"],
+    cores: [
+      { nome: "Marfim" },
+      { nome: "Viga", verificar: true },
+      { nome: "Grená", verificar: true },
+      { nome: "Pérola", verificar: true },
+      { nome: "Café", verificar: true },
+      { nome: "Royal", verificar: true },
+    ],
+    acabamentos: [{ nome: "Prime (Resinado)" }],
     pecasPorM2: 13,
     imagemKey: "romana-top",
     descricao: "Onda ampla, cobertura maior por peça.",
@@ -68,7 +94,8 @@ const FORMATOS: Formato[] = [
 
 const SPECS = [
   { label: "Formatos", value: "Portuguesa, Romana, Americana, Francesa e Mediterrânea" },
-  { label: "Acabamentos", value: "Natural, Resinada e Mesclada Resinada" },
+  { label: "Acabamentos", value: "Natural, Resinada e Prime (Resinado)" },
+  { label: "Rendimento Romana", value: "R13 (13 pçs/m²) e R17 (17 pçs/m²)" },
   { label: "Marcas", value: "Isotec, Rodrigues, Laranjal e Top Telha" },
   { label: "Inclinação mínima", value: "30%" },
   { label: "Fixação", value: "Prego telheiro ou arame" },
@@ -91,15 +118,23 @@ function Passo({ n, title, children }: { n: number; title: string; children: Rea
 export function CeramicaConfigurator() {
   const { addItem, setOpen } = useQuoteCart();
   const [formatoId, setFormatoId] = useState(FORMATOS[0].value);
-  const [acabamento, setAcabamento] = useState(FORMATOS[0].acabamentos[0]);
+  const [cor, setCor] = useState(FORMATOS[0].cores[0].nome);
+  const [acabamento, setAcabamento] = useState(FORMATOS[0].acabamentos[0].nome);
+  const [rendimento, setRendimento] = useState<string | null>(null);
   const [qty, setQty] = useState(100);
 
   const formato = FORMATOS.find((f) => f.value === formatoId)!;
-  const acabamentoAtivo = formato.acabamentos.includes(acabamento)
-    ? acabamento
-    : formato.acabamentos[0];
-  const cobertura = Math.round((qty / formato.pecasPorM2) * 10) / 10;
-  const nomeCompleto = `${formato.nome} ${acabamentoAtivo}`;
+  const corAtiva = formato.cores.find((c) => c.nome === cor) ?? formato.cores[0];
+  const acabamentoAtivo =
+    formato.acabamentos.find((a) => a.nome === acabamento) ?? formato.acabamentos[0];
+  const rendimentoAtivo =
+    formato.rendimentos?.find((r) => r.nome === rendimento) ?? formato.rendimentos?.[0] ?? null;
+  const pecasPorM2 = rendimentoAtivo?.pecasPorM2 ?? formato.pecasPorM2;
+  const cobertura = Math.round((qty / pecasPorM2) * 10) / 10;
+  const nomeCompleto = `${formato.nome} ${acabamentoAtivo.nome} · ${corAtiva.nome}${
+    rendimentoAtivo ? ` · ${rendimentoAtivo.nome}` : ""
+  }`;
+  const precisaVerificar = corAtiva.verificar || acabamentoAtivo.verificar;
 
   const detail = `Telha Cerâmica · ${nomeCompleto} · cobertura ~${cobertura} m²`;
 
@@ -107,7 +142,8 @@ export function CeramicaConfigurator() {
 
 🪨 *Telha Cerâmica*
 - Formato: ${formato.nome}
-- Acabamento: ${acabamentoAtivo}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
+- Cor: ${corAtiva.nome}
+- Acabamento: ${acabamentoAtivo.nome}${rendimentoAtivo ? `\n- Rendimento: ${rendimentoAtivo.nome} (${rendimentoAtivo.pecasPorM2} pçs/m²)` : ""}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
 - Quantidade: ${qty} peças
 - Cobertura estimada: ~${cobertura} m²
 
@@ -146,7 +182,9 @@ Poderia verificar estoque e frete?`;
                     type="button"
                     onClick={() => {
                       setFormatoId(f.value);
-                      setAcabamento(f.acabamentos[0]);
+                      setCor(f.cores[0].nome);
+                      setAcabamento(f.acabamentos[0].nome);
+                      setRendimento(f.rendimentos?.[0].nome ?? null);
                     }}
                     aria-pressed={active}
                     className={`flex w-full items-center justify-between gap-3 rounded-2xl border px-5 py-4 text-left transition-all ${
@@ -181,30 +219,91 @@ Poderia verificar estoque e frete?`;
             </div>
           </Passo>
 
-          <Passo n={2} title="Acabamento">
+          <Passo n={2} title="Cor / Tonalidade">
             <div className="flex flex-wrap gap-2">
-              {formato.acabamentos.map((a) => {
-                const active = acabamentoAtivo === a;
+              {formato.cores.map((c) => {
+                const active = corAtiva.nome === c.nome;
                 return (
                   <button
-                    key={a}
+                    key={c.nome}
                     type="button"
-                    onClick={() => setAcabamento(a)}
+                    onClick={() => setCor(c.nome)}
                     aria-pressed={active}
-                    className={`rounded-full border px-4 py-2 text-sm font-bold transition-all ${
+                    className={`rounded-full border px-4 py-2 text-left text-sm font-bold transition-all ${
                       active
                         ? "border-accent bg-accent/10 text-primary ring-1 ring-accent/40"
                         : "border-border bg-background text-muted-foreground hover:border-accent/60"
                     }`}
                   >
-                    {a}
+                    {c.nome}
+                    {c.verificar ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        verificar disponibilidade
+                      </span>
+                    ) : null}
                   </button>
                 );
               })}
             </div>
           </Passo>
 
-          <Passo n={3} title="Quantidade">
+          <Passo n={3} title="Acabamento">
+            <div className="flex flex-wrap gap-2">
+              {formato.acabamentos.map((a) => {
+                const active = acabamentoAtivo.nome === a.nome;
+                return (
+                  <button
+                    key={a.nome}
+                    type="button"
+                    onClick={() => setAcabamento(a.nome)}
+                    aria-pressed={active}
+                    className={`rounded-full border px-4 py-2 text-left text-sm font-bold transition-all ${
+                      active
+                        ? "border-accent bg-accent/10 text-primary ring-1 ring-accent/40"
+                        : "border-border bg-background text-muted-foreground hover:border-accent/60"
+                    }`}
+                  >
+                    {a.nome}
+                    {a.verificar ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        verificar disponibilidade
+                      </span>
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
+          </Passo>
+
+          {formato.rendimentos ? (
+            <Passo n={4} title="Rendimento (telhas por m²)">
+              <div className="grid gap-3 sm:grid-cols-2">
+                {formato.rendimentos.map((r) => {
+                  const active = rendimentoAtivo?.nome === r.nome;
+                  return (
+                    <button
+                      key={r.nome}
+                      type="button"
+                      onClick={() => setRendimento(r.nome)}
+                      aria-pressed={active}
+                      className={`rounded-2xl border px-5 py-4 text-left transition-all ${
+                        active
+                          ? "border-accent bg-accent/10 ring-1 ring-accent/40"
+                          : "border-border bg-background hover:border-accent/60"
+                      }`}
+                    >
+                      <span className="block text-base font-extrabold text-primary">{r.nome}</span>
+                      <span className="mt-0.5 block text-xs text-muted-foreground">
+                        {r.descricao}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </Passo>
+          ) : null}
+
+          <Passo n={formato.rendimentos ? 5 : 4} title="Quantidade">
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold tracking-[0.14em] text-primary/60 uppercase">
                 Nº de peças
@@ -237,7 +336,7 @@ Poderia verificar estoque e frete?`;
             <p className="mt-3 rounded-xl bg-secondary px-4 py-3 text-sm font-semibold text-primary">
               Cobertura estimada: {cobertura} m²{" "}
               <span className="font-normal text-muted-foreground">
-                (~{formato.pecasPorM2} peças por m²)
+                (~{pecasPorM2} peças por m²)
               </span>
             </p>
           </Passo>
@@ -251,6 +350,11 @@ Poderia verificar estoque e frete?`;
               Quantidade: {qty} peças · Cobertura: ~{cobertura} m²
               {formato.marcas ? ` · Marcas: ${formato.marcas}` : ""}
             </p>
+            {precisaVerificar ? (
+              <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
+                Esta combinação: verificar disponibilidade
+              </p>
+            ) : null}
 
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               <Button
@@ -259,7 +363,7 @@ Poderia verificar estoque e frete?`;
                 size="xl"
                 onClick={() => {
                   addItem({
-                    id: `ceramica--${formatoId}--${acabamentoAtivo}`,
+                    id: `ceramica--${formatoId}--${corAtiva.nome}--${acabamentoAtivo.nome}${rendimentoAtivo ? `--${rendimentoAtivo.nome}` : ""}`,
                     name: "Telha Cerâmica",
                     detail,
                     qty,
