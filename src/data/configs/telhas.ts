@@ -18,6 +18,7 @@ const CORES_CONCRETO = [
 ];
 
 export const CONFIG_CONCRETO: ConfiguradorConfig = {
+  sugestaoCumeeira: (s) => (s.cor ? { material: "Concreto", cor: s.cor } : null),
   produtoKey: "concreto",
   breadcrumb: BC("Telha de Concreto"),
   titulo: "🏗️ Telha de Concreto",
@@ -155,6 +156,7 @@ const acessoriosEsmaltada = (cor: string, qtd: number): AcessorioItem[] => [
 ];
 
 export const CONFIG_ESMALTADA: ConfiguradorConfig = {
+  sugestaoCumeeira: (s) => (s.cor ? { material: "Esmaltada", cor: s.cor } : null),
   produtoKey: "esmaltada",
   breadcrumb: BC("Telha Esmaltada"),
   titulo: "✨ Telha Esmaltada",
@@ -296,59 +298,4 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   idItem: (s) => `vidro-${s.formato}`,
   mensagem: (s, q) =>
     `🔷 *Telha de Vidro*\n• Formato: ${s.formato}\n• Quantidade: ${q.qtd ?? 6} peças`,
-};
-
-const TIPOS_CUMEEIRA = [
-  { valor: "Barro Resinada", emoji: "🪨", sub: "Mesclada ou Larga Resinada" },
-  { valor: "Concreto", emoji: "🏗️", sub: "3 Vias, Inicial, Cinza, Cores, Tabaco" },
-  {
-    valor: "Esmaltada",
-    emoji: "✨",
-    sub: "Vitrificada · Vermelho, Branco, Preto, Azul, Verde ou Marrom",
-  },
-  { valor: "PVC Central Fixa", emoji: "🟧", sub: "53cm × 86cm · Cerâmica, Cinza ou Marfim" },
-  { valor: "PVC Central Articulada", emoji: "🟧", sub: "53cm × 86cm · Cerâmica, Cinza ou Marfim" },
-  { valor: "PVC Lateral Articulada", emoji: "🟧", sub: "53cm × 103cm · Cerâmica, Cinza ou Marfim" },
-  { valor: "PVC Triangular 3 Vias", emoji: "🟧", sub: "Cerâmica, Cinza ou Marfim" },
-  { valor: "Fibrocimento 90°", emoji: "⬛", sub: "Shed · 110cm × 6cm" },
-  { valor: "Fibrocimento Articulada", emoji: "⬛", sub: "110cm × 6mm" },
-  { valor: "Fibrocimento Normal 15°", emoji: "⬛", sub: "092cm e 110cm × 60cm × 6mm" },
-  { valor: "Fibrocimento Universal 45° a 75°", emoji: "⬛" },
-];
-
-const variacoesCumeeira = (tipo: string) => {
-  if (tipo?.startsWith("PVC")) return ["Cerâmica", "Cinza", "Marfim"];
-  if (tipo === "Concreto") return ["3 Vias", "Inicial", "Cinza", "Cores", "Tabaco"];
-  if (tipo === "Barro Resinada") return ["Mesclada", "Larga Resinada"];
-  if (tipo === "Esmaltada") return ["Vermelho", "Branco", "Preto", "Azul", "Verde", "Marrom"];
-  return [];
-};
-
-export const CONFIG_CUMEEIRAS: ConfiguradorConfig = {
-  breadcrumb: BC("Cumeeiras & Acessórios"),
-  titulo: "🔺 Cumeeiras & Acessórios de Cobertura",
-  subtitulo:
-    "Barro, concreto, esmaltada, PVC e fibrocimento. Tudo para fechar e arrematar qualquer cobertura.",
-  galeriaTitulo: "Cumeeiras",
-  galeriaPlaceholder: "Selecione um tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: `Cumeeira ${s.tipo}` }] : []),
-  categoria: "Telhas",
-  passos: [
-    { chave: "tipo", titulo: "Tipo de Cumeeira", tipo: "lista", opcoes: TIPOS_CUMEEIRA },
-    {
-      chave: "variacao",
-      titulo: "Cor / Variação",
-      tipo: "chips",
-      visivel: (s) => variacoesCumeeira(s.tipo).length > 0,
-      opcoes: (s) => variacoesCumeeira(s.tipo).map((v) => ({ valor: v })),
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 10 },
-  ],
-  resumoNome: () => "Cumeeira",
-  resumoDetalhe: (s, q) =>
-    `${s.tipo}${s.variacao ? ` · ${s.variacao}` : ""} · ${q.qtd ?? 10} peças`,
-  unidadeResumo: () => "peças",
-  idItem: (s) => `cumeeira-${s.tipo}-${s.variacao ?? ""}`,
-  mensagem: (s, q) =>
-    `🔺 *Cumeeira*\n• Tipo: ${s.tipo}${s.variacao ? `\n• Variação: ${s.variacao}` : ""}\n• Quantidade: ${q.qtd ?? 10} peças`,
 };
