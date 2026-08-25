@@ -350,6 +350,11 @@ Poderia verificar estoque e frete?`;
               Quantidade: {qty} peças · Cobertura: ~{cobertura} m²
               {formato.marcas ? ` · Marcas: ${formato.marcas}` : ""}
             </p>
+            {precisaVerificar ? (
+              <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
+                Esta combinação: verificar disponibilidade
+              </p>
+            ) : null}
 
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
               <Button
