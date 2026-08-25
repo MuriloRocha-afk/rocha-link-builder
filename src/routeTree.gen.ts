@@ -43,6 +43,7 @@ import { Route as CatalogoTelhasConcretoRouteImport } from './routes/catalogo.te
 import { Route as CatalogoTelhasColonialPvcRouteImport } from './routes/catalogo.telhas.colonial-pvc'
 import { Route as CatalogoTelhasCeramicaRouteImport } from './routes/catalogo.telhas.ceramica'
 import { Route as CatalogoMadeiramentoTabeirasDeckRouteImport } from './routes/catalogo.madeiramento.tabeiras-deck'
+import { Route as CatalogoMadeiramentoTabeiraRouteImport } from './routes/catalogo.madeiramento.tabeira'
 import { Route as CatalogoMadeiramentoPontaleteEucaliptoRouteImport } from './routes/catalogo.madeiramento.pontalete-eucalipto'
 import { Route as CatalogoMadeiramentoPinusRouteImport } from './routes/catalogo.madeiramento.pinus'
 import { Route as CatalogoMadeiramentoPerobaRouteImport } from './routes/catalogo.madeiramento.peroba'
@@ -258,6 +259,12 @@ const CatalogoMadeiramentoTabeirasDeckRoute =
   CatalogoMadeiramentoTabeirasDeckRouteImport.update({
     id: '/catalogo/madeiramento/tabeiras-deck',
     path: '/catalogo/madeiramento/tabeiras-deck',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CatalogoMadeiramentoTabeiraRoute =
+  CatalogoMadeiramentoTabeiraRouteImport.update({
+    id: '/catalogo/madeiramento/tabeira',
+    path: '/catalogo/madeiramento/tabeira',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CatalogoMadeiramentoPontaleteEucaliptoRoute =
@@ -506,6 +513,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
+  '/catalogo/madeiramento/tabeira': typeof CatalogoMadeiramentoTabeiraRoute
   '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
@@ -576,6 +584,7 @@ export interface FileRoutesByTo {
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
+  '/catalogo/madeiramento/tabeira': typeof CatalogoMadeiramentoTabeiraRoute
   '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
@@ -648,6 +657,7 @@ export interface FileRoutesById {
   '/catalogo/madeiramento/peroba': typeof CatalogoMadeiramentoPerobaRoute
   '/catalogo/madeiramento/pinus': typeof CatalogoMadeiramentoPinusRoute
   '/catalogo/madeiramento/pontalete-eucalipto': typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
+  '/catalogo/madeiramento/tabeira': typeof CatalogoMadeiramentoTabeiraRoute
   '/catalogo/madeiramento/tabeiras-deck': typeof CatalogoMadeiramentoTabeirasDeckRoute
   '/catalogo/telhas/ceramica': typeof CatalogoTelhasCeramicaRoute
   '/catalogo/telhas/colonial-pvc': typeof CatalogoTelhasColonialPvcRoute
@@ -721,6 +731,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
+    | '/catalogo/madeiramento/tabeira'
     | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
@@ -791,6 +802,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
+    | '/catalogo/madeiramento/tabeira'
     | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
@@ -862,6 +874,7 @@ export interface FileRouteTypes {
     | '/catalogo/madeiramento/peroba'
     | '/catalogo/madeiramento/pinus'
     | '/catalogo/madeiramento/pontalete-eucalipto'
+    | '/catalogo/madeiramento/tabeira'
     | '/catalogo/madeiramento/tabeiras-deck'
     | '/catalogo/telhas/ceramica'
     | '/catalogo/telhas/colonial-pvc'
@@ -933,6 +946,7 @@ export interface RootRouteChildren {
   CatalogoMadeiramentoPerobaRoute: typeof CatalogoMadeiramentoPerobaRoute
   CatalogoMadeiramentoPinusRoute: typeof CatalogoMadeiramentoPinusRoute
   CatalogoMadeiramentoPontaleteEucaliptoRoute: typeof CatalogoMadeiramentoPontaleteEucaliptoRoute
+  CatalogoMadeiramentoTabeiraRoute: typeof CatalogoMadeiramentoTabeiraRoute
   CatalogoMadeiramentoTabeirasDeckRoute: typeof CatalogoMadeiramentoTabeirasDeckRoute
   CatalogoTelhasCeramicaRoute: typeof CatalogoTelhasCeramicaRoute
   CatalogoTelhasColonialPvcRoute: typeof CatalogoTelhasColonialPvcRoute
@@ -1201,6 +1215,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/madeiramento/tabeiras-deck'
       fullPath: '/catalogo/madeiramento/tabeiras-deck'
       preLoaderRoute: typeof CatalogoMadeiramentoTabeirasDeckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/madeiramento/tabeira': {
+      id: '/catalogo/madeiramento/tabeira'
+      path: '/catalogo/madeiramento/tabeira'
+      fullPath: '/catalogo/madeiramento/tabeira'
+      preLoaderRoute: typeof CatalogoMadeiramentoTabeiraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/madeiramento/pontalete-eucalipto': {
@@ -1512,6 +1533,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoMadeiramentoPinusRoute: CatalogoMadeiramentoPinusRoute,
   CatalogoMadeiramentoPontaleteEucaliptoRoute:
     CatalogoMadeiramentoPontaleteEucaliptoRoute,
+  CatalogoMadeiramentoTabeiraRoute: CatalogoMadeiramentoTabeiraRoute,
   CatalogoMadeiramentoTabeirasDeckRoute: CatalogoMadeiramentoTabeirasDeckRoute,
   CatalogoTelhasCeramicaRoute: CatalogoTelhasCeramicaRoute,
   CatalogoTelhasColonialPvcRoute: CatalogoTelhasColonialPvcRoute,

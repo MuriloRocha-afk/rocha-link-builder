@@ -748,6 +748,7 @@ export const ITEM_SLUG_ALIASES: Record<string, string> = {
   "forro-cedrinho": "outras-madeiras",
   madeirit: "madeirite-tabeiras",
   "tabeiras-deck": "madeirite-tabeiras",
+  tabeira: "madeirite-tabeiras",
   mourao: "madeirite-tabeiras",
 };
 

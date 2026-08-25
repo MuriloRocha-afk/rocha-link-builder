@@ -7,25 +7,25 @@ import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import TipoCard from "../../../components/site/TipoCard";
 import { imagensMadeirit } from "../../../data/imagensProduto";
 
-type Tipo = "Plastificado" | "Resinado/Vermelho" | "OSB" | "Compensado";
+type Tipo = "Plastificado" | "Rosa" | "OSB" | "Compensado";
 
 const TIPOS: { id: Tipo; nome: string; descricao: string; icone: string; badge?: string }[] = [
   { id: "Plastificado", nome: "Plastificado", descricao: "Chapas pretas revestidas para formas e revestimentos", icone: "⬛", badge: "★ Mais vendido" },
-  { id: "Resinado/Vermelho", nome: "Resinado/Vermelho", descricao: "Chapas resinadas para construção civil e formas", icone: "🟥" },
+  { id: "Rosa", nome: "Rosa", descricao: "Chapas resinadas rosa para construção civil e formas", icone: "🟥" },
   { id: "OSB", nome: "OSB", descricao: "Oriented Strand Board para estruturas e revestimentos", icone: "🪵" },
   { id: "Compensado", nome: "Compensado", descricao: "Compensado naval/multilaminado para diversos usos", icone: "📐" },
 ];
 
 const ESPESSURAS: Record<Tipo, string[]> = {
-  Plastificado: ["10mm", "12mm", "14mm", "16mm", "18mm", "20mm"],
-  "Resinado/Vermelho": ["5mm", "9mm", "12mm"],
+  Plastificado: ["10mm", "12mm", "14mm", "16mm", "18mm", "20mm", "22mm"],
+  Rosa: ["5mm", "9mm", "12mm", "17mm", "20mm"],
   OSB: ["10mm"],
-  Compensado: ["9mm", "11mm", "15mm"],
+  Compensado: ["9mm", "11mm", "15mm", "25mm"],
 };
 
 const DIMENSOES: Record<Tipo, string> = {
   Plastificado: "220cm × 110cm",
-  "Resinado/Vermelho": "220cm × 110cm",
+  Rosa: "220cm × 110cm",
   OSB: "220cm × 122cm",
   Compensado: "220cm × 160cm",
 };
@@ -118,7 +118,7 @@ export default function Madeirit() {
             Chapas estruturais para formas, forros e revestimentos. Selecione o tipo, espessura e quantidade.
           </p>
           <div className="flex gap-2 mt-3 flex-wrap">
-            {["Plastificado Preto", "Resinado/Vermelho", "OSB Multiplac", "Compensado"].map((tag) => (
+            {["Plastificado Preto", "Rosa", "OSB Multiplac", "Compensado"].map((tag) => (
               <span key={tag} className="text-xs bg-green-50 text-green-700 border border-green-200 px-2 py-1 rounded-full">
                 ✓ {tag}
               </span>

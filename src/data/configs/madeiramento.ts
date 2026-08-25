@@ -230,60 +230,89 @@ export const CONFIG_AMESCLA: ConfiguradorConfig = {
   mensagem: (s, q) => `📦 *Amescla*\n• Peça: ${s.peca}\n• Quantidade: ${q.qtd ?? 10} Mt`,
 };
 
-const CAT_TABEIRAS = [
-  { valor: "Tabeiras Desenhadas", emoji: "🎨", sub: "15cm, 20cm, 25cm e 30cm" },
-  { valor: "Deck Cumaru Mesclado", emoji: "🟤", sub: "10cm × 2cm por m²" },
-  { valor: "Deck Garapeia", emoji: "🟫", sub: "8cm × 2cm por m²" },
-  { valor: "Deck Pinus Tratado", emoji: "🌲", sub: "10cm × 2cm por m²" },
-];
+/* ---------------- TABEIRA (card próprio) ---------------- */
 
-const altTabeiras = (cat: string) =>
-  cat === "Tabeiras Desenhadas"
-    ? "Tabeira desenhada instalada"
-    : cat === "Deck Cumaru Mesclado"
-      ? "Deck de Cumaru Mesclado"
-      : cat === "Deck Garapeia"
-        ? "Deck Garapeia 8cm"
-        : "Deck Pinus Tratado";
+const ehDesenhada = (s: Record<string, string>) => s.acabamento === "Desenhada";
 
-const ehTabeira = (s: Record<string, string>) => s.categoria === "Tabeiras Desenhadas";
-const ehDeck = (s: Record<string, string>) =>
-  Boolean(s.categoria) && s.categoria !== "Tabeiras Desenhadas";
-const especieDeck = (cat: string) => cat.replace("Deck ", "");
-
-export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
-  breadcrumb: BC("Tabeiras & Deck"),
-  titulo: "🎨 Tabeiras & Deck",
+export const CONFIG_TABEIRA: ConfiguradorConfig = {
+  breadcrumb: BC("Tabeira"),
+  titulo: "Tabeira",
   subtitulo:
-    "Tabeiras desenhadas de 15cm a 30cm em 6 modelos e deck de cumaru, garapeia e pinus tratado.",
-  galeriaTitulo: "Tabeiras & Deck",
-  galeriaPlaceholder: "Selecione uma categoria para ver as fotos",
-  imagens: (s) => (s.categoria ? [{ src: "", alt: altTabeiras(s.categoria) }] : []),
+    "Tabeiras lisas (boleadas) ou desenhadas de 15cm a 30cm, com 6 modelos de desenho. Vendidas por metro linear.",
+  galeriaTitulo: "Tabeira",
+  galeriaPlaceholder: "Selecione o acabamento para ver as fotos",
+  imagens: (s) =>
+    s.acabamento
+      ? [{ src: "", alt: `Tabeira ${s.acabamento}` }]
+      : [],
   categoria: "Madeiramento",
   passos: [
-    { chave: "categoria", titulo: "Categoria", tipo: "grid2", opcoes: CAT_TABEIRAS },
     {
-      chave: "largura",
-      titulo: "Largura da Tabeira",
+      chave: "acabamento",
+      titulo: "Acabamento",
       tipo: "grid2",
-      visivel: ehTabeira,
+      opcoes: [
+        { valor: "Lisa (Boleada)", sub: "Perfil liso com borda boleada" },
+        { valor: "Desenhada", sub: "6 modelos de desenho disponíveis" },
+      ],
+    },
+    {
+      chave: "tamanho",
+      titulo: "Tamanho",
+      tipo: "grid2",
       opcoes: ["15cm", "20cm", "25cm", "30cm"].map((v) => ({ valor: v })),
     },
     {
       chave: "modelo",
       titulo: "Modelo",
       tipo: "grid3",
-      visivel: ehTabeira,
+      visivel: ehDesenhada,
       opcoes: [1, 2, 3, 4, 5, 6].map((n) => ({ valor: `Modelo ${n}` })),
     },
     {
-      chave: "qtdTabeira",
+      chave: "qtd",
       titulo: "Quantidade",
       tipo: "quantidade",
       unidade: "Mt",
       padrao: 10,
-      visivel: ehTabeira,
     },
+  ],
+  especificacoes: [
+    ["Acabamentos", "Lisa (boleada) ou desenhada"],
+    ["Tamanhos", "15cm, 20cm, 25cm e 30cm"],
+    ["Modelos", "Desenhada nº1 a nº6"],
+    ["Venda", "Por metro linear"],
+  ],
+  resumoNome: (s) => (ehDesenhada(s) ? "Tabeira Desenhada" : "Tabeira Lisa (Boleada)"),
+  resumoDetalhe: (s, q) =>
+    `${s.tamanho}${ehDesenhada(s) ? ` · ${s.modelo}` : ""} · ${q.qtd ?? 10} Mt`,
+  unidadeResumo: () => "Mt",
+  idItem: (s) => `tabeira-${s.acabamento}-${s.tamanho}-${s.modelo ?? ""}`,
+  mensagem: (s, q) =>
+    `*Tabeira ${ehDesenhada(s) ? "Desenhada" : "Lisa (Boleada)"}*\n• Tamanho: ${s.tamanho}${ehDesenhada(s) ? `\n• Modelo: ${s.modelo?.replace("Modelo ", "nº ")}` : ""}\n• Quantidade: ${q.qtd ?? 10} Mt`,
+};
+
+/* ---------------- DECK ---------------- */
+
+const CAT_DECK = [
+  { valor: "Deck Cumaru Mesclado", emoji: "🟤", sub: "10cm × 2cm por m²" },
+  { valor: "Deck Garapeia", emoji: "🟫", sub: "8cm × 2cm por m²" },
+  { valor: "Deck Pinus Tratado", emoji: "🌲", sub: "10cm × 2cm por m²" },
+];
+
+const especieDeck = (cat: string) => cat.replace("Deck ", "");
+
+export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
+  breadcrumb: BC("Deck"),
+  titulo: "Deck",
+  subtitulo: "Deck de cumaru mesclado, garapeia e pinus tratado, calculado por m².",
+  galeriaTitulo: "Deck",
+  galeriaPlaceholder: "Selecione uma categoria para ver as fotos",
+  imagens: (s) =>
+    s.categoria ? [{ src: "", alt: `Deck ${especieDeck(s.categoria)}` }] : [],
+  categoria: "Madeiramento",
+  passos: [
+    { chave: "categoria", titulo: "Tipo de Deck", tipo: "grid2", opcoes: CAT_DECK },
     {
       chave: "area",
       titulo: "Área em m²",
@@ -291,53 +320,40 @@ export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
       unidade: "m²",
       padrao: 10,
       decimal: true,
-      visivel: ehDeck,
       nota: (_s, q) => `+15% sugerido para perdas → ${(q * 1.15).toFixed(1)} m² total`,
     },
   ],
-  resumoNome: (s) =>
-    ehTabeira(s) ? "Tabeira Desenhada" : `Deck ${especieDeck(s.categoria ?? "")}`,
-  resumoDetalhe: (s, q) =>
-    ehTabeira(s)
-      ? `${s.largura} · ${s.modelo} · ${q.qtdTabeira ?? 10} Mt`
-      : `${(((q.area as number) ?? 10) * 1.15).toFixed(1)} m² (inclui 15% de perda)`,
-  unidadeResumo: (s) => (ehTabeira(s) ? "Mt" : "m²"),
-  idItem: (s) => `tabeiras-deck-${s.categoria}-${s.largura ?? ""}-${s.modelo ?? ""}`,
+  resumoNome: (s) => `Deck ${especieDeck(s.categoria ?? "")}`,
+  resumoDetalhe: (_s, q) =>
+    `${(((q.area as number) ?? 10) * 1.15).toFixed(1)} m² (inclui 15% de perda)`,
+  unidadeResumo: () => "m²",
+  idItem: (s) => `deck-${s.categoria}`,
   mensagem: (s, q) =>
-    ehTabeira(s)
-      ? `🎨 *Tabeira Desenhada*\n• Largura: ${s.largura} · ${s.modelo?.replace("Modelo ", "Modelo nº ")}\n• Quantidade: ${q.qtdTabeira ?? 10} Mt`
-      : `🟤 *Deck ${especieDeck(s.categoria ?? "")}*\n• Área: ${(((q.area as number) ?? 10) * 1.15).toFixed(1)} m² (inclui 15% de perda)\n• Espécie: ${especieDeck(s.categoria ?? "")}`,
+    `🟤 *Deck ${especieDeck(s.categoria ?? "")}*\n• Área: ${(((q.area as number) ?? 10) * 1.15).toFixed(1)} m² (inclui 15% de perda)\n• Espécie: ${especieDeck(s.categoria ?? "")}`,
 };
 
-const DIAMETROS = [
-  "4cm × 6cm",
-  "6cm × 8cm",
-  "8cm × 10cm",
-  "10cm × 12cm",
-  "12cm × 14cm",
-  "14cm × 16cm",
-  "16cm × 18cm",
-  "18cm × 20cm",
-];
-const COMPRIMENTOS_MOURAO = [
-  "2,20m",
-  "2,50m",
-  "3,00m",
-  "4,00m",
-  "5,00m",
-  "6,00m",
-  "7,00m",
-  "8,00m",
-  "9,00m",
-  "10,00m",
-];
+/* ---------------- MOURÃO TRATADO ---------------- */
+
+/** Medidas reais: comprimentos disponíveis por diâmetro. */
+export const MOURAO_MEDIDAS: Record<string, string[]> = {
+  "04 x 06cm": ["2,20m", "2,50m", "3m"],
+  "06 x 08cm": ["2,20m", "2,50m", "3m", "4m", "5m", "6m"],
+  "08 x 10cm": ["2,50m", "3m", "4m", "5m", "6m", "7m"],
+  "10 x 12cm": ["2,20m", "2,50m", "3m", "4m", "5m", "6m", "7m", "8m"],
+  "12 x 14cm": ["2,50m", "3m", "4m", "5m", "6m", "7m", "8m", "9m"],
+  "14 x 16cm": ["2,50m", "3m", "4m", "5m", "6m", "7m", "8m", "9m", "10m"],
+  "16 x 18cm": ["2,50m", "3m", "4m", "5m", "6m", "7m", "8m", "9m", "10m"],
+  "18 x 20cm": ["2,50m", "3m", "4m", "5m", "6m", "7m", "8m", "9m"],
+  "20 x 22cm": ["5m"],
+  "28 x 30cm": ["4m", "5m"],
+};
 
 export const CONFIG_MOURAO: ConfiguradorConfig = {
   produtoKey: "mourao",
   breadcrumb: BC("Mourão Tratado"),
-  titulo: "🌾 Mourão Tratado",
+  titulo: "Mourão Tratado",
   subtitulo:
-    "Autoclave de 4cm a 20cm de diâmetro e 2,20m a 10m de comprimento. Cercas e estruturas rurais.",
+    "Autoclave de 04x06cm a 28x30cm e 2,20m a 10m de comprimento. Cercas e estruturas rurais.",
   tagInfo: "✓ Tratado em Autoclave · Reflorestamento",
   galeriaTitulo: "Mourão Tratado",
   galeriaPlaceholder: "Selecione o diâmetro para ver as fotos",
@@ -345,42 +361,32 @@ export const CONFIG_MOURAO: ConfiguradorConfig = {
   categoria: "Madeiramento",
   passos: [
     {
-      chave: "aplicacao",
-      titulo: "Aplicação",
-      tipo: "grid2",
-      opcoes: [
-        { valor: "Cerca / Divisa", emoji: "🚧", sub: "Mourões de cerca rural e divisas" },
-        { valor: "Estrutura / Pergolado", emoji: "🏗️", sub: "Pilares, pergolados e coberturas" },
-        { valor: "Curral / Baia", emoji: "🐄", sub: "Currais, baias e manejo de animais" },
-        { valor: "Paisagismo", emoji: "🌿", sub: "Contenção, canteiros e decoração" },
-      ],
-    },
-    {
       chave: "diametro",
       titulo: "Diâmetro",
       tipo: "chips",
-      opcoes: DIAMETROS.map((v) => ({ valor: v })),
+      opcoes: Object.keys(MOURAO_MEDIDAS).map((v) => ({ valor: v })),
     },
     {
       chave: "comprimento",
       titulo: "Comprimento",
       tipo: "grid3",
-      opcoes: COMPRIMENTOS_MOURAO.map((v) => ({ valor: v })),
+      visivel: (s) => Boolean(s.diametro),
+      opcoes: (s) => (MOURAO_MEDIDAS[s.diametro] ?? []).map((v) => ({ valor: v })),
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 10 },
   ],
   especificacoes: [
     ["Tratamento", "Autoclave — CCA Tipo C"],
+    ["Diâmetros", "04x06cm a 28x30cm"],
     ["Uso", "Cercas, estruturas rurais, fundações"],
     ["Durabilidade", "10 a 25 anos no solo"],
   ],
   resumoNome: () => "Mourão Tratado",
-  resumoDetalhe: (s, q) =>
-    `${s.aplicacao} · ${s.diametro} · ${s.comprimento} · ${q.qtd ?? 10} peças`,
+  resumoDetalhe: (s, q) => `${s.diametro} · ${s.comprimento} · ${q.qtd ?? 10} peças`,
   unidadeResumo: () => "peças",
   idItem: (s) => `mourao-${s.diametro}-${s.comprimento}`,
   mensagem: (s, q) =>
-    `🌾 *Mourão Tratado*\n• Aplicação: ${s.aplicacao}\n• Diâmetro: ${s.diametro}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 10} peças`,
+    `🌾 *Mourão Tratado*\n• Diâmetro: ${s.diametro}\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 10} peças`,
 };
 
 export const CONFIG_JATOBA: ConfiguradorConfig = criarConfigMadeiraNativa({
