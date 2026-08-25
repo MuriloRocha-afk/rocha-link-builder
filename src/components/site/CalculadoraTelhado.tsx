@@ -290,21 +290,16 @@ export function CalculadoraTelhado() {
 
     const peso = areaIncl * telha.pesoM2;
 
-    const listaCusto: ItemCusto[] = [
-      { chave: telha.chavePreco, nome: telha.label, qtd: telhas },
-      ...[...itens, ...acabamento, ...calhas, ...estrutura].map((i) => ({
-        chave: i.chave ?? null,
-        nome: i.nome,
-        qtd: i.valor ?? 0,
-      })),
-    ];
-    const faixa = estimarFaixa(listaCusto);
+    const peso = areaIncl * telha.pesoM2;
 
     setCompA(telha.id);
-    const sugestao =
-      TELHAS.find((t) => t.grupo !== telha.grupo && t.min <= incl && t.chavePreco) ??
+    const compativeis = TELHAS.filter((t) => t.id !== telha.id && t.min <= incl);
+    const sugB =
+      compativeis.find((t) => t.grupo !== telha.grupo) ??
       TELHAS.find((t) => t.id !== telha.id)!;
-    setCompB(sugestao.id);
+    setCompB(sugB.id);
+    const sugC = compativeis.find((t) => t.grupo !== telha.grupo && t.grupo !== sugB.grupo);
+    setCompC(sugC ? sugC.id : "");
 
     setRes({
       areaBase,
@@ -319,7 +314,6 @@ export function CalculadoraTelhado() {
       calhas,
       telha,
       peso,
-      faixa,
       croqui: croquiTelhadoSvg({
         tipo,
         comprimento: comprimentoNum,
@@ -333,25 +327,44 @@ export function CalculadoraTelhado() {
   };
 
   const fmt = (n: number, d = 2) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
-  const brl = (n: number) =>
-    n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 
-  const comparativo: Comparativo[] = res
-    ? [compA, compB].map((id) => {
-        const t = TELHAS.find((x) => x.id === id)!;
-        const pecas = calcularPecas(t, res.areaIncl, res.margem);
-        const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
-        return {
-          telha: t,
-          pecas,
-          peso: res.areaIncl * t.pesoM2,
-          custoMin: f.min,
-          custoMax: f.max,
-          semPreco: f.naoEncontrados.length > 0,
-          compativel: t.min <= res.incl,
-        };
-      })
-    : [];
+  /**
+   * Comparativo: usa internamente a tabela real de preços apenas para calcular
+   * a diferença percentual entre as opções — nenhum valor em R$ é exibido.
+   */
+  const comparativo: Comparativo[] = (() => {
+    if (!res) return [];
+    const base = [compA, compB, compC].filter(Boolean).map((id) => {
+      const t = acharTelha(id);
+      const pecas = calcularPecas(t, res.areaIncl, res.margem);
+      const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
+      const semPreco = f.naoEncontrados.length > 0 || f.max <= 0;
+      return {
+        telha: t,
+        pecas,
+        peso: res.areaIncl * t.pesoM2,
+        custoRef: semPreco ? 0 : (f.min + f.max) / 2,
+        semPreco,
+        compativel: t.min <= res.incl,
+      };
+    });
+    const comPreco = base.filter((b) => !b.semPreco).map((b) => b.custoRef);
+    const referencia = comPreco.length ? Math.min(...comPreco) : 0;
+    return base.map((b) => ({
+      ...b,
+      percentual:
+        b.semPreco || !referencia ? null : Math.round(((b.custoRef - referencia) / referencia) * 100),
+    }));
+  })();
+
+  const textoComparativo = (c: Comparativo) =>
+    c.percentual === null
+      ? "custo sob cotação"
+      : c.percentual === 0
+        ? "referência (opção mais econômica)"
+        : `aproximadamente ${c.percentual}% mais cara que a opção de referência`;
+
+
 
   const mensagem = res
     ? [
