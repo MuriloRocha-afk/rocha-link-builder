@@ -63,16 +63,18 @@ export function PolicarbonatoConfigurator() {
   const [qty, setQty] = useState(5);
 
   const versao = VERSOES.find((v) => v.value === versaoId)!;
-  const comprimento = COMPRIMENTOS.find((c) => c.value === dimensao)!;
+  const comprimentos = COMPRIMENTOS.filter((c) => !c.somenteCristal || versaoId === "cristal");
+  const comprimento = comprimentos.find((c) => c.value === dimensao) ?? comprimentos[1];
   const area = Math.round(comprimento.area * qty * 10) / 10;
+  const dimensaoAtiva = comprimento.value;
 
-  const detail = `Policarbonato · ${versao.nome} · ${dimensao} · área ~${area} m²`;
+  const detail = `Policarbonato · ${versao.nome} · ${dimensaoAtiva} · área ~${area} m²`;
 
   const mensagem = `Olá! Gostaria de um orçamento:
 
 ☀️ *Telha Policarbonato*
 - Versão: ${versao.nome}
-- Comprimento: ${dimensao}
+- Comprimento: ${dimensaoAtiva}
 - Quantidade: ${qty} chapas
 - Área estimada: ~${area} m²
 
@@ -111,7 +113,15 @@ Poderia verificar estoque e frete?`;
                   <button
                     key={v.value}
                     type="button"
-                    onClick={() => setVersaoId(v.value)}
+                    onClick={() => {
+                      setVersaoId(v.value);
+                      setDimensao((d) => {
+                        const alvo = COMPRIMENTOS.find((c) => c.value === d);
+                        return alvo?.somenteCristal && v.value !== "cristal"
+                          ? COMPRIMENTOS[1].value
+                          : d;
+                      });
+                    }}
                     aria-pressed={active}
                     className={`rounded-2xl border px-5 py-4 text-left transition-all ${
                       active
@@ -130,7 +140,7 @@ Poderia verificar estoque e frete?`;
 
           <Passo n={2} title="Comprimento">
             <div className="grid gap-3">
-              {COMPRIMENTOS.map((c) => {
+              {comprimentos.map((c) => {
                 const active = dimensao === c.value;
                 return (
                   <button
@@ -198,7 +208,7 @@ Poderia verificar estoque e frete?`;
           <div className="rounded-2xl border border-accent/40 bg-accent/5 p-6">
             <p className="text-xs font-bold tracking-[0.16em] text-accent uppercase">Resumo</p>
             <p className="mt-2 text-lg font-extrabold text-primary">
-              Telha Policarbonato · {versao.nome} · {dimensao}
+              Telha Policarbonato · {versao.nome} · {dimensaoAtiva}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               Quantidade: {qty} chapas · Área: ~{area} m²
@@ -211,7 +221,7 @@ Poderia verificar estoque e frete?`;
                 size="xl"
                 onClick={() => {
                   addItem({
-                    id: `policarbonato--${versaoId}--${dimensao}`,
+                    id: `policarbonato--${versaoId}--${dimensaoAtiva}`,
                     name: "Telha Policarbonato",
                     detail,
                     qty,
