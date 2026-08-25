@@ -590,7 +590,76 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["NCM", "68071000"],
     ],
   },
+  "manta-asfaltica": {
+    badges: [
+      { icone: "💧", texto: "100% impermeável" },
+      { icone: "☀️", texto: "Face aluminizada" },
+      { icone: "📐", texto: "10cm e 20cm" },
+      { icone: "🔥", texto: "Aplicação a quente" },
+    ],
+    motivos: [
+      {
+        titulo: "Veda emendas e junções",
+        descricao:
+          "Ideal para emendas de calha, rufos, encontros de parede e pequenos reparos no telhado.",
+      },
+      {
+        titulo: "Alumínio reflete o calor",
+        descricao: "A face aluminizada terracota protege o asfalto do sol e aumenta a durabilidade.",
+      },
+      {
+        titulo: "Adesão imediata",
+        descricao: "Autoadesiva com aquecimento leve, cola em metal, alvenaria, fibrocimento e PVC.",
+      },
+      {
+        titulo: "Rolo prático de 10m",
+        descricao: "Duas larguras para escolher conforme o tamanho da junção a impermeabilizar.",
+      },
+    ],
+    especificacoes: [
+      ["Material", "Asfalto elastomérico + alumínio"],
+      ["Cor", "Terracota"],
+      ["Larguras", "10cm e 20cm"],
+      ["Comprimento", "10m por rolo"],
+      ["Aplicação", "Calhas, rufos e junções"],
+    ],
+  },
+  pregos: {
+    badges: [
+      { icone: "🔨", texto: "3 tipos" },
+      { icone: "⚖️", texto: "A partir de 100g" },
+      { icone: "📦", texto: "Aço em pacote 100un" },
+      { icone: "🏗️", texto: "Uso em obra" },
+    ],
+    motivos: [
+      {
+        titulo: "Compre só o que precisa",
+        descricao: "Pregos polidos vendidos em múltiplos de 100g, sem sobra e sem desperdício.",
+      },
+      {
+        titulo: "Prego de aço para concreto",
+        descricao:
+          "Alta resistência para fixar em concreto e alvenaria, em pacote fechado de 100 unidades.",
+      },
+      {
+        titulo: "Bitolas para cada serviço",
+        descricao: "De 10×10 a 25×72, cobrindo caixaria, ripa, forro e madeiramento.",
+      },
+      {
+        titulo: "Com e sem cabeça",
+        descricao: "Sem cabeça para acabamento discreto; com cabeça para máxima fixação.",
+      },
+    ],
+    especificacoes: [
+      ["Tipos", "Aço, Polido com cabeça, Polido sem cabeça"],
+      ["Bitolas", "10×10 a 25×72"],
+      ["Embalagem polido", "Múltiplos de 100g"],
+      ["Embalagem aço", "Pacote de 100 unidades"],
+      ["Material", "Aço carbono / aço polido"],
+    ],
+  },
 };
+
 
 export function getDestaques(chave?: string): DestaquesProdutoInfo | undefined {
   return chave ? DESTAQUES_PRODUTO[chave] : undefined;
