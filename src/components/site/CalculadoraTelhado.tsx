@@ -6,61 +6,25 @@ import {
   AlertTriangle,
   Download,
   Scale,
-  Wallet,
   Ruler,
   Info,
 } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
-import { estimarFaixa, TABELA_PRECOS, type ItemCusto, type ResultadoFaixa } from "@/data/precosLoja";
+import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
+import {
+  TELHAS_CATALOGO,
+  GRUPOS_TELHAS,
+  acharTelha,
+  type TelhaCatalogo,
+  type FamiliaTelha,
+} from "@/data/telhasCatalogo";
 
-type Telha = {
-  id: string;
-  label: string;
-  grupo: string;
-  /** peças por m² de telhado inclinado */
-  rendimento: number;
-  /** inclinação mínima em % */
-  min: number;
-  familia: "fibrocimento" | "pvc" | "ceramica" | "policarbonato" | "concreto" | "translucida";
-  /** peso aproximado da cobertura em kg por m² */
-  pesoM2: number;
-  /** peso aproximado de uma peça, em kg */
-  pesoPeca: number;
-  /** galga (distância entre ripas) — só para telhas de encaixe */
-  galga: string | null;
-  /** chave na tabela de preços real da loja (null = produto não tabelado) */
-  chavePreco: string | null;
-};
+type Telha = TelhaCatalogo;
 
-const TELHAS: Telha[] = [
-  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.67, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 18, galga: null, chavePreco: "telha.fib-153" },
-  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.56, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 21.5, galga: null, chavePreco: "telha.fib-183" },
-  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", rendimento: 0.42, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 28.5, galga: null, chavePreco: "telha.fib-244" },
-  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.34, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 35.5, galga: null, chavePreco: "telha.fib-305" },
-  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", rendimento: 0.28, min: 10, familia: "fibrocimento", pesoM2: 18, pesoPeca: 42.5, galga: null, chavePreco: "telha.fib-366" },
+const TELHAS = TELHAS_CATALOGO;
+const GRUPOS = GRUPOS_TELHAS;
 
-  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", rendimento: 0.58, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 6.5, galga: null, chavePreco: "telha.pvc-230" },
-  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", rendimento: 0.41, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 9.2, galga: null, chavePreco: "telha.pvc-328" },
-  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", rendimento: 0.3, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 12.9, galga: null, chavePreco: "telha.pvc-459" },
-  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", rendimento: 0.26, min: 15, familia: "pvc", pesoM2: 9, pesoPeca: 14.8, galga: null, chavePreco: "telha.pvc-525" },
-
-  { id: "cer-port", label: "Portuguesa Resinada (Isotec)", grupo: "Cerâmica", rendimento: 17, min: 30, familia: "ceramica", pesoM2: 45, pesoPeca: 2.6, galga: "33 a 35 cm", chavePreco: "telha.cer-port" },
-  { id: "cer-romana", label: "Romana", grupo: "Cerâmica", rendimento: 16, min: 30, familia: "ceramica", pesoM2: 45, pesoPeca: 2.8, galga: "34 a 36 cm", chavePreco: "telha.cer-romana" },
-  { id: "cer-amer", label: "Americana", grupo: "Cerâmica", rendimento: 12.5, min: 30, familia: "ceramica", pesoM2: 42, pesoPeca: 3.3, galga: "38 a 40 cm", chavePreco: "telha.cer-amer" },
-
-  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", rendimento: 0.56, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 2.6, galga: null, chavePreco: "telha.pol-183" },
-  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", rendimento: 0.42, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 3.4, galga: null, chavePreco: "telha.pol-244" },
-  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", rendimento: 0.34, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 4.3, galga: null, chavePreco: "telha.pol-305" },
-  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", rendimento: 0.28, min: 10, familia: "policarbonato", pesoM2: 3.5, pesoPeca: 5.1, galga: null, chavePreco: "telha.pol-366" },
-
-  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", rendimento: 10.5, min: 30, familia: "concreto", pesoM2: 48, pesoPeca: 4.5, galga: "32 a 34 cm", chavePreco: "telha.con-euro" },
-
-  { id: "tra-244", label: "Translúcida Polipropileno 2,44 m", grupo: "Translúcida", rendimento: 0.42, min: 10, familia: "translucida", pesoM2: 3, pesoPeca: 2.2, galga: null, chavePreco: null },
-  { id: "tra-366", label: "Translúcida Polipropileno 3,66 m", grupo: "Translúcida", rendimento: 0.28, min: 10, familia: "translucida", pesoM2: 3, pesoPeca: 3.3, galga: null, chavePreco: null },
-];
-
-const GRUPOS = Array.from(new Set(TELHAS.map((t) => t.grupo)));
 
 const ESPECIES = [
   { id: "cambara", label: "Cambará Rosa ★" },
@@ -125,21 +89,27 @@ type Comparativo = {
   telha: Telha;
   pecas: number;
   peso: number;
-  custoMin: number;
-  custoMax: number;
+  /** custo médio interno (só para calcular o percentual relativo) */
+  custoRef: number;
   semPreco: boolean;
   compativel: boolean;
+  /** percentual a mais em relação à opção mais barata (0 = referência) */
+  percentual: number | null;
 };
 
+type CfgAcabamento = { nome: string; util: number; chave: string };
+
 /** dados de cumeeira/espigão por família de telha (catálogo de acabamentos) */
-const ACABAMENTO = {
+const ACABAMENTO: Record<FamiliaTelha, CfgAcabamento> = {
   fibrocimento: { nome: "Cumeeira normal fibrocimento", util: 0.9, chave: "cumeeira.fibrocimento" },
   policarbonato: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
   translucida: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
   pvc: { nome: "Cumeeira Colonial PVC", util: 0.86, chave: "cumeeira.pvc" },
   ceramica: { nome: "Cumeeira de barro", util: 0.33, chave: "cumeeira.barro" },
   concreto: { nome: "Cumeeira de concreto", util: 0.33, chave: "cumeeira.barro" },
-} as const;
+  vidro: { nome: "Cumeeira de barro (compatível)", util: 0.33, chave: "cumeeira.barro" },
+};
+
 
 export function CalculadoraTelhado() {
   const { setDims } = useCalcDims();
@@ -158,7 +128,7 @@ export function CalculadoraTelhado() {
   const [espacamento, setEspacamento] = useState("0.50");
   const [compA, setCompA] = useState("fib-244");
   const [compB, setCompB] = useState("pvc-328");
-  const [mostrarCusto, setMostrarCusto] = useState(true);
+  const [compC, setCompC] = useState("");
   const [res, setRes] = useState<null | {
     areaBase: number;
     areaIncl: number;
@@ -172,7 +142,6 @@ export function CalculadoraTelhado() {
     calhas: Item[];
     telha: Telha;
     peso: number;
-    faixa: ResultadoFaixa;
     croqui: string;
     tipo: Tipo;
     incl: number;
@@ -180,8 +149,7 @@ export function CalculadoraTelhado() {
   }>(null);
   const [modal, setModal] = useState(false);
 
-  const telha = TELHAS.find((t) => t.id === telhaId)!;
-  const precoTelha = telha.chavePreco ? TABELA_PRECOS[telha.chavePreco] : undefined;
+  const telha = acharTelha(telhaId);
   const avisoIncl = incl < telha.min;
 
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
@@ -322,21 +290,14 @@ export function CalculadoraTelhado() {
 
     const peso = areaIncl * telha.pesoM2;
 
-    const listaCusto: ItemCusto[] = [
-      { chave: telha.chavePreco, nome: telha.label, qtd: telhas },
-      ...[...itens, ...acabamento, ...calhas, ...estrutura].map((i) => ({
-        chave: i.chave ?? null,
-        nome: i.nome,
-        qtd: i.valor ?? 0,
-      })),
-    ];
-    const faixa = estimarFaixa(listaCusto);
-
     setCompA(telha.id);
-    const sugestao =
-      TELHAS.find((t) => t.grupo !== telha.grupo && t.min <= incl && t.chavePreco) ??
+    const compativeis = TELHAS.filter((t) => t.id !== telha.id && t.min <= incl);
+    const sugB =
+      compativeis.find((t) => t.grupo !== telha.grupo) ??
       TELHAS.find((t) => t.id !== telha.id)!;
-    setCompB(sugestao.id);
+    setCompB(sugB.id);
+    const sugC = compativeis.find((t) => t.grupo !== telha.grupo && t.grupo !== sugB.grupo);
+    setCompC(sugC ? sugC.id : "");
 
     setRes({
       areaBase,
@@ -351,7 +312,6 @@ export function CalculadoraTelhado() {
       calhas,
       telha,
       peso,
-      faixa,
       croqui: croquiTelhadoSvg({
         tipo,
         comprimento: comprimentoNum,
@@ -365,25 +325,44 @@ export function CalculadoraTelhado() {
   };
 
   const fmt = (n: number, d = 2) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
-  const brl = (n: number) =>
-    n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 
-  const comparativo: Comparativo[] = res
-    ? [compA, compB].map((id) => {
-        const t = TELHAS.find((x) => x.id === id)!;
-        const pecas = calcularPecas(t, res.areaIncl, res.margem);
-        const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
-        return {
-          telha: t,
-          pecas,
-          peso: res.areaIncl * t.pesoM2,
-          custoMin: f.min,
-          custoMax: f.max,
-          semPreco: f.naoEncontrados.length > 0,
-          compativel: t.min <= res.incl,
-        };
-      })
-    : [];
+  /**
+   * Comparativo: usa internamente a tabela real de preços apenas para calcular
+   * a diferença percentual entre as opções — nenhum valor em R$ é exibido.
+   */
+  const comparativo: Comparativo[] = (() => {
+    if (!res) return [];
+    const base = [compA, compB, compC].filter(Boolean).map((id) => {
+      const t = acharTelha(id);
+      const pecas = calcularPecas(t, res.areaIncl, res.margem);
+      const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
+      const semPreco = f.naoEncontrados.length > 0 || f.max <= 0;
+      return {
+        telha: t,
+        pecas,
+        peso: res.areaIncl * t.pesoM2,
+        custoRef: semPreco ? 0 : (f.min + f.max) / 2,
+        semPreco,
+        compativel: t.min <= res.incl,
+      };
+    });
+    const comPreco = base.filter((b) => !b.semPreco).map((b) => b.custoRef);
+    const referencia = comPreco.length ? Math.min(...comPreco) : 0;
+    return base.map((b) => ({
+      ...b,
+      percentual:
+        b.semPreco || !referencia ? null : Math.round(((b.custoRef - referencia) / referencia) * 100),
+    }));
+  })();
+
+  const textoComparativo = (c: Comparativo) =>
+    c.percentual === null
+      ? "custo sob cotação"
+      : c.percentual === 0
+        ? "referência (opção mais econômica)"
+        : `aproximadamente ${c.percentual}% mais cara que a opção de referência`;
+
+
 
   const mensagem = res
     ? [
@@ -396,10 +375,18 @@ export function CalculadoraTelhado() {
         `- Margem de recorte/reposição: ${res.margem}%`,
         `- Telha escolhida: ${res.telha.label} (${res.telha.grupo})`,
         `- Peso estimado da cobertura: ${fmt(res.peso, 0)} kg`,
-        `- Faixa estimada de investimento (tabela Rocha & Telhas): ${brl(res.faixa.min)} a ${brl(res.faixa.max)}`,
-        ...(res.faixa.naoEncontrados.length
-          ? [`- Obs.: valor de ${res.faixa.naoEncontrados.length} item(ns) não incluído na estimativa, sujeito a cotação`]
+        ...(comparativo.length > 1
+          ? [
+              ``,
+              `⚖️ *COMPARATIVO ENTRE TELHAS*`,
+              ...comparativo.map(
+                (c) =>
+                  `- ${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}: ${c.pecas} un · ${fmt(c.peso, 0)} kg · ${textoComparativo(c)}`,
+              ),
+            ]
           : []),
+        ``,
+        `Obs.: a calculadora não informa valores — o preço final sai na cotação com o vendedor.`,
         ``,
         `📋 *MATERIAIS ESTIMADOS*`,
         `- ${res.telha.label} — Qtd: ${res.telhas} un`,
@@ -423,15 +410,11 @@ export function CalculadoraTelhado() {
       itens.length ? `<h2>${titulo}</h2><table>${itens.map(linha).join("")}</table>` : "";
     const comparaHtml = comparativo.length
       ? `<h2>Comparativo entre telhas</h2><table>
-        <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso${mostrarCusto ? "</td><td class=\"q\">Custo estimado" : ""}</td></tr>
+        <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso</td><td class="q">Comparação relativa</td></tr>
         ${comparativo
           .map(
             (c) =>
-              `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td>${
-                mostrarCusto
-                  ? `<td class="q">${c.semPreco ? "Sob cotação" : `${brl(c.custoMin)} – ${brl(c.custoMax)}`}</td>`
-                  : ""
-              }</tr>`,
+              `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td><td class="q">${textoComparativo(c)}</td></tr>`,
           )
           .join("")}
       </table>`
@@ -459,14 +442,13 @@ export function CalculadoraTelhado() {
   <div class="box"><span>Área inclinada</span><b>${fmt(res.areaIncl)} m²</b></div>
   <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
   <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
-  <div class="box"><span>Investimento estimado</span><b>${brl(res.faixa.min)} – ${brl(res.faixa.max)}</b></div>
 </div>
 ${bloco("Cobertura", [{ nome: res.telha.label, qtd: `${res.telhas} un` }, ...res.itens])}
 ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
 ${bloco("Calhas e rufos", res.calhas)}
 ${bloco("Estrutura de madeira", res.estrutura)}
 ${comparaHtml}
-<p class="small">Estimativa de referência gerada automaticamente. Valores e quantidades são conferidos pela equipe técnica na cotação final.</p>
+<p class="small">Estimativa de referência gerada automaticamente. Este material não apresenta valores: o preço final sai apenas na cotação com o vendedor, que também confere as quantidades.</p>
 </body></html>`;
     const w = window.open("", "_blank");
     if (!w) return;
@@ -586,12 +568,10 @@ ${comparaHtml}
             ))}
           </div>
           <p className="mt-2 text-[11px] text-gray-500">
-            Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b>
-            {precoTelha ? (
-              <> · preço de tabela a partir de <b className="text-gray-700">{brl(precoTelha.min.preco)}/peça</b></>
-            ) : (
-              <> · preço não tabelado — sujeito a cotação</>
-            )}
+            Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b> ·{" "}
+            <a href={telha.href} className="font-bold text-orange-600 hover:underline">
+              ver ficha completa no catálogo →
+            </a>
           </p>
         </div>
       </div>
@@ -778,30 +758,19 @@ ${comparaHtml}
             ))}
           </div>
 
-          {/* Faixa de investimento */}
+          {/* Peso e aviso de cotação (sem valores em R$) */}
           <div className="mt-4 rounded-xl border border-orange-200 bg-white p-4">
-            <div className="flex items-center gap-2">
-              <Wallet size={16} className="text-orange-600" />
-              <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">Faixa estimada de investimento</p>
-            </div>
-            <p className="mt-2 text-2xl font-extrabold text-gray-900">
-              {brl(res.faixa.min)} <span className="text-base font-bold text-gray-400">a</span> {brl(res.faixa.max)}
+            <p className="flex items-center gap-1.5 text-xs text-gray-600">
+              <Scale size={14} className="text-orange-600" /> Peso estimado da cobertura:{" "}
+              <b className="text-gray-900">{fmt(res.peso, 0)} kg</b>
             </p>
-            <p className="mt-1 flex items-center gap-1.5 text-xs text-gray-500">
-              <Scale size={13} /> Peso estimado da cobertura: <b className="text-gray-700">{fmt(res.peso, 0)} kg</b>
-            </p>
-            {res.faixa.naoEncontrados.length > 0 ? (
-              <p className="mt-2 text-[11px] font-semibold text-orange-700">
-                Valor de {res.faixa.naoEncontrados.length} item(ns) não incluído na estimativa, sujeito a cotação:{" "}
-                {res.faixa.naoEncontrados.join(", ")}.
-              </p>
-            ) : null}
             <p className="mt-2 text-[11px] text-gray-500">
-              Cálculo feito com os preços da tabela da Rocha &amp; Telhas (quantidade × preço unitário); a faixa reflete
-              a variação real entre as especificações mais comuns de cada produto. Não é preço fechado — o valor final
-              sai na cotação.
+              A calculadora não exibe preços: o valor final sai somente na cotação com o vendedor, que confere as
+              quantidades e as especificações disponíveis em estoque. No comparativo abaixo, mostramos apenas a
+              diferença relativa (%) entre as telhas escolhidas.
             </p>
           </div>
+
 
           <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
           <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
@@ -870,20 +839,23 @@ ${comparaHtml}
             </>
           )}
 
-          {/* Comparativo lado a lado */}
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">Comparativo entre duas telhas</p>
-            <label className="flex items-center gap-2 text-[11px] font-semibold text-gray-600">
-              Mostrar custo
-              <Toggle on={mostrarCusto} onClick={() => setMostrarCusto((v) => !v)} label="Mostrar custo" />
-            </label>
+          {/* Comparativo lado a lado — qualquer telha do catálogo */}
+          <div className="mt-5">
+            <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">
+              Comparativo entre telhas do catálogo
+            </p>
+            <p className="mt-1 text-[11px] text-gray-500">
+              Sugerimos telhas compatíveis com a inclinação informada, mas você pode trocar por qualquer outra opção do
+              catálogo — inclusive uma terceira telha.
+            </p>
           </div>
-          <div className="mt-2 grid gap-3 sm:grid-cols-2">
+          <div className="mt-2 grid gap-3 sm:grid-cols-3">
             {[
-              { valor: compA, set: setCompA },
-              { valor: compB, set: setCompB },
+              { valor: compA, set: setCompA, opcional: false },
+              { valor: compB, set: setCompB, opcional: false },
+              { valor: compC, set: setCompC, opcional: true },
             ].map((sel, idx) => {
-              const c = comparativo[idx];
+              const c = comparativo.find((x) => x.telha.id === sel.valor);
               return (
                 <div key={idx} className="rounded-xl border border-orange-100 bg-white p-3">
                   <select
@@ -892,6 +864,7 @@ ${comparaHtml}
                     className="w-full rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-bold focus:border-orange-400 focus:outline-none"
                     aria-label={`Telha ${idx + 1} do comparativo`}
                   >
+                    {sel.opcional && <option value="">+ Comparar uma 3ª telha (opcional)</option>}
                     {GRUPOS.map((g) => (
                       <optgroup key={g} label={g}>
                         {TELHAS.filter((t) => t.grupo === g).map((t) => (
@@ -912,19 +885,23 @@ ${comparaHtml}
                         <dt className="text-gray-500">Peso total</dt>
                         <dd className="font-bold text-gray-900">{fmt(c.peso, 0)} kg</dd>
                       </div>
-                      {mostrarCusto && (
-                        <div className="flex justify-between gap-2">
-                          <dt className="text-gray-500">Custo estimado</dt>
-                          <dd className="text-right font-bold text-orange-600">
-                            {c.semPreco ? <span className="text-gray-500">Sob cotação</span> : `${brl(c.custoMin)} – ${brl(c.custoMax)}`}
-                          </dd>
-                        </div>
-                      )}
                       <div className="flex justify-between">
                         <dt className="text-gray-500">Inclinação mínima</dt>
                         <dd className={`font-bold ${c.compativel ? "text-green-600" : "text-red-600"}`}>
                           {c.telha.min}% {c.compativel ? "· compatível" : "· acima da sua"}
                         </dd>
+                      </div>
+                      <div className="rounded-lg bg-orange-50 p-2">
+                        <p className="text-[10px] font-semibold tracking-wider text-orange-700 uppercase">
+                          Comparação relativa
+                        </p>
+                        <p className="mt-0.5 text-xs font-bold text-gray-800">
+                          {c.percentual === null
+                            ? "Custo sob cotação"
+                            : c.percentual === 0
+                              ? "Referência — opção mais econômica"
+                              : `≈ ${c.percentual}% mais cara que a referência`}
+                        </p>
                       </div>
                     </dl>
                   )}
@@ -933,9 +910,11 @@ ${comparaHtml}
             })}
           </div>
           <p className="mt-2 text-[11px] text-gray-500">
-            Coberturas mais leves (PVC e policarbonato) exigem menos madeira; cerâmica e concreto pedem estrutura
-            reforçada.
+            A diferença percentual é calculada com a tabela interna da loja, sem exibir valores: serve só para comparar
+            as opções entre si. Coberturas mais leves (PVC e policarbonato) exigem menos madeira; cerâmica e concreto
+            pedem estrutura reforçada.
           </p>
+
 
           <p className="mt-4 text-[11px] text-gray-500">
             Estimativa de referência. Nossa equipe técnica confere as quantidades na cotação final.
