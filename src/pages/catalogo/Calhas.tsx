@@ -79,7 +79,7 @@ export default function Calhas() {
   return (
     <CategoriaSubcardPage
       titulo="🌧️ Calhas, Rufos & Funilaria"
-      subtitulo="Calhas Alge e Aquapluv, rufos galvanizados, mantas térmicas e asfálticas. Escolha o produto."
+      subtitulo="Calha galvanizada, rufos, mantas térmicas e asfálticas. Escolha o produto."
       breadcrumb="Calhas, Rufos & Funilaria"
       eyebrow="Escolha o produto"
       cards={CARDS}

@@ -5,7 +5,7 @@ import Calhas from "@/pages/catalogo/Calhas";
 
 const TITLE = "Calhas, Rufos e Condutores | Rocha Telhas";
 const DESCRIPTION =
-  "Calhas Alge e Aquapluv, rufos, condutores e acessórios de captação de água. Monte seu orçamento e cote direto no WhatsApp.";
+  "Calha galvanizada, rufos, condutores e acessórios de captação de água. Monte seu orçamento e cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/")({
   head: () => ({
