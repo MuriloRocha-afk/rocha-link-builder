@@ -591,7 +591,7 @@ export const CATEGORIES: CatalogCategory[] = [
     title: "Calhas, Rufos & Funilaria",
     short: "Calhas & Rufos",
     description:
-      "Calhas Alge e Aquapluv, rufos galvanizados e mantas térmicas e asfálticas.",
+      "Calha galvanizada, rufos e mantas térmicas e asfálticas.",
     image: rufos,
     ctaLabel: "Ver Produtos",
     items: [
