@@ -57,21 +57,12 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   },
   {
     slug: "eucalipto",
-    name: "Eucalipto",
-    image: eucalipto,
-    description:
-      "Eucalipto in natura e tratado em autoclave, de 2m a 6m. Reflorestamento certificado.",
-    cta: "Escolher Comprimento",
-    grupo: "gerais",
-  },
-  {
-    slug: "pontalete-eucalipto",
     name: "Pontalete de Eucalipto",
     image: eucalipto,
     description:
-      "Pontalete roliço tratado em autoclave, bitolas de 6cm a 18cm e 2m a 6m de comprimento. Roliço é o mais vendido.",
+      "Pontalete roliço de eucalipto in natura, de 3m a 6m. Reflorestamento certificado.",
     badge: "Mais Vendido",
-    cta: "Configurar Bitola",
+    cta: "Escolher Comprimento",
     grupo: "gerais",
   },
   {
