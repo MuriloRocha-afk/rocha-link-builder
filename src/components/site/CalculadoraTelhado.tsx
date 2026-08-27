@@ -11,13 +11,12 @@ import {
 } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import { estimarFaixa } from "@/data/precosLoja";
-import { croquiTelhadoSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
+import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 import {
   TELHAS_CATALOGO,
   GRUPOS_TELHAS,
   acharTelha,
   type TelhaCatalogo,
-  type FamiliaTelha,
 } from "@/data/telhasCatalogo";
 
 type Telha = TelhaCatalogo;
@@ -97,18 +96,8 @@ type Comparativo = {
   percentual: number | null;
 };
 
-type CfgAcabamento = { nome: string; util: number; chave: string };
+/* cumeeira e espigão vêm do cadastro de cada telha (src/data/telhasCatalogo.ts) */
 
-/** dados de cumeeira/espigão por família de telha (catálogo de acabamentos) */
-const ACABAMENTO: Record<FamiliaTelha, CfgAcabamento> = {
-  fibrocimento: { nome: "Cumeeira normal fibrocimento", util: 0.9, chave: "cumeeira.fibrocimento" },
-  policarbonato: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
-  translucida: { nome: "Cumeeira universal (fibrocimento)", util: 0.9, chave: "cumeeira.fibrocimento" },
-  pvc: { nome: "Cumeeira Colonial PVC", util: 0.86, chave: "cumeeira.pvc" },
-  ceramica: { nome: "Cumeeira de barro", util: 0.33, chave: "cumeeira.barro" },
-  concreto: { nome: "Cumeeira de concreto", util: 0.33, chave: "cumeeira.barro" },
-  vidro: { nome: "Cumeeira de barro (compatível)", util: 0.33, chave: "cumeeira.barro" },
-};
 
 
 export function CalculadoraTelhado() {
@@ -136,6 +125,7 @@ export function CalculadoraTelhado() {
     telhas: number;
     alturaCumeeira: number;
     caibro: number;
+    larguraInclinada: number;
     itens: Item[];
     acabamento: Item[];
     estrutura: Item[];
@@ -143,6 +133,7 @@ export function CalculadoraTelhado() {
     telha: Telha;
     peso: number;
     croqui: string;
+    perfil: string;
     tipo: Tipo;
     incl: number;
     margem: number;
@@ -185,17 +176,27 @@ export function CalculadoraTelhado() {
     Math.ceil(areaIncl * t.rendimento * (1 + m / 100));
 
   const calcular = () => {
-    const c = comprimentoNum + 2 * beiralNum;
-    const l = larguraNum + 2 * beiralNum;
     if (comprimentoNum <= 0 || larguraNum <= 0) return;
 
-    const areaBase = c * l;
+    // Projeção do telhado (planta) COM beiral — usada só para a área inclinada
+    const c = comprimentoNum + 2 * beiralNum;
+    const l = larguraNum + 2 * beiralNum;
+
+    // Área da planta baixa do imóvel: exatamente o que o cliente informou.
+    // O beiral NÃO entra aqui — ele é prolongamento do plano inclinado.
+    const areaBase = comprimentoNum * larguraNum;
     const perimetro = 2 * (c + l);
     const fator = Math.sqrt(1 + Math.pow(incl / 100, 2));
-    const areaIncl = areaBase * fator * (tipo === "4aguas" ? 1.08 : tipo === "3aguas" ? 1.05 : 1);
+    // Todos os planos têm a mesma inclinação (1, 2, 3 ou 4 águas):
+    // área real de cobertura = projeção do telhado (com beiral) × fator de inclinação.
+    const areaIncl = c * l * fator;
     const telhas = calcularPecas(telha, areaIncl, margem);
-    const alturaCumeeira = (l / 2) * (incl / 100);
-    const caibro = Math.sqrt(Math.pow(l / 2, 2) + Math.pow(alturaCumeeira, 2));
+    // vão de cada água (sem beiral) e altura do oitão
+    const vao = tipo === "1agua" ? larguraNum : larguraNum / 2;
+    const alturaCumeeira = vao * (incl / 100);
+    // largura inclinada: do cume até a borda, já somando o beiral na direção da água
+    const larguraInclinada = vao * fator;
+    const caibro = larguraInclinada + beiralNum;
 
     const itens: Item[] = [];
     if (telha.familia === "fibrocimento" || telha.familia === "policarbonato" || telha.familia === "translucida") {
@@ -210,26 +211,45 @@ export function CalculadoraTelhado() {
       itens.push({ nome: "Prego telheiro / arame de amarração", qtd: `${Math.ceil(areaIncl * 1.5)} un`, chave: null });
     }
 
-    // ---- Item 5: telhas de acabamento (cumeeira / espigão) ----
+    // ---- telhas de acabamento: cumeeira e espigão contados SEPARADAMENTE ----
     const acabamento: Item[] = [];
     if (comAcabamento) {
-      const cfg = ACABAMENTO[telha.familia];
+      // cumeeira = linha de cume, medida sobre a planta do telhado (com beiral nas empenas)
       const mCumeeira =
-        tipo === "1agua" ? 0 : tipo === "2aguas" ? c : tipo === "3aguas" ? Math.max(0, c - l / 2) : Math.max(0, c - l);
-      const hip = Math.sqrt(Math.pow(l / 2, 2) * 2 + Math.pow(alturaCumeeira, 2));
+        tipo === "1agua"
+          ? 0
+          : tipo === "2aguas"
+            ? c
+            : tipo === "3aguas"
+              ? Math.max(0, c - l / 2)
+              : Math.max(0, c - l);
+      // espigão = aresta inclinada do canto até o cume
+      const hip = Math.sqrt(Math.pow(larguraInclinada + beiralNum, 2) + Math.pow(l / 2, 2));
       const mEspigao = tipo === "3aguas" ? 2 * hip : tipo === "4aguas" ? 4 * hip : 0;
       const totalM = mCumeeira + mEspigao;
-      const pecas = Math.ceil((totalM / cfg.util) * (1 + margem / 100));
-      if (totalM > 0) {
+
+      if (mCumeeira > 0) {
+        const pcCum = Math.ceil((mCumeeira / telha.cumeeira.util) * (1 + margem / 100));
         acabamento.push({
-          nome: `${cfg.nome} — cumeeira ${fmtN(mCumeeira)} m${mEspigao > 0 ? ` + espigão ${fmtN(mEspigao)} m` : ""}`,
-          qtd: `${pecas} un (${fmtN(totalM)} m lineares)`,
-          chave: cfg.chave,
-          valor: pecas,
+          nome: `Cumeeira — ${telha.cumeeira.nome} · ${fmtN(mCumeeira)} m lineares`,
+          qtd: `${pcCum} un`,
+          chave: telha.cumeeira.chave,
+          valor: pcCum,
         });
+      }
+      if (mEspigao > 0) {
+        const pcEsp = Math.ceil((mEspigao / telha.espigao.util) * (1 + margem / 100));
+        acabamento.push({
+          nome: `Espigão — ${telha.espigao.nome} · ${fmtN(mEspigao)} m lineares`,
+          qtd: `${pcEsp} un`,
+          chave: telha.espigao.chave,
+          valor: pcEsp,
+        });
+      }
+      if (totalM > 0) {
         if (telha.familia === "ceramica" || telha.familia === "concreto") {
           const arg = Math.max(1, Math.ceil(totalM / 6));
-          acabamento.push({ nome: "Argamassa / cimento-cola para assentar cumeeira", qtd: `${arg} saco(s)`, chave: null });
+          acabamento.push({ nome: "Argamassa / cimento-cola para assentar cumeeira e espigão", qtd: `${arg} saco(s)`, chave: null });
         }
       } else {
         acabamento.push({
@@ -238,6 +258,7 @@ export function CalculadoraTelhado() {
           chave: null,
         });
       }
+
     }
 
     const estrutura: Item[] = [];
@@ -306,6 +327,7 @@ export function CalculadoraTelhado() {
       telhas,
       alturaCumeeira,
       caibro,
+      larguraInclinada,
       itens,
       acabamento,
       estrutura,
@@ -318,10 +340,17 @@ export function CalculadoraTelhado() {
         largura: larguraNum,
         beiral: beiralNum || undefined,
       }),
+      perfil: croquiPerfilSvg({
+        tipo,
+        largura: larguraNum,
+        beiral: beiralNum,
+        inclinacao: incl,
+      }),
       tipo,
       incl,
       margem,
     });
+
   };
 
   const fmt = (n: number, d = 2) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
@@ -367,8 +396,9 @@ export function CalculadoraTelhado() {
   const mensagem = res
     ? [
         `Telhado`,
-        `- Área da base (com beiral): ${fmt(res.areaBase)} m²`,
-        `- Área inclinada: ${fmt(res.areaIncl)} m²`,
+        `- Área da base (planta, sem beiral): ${fmt(res.areaBase)} m²`,
+        `- Área inclinada (com beiral): ${fmt(res.areaIncl)} m²`,
+        `- Largura inclinada da água: ${fmt(res.larguraInclinada)} m (+ beiral ${fmt(beiralNum)} m)`,
         `- Perímetro: ${fmt(res.perimetro)} m`,
         `- Tipo: ${TIPOS.find((t) => t.id === res.tipo)!.label} — Inclinação ${res.incl}%`,
         `- Medidas: ${fmt(comprimentoNum)} × ${fmt(larguraNum)} m · beiral ${fmt(beiralNum)} m`,
@@ -431,15 +461,17 @@ export function CalculadoraTelhado() {
   .grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .box{border:1px solid #eee;border-radius:8px;padding:8px 12px;min-width:150px}
   .box b{display:block;font-size:15px}
-  .croqui{border:1px solid #eee;border-radius:8px;padding:10px;margin-top:14px;max-width:420px}
+  .croquis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .croqui{border:1px solid #eee;border-radius:8px;padding:10px;width:330px}
   .small{color:#6b7280;font-size:11px;margin-top:18px}
 </style></head><body>
 <h1>Rocha Telhas — Cálculo de telhado</h1>
 <div>${TIPOS.find((t) => t.id === res.tipo)!.label} · inclinação ${res.incl}% · ${res.telha.label} · margem ${res.margem}%</div>
-<div class="croqui">${res.croqui}</div>
+<div class="croquis"><div class="croqui">${res.croqui}</div><div class="croqui">${res.perfil}</div></div>
 <div class="grid">
-  <div class="box"><span>Área da base</span><b>${fmt(res.areaBase)} m²</b></div>
+  <div class="box"><span>Área da base (planta)</span><b>${fmt(res.areaBase)} m²</b></div>
   <div class="box"><span>Área inclinada</span><b>${fmt(res.areaIncl)} m²</b></div>
+  <div class="box"><span>Largura inclinada</span><b>${fmt(res.larguraInclinada)} m</b></div>
   <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
   <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
 </div>
@@ -508,8 +540,8 @@ ${comparaHtml}
           dangerouslySetInnerHTML={{ __html: croquiAtual }}
         />
         <p className="mt-2 flex items-start gap-1.5 text-[11px] text-gray-500">
-          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da alvenaria (linha tracejada). O beiral é
-          somado automaticamente em todos os lados.
+          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da planta (largura × comprimento). O beiral não entra na área da
+          planta — ele é somado apenas no comprimento da água inclinada.
         </p>
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div>
@@ -567,8 +599,16 @@ ${comparaHtml}
               </div>
             ))}
           </div>
+          {telha.notaDados && (
+            <p className="mt-2 flex items-start gap-1.5 rounded-lg bg-amber-50 p-2 text-[11px] text-amber-800">
+              <AlertTriangle size={13} className="mt-0.5 shrink-0" />
+              <span>
+                <b>Dado a confirmar:</b> {telha.notaDados}
+              </span>
+            </p>
+          )}
           <p className="mt-2 text-[11px] text-gray-500">
-            Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b> ·{" "}
+            Fabricante de referência: <b className="text-gray-700">{telha.fabricante}</b> · Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b> ·{" "}
             <a href={telha.href} className="font-bold text-orange-600 hover:underline">
               ver ficha completa no catálogo →
             </a>
@@ -736,20 +776,21 @@ ${comparaHtml}
         <div className="rounded-xl border border-[#fed7aa] bg-[#fff7ed] p-5">
           <p className="text-xs font-bold tracking-wider text-orange-600 uppercase">Resultado estimado</p>
 
-          {/* Croqui com as medidas preenchidas */}
-          <div
-            className="mt-3 rounded-xl border border-orange-100 bg-white p-3"
-            dangerouslySetInnerHTML={{ __html: res.croqui }}
-          />
+          {/* Croquis: vista superior + vista de perfil */}
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            <div className="rounded-xl border border-orange-100 bg-white p-3" dangerouslySetInnerHTML={{ __html: res.croqui }} />
+            <div className="rounded-xl border border-orange-100 bg-white p-3" dangerouslySetInnerHTML={{ __html: res.perfil }} />
+          </div>
 
           <div className="mt-3 grid grid-cols-2 gap-3">
             {[
-              { l: "Área da base", v: `${fmt(res.areaBase)} m²` },
+              { l: "Área da base (planta)", v: `${fmt(res.areaBase)} m²` },
               { l: "Área inclinada real", v: `${fmt(res.areaIncl)} m²` },
               { l: "Perímetro do telhado", v: `${fmt(res.perimetro)} m` },
               { l: `Telhas (+${res.margem}% margem)`, v: `${res.telhas} un` },
-              { l: "Altura da cumeeira", v: `${fmt(res.alturaCumeeira)} m` },
-              { l: "Comprimento do caibro", v: `${fmt(res.caibro)} m` },
+              { l: "Altura do oitão", v: `${fmt(res.alturaCumeeira)} m` },
+              { l: "Largura inclinada (água)", v: `${fmt(res.larguraInclinada)} m` },
+              { l: "Água + beiral (caibro)", v: `${fmt(res.caibro)} m` },
             ].map((b) => (
               <div key={b.l} className="rounded-lg border border-orange-100 bg-white p-3">
                 <p className="text-[11px] font-semibold text-gray-500">{b.l}</p>
