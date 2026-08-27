@@ -326,6 +326,7 @@ export function CalculadoraTelhado() {
       telhas,
       alturaCumeeira,
       caibro,
+      larguraInclinada,
       itens,
       acabamento,
       estrutura,
@@ -338,10 +339,17 @@ export function CalculadoraTelhado() {
         largura: larguraNum,
         beiral: beiralNum || undefined,
       }),
+      perfil: croquiPerfilSvg({
+        tipo,
+        largura: larguraNum,
+        beiral: beiralNum,
+        inclinacao: incl,
+      }),
       tipo,
       incl,
       margem,
     });
+
   };
 
   const fmt = (n: number, d = 2) => n.toLocaleString("pt-BR", { maximumFractionDigits: d });
