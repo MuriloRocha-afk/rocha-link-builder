@@ -94,10 +94,12 @@ const MEDIDAS: Medida[] = [
 ];
 
 const SPECS = [
-  { label: "Inclinação mínima", value: "10%" },
-  { label: "Sobreposição lateral", value: "1 onda" },
-  { label: "Sobreposição longitudinal", value: "14 cm" },
-  { label: "Larguras", value: "1,10 m · 0,92 m · 0,50 m" },
+  { label: "Inclinação mínima", value: "10° (17,6%) no 5 mm · 5° (9%) no 6 e 8 mm" },
+  { label: "Sobreposição lateral", value: "1/4 de onda (1 e 1/4 abaixo de 10°)" },
+  { label: "Sobreposição longitudinal", value: "14 cm (≥15°) · 20 cm (10°–15°) · 25 cm (5°–10°)" },
+  { label: "Largura útil", value: "1,05 m (nominal 1,10 m) · 0,87 m (nominal 0,92 m)" },
+  { label: "Área útil por telha", value: "Largura útil × (comprimento − sobreposição)" },
+  { label: "Vão livre máximo", value: "1,69 m (5 e 6 mm) · 1,99 m (8 mm)" },
   { label: "Fixação", value: "Parafuso com vedação 110mm" },
 ];
 
