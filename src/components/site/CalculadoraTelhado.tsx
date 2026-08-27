@@ -199,6 +199,50 @@ export function CalculadoraTelhado() {
   const luzQtdNum = Math.max(0, Math.floor(Number(luzQtd.replace(",", ".")) || 0));
   const rendimentoAtual = rendimentoTelha(telha, incl);
 
+  /* ---------- Item 1: medidas individuais por água do telhado ---------- */
+  const fatorIncl = Math.sqrt(1 + Math.pow(incl / 100, 2));
+  type Agua = { id: string; nome: string; forma: "ret" | "tri"; vao: number; comp: number };
+
+  const aguasPadrao: Agua[] = (() => {
+    const C = comprimentoNum;
+    const L = larguraNum;
+    if (tipo === "1agua") return [{ id: "a1", nome: "Água única", forma: "ret", vao: L, comp: C }];
+    if (tipo === "2aguas")
+      return [
+        { id: "a1", nome: "Água 1", forma: "ret", vao: L / 2, comp: C },
+        { id: "a2", nome: "Água 2", forma: "ret", vao: L / 2, comp: C },
+      ];
+    if (tipo === "3aguas") {
+      const cume = Math.max(0, C - L / 2);
+      const medio = (C + cume) / 2;
+      return [
+        { id: "a1", nome: "Água 1 (trapézio)", forma: "ret", vao: L / 2, comp: medio },
+        { id: "a2", nome: "Água 2 (trapézio)", forma: "ret", vao: L / 2, comp: medio },
+        { id: "a3", nome: "Tacaniça (triangular)", forma: "tri", vao: L / 2, comp: L },
+      ];
+    }
+    const cume4 = Math.max(0, C - L);
+    const medio4 = (C + cume4) / 2;
+    return [
+      { id: "a1", nome: "Água 1 (trapézio)", forma: "ret", vao: L / 2, comp: medio4 },
+      { id: "a2", nome: "Água 2 (trapézio)", forma: "ret", vao: L / 2, comp: medio4 },
+      { id: "a3", nome: "Tacaniça 1 (triangular)", forma: "tri", vao: L / 2, comp: L },
+      { id: "a4", nome: "Tacaniça 2 (triangular)", forma: "tri", vao: L / 2, comp: L },
+    ];
+  })();
+
+  /** medidas efetivas: no modo avançado o usuário pode sobrescrever água por água */
+  const aguas: Agua[] = aguasPadrao.map((a) => {
+    const cu = avancado ? aguasCustom[a.id] : undefined;
+    if (!cu) return a;
+    return { ...a, vao: num(cu.vao) || a.vao, comp: num(cu.comp) || a.comp };
+  });
+
+  /** comprimento da rampa da água (do cume à borda), já com beiral */
+  const rampaAgua = (a: Agua) => a.vao * fatorIncl + beiralNum;
+  const areaAgua = (a: Agua) => (a.forma === "tri" ? 0.5 * a.comp : a.comp) * rampaAgua(a);
+
+
   const calcular = () => {
     if (comprimentoNum <= 0 || larguraNum <= 0) return;
 
