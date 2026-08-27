@@ -27,7 +27,15 @@ function MadeiramentoGarapeiraRoute() {
     <>
       <Header />
       <div className="pt-24">
-        <ConfiguradorGenerico config={CONFIG_GARAPEIRA} />
+        <MadeiraNativaConfigurator
+          nome="Garapeira"
+          slug="garapeira"
+          produtoKey="garapeira"
+          subtitulo="Madeira dura nativa para estruturas de alta resistência. Bruta ou aparelhada em plaina no nosso pátio."
+          tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Frota Própria"]}
+          imagem={garapeiraImg}
+        />
+
       </div>
       <Footer />
       <FloatingWhats />
