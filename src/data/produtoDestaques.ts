@@ -658,6 +658,96 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Material", "Aço carbono / aço polido"],
     ],
   },
+  polipropileno: {
+    badges: [
+      { icone: "💡", texto: "Alta luz natural" },
+      { icone: "🪶", texto: "Muito leve" },
+      { icone: "🛡️", texto: "Resiste a impacto" },
+      { icone: "🔗", texto: "Encaixa no fibrocimento" },
+    ],
+    motivos: [
+      {
+        titulo: "Iluminação natural sem furar o telhado",
+        descricao:
+          "Acabamento translúcido leitoso da linha Luxtelhas/Fibrarte: alta transmissão de luz natural com claridade difusa, sem ofuscamento direto.",
+      },
+      {
+        titulo: "Muito mais leve que telhas rígidas",
+        descricao:
+          "Bem mais leve que fibrocimento, cerâmica ou vidro no mesmo vão — manuseio simples e menos carga sobre o madeiramento.",
+      },
+      {
+        titulo: "Boa resistência a impacto",
+        descricao:
+          "O polipropileno é flexível e absorve impactos que trincariam uma peça rígida, reduzindo quebras no transporte e na instalação.",
+      },
+      {
+        titulo: "Perfil compatível com o telhado existente",
+        descricao:
+          "Perfil Onda Alta 177/51 que casa com a telha ondulada de fibrocimento, permitindo substituir peças pontuais do pano.",
+      },
+    ],
+  },
+  vidro: {
+    badges: [
+      { icone: "☀️", texto: "Ponto de luz" },
+      { icone: "🪶", texto: "Leve" },
+      { icone: "🛡️", texto: "Mais resistente que vidro" },
+      { icone: "🧩", texto: "Mesmo formato da cerâmica" },
+    ],
+    motivos: [
+      {
+        titulo: "Não é vidro de verdade — é PET injetado",
+        descricao:
+          "Apesar do nome comercial, a peça (Cejatel/Vilhena) é de plástico PET transparente injetado. Tem a mesma função de iluminar, sem o peso e a fragilidade do vidro.",
+      },
+      {
+        titulo: "Resistência a impacto superior ao vidro comum",
+        descricao:
+          "O PET absorve impactos que estilhaçariam uma telha de vidro tradicional, o que reduz risco de quebra na obra e na manutenção.",
+      },
+      {
+        titulo: "Leveza no pano do telhado",
+        descricao:
+          "Peça leve, sem exigir reforço de estrutura no ponto onde é aplicada.",
+      },
+      {
+        titulo: "Uso como ponto de luz, não como cobertura",
+        descricao:
+          "Indicada em peças avulsas distribuídas no telhado para iluminar o ambiente — não é feita para cobrir o telhado inteiro.",
+      },
+    ],
+  },
+  cumeeiras: {
+    badges: [
+      { icone: "🔺", texto: "Arremate do topo" },
+      { icone: "🧱", texto: "5 materiais" },
+      { icone: "💧", texto: "Veda contra chuva" },
+      { icone: "🎨", texto: "Cores da telha" },
+    ],
+    motivos: [
+      {
+        titulo: "Fecha a cumeeira e o espigão contra a chuva",
+        descricao:
+          "É a peça que veda o encontro das águas do telhado — sem ela, chuva com vento entra direto pela espinha da cobertura.",
+      },
+      {
+        titulo: "Mesma linha e cor da sua telha",
+        descricao:
+          "Trabalhamos com peças em barro, PVC, fibrocimento, concreto e esmaltada, para manter o acabamento uniforme com o pano do telhado.",
+      },
+      {
+        titulo: "Consumo previsível por metro",
+        descricao:
+          "As fichas abaixo trazem comprimento, peso e consumo por metro, o que permite fechar a quantidade exata da sua obra.",
+      },
+      {
+        titulo: "Formatos para cada encontro",
+        descricao:
+          "Central, articulada, triangular 3 vias e capa lateral (paulistinha) cobrem cumeeira, espigão e arremates de borda.",
+      },
+    ],
+  },
 };
 
 
