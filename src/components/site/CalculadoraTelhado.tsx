@@ -431,7 +431,6 @@ export function CalculadoraTelhado() {
       const suportes = Math.ceil(mCalha / 0.8);
       const saidas = Math.max(1, Math.ceil(mCalha / 10));
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
-      const condutor = Math.ceil(saidas * 3);
       const vedaCalha = Math.max(1, Math.ceil(lances / 2));
 
       calhas.push({ nome: "Calha (metro linear)", qtd: `${Math.ceil(mCalha)} m`, chave: "calha.m", valor: Math.ceil(mCalha) });
@@ -441,7 +440,6 @@ export function CalculadoraTelhado() {
       calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
       calhas.push({ nome: "Saída / bocal de calha", qtd: `${saidas} un`, chave: "saida.calha", valor: saidas });
       if (cabeceiras > 0) calhas.push({ nome: "Cabeceira (tampa de extremidade)", qtd: `${cabeceiras} un`, chave: "cabeceira.calha", valor: cabeceiras });
-      calhas.push({ nome: "Tubo condutor de descida", qtd: `${condutor} m`, chave: null });
       calhas.push({ nome: "Veda calha PU / silicone", qtd: `${vedaCalha} un`, chave: "vedacalha", valor: vedaCalha });
     }
 
