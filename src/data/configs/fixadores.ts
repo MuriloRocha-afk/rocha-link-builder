@@ -12,6 +12,7 @@ const ehKitPvc = (s: Record<string, string>) => s.tipo === "Kit de Fixação e V
 export const CONFIG_PARAFUSOS_TELHA: ConfiguradorConfig = {
   breadcrumb: BC("Parafusos para Telha"),
   titulo: "🔩 Parafusos para Telha",
+  produtoKey: "parafusos-telha",
   badge: "★ Campeão de Vendas",
   subtitulo: "Parafusos com vedação para fibrocimento e kits coloridos para Colonial PVC.",
   galeriaTitulo: "Parafusos para Telha",
@@ -86,35 +87,6 @@ export const CONFIG_PARAFUSOS_TELHA: ConfiguradorConfig = {
       : `🔩 *Parafuso com Vedação*\n• Tamanho: ${s.tamanho}\n• Embalagem: ${s.embalagem}\n• Quantidade: ${q.qtd ?? 1} embalagens`,
 };
 
-export const CONFIG_ESPIGOES: ConfiguradorConfig = {
-  breadcrumb: BC("Espigões"),
-  titulo: "📌 Espigões para Telha Fibrocimento",
-  subtitulo: "Vedação lateral entre chapas. 120cm e 180cm, modelos Inicial e Sequencial.",
-  galeriaTitulo: "Espigão para Telha Fibrocimento",
-  galeriaPlaceholder: "Foto em breve",
-  imagens: () => [{ src: "", alt: "Espigão para telha fibrocimento instalado" }],
-  categoria: "Fixadores",
-  passos: [
-    {
-      chave: "modelo",
-      titulo: "Modelo",
-      tipo: "lista",
-      opcoes: [
-        { valor: "Espigão 120cm × 6mm — Inicial" },
-        { valor: "Espigão 120cm × 6mm — Sequencial", badge: "★ Mais usado" },
-        { valor: "Espigão 180cm × 6mm — Confibra — Sequencial" },
-      ],
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 5 },
-  ],
-  resumoNome: () => "Espigão Telha Fibrocimento",
-  resumoDetalhe: (s, q) => `${s.modelo} · ${q.qtd ?? 5} peças`,
-  unidadeResumo: () => "peças",
-  idItem: (s) => `espigao-${s.modelo}`,
-  mensagem: (s, q) =>
-    `📌 *Espigão Telha Fibrocimento*\n• Modelo: ${s.modelo}\n• Quantidade: ${q.qtd ?? 5} peças`,
-};
-
 const ehAco = (s: Record<string, string>) => s.tipo === "Prego de Aço";
 const ehComCabeca = (s: Record<string, string>) => s.tipo === "Polido com Cabeça";
 const ehSemCabeca = (s: Record<string, string>) => s.tipo === "Polido sem Cabeça";
@@ -128,7 +100,7 @@ export const CONFIG_PREGOS: ConfiguradorConfig = {
   titulo: "🔨 Pregos",
   produtoKey: "pregos",
   subtitulo:
-    "Prego de aço em pacote de 100 unidades e pregos polidos com e sem cabeça vendidos a partir de 100g.",
+    "Prego de aço em pacote de 100 unidades e pregos polidos com e sem cabeça em pacote fechado de 1kg.",
   galeriaTitulo: "Pregos",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
   imagens: (s) => (s.tipo ? [{ src: "", alt: `Prego ${s.tipo}` }] : []),
@@ -182,34 +154,33 @@ export const CONFIG_PREGOS: ConfiguradorConfig = {
       padrao: 1,
     },
     {
-      chave: "qtdGramas",
+      chave: "qtdKg",
       titulo: "Quantidade",
       tipo: "quantidade",
       visivel: emGramas,
-      unidade: "gramas",
-      padrao: 100,
-      passo: 100,
-      nota: (_s, q) => `Equivale a ${(q / 100).toFixed(0)} embalagem(ns) de 100g.`,
-      aviso: "Venda em múltiplos de 100g.",
+      unidade: "pacotes de 1kg",
+      padrao: 1,
+      aviso: "Venda exclusivamente em pacote fechado de 1kg.",
     },
   ],
   resumoNome: (s) => (ehAco(s) ? "Prego de Aço" : `Prego ${s.tipo ?? ""}`),
   resumoDetalhe: (s, q) =>
     ehAco(s)
       ? `${s.bitolaAco} · ${q.qtdAco ?? 1} pacotes de 100 un`
-      : `${bitolaPrego(s)} · ${q.qtdGramas ?? 100}g`,
-  unidadeResumo: (s) => (ehAco(s) ? "pacotes de 100 un" : "gramas"),
+      : `${bitolaPrego(s)} · ${q.qtdKg ?? 1} pacotes de 1kg`,
+  unidadeResumo: (s) => (ehAco(s) ? "pacotes de 100 un" : "pacotes de 1kg"),
   idItem: (s) => `prego-${s.tipo}-${bitolaPrego(s)}`,
   mensagem: (s, q) =>
     ehAco(s)
       ? `🔨 *Prego de Aço ${s.bitolaAco}*\n• Embalagem: pacote de 100 unidades\n• Quantidade: ${q.qtdAco ?? 1} pacotes`
-      : `🔨 *Prego ${s.tipo} ${bitolaPrego(s)}*\n• Embalagem: múltiplos de 100g\n• Quantidade: ${q.qtdGramas ?? 100}g`,
+      : `🔨 *Prego ${s.tipo} ${bitolaPrego(s)}*\n• Embalagem: pacote fechado de 1kg\n• Quantidade: ${q.qtdKg ?? 1} pacotes`,
 };
 
 
 export const CONFIG_ARAMES: ConfiguradorConfig = {
   breadcrumb: BC("Arames"),
   titulo: "〰️ Arames",
+  produtoKey: "arames",
   subtitulo: "Galvanizado BWG14, 16 e 18. Recozido Liso e Torcido. Para amarrações e cercas.",
   galeriaTitulo: "Arames",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
@@ -272,6 +243,7 @@ const PRODUTOS_FIXACAO: Record<string, string[]> = {
 export const CONFIG_BUCHAS_ARRUELAS: ConfiguradorConfig = {
   breadcrumb: BC("Buchas, Arruelas & Barras"),
   titulo: "⚙️ Buchas, Arruelas & Barras Roscadas",
+  produtoKey: "buchas-arruelas",
   subtitulo: "Buchas plásticas, arruelas zincadas e barras roscadas de 1/4 a 1/2 por 1,0m.",
   galeriaTitulo: "Fixadores",
   galeriaPlaceholder: "Selecione uma categoria para ver as fotos",
@@ -331,6 +303,7 @@ const BITOLAS_MADEIRA: Record<string, string[]> = {
 export const CONFIG_PARAFUSOS_MADEIRA: ConfiguradorConfig = {
   breadcrumb: BC("Parafusos para Madeira"),
   titulo: "🪛 Parafusos para Madeira",
+  produtoKey: "parafusos-madeira",
   subtitulo:
     "Chipboard, Autobrocante e Frances Completo em diversas bitolas para estruturas e caixaria.",
   galeriaTitulo: "Parafusos para Madeira",
