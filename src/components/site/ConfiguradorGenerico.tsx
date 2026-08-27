@@ -31,6 +31,8 @@ export type PassoConfig = {
   padrao?: number;
   passo?: number;
   decimal?: boolean;
+  /** força a quantidade a ser múltipla deste valor (ex.: 0.5) */
+  multiplo?: number;
   nota?: (sel: Selecao, qtd: number) => string | null;
   aviso?: string;
 };
