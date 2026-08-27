@@ -734,6 +734,51 @@ ${comparaHtml}
             <input inputMode="decimal" value={beiral} onChange={(e) => setBeiral(e.target.value)} placeholder="Ex.: 0,5" className={input} />
           </div>
         </div>
+
+        {/* Item 1 — medidas individuais por água */}
+        {avancado && (
+          <div className="mt-4 rounded-xl border border-orange-200 bg-orange-50/40 p-3">
+            <p className="text-[11px] font-bold tracking-wider text-orange-700 uppercase">
+              Medidas de cada água
+            </p>
+            <p className="mt-1 text-[11px] text-gray-600">
+              Águas com tamanhos diferentes? Ajuste o vão (do cume à borda, em planta) e o comprimento de cada
+              uma — o cálculo de telha e de estrutura soma água por água.
+            </p>
+            <div className="mt-3 space-y-2">
+              {aguasPadrao.map((a) => {
+                const cu = aguasCustom[a.id] ?? { vao: "", comp: "" };
+                const set = (campo: "vao" | "comp", v: string) =>
+                  setAguasCustom((s) => ({ ...s, [a.id]: { ...(s[a.id] ?? { vao: "", comp: "" }), [campo]: v } }));
+                return (
+                  <div key={a.id} className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:items-center">
+                    <p className="col-span-2 text-xs font-bold text-gray-700 sm:col-span-1">{a.nome}</p>
+                    <input
+                      inputMode="decimal"
+                      value={cu.vao}
+                      onChange={(e) => set("vao", e.target.value)}
+                      placeholder={`Vão ${fmt(a.vao)} m`}
+                      aria-label={`Vão da ${a.nome}`}
+                      className={input}
+                    />
+                    <input
+                      inputMode="decimal"
+                      value={cu.comp}
+                      onChange={(e) => set("comp", e.target.value)}
+                      placeholder={`${a.forma === "tri" ? "Base" : "Comprimento"} ${fmt(a.comp)} m`}
+                      aria-label={`Comprimento da ${a.nome}`}
+                      className={input}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-2 text-[11px] text-gray-500">
+              Área inclinada somada das águas: <b className="text-gray-700">{fmt(aguas.reduce((s, a) => s + areaAgua(a), 0))} m²</b>
+            </p>
+          </div>
+        )}
+
       </div>
 
       {/* Passo 3 — telha + ficha técnica */}
