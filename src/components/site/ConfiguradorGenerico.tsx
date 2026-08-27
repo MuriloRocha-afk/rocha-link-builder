@@ -102,7 +102,15 @@ export default function ConfiguradorGenerico({
   inicial?: Selecao;
 }) {
   const { adicionar } = useOrcamento();
-  const [sel, setSel] = useState<Selecao>(inicial ?? {});
+  const buscaSel = useBuscaSelecao();
+  const [sel, setSel] = useState<Selecao>(() => {
+    const base: Selecao = { ...(inicial ?? {}) };
+    config.passos.forEach((p) => {
+      if (p.tipo !== "quantidade" && buscaSel[p.chave]) base[p.chave] = buscaSel[p.chave];
+    });
+    return base;
+  });
+
   const [qtds, setQtds] = useState<Quantidades>({});
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
