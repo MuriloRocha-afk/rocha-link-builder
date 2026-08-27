@@ -63,7 +63,6 @@ import { Route as CatalogoFixadoresPregosRouteImport } from './routes/catalogo.f
 import { Route as CatalogoFixadoresParafusosTelhaRouteImport } from './routes/catalogo.fixadores.parafusos-telha'
 import { Route as CatalogoFixadoresParafusosMadeiraRouteImport } from './routes/catalogo.fixadores.parafusos-madeira'
 import { Route as CatalogoFixadoresFerramentasRouteImport } from './routes/catalogo.fixadores.ferramentas'
-import { Route as CatalogoFixadoresEspigoesRouteImport } from './routes/catalogo.fixadores.espigoes'
 import { Route as CatalogoFixadoresBuchasArruelasRouteImport } from './routes/catalogo.fixadores.buchas-arruelas'
 import { Route as CatalogoFixadoresAramesRouteImport } from './routes/catalogo.fixadores.arames'
 import { Route as CatalogoFixadoresProdutoSlugRouteImport } from './routes/catalogo.fixadores.$produtoSlug'
@@ -375,12 +374,6 @@ const CatalogoFixadoresFerramentasRoute =
     path: '/catalogo/fixadores/ferramentas',
     getParentRoute: () => rootRouteImport,
   } as any)
-const CatalogoFixadoresEspigoesRoute =
-  CatalogoFixadoresEspigoesRouteImport.update({
-    id: '/catalogo/fixadores/espigoes',
-    path: '/catalogo/fixadores/espigoes',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const CatalogoFixadoresBuchasArruelasRoute =
   CatalogoFixadoresBuchasArruelasRouteImport.update({
     id: '/catalogo/fixadores/buchas-arruelas',
@@ -455,7 +448,6 @@ export interface FileRoutesByFullPath {
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
   '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
-  '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
   '/catalogo/fixadores/ferramentas': typeof CatalogoFixadoresFerramentasRoute
   '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
   '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
@@ -521,7 +513,6 @@ export interface FileRoutesByTo {
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
   '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
-  '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
   '/catalogo/fixadores/ferramentas': typeof CatalogoFixadoresFerramentasRoute
   '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
   '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
@@ -589,7 +580,6 @@ export interface FileRoutesById {
   '/catalogo/fixadores/$produtoSlug': typeof CatalogoFixadoresProdutoSlugRoute
   '/catalogo/fixadores/arames': typeof CatalogoFixadoresAramesRoute
   '/catalogo/fixadores/buchas-arruelas': typeof CatalogoFixadoresBuchasArruelasRoute
-  '/catalogo/fixadores/espigoes': typeof CatalogoFixadoresEspigoesRoute
   '/catalogo/fixadores/ferramentas': typeof CatalogoFixadoresFerramentasRoute
   '/catalogo/fixadores/parafusos-madeira': typeof CatalogoFixadoresParafusosMadeiraRoute
   '/catalogo/fixadores/parafusos-telha': typeof CatalogoFixadoresParafusosTelhaRoute
@@ -658,7 +648,6 @@ export interface FileRouteTypes {
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
     | '/catalogo/fixadores/buchas-arruelas'
-    | '/catalogo/fixadores/espigoes'
     | '/catalogo/fixadores/ferramentas'
     | '/catalogo/fixadores/parafusos-madeira'
     | '/catalogo/fixadores/parafusos-telha'
@@ -724,7 +713,6 @@ export interface FileRouteTypes {
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
     | '/catalogo/fixadores/buchas-arruelas'
-    | '/catalogo/fixadores/espigoes'
     | '/catalogo/fixadores/ferramentas'
     | '/catalogo/fixadores/parafusos-madeira'
     | '/catalogo/fixadores/parafusos-telha'
@@ -791,7 +779,6 @@ export interface FileRouteTypes {
     | '/catalogo/fixadores/$produtoSlug'
     | '/catalogo/fixadores/arames'
     | '/catalogo/fixadores/buchas-arruelas'
-    | '/catalogo/fixadores/espigoes'
     | '/catalogo/fixadores/ferramentas'
     | '/catalogo/fixadores/parafusos-madeira'
     | '/catalogo/fixadores/parafusos-telha'
@@ -858,7 +845,6 @@ export interface RootRouteChildren {
   CatalogoFixadoresProdutoSlugRoute: typeof CatalogoFixadoresProdutoSlugRoute
   CatalogoFixadoresAramesRoute: typeof CatalogoFixadoresAramesRoute
   CatalogoFixadoresBuchasArruelasRoute: typeof CatalogoFixadoresBuchasArruelasRoute
-  CatalogoFixadoresEspigoesRoute: typeof CatalogoFixadoresEspigoesRoute
   CatalogoFixadoresFerramentasRoute: typeof CatalogoFixadoresFerramentasRoute
   CatalogoFixadoresParafusosMadeiraRoute: typeof CatalogoFixadoresParafusosMadeiraRoute
   CatalogoFixadoresParafusosTelhaRoute: typeof CatalogoFixadoresParafusosTelhaRoute
@@ -1289,13 +1275,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoFixadoresFerramentasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/catalogo/fixadores/espigoes': {
-      id: '/catalogo/fixadores/espigoes'
-      path: '/catalogo/fixadores/espigoes'
-      fullPath: '/catalogo/fixadores/espigoes'
-      preLoaderRoute: typeof CatalogoFixadoresEspigoesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/catalogo/fixadores/buchas-arruelas': {
       id: '/catalogo/fixadores/buchas-arruelas'
       path: '/catalogo/fixadores/buchas-arruelas'
@@ -1401,7 +1380,6 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoFixadoresProdutoSlugRoute: CatalogoFixadoresProdutoSlugRoute,
   CatalogoFixadoresAramesRoute: CatalogoFixadoresAramesRoute,
   CatalogoFixadoresBuchasArruelasRoute: CatalogoFixadoresBuchasArruelasRoute,
-  CatalogoFixadoresEspigoesRoute: CatalogoFixadoresEspigoesRoute,
   CatalogoFixadoresFerramentasRoute: CatalogoFixadoresFerramentasRoute,
   CatalogoFixadoresParafusosMadeiraRoute:
     CatalogoFixadoresParafusosMadeiraRoute,

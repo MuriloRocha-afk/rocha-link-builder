@@ -12,21 +12,12 @@ const CARDS: EmojiSubcard[] = [
     cta: "Escolher e cotar",
   },
   {
-    slug: "espigoes",
-    name: "Espigões para Fibrocimento",
-    emoji: "📌",
-    tags: ["120cm", "180cm"],
-    description:
-      "Espigão 120cm Inicial e Sequencial, Espigão 180cm Confibra. Vedação lateral entre chapas de fibrocimento.",
-    cta: "Escolher e cotar",
-  },
-  {
     slug: "pregos",
     name: "Pregos",
     emoji: "🔨",
-    tags: ["Por Kg", "Por embalagem"],
+    tags: ["Pacote 1kg", "Pacote 100 un"],
     description:
-      "Prego polido com e sem cabeça, Telheiro e Aço com cabeça. Vendidos por Kg ou embalagem de 100 unidades.",
+      "Prego de aço em pacote de 100 unidades e pregos polidos com e sem cabeça em pacote fechado de 1kg.",
     cta: "Escolher e cotar",
   },
   {
@@ -72,10 +63,9 @@ const GRUPOS = [
     id: "fixacao",
     label: "Fixação & Ferragens",
     descricao:
-      "Parafusos, pregos, arames, espigões, buchas, arruelas e barras roscadas para telhas e estruturas.",
+      "Parafusos, pregos, arames, buchas, arruelas e barras roscadas para telhas e estruturas.",
     slugs: [
       "parafusos-telha",
-      "espigoes",
       "pregos",
       "arames",
       "buchas-arruelas",
@@ -95,7 +85,7 @@ export default function Fixadores() {
   return (
     <CategoriaSubcardPage
       titulo="🔩 Fixadores & Acessórios de Instalação"
-      subtitulo="Parafusos, pregos, espigões, arames e tudo para fixação de telhas e estruturas de madeira."
+      subtitulo="Parafusos, pregos, arames e tudo para fixação de telhas e estruturas de madeira."
       breadcrumb="Fixadores & Acessórios"
       eyebrow="Escolha a categoria"
       cards={CARDS}
