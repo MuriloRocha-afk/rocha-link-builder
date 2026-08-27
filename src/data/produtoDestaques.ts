@@ -624,6 +624,66 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Aplicação", "Calhas, rufos e junções"],
     ],
   },
+  rufo: {
+    badges: [
+      { icone: "🛡️", texto: "Aço galvanizado" },
+      { icone: "💧", texto: "Veda infiltração" },
+      { icone: "📐", texto: "Corte 25 e 33" },
+      { icone: "🔧", texto: "Fácil adaptar" },
+    ],
+    motivos: [
+      {
+        titulo: "Fabricado em aço galvanizado",
+        descricao:
+          "Resistente à corrosão, ideal para regiões com alta pluviosidade e telhados expostos.",
+      },
+      {
+        titulo: "Corte 33 disponível",
+        descricao:
+          "Aba maior para telhados com mais volume de água ou quando se deseja maior sobreposição na parede.",
+      },
+      {
+        titulo: "Essencial contra infiltração",
+        descricao:
+          "Veda o encontro entre telhado, parede e platibanda, impedindo que a água escorra pela alvenaria.",
+      },
+      {
+        titulo: "Fácil de cortar e ajustar",
+        descricao:
+          "Peças de 2m a 6m que podem ser cortadas na obra para encaixe perfeito em cada trecho.",
+      },
+    ],
+  },
+  acessorios: {
+    badges: [
+      { icone: "🔧", texto: "Linha completa" },
+      { icone: "🏠", texto: "Moldura e Platibanda" },
+      { icone: "💧", texto: "Instalação vedada" },
+      { icone: "🚫", texto: "Sem improviso" },
+    ],
+    motivos: [
+      {
+        titulo: "Compatível com Moldura e Platibanda",
+        descricao:
+          "Peças projetadas para os dois sistemas de calha galvanizada da Rocha Telhas.",
+      },
+      {
+        titulo: "Acessório para cada ponto crítico",
+        descricao:
+          "Suporte, cabeceira, saída, água furtada e pingadeira cobrem todos os pontos de escoamento e arremate.",
+      },
+      {
+        titulo: "Instalação completa e vedada",
+        descricao:
+          "Usar os acessórios certos evita gotejamentos, vazamentos e acúmulo de água no telhado.",
+      },
+      {
+        titulo: "Evita improviso na obra",
+        descricao:
+          "Peças específicas de fábrica garantem encaixe correto e acabamento profissional.",
+      },
+    ],
+  },
   pregos: {
     badges: [
       { icone: "🔨", texto: "3 tipos" },
