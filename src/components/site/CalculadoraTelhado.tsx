@@ -274,12 +274,18 @@ export function CalculadoraTelhado() {
       const mantaM2 = Math.ceil(areaIncl);
       itens.push({ nome: "Parafuso 8x110mm com vedação", qtd: `${parafusos} un`, chave: "parafuso.vedacao", valor: parafusos });
       itens.push({ nome: "Manta térmica aluminizada", qtd: `${mantaM2} m²`, chave: "manta.termica.m2", valor: mantaM2 });
+      // Item 5: prego telheiro e arame de amarração só na Fibrocimento 2,44 × 0,50 m
+      if (telha.id === "fib-244") {
+        const telheiro = Math.ceil(telhas * 2);
+        const arameKg = Math.max(1, Math.ceil(telhas * 0.05));
+        itens.push({ nome: "Prego telheiro (fixação em madeira)", qtd: `${telheiro} un`, chave: null });
+        itens.push({ nome: "Arame de amarração", qtd: `${arameKg} kg`, chave: null });
+      }
     } else if (telha.familia === "pvc") {
       const kits = Math.ceil(telhas / 20);
       itens.push({ nome: "Kit de fixação PVC (parafuso + vedação)", qtd: `${kits} kit(s)`, chave: "kit.fixacao.pvc", valor: kits });
-    } else {
-      itens.push({ nome: "Prego telheiro / arame de amarração", qtd: `${Math.ceil(areaIncl * 1.5)} un`, chave: null });
     }
+
 
     // ---- telhas de acabamento: cumeeira e espigão contados SEPARADAMENTE ----
     const acabamento: Item[] = [];
