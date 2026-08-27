@@ -6,6 +6,7 @@ import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensCambara, IMG } from "../../../data/imagensProduto";
 import { TIPOS_MADEIRA, BITOLAS_MADEIRA, COMPRIMENTOS_MADEIRA } from "../../../data/configs/madeiramento";
+import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
 
 
 const TIPOS = TIPOS_MADEIRA;
@@ -48,7 +49,12 @@ function Chip({
 
 export default function Cambara() {
   const { adicionar } = useOrcamento();
-  const [tipo, setTipo] = useState<Tipo | null>(null);
+  const buscaSel = useBuscaSelecao();
+  const [tipo, setTipo] = useState<Tipo | null>(
+    (TIPOS_MADEIRA as readonly string[]).includes(buscaSel.peca ?? "")
+      ? (buscaSel.peca as Tipo)
+      : null,
+  );
   const [bitola, setBitola] = useState<string | null>(null);
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [acabamento, setAcabamento] = useState<"Bruto" | "Aparelhado" | null>(null);

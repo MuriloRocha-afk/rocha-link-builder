@@ -5,6 +5,7 @@ import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import {
+import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
   TIPOS_MADEIRA,
   BITOLAS_MADEIRA,
   COMPRIMENTOS_MADEIRA,
@@ -64,7 +65,12 @@ export default function MadeiraNativaConfigurator({
   consulta = true,
 }: MadeiraNativaProps) {
   const { adicionar } = useOrcamento();
-  const [tipo, setTipo] = useState<Tipo | null>(null);
+  const buscaSel = useBuscaSelecao();
+  const [tipo, setTipo] = useState<Tipo | null>(
+    (TIPOS_MADEIRA as readonly string[]).includes(buscaSel.peca ?? "")
+      ? (buscaSel.peca as Tipo)
+      : null,
+  );
   const [bitola, setBitola] = useState<string | null>(null);
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [acabamento, setAcabamento] = useState<"Bruto" | "Aparelhado" | null>(null);
