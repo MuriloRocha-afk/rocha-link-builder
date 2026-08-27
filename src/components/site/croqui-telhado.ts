@@ -168,7 +168,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
       `<line x1="${cxBase + 8}" y1="${yCume}" x2="${cxBase + 8}" y2="${Ybase}" stroke="${texto}" stroke-width="1" marker-start="url(#pf-arrow)" marker-end="url(#pf-arrow)"/>`,
       `<text x="${cxBase + 13}" y="${(yCume + Ybase) / 2}" font-size="9.5" font-weight="bold" fill="${texto}">Altura do oitão ${fmt(h)} m</text>`,
       // largura inclinada (água)
-      `<text x="${(xEsq + cxBase) / 2 - 6}" y="${(yCume + Ybase) / 2 - 6}" font-size="9.5" font-weight="bold" fill="${laranja}" text-anchor="middle">Largura inclinada ${fmt(inclinada)} m</text>`,
+      `<text x="${(xEsq + cxBase) / 2 - 10}" y="${(yCume + Ybase) / 2 - 14}" font-size="9.5" font-weight="bold" fill="${laranja}" text-anchor="middle">Largura inclinada ${fmt(inclinada)} m</text>`,
     );
   }
 
