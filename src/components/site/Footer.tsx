@@ -12,9 +12,9 @@ export function Footer() {
               <Logo size="md" />
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-primary-foreground/70">
-              Distribuidora e madeireira com mais de 25 anos de tradição. Atendemos Franco da
-              Rocha, Caieiras, Francisco Morato, Mairiporã, Perus e toda a região com frota
-              própria.
+              Distribuidora e madeireira símbolo de  tradição na Região. Atendemos Franco da
+              Rocha, Caieiras, Francisco Morato, Mairiporã, Perus e toda a região da Grande São
+              Paulo com frota própria.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-primary-foreground/70">
               <li className="flex gap-3">
