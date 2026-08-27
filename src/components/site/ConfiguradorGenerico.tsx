@@ -48,6 +48,9 @@ export type ConfiguradorConfig = {
   informacoes?: { titulo: string; texto: string }[];
   produtoKey?: string;
   tagInfo?: string;
+  /** aviso em destaque exibido acima dos passos */
+  avisoDestaque?: string;
+
   categoria: string;
   unidadeResumo: (sel: Selecao, qtds: Quantidades) => string;
   resumoNome: (sel: Selecao) => string;
@@ -199,9 +202,16 @@ export default function ConfiguradorGenerico({
       }
     >
       <>
-
+        {config.avisoDestaque && (
+          <div className="rounded-2xl border border-amber-300 bg-amber-50 p-4">
+            <p className="text-sm font-semibold leading-snug text-amber-900">
+              ⚠️ {config.avisoDestaque}
+            </p>
+          </div>
+        )}
 
         {passosVisiveis.map((p) => {
+
           if (bloqueado) return null;
           numero += 1;
           const n = numero;
