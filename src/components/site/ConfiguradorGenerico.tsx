@@ -31,6 +31,8 @@ export type PassoConfig = {
   padrao?: number;
   passo?: number;
   decimal?: boolean;
+  /** força a quantidade a ser múltipla deste valor (ex.: 0.5) */
+  multiplo?: number;
   nota?: (sel: Selecao, qtd: number) => string | null;
   aviso?: string;
 };
@@ -63,6 +65,18 @@ export type ConfiguradorConfig = {
   acessorios?: (sel: Selecao, qtds: Quantidades) => AcessorioItem[];
   tituloAcessorios?: string;
 };
+
+function ajustarQtd(passo: PassoConfig, valor: number): number {
+  const passoMin = passo.multiplo ?? (passo.decimal ? 0.5 : 1);
+  const minimo = passo.multiplo ?? (passo.decimal ? 0.5 : 1);
+  const bruto = Number.isFinite(valor) ? valor : minimo;
+  const arredondado = passo.multiplo
+    ? Math.round(bruto / passo.multiplo) * passo.multiplo
+    : passo.decimal
+      ? bruto
+      : Math.round(bruto);
+  return Math.max(minimo, Number((arredondado || passoMin).toFixed(2)));
+}
 
 function resolverOpcoes(passo: PassoConfig, sel: Selecao): OpcaoConfig[] {
   if (!passo.opcoes) return [];
@@ -235,7 +249,7 @@ export default function ConfiguradorGenerico({
                         onClick={() =>
                           setQtds((q) => ({
                             ...q,
-                            [p.chave]: Math.max(p.decimal ? 0.5 : 1, getQtd(p) - (p.passo ?? 1)),
+                            [p.chave]: ajustarQtd(p, getQtd(p) - (p.passo ?? p.multiplo ?? 1)),
                           }))
                         }
                         className="px-3 py-2 hover:bg-gray-100 text-lg font-bold text-gray-600"
@@ -244,18 +258,22 @@ export default function ConfiguradorGenerico({
                       </button>
                       <input
                         type="number"
+                        step={p.multiplo ?? (p.decimal ? 0.5 : 1)}
                         value={getQtd(p)}
                         onChange={(e) =>
                           setQtds((q) => ({
                             ...q,
-                            [p.chave]: Math.max(p.decimal ? 0 : 1, Number(e.target.value)),
+                            [p.chave]: ajustarQtd(p, Number(e.target.value)),
                           }))
                         }
                         className="w-24 py-2 text-center font-bold text-gray-900 border-x border-gray-200 focus:outline-none"
                       />
                       <button
                         onClick={() =>
-                          setQtds((q) => ({ ...q, [p.chave]: getQtd(p) + (p.passo ?? 1) }))
+                          setQtds((q) => ({
+                            ...q,
+                            [p.chave]: ajustarQtd(p, getQtd(p) + (p.passo ?? p.multiplo ?? 1)),
+                          }))
                         }
                         className="px-3 py-2 hover:bg-gray-100 text-lg font-bold text-gray-600"
                       >

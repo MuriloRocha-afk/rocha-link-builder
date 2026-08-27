@@ -200,6 +200,7 @@ const PECAS_AMESCLA = [
 ];
 
 export const CONFIG_AMESCLA: ConfiguradorConfig = {
+  produtoKey: "amescla",
   breadcrumb: BC("Amescla"),
   titulo: "📦 Amescla",
   subtitulo: "Sarrafos e tábuas em bruto. Opção econômica para estruturas secundárias.",
@@ -210,8 +211,8 @@ export const CONFIG_AMESCLA: ConfiguradorConfig = {
   passos: [
     {
       chave: "peca",
-      titulo: "Tipo de Peça",
-      tipo: "grid2",
+      titulo: "Dimensão da Peça",
+      tipo: "chips",
       opcoes: PECAS_AMESCLA.map((v) => ({ valor: v })),
     },
     {
@@ -235,6 +236,7 @@ export const CONFIG_AMESCLA: ConfiguradorConfig = {
 const ehDesenhada = (s: Record<string, string>) => s.acabamento === "Desenhada";
 
 export const CONFIG_TABEIRA: ConfiguradorConfig = {
+  produtoKey: "tabeira",
   breadcrumb: BC("Tabeira"),
   titulo: "Tabeira",
   subtitulo:
@@ -275,6 +277,10 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
       tipo: "quantidade",
       unidade: "Mt",
       padrao: 10,
+      decimal: true,
+      multiplo: 0.5,
+      passo: 0.5,
+      aviso: "Vendida em peças de tamanho fixo — quantidade em múltiplos de 0,5 m.",
     },
   ],
   especificacoes: [
@@ -303,6 +309,7 @@ const CAT_DECK = [
 const especieDeck = (cat: string) => cat.replace("Deck ", "");
 
 export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
+  produtoKey: "deck",
   breadcrumb: BC("Deck"),
   titulo: "Deck",
   subtitulo: "Deck de cumaru mesclado, garapeia e pinus tratado, calculado por m².",
@@ -321,6 +328,34 @@ export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
       padrao: 10,
       decimal: true,
       nota: (_s, q) => `+15% sugerido para perdas → ${(q * 1.15).toFixed(1)} m² total`,
+    },
+  ],
+  especificacoes: [
+    ["Espécies", "Cumaru mesclado, garapeia e pinus tratado"],
+    ["Réguas", "8cm ou 10cm de largura × 2cm de espessura"],
+    ["Venda", "Calculado por m² (sugerimos +15% para perdas)"],
+    ["Uso", "Piscina, varanda, jardim e áreas de lazer"],
+  ],
+  informacoes: [
+    {
+      titulo: "Espaçamento entre as réguas",
+      texto:
+        "Deixe cerca de 3 a 5 mm entre as réguas para dilatação da madeira e escoamento da água da chuva.",
+    },
+    {
+      titulo: "Estrutura de apoio (vigamento)",
+      texto:
+        "O deck precisa de vigamento nivelado sob as réguas, com apoios regularmente espaçados e ventilação por baixo para evitar acúmulo de umidade.",
+    },
+    {
+      titulo: "Acabamento e manutenção",
+      texto:
+        "Para madeira exposta a sol e chuva, aplique verniz, stain ou óleo próprio para deck e reaplique periodicamente conforme a exposição.",
+    },
+    {
+      titulo: "Instruções gerais",
+      texto:
+        "Orientações básicas — confirme detalhes de instalação do seu projeto com nossa equipe pelo WhatsApp.",
     },
   ],
   resumoNome: (s) => `Deck ${especieDeck(s.categoria ?? "")}`,
