@@ -116,10 +116,21 @@ export function CalculadoraTelhado() {
   const [comEstrutura, setComEstrutura] = useState(false);
   const [comCalhas, setComCalhas] = useState(true);
   const [comAcabamento, setComAcabamento] = useState(true);
-  const [margem, setMargem] = useState(10);
+  const [margem, setMargem] = useState(2);
   const [ajustarMargem, setAjustarMargem] = useState(false);
+  const [margemMadeira, setMargemMadeira] = useState(5);
   const [especie, setEspecie] = useState("cambara");
-  const [espacamento, setEspacamento] = useState("0.50");
+  const [espacamento, setEspacamento] = useState("1.00");
+  // modo avançado (item 7)
+  const [avancado, setAvancado] = useState(false);
+  const [espRipa, setEspRipa] = useState("0.40");
+  const [espRipao, setEspRipao] = useState("0.50");
+  const [espCaibrao, setEspCaibrao] = useState("1.50");
+  const [comRipao, setComRipao] = useState(false);
+  const [comCaibrao, setComCaibrao] = useState(false);
+  /** medidas individuais por água (modo avançado) */
+  const [aguasCustom, setAguasCustom] = useState<Record<string, { vao: string; comp: string }>>({});
+
   const [compA, setCompA] = useState("fib-244");
   const [compB, setCompB] = useState("pvc-328");
   const [compC, setCompC] = useState("");
@@ -188,6 +199,50 @@ export function CalculadoraTelhado() {
   const luzQtdNum = Math.max(0, Math.floor(Number(luzQtd.replace(",", ".")) || 0));
   const rendimentoAtual = rendimentoTelha(telha, incl);
 
+  /* ---------- Item 1: medidas individuais por água do telhado ---------- */
+  const fatorIncl = Math.sqrt(1 + Math.pow(incl / 100, 2));
+  type Agua = { id: string; nome: string; forma: "ret" | "tri"; vao: number; comp: number };
+
+  const aguasPadrao: Agua[] = (() => {
+    const C = comprimentoNum;
+    const L = larguraNum;
+    if (tipo === "1agua") return [{ id: "a1", nome: "Água única", forma: "ret", vao: L, comp: C }];
+    if (tipo === "2aguas")
+      return [
+        { id: "a1", nome: "Água 1", forma: "ret", vao: L / 2, comp: C },
+        { id: "a2", nome: "Água 2", forma: "ret", vao: L / 2, comp: C },
+      ];
+    if (tipo === "3aguas") {
+      const cume = Math.max(0, C - L / 2);
+      const medio = (C + cume) / 2;
+      return [
+        { id: "a1", nome: "Água 1 (trapézio)", forma: "ret", vao: L / 2, comp: medio },
+        { id: "a2", nome: "Água 2 (trapézio)", forma: "ret", vao: L / 2, comp: medio },
+        { id: "a3", nome: "Tacaniça (triangular)", forma: "tri", vao: L / 2, comp: L },
+      ];
+    }
+    const cume4 = Math.max(0, C - L);
+    const medio4 = (C + cume4) / 2;
+    return [
+      { id: "a1", nome: "Água 1 (trapézio)", forma: "ret", vao: L / 2, comp: medio4 },
+      { id: "a2", nome: "Água 2 (trapézio)", forma: "ret", vao: L / 2, comp: medio4 },
+      { id: "a3", nome: "Tacaniça 1 (triangular)", forma: "tri", vao: L / 2, comp: L },
+      { id: "a4", nome: "Tacaniça 2 (triangular)", forma: "tri", vao: L / 2, comp: L },
+    ];
+  })();
+
+  /** medidas efetivas: no modo avançado o usuário pode sobrescrever água por água */
+  const aguas: Agua[] = aguasPadrao.map((a) => {
+    const cu = avancado ? aguasCustom[a.id] : undefined;
+    if (!cu) return a;
+    return { ...a, vao: num(cu.vao) || a.vao, comp: num(cu.comp) || a.comp };
+  });
+
+  /** comprimento da rampa da água (do cume à borda), já com beiral */
+  const rampaAgua = (a: Agua) => a.vao * fatorIncl + beiralNum;
+  const areaAgua = (a: Agua) => (a.forma === "tri" ? 0.5 * a.comp : a.comp) * rampaAgua(a);
+
+
   const calcular = () => {
     if (comprimentoNum <= 0 || larguraNum <= 0) return;
 
@@ -199,33 +254,18 @@ export function CalculadoraTelhado() {
     // O beiral NÃO entra aqui — ele é prolongamento do plano inclinado.
     const areaBase = comprimentoNum * larguraNum;
     const perimetro = 2 * (c + l);
-    const fator = Math.sqrt(1 + Math.pow(incl / 100, 2));
+    const fator = fatorIncl;
     // vão de cada água (sem beiral) e altura do oitão
-    const vao = tipo === "1agua" ? larguraNum : larguraNum / 2;
+    const vao = aguas[0]?.vao ?? (tipo === "1agua" ? larguraNum : larguraNum / 2);
     const alturaCumeeira = vao * (incl / 100);
     // largura inclinada: do cume até a borda, já somando o beiral na direção da água
     const larguraInclinada = vao * fator;
     const caibro = larguraInclinada + beiralNum;
 
-    // ---- área inclinada: soma das áreas reais de cada plano de telhado ----
-    // O beiral entra somente na direção em que ele se estende para cada plano
-    // (prolongamento da água, já contido em `caibro`) — nunca reprojetando a
-    // planta inteira com beiral nos 4 lados.
-    const areaIncl = (() => {
-      if (tipo === "1agua") return caibro * comprimentoNum;
-      if (tipo === "2aguas") return 2 * caibro * comprimentoNum;
-      // tacaniça (água triangular): base = largura, altura inclinada = caibro
-      const triangulo = 0.5 * larguraNum * caibro;
-      if (tipo === "3aguas") {
-        // 2 trapézios (cume encurtado de meia largura) + 1 tacaniça
-        const cume = Math.max(0, comprimentoNum - larguraNum / 2);
-        return 2 * (((comprimentoNum + cume) / 2) * caibro) + triangulo;
-      }
-      // 4 águas: 2 trapézios + 2 tacaniças
-      const cume4 = Math.max(0, comprimentoNum - larguraNum);
-      return 2 * (((comprimentoNum + cume4) / 2) * caibro) + 2 * triangulo;
-    })();
+    // ---- área inclinada: soma das áreas reais de cada água (medidas individuais) ----
+    const areaIncl = aguas.reduce((s, a) => s + areaAgua(a), 0);
     const telhas = calcularPecas(telha, areaIncl, margem, incl);
+
 
 
     const itens: Item[] = [];
@@ -234,12 +274,18 @@ export function CalculadoraTelhado() {
       const mantaM2 = Math.ceil(areaIncl);
       itens.push({ nome: "Parafuso 8x110mm com vedação", qtd: `${parafusos} un`, chave: "parafuso.vedacao", valor: parafusos });
       itens.push({ nome: "Manta térmica aluminizada", qtd: `${mantaM2} m²`, chave: "manta.termica.m2", valor: mantaM2 });
+      // Item 5: prego telheiro e arame de amarração só na Fibrocimento 2,44 × 0,50 m
+      if (telha.id === "fib-244") {
+        const telheiro = Math.ceil(telhas * 2);
+        const arameKg = Math.max(1, Math.ceil(telhas * 0.05));
+        itens.push({ nome: "Prego telheiro (fixação em madeira)", qtd: `${telheiro} un`, chave: null });
+        itens.push({ nome: "Arame de amarração", qtd: `${arameKg} kg`, chave: null });
+      }
     } else if (telha.familia === "pvc") {
       const kits = Math.ceil(telhas / 20);
       itens.push({ nome: "Kit de fixação PVC (parafuso + vedação)", qtd: `${kits} kit(s)`, chave: "kit.fixacao.pvc", valor: kits });
-    } else {
-      itens.push({ nome: "Prego telheiro / arame de amarração", qtd: `${Math.ceil(areaIncl * 1.5)} un`, chave: null });
     }
+
 
     // ---- telhas de acabamento: cumeeira e espigão contados SEPARADAMENTE ----
     const acabamento: Item[] = [];
@@ -293,14 +339,47 @@ export function CalculadoraTelhado() {
 
     const estrutura: Item[] = [];
     if (comEstrutura) {
-      const esp = Number(espacamento);
       const nomeEsp = ESPECIES.find((e) => e.id === especie)!.label.replace(" ★", "");
-      const linhasCaibro = Math.ceil(c / esp) + 1;
-      const aguas = tipo === "1agua" ? 1 : 2;
-      const mCaibro = Math.ceil(linhasCaibro * caibro * aguas);
-      const mViga = Math.ceil(c * (tipo === "1agua" ? 2 : 3));
-      const mRipa = Math.ceil(areaIncl / 0.35);
-      const kgPregos = areaIncl * 0.12;
+      const eCaibro = Math.max(0.3, Number(espacamento) || 1);
+      const eRipa = Math.max(0.2, Number(espRipa) || 0.4);
+      const eRipao = Math.max(0.2, Number(espRipao) || 0.5);
+      const eCaibrao = Math.max(0.5, Number(espCaibrao) || 1.5);
+      const fMad = 1 + Math.max(0, margemMadeira) / 100;
+
+      let mCaibro = 0;
+      let mCaibrao = 0;
+      let mRipa = 0;
+      let mRipao = 0;
+      let mViga = 0;
+      // pontos de fixação por bitola de prego (item 2 e 4)
+      let pRipa = 0; // ripa × caibro   → 17x21
+      let pRipao = 0; // ripão × caibro → 19x36
+      let pCaibro = 0; // caibro/caibrão × terça → 22x48
+
+      for (const a of aguas) {
+        const rampa = rampaAgua(a);
+        // comprimento médio efetivo da água (tacaniça = metade da base)
+        const cef = a.forma === "tri" ? a.comp / 2 : a.comp;
+        if (rampa <= 0 || cef <= 0) continue;
+
+        const nCaibros = Math.ceil(cef / eCaibro) + 1;
+        const nTercas = Math.max(2, Math.ceil(rampa / 2) + 1);
+        const nRipas = Math.ceil(rampa / eRipa) + 1;
+        const nRipoes = comRipao ? Math.ceil(rampa / eRipao) + 1 : 0;
+        const nCaibroes = comCaibrao ? Math.ceil(cef / eCaibrao) + 1 : 0;
+
+        mCaibro += nCaibros * rampa;
+        mCaibrao += nCaibroes * rampa;
+        mRipa += nRipas * cef;
+        mRipao += nRipoes * cef;
+        mViga += nTercas * cef;
+
+        // cada cruzamento é contado UMA vez: nada de somar peça a peça
+        pRipa += nRipas * nCaibros; // 1 prego por cruzamento ripa/caibro
+        pRipao += nRipoes * nCaibros; // 1 prego por cruzamento ripão/caibro
+        pCaibro += (nCaibros + nCaibroes) * nTercas * 2; // 2 pregos por apoio
+      }
+
       const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => {
         const k = `madeira.${especie}.${peca}`;
         return ["madeira.cambara.caibro", "madeira.cambara.viga", "madeira.cambara.ripa",
@@ -310,11 +389,38 @@ export function CalculadoraTelhado() {
           ? k
           : null;
       };
-      estrutura.push({ nome: `Caibro 5x7 cm — ${nomeEsp}`, qtd: `${mCaibro} m lineares`, chave: chaveMadeira("caibro"), valor: mCaibro });
-      estrutura.push({ nome: `Viga 5x15 cm — ${nomeEsp}`, qtd: `${mViga} m lineares`, chave: chaveMadeira("viga"), valor: mViga });
-      estrutura.push({ nome: `Ripa 1,5x5 cm — ${nomeEsp}`, qtd: `${mRipa} m lineares`, chave: chaveMadeira("ripa"), valor: mRipa });
-      estrutura.push({ nome: "Prego polido 18x27", qtd: `${kgPregos.toFixed(1)} kg`, chave: "prego.18x27", valor: Number(kgPregos.toFixed(1)) });
+      const ml = (n: number) => Math.ceil(n * fMad);
+      const addMadeira = (nome: string, metros: number, chave: string | null) => {
+        if (metros <= 0) return;
+        const v = ml(metros);
+        estrutura.push({ nome, qtd: `${v} m lineares`, chave, valor: v });
+      };
+
+      addMadeira(`Viga / terça 5x15 cm — ${nomeEsp}`, mViga, chaveMadeira("viga"));
+      addMadeira(`Caibro 5x7 cm — ${nomeEsp}`, mCaibro, chaveMadeira("caibro"));
+      if (comCaibrao) addMadeira(`Caibrão 7x11 cm — ${nomeEsp}`, mCaibrao, chaveMadeira("caibro"));
+      addMadeira(`Ripa 1,5x5 cm — ${nomeEsp}`, mRipa, chaveMadeira("ripa"));
+      if (comRipao) addMadeira(`Ripão 2,5x10 cm — ${nomeEsp}`, mRipao, chaveMadeira("ripa"));
+
+      // ---- Pregos discriminados por bitola (itens 2 e 4) ----
+      const PREGOS: { bitola: string; peca: string; un: number; kgUn: number; chave: string | null }[] = [
+        { bitola: "17x21", peca: "ripa", un: pRipa, kgUn: 0.0018, chave: null },
+        { bitola: "19x36", peca: "ripão", un: pRipao, kgUn: 0.0048, chave: null },
+        { bitola: "22x48", peca: "caibro / caibrão em terça", un: pCaibro, kgUn: 0.012, chave: "prego.18x27" },
+      ];
+      for (const p of PREGOS) {
+        if (p.un <= 0) continue;
+        const un = Math.ceil(p.un * fMad);
+        const kg = Math.max(0.5, Math.ceil(un * p.kgUn * 2) / 2);
+        estrutura.push({
+          nome: `Prego polido ${p.bitola} — fixação de ${p.peca}`,
+          qtd: `${kg.toFixed(1)} kg (~${un} pregos)`,
+          chave: p.chave,
+          valor: kg,
+        });
+      }
     }
+
 
     // ---- Calhas e rufos ----
     const calhas: Item[] = [];
@@ -325,7 +431,6 @@ export function CalculadoraTelhado() {
       const suportes = Math.ceil(mCalha / 0.8);
       const saidas = Math.max(1, Math.ceil(mCalha / 10));
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
-      const condutor = Math.ceil(saidas * 3);
       const vedaCalha = Math.max(1, Math.ceil(lances / 2));
 
       calhas.push({ nome: "Calha (metro linear)", qtd: `${Math.ceil(mCalha)} m`, chave: "calha.m", valor: Math.ceil(mCalha) });
@@ -335,7 +440,6 @@ export function CalculadoraTelhado() {
       calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
       calhas.push({ nome: "Saída / bocal de calha", qtd: `${saidas} un`, chave: "saida.calha", valor: saidas });
       if (cabeceiras > 0) calhas.push({ nome: "Cabeceira (tampa de extremidade)", qtd: `${cabeceiras} un`, chave: "cabeceira.calha", valor: cabeceiras });
-      calhas.push({ nome: "Tubo condutor de descida", qtd: `${condutor} m`, chave: null });
       calhas.push({ nome: "Veda calha PU / silicone", qtd: `${vedaCalha} un`, chave: "vedacalha", valor: vedaCalha });
     }
 
@@ -436,7 +540,14 @@ export function CalculadoraTelhado() {
         `- Perímetro: ${fmt(res.perimetro)} m`,
         `- Tipo: ${TIPOS.find((t) => t.id === res.tipo)!.label} — Inclinação ${res.incl}%`,
         `- Medidas: ${fmt(comprimentoNum)} × ${fmt(larguraNum)} m · beiral ${fmt(beiralNum)} m`,
-        `- Margem de recorte/reposição: ${res.margem}%`,
+        `- Margem de recorte/reposição da telha: ${res.margem}%`,
+        ...(comEstrutura ? [`- Margem de corte da madeira: ${margemMadeira}%`] : []),
+        ...(avancado
+          ? [
+              `- Medidas por água: ${aguas.map((a) => `${a.nome} ${fmt(a.vao)} × ${fmt(a.comp)} m`).join(" · ")}`,
+            ]
+          : []),
+
         `- Telha escolhida: ${res.telha.label} (${res.telha.grupo})`,
         `- Peso estimado da cobertura: ${fmt(res.peso, 0)} kg`,
         ...(comparativo.length > 1
@@ -549,6 +660,40 @@ ${comparaHtml}
 
   return (
     <div className="space-y-4">
+      {/* Modo simples x avançado (item 7) */}
+      <div className={card}>
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className={passo}>{avancado ? "Modo avançado" : "Modo simples"}</p>
+            <p className="mt-1 text-xs text-gray-500">
+              {avancado
+                ? "Medida por água, espaçamento por peça, bitola de prego e margem da madeira liberados para edição."
+                : "Usamos valores recomendados de espaçamento, prego e margem. Ative o modo avançado para especificar tudo manualmente."}
+            </p>
+          </div>
+          <Toggle
+            on={avancado}
+            label="Modo avançado"
+            onClick={() =>
+              setAvancado((v) => {
+                // ao entrar no avançado, herda as medidas calculadas no modo simples
+                if (!v)
+                  setAguasCustom(
+                    Object.fromEntries(
+                      aguasPadrao.map((a) => [
+                        a.id,
+                        { vao: a.vao ? String(Number(a.vao.toFixed(2))) : "", comp: a.comp ? String(Number(a.comp.toFixed(2))) : "" },
+                      ]),
+                    ),
+                  );
+                return !v;
+              })
+            }
+          />
+        </div>
+      </div>
+
+
       {/* Passo 1 */}
       <div className={card}>
         <p className={passo}>Passo 1 · Tipo de telhado</p>
@@ -596,6 +741,51 @@ ${comparaHtml}
             <input inputMode="decimal" value={beiral} onChange={(e) => setBeiral(e.target.value)} placeholder="Ex.: 0,5" className={input} />
           </div>
         </div>
+
+        {/* Item 1 — medidas individuais por água */}
+        {avancado && (
+          <div className="mt-4 rounded-xl border border-orange-200 bg-orange-50/40 p-3">
+            <p className="text-[11px] font-bold tracking-wider text-orange-700 uppercase">
+              Medidas de cada água
+            </p>
+            <p className="mt-1 text-[11px] text-gray-600">
+              Águas com tamanhos diferentes? Ajuste o vão (do cume à borda, em planta) e o comprimento de cada
+              uma — o cálculo de telha e de estrutura soma água por água.
+            </p>
+            <div className="mt-3 space-y-2">
+              {aguasPadrao.map((a) => {
+                const cu = aguasCustom[a.id] ?? { vao: "", comp: "" };
+                const set = (campo: "vao" | "comp", v: string) =>
+                  setAguasCustom((s) => ({ ...s, [a.id]: { ...(s[a.id] ?? { vao: "", comp: "" }), [campo]: v } }));
+                return (
+                  <div key={a.id} className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:items-center">
+                    <p className="col-span-2 text-xs font-bold text-gray-700 sm:col-span-1">{a.nome}</p>
+                    <input
+                      inputMode="decimal"
+                      value={cu.vao}
+                      onChange={(e) => set("vao", e.target.value)}
+                      placeholder={`Vão ${fmt(a.vao)} m`}
+                      aria-label={`Vão da ${a.nome}`}
+                      className={input}
+                    />
+                    <input
+                      inputMode="decimal"
+                      value={cu.comp}
+                      onChange={(e) => set("comp", e.target.value)}
+                      placeholder={`${a.forma === "tri" ? "Base" : "Comprimento"} ${fmt(a.comp)} m`}
+                      aria-label={`Comprimento da ${a.nome}`}
+                      className={input}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-2 text-[11px] text-gray-500">
+              Área inclinada somada das águas: <b className="text-gray-700">{fmt(aguas.reduce((s, a) => s + areaAgua(a), 0))} m²</b>
+            </p>
+          </div>
+        )}
+
       </div>
 
       {/* Passo 3 — telha + ficha técnica */}
@@ -809,23 +999,81 @@ ${comparaHtml}
                 ))}
               </select>
             </div>
-            <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibros</label>
-              <select value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input}>
-                <option value="0.40">0,40 m</option>
-                <option value="0.50">0,50 m</option>
-                <option value="0.60">0,60 m</option>
-              </select>
-            </div>
+            {!avancado && (
+              <div className="sm:col-span-2 rounded-lg bg-gray-50 p-3 text-[11px] text-gray-600">
+                Modo simples: usamos espaçamento recomendado (ripa 0,40 m · caibro 1,00 m), prego por bitola
+                calculado automaticamente e 5% de margem de corte na madeira. Ative o modo avançado no topo para
+                editar esses valores.
+              </div>
+            )}
+
+            {avancado && (
+              <>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre ripas (m)</label>
+                  <input inputMode="decimal" value={espRipa} onChange={(e) => setEspRipa(e.target.value)} className={input} />
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibros (m)</label>
+                  <input inputMode="decimal" value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input} />
+                </div>
+
+                <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
+                  <span className="text-xs font-semibold text-gray-700">Usar ripão na estrutura</span>
+                  <Toggle on={comRipao} onClick={() => setComRipao((v) => !v)} label="Usar ripão" />
+                </div>
+                {comRipao && (
+                  <div>
+                    <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre ripões (m)</label>
+                    <input inputMode="decimal" value={espRipao} onChange={(e) => setEspRipao(e.target.value)} className={input} />
+                  </div>
+                )}
+
+                <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
+                  <span className="text-xs font-semibold text-gray-700">Usar caibrão na estrutura</span>
+                  <Toggle on={comCaibrao} onClick={() => setComCaibrao((v) => !v)} label="Usar caibrão" />
+                </div>
+                {comCaibrao && (
+                  <div>
+                    <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibrões (m)</label>
+                    <input inputMode="decimal" value={espCaibrao} onChange={(e) => setEspCaibrao(e.target.value)} className={input} />
+                  </div>
+                )}
+
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">Margem de corte da madeira (%)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={25}
+                    value={margemMadeira}
+                    onChange={(e) => setMargemMadeira(Number(e.target.value))}
+                    className={input}
+                  />
+                </div>
+
+                <div className="sm:col-span-2 rounded-lg border border-orange-100 bg-orange-50/50 p-3 text-[11px] text-gray-600">
+                  <b className="text-orange-700">Prego por bitola:</b> ripa → 17x21 · ripão → 19x36 · caibro e
+                  caibrão em terça → 22x48. A quantidade é contada por ponto de fixação (cada cruzamento uma vez
+                  só), sem somar peças que se cruzam duas vezes.
+                </div>
+              </>
+            )}
           </div>
         )}
+
       </div>
 
       {/* Margem de recorte */}
       <div className={card}>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-xs font-semibold text-gray-600">
-            Margem de recorte / reposição aplicada: <b className="text-orange-600">{margem}%</b>
+            Margem de recorte / reposição da telha: <b className="text-orange-600">{margem}%</b>
+            {comEstrutura ? (
+              <>
+                {" "}· madeira: <b className="text-orange-600">{margemMadeira}%</b>
+              </>
+            ) : null}
           </p>
           <button
             type="button"
@@ -840,8 +1088,8 @@ ${comparaHtml}
             <input
               type="range"
               min={0}
-              max={25}
-              step={1}
+              max={5}
+              step={0.5}
               value={margem}
               onChange={(e) => setMargem(Number(e.target.value))}
               className="w-full accent-orange-600"
@@ -850,7 +1098,8 @@ ${comparaHtml}
             <input
               type="number"
               min={0}
-              max={50}
+              max={10}
+              step={0.5}
               value={margem}
               onChange={(e) => setMargem(Number(e.target.value))}
               aria-label="Margem em porcentagem"
@@ -858,6 +1107,10 @@ ${comparaHtml}
             />
           </div>
         )}
+        <p className="mt-2 text-[11px] text-gray-500">
+          Recomendado de 1,5% a 2% para telha. A madeira usa margem própria (~5%), editável no modo avançado.
+        </p>
+
       </div>
 
       <button
