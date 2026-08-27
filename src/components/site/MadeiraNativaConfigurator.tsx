@@ -5,11 +5,12 @@ import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import {
-import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
   TIPOS_MADEIRA,
   BITOLAS_MADEIRA,
   COMPRIMENTOS_MADEIRA,
 } from "@/data/configs/madeiramento";
+import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
+
 
 type Tipo = (typeof TIPOS_MADEIRA)[number];
 
