@@ -277,6 +277,10 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
       tipo: "quantidade",
       unidade: "Mt",
       padrao: 10,
+      decimal: true,
+      multiplo: 0.5,
+      passo: 0.5,
+      aviso: "Vendida em peças de tamanho fixo — quantidade em múltiplos de 0,5 m.",
     },
   ],
   especificacoes: [
