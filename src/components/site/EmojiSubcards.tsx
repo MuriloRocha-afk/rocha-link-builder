@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ChevronRight, Crown } from "lucide-react";
 import { SubcardTile } from "@/components/site/SubcardTile";
@@ -61,6 +61,17 @@ function GruposTabs({
   tagTone?: TagTone;
 }) {
   const [aba, setAba] = useState(grupos[0]?.id);
+  const chaveAba = `grupos:${categoriaSlug}`;
+
+  useEffect(() => {
+    const salva = sessionStorage.getItem(chaveAba);
+    if (salva && grupos.some((g) => g.id === salva)) setAba(salva);
+  }, [chaveAba, grupos]);
+
+  const trocarAba = (id: string) => {
+    setAba(id);
+    sessionStorage.setItem(chaveAba, id);
+  };
 
   return (
     <div>
@@ -76,7 +87,7 @@ function GruposTabs({
             role="tab"
             aria-selected={aba === g.id}
             aria-controls={`painel-${g.id}`}
-            onClick={() => setAba(g.id)}
+            onClick={() => trocarAba(g.id)}
             className={`flex-1 rounded-xl px-4 py-3 text-xs font-extrabold tracking-wide uppercase transition-colors sm:text-sm ${
               aba === g.id ? "bg-[#F97316] text-white shadow-sm" : "text-primary/70 hover:bg-primary/5"
             }`}

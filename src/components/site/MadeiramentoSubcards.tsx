@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubcardTile } from "@/components/site/SubcardTile";
 import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucalipto from "@/assets/prod-eucalipto.jpg";
@@ -205,8 +205,20 @@ const ABAS = [
   },
 ];
 
+const CHAVE_ABA = "madeiramento:aba";
+
 export function MadeiramentoSubcardGrid() {
   const [aba, setAba] = useState<"nobres" | "gerais">("nobres");
+
+  useEffect(() => {
+    const salva = sessionStorage.getItem(CHAVE_ABA);
+    if (salva === "nobres" || salva === "gerais") setAba(salva);
+  }, []);
+
+  const trocarAba = (id: "nobres" | "gerais") => {
+    setAba(id);
+    sessionStorage.setItem(CHAVE_ABA, id);
+  };
 
   return (
     <div>
@@ -222,7 +234,7 @@ export function MadeiramentoSubcardGrid() {
             role="tab"
             aria-selected={aba === t.id}
             aria-controls={`painel-${t.id}`}
-            onClick={() => setAba(t.id)}
+            onClick={() => trocarAba(t.id)}
             className={`flex-1 rounded-xl px-4 py-3 text-xs font-extrabold tracking-wide uppercase transition-colors sm:text-sm ${
               aba === t.id
                 ? "bg-[#F97316] text-white shadow-sm"
