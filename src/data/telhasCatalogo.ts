@@ -55,7 +55,45 @@ export type TelhaCatalogo = {
   notaDados?: string;
   cumeeira: PecaAcabamento;
   espigao: PecaAcabamento;
+  /**
+   * false = produto pontual (ponto de luz natural), não é usado para cobrir o
+   * telhado inteiro; fica fora do seletor principal da calculadora.
+   */
+  usoCobertura: boolean;
+  /** comprimento nominal da peça (m) — usado no cálculo dinâmico do fibrocimento */
+  comprimentoPeca?: number;
+  /** largura útil da peça (m) — 0,87 (nominal 0,92) ou 1,05 (nominal 1,10) */
+  larguraUtil?: number;
+  /** espessura nominal (fibrocimento) */
+  espessura?: string;
 };
+
+/**
+ * Recobrimento longitudinal adotado (m) conforme a inclinação da cobertura —
+ * tabela Infibra (aba "Fibrocimento (Infibra)" da planilha mestre):
+ *  15° (26,8%) ou mais → 14 cm · 10°–15° (17,6%–26,8%) → 20 cm ·
+ *  5°–10° (9%–17,6%, só telhas de 6 e 8 mm) → 25 cm.
+ */
+export const recobrimentoFibro = (inclPct: number) =>
+  inclPct >= 26.8 ? 0.14 : inclPct >= 17.6 ? 0.2 : 0.25;
+
+/** Área útil real de uma telha de fibrocimento na inclinação informada (m²) */
+export const areaUtilFibro = (t: TelhaCatalogo, inclPct: number) =>
+  (t.larguraUtil ?? 1.05) * ((t.comprimentoPeca ?? 2.44) - recobrimentoFibro(inclPct));
+
+/**
+ * Rendimento (telhas/m²) usado no cálculo. Para o fibrocimento o valor é
+ * dinâmico: 1 ÷ área útil por telha, que muda com a inclinação. Para as demais
+ * famílias vale o rendimento de ficha técnica do fabricante.
+ */
+export const rendimentoTelha = (t: TelhaCatalogo, inclPct: number) =>
+  t.familia === "fibrocimento" && t.comprimentoPeca ? 1 / areaUtilFibro(t, inclPct) : t.rendimento;
+
+/** Peso aproximado da cobertura (kg/m²) coerente com o rendimento aplicado */
+export const pesoM2Telha = (t: TelhaCatalogo, inclPct: number) =>
+  t.familia === "fibrocimento" && t.comprimentoPeca
+    ? rendimentoTelha(t, inclPct) * t.pesoPeca
+    : t.pesoM2;
 
 const FIBRO = "/catalogo/telhas/fibrocimento";
 const COLONIAL = "/catalogo/telhas/colonial-pvc";
@@ -113,65 +151,82 @@ const NOTA_CONFIRMAR = "Rendimento/peso ainda não confirmados em ficha técnica
 
 export const TELHAS_CATALOGO: TelhaCatalogo[] = [
   // ---------- Fibrocimento (Infibra — manual de instalação rev. mai/2025) ----------
-  // Rendimento depende do recobrimento longitudinal (varia com a inclinação): a
-  // planilha marca "varia com a inclinação" — valores abaixo são o rendimento
-  // prático usado hoje pela loja e seguem pendentes de confirmação.
-  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 0.67, min: 17.6, familia: "fibrocimento", pesoM2: 12, pesoPeca: 17.9, galga: null, chavePreco: "telha.fib-153", confirmado: false, notaDados: "Peso e inclinação mínima conforme manual Infibra (5 mm, 10° = 17,6%). O rendimento varia com o recobrimento longitudinal — confirmar.", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 0.56, min: 17.6, familia: "fibrocimento", pesoM2: 12, pesoPeca: 21.4, galga: null, chavePreco: "telha.fib-183", confirmado: false, notaDados: "Peso conforme manual Infibra (1,83 × 1,05 m). Rendimento varia com a inclinação — confirmar.", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 0.42, min: 17.6, familia: "fibrocimento", pesoM2: 12, pesoPeca: 28.6, galga: null, chavePreco: "telha.fib-244", confirmado: false, notaDados: "Peso conforme manual Infibra (2,44 × 1,05 m). Rendimento varia com a inclinação — confirmar.", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 0.34, min: 17.6, familia: "fibrocimento", pesoM2: 14.6, pesoPeca: 43, galga: null, chavePreco: "telha.fib-305", confirmado: false, notaDados: "Peso conforme manual Infibra (3,05 × 1,05 m, 6 mm). Rendimento varia com a inclinação — confirmar.", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 0.28, min: 17.6, familia: "fibrocimento", pesoM2: 14.4, pesoPeca: 51.6, galga: null, chavePreco: "telha.fib-366", confirmado: false, notaDados: "Peso conforme manual Infibra (3,66 × 1,05 m, 6 mm). Rendimento varia com a inclinação — confirmar.", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  // O rendimento NÃO é fixo: a calculadora aplica
+  // área útil = largura útil × (comprimento − recobrimento longitudinal),
+  // com o recobrimento definido pela inclinação (14/20/25 cm — tabela Infibra).
+  // O campo `rendimento` abaixo é só o valor de referência a 15° (recobrimento 14 cm).
+  { id: "fib-122", label: "Fibrocimento 1,22 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (1.05 * (1.22 - 0.14)), min: 9, familia: "fibrocimento", pesoM2: 13.2, pesoPeca: 14.3, galga: null, chavePreco: "telha.fib-153", confirmado: true, comprimentoPeca: 1.22, larguraUtil: 1.05, espessura: "6 mm", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "fib-153", label: "Fibrocimento 1,53 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (1.05 * (1.53 - 0.14)), min: 9, familia: "fibrocimento", pesoM2: 12.9, pesoPeca: 17.9, galga: null, chavePreco: "telha.fib-153", confirmado: true, comprimentoPeca: 1.53, larguraUtil: 1.05, espessura: "6 mm", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "fib-183", label: "Fibrocimento 1,83 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (1.05 * (1.83 - 0.14)), min: 9, familia: "fibrocimento", pesoM2: 12.1, pesoPeca: 21.4, galga: null, chavePreco: "telha.fib-183", confirmado: true, comprimentoPeca: 1.83, larguraUtil: 1.05, espessura: "6 mm", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "fib-213", label: "Fibrocimento 2,13 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (1.05 * (2.13 - 0.14)), min: 9, familia: "fibrocimento", pesoM2: 12, pesoPeca: 25, galga: null, chavePreco: "telha.fib-183", confirmado: true, comprimentoPeca: 2.13, larguraUtil: 1.05, espessura: "6 mm", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "fib-244", label: "Fibrocimento 2,44 m ★", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (1.05 * (2.44 - 0.14)), min: 9, familia: "fibrocimento", pesoM2: 11.8, pesoPeca: 28.6, galga: null, chavePreco: "telha.fib-244", confirmado: true, comprimentoPeca: 2.44, larguraUtil: 1.05, espessura: "6 mm", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "fib-305", label: "Fibrocimento 3,05 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (1.05 * (3.05 - 0.14)), min: 9, familia: "fibrocimento", pesoM2: 14.1, pesoPeca: 43, galga: null, chavePreco: "telha.fib-305", confirmado: true, comprimentoPeca: 3.05, larguraUtil: 1.05, espessura: "6 mm", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "fib-366", label: "Fibrocimento 3,66 m", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (1.05 * (3.66 - 0.14)), min: 9, familia: "fibrocimento", pesoM2: 14.6, pesoPeca: 51.6, galga: null, chavePreco: "telha.fib-366", confirmado: true, comprimentoPeca: 3.66, larguraUtil: 1.05, espessura: "6 mm", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "fib-244-92", label: "Fibrocimento 2,44 m × 0,92 m (5 mm)", grupo: "Fibrocimento INFIBRA", fabricante: "Infibra", href: FIBRO, rendimento: 1 / (0.87 * (2.44 - 0.14)), min: 17.6, familia: "fibrocimento", pesoM2: 12.1, pesoPeca: 24.2, galga: null, chavePreco: "telha.fib-244", confirmado: true, comprimentoPeca: 2.44, larguraUtil: 0.87, espessura: "5 mm", notaDados: "Telha de 5 mm exige inclinação mínima de 10° (17,6%), conforme manual Infibra.", usoCobertura: true, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
 
   // ---------- Colonial PVC (Afort — ficha técnica 5 ondas) ----------
-  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 1.53, min: 15, familia: "pvc", pesoM2: 4.4, pesoPeca: 6.7, galga: null, chavePreco: "telha.pvc-230", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
-  { id: "pvc-262", label: "Colonial PVC 2,62 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 1.77, min: 15, familia: "pvc", pesoM2: 4.3, pesoPeca: 7.63, galga: null, chavePreco: "telha.pvc-230", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
-  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 2.28, min: 15, familia: "pvc", pesoM2: 4.2, pesoPeca: 9.55, galga: null, chavePreco: "telha.pvc-328", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
-  { id: "pvc-394", label: "Colonial PVC 3,94 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 2.78, min: 15, familia: "pvc", pesoM2: 4.1, pesoPeca: 11.47, galga: null, chavePreco: "telha.pvc-328", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
-  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 3.28, min: 15, familia: "pvc", pesoM2: 4.1, pesoPeca: 13.37, galga: null, chavePreco: "telha.pvc-459", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
-  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 3.79, min: 15, familia: "pvc", pesoM2: 4, pesoPeca: 15.29, galga: null, chavePreco: "telha.pvc-525", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "pvc-230", label: "Colonial PVC 2,30 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 1.53, min: 15, familia: "pvc", pesoM2: 4.4, pesoPeca: 6.7, galga: null, chavePreco: "telha.pvc-230", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "pvc-262", label: "Colonial PVC 2,62 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 1.77, min: 15, familia: "pvc", pesoM2: 4.3, pesoPeca: 7.63, galga: null, chavePreco: "telha.pvc-230", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "pvc-328", label: "Colonial PVC 3,28 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 2.28, min: 15, familia: "pvc", pesoM2: 4.2, pesoPeca: 9.55, galga: null, chavePreco: "telha.pvc-328", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "pvc-394", label: "Colonial PVC 3,94 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 2.78, min: 15, familia: "pvc", pesoM2: 4.1, pesoPeca: 11.47, galga: null, chavePreco: "telha.pvc-328", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "pvc-459", label: "Colonial PVC 4,59 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 3.28, min: 15, familia: "pvc", pesoM2: 4.1, pesoPeca: 13.37, galga: null, chavePreco: "telha.pvc-459", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "pvc-525", label: "Colonial PVC 5,25 m", grupo: "Colonial PVC", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 3.79, min: 15, familia: "pvc", pesoM2: 4, pesoPeca: 15.29, galga: null, chavePreco: "telha.pvc-525", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
 
   // ---------- Plan PVC (Afort — ficha técnica 6 ondas) ----------
-  { id: "plan-198", label: "Plan PVC 1,98 m", grupo: "Plan PVC", fabricante: "Afort", href: PLAN, rendimento: 1 / 1.4, min: 15, familia: "pvc", pesoM2: 3.5, pesoPeca: 4.9, galga: null, chavePreco: "telha.pvc-230", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
-  { id: "plan-242", label: "Plan PVC 2,42 m", grupo: "Plan PVC", fabricante: "Afort", href: PLAN, rendimento: 1 / 1.75, min: 15, familia: "pvc", pesoM2: 3.4, pesoPeca: 6, galga: null, chavePreco: "telha.pvc-230", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
-  { id: "plan-330", label: "Plan PVC 3,30 m", grupo: "Plan PVC", fabricante: "Afort", href: PLAN, rendimento: 1 / 2.46, min: 15, familia: "pvc", pesoM2: 3.2, pesoPeca: 7.91, galga: null, chavePreco: "telha.pvc-328", confirmado: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "plan-198", label: "Plan PVC 1,98 m", grupo: "Plan PVC", fabricante: "Afort", href: PLAN, rendimento: 1 / 1.4, min: 15, familia: "pvc", pesoM2: 3.5, pesoPeca: 4.9, galga: null, chavePreco: "telha.pvc-230", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "plan-242", label: "Plan PVC 2,42 m", grupo: "Plan PVC", fabricante: "Afort", href: PLAN, rendimento: 1 / 1.75, min: 15, familia: "pvc", pesoM2: 3.4, pesoPeca: 6, galga: null, chavePreco: "telha.pvc-230", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "plan-330", label: "Plan PVC 3,30 m", grupo: "Plan PVC", fabricante: "Afort", href: PLAN, rendimento: 1 / 2.46, min: 15, familia: "pvc", pesoM2: 3.2, pesoPeca: 7.91, galga: null, chavePreco: "telha.pvc-328", confirmado: true, usoCobertura: true, cumeeira: CUM_PVC, espigao: ESP_PVC },
 
   // ---------- Cerâmica de barro ----------
-  { id: "cer-romana-17", label: "Romana R17 (Isotec) — 17 pç/m²", grupo: "Cerâmica de Barro", fabricante: "Isotec", href: CERAMICA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 39.1, pesoPeca: 2.3, galga: "36,5 cm (LP)", chavePreco: "telha.cer-romana", confirmado: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "cer-romana-13", label: "Romana R13 (TopTelha) — 13 pç/m²", grupo: "Cerâmica de Barro", fabricante: "TopTelha", href: CERAMICA, rendimento: 13, min: 30, familia: "ceramica", pesoM2: 39, pesoPeca: 3, galga: "37,7 cm", chavePreco: "telha.cer-romana", confirmado: true, notaDados: "Inclinação de 30% vale para água de até 3 m — acima disso, ver tabela TopTelha.", cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "cer-port", label: "Portuguesa (Isotec)", grupo: "Cerâmica de Barro", fabricante: "Isotec", href: CERAMICA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 39.1, pesoPeca: 2.3, galga: "37,2 cm (LP)", chavePreco: "telha.cer-port", confirmado: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "cer-amer", label: "Americana (Pereira Rodrigues)", grupo: "Cerâmica de Barro", fabricante: "Pereira Rodrigues", href: CERAMICA, rendimento: 12, min: 30, familia: "ceramica", pesoM2: 40, pesoPeca: 3.3, galga: "38 a 40 cm", chavePreco: "telha.cer-amer", confirmado: false, notaDados: "Rendimento (12 pç/m²) confirmado em ficha Pereira Rodrigues. Peso por peça e inclinação mínima pendentes de confirmação.", cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "cer-medit", label: "Mediterrânea (TopTelha)", grupo: "Cerâmica de Barro", fabricante: "TopTelha", href: CERAMICA, rendimento: 13, min: 30, familia: "ceramica", pesoM2: 39, pesoPeca: 3, galga: "35,6 cm", chavePreco: "telha.cer-amer", confirmado: true, notaDados: "Inclinação de 30% vale para água de até 3 m — acima disso, ver tabela TopTelha.", cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "cer-colonial", label: "Colonial cerâmica (TopTelha)", grupo: "Cerâmica de Barro", fabricante: "TopTelha", href: CERAMICA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 61.2, pesoPeca: 3.6, galga: "47,8 cm", chavePreco: "telha.cer-port", confirmado: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "cer-francesa", label: "Francesa (Marselha)", grupo: "Cerâmica de Barro", fabricante: "A confirmar", href: CERAMICA, rendimento: 16, min: 30, familia: "ceramica", pesoM2: 44, pesoPeca: 2.7, galga: "33 a 35 cm", chavePreco: "telha.cer-romana", confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "cer-romana-17", label: "Romana R17 (Isotec) — 17 pç/m²", grupo: "Cerâmica de Barro", fabricante: "Isotec", href: CERAMICA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 39.1, pesoPeca: 2.3, galga: "36,5 cm (LP)", chavePreco: "telha.cer-romana", confirmado: true, usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "cer-romana-13", label: "Romana R13 (TopTelha) — 13 pç/m²", grupo: "Cerâmica de Barro", fabricante: "TopTelha", href: CERAMICA, rendimento: 13, min: 30, familia: "ceramica", pesoM2: 39, pesoPeca: 3, galga: "37,7 cm", chavePreco: "telha.cer-romana", confirmado: true, notaDados: "Inclinação de 30% vale para água de até 3 m — acima disso, ver tabela TopTelha.", usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "cer-port", label: "Portuguesa (Isotec)", grupo: "Cerâmica de Barro", fabricante: "Isotec", href: CERAMICA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 39.1, pesoPeca: 2.3, galga: "37,2 cm (LP)", chavePreco: "telha.cer-port", confirmado: true, usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "cer-amer", label: "Americana (Pereira Rodrigues)", grupo: "Cerâmica de Barro", fabricante: "Pereira Rodrigues", href: CERAMICA, rendimento: 12, min: 30, familia: "ceramica", pesoM2: 40, pesoPeca: 3.3, galga: "38 a 40 cm", chavePreco: "telha.cer-amer", confirmado: false, notaDados: "Rendimento (12 pç/m²) confirmado em ficha Pereira Rodrigues. Peso por peça e inclinação mínima pendentes de confirmação.", usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "cer-medit", label: "Mediterrânea (TopTelha)", grupo: "Cerâmica de Barro", fabricante: "TopTelha", href: CERAMICA, rendimento: 13, min: 30, familia: "ceramica", pesoM2: 39, pesoPeca: 3, galga: "35,6 cm", chavePreco: "telha.cer-amer", confirmado: true, notaDados: "Inclinação de 30% vale para água de até 3 m — acima disso, ver tabela TopTelha.", usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "cer-colonial", label: "Colonial cerâmica (TopTelha)", grupo: "Cerâmica de Barro", fabricante: "TopTelha", href: CERAMICA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 61.2, pesoPeca: 3.6, galga: "47,8 cm", chavePreco: "telha.cer-port", confirmado: true, usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "cer-francesa", label: "Francesa (Marselha)", grupo: "Cerâmica de Barro", fabricante: "A confirmar", href: CERAMICA, rendimento: 16, min: 30, familia: "ceramica", pesoM2: 44, pesoPeca: 2.7, galga: "33 a 35 cm", chavePreco: "telha.cer-romana", confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
 
   // ---------- Esmaltada (Premier) ----------
-  { id: "esm-premier", label: "Esmaltada Premier (grês)", grupo: "Esmaltada (vitrificada)", fabricante: "Premier", href: ESMALTADA, rendimento: 9.4, min: 35, familia: "ceramica", pesoM2: 23.5, pesoPeca: 2.5, galga: "peça 30 × 44 cm", chavePreco: null, confirmado: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "esm-port", label: "Esmaltada Portuguesa", grupo: "Esmaltada (vitrificada)", fabricante: "A confirmar", href: ESMALTADA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 46, pesoPeca: 2.7, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "esm-romana", label: "Esmaltada Romana", grupo: "Esmaltada (vitrificada)", fabricante: "A confirmar", href: ESMALTADA, rendimento: 16, min: 35, familia: "ceramica", pesoM2: 46, pesoPeca: 2.9, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "esm-premier", label: "Esmaltada Premier (grês)", grupo: "Esmaltada (vitrificada)", fabricante: "Premier", href: ESMALTADA, rendimento: 9.4, min: 35, familia: "ceramica", pesoM2: 23.5, pesoPeca: 2.5, galga: "peça 30 × 44 cm", chavePreco: null, confirmado: true, usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "esm-port", label: "Esmaltada Portuguesa", grupo: "Esmaltada (vitrificada)", fabricante: "A confirmar", href: ESMALTADA, rendimento: 17, min: 35, familia: "ceramica", pesoM2: 46, pesoPeca: 2.7, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "esm-romana", label: "Esmaltada Romana", grupo: "Esmaltada (vitrificada)", fabricante: "A confirmar", href: ESMALTADA, rendimento: 16, min: 35, familia: "ceramica", pesoM2: 46, pesoPeca: 2.9, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
 
   // ---------- Concreto (Eurotop — Linha Clássica) ----------
-  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", fabricante: "Eurotop", href: CONCRETO, rendimento: 10.4, min: 30, familia: "concreto", pesoM2: 46.8, pesoPeca: 4.5, galga: "32 a 34 cm", chavePreco: "telha.con-euro", confirmado: false, notaDados: "Rendimento (10,4 pç/m²) e peso confirmados no catálogo Eurotop. Inclinação mínima não é especificada na NBR 13858-2 — confirmar com o fabricante.", cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "con-euro", label: "Concreto Eurotop", grupo: "Concreto", fabricante: "Eurotop", href: CONCRETO, rendimento: 10.4, min: 30, familia: "concreto", pesoM2: 46.8, pesoPeca: 4.5, galga: "32 a 34 cm", chavePreco: "telha.con-euro", confirmado: false, notaDados: "Rendimento (10,4 pç/m²) e peso confirmados no catálogo Eurotop. Inclinação mínima não é especificada na NBR 13858-2 — confirmar com o fabricante.", usoCobertura: true, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
 
   // ---------- Policarbonato (Ajover) ----------
-  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.56, min: 26.8, familia: "policarbonato", pesoM2: 2, pesoPeca: 2.6, galga: null, chavePreco: "telha.pol-183", confirmado: false, notaDados: "Ficha oficial Ajover não localizada — rendimento e peso pendentes de confirmação (inclinação 15° ≈ 26,8%).", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.42, min: 26.8, familia: "policarbonato", pesoM2: 1.5, pesoPeca: 3.6, galga: null, chavePreco: "telha.pol-244", confirmado: false, notaDados: "Peso 3,6 kg (peça 244 × 110 cm) de fonte de revenda; rendimento pendente de confirmação.", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.34, min: 26.8, familia: "policarbonato", pesoM2: 1.5, pesoPeca: 4.3, galga: null, chavePreco: "telha.pol-305", confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.28, min: 26.8, familia: "policarbonato", pesoM2: 1.4, pesoPeca: 5.1, galga: null, chavePreco: "telha.pol-366", confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "pol-183", label: "Policarbonato 1,83 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.56, min: 26.8, familia: "policarbonato", pesoM2: 2, pesoPeca: 2.6, galga: null, chavePreco: "telha.pol-183", confirmado: false, notaDados: "Ficha oficial Ajover não localizada — rendimento e peso pendentes de confirmação (inclinação 15° ≈ 26,8%).", usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "pol-244", label: "Policarbonato 2,44 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.42, min: 26.8, familia: "policarbonato", pesoM2: 1.5, pesoPeca: 3.6, galga: null, chavePreco: "telha.pol-244", confirmado: false, notaDados: "Peso 3,6 kg (peça 244 × 110 cm) de fonte de revenda; rendimento pendente de confirmação.", usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "pol-305", label: "Policarbonato 3,05 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.34, min: 26.8, familia: "policarbonato", pesoM2: 1.5, pesoPeca: 4.3, galga: null, chavePreco: "telha.pol-305", confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "pol-366", label: "Policarbonato 3,66 m", grupo: "Policarbonato", fabricante: "Ajover", href: POLI, rendimento: 0.28, min: 26.8, familia: "policarbonato", pesoM2: 1.4, pesoPeca: 5.1, galga: null, chavePreco: "telha.pol-366", confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
 
   // ---------- Translúcida polipropileno (Luxtelhas/Fibrarte) ----------
-  { id: "tra-122", label: "Translúcida PP 1,22 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.85, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 1.1, galga: null, chavePreco: null, confirmado: false, notaDados: "Fabricante não disponibiliza ficha técnica — rendimento e peso pendentes de confirmação.", cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "tra-183", label: "Translúcida PP 1,83 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.56, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 1.7, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "tra-244", label: "Translúcida PP 2,44 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.42, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 2.2, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "tra-305", label: "Translúcida PP 3,05 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.34, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 2.8, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
-  { id: "tra-366", label: "Translúcida PP 3,66 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.28, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 3.3, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "tra-122", label: "Translúcida PP 1,22 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.85, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 1.1, galga: null, chavePreco: null, confirmado: false, notaDados: "Fabricante não disponibiliza ficha técnica — rendimento e peso pendentes de confirmação.", usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "tra-183", label: "Translúcida PP 1,83 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.56, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 1.7, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "tra-244", label: "Translúcida PP 2,44 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.42, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 2.2, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "tra-305", label: "Translúcida PP 3,05 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.34, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 2.8, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
+  { id: "tra-366", label: "Translúcida PP 3,66 m", grupo: "Translúcida Polipropileno", fabricante: "Luxtelhas/Fibrarte", href: PP, rendimento: 0.28, min: 26.8, familia: "translucida", pesoM2: 3, pesoPeca: 3.3, galga: null, chavePreco: null, confirmado: false, notaDados: NOTA_CONFIRMAR, usoCobertura: false, cumeeira: CUM_FIBRO, espigao: ESP_FIBRO },
 
   // ---------- Vidro (dados aproximados de pesquisa — não é ficha oficial) ----------
-  { id: "vid-romana", label: "Vidro Romana", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 33, pesoPeca: 2.05, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa (13 a 16 pç/m²) — não é ficha técnica oficial.", cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "vid-port", label: "Vidro Portuguesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 29.6, pesoPeca: 1.85, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "vid-francesa", label: "Vidro Francesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 35.2, pesoPeca: 2.2, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "vid-romana", label: "Vidro Romana", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 33, pesoPeca: 2.05, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa (13 a 16 pç/m²) — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "vid-port", label: "Vidro Portuguesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 29.6, pesoPeca: 1.85, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "vid-francesa", label: "Vidro Francesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 35.2, pesoPeca: 2.2, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "vid-medit", label: "Vidro Mediterrânea", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 13, min: 30, familia: "vidro", pesoM2: 26, pesoPeca: 2, galga: "35 a 37 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
 ];
 
 export const GRUPOS_TELHAS = Array.from(new Set(TELHAS_CATALOGO.map((t) => t.grupo)));
+
+/** Telhas usadas para cobrir o telhado inteiro (seletor principal da calculadora) */
+export const TELHAS_COBERTURA = TELHAS_CATALOGO.filter((t) => t.usoCobertura);
+export const GRUPOS_COBERTURA = Array.from(new Set(TELHAS_COBERTURA.map((t) => t.grupo)));
+
+/**
+ * Telhas translúcidas / de vidro: pontos de luz natural instalados misturados à
+ * telha principal. Entram na calculadora só como quantidade de peças informada
+ * pelo cliente — sem cálculo de rendimento por m².
+ */
+export const TELHAS_LUZ = TELHAS_CATALOGO.filter((t) => !t.usoCobertura);
+export const GRUPOS_LUZ = Array.from(new Set(TELHAS_LUZ.map((t) => t.grupo)));
 
 export const acharTelha = (id: string) =>
   TELHAS_CATALOGO.find((t) => t.id === id) ?? TELHAS_CATALOGO[0];
