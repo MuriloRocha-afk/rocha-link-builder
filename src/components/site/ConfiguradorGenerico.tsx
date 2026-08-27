@@ -237,7 +237,7 @@ export default function ConfiguradorGenerico({
                         onClick={() =>
                           setQtds((q) => ({
                             ...q,
-                            [p.chave]: Math.max(p.decimal ? 0.5 : 1, getQtd(p) - (p.passo ?? 1)),
+                            [p.chave]: ajustarQtd(p, getQtd(p) - (p.passo ?? p.multiplo ?? 1)),
                           }))
                         }
                         className="px-3 py-2 hover:bg-gray-100 text-lg font-bold text-gray-600"
@@ -246,18 +246,22 @@ export default function ConfiguradorGenerico({
                       </button>
                       <input
                         type="number"
+                        step={p.multiplo ?? (p.decimal ? 0.5 : 1)}
                         value={getQtd(p)}
                         onChange={(e) =>
                           setQtds((q) => ({
                             ...q,
-                            [p.chave]: Math.max(p.decimal ? 0 : 1, Number(e.target.value)),
+                            [p.chave]: ajustarQtd(p, Number(e.target.value)),
                           }))
                         }
                         className="w-24 py-2 text-center font-bold text-gray-900 border-x border-gray-200 focus:outline-none"
                       />
                       <button
                         onClick={() =>
-                          setQtds((q) => ({ ...q, [p.chave]: getQtd(p) + (p.passo ?? 1) }))
+                          setQtds((q) => ({
+                            ...q,
+                            [p.chave]: ajustarQtd(p, getQtd(p) + (p.passo ?? p.multiplo ?? 1)),
+                          }))
                         }
                         className="px-3 py-2 hover:bg-gray-100 text-lg font-bold text-gray-600"
                       >
