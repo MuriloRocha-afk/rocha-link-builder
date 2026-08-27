@@ -254,33 +254,18 @@ export function CalculadoraTelhado() {
     // O beiral NÃO entra aqui — ele é prolongamento do plano inclinado.
     const areaBase = comprimentoNum * larguraNum;
     const perimetro = 2 * (c + l);
-    const fator = Math.sqrt(1 + Math.pow(incl / 100, 2));
+    const fator = fatorIncl;
     // vão de cada água (sem beiral) e altura do oitão
-    const vao = tipo === "1agua" ? larguraNum : larguraNum / 2;
+    const vao = aguas[0]?.vao ?? (tipo === "1agua" ? larguraNum : larguraNum / 2);
     const alturaCumeeira = vao * (incl / 100);
     // largura inclinada: do cume até a borda, já somando o beiral na direção da água
     const larguraInclinada = vao * fator;
     const caibro = larguraInclinada + beiralNum;
 
-    // ---- área inclinada: soma das áreas reais de cada plano de telhado ----
-    // O beiral entra somente na direção em que ele se estende para cada plano
-    // (prolongamento da água, já contido em `caibro`) — nunca reprojetando a
-    // planta inteira com beiral nos 4 lados.
-    const areaIncl = (() => {
-      if (tipo === "1agua") return caibro * comprimentoNum;
-      if (tipo === "2aguas") return 2 * caibro * comprimentoNum;
-      // tacaniça (água triangular): base = largura, altura inclinada = caibro
-      const triangulo = 0.5 * larguraNum * caibro;
-      if (tipo === "3aguas") {
-        // 2 trapézios (cume encurtado de meia largura) + 1 tacaniça
-        const cume = Math.max(0, comprimentoNum - larguraNum / 2);
-        return 2 * (((comprimentoNum + cume) / 2) * caibro) + triangulo;
-      }
-      // 4 águas: 2 trapézios + 2 tacaniças
-      const cume4 = Math.max(0, comprimentoNum - larguraNum);
-      return 2 * (((comprimentoNum + cume4) / 2) * caibro) + 2 * triangulo;
-    })();
+    // ---- área inclinada: soma das áreas reais de cada água (medidas individuais) ----
+    const areaIncl = aguas.reduce((s, a) => s + areaAgua(a), 0);
     const telhas = calcularPecas(telha, areaIncl, margem, incl);
+
 
 
     const itens: Item[] = [];
