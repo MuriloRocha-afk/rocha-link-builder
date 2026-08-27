@@ -748,7 +748,98 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
+  garapeira: {
+    badges: [
+      { icone: "🪵", texto: "Alta densidade" },
+      { icone: "🏗️", texto: "Uso estrutural nobre" },
+      { icone: "🛡️", texto: "Resistente a cupim" },
+      { icone: "📋", texto: "Verificar disponibilidade" },
+    ],
+    motivos: [
+      {
+        titulo: "Durabilidade de madeira de lei",
+        descricao:
+          "Espécie nativa densa, que mantém desempenho estrutural por décadas mesmo em telhados de grande vão.",
+      },
+      {
+        titulo: "Resistência natural a cupim",
+        descricao:
+          "A densidade e os extrativos da garapeira dificultam o ataque de cupins e outros xilófagos.",
+      },
+      {
+        titulo: "Indicada para estrutura aparente",
+        descricao:
+          "Aparelhada em plaina, entrega superfície uniforme e tom fechado, ideal para telhado com estrutura à vista.",
+      },
+      {
+        titulo: "Origem legalizada",
+        descricao:
+          "Madeira nativa com DOF/IBAMA. Bitolas e comprimentos sujeitos a verificação de disponibilidade.",
+      },
+    ],
+  },
+  peroba: {
+    badges: [
+      { icone: "📐", texto: "Estabilidade dimensional" },
+      { icone: "✨", texto: "Acabamento nobre" },
+      { icone: "🔨", texto: "Boa trabalhabilidade" },
+      { icone: "📋", texto: "Verificar disponibilidade" },
+    ],
+    motivos: [
+      {
+        titulo: "Baixa propensão a empenar",
+        descricao:
+          "Comportamento estável com a variação de umidade, mantendo o alinhamento das peças no madeiramento.",
+      },
+      {
+        titulo: "Boa trabalhabilidade",
+        descricao:
+          "Aceita bem corte, furação e aparelhamento em plaina, facilitando encaixes e ajustes na obra.",
+      },
+      {
+        titulo: "Acabamento valorizado",
+        descricao:
+          "Fibra fechada e tom uniforme, excelente para receber verniz ou stain em estruturas aparentes.",
+      },
+      {
+        titulo: "Tradicional em telhados de alto padrão",
+        descricao:
+          "Espécie clássica em coberturas residenciais nobres. Itens sujeitos a verificação de disponibilidade.",
+      },
+    ],
+  },
+  jatoba: {
+    badges: [
+      { icone: "💎", texto: "Altíssima dureza" },
+      { icone: "🛡️", texto: "Máxima resistência" },
+      { icone: "⏳", texto: "Longa durabilidade" },
+      { icone: "📞", texto: "Sob consulta" },
+    ],
+    motivos: [
+      {
+        titulo: "Uma das madeiras mais duras do mercado",
+        descricao:
+          "Densidade elevada que suporta cargas altas e reduz deformação em vigas e caibros de grande seção.",
+      },
+      {
+        titulo: "Altíssima durabilidade",
+        descricao:
+          "Resistência natural a apodrecimento e ataque de insetos, indicada para estruturas de vida longa.",
+      },
+      {
+        titulo: "Resistência a intempéries",
+        descricao:
+          "Comporta-se bem em áreas expostas a sol e chuva quando protegida com stain ou verniz adequado.",
+      },
+      {
+        titulo: "Sob consulta",
+        descricao:
+          "Item de baixíssimo giro na loja: bitolas e comprimentos são cotados caso a caso, sob consulta.",
+      },
+    ],
+  },
 };
+
 
 
 export function getDestaques(chave?: string): DestaquesProdutoInfo | undefined {
