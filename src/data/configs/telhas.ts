@@ -230,12 +230,13 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
   imagens: (s) =>
     s.comprimento ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }] : [],
   categoria: "Telhas",
+  produtoKey: "polipropileno",
   passos: [
     {
       chave: "comprimento",
       titulo: "Tamanho da Telha (comprimento × largura)",
-      tipo: "grid2",
-      opcoes: COMPRIMENTOS_PP.map((o) => ({ ...o, emoji: "📏" })),
+      tipo: "chips",
+      opcoes: COMPRIMENTOS_PP,
     },
     {
       chave: "qtd",
@@ -248,13 +249,24 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     },
   ],
   especificacoes: [
+    ["Marca", "Luxtelhas / Fibrarte"],
+    ["Material", "Polipropileno translúcido leitoso"],
     ["Espessura", "1,2 mm (única)"],
     ["Inclinação mínima", "10%"],
     ["Sobreposição", "14 cm (igual ao fibrocimento)"],
     ["Larguras", "110 cm · 92 cm e 50 cm (apenas no comprimento 244 cm)"],
-    ["Fixação", "Parafuso com vedação 110mm"],
+    ["Fixação", "Parafuso com vedação 110mm · apoios a cada 1,0 m"],
     ["Compatibilidade", "100% com telha fibrocimento INFIBRA"],
+    ["Peso por peça", "Consultar disponibilidade"],
   ],
+  informacoes: [
+    {
+      titulo: "Transmissão de luz",
+      texto:
+        "Acabamento translúcido leitoso, com alta transmissão de luz natural e claridade difusa. O fabricante não publica ficha técnica com o percentual exato de transmissão — por isso não informamos número fechado.",
+    },
+  ],
+
   tituloAcessorios: "Acessórios para Telha Plástica",
   acessorios: (_s, q) => acessoriosPlastico((q.qtd as number) ?? 5),
   resumoNome: () => "Telha Translúcida Polipropileno",
@@ -281,17 +293,35 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
   imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
   categoria: "Telhas",
+  produtoKey: "vidro",
+  avisoDestaque:
+    "A telha de vidro deve ser do mesmo formato/modelo da telha cerâmica já usada no telhado (ex.: Vidro Portuguesa com Cerâmica Portuguesa), para garantir o encaixe correto.",
   passos: [
     { chave: "formato", titulo: "Formato", tipo: "grid2", opcoes: FORMATOS_VIDRO },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 6 },
   ],
   especificacoes: [
-    ["Material", "Vidro temperado transparente"],
+    ["Marca", "Cejatel / Vilhena"],
+    ["Material real", "PET plástico transparente injetado (não é vidro)"],
     ["Formatos", "Portuguesa, Romana e Mediterrânea"],
     ["Compatibilidade", "Encaixe igual ao da telha cerâmica do mesmo formato"],
     ["Uso indicado", "Pontos de luz natural na cobertura"],
     ["Recomendação", "1 a 2 telhas de vidro a cada 4 m² de ambiente"],
+    ["Peso por peça", "Consultar disponibilidade"],
   ],
+  informacoes: [
+    {
+      titulo: "Nome comercial x material real",
+      texto:
+        "É conhecida como “telha de vidro”, mas a peça vendida é de PET plástico transparente injetado (Cejatel/Vilhena). Isso deixa a peça mais leve e com resistência a impacto superior à do vidro comum.",
+    },
+    {
+      titulo: "Não substitui a cobertura",
+      texto:
+        "É usada como ponto de iluminação natural, distribuída em peças avulsas no pano do telhado — não como cobertura completa.",
+    },
+  ],
+
   resumoNome: () => "Telha de Vidro",
   resumoDetalhe: (s, q) => `${s.formato} · ${q.qtd ?? 6} peças`,
   unidadeResumo: () => "peças",
