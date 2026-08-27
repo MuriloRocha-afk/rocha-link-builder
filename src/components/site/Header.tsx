@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Logo, WhatsAppButton } from "./shared";
 import { QuoteCartButton } from "./quote-cart";
+import { BuscaGlobal } from "./BuscaGlobal";
+
 
 type NavItem = { label: string; hash?: string; to?: string };
 
