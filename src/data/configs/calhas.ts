@@ -57,6 +57,7 @@ export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
 };
 
 export const CONFIG_RUFO: ConfiguradorConfig = {
+  produtoKey: "rufo",
   breadcrumb: BC("Rufo Galvanizado"),
   titulo: "Rufo Galvanizado",
   subtitulo:
