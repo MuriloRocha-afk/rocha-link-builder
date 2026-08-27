@@ -992,16 +992,69 @@ ${comparaHtml}
                 ))}
               </select>
             </div>
-            <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibros</label>
-              <select value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input}>
-                <option value="0.40">0,40 m</option>
-                <option value="0.50">0,50 m</option>
-                <option value="0.60">0,60 m</option>
-              </select>
-            </div>
+            {!avancado && (
+              <div className="sm:col-span-2 rounded-lg bg-gray-50 p-3 text-[11px] text-gray-600">
+                Modo simples: usamos espaçamento recomendado (ripa 0,40 m · caibro 1,00 m), prego por bitola
+                calculado automaticamente e 5% de margem de corte na madeira. Ative o modo avançado no topo para
+                editar esses valores.
+              </div>
+            )}
+
+            {avancado && (
+              <>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre ripas (m)</label>
+                  <input inputMode="decimal" value={espRipa} onChange={(e) => setEspRipa(e.target.value)} className={input} />
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibros (m)</label>
+                  <input inputMode="decimal" value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input} />
+                </div>
+
+                <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
+                  <span className="text-xs font-semibold text-gray-700">Usar ripão na estrutura</span>
+                  <Toggle on={comRipao} onClick={() => setComRipao((v) => !v)} label="Usar ripão" />
+                </div>
+                {comRipao && (
+                  <div>
+                    <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre ripões (m)</label>
+                    <input inputMode="decimal" value={espRipao} onChange={(e) => setEspRipao(e.target.value)} className={input} />
+                  </div>
+                )}
+
+                <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
+                  <span className="text-xs font-semibold text-gray-700">Usar caibrão na estrutura</span>
+                  <Toggle on={comCaibrao} onClick={() => setComCaibrao((v) => !v)} label="Usar caibrão" />
+                </div>
+                {comCaibrao && (
+                  <div>
+                    <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibrões (m)</label>
+                    <input inputMode="decimal" value={espCaibrao} onChange={(e) => setEspCaibrao(e.target.value)} className={input} />
+                  </div>
+                )}
+
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">Margem de corte da madeira (%)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    max={25}
+                    value={margemMadeira}
+                    onChange={(e) => setMargemMadeira(Number(e.target.value))}
+                    className={input}
+                  />
+                </div>
+
+                <div className="sm:col-span-2 rounded-lg border border-orange-100 bg-orange-50/50 p-3 text-[11px] text-gray-600">
+                  <b className="text-orange-700">Prego por bitola:</b> ripa → 17x21 · ripão → 19x36 · caibro e
+                  caibrão em terça → 22x48. A quantidade é contada por ponto de fixação (cada cruzamento uma vez
+                  só), sem somar peças que se cruzam duas vezes.
+                </div>
+              </>
+            )}
           </div>
         )}
+
       </div>
 
       {/* Margem de recorte */}
