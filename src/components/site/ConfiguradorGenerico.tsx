@@ -66,6 +66,18 @@ export type ConfiguradorConfig = {
   tituloAcessorios?: string;
 };
 
+function ajustarQtd(passo: PassoConfig, valor: number): number {
+  const passoMin = passo.multiplo ?? (passo.decimal ? 0.5 : 1);
+  const minimo = passo.multiplo ?? (passo.decimal ? 0.5 : 1);
+  const bruto = Number.isFinite(valor) ? valor : minimo;
+  const arredondado = passo.multiplo
+    ? Math.round(bruto / passo.multiplo) * passo.multiplo
+    : passo.decimal
+      ? bruto
+      : Math.round(bruto);
+  return Math.max(minimo, Number((arredondado || passoMin).toFixed(2)));
+}
+
 function resolverOpcoes(passo: PassoConfig, sel: Selecao): OpcaoConfig[] {
   if (!passo.opcoes) return [];
   return typeof passo.opcoes === "function" ? passo.opcoes(sel) : passo.opcoes;
