@@ -13,7 +13,6 @@ import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 import {
-  TELHAS_CATALOGO,
   TELHAS_COBERTURA,
   GRUPOS_COBERTURA,
   TELHAS_LUZ,
