@@ -164,6 +164,41 @@ export const CONFIG_CUMEEIRAS: ConfiguradorConfig = {
   imagens: (s) =>
     s.material ? [{ src: "", alt: `${s.peca ?? "Cumeeira"} ${s.material} ${s.cor ?? ""}`.trim() }] : [],
   categoria: "Telhas",
+  produtoKey: "cumeeiras",
+  especificacoes: [
+    ["Barro · TopTelha — Cumeeira", "45 cm · 2,9 kg/pç · 2,4 pç/m · absorção <13%"],
+    ["Barro · TopTelha — Peça Colonial (cumeeira alternativa)", "54,8 cm · 3,6 kg/pç · 2,1 pç/m · absorção <13%"],
+    ["Barro · TopTelha — Final de espigão", "40,5 cm · 2,8 kg/pç · peça de arremate"],
+    ["Barro · TopTelha — Triangular 3 vias", "40 cm · 3,4 kg/pç · peça de encontro"],
+    ["Barro · Linha Isotec", "Consultar disponibilidade"],
+    ["PVC · Afort", "86 cm de comprimento × 53 cm · ~1,2 pç/m útil · peso por peça: consultar disponibilidade"],
+    ["Fibrocimento · Infibra", "Normal 15°, Articulada, Shed 90° e Universal 45°–75° · consumo conforme largura útil da peça · peso: consultar disponibilidade"],
+    ["Concreto · Eurotop", "Consultar disponibilidade"],
+    ["Esmaltada (vitrificada)", "Consultar disponibilidade"],
+  ],
+  informacoes: [
+    {
+      titulo: "Como calcular a quantidade",
+      texto:
+        "Meça o comprimento total da linha de cumeeira e de cada espigão, em metros, e multiplique pelo consumo por metro da peça escolhida (ex.: cumeeira de barro TopTelha, 2,4 peças por metro). Em telhados de quatro águas, some cumeeira e espigões separadamente.",
+    },
+    {
+      titulo: "Peças especiais de cerâmica (TopTelha)",
+      texto:
+        "Além da cumeeira, a linha oferece final de espigão (40,5 cm · 2,8 kg), triangular 3 vias (40 cm · 3,4 kg), passarinheira (12,7 cm · 0,2 kg · 4 pç/m) e telha de ventilação (42,4 cm · 3,2 kg · 3 pç a cada 10 m²). Absorção de água inferior a 13%.",
+    },
+    {
+      titulo: "Dados ainda em confirmação",
+      texto:
+        "Cumeeira compatível com a linha Isotec, peças de concreto Eurotop e esmaltadas ainda não têm ficha oficial do fabricante liberada — nesses casos, indicamos “consultar disponibilidade” e confirmamos medidas e peso antes de fechar o pedido.",
+    },
+    {
+      titulo: "Combine com a telha",
+      texto:
+        "Use sempre a peça do mesmo material e da mesma cor/linha da telha instalada, para garantir encaixe e acabamento uniforme.",
+    },
+  ],
+
   passos: [
     { chave: "peca", titulo: "Tipo de peça", tipo: "grid3", opcoes: PECAS_CUMEEIRA },
     {
