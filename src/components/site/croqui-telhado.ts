@@ -101,3 +101,99 @@ export function croquiTelhadoSvg({ tipo, comprimento, largura, beiral }: Opts): 
   ${linhas.join("\n  ")}
 </svg>`;
 }
+
+type PerfilOpts = {
+  tipo: TipoTelhado;
+  /** largura da base em metros */
+  largura?: number;
+  /** beiral em metros */
+  beiral?: number;
+  /** inclinação em % */
+  inclinacao: number;
+};
+
+/**
+ * Vista de perfil (corte lateral) do telhado: largura da base, altura do oitão,
+ * largura inclinada (comprimento da água, do cume até a borda antes do beiral)
+ * e o beiral em destaque na ponta.
+ */
+export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: PerfilOpts): string {
+  const laranja = "#ea580c";
+  const cinza = "#94a3b8";
+  const texto = "#475569";
+
+  const L = largura && largura > 0 ? largura : 8;
+  const b = beiral > 0 ? beiral : 0;
+  const i = inclinacao / 100;
+  const umaAgua = tipo === "1agua";
+  const run = umaAgua ? L : L / 2;
+  const h = run * i;
+  const fator = Math.sqrt(1 + i * i);
+  const inclinada = run * fator;
+  const bH = b / fator; // projeção horizontal do beiral
+
+  // escala para caber no viewBox
+  const totalW = L + 2 * (umaAgua ? bH / 2 : bH);
+  const escala = Math.min(236 / totalW, 78 / Math.max(h + 0.4, 1));
+  const px = (m: number) => m * escala;
+
+  const cxBase = 165;
+  const Ybase = 148;
+  const xEsq = cxBase - px(L / 2);
+  const xDir = cxBase + px(L / 2);
+
+  const linhas: string[] = [];
+
+  // alvenaria
+  linhas.push(
+    `<rect x="${xEsq}" y="${Ybase}" width="${px(L)}" height="26" fill="none" stroke="${cinza}" stroke-width="1.4" stroke-dasharray="5 4"/>`,
+  );
+
+  if (umaAgua) {
+    const yTopo = Ybase - px(h);
+    const xB1 = xEsq - px(bH);
+    const xB2 = xDir + px(bH);
+    linhas.push(
+      `<line x1="${xB1}" y1="${yTopo - px(bH * i)}" x2="${xB2}" y2="${Ybase + px(bH * i)}" stroke="${laranja}" stroke-width="3" stroke-linecap="round"/>`,
+      `<line x1="${xEsq}" y1="${yTopo}" x2="${xEsq}" y2="${Ybase}" stroke="${cinza}" stroke-width="1" stroke-dasharray="3 3"/>`,
+    );
+  } else {
+    const yCume = Ybase - px(h);
+    const xB1 = xEsq - px(bH);
+    const xB2 = xDir + px(bH);
+    linhas.push(
+      `<path d="M ${xB1} ${Ybase + px(bH * i)} L ${cxBase} ${yCume} L ${xB2} ${Ybase + px(bH * i)}" fill="#fff7ed" stroke="${laranja}" stroke-width="3" stroke-linejoin="round"/>`,
+      `<line x1="${cxBase}" y1="${yCume}" x2="${cxBase}" y2="${Ybase}" stroke="${cinza}" stroke-width="1" stroke-dasharray="3 3"/>`,
+      // cota da altura do oitão
+      `<line x1="${cxBase + 8}" y1="${yCume}" x2="${cxBase + 8}" y2="${Ybase}" stroke="${texto}" stroke-width="1" marker-start="url(#pf-arrow)" marker-end="url(#pf-arrow)"/>`,
+      `<text x="${cxBase + 13}" y="${(yCume + Ybase) / 2}" font-size="9.5" font-weight="bold" fill="${texto}">Altura do oitão ${fmt(h)} m</text>`,
+      // largura inclinada (água)
+      `<text x="${(xEsq + cxBase) / 2 - 6}" y="${(yCume + Ybase) / 2 - 6}" font-size="9.5" font-weight="bold" fill="${laranja}" text-anchor="middle">Largura inclinada ${fmt(inclinada)} m</text>`,
+    );
+  }
+
+  // beiral em destaque
+  if (b > 0) {
+    const xB1 = xEsq - px(bH);
+    linhas.push(
+      `<line x1="${xB1}" y1="${Ybase + 34}" x2="${xEsq}" y2="${Ybase + 34}" stroke={} stroke-width="1"/>`.replace("{}", laranja),
+      `<text x="${xB1}" y="${Ybase + 48}" font-size="9.5" font-weight="bold" fill="${laranja}">Beiral ${fmt(b)} m</text>`,
+    );
+  }
+
+  // cota da largura da base
+  linhas.push(
+    `<line x1="${xEsq}" y1="${Ybase + 22}" x2="${xDir}" y2="${Ybase + 22}" stroke="${texto}" stroke-width="1" marker-start="url(#pf-arrow)" marker-end="url(#pf-arrow)"/>`,
+    `<text x="${cxBase}" y="${Ybase + 34}" font-size="10" font-weight="bold" fill="${texto}" text-anchor="middle">Largura da base ${fmt(L)} m</text>`,
+    `<text x="16" y="18" font-size="9" fill="${cinza}">vista de perfil (corte) · inclinação ${fmt(inclinacao)}%</text>`,
+  );
+
+  return `<svg viewBox="0 0 330 200" width="100%" role="img" aria-label="Croqui do telhado em corte de perfil" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="pf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="${texto}"/>
+    </marker>
+  </defs>
+  ${linhas.join("\n  ")}
+</svg>`;
+}
