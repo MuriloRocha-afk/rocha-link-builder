@@ -387,7 +387,7 @@ export function CalculadoraTelhado() {
       return {
         telha: t,
         pecas,
-        peso: res.areaIncl * t.pesoM2,
+        peso: res.areaIncl * pesoM2Telha(t, res.incl),
         custoRef: semPreco ? 0 : (f.min + f.max) / 2,
         semPreco,
         compativel: t.min <= res.incl,
@@ -439,6 +439,7 @@ export function CalculadoraTelhado() {
         `📋 *MATERIAIS ESTIMADOS*`,
         `- ${res.telha.label} — Qtd: ${res.telhas} un`,
         ...res.itens.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`),
+        ...(res.luz ? [`- Pontos de Luz Natural: ${res.luz.qtd} peças de ${res.luz.label}`] : []),
         ...(res.acabamento.length
           ? ["", "*Acabamento (cumeeira / espigão):*", ...res.acabamento.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
           : []),
@@ -493,7 +494,11 @@ export function CalculadoraTelhado() {
   <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
   <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
 </div>
-${bloco("Cobertura", [{ nome: res.telha.label, qtd: `${res.telhas} un` }, ...res.itens])}
+${bloco("Cobertura", [
+  { nome: res.telha.label, qtd: `${res.telhas} un` },
+  ...res.itens,
+  ...(res.luz ? [{ nome: `Pontos de Luz Natural — ${res.luz.label}`, qtd: `${res.luz.qtd} peças` }] : []),
+])}
 ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
 ${bloco("Calhas e rufos", res.calhas)}
 ${bloco("Estrutura de madeira", res.estrutura)}
@@ -605,7 +610,7 @@ ${comparaHtml}
             {[
               {
                 l: "Telhas por m²",
-                v: telha.rendimento >= 1 ? `${fmt(telha.rendimento, 1)} un` : `${fmt(telha.rendimento, 2)} un`,
+                v: rendimentoAtual >= 1 ? `${fmt(rendimentoAtual, 1)} un` : `${fmt(rendimentoAtual, 2)} un`,
               },
               { l: "Galga mínima", v: telha.galga ?? "Não se aplica" },
               { l: "Peso por peça", v: `${fmt(telha.pesoPeca, 1)} kg` },
@@ -623,6 +628,14 @@ ${comparaHtml}
               <span>
                 <b>Dado a confirmar:</b> {telha.notaDados}
               </span>
+            </p>
+          )}
+          {telha.familia === "fibrocimento" && telha.comprimentoPeca && (
+            <p className="mt-2 rounded-lg bg-white p-2 text-[11px] text-gray-600">
+              <b>Área útil dinâmica (Infibra):</b> {fmt(telha.larguraUtil ?? 1.05, 2)} m ×
+              ({fmt(telha.comprimentoPeca, 2)} m − {fmt(recobrimentoFibro(incl), 2)} m de recobrimento em{" "}
+              {incl}%) = <b>{fmt(1 / rendimentoAtual, 2)} m² por telha</b> · {fmt(rendimentoAtual, 2)} telhas/m².
+              O recobrimento muda com a inclinação (14 cm ≥ 15°, 20 cm de 10° a 15°, 25 cm de 5° a 10°).
             </p>
           )}
           <p className="mt-2 text-[11px] text-gray-500">
@@ -698,6 +711,56 @@ ${comparaHtml}
           Calculamos o metro linear de cumeeira e de espigão conforme o número de águas e convertemos em peças pelo
           rendimento da cumeeira compatível com a sua telha.
         </p>
+      </div>
+
+      {/* Pontos de luz natural */}
+      <div className={card}>
+        <div className="flex items-center justify-between gap-3">
+          <p className={passo}>Quer adicionar pontos de luz natural (telha translúcida)?</p>
+          <Toggle on={comLuz} onClick={() => setComLuz((v) => !v)} label="Adicionar pontos de luz" />
+        </div>
+        <p className="mt-2 text-xs text-gray-500">
+          Telhas de vidro, polipropileno e policarbonato são usadas como pontos pontuais de iluminação, misturadas à
+          telha principal — por isso você informa a quantidade de peças, não uma área.
+        </p>
+        {comLuz && (
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-700">Tipo de telha translúcida</label>
+              <select value={luzId} onChange={(e) => setLuzId(e.target.value)} className={input}>
+                {GRUPOS_LUZ.map((g) => (
+                  <optgroup key={g} label={g}>
+                    {TELHAS_LUZ.filter((t) => t.grupo === g).map((t) => (
+                      <option key={t.id} value={t.id}>
+                        {t.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-700">Quantidade de peças</label>
+              <input
+                type="number"
+                min={0}
+                value={luzQtd}
+                onChange={(e) => setLuzQtd(e.target.value)}
+                className={input}
+                aria-label="Quantidade de peças de telha translúcida"
+              />
+            </div>
+            {telhaLuz?.familia === "vidro" && (
+              <div className="sm:col-span-2 flex gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3">
+                <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
+                <p className="text-xs text-amber-800">
+                  A telha de vidro deve ser do mesmo formato da telha cerâmica escolhida (ex.: Vidro Portuguesa com
+                  Cerâmica Portuguesa), para garantir o encaixe correto.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Passo 6 — calhas */}
@@ -843,6 +906,17 @@ ${comparaHtml}
                 <span className="shrink-0 text-sm font-bold text-orange-600">{i.qtd}</span>
               </li>
             ))}
+            {res.luz && (
+              <li className="flex items-center justify-between gap-3 p-3">
+                <span className="text-sm text-gray-700">
+                  Pontos de Luz Natural — {res.luz.label}{" "}
+                  <a href={res.luz.href} className="font-bold text-orange-600 hover:underline">
+                    ver no catálogo →
+                  </a>
+                </span>
+                <span className="shrink-0 text-sm font-bold text-orange-600">{res.luz.qtd} peças</span>
+              </li>
+            )}
           </ul>
 
           {res.acabamento.length > 0 && (
