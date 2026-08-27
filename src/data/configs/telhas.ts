@@ -293,17 +293,35 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
   imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
   categoria: "Telhas",
+  produtoKey: "vidro",
+  avisoDestaque:
+    "A telha de vidro deve ser do mesmo formato/modelo da telha cerâmica já usada no telhado (ex.: Vidro Portuguesa com Cerâmica Portuguesa), para garantir o encaixe correto.",
   passos: [
     { chave: "formato", titulo: "Formato", tipo: "grid2", opcoes: FORMATOS_VIDRO },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 6 },
   ],
   especificacoes: [
-    ["Material", "Vidro temperado transparente"],
+    ["Marca", "Cejatel / Vilhena"],
+    ["Material real", "PET plástico transparente injetado (não é vidro)"],
     ["Formatos", "Portuguesa, Romana e Mediterrânea"],
     ["Compatibilidade", "Encaixe igual ao da telha cerâmica do mesmo formato"],
     ["Uso indicado", "Pontos de luz natural na cobertura"],
     ["Recomendação", "1 a 2 telhas de vidro a cada 4 m² de ambiente"],
+    ["Peso por peça", "Consultar disponibilidade"],
   ],
+  informacoes: [
+    {
+      titulo: "Nome comercial x material real",
+      texto:
+        "É conhecida como “telha de vidro”, mas a peça vendida é de PET plástico transparente injetado (Cejatel/Vilhena). Isso deixa a peça mais leve e com resistência a impacto superior à do vidro comum.",
+    },
+    {
+      titulo: "Não substitui a cobertura",
+      texto:
+        "É usada como ponto de iluminação natural, distribuída em peças avulsas no pano do telhado — não como cobertura completa.",
+    },
+  ],
+
   resumoNome: () => "Telha de Vidro",
   resumoDetalhe: (s, q) => `${s.formato} · ${q.qtd ?? 6} peças`,
   unidadeResumo: () => "peças",
