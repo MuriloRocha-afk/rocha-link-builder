@@ -211,9 +211,22 @@ export const TELHAS_CATALOGO: TelhaCatalogo[] = [
   { id: "vid-romana", label: "Vidro Romana", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 33, pesoPeca: 2.05, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa (13 a 16 pç/m²) — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
   { id: "vid-port", label: "Vidro Portuguesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 29.6, pesoPeca: 1.85, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
   { id: "vid-francesa", label: "Vidro Francesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 35.2, pesoPeca: 2.2, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "vid-medit", label: "Vidro Mediterrânea", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 13, min: 30, familia: "vidro", pesoM2: 26, pesoPeca: 2, galga: "35 a 37 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
 ];
 
 export const GRUPOS_TELHAS = Array.from(new Set(TELHAS_CATALOGO.map((t) => t.grupo)));
+
+/** Telhas usadas para cobrir o telhado inteiro (seletor principal da calculadora) */
+export const TELHAS_COBERTURA = TELHAS_CATALOGO.filter((t) => t.usoCobertura);
+export const GRUPOS_COBERTURA = Array.from(new Set(TELHAS_COBERTURA.map((t) => t.grupo)));
+
+/**
+ * Telhas translúcidas / de vidro: pontos de luz natural instalados misturados à
+ * telha principal. Entram na calculadora só como quantidade de peças informada
+ * pelo cliente — sem cálculo de rendimento por m².
+ */
+export const TELHAS_LUZ = TELHAS_CATALOGO.filter((t) => !t.usoCobertura);
+export const GRUPOS_LUZ = Array.from(new Set(TELHAS_LUZ.map((t) => t.grupo)));
 
 export const acharTelha = (id: string) =>
   TELHAS_CATALOGO.find((t) => t.id === id) ?? TELHAS_CATALOGO[0];
