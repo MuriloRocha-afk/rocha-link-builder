@@ -1061,7 +1061,12 @@ ${comparaHtml}
       <div className={card}>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-xs font-semibold text-gray-600">
-            Margem de recorte / reposição aplicada: <b className="text-orange-600">{margem}%</b>
+            Margem de recorte / reposição da telha: <b className="text-orange-600">{margem}%</b>
+            {comEstrutura ? (
+              <>
+                {" "}· madeira: <b className="text-orange-600">{margemMadeira}%</b>
+              </>
+            ) : null}
           </p>
           <button
             type="button"
@@ -1076,8 +1081,8 @@ ${comparaHtml}
             <input
               type="range"
               min={0}
-              max={25}
-              step={1}
+              max={5}
+              step={0.5}
               value={margem}
               onChange={(e) => setMargem(Number(e.target.value))}
               className="w-full accent-orange-600"
@@ -1086,7 +1091,8 @@ ${comparaHtml}
             <input
               type="number"
               min={0}
-              max={50}
+              max={10}
+              step={0.5}
               value={margem}
               onChange={(e) => setMargem(Number(e.target.value))}
               aria-label="Margem em porcentagem"
@@ -1094,6 +1100,10 @@ ${comparaHtml}
             />
           </div>
         )}
+        <p className="mt-2 text-[11px] text-gray-500">
+          Recomendado de 1,5% a 2% para telha. A madeira usa margem própria (~5%), editável no modo avançado.
+        </p>
+
       </div>
 
       <button
