@@ -236,6 +236,7 @@ export const CONFIG_AMESCLA: ConfiguradorConfig = {
 const ehDesenhada = (s: Record<string, string>) => s.acabamento === "Desenhada";
 
 export const CONFIG_TABEIRA: ConfiguradorConfig = {
+  produtoKey: "tabeira",
   breadcrumb: BC("Tabeira"),
   titulo: "Tabeira",
   subtitulo:
