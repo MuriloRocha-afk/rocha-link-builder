@@ -1,10 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Search, X, MessageCircle, ArrowRight } from "lucide-react";
+import { Search, X, MessageCircle, ArrowRight, MoreHorizontal } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { agrupar, buscar, CATEGORIAS_SUGERIDAS, type ItemBusca } from "@/data/buscaIndex";
 import { waLink } from "@/constants/whatsapp";
 
-export function BuscaGlobal({ className = "" }: { className?: string }) {
+export function BuscaGlobal({
+  className = "",
+  placeholder = "Buscar produto (ex.: caibro, romana, calha...)",
+}: {
+  className?: string;
+  placeholder?: string;
+}) {
   const navigate = useNavigate();
   const [termo, setTermo] = useState("");
   const [aberto, setAberto] = useState(false);
@@ -66,7 +72,7 @@ export function BuscaGlobal({ className = "" }: { className?: string }) {
           }}
           onFocus={() => setAberto(true)}
           onKeyDown={onKeyDown}
-          placeholder="Buscar produto (ex.: caibro, romana, calha...)"
+          placeholder={placeholder}
           aria-label="Buscar produtos no catálogo"
           className="w-full bg-transparent text-sm [&::-webkit-search-cancel-button]:appearance-none text-foreground outline-none placeholder:text-muted-foreground"
         />
