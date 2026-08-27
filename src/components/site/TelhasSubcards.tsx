@@ -42,7 +42,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   },
   {
     slug: "ceramica",
-    name: "Telha de Barro — Romana e Portuguesa Resinada",
+    name: "Telha\u00a0 Cerâmica de Barro\u00a0",
     image: ceramica,
     description:
       "As mais vendidas de barro. Romana e Portuguesa Resinada — natural ou esmaltada também disponível.",
