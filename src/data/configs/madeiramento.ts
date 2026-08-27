@@ -200,6 +200,7 @@ const PECAS_AMESCLA = [
 ];
 
 export const CONFIG_AMESCLA: ConfiguradorConfig = {
+  produtoKey: "amescla",
   breadcrumb: BC("Amescla"),
   titulo: "📦 Amescla",
   subtitulo: "Sarrafos e tábuas em bruto. Opção econômica para estruturas secundárias.",
