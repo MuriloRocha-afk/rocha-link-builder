@@ -330,6 +330,34 @@ export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
       nota: (_s, q) => `+15% sugerido para perdas → ${(q * 1.15).toFixed(1)} m² total`,
     },
   ],
+  especificacoes: [
+    ["Espécies", "Cumaru mesclado, garapeia e pinus tratado"],
+    ["Réguas", "8cm ou 10cm de largura × 2cm de espessura"],
+    ["Venda", "Calculado por m² (sugerimos +15% para perdas)"],
+    ["Uso", "Piscina, varanda, jardim e áreas de lazer"],
+  ],
+  informacoes: [
+    {
+      titulo: "Espaçamento entre as réguas",
+      texto:
+        "Deixe cerca de 3 a 5 mm entre as réguas para dilatação da madeira e escoamento da água da chuva.",
+    },
+    {
+      titulo: "Estrutura de apoio (vigamento)",
+      texto:
+        "O deck precisa de vigamento nivelado sob as réguas, com apoios regularmente espaçados e ventilação por baixo para evitar acúmulo de umidade.",
+    },
+    {
+      titulo: "Acabamento e manutenção",
+      texto:
+        "Para madeira exposta a sol e chuva, aplique verniz, stain ou óleo próprio para deck e reaplique periodicamente conforme a exposição.",
+    },
+    {
+      titulo: "Instruções gerais",
+      texto:
+        "Orientações básicas — confirme detalhes de instalação do seu projeto com nossa equipe pelo WhatsApp.",
+    },
+  ],
   resumoNome: (s) => `Deck ${especieDeck(s.categoria ?? "")}`,
   resumoDetalhe: (_s, q) =>
     `${(((q.area as number) ?? 10) * 1.15).toFixed(1)} m² (inclui 15% de perda)`,
