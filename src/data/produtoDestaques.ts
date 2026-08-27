@@ -988,7 +988,116 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
+  "parafusos-telha": {
+    badges: [
+      { icone: "🧰", texto: "Kit completo" },
+      { icone: "💧", texto: "Com vedação" },
+      { icone: "🏠", texto: "PVC, fibro e policarbonato" },
+      { icone: "⚡", texto: "Instalação rápida" },
+    ],
+    motivos: [
+      {
+        titulo: "Kit completo com vedação",
+        descricao:
+          "Parafuso, arruela e vedação no mesmo conjunto, sem precisar comprar peças separadas.",
+      },
+      {
+        titulo: "Evita infiltração no ponto de fixação",
+        descricao:
+          "A vedação fecha o furo da telha, que é justamente onde a água costuma entrar.",
+      },
+      {
+        titulo: "Compatível com os principais tipos de telha",
+        descricao: "Usado em telha de PVC, fibrocimento e policarbonato.",
+      },
+      {
+        titulo: "Instalação rápida",
+        descricao:
+          "Fixação direta com parafusadeira, agilizando a montagem da cobertura.",
+      },
+    ],
+  },
+  arames: {
+    badges: [
+      { icone: "🪢", texto: "Amarração de telha" },
+      { icone: "🛡️", texto: "Galvanizado" },
+      { icone: "🧱", texto: "Estrutura de madeira" },
+      { icone: "🏺", texto: "Telhado de barro" },
+    ],
+    motivos: [
+      {
+        titulo: "Amarração de telha cerâmica",
+        descricao:
+          "Prende a telha de barro na ripa ou na estrutura, evitando deslocamento com vento.",
+      },
+      {
+        titulo: "Resistente à corrosão",
+        descricao:
+          "A versão galvanizada tem proteção contra ferrugem, indicada para uso exposto.",
+      },
+      {
+        titulo: "Uso em estrutura de madeira",
+        descricao:
+          "Serve para amarrações e travamentos auxiliares no madeiramento do telhado.",
+      },
+      {
+        titulo: "Fixação tradicional",
+        descricao:
+          "Método consagrado e econômico para telhado de barro em todo o país.",
+      },
+    ],
+  },
+  "buchas-arruelas": {
+    badges: [
+      { icone: "📏", texto: "Várias medidas" },
+      { icone: "🔩", texto: "Complemento do parafuso" },
+      { icone: "🔒", texto: "Evita folga" },
+      { icone: "⚙️", texto: "Uso geral" },
+    ],
+    motivos: [
+      {
+        titulo: "Variedade de medidas",
+        descricao:
+          "Buchas, arruelas e barras roscadas em diferentes bitolas para cada aplicação.",
+      },
+      {
+        titulo: "Complemento essencial da fixação",
+        descricao:
+          "Praticamente toda fixação com parafuso pede bucha ou arruela correspondente.",
+      },
+      {
+        titulo: "Evita folga e garante firmeza",
+        descricao:
+          "A arruela distribui o aperto e a bucha fixa o parafuso na alvenaria sem folga.",
+      },
+    ],
+  },
+  "parafusos-madeira": {
+    badges: [
+      { icone: "🪵", texto: "Estrutura de telhado" },
+      { icone: "🪛", texto: "Bruta ou aparelhada" },
+      { icone: "📐", texto: "Várias bitolas" },
+      { icone: "🔒", texto: "Boa fixação" },
+    ],
+    motivos: [
+      {
+        titulo: "Indicado para estrutura de telhado",
+        descricao: "Usado na fixação de caibro, ripa, viga e demais peças do madeiramento.",
+      },
+      {
+        titulo: "Boa fixação em madeira",
+        descricao:
+          "Rosca própria para madeira bruta ou aparelhada, com bom travamento.",
+      },
+      {
+        titulo: "Diferentes bitolas",
+        descricao:
+          "Opções de diâmetro e comprimento para cada espessura de peça e tipo de serviço.",
+      },
+    ],
+  },
 };
+
 
 
 
