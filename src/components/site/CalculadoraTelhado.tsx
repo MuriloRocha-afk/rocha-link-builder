@@ -339,14 +339,47 @@ export function CalculadoraTelhado() {
 
     const estrutura: Item[] = [];
     if (comEstrutura) {
-      const esp = Number(espacamento);
       const nomeEsp = ESPECIES.find((e) => e.id === especie)!.label.replace(" ★", "");
-      const linhasCaibro = Math.ceil(c / esp) + 1;
-      const aguas = tipo === "1agua" ? 1 : 2;
-      const mCaibro = Math.ceil(linhasCaibro * caibro * aguas);
-      const mViga = Math.ceil(c * (tipo === "1agua" ? 2 : 3));
-      const mRipa = Math.ceil(areaIncl / 0.35);
-      const kgPregos = areaIncl * 0.12;
+      const eCaibro = Math.max(0.3, Number(espacamento) || 1);
+      const eRipa = Math.max(0.2, Number(espRipa) || 0.4);
+      const eRipao = Math.max(0.2, Number(espRipao) || 0.5);
+      const eCaibrao = Math.max(0.5, Number(espCaibrao) || 1.5);
+      const fMad = 1 + Math.max(0, margemMadeira) / 100;
+
+      let mCaibro = 0;
+      let mCaibrao = 0;
+      let mRipa = 0;
+      let mRipao = 0;
+      let mViga = 0;
+      // pontos de fixação por bitola de prego (item 2 e 4)
+      let pRipa = 0; // ripa × caibro   → 17x21
+      let pRipao = 0; // ripão × caibro → 19x36
+      let pCaibro = 0; // caibro/caibrão × terça → 22x48
+
+      for (const a of aguas) {
+        const rampa = rampaAgua(a);
+        // comprimento médio efetivo da água (tacaniça = metade da base)
+        const cef = a.forma === "tri" ? a.comp / 2 : a.comp;
+        if (rampa <= 0 || cef <= 0) continue;
+
+        const nCaibros = Math.ceil(cef / eCaibro) + 1;
+        const nTercas = Math.max(2, Math.ceil(rampa / 2) + 1);
+        const nRipas = Math.ceil(rampa / eRipa) + 1;
+        const nRipoes = comRipao ? Math.ceil(rampa / eRipao) + 1 : 0;
+        const nCaibroes = comCaibrao ? Math.ceil(cef / eCaibrao) + 1 : 0;
+
+        mCaibro += nCaibros * rampa;
+        mCaibrao += nCaibroes * rampa;
+        mRipa += nRipas * cef;
+        mRipao += nRipoes * cef;
+        mViga += nTercas * cef;
+
+        // cada cruzamento é contado UMA vez: nada de somar peça a peça
+        pRipa += nRipas * nCaibros; // 1 prego por cruzamento ripa/caibro
+        pRipao += nRipoes * nCaibros; // 1 prego por cruzamento ripão/caibro
+        pCaibro += (nCaibros + nCaibroes) * nTercas * 2; // 2 pregos por apoio
+      }
+
       const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => {
         const k = `madeira.${especie}.${peca}`;
         return ["madeira.cambara.caibro", "madeira.cambara.viga", "madeira.cambara.ripa",
@@ -356,11 +389,38 @@ export function CalculadoraTelhado() {
           ? k
           : null;
       };
-      estrutura.push({ nome: `Caibro 5x7 cm — ${nomeEsp}`, qtd: `${mCaibro} m lineares`, chave: chaveMadeira("caibro"), valor: mCaibro });
-      estrutura.push({ nome: `Viga 5x15 cm — ${nomeEsp}`, qtd: `${mViga} m lineares`, chave: chaveMadeira("viga"), valor: mViga });
-      estrutura.push({ nome: `Ripa 1,5x5 cm — ${nomeEsp}`, qtd: `${mRipa} m lineares`, chave: chaveMadeira("ripa"), valor: mRipa });
-      estrutura.push({ nome: "Prego polido 18x27", qtd: `${kgPregos.toFixed(1)} kg`, chave: "prego.18x27", valor: Number(kgPregos.toFixed(1)) });
+      const ml = (n: number) => Math.ceil(n * fMad);
+      const addMadeira = (nome: string, metros: number, chave: string | null) => {
+        if (metros <= 0) return;
+        const v = ml(metros);
+        estrutura.push({ nome, qtd: `${v} m lineares`, chave, valor: v });
+      };
+
+      addMadeira(`Viga / terça 5x15 cm — ${nomeEsp}`, mViga, chaveMadeira("viga"));
+      addMadeira(`Caibro 5x7 cm — ${nomeEsp}`, mCaibro, chaveMadeira("caibro"));
+      if (comCaibrao) addMadeira(`Caibrão 7x11 cm — ${nomeEsp}`, mCaibrao, chaveMadeira("caibro"));
+      addMadeira(`Ripa 1,5x5 cm — ${nomeEsp}`, mRipa, chaveMadeira("ripa"));
+      if (comRipao) addMadeira(`Ripão 2,5x10 cm — ${nomeEsp}`, mRipao, chaveMadeira("ripa"));
+
+      // ---- Pregos discriminados por bitola (itens 2 e 4) ----
+      const PREGOS: { bitola: string; peca: string; un: number; kgUn: number; chave: string | null }[] = [
+        { bitola: "17x21", peca: "ripa", un: pRipa, kgUn: 0.0018, chave: null },
+        { bitola: "19x36", peca: "ripão", un: pRipao, kgUn: 0.0048, chave: null },
+        { bitola: "22x48", peca: "caibro / caibrão em terça", un: pCaibro, kgUn: 0.012, chave: "prego.18x27" },
+      ];
+      for (const p of PREGOS) {
+        if (p.un <= 0) continue;
+        const un = Math.ceil(p.un * fMad);
+        const kg = Math.max(0.5, Math.ceil(un * p.kgUn * 2) / 2);
+        estrutura.push({
+          nome: `Prego polido ${p.bitola} — fixação de ${p.peca}`,
+          qtd: `${kg.toFixed(1)} kg (~${un} pregos)`,
+          chave: p.chave,
+          valor: kg,
+        });
+      }
     }
+
 
     // ---- Calhas e rufos ----
     const calhas: Item[] = [];
