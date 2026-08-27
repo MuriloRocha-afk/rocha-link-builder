@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
-import { CONFIG_PEROBA } from "@/data/configs/madeiramento";
+import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
+import perobaImg from "@/assets/prod-garapeira.jpg";
 
 const TITLE = "Peroba do Norte / D'Água — Vigas, Caibros e Ripas | Rocha Telhas";
 const DESCRIPTION =
@@ -27,7 +27,14 @@ function MadeiramentoPerobaRoute() {
     <>
       <Header />
       <div className="pt-24">
-        <ConfiguradorGenerico config={CONFIG_PEROBA} />
+        <MadeiraNativaConfigurator
+          nome="Peroba do Norte / D'Água"
+          slug="peroba"
+          produtoKey="peroba"
+          subtitulo="Madeira nativa estável e de acabamento nobre para estruturas de telhado. Bruta ou aparelhada em plaina."
+          tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Frota Própria"]}
+          imagem={perobaImg}
+        />
       </div>
       <Footer />
       <FloatingWhats />
