@@ -55,7 +55,45 @@ export type TelhaCatalogo = {
   notaDados?: string;
   cumeeira: PecaAcabamento;
   espigao: PecaAcabamento;
+  /**
+   * false = produto pontual (ponto de luz natural), não é usado para cobrir o
+   * telhado inteiro; fica fora do seletor principal da calculadora.
+   */
+  usoCobertura: boolean;
+  /** comprimento nominal da peça (m) — usado no cálculo dinâmico do fibrocimento */
+  comprimentoPeca?: number;
+  /** largura útil da peça (m) — 0,87 (nominal 0,92) ou 1,05 (nominal 1,10) */
+  larguraUtil?: number;
+  /** espessura nominal (fibrocimento) */
+  espessura?: string;
 };
+
+/**
+ * Recobrimento longitudinal adotado (m) conforme a inclinação da cobertura —
+ * tabela Infibra (aba "Fibrocimento (Infibra)" da planilha mestre):
+ *  15° (26,8%) ou mais → 14 cm · 10°–15° (17,6%–26,8%) → 20 cm ·
+ *  5°–10° (9%–17,6%, só telhas de 6 e 8 mm) → 25 cm.
+ */
+export const recobrimentoFibro = (inclPct: number) =>
+  inclPct >= 26.8 ? 0.14 : inclPct >= 17.6 ? 0.2 : 0.25;
+
+/** Área útil real de uma telha de fibrocimento na inclinação informada (m²) */
+export const areaUtilFibro = (t: TelhaCatalogo, inclPct: number) =>
+  (t.larguraUtil ?? 1.05) * ((t.comprimentoPeca ?? 2.44) - recobrimentoFibro(inclPct));
+
+/**
+ * Rendimento (telhas/m²) usado no cálculo. Para o fibrocimento o valor é
+ * dinâmico: 1 ÷ área útil por telha, que muda com a inclinação. Para as demais
+ * famílias vale o rendimento de ficha técnica do fabricante.
+ */
+export const rendimentoTelha = (t: TelhaCatalogo, inclPct: number) =>
+  t.familia === "fibrocimento" && t.comprimentoPeca ? 1 / areaUtilFibro(t, inclPct) : t.rendimento;
+
+/** Peso aproximado da cobertura (kg/m²) coerente com o rendimento aplicado */
+export const pesoM2Telha = (t: TelhaCatalogo, inclPct: number) =>
+  t.familia === "fibrocimento" && t.comprimentoPeca
+    ? rendimentoTelha(t, inclPct) * t.pesoPeca
+    : t.pesoM2;
 
 const FIBRO = "/catalogo/telhas/fibrocimento";
 const COLONIAL = "/catalogo/telhas/colonial-pvc";
