@@ -838,6 +838,96 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
+  amescla: {
+    badges: [
+      { icone: "⚖️", texto: "Média densidade" },
+      { icone: "💰", texto: "Custo-benefício" },
+      { icone: "🪚", texto: "Sarrafo e tábua" },
+      { icone: "📞", texto: "Verificar disponibilidade" },
+    ],
+    motivos: [
+      {
+        titulo: "Madeira de média densidade",
+        descricao:
+          "Fácil de cortar e pregar, com peso equilibrado para peças de acabamento e caixaria.",
+      },
+      {
+        titulo: "Boa relação custo-benefício",
+        descricao:
+          "Alternativa econômica quando a peça não exige a resistência de uma madeira de lei.",
+      },
+      {
+        titulo: "Uso comum em sarrafo e tábua",
+        descricao:
+          "Muito usada em caixaria, formas, travamentos e acabamentos secundários da obra.",
+      },
+      {
+        titulo: "Disponibilidade a confirmar",
+        descricao:
+          "Bitolas e comprimentos variam conforme o lote — confirmamos estoque e prazo por WhatsApp.",
+      },
+    ],
+  },
+  tabeira: {
+    badges: [
+      { icone: "✨", texto: "Acabamento do beiral" },
+      { icone: "🪵", texto: "Lisa ou desenhada" },
+      { icone: "🔢", texto: "6 modelos" },
+      { icone: "📏", texto: "15cm a 30cm" },
+    ],
+    motivos: [
+      {
+        titulo: "Acabamento estético do telhado",
+        descricao:
+          "Fecha visualmente o beiral ou a platibanda, escondendo as pontas dos caibros e ripas.",
+      },
+      {
+        titulo: "Lisa (boleada) ou desenhada",
+        descricao:
+          "Escolha entre o perfil liso com borda boleada ou o recorte decorativo desenhado.",
+      },
+      {
+        titulo: "6 modelos numerados",
+        descricao:
+          "Os desenhos vão do modelo 1 ao 6, permitindo combinar com o estilo da fachada.",
+      },
+      {
+        titulo: "Fechamento visual do telhado",
+        descricao:
+          "Vendida por metro linear em peças de 15cm, 20cm, 25cm e 30cm de largura.",
+      },
+    ],
+  },
+  deck: {
+    badges: [
+      { icone: "🌤️", texto: "Área externa" },
+      { icone: "💧", texto: "Resiste à umidade" },
+      { icone: "🦶", texto: "Conforto térmico" },
+      { icone: "🏡", texto: "Valoriza o espaço" },
+    ],
+    motivos: [
+      {
+        titulo: "Feito para áreas externas",
+        descricao:
+          "Indicado para borda de piscina, varanda, jardim e áreas de lazer descobertas.",
+      },
+      {
+        titulo: "Resistência à umidade e intempérie",
+        descricao:
+          "Espécies densas e o pinus tratado suportam sol e chuva com manutenção simples.",
+      },
+      {
+        titulo: "Conforto ao pisar descalço",
+        descricao:
+          "A madeira aquece muito menos que piso cerâmico ou pedra sob sol forte.",
+      },
+      {
+        titulo: "Valorização estética",
+        descricao:
+          "Acabamento natural que valoriza a área externa e combina com qualquer paisagismo.",
+      },
+    ],
+  },
 };
 
 
