@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Logo, WhatsAppButton } from "./shared";
 import { QuoteCartButton } from "./quote-cart";
+import { BuscaGlobal } from "./BuscaGlobal";
+
 
 type NavItem = { label: string; hash?: string; to?: string };
 
@@ -43,6 +45,8 @@ function NavLink({
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [buscaAberta, setBuscaAberta] = useState(false);
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -60,7 +64,7 @@ export function Header() {
           <Logo size="lg" />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {NAV.map((item) => (
             <NavLink
               key={item.label}
@@ -69,6 +73,8 @@ export function Header() {
             />
           ))}
         </nav>
+
+        <BuscaGlobal className="mx-4 hidden w-64 lg:block xl:w-72" />
 
         <div className="hidden items-center gap-3 lg:flex">
           <QuoteCartButton />
@@ -81,10 +87,24 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
+          <button
+            type="button"
+            onClick={() => {
+              setBuscaAberta((v) => !v);
+              setOpen(false);
+            }}
+            aria-label="Buscar produtos"
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary"
+          >
+            <Search className="h-5 w-5" />
+          </button>
           <QuoteCartButton />
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => {
+              setOpen((v) => !v);
+              setBuscaAberta(false);
+            }}
             aria-label="Abrir menu"
             className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary"
           >
@@ -93,6 +113,12 @@ export function Header() {
         </div>
 
       </div>
+
+      {buscaAberta ? (
+        <div className="border-t border-border bg-card px-5 py-4 lg:hidden">
+          <BuscaGlobal />
+        </div>
+      ) : null}
 
       {open ? (
         <div className="border-t border-border bg-card px-5 py-5 lg:hidden">
@@ -117,6 +143,7 @@ export function Header() {
           </div>
         </div>
       ) : null}
+
     </header>
   );
 }

@@ -9,6 +9,8 @@ import {
   BITOLAS_MADEIRA,
   COMPRIMENTOS_MADEIRA,
 } from "@/data/configs/madeiramento";
+import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
+
 
 type Tipo = (typeof TIPOS_MADEIRA)[number];
 
@@ -64,7 +66,12 @@ export default function MadeiraNativaConfigurator({
   consulta = true,
 }: MadeiraNativaProps) {
   const { adicionar } = useOrcamento();
-  const [tipo, setTipo] = useState<Tipo | null>(null);
+  const buscaSel = useBuscaSelecao();
+  const [tipo, setTipo] = useState<Tipo | null>(
+    (TIPOS_MADEIRA as readonly string[]).includes(buscaSel.peca ?? "")
+      ? (buscaSel.peca as Tipo)
+      : null,
+  );
   const [bitola, setBitola] = useState<string | null>(null);
   const [comprimento, setComprimento] = useState<string | null>(null);
   const [acabamento, setAcabamento] = useState<"Bruto" | "Aparelhado" | null>(null);

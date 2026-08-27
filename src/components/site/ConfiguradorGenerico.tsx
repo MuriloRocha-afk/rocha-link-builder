@@ -7,6 +7,8 @@ import ProdutoLayout from "@/components/site/ProdutoLayout";
 import BlocoAcessorios, { type AcessorioItem } from "@/components/site/BlocoAcessorios";
 import TipoCard from "@/components/site/TipoCard";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
+import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
+
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
@@ -102,7 +104,15 @@ export default function ConfiguradorGenerico({
   inicial?: Selecao;
 }) {
   const { adicionar } = useOrcamento();
-  const [sel, setSel] = useState<Selecao>(inicial ?? {});
+  const buscaSel = useBuscaSelecao();
+  const [sel, setSel] = useState<Selecao>(() => {
+    const base: Selecao = { ...(inicial ?? {}) };
+    config.passos.forEach((p) => {
+      if (p.tipo !== "quantidade" && buscaSel[p.chave]) base[p.chave] = buscaSel[p.chave];
+    });
+    return base;
+  });
+
   const [qtds, setQtds] = useState<Quantidades>({});
   const [adicionado, setAdicionado] = useState(false);
   const [modalWppAberto, setModalWppAberto] = useState(false);
