@@ -68,7 +68,7 @@ export function BuscaGlobal({ className = "" }: { className?: string }) {
           onKeyDown={onKeyDown}
           placeholder="Buscar produto (ex.: caibro, romana, calha...)"
           aria-label="Buscar produtos no catálogo"
-          className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+          className="w-full bg-transparent text-sm [&::-webkit-search-cancel-button]:appearance-none text-foreground outline-none placeholder:text-muted-foreground"
         />
         {termo ? (
           <button
@@ -83,7 +83,7 @@ export function BuscaGlobal({ className = "" }: { className?: string }) {
       </div>
 
       {mostrar ? (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-xl border border-border bg-card shadow-xl">
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] lg:left-auto lg:w-[26rem] overflow-y-auto rounded-xl border border-border bg-card shadow-xl">
           {resultados.length > 0 ? (
             grupos.map((grupo) => (
               <div key={grupo.categoria} className="border-b border-border/60 last:border-0">
