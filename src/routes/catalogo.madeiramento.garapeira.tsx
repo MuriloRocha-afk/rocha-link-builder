@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
-import { CONFIG_GARAPEIRA } from "@/data/configs/madeiramento";
+import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
+import garapeiraImg from "@/assets/prod-garapeira.jpg";
+
 
 const TITLE = "Garapeira — Sarrafos, Tábuas e Vigas | Rocha Telhas";
 const DESCRIPTION = "Garapeira em viga, caibro, caibrão, ripa, ripão, sarrafo, tábua e dormente, bruta ou aparelhada. Verificar disponibilidade.";
