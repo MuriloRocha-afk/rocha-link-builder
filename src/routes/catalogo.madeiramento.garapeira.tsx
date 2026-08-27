@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
-import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
-import { CONFIG_GARAPEIRA } from "@/data/configs/madeiramento";
+import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
+import garapeiraImg from "@/assets/prod-garapeira.jpg";
+
 
 const TITLE = "Garapeira — Sarrafos, Tábuas e Vigas | Rocha Telhas";
 const DESCRIPTION = "Garapeira em viga, caibro, caibrão, ripa, ripão, sarrafo, tábua e dormente, bruta ou aparelhada. Verificar disponibilidade.";
@@ -26,7 +27,15 @@ function MadeiramentoGarapeiraRoute() {
     <>
       <Header />
       <div className="pt-24">
-        <ConfiguradorGenerico config={CONFIG_GARAPEIRA} />
+        <MadeiraNativaConfigurator
+          nome="Garapeira"
+          slug="garapeira"
+          produtoKey="garapeira"
+          subtitulo="Madeira dura nativa para estruturas de alta resistência. Bruta ou aparelhada em plaina no nosso pátio."
+          tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Frota Própria"]}
+          imagem={garapeiraImg}
+        />
+
       </div>
       <Footer />
       <FloatingWhats />
