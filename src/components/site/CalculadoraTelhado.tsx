@@ -14,15 +14,21 @@ import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 import {
   TELHAS_CATALOGO,
-  GRUPOS_TELHAS,
+  TELHAS_COBERTURA,
+  GRUPOS_COBERTURA,
+  TELHAS_LUZ,
+  GRUPOS_LUZ,
   acharTelha,
+  rendimentoTelha,
+  pesoM2Telha,
+  recobrimentoFibro,
   type TelhaCatalogo,
 } from "@/data/telhasCatalogo";
 
 type Telha = TelhaCatalogo;
 
-const TELHAS = TELHAS_CATALOGO;
-const GRUPOS = GRUPOS_TELHAS;
+const TELHAS = TELHAS_COBERTURA;
+const GRUPOS = GRUPOS_COBERTURA;
 
 
 const ESPECIES = [
@@ -118,6 +124,9 @@ export function CalculadoraTelhado() {
   const [compA, setCompA] = useState("fib-244");
   const [compB, setCompB] = useState("pvc-328");
   const [compC, setCompC] = useState("");
+  const [comLuz, setComLuz] = useState(false);
+  const [luzId, setLuzId] = useState(TELHAS_LUZ[0]?.id ?? "");
+  const [luzQtd, setLuzQtd] = useState("4");
   const [res, setRes] = useState<null | {
     areaBase: number;
     areaIncl: number;
@@ -137,6 +146,7 @@ export function CalculadoraTelhado() {
     tipo: Tipo;
     incl: number;
     margem: number;
+    luz: { label: string; grupo: string; href: string; qtd: number } | null;
   }>(null);
   const [modal, setModal] = useState(false);
 
@@ -172,8 +182,12 @@ export function CalculadoraTelhado() {
     beiral: beiralNum || undefined,
   });
 
-  const calcularPecas = (t: Telha, areaIncl: number, m: number) =>
-    Math.ceil(areaIncl * t.rendimento * (1 + m / 100));
+  const calcularPecas = (t: Telha, areaIncl: number, m: number, inclPct: number) =>
+    Math.ceil(areaIncl * rendimentoTelha(t, inclPct) * (1 + m / 100));
+
+  const telhaLuz = TELHAS_LUZ.find((t) => t.id === luzId) ?? TELHAS_LUZ[0];
+  const luzQtdNum = Math.max(0, Math.floor(Number(luzQtd.replace(",", ".")) || 0));
+  const rendimentoAtual = rendimentoTelha(telha, incl);
 
   const calcular = () => {
     if (comprimentoNum <= 0 || larguraNum <= 0) return;
@@ -190,7 +204,7 @@ export function CalculadoraTelhado() {
     // Todos os planos têm a mesma inclinação (1, 2, 3 ou 4 águas):
     // área real de cobertura = projeção do telhado (com beiral) × fator de inclinação.
     const areaIncl = c * l * fator;
-    const telhas = calcularPecas(telha, areaIncl, margem);
+    const telhas = calcularPecas(telha, areaIncl, margem, incl);
     // vão de cada água (sem beiral) e altura do oitão
     const vao = tipo === "1agua" ? larguraNum : larguraNum / 2;
     const alturaCumeeira = vao * (incl / 100);
@@ -309,7 +323,7 @@ export function CalculadoraTelhado() {
       calhas.push({ nome: "Veda calha PU / silicone", qtd: `${vedaCalha} un`, chave: "vedacalha", valor: vedaCalha });
     }
 
-    const peso = areaIncl * telha.pesoM2;
+    const peso = areaIncl * pesoM2Telha(telha, incl);
 
     setCompA(telha.id);
     const compativeis = TELHAS.filter((t) => t.id !== telha.id && t.min <= incl);
@@ -349,6 +363,10 @@ export function CalculadoraTelhado() {
       tipo,
       incl,
       margem,
+      luz:
+        comLuz && telhaLuz && luzQtdNum > 0
+          ? { label: telhaLuz.label, grupo: telhaLuz.grupo, href: telhaLuz.href, qtd: luzQtdNum }
+          : null,
     });
 
   };
@@ -363,7 +381,7 @@ export function CalculadoraTelhado() {
     if (!res) return [];
     const base = [compA, compB, compC].filter(Boolean).map((id) => {
       const t = acharTelha(id);
-      const pecas = calcularPecas(t, res.areaIncl, res.margem);
+      const pecas = calcularPecas(t, res.areaIncl, res.margem, res.incl);
       const f = estimarFaixa([{ chave: t.chavePreco, nome: t.label, qtd: pecas }]);
       const semPreco = f.naoEncontrados.length > 0 || f.max <= 0;
       return {
