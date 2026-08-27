@@ -7,6 +7,8 @@ import ProdutoLayout from "@/components/site/ProdutoLayout";
 import BlocoAcessorios, { type AcessorioItem } from "@/components/site/BlocoAcessorios";
 import TipoCard from "@/components/site/TipoCard";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
+import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
+
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
