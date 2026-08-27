@@ -17,7 +17,6 @@ import {
   GRUPOS_TELHAS,
   acharTelha,
   type TelhaCatalogo,
-  type FamiliaTelha,
 } from "@/data/telhasCatalogo";
 
 type Telha = TelhaCatalogo;
@@ -600,8 +599,16 @@ ${comparaHtml}
               </div>
             ))}
           </div>
+          {telha.notaDados && (
+            <p className="mt-2 flex items-start gap-1.5 rounded-lg bg-amber-50 p-2 text-[11px] text-amber-800">
+              <AlertTriangle size={13} className="mt-0.5 shrink-0" />
+              <span>
+                <b>Dado a confirmar:</b> {telha.notaDados}
+              </span>
+            </p>
+          )}
           <p className="mt-2 text-[11px] text-gray-500">
-            Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b> ·{" "}
+            Fabricante de referência: <b className="text-gray-700">{telha.fabricante}</b> · Peso aproximado da cobertura: <b className="text-gray-700">{telha.pesoM2} kg/m²</b> ·{" "}
             <a href={telha.href} className="font-bold text-orange-600 hover:underline">
               ver ficha completa no catálogo →
             </a>
