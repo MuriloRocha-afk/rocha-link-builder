@@ -211,8 +211,8 @@ export const CONFIG_AMESCLA: ConfiguradorConfig = {
   passos: [
     {
       chave: "peca",
-      titulo: "Tipo de Peça",
-      tipo: "grid2",
+      titulo: "Dimensão da Peça",
+      tipo: "chips",
       opcoes: PECAS_AMESCLA.map((v) => ({ valor: v })),
     },
     {
