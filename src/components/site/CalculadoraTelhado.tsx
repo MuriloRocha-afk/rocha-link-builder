@@ -116,10 +116,21 @@ export function CalculadoraTelhado() {
   const [comEstrutura, setComEstrutura] = useState(false);
   const [comCalhas, setComCalhas] = useState(true);
   const [comAcabamento, setComAcabamento] = useState(true);
-  const [margem, setMargem] = useState(10);
+  const [margem, setMargem] = useState(2);
   const [ajustarMargem, setAjustarMargem] = useState(false);
+  const [margemMadeira, setMargemMadeira] = useState(5);
   const [especie, setEspecie] = useState("cambara");
-  const [espacamento, setEspacamento] = useState("0.50");
+  const [espacamento, setEspacamento] = useState("1.00");
+  // modo avançado (item 7)
+  const [avancado, setAvancado] = useState(false);
+  const [espRipa, setEspRipa] = useState("0.40");
+  const [espRipao, setEspRipao] = useState("0.50");
+  const [espCaibrao, setEspCaibrao] = useState("1.50");
+  const [comRipao, setComRipao] = useState(false);
+  const [comCaibrao, setComCaibrao] = useState(false);
+  /** medidas individuais por água (modo avançado) */
+  const [aguasCustom, setAguasCustom] = useState<Record<string, { vao: string; comp: string }>>({});
+
   const [compA, setCompA] = useState("fib-244");
   const [compB, setCompB] = useState("pvc-328");
   const [compC, setCompC] = useState("");
