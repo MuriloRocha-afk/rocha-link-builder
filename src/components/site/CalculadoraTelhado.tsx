@@ -175,17 +175,27 @@ export function CalculadoraTelhado() {
     Math.ceil(areaIncl * t.rendimento * (1 + m / 100));
 
   const calcular = () => {
-    const c = comprimentoNum + 2 * beiralNum;
-    const l = larguraNum + 2 * beiralNum;
     if (comprimentoNum <= 0 || larguraNum <= 0) return;
 
-    const areaBase = c * l;
+    // Projeção do telhado (planta) COM beiral — usada só para a área inclinada
+    const c = comprimentoNum + 2 * beiralNum;
+    const l = larguraNum + 2 * beiralNum;
+
+    // Área da planta baixa do imóvel: exatamente o que o cliente informou.
+    // O beiral NÃO entra aqui — ele é prolongamento do plano inclinado.
+    const areaBase = comprimentoNum * larguraNum;
     const perimetro = 2 * (c + l);
     const fator = Math.sqrt(1 + Math.pow(incl / 100, 2));
-    const areaIncl = areaBase * fator * (tipo === "4aguas" ? 1.08 : tipo === "3aguas" ? 1.05 : 1);
+    // Todos os planos têm a mesma inclinação (1, 2, 3 ou 4 águas):
+    // área real de cobertura = projeção do telhado (com beiral) × fator de inclinação.
+    const areaIncl = c * l * fator;
     const telhas = calcularPecas(telha, areaIncl, margem);
-    const alturaCumeeira = (l / 2) * (incl / 100);
-    const caibro = Math.sqrt(Math.pow(l / 2, 2) + Math.pow(alturaCumeeira, 2));
+    // vão de cada água (sem beiral) e altura do oitão
+    const vao = tipo === "1agua" ? larguraNum : larguraNum / 2;
+    const alturaCumeeira = vao * (incl / 100);
+    // largura inclinada: do cume até a borda, já somando o beiral na direção da água
+    const larguraInclinada = vao * fator;
+    const caibro = larguraInclinada + beiralNum;
 
     const itens: Item[] = [];
     if (telha.familia === "fibrocimento" || telha.familia === "policarbonato" || telha.familia === "translucida") {
@@ -200,26 +210,45 @@ export function CalculadoraTelhado() {
       itens.push({ nome: "Prego telheiro / arame de amarração", qtd: `${Math.ceil(areaIncl * 1.5)} un`, chave: null });
     }
 
-    // ---- Item 5: telhas de acabamento (cumeeira / espigão) ----
+    // ---- telhas de acabamento: cumeeira e espigão contados SEPARADAMENTE ----
     const acabamento: Item[] = [];
     if (comAcabamento) {
-      const cfg = ACABAMENTO[telha.familia];
+      // cumeeira = linha de cume, medida sobre a planta do telhado (com beiral nas empenas)
       const mCumeeira =
-        tipo === "1agua" ? 0 : tipo === "2aguas" ? c : tipo === "3aguas" ? Math.max(0, c - l / 2) : Math.max(0, c - l);
-      const hip = Math.sqrt(Math.pow(l / 2, 2) * 2 + Math.pow(alturaCumeeira, 2));
+        tipo === "1agua"
+          ? 0
+          : tipo === "2aguas"
+            ? c
+            : tipo === "3aguas"
+              ? Math.max(0, c - l / 2)
+              : Math.max(0, c - l);
+      // espigão = aresta inclinada do canto até o cume
+      const hip = Math.sqrt(Math.pow(larguraInclinada + beiralNum, 2) + Math.pow(l / 2, 2));
       const mEspigao = tipo === "3aguas" ? 2 * hip : tipo === "4aguas" ? 4 * hip : 0;
       const totalM = mCumeeira + mEspigao;
-      const pecas = Math.ceil((totalM / cfg.util) * (1 + margem / 100));
-      if (totalM > 0) {
+
+      if (mCumeeira > 0) {
+        const pcCum = Math.ceil((mCumeeira / telha.cumeeira.util) * (1 + margem / 100));
         acabamento.push({
-          nome: `${cfg.nome} — cumeeira ${fmtN(mCumeeira)} m${mEspigao > 0 ? ` + espigão ${fmtN(mEspigao)} m` : ""}`,
-          qtd: `${pecas} un (${fmtN(totalM)} m lineares)`,
-          chave: cfg.chave,
-          valor: pecas,
+          nome: `Cumeeira — ${telha.cumeeira.nome} · ${fmtN(mCumeeira)} m lineares`,
+          qtd: `${pcCum} un`,
+          chave: telha.cumeeira.chave,
+          valor: pcCum,
         });
+      }
+      if (mEspigao > 0) {
+        const pcEsp = Math.ceil((mEspigao / telha.espigao.util) * (1 + margem / 100));
+        acabamento.push({
+          nome: `Espigão — ${telha.espigao.nome} · ${fmtN(mEspigao)} m lineares`,
+          qtd: `${pcEsp} un`,
+          chave: telha.espigao.chave,
+          valor: pcEsp,
+        });
+      }
+      if (totalM > 0) {
         if (telha.familia === "ceramica" || telha.familia === "concreto") {
           const arg = Math.max(1, Math.ceil(totalM / 6));
-          acabamento.push({ nome: "Argamassa / cimento-cola para assentar cumeeira", qtd: `${arg} saco(s)`, chave: null });
+          acabamento.push({ nome: "Argamassa / cimento-cola para assentar cumeeira e espigão", qtd: `${arg} saco(s)`, chave: null });
         }
       } else {
         acabamento.push({
@@ -228,6 +257,7 @@ export function CalculadoraTelhado() {
           chave: null,
         });
       }
+
     }
 
     const estrutura: Item[] = [];
