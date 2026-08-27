@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import { estimarFaixa } from "@/data/precosLoja";
-import { croquiTelhadoSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
+import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 import {
   TELHAS_CATALOGO,
   GRUPOS_TELHAS,
@@ -126,6 +126,7 @@ export function CalculadoraTelhado() {
     telhas: number;
     alturaCumeeira: number;
     caibro: number;
+    larguraInclinada: number;
     itens: Item[];
     acabamento: Item[];
     estrutura: Item[];
@@ -133,6 +134,7 @@ export function CalculadoraTelhado() {
     telha: Telha;
     peso: number;
     croqui: string;
+    perfil: string;
     tipo: Tipo;
     incl: number;
     margem: number;
@@ -395,8 +397,9 @@ export function CalculadoraTelhado() {
   const mensagem = res
     ? [
         `Telhado`,
-        `- Área da base (com beiral): ${fmt(res.areaBase)} m²`,
-        `- Área inclinada: ${fmt(res.areaIncl)} m²`,
+        `- Área da base (planta, sem beiral): ${fmt(res.areaBase)} m²`,
+        `- Área inclinada (com beiral): ${fmt(res.areaIncl)} m²`,
+        `- Largura inclinada da água: ${fmt(res.larguraInclinada)} m (+ beiral ${fmt(beiralNum)} m)`,
         `- Perímetro: ${fmt(res.perimetro)} m`,
         `- Tipo: ${TIPOS.find((t) => t.id === res.tipo)!.label} — Inclinação ${res.incl}%`,
         `- Medidas: ${fmt(comprimentoNum)} × ${fmt(larguraNum)} m · beiral ${fmt(beiralNum)} m`,
@@ -459,15 +462,17 @@ export function CalculadoraTelhado() {
   .grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .box{border:1px solid #eee;border-radius:8px;padding:8px 12px;min-width:150px}
   .box b{display:block;font-size:15px}
-  .croqui{border:1px solid #eee;border-radius:8px;padding:10px;margin-top:14px;max-width:420px}
+  .croquis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .croqui{border:1px solid #eee;border-radius:8px;padding:10px;width:330px}
   .small{color:#6b7280;font-size:11px;margin-top:18px}
 </style></head><body>
 <h1>Rocha Telhas — Cálculo de telhado</h1>
 <div>${TIPOS.find((t) => t.id === res.tipo)!.label} · inclinação ${res.incl}% · ${res.telha.label} · margem ${res.margem}%</div>
-<div class="croqui">${res.croqui}</div>
+<div class="croquis"><div class="croqui">${res.croqui}</div><div class="croqui">${res.perfil}</div></div>
 <div class="grid">
-  <div class="box"><span>Área da base</span><b>${fmt(res.areaBase)} m²</b></div>
+  <div class="box"><span>Área da base (planta)</span><b>${fmt(res.areaBase)} m²</b></div>
   <div class="box"><span>Área inclinada</span><b>${fmt(res.areaIncl)} m²</b></div>
+  <div class="box"><span>Largura inclinada</span><b>${fmt(res.larguraInclinada)} m</b></div>
   <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
   <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
 </div>
@@ -536,8 +541,8 @@ ${comparaHtml}
           dangerouslySetInnerHTML={{ __html: croquiAtual }}
         />
         <p className="mt-2 flex items-start gap-1.5 text-[11px] text-gray-500">
-          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da alvenaria (linha tracejada). O beiral é
-          somado automaticamente em todos os lados.
+          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da planta (largura × comprimento). O beiral não entra na área da
+          planta — ele é somado apenas no comprimento da água inclinada.
         </p>
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div>
@@ -764,20 +769,21 @@ ${comparaHtml}
         <div className="rounded-xl border border-[#fed7aa] bg-[#fff7ed] p-5">
           <p className="text-xs font-bold tracking-wider text-orange-600 uppercase">Resultado estimado</p>
 
-          {/* Croqui com as medidas preenchidas */}
-          <div
-            className="mt-3 rounded-xl border border-orange-100 bg-white p-3"
-            dangerouslySetInnerHTML={{ __html: res.croqui }}
-          />
+          {/* Croquis: vista superior + vista de perfil */}
+          <div className="mt-3 grid gap-3 md:grid-cols-2">
+            <div className="rounded-xl border border-orange-100 bg-white p-3" dangerouslySetInnerHTML={{ __html: res.croqui }} />
+            <div className="rounded-xl border border-orange-100 bg-white p-3" dangerouslySetInnerHTML={{ __html: res.perfil }} />
+          </div>
 
           <div className="mt-3 grid grid-cols-2 gap-3">
             {[
-              { l: "Área da base", v: `${fmt(res.areaBase)} m²` },
+              { l: "Área da base (planta)", v: `${fmt(res.areaBase)} m²` },
               { l: "Área inclinada real", v: `${fmt(res.areaIncl)} m²` },
               { l: "Perímetro do telhado", v: `${fmt(res.perimetro)} m` },
               { l: `Telhas (+${res.margem}% margem)`, v: `${res.telhas} un` },
-              { l: "Altura da cumeeira", v: `${fmt(res.alturaCumeeira)} m` },
-              { l: "Comprimento do caibro", v: `${fmt(res.caibro)} m` },
+              { l: "Altura do oitão", v: `${fmt(res.alturaCumeeira)} m` },
+              { l: "Largura inclinada (água)", v: `${fmt(res.larguraInclinada)} m` },
+              { l: "Água + beiral (caibro)", v: `${fmt(res.caibro)} m` },
             ].map((b) => (
               <div key={b.l} className="rounded-lg border border-orange-100 bg-white p-3">
                 <p className="text-[11px] font-semibold text-gray-500">{b.l}</p>
