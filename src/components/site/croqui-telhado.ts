@@ -176,7 +176,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   if (b > 0) {
     const xB1 = xEsq - px(bH);
     linhas.push(
-      `<line x1="${xB1}" y1="${Ybase + 34}" x2="${xEsq}" y2="${Ybase + 34}" stroke={} stroke-width="1"/>`.replace("{}", laranja),
+      `<line x1="${xB1}" y1="${Ybase + 34}" x2="${xEsq}" y2="${Ybase + 34}" stroke="${laranja}" stroke-width="1.6"/>`,
       `<text x="${xB1}" y="${Ybase + 48}" font-size="9.5" font-weight="bold" fill="${laranja}">Beiral ${fmt(b)} m</text>`,
     );
   }
