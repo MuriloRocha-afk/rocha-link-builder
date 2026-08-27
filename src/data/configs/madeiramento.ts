@@ -309,6 +309,7 @@ const CAT_DECK = [
 const especieDeck = (cat: string) => cat.replace("Deck ", "");
 
 export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
+  produtoKey: "deck",
   breadcrumb: BC("Deck"),
   titulo: "Deck",
   subtitulo: "Deck de cumaru mesclado, garapeia e pinus tratado, calculado por m².",
