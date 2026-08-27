@@ -230,12 +230,13 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
   imagens: (s) =>
     s.comprimento ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }] : [],
   categoria: "Telhas",
+  produtoKey: "polipropileno",
   passos: [
     {
       chave: "comprimento",
       titulo: "Tamanho da Telha (comprimento × largura)",
-      tipo: "grid2",
-      opcoes: COMPRIMENTOS_PP.map((o) => ({ ...o, emoji: "📏" })),
+      tipo: "chips",
+      opcoes: COMPRIMENTOS_PP,
     },
     {
       chave: "qtd",
@@ -248,13 +249,24 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     },
   ],
   especificacoes: [
+    ["Marca", "Luxtelhas / Fibrarte"],
+    ["Material", "Polipropileno translúcido leitoso"],
     ["Espessura", "1,2 mm (única)"],
     ["Inclinação mínima", "10%"],
     ["Sobreposição", "14 cm (igual ao fibrocimento)"],
     ["Larguras", "110 cm · 92 cm e 50 cm (apenas no comprimento 244 cm)"],
-    ["Fixação", "Parafuso com vedação 110mm"],
+    ["Fixação", "Parafuso com vedação 110mm · apoios a cada 1,0 m"],
     ["Compatibilidade", "100% com telha fibrocimento INFIBRA"],
+    ["Peso por peça", "Consultar disponibilidade"],
   ],
+  informacoes: [
+    {
+      titulo: "Transmissão de luz",
+      texto:
+        "Acabamento translúcido leitoso, com alta transmissão de luz natural e claridade difusa. O fabricante não publica ficha técnica com o percentual exato de transmissão — por isso não informamos número fechado.",
+    },
+  ],
+
   tituloAcessorios: "Acessórios para Telha Plástica",
   acessorios: (_s, q) => acessoriosPlastico((q.qtd as number) ?? 5),
   resumoNome: () => "Telha Translúcida Polipropileno",
