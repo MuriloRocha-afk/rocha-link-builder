@@ -540,7 +540,14 @@ export function CalculadoraTelhado() {
         `- Perímetro: ${fmt(res.perimetro)} m`,
         `- Tipo: ${TIPOS.find((t) => t.id === res.tipo)!.label} — Inclinação ${res.incl}%`,
         `- Medidas: ${fmt(comprimentoNum)} × ${fmt(larguraNum)} m · beiral ${fmt(beiralNum)} m`,
-        `- Margem de recorte/reposição: ${res.margem}%`,
+        `- Margem de recorte/reposição da telha: ${res.margem}%`,
+        ...(comEstrutura ? [`- Margem de corte da madeira: ${margemMadeira}%`] : []),
+        ...(avancado
+          ? [
+              `- Medidas por água: ${aguas.map((a) => `${a.nome} ${fmt(a.vao)} × ${fmt(a.comp)} m`).join(" · ")}`,
+            ]
+          : []),
+
         `- Telha escolhida: ${res.telha.label} (${res.telha.grupo})`,
         `- Peso estimado da cobertura: ${fmt(res.peso, 0)} kg`,
         ...(comparativo.length > 1
