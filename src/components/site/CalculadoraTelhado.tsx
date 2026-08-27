@@ -653,6 +653,40 @@ ${comparaHtml}
 
   return (
     <div className="space-y-4">
+      {/* Modo simples x avançado (item 7) */}
+      <div className={card}>
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className={passo}>{avancado ? "Modo avançado" : "Modo simples"}</p>
+            <p className="mt-1 text-xs text-gray-500">
+              {avancado
+                ? "Medida por água, espaçamento por peça, bitola de prego e margem da madeira liberados para edição."
+                : "Usamos valores recomendados de espaçamento, prego e margem. Ative o modo avançado para especificar tudo manualmente."}
+            </p>
+          </div>
+          <Toggle
+            on={avancado}
+            label="Modo avançado"
+            onClick={() =>
+              setAvancado((v) => {
+                // ao entrar no avançado, herda as medidas calculadas no modo simples
+                if (!v)
+                  setAguasCustom(
+                    Object.fromEntries(
+                      aguasPadrao.map((a) => [
+                        a.id,
+                        { vao: a.vao ? String(Number(a.vao.toFixed(2))) : "", comp: a.comp ? String(Number(a.comp.toFixed(2))) : "" },
+                      ]),
+                    ),
+                  );
+                return !v;
+              })
+            }
+          />
+        </div>
+      </div>
+
+
       {/* Passo 1 */}
       <div className={card}>
         <p className={passo}>Passo 1 · Tipo de telhado</p>
