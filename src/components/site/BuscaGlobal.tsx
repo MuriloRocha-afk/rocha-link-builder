@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Search, X, MessageCircle, ArrowRight, MoreHorizontal } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { agrupar, buscar, CATEGORIAS_SUGERIDAS, type ItemBusca } from "@/data/buscaIndex";
