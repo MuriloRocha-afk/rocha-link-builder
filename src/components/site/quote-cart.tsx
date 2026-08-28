@@ -233,14 +233,12 @@ function QuoteDrawer() {
           })),
         },
       });
-      if (res.ok) {
-        setSucesso({ numero: res.numeroPedido });
-        clear();
-      } else {
-        setErro(res.erro);
-      }
+      // o WhatsApp já foi aberto; o registro interno acontece em segundo plano
+      setSucesso({ numero: res.ok ? res.numeroPedido : "" });
+      clear();
     } catch {
-      setErro("Não foi possível enviar agora. Tente novamente ou fale no WhatsApp.");
+      setSucesso({ numero: "" });
+      clear();
     } finally {
       setEnviando(false);
     }
