@@ -659,10 +659,13 @@ export function CalculadoraTelhado() {
 
   const baixarPdf = () => {
     if (!res) return;
-    const linha = (i: Item) => `<tr><td>${i.nome}</td><td class="qty">${i.qtd}</td></tr>`;
+    const linha = (i: Item) =>
+      i.chave === null && /^Crit\u00e9rios/i.test(i.nome)
+        ? `<div class="criterio"><b>${i.nome}:</b> ${i.qtd}</div>`
+        : `<div class="linha"><span class="nome">${i.nome}</span><span class="leader"></span><span class="qty">${i.qtd}</span></div>`;
     const bloco = (titulo: string, itens: Item[]) =>
       itens.length
-        ? `<div class="section-title">${titulo}</div><table class="data">${itens.map(linha).join("")}</table>`
+        ? `<div class="section-title">${titulo}</div><div class="data">${itens.map(linha).join("")}</div>`
         : "";
 
     const pregos = res.estrutura.filter((i) => /^Prego/i.test(i.nome));
@@ -729,9 +732,12 @@ export function CalculadoraTelhado() {
   .stat .label{font-size:8px;color:#9CA3AF;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
   .stat .value{font-size:13px;font-weight:800;margin-top:2px}
   .section-title{font-size:10.5px;font-weight:800;color:#E8622E;text-transform:uppercase;letter-spacing:.5px;border-bottom:1.5px solid #F0D9CC;padding-bottom:3px;margin:10px 0 5px}
-  table.data{width:100%;border-collapse:collapse;font-size:10px}
-  table.data td{padding:3px 4px;border-bottom:1px solid #F0F0F0;vertical-align:top}
-  table.data td.qty{text-align:right;font-weight:700;color:#B5450F;white-space:nowrap}
+  .data{font-size:9.5px}
+  .data .linha{display:flex;align-items:baseline;gap:4px;padding:2.5px 2px;border-bottom:1px solid #F5F5F5}
+  .data .nome{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+  .data .leader{flex:1 1 auto;min-width:8px;border-bottom:1px dotted #D1D5DB;transform:translateY(-2px)}
+  .data .qty{white-space:nowrap;font-weight:700;color:#B5450F;flex:0 0 auto}
+  .data .criterio{padding:4px 2px;font-size:8.5px;line-height:1.45;color:#4B5563;background:#FAFAFA;border-radius:4px}
   .two-col-sections{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
   table.comparativo{width:100%;border-collapse:collapse;font-size:9.5px}
   table.comparativo thead th{background:#FFF3EC;color:#B5450F;font-size:8.5px;text-transform:uppercase;letter-spacing:.3px;font-weight:800;padding:5px 6px;text-align:left;border-bottom:2px solid #E8622E}
