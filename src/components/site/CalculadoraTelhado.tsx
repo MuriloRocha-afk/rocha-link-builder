@@ -831,6 +831,25 @@ export function CalculadoraTelhado() {
   };
 
 
+  /** linha de relatório em texto corrido: nome à esquerda, pontilhado, valor à direita */
+  const LinhaItem = ({ nome, qtd, extra }: { nome: string; qtd: string; extra?: React.ReactNode }) => {
+    if (/^Crit\u00e9rios/i.test(nome)) {
+      return (
+        <li className="p-3 text-[11px] leading-relaxed text-gray-600">
+          <b className="text-gray-700">{nome}:</b> {qtd}
+        </li>
+      );
+    }
+    return (
+      <li className="flex items-baseline gap-2 p-3 text-sm">
+        <span className="shrink truncate whitespace-nowrap text-gray-700">{nome}</span>
+        {extra}
+        <span className="min-w-4 flex-1 translate-y-[-3px] border-b border-dotted border-gray-300" />
+        <span className="shrink-0 font-bold whitespace-nowrap text-orange-600">{qtd}</span>
+      </li>
+    );
+  };
+
   const card = "rounded-xl border border-gray-200 bg-white p-5";
   const passo = "text-xs font-bold uppercase tracking-wider text-orange-600";
   const input =
@@ -1414,26 +1433,20 @@ export function CalculadoraTelhado() {
 
           <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
           <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-            <li className="flex items-center justify-between gap-3 p-3">
-              <span className="text-sm text-gray-700">{res.telha.label}</span>
-              <span className="shrink-0 text-sm font-bold text-orange-600">{res.telhas} un</span>
-            </li>
+            <LinhaItem nome={res.telha.label} qtd={`${res.telhas} un`} />
             {res.itens.map((i) => (
-              <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                <span className="text-sm text-gray-700">{i.nome}</span>
-                <span className="shrink-0 text-sm font-bold text-orange-600">{i.qtd}</span>
-              </li>
+              <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
             ))}
             {res.luz && (
-              <li className="flex items-center justify-between gap-3 p-3">
-                <span className="text-sm text-gray-700">
-                  Pontos de Luz Natural — {res.luz.label}{" "}
-                  <a href={res.luz.href} className="font-bold text-orange-600 hover:underline">
-                    ver no catálogo →
+              <LinhaItem
+                nome={`Pontos de Luz Natural — ${res.luz.label}`}
+                qtd={`${res.luz.qtd} peças`}
+                extra={
+                  <a href={res.luz.href} className="shrink-0 text-xs font-bold whitespace-nowrap text-orange-600 hover:underline">
+                    ver →
                   </a>
-                </span>
-                <span className="shrink-0 text-sm font-bold text-orange-600">{res.luz.qtd} peças</span>
-              </li>
+                }
+              />
             )}
           </ul>
 
@@ -1444,10 +1457,7 @@ export function CalculadoraTelhado() {
               </p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.acabamento.map((i) => (
-                  <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                    <span className="text-sm text-gray-700">{i.nome}</span>
-                    <span className="shrink-0 text-right text-sm font-bold text-orange-600">{i.qtd}</span>
-                  </li>
+                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
                 ))}
               </ul>
               <a
@@ -1464,10 +1474,7 @@ export function CalculadoraTelhado() {
               <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas e acessórios</p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.calhas.map((i) => (
-                  <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                    <span className="text-sm text-gray-700">{i.nome}</span>
-                    <span className="shrink-0 text-sm font-bold text-orange-600">{i.qtd}</span>
-                  </li>
+                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
                 ))}
               </ul>
               <a href="/catalogo/calhas" className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline">
@@ -1481,10 +1488,7 @@ export function CalculadoraTelhado() {
               <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Estrutura de madeira</p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.estrutura.map((i) => (
-                  <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                    <span className="text-sm text-gray-700">{i.nome}</span>
-                    <span className="shrink-0 text-sm font-bold text-orange-600">{i.qtd}</span>
-                  </li>
+                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
                 ))}
               </ul>
             </>
