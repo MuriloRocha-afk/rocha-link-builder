@@ -513,7 +513,7 @@ export function CalculadoraTelhado() {
       const vedaCalha = Math.max(1, Math.ceil(lances / 2));
 
       calhas.push({ nome: "Calha (metro linear)", qtd: `${Math.ceil(mCalha)} m`, chave: "calha.m", valor: Math.ceil(mCalha) });
-      if (mRufo > 0) calhas.push({ nome: "Rufo / testeira (metro linear)", qtd: `${Math.ceil(mRufo)} m`, chave: "rufo.m", valor: Math.ceil(mRufo) });
+      
       if (tipo === "4aguas" || tipo === "3aguas")
         calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m`, chave: "aguafurtada.m", valor: Math.ceil(l) });
       calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
