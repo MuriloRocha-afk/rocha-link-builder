@@ -440,7 +440,7 @@ export function CalculadoraTelhado() {
 
       if (sistema === "ripa") {
         addMadeira(
-          comCaibrao ? `Caibrão 7x11 cm — ${nomeEsp}` : `Caibro 5x7 cm — ${nomeEsp}`,
+          comCaibrao ? `Caibrão 5x7 cm — ${nomeEsp}` : `Caibro 5x5 cm — ${nomeEsp}`,
           mCaibro,
           chaveMadeira("caibro"),
         );
