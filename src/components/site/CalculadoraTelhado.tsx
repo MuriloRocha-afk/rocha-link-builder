@@ -186,6 +186,10 @@ export function CalculadoraTelhado() {
   const comprimentoNum = num(comprimento);
   const beiralNum = num(beiral);
 
+  /** vão livre padrão = comprimento real informado no Passo 1 (editável no modo avançado) */
+  const vaoLivreAuto = Math.max(0.5, comprimentoNum || 3);
+  const vaoLivreEfetivo = avancado ? Math.max(0.5, num(vaoLivre) || vaoLivreAuto) : vaoLivreAuto;
+
   // Item 4: ao trocar a telha, sugere automaticamente a inclinação mínima (editável)
   useEffect(() => {
     setIncl(telha.min);
