@@ -506,7 +506,7 @@ export function CalculadoraTelhado() {
     const calhas: Item[] = [];
     if (comCalhas) {
       const mCalha = tipo === "1agua" ? c : tipo === "2aguas" ? c * 2 : perimetro;
-      const mRufo = tipo === "1agua" ? c + 2 * l : tipo === "2aguas" ? 2 * l : tipo === "3aguas" ? l : 0;
+      
       const lances = Math.ceil(mCalha / 6);
       const suportes = Math.ceil(mCalha / 0.8);
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
