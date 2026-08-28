@@ -21,6 +21,8 @@ import {
 import { useServerFn } from "@tanstack/react-start";
 import { enviarPedidoTiny } from "@/lib/tiny.functions";
 import { waLink, CONTATO } from "./shared";
+import { AvaliacaoModal } from "./AvaliacaoModal";
+
 
 
 export type QuoteItem = {
@@ -201,6 +203,8 @@ function QuoteDrawer() {
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [sucesso, setSucesso] = useState<{ numero: string } | null>(null);
+  const [avaliar, setAvaliar] = useState(false);
+
   const enviarPedido = useServerFn(enviarPedidoTiny);
   const pronto =
     nome.trim().length >= 2 &&
