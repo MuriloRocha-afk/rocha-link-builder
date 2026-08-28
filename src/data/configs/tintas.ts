@@ -266,58 +266,21 @@ export const CONFIG_CUPICIDA: ConfiguradorConfig = {
     `🌿 *Exterminador de Cupim — ${s.marca}*\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
-const THINNERS = [
-  "Anjo Thinner — Limpeza e Diluição 900ml",
-  "Anjo Thinner — Limpeza e Diluição 5L",
-  "Anjo Diluente Premium — 900ml",
-  "Anjo Diluente Seladora Madeiras e Móveis — 900ml",
-  "Anjo Diluente Seladora Madeiras e Móveis — 5L",
-  "Anjo Diluente Seladora Madeiras e Móveis — 18L",
-  "Aguarraz Mineral — 900ml",
-  "Anjo Aguarras Mineral — 5L",
-  "Sayerlack Thinner Profissional — 900ml",
-  "Thinner Eucatex — 900ml",
-  "Anjo Diluente para Tinta — 900ml",
-];
-
-export const CONFIG_THINNER: ConfiguradorConfig = {
-  breadcrumb: BC("Thinner & Diluentes"),
-  titulo: "🧪 Thinner & Diluentes",
-  subtitulo: "Anjo Thinner, Aguarraz e Diluentes. Para limpeza e diluição de tintas e vernizes.",
-  galeriaTitulo: "Thinner & Diluentes",
-  galeriaPlaceholder: "Foto em breve",
-  imagens: () => [{ src: "", alt: "Linha de thinners e diluentes Anjo" }],
-  categoria: "Tintas",
-  passos: [
-    {
-      chave: "produto",
-      titulo: "Produto",
-      tipo: "lista",
-      opcoes: THINNERS.map((v) => ({ valor: v })),
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
-  ],
-  resumoNome: (s) => s.produto ?? "Thinner & Diluentes",
-  resumoDetalhe: (_s, q) => `${q.qtd ?? 1} un`,
-  unidadeResumo: () => "un",
-  idItem: (s) => `thinner-${s.produto}`,
-  mensagem: (s, q) => `🧪 *${s.produto}*\n• Quantidade: ${q.qtd ?? 1} un`,
-};
-
-/* ---------------- Aguarrás ---------------- */
+/* ---------------- Aguarrás & Thinner (Sayerlack) ---------------- */
 
 const AGUARRAS: { nome: string; volumes: string[] }[] = [
-  { nome: "Anjo Aguarrás Mineral", volumes: ["500ml", "900ml", "5L", "18L"] },
-  { nome: "Aguarrás Vegetal", volumes: ["900ml", "5L"] },
-  { nome: "Aguarrás Eucatex", volumes: ["900ml", "5L"] },
+  { nome: "Sayerlack Aguarrás Mineral", volumes: ["500ml", "900ml", "5L", "18L"] },
+  { nome: "Sayerlack Aguarrás Vegetal", volumes: ["900ml", "5L"] },
+  { nome: "Sayerlack Thinner Profissional", volumes: ["900ml", "5L"] },
+  { nome: "Sayerlack Diluente para Verniz e Stain", volumes: ["900ml", "5L"] },
 ];
 
 export const CONFIG_AGUARRAS: ConfiguradorConfig = {
-  breadcrumb: BC("Aguarrás"),
-  titulo: "🧴 Aguarrás",
+  breadcrumb: BC("Aguarrás / Thinner"),
+  titulo: "🧴 Aguarrás / Thinner — Sayerlack",
   subtitulo:
-    "Aguarrás mineral e vegetal para diluição de esmaltes, vernizes e limpeza de ferramentas.",
-  galeriaTitulo: "Aguarrás",
+    "Aguarrás mineral e vegetal, thinner e diluentes Sayerlack para diluição de vernizes, stains e limpeza de ferramentas.",
+  galeriaTitulo: "Aguarrás / Thinner",
   galeriaPlaceholder: "Selecione o produto para ver as fotos",
   imagens: (s) => (s.produto ? [{ src: "", alt: s.produto }] : []),
   categoria: "Tintas",
@@ -337,12 +300,13 @@ export const CONFIG_AGUARRAS: ConfiguradorConfig = {
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: (s) => s.produto ?? "Aguarrás",
+  resumoNome: (s) => s.produto ?? "Aguarrás / Thinner",
   resumoDetalhe: (s, q) => `${s.volume} · ${q.qtd ?? 1} un`,
   unidadeResumo: () => "un",
   idItem: (s) => `aguarras-${s.produto}-${s.volume}`,
   mensagem: (s, q) => `🧴 *${s.produto} ${s.volume}*\n• Quantidade: ${q.qtd ?? 1} un`,
 };
+
 
 /* ---------------- Acessórios de aplicação ---------------- */
 
