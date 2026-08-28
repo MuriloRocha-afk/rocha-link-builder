@@ -230,3 +230,62 @@ export const GRUPOS_LUZ = Array.from(new Set(TELHAS_LUZ.map((t) => t.grupo)));
 
 export const acharTelha = (id: string) =>
   TELHAS_CATALOGO.find((t) => t.id === id) ?? TELHAS_CATALOGO[0];
+
+/* ============================================================
+ * Estrutura de madeira por tipo de telha
+ * ============================================================ */
+
+/**
+ * "ripa"  → Barro, Concreto, Esmaltada e Vidro: ripa/ripão (galga da telha),
+ *            caibro/caibrão (50 cm) e viga (1,5 m).
+ * "apoio" → Fibrocimento, Policarbonato e Translúcida: só viga, apoio no
+ *            começo/meio/fim de cada telha (apoio compartilhado entre fiadas).
+ * "pvc"   → Colonial e Plan PVC: apoio fixo a cada 66 cm, viga 11 cm.
+ */
+export type SistemaEstrutura = "ripa" | "apoio" | "pvc";
+
+export const sistemaEstrutura = (t: TelhaCatalogo): SistemaEstrutura =>
+  t.familia === "pvc"
+    ? "pvc"
+    : t.familia === "fibrocimento" || t.familia === "policarbonato" || t.familia === "translucida"
+      ? "apoio"
+      : "ripa";
+
+/**
+ * Galga (m) = distância do topo de uma ripa ao topo da próxima, por modelo de
+ * telha (ficha técnica mestre da loja). Telhas de vidro não têm galga própria:
+ * usam a galga da cerâmica equivalente.
+ */
+const GALGA_POR_TELHA: Record<string, number> = {
+  "cer-romana-17": 0.328, // Romana Isotec
+  "cer-romana-13": 0.33, // Romana TopTelha
+  "cer-port": 0.332, // Portuguesa Isotec
+  "cer-amer": 0.358, // Americana Pereira Rodrigues
+  "cer-medit": 0.28, // Mediterrânea TopTelha
+  "cer-francesa": 0.365, // Francesa (ref. Cejatel linha Wave)
+  "cer-colonial": 0.33, // Colonial cerâmica TopTelha (ref. Romana)
+  "con-euro": 0.32, // Concreto Eurotop (distância máxima entre ripas)
+  "esm-premier": 0.375, // Esmaltada Premier
+  "esm-port": 0.375,
+  "esm-romana": 0.375,
+  "vid-romana": 0.328, // = Romana cerâmica
+  "vid-port": 0.332, // = Portuguesa cerâmica
+  "vid-francesa": 0.365, // = Francesa cerâmica
+  "vid-medit": 0.28, // = Mediterrânea cerâmica
+};
+
+/** Galga em metros do modelo (null quando a telha não usa ripa) */
+export const galgaTelha = (t: TelhaCatalogo): number | null =>
+  sistemaEstrutura(t) === "ripa" ? (GALGA_POR_TELHA[t.id] ?? 0.33) : null;
+
+/** Bitola da viga conforme o vão livre (m) */
+export const bitolaVigaPorVao = (vaoLivre: number) =>
+  vaoLivre <= 3 ? "11 cm" : vaoLivre <= 4.5 ? "15 cm" : vaoLivre <= 5.5 ? "20 ou 25 cm" : "30 cm";
+
+/** Espaçamento fixo de apoio das telhas de PVC (m) */
+export const APOIO_PVC = 0.66;
+/** Espaçamento padrão de caibro/caibrão (m) */
+export const ESP_CAIBRO_PADRAO = 0.5;
+/** Espaçamento padrão de viga (m) */
+export const ESP_VIGA_PADRAO = 1.5;
+

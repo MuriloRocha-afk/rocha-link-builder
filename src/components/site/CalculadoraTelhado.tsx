@@ -22,7 +22,14 @@ import {
   rendimentoTelha,
   pesoM2Telha,
   recobrimentoFibro,
+  sistemaEstrutura,
+  galgaTelha,
+  bitolaVigaPorVao,
+  APOIO_PVC,
+  ESP_CAIBRO_PADRAO,
+  ESP_VIGA_PADRAO,
   type TelhaCatalogo,
+
 } from "@/data/telhasCatalogo";
 
 type Telha = TelhaCatalogo;
@@ -121,14 +128,19 @@ export function CalculadoraTelhado() {
   const [ajustarMargem, setAjustarMargem] = useState(false);
   const [margemMadeira, setMargemMadeira] = useState(5);
   const [especie, setEspecie] = useState("cambara");
-  const [espacamento, setEspacamento] = useState("1.00");
+  /** espaçamento de caibro/caibrão (m) — padrão 0,50 m, editável no avançado */
+  const [espacamento, setEspacamento] = useState(String(ESP_CAIBRO_PADRAO));
   // modo avançado (item 7)
   const [avancado, setAvancado] = useState(false);
-  const [espRipa, setEspRipa] = useState("0.40");
-  const [espRipao, setEspRipao] = useState("0.50");
-  const [espCaibrao, setEspCaibrao] = useState("1.50");
+  /** galga aplicada (m) — vazio = usa a galga da ficha técnica da telha */
+  const [galgaCustom, setGalgaCustom] = useState("");
+  /** espaçamento entre vigas (m) */
+  const [espViga, setEspViga] = useState(String(ESP_VIGA_PADRAO));
+  /** vão livre entre apoios (m) — define a bitola da viga */
+  const [vaoLivre, setVaoLivre] = useState("3");
   const [comRipao, setComRipao] = useState(false);
   const [comCaibrao, setComCaibrao] = useState(false);
+
   /** medidas individuais por água (modo avançado) */
   const [aguasCustom, setAguasCustom] = useState<Record<string, { vao: string; comp: string }>>({});
 
@@ -162,6 +174,10 @@ export function CalculadoraTelhado() {
   const [modal, setModal] = useState(false);
 
   const telha = acharTelha(telhaId);
+  /** sistema de estrutura de madeira exigido pelo tipo de telha escolhido */
+  const sistemaTelha = sistemaEstrutura(telha);
+  const galgaFichaTelha = galgaTelha(telha);
+
   const avisoIncl = incl < telha.min;
 
   const num = (v: string) => Number(v.replace(",", ".")) || 0;
@@ -337,21 +353,32 @@ export function CalculadoraTelhado() {
     const estrutura: Item[] = [];
     if (comEstrutura) {
       const nomeEsp = ESPECIES.find((e) => e.id === especie)!.label.replace(" ★", "");
-      const eCaibro = Math.max(0.3, Number(espacamento) || 1);
-      const eRipa = Math.max(0.2, Number(espRipa) || 0.4);
-      const eRipao = Math.max(0.2, Number(espRipao) || 0.5);
-      const eCaibrao = Math.max(0.5, Number(espCaibrao) || 1.5);
+      const sistema = sistemaEstrutura(telha);
+      const eCaibro = Math.max(0.3, num(espacamento) || ESP_CAIBRO_PADRAO);
+      const eViga = Math.max(0.5, num(espViga) || ESP_VIGA_PADRAO);
+      const galgaFicha = galgaTelha(telha);
+      const galga = Math.max(
+        0.15,
+        (avancado ? num(galgaCustom) : 0) || galgaFicha || 0.33,
+      );
+      const vaoLivreAplicado = Math.max(0.5, num(vaoLivre) || 3);
+      const bitolaViga = sistema === "pvc" ? "11 cm" : bitolaVigaPorVao(vaoLivreAplicado);
       const fMad = 1 + Math.max(0, margemMadeira) / 100;
 
+      // comprimento útil de uma telha na direção da rampa (só sistemas de apoio)
+      const compPeca =
+        telha.comprimentoPeca ?? (Number(telha.id.match(/(\d{3})$/)?.[1] ?? 244) / 100);
+      const utilPeca = Math.max(
+        0.5,
+        compPeca - (telha.familia === "fibrocimento" ? recobrimentoFibro(incl) : 0.14),
+      );
+
       let mCaibro = 0;
-      let mCaibrao = 0;
       let mRipa = 0;
-      let mRipao = 0;
       let mViga = 0;
       // pontos de fixação por bitola de prego (item 2 e 4)
-      let pRipa = 0; // ripa × caibro   → 17x21
-      let pRipao = 0; // ripão × caibro → 19x36
-      let pCaibro = 0; // caibro/caibrão × terça → 22x48
+      let pRipa = 0; // ripa/ripão × caibro
+      let pCaibro = 0; // caibro/caibrão × viga
 
       for (const a of aguas) {
         const rampa = rampaAgua(a);
@@ -359,23 +386,35 @@ export function CalculadoraTelhado() {
         const cef = a.forma === "tri" ? a.comp / 2 : a.comp;
         if (rampa <= 0 || cef <= 0) continue;
 
-        const nCaibros = Math.ceil(cef / eCaibro) + 1;
-        const nTercas = Math.max(2, Math.ceil(rampa / 2) + 1);
-        const nRipas = Math.ceil(rampa / eRipa) + 1;
-        const nRipoes = comRipao ? Math.ceil(rampa / eRipao) + 1 : 0;
-        const nCaibroes = comCaibrao ? Math.ceil(cef / eCaibrao) + 1 : 0;
+        if (sistema === "ripa") {
+          // ripa/ripão: espaçadas pela galga da telha, ao longo da rampa
+          const nRipas = Math.ceil(rampa / galga) + 1;
+          // caibro/caibrão: correm no sentido da largura, espaçados no comprimento
+          const nCaibros = Math.ceil(cef / eCaibro) + 1;
+          // viga: corre no sentido do comprimento, espaçada ao longo da largura
+          const nVigas = Math.max(2, Math.ceil(rampa / eViga) + 1);
 
-        mCaibro += nCaibros * rampa;
-        mCaibrao += nCaibroes * rampa;
-        mRipa += nRipas * cef;
-        mRipao += nRipoes * cef;
-        mViga += nTercas * cef;
+          mRipa += nRipas * cef;
+          mCaibro += nCaibros * rampa;
+          mViga += nVigas * cef;
 
-        // cada cruzamento é contado UMA vez: nada de somar peça a peça
-        pRipa += nRipas * nCaibros; // 1 prego por cruzamento ripa/caibro
-        pRipao += nRipoes * nCaibros; // 1 prego por cruzamento ripão/caibro
-        pCaibro += (nCaibros + nCaibroes) * nTercas * 2; // 2 pregos por apoio
+          // cada cruzamento é contado UMA vez
+          pRipa += nRipas * nCaibros;
+          pCaibro += nCaibros * nVigas * 2;
+        } else if (sistema === "apoio") {
+          // fibrocimento / policarbonato / translúcida: só viga.
+          // apoio no começo, meio e fim de cada telha; o último apoio de uma
+          // fiada é o primeiro da fiada seguinte (apoios compartilhados).
+          const fiadas = Math.max(1, Math.ceil(rampa / utilPeca));
+          const nApoios = 2 * fiadas + 1;
+          mViga += nApoios * cef;
+        } else {
+          // PVC Colonial / Plan: apoio fixo a cada 66 cm
+          const nApoios = Math.ceil(rampa / APOIO_PVC) + 1;
+          mViga += nApoios * cef;
+        }
       }
+
 
       const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => {
         const k = `madeira.${especie}.${peca}`;
@@ -393,18 +432,41 @@ export function CalculadoraTelhado() {
         estrutura.push({ nome, qtd: `${v} m lineares`, chave, valor: v });
       };
 
-      addMadeira(`Viga / terça 5x15 cm — ${nomeEsp}`, mViga, chaveMadeira("viga"));
-      addMadeira(`Caibro 5x7 cm — ${nomeEsp}`, mCaibro, chaveMadeira("caibro"));
-      if (comCaibrao) addMadeira(`Caibrão 7x11 cm — ${nomeEsp}`, mCaibrao, chaveMadeira("caibro"));
-      addMadeira(`Ripa 1,5x5 cm — ${nomeEsp}`, mRipa, chaveMadeira("ripa"));
-      if (comRipao) addMadeira(`Ripão 2,5x10 cm — ${nomeEsp}`, mRipao, chaveMadeira("ripa"));
+      const nomeViga =
+        sistema === "ripa"
+          ? `Viga / terça ${bitolaViga} — ${nomeEsp}`
+          : `Viga de apoio ${bitolaViga} — ${nomeEsp}`;
+      addMadeira(nomeViga, mViga, chaveMadeira("viga"));
+
+      if (sistema === "ripa") {
+        addMadeira(
+          comCaibrao ? `Caibrão 7x11 cm — ${nomeEsp}` : `Caibro 5x7 cm — ${nomeEsp}`,
+          mCaibro,
+          chaveMadeira("caibro"),
+        );
+        addMadeira(
+          comRipao ? `Ripão 2,5x10 cm — ${nomeEsp}` : `Ripa 1,5x5 cm — ${nomeEsp}`,
+          mRipa,
+          chaveMadeira("ripa"),
+        );
+      }
 
       // ---- Pregos discriminados por bitola (itens 2 e 4) ----
-      const PREGOS: { bitola: string; peca: string; un: number; kgUn: number; chave: string | null }[] = [
-        { bitola: "17x21", peca: "ripa", un: pRipa, kgUn: 0.0018, chave: null },
-        { bitola: "19x36", peca: "ripão", un: pRipao, kgUn: 0.0048, chave: null },
-        { bitola: "22x48", peca: "caibro / caibrão em terça", un: pCaibro, kgUn: 0.012, chave: "prego.18x27" },
-      ];
+      const PREGOS: { bitola: string; peca: string; un: number; kgUn: number; chave: string | null }[] =
+        sistema === "ripa"
+          ? [
+              comRipao
+                ? { bitola: "19x36", peca: "ripão", un: pRipa, kgUn: 0.0048, chave: null }
+                : { bitola: "17x21", peca: "ripa", un: pRipa, kgUn: 0.0018, chave: null },
+              {
+                bitola: "22x48",
+                peca: comCaibrao ? "caibrão em viga" : "caibro em viga",
+                un: pCaibro,
+                kgUn: 0.012,
+                chave: "prego.18x27",
+              },
+            ]
+          : [];
       for (const p of PREGOS) {
         if (p.un <= 0) continue;
         const un = Math.ceil(p.un * fMad);
@@ -416,7 +478,20 @@ export function CalculadoraTelhado() {
           valor: kg,
         });
       }
+
+      // ---- critérios aplicados (explicitados no relatório) ----
+      estrutura.push({
+        nome: "Critérios de estrutura aplicados",
+        qtd:
+          sistema === "ripa"
+            ? `Galga ${(galga * 100).toFixed(1).replace(".", ",")} cm · caibro a cada ${fmtN(eCaibro)} m · viga a cada ${fmtN(eViga)} m · vão livre ${fmtN(vaoLivreAplicado)} m → viga ${bitolaViga}`
+            : sistema === "pvc"
+              ? `Apoio a cada 66 cm (sem ripa/caibro) · viga 11 cm`
+              : `Apoio no começo, meio e fim de cada telha (compartilhado entre fiadas) · sem ripa/caibro · vão livre ${fmtN(vaoLivreAplicado)} m → viga ${bitolaViga}`,
+        chave: null,
+      });
     }
+
 
 
     // ---- Calhas e rufos ----
@@ -1012,42 +1087,80 @@ ${comparaHtml}
             </div>
             {!avancado && (
               <div className="sm:col-span-2 rounded-lg bg-gray-50 p-3 text-[11px] text-gray-600">
-                Modo simples: usamos espaçamento recomendado (ripa 0,40 m · caibro 1,00 m), prego por bitola
-                calculado automaticamente e 5% de margem de corte na madeira. Ative o modo avançado no topo para
-                editar esses valores.
+                {sistemaTelha === "ripa" ? (
+                  <>
+                    Modo simples: ripa/ripão pela galga da telha escolhida (
+                    <b>{galgaFichaTelha ? `${(galgaFichaTelha * 100).toFixed(1).replace(".", ",")} cm` : "—"}</b>
+                    ), caibro/caibrão a cada 0,50 m e viga a cada 1,50 m, com bitola de viga definida pelo vão
+                    livre (padrão 3 m → 11 cm).
+                  </>
+                ) : sistemaTelha === "pvc" ? (
+                  <>Telha PVC: apoio de madeira a cada 66 cm e viga de 11 cm — sem ripa e sem caibro.</>
+                ) : (
+                  <>
+                    Fibrocimento, policarbonato e translúcida: só viga de apoio (começo, meio e fim de cada telha,
+                    com apoio compartilhado entre fiadas) — sem ripa e sem caibro.
+                  </>
+                )}{" "}
+                Margem de corte da madeira: 5%. Ative o modo avançado no topo para editar esses valores.
               </div>
             )}
 
             {avancado && (
               <>
-                <div>
-                  <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre ripas (m)</label>
-                  <input inputMode="decimal" value={espRipa} onChange={(e) => setEspRipa(e.target.value)} className={input} />
-                </div>
-                <div>
-                  <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibros (m)</label>
-                  <input inputMode="decimal" value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input} />
-                </div>
+                {sistemaTelha === "ripa" && (
+                  <>
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-gray-700">
+                        Galga da telha (m) — espaçamento entre ripas
+                      </label>
+                      <input
+                        inputMode="decimal"
+                        placeholder={galgaFichaTelha ? galgaFichaTelha.toFixed(3) : "0,330"}
+                        value={galgaCustom}
+                        onChange={(e) => setGalgaCustom(e.target.value)}
+                        className={input}
+                      />
+                      <p className="mt-1 text-[11px] text-gray-500">
+                        Ficha técnica: {galgaFichaTelha ? `${(galgaFichaTelha * 100).toFixed(1).replace(".", ",")} cm` : "—"} ·
+                        deixe vazio para usar esse valor.
+                      </p>
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-gray-700">
+                        Espaçamento entre caibros / caibrões (m)
+                      </label>
+                      <input inputMode="decimal" value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input} />
+                    </div>
 
-                <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
-                  <span className="text-xs font-semibold text-gray-700">Usar ripão na estrutura</span>
-                  <Toggle on={comRipao} onClick={() => setComRipao((v) => !v)} label="Usar ripão" />
-                </div>
-                {comRipao && (
-                  <div>
-                    <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre ripões (m)</label>
-                    <input inputMode="decimal" value={espRipao} onChange={(e) => setEspRipao(e.target.value)} className={input} />
-                  </div>
+                    <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
+                      <span className="text-xs font-semibold text-gray-700">
+                        Usar ripão (mesma medida da ripa, bitola reforçada)
+                      </span>
+                      <Toggle on={comRipao} onClick={() => setComRipao((v) => !v)} label="Usar ripão" />
+                    </div>
+                    <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
+                      <span className="text-xs font-semibold text-gray-700">
+                        Usar caibrão (mesmo espaçamento do caibro, bitola reforçada)
+                      </span>
+                      <Toggle on={comCaibrao} onClick={() => setComCaibrao((v) => !v)} label="Usar caibrão" />
+                    </div>
+
+                    <div>
+                      <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre vigas (m)</label>
+                      <input inputMode="decimal" value={espViga} onChange={(e) => setEspViga(e.target.value)} className={input} />
+                    </div>
+                  </>
                 )}
 
-                <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
-                  <span className="text-xs font-semibold text-gray-700">Usar caibrão na estrutura</span>
-                  <Toggle on={comCaibrao} onClick={() => setComCaibrao((v) => !v)} label="Usar caibrão" />
-                </div>
-                {comCaibrao && (
+                {sistemaTelha !== "pvc" && (
                   <div>
-                    <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre caibrões (m)</label>
-                    <input inputMode="decimal" value={espCaibrao} onChange={(e) => setEspCaibrao(e.target.value)} className={input} />
+                    <label className="mb-1 block text-xs font-semibold text-gray-700">Vão livre entre apoios (m)</label>
+                    <input inputMode="decimal" value={vaoLivre} onChange={(e) => setVaoLivre(e.target.value)} className={input} />
+                    <p className="mt-1 text-[11px] text-gray-500">
+                      Bitola da viga aplicada: <b>{bitolaVigaPorVao(Math.max(0.5, num(vaoLivre) || 3))}</b> (até 3 m →
+                      11 cm · até 4,5 m → 15 cm · até 5,5 m → 20 ou 25 cm · acima → 30 cm).
+                    </p>
                   </div>
                 )}
 
@@ -1064,14 +1177,24 @@ ${comparaHtml}
                 </div>
 
                 <div className="sm:col-span-2 rounded-lg border border-orange-100 bg-orange-50/50 p-3 text-[11px] text-gray-600">
-                  <b className="text-orange-700">Prego por bitola:</b> ripa → 17x21 · ripão → 19x36 · caibro e
-                  caibrão em terça → 22x48. A quantidade é contada por ponto de fixação (cada cruzamento uma vez
-                  só), sem somar peças que se cruzam duas vezes.
+                  {sistemaTelha === "ripa" ? (
+                    <>
+                      <b className="text-orange-700">Prego por bitola:</b> ripa → 17x21 · ripão → 19x36 · caibro e
+                      caibrão em viga → 22x48. A quantidade é contada por ponto de fixação (cada cruzamento uma vez
+                      só).
+                    </>
+                  ) : (
+                    <>
+                      <b className="text-orange-700">Sem ripa e sem caibro:</b> esta telha é fixada direto na viga de
+                      apoio com parafuso de vedação — por isso não há prego de ripa/caibro no orçamento.
+                    </>
+                  )}
                 </div>
               </>
             )}
           </div>
         )}
+
 
       </div>
 
