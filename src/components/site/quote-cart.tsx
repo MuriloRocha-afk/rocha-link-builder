@@ -239,9 +239,11 @@ function QuoteDrawer() {
       });
       // o WhatsApp já foi aberto; o registro interno acontece em segundo plano
       setSucesso({ numero: res.ok ? res.numeroPedido : "" });
+      setAvaliar(true);
       clear();
     } catch {
       setSucesso({ numero: "" });
+      setAvaliar(true);
       clear();
     } finally {
       setEnviando(false);
