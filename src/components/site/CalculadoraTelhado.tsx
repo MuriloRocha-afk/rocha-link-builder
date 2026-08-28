@@ -322,12 +322,8 @@ export function CalculadoraTelhado() {
           valor: pcEsp,
         });
       }
-      if (totalM > 0) {
-        if (telha.familia === "ceramica" || telha.familia === "concreto") {
-          const arg = Math.max(1, Math.ceil(totalM / 6));
-          acabamento.push({ nome: "Argamassa / cimento-cola para assentar cumeeira e espigão", qtd: `${arg} saco(s)`, chave: null });
-        }
-      } else {
+      if (totalM <= 0) {
+
         acabamento.push({
           nome: "Telhado de 1 água — sem cumeeira",
           qtd: "Use rufo de arremate no topo",
