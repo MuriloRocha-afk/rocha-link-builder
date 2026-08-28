@@ -651,71 +651,161 @@ export function CalculadoraTelhado() {
 
   const baixarPdf = () => {
     if (!res) return;
-    const linha = (i: Item) => `<tr><td>${i.nome}</td><td class="q">${i.qtd}</td></tr>`;
+    const linha = (i: Item) => `<tr><td>${i.nome}</td><td class="qty">${i.qtd}</td></tr>`;
     const bloco = (titulo: string, itens: Item[]) =>
-      itens.length ? `<div class="sec"><h2>${titulo}</h2><table>${itens.map(linha).join("")}</table></div>` : "";
+      itens.length
+        ? `<div class="section-title">${titulo}</div><table class="data">${itens.map(linha).join("")}</table>`
+        : "";
+
+    const pregos = res.estrutura.filter((i) => /^Prego/i.test(i.nome));
+    const madeira = res.estrutura.filter((i) => !/^Prego/i.test(i.nome));
+    const nomeEspecie = ESPECIES.find((e) => e.id === especie)?.label.replace(" ★", "") ?? "";
+
     const comparaHtml = comparativo.length
-      ? `<div class="sec"><h2>Comparativo entre telhas</h2><table>
-        <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso</td><td class="q">Comparação relativa</td></tr>
+      ? `<div class="comparativo-wrap">
+      <div class="section-title">Comparativo entre telhas do catálogo</div>
+      <table class="comparativo">
+        <thead><tr>
+          <th>Telha</th><th class="num">Peças</th><th class="num">Peso</th>
+          <th>Inclinação mínima</th><th>Comparação relativa</th>
+        </tr></thead>
+        <tbody>
         ${comparativo
-          .map(
-            (c) =>
-              `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td><td class="q">${textoComparativo(c)}</td></tr>`,
-          )
+          .map((c) => {
+            const ref = c.percentual === 0;
+            const badge = ref
+              ? `<span class="badge ref">REFERÊNCIA</span> Opção mais econômica`
+              : c.percentual === null
+                ? `<span class="badge pricier">—</span> custo sob cotação`
+                : `<span class="badge pricier">+${c.percentual}%</span> mais cara que a referência`;
+            return `<tr class="${ref ? "reference" : ""}">
+              <td>${ref ? "<strong>" : ""}${c.telha.label.replace(" ★", "")}${ref ? "</strong>" : ""} — ${c.telha.grupo}</td>
+              <td class="num">${c.pecas} un</td>
+              <td class="num">${fmt(c.peso, 0)} kg</td>
+              <td><span class="compat ${c.compativel ? "ok" : "no"}">${c.telha.min}% · ${c.compativel ? "compatível" : "incompatível"}</span></td>
+              <td>${badge}</td>
+            </tr>`;
+          })
           .join("")}
-      </table></div>`
+        </tbody>
+      </table>
+      <div class="comparativo-note">A diferença percentual é calculada com a tabela interna da loja, sem exibir valores — serve apenas para comparar as opções entre si. Coberturas mais leves (PVC e policarbonato) exigem menos madeira; cerâmica e concreto pedem estrutura reforçada.</div>
+    </div>`
       : "";
+
+    const agora = new Date();
+    const logoGrande = LOGO_ROCHA_SVG.replace('width="58" height="32"', 'width="104" height="58"');
+
     const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <title>Calculo de telhado - Rocha Telhas</title>
 <style>
-  @page{size:A4 portrait;margin:10mm}
+  @page{size:A4 portrait;margin:0}
   *{box-sizing:border-box}
-  body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:0;font-size:9.5px;line-height:1.25}
-  header{display:flex;align-items:center;gap:10px;border-bottom:2px solid #ea580c;padding-bottom:6px}
-  header svg{flex:0 0 auto}
-  h1{color:#ea580c;font-size:15px;margin:0}
-  .sub{color:#374151;font-size:9px;margin-top:1px}
-  h2{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:0 0 3px;border-bottom:1px solid #f3f4f6;padding-bottom:2px}
-  table{width:100%;border-collapse:collapse}
-  td{border-bottom:1px solid #f1f1f1;padding:2px 3px;vertical-align:top}
-  td.q{text-align:right;font-weight:bold;color:#ea580c;white-space:nowrap}
-  .grid{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}
-  .box{border:1px solid #eee;border-radius:5px;padding:4px 7px;flex:1 1 0;text-align:center}
-  .box span{color:#6b7280;font-size:8px;display:block}
-  .box b{display:block;font-size:11px}
-  .croquis{display:flex;gap:8px;margin-top:7px}
-  .croqui{border:1px solid #eee;border-radius:5px;padding:4px;width:50%}
-  .cols{column-count:2;column-gap:12px;margin-top:6px}
-  .sec{break-inside:avoid;page-break-inside:avoid;margin-bottom:8px}
-  .small{color:#6b7280;font-size:8px;margin-top:8px;border-top:1px solid #eee;padding-top:4px}
+  body{font-family:'Helvetica Neue',Arial,Helvetica,sans-serif;color:#1f2937;margin:0}
+  .page{width:210mm;min-height:297mm;padding:11mm 12mm 9mm;display:flex;flex-direction:column}
+  .header{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #E8622E;padding-bottom:8px;margin-bottom:10px}
+  .logo-block{display:flex;align-items:center;gap:12px}
+  .brand{font-size:20px;font-weight:800;letter-spacing:-.3px;line-height:1.1}
+  .brand span{color:#E8622E}
+  .header-right{text-align:right}
+  .header-right .title{font-size:14.5px;font-weight:700}
+  .header-right .meta{font-size:9.5px;color:#6b7280;margin-top:2px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .chip{background:#FFF3EC;border:1px solid #F7D3BE;color:#B5450F;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px}
+  .diagrams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+  .diagram-box{border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px 6px;background:#FAFAFA}
+  .diagram-title{font-size:9.5px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  svg{display:block}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:6px}
+  .stat{border:1px solid #E5E7EB;border-radius:8px;padding:6px 8px;text-align:center;background:#fff}
+  .stat .label{font-size:8px;color:#9CA3AF;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+  .stat .value{font-size:13px;font-weight:800;margin-top:2px}
+  .section-title{font-size:10.5px;font-weight:800;color:#E8622E;text-transform:uppercase;letter-spacing:.5px;border-bottom:1.5px solid #F0D9CC;padding-bottom:3px;margin:10px 0 5px}
+  table.data{width:100%;border-collapse:collapse;font-size:10px}
+  table.data td{padding:3px 4px;border-bottom:1px solid #F0F0F0;vertical-align:top}
+  table.data td.qty{text-align:right;font-weight:700;color:#B5450F;white-space:nowrap}
+  .two-col-sections{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+  table.comparativo{width:100%;border-collapse:collapse;font-size:9.5px}
+  table.comparativo thead th{background:#FFF3EC;color:#B5450F;font-size:8.5px;text-transform:uppercase;letter-spacing:.3px;font-weight:800;padding:5px 6px;text-align:left;border-bottom:2px solid #E8622E}
+  table.comparativo thead th.num{text-align:right}
+  table.comparativo tbody td{padding:5px 6px;border-bottom:1px solid #F0F0F0;vertical-align:middle}
+  table.comparativo tbody td.num{text-align:right;font-weight:700}
+  table.comparativo tbody tr.reference{background:#FFF8F4}
+  .badge{display:inline-block;font-size:8px;font-weight:800;padding:2px 7px;border-radius:10px}
+  .badge.ref{background:#DCFCE7;color:#15803D}
+  .badge.pricier{background:#FEF3C7;color:#92400E}
+  .compat{font-size:8.5px;font-weight:700}
+  .compat.ok{color:#15803D}
+  .compat.no{color:#B91C1C}
+  .comparativo-note{font-size:8px;color:#9CA3AF;margin-top:4px;line-height:1.4}
+  .footer{margin-top:auto;padding-top:8px;border-top:1.5px solid #E5E7EB}
+  .disclaimer{background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:7px 10px;font-size:8.5px;color:#92400E;font-weight:600;line-height:1.4;margin-bottom:5px}
+  .footer-bottom{display:flex;justify-content:space-between;font-size:8px;color:#9CA3AF}
 </style></head><body>
-<header>
-  ${LOGO_ROCHA_SVG}
-  <div>
-    <h1>Rocha Telhas — Cálculo de Telhado</h1>
-    <div class="sub">${TIPOS.find((t) => t.id === res.tipo)!.label} · inclinação ${res.incl}% · ${res.telha.label} · margem ${res.margem}% · ${new Date().toLocaleDateString("pt-BR")}</div>
+<div class="page">
+  <div class="header">
+    <div class="logo-block">
+      ${logoGrande}
+      <div class="brand">ROCHA <span>TELHAS</span> &amp; MADEIRAS</div>
+    </div>
+    <div class="header-right">
+      <div class="title">Cálculo de Telhado — Orçamento Estimado</div>
+      <div class="meta">Gerado em ${agora.toLocaleDateString("pt-BR")} às ${agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</div>
+    </div>
   </div>
-</header>
-<div class="croquis"><div class="croqui">${res.croqui}</div><div class="croqui">${res.perfil}</div></div>
-<div class="grid">
-  <div class="box"><span>Área da base (planta)</span><b>${fmt(res.areaBase)} m²</b></div>
-  <div class="box"><span>Área inclinada</span><b>${fmt(res.areaIncl)} m²</b></div>
-  <div class="box"><span>Largura inclinada</span><b>${fmt(res.larguraInclinada)} m</b></div>
-  <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
-  <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
+
+  <div class="chips">
+    <span class="chip">${TIPOS.find((t) => t.id === res.tipo)!.label}</span>
+    <span class="chip">Inclinação ${res.incl}%</span>
+    <span class="chip">${res.telha.label.replace(" ★", "")}</span>
+    <span class="chip">Margem ${res.margem}%</span>
+    ${comEstrutura ? `<span class="chip">Madeira ${nomeEspecie} · margem ${margemMadeira}%</span>` : ""}
+  </div>
+
+  <div class="diagrams">
+    <div class="diagram-box"><div class="diagram-title">Vista superior</div>${res.croqui}</div>
+    <div class="diagram-box"><div class="diagram-title">Vista de perfil (corte) · inclinação ${res.incl}%</div>${res.perfil}</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">Área da base</div><div class="value">${fmt(res.areaBase)} m²</div></div>
+    <div class="stat"><div class="label">Área inclinada</div><div class="value">${fmt(res.areaIncl)} m²</div></div>
+    <div class="stat"><div class="label">Largura inclinada</div><div class="value">${fmt(res.larguraInclinada)} m</div></div>
+    <div class="stat"><div class="label">Perímetro</div><div class="value">${fmt(res.perimetro)} m</div></div>
+    <div class="stat"><div class="label">Peso da cobertura</div><div class="value">${fmt(res.peso, 0)} kg</div></div>
+  </div>
+
+  <div class="two-col-sections">
+    <div>
+      ${bloco("Cobertura", [
+        { nome: res.telha.label.replace(" ★", ""), qtd: `${res.telhas} un` },
+        ...res.itens,
+        ...(res.luz
+          ? [{ nome: `Pontos de Luz Natural — ${res.luz.label}`, qtd: `${res.luz.qtd} peças` }]
+          : []),
+      ])}
+      ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
+      ${bloco("Calhas e rufos", res.calhas)}
+    </div>
+    <div>
+      ${bloco(`Estrutura de madeira${nomeEspecie && madeira.length ? ` — ${nomeEspecie}` : ""}`, madeira)}
+      ${bloco("Pregos", pregos)}
+    </div>
+  </div>
+
+  ${comparaHtml}
+
+  <div class="footer">
+    <div class="disclaimer">
+      ⚠️ ESTE DOCUMENTO É UMA ESTIMATIVA DE REFERÊNCIA gerada automaticamente pela calculadora do site. Não apresenta valores em R$ — o preço final e a
+      conferência definitiva das quantidades são feitos pela nossa equipe técnica na cotação com o vendedor.
+    </div>
+    <div class="footer-bottom">
+      <span>Rocha Telhas &amp; Madeiras · rochatelhas.com.br · (11) 97176-1003</span>
+      <span>Página 1 de 1</span>
+    </div>
+  </div>
 </div>
-<div class="cols">
-${bloco("Cobertura", [
-  { nome: res.telha.label, qtd: `${res.telhas} un` },
-  ...res.itens,
-  ...(res.luz ? [{ nome: `Pontos de Luz Natural — ${res.luz.label}`, qtd: `${res.luz.qtd} peças` }] : []),
-])}
-${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
-${bloco("Calhas e rufos", res.calhas)}
-${bloco("Estrutura de madeira", res.estrutura)}
-${comparaHtml}
-</div>
-<p class="small">Estimativa de referência gerada automaticamente. Este material não apresenta valores: o preço final sai apenas na cotação com o vendedor, que também confere as quantidades.</p>
 </body></html>`;
 
     const w = window.open("", "_blank");
@@ -725,6 +815,7 @@ ${comparaHtml}
     w.focus();
     setTimeout(() => w.print(), 300);
   };
+
 
   const card = "rounded-xl border border-gray-200 bg-white p-5";
   const passo = "text-xs font-bold uppercase tracking-wider text-orange-600";
