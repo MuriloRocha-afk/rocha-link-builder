@@ -10,6 +10,7 @@ import {
   Info,
 } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
+import { LOGO_ROCHA_SVG } from "@/components/site/logo-print";
 import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 import {
@@ -577,9 +578,9 @@ export function CalculadoraTelhado() {
     if (!res) return;
     const linha = (i: Item) => `<tr><td>${i.nome}</td><td class="q">${i.qtd}</td></tr>`;
     const bloco = (titulo: string, itens: Item[]) =>
-      itens.length ? `<h2>${titulo}</h2><table>${itens.map(linha).join("")}</table>` : "";
+      itens.length ? `<div class="sec"><h2>${titulo}</h2><table>${itens.map(linha).join("")}</table></div>` : "";
     const comparaHtml = comparativo.length
-      ? `<h2>Comparativo entre telhas</h2><table>
+      ? `<div class="sec"><h2>Comparativo entre telhas</h2><table>
         <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso</td><td class="q">Comparação relativa</td></tr>
         ${comparativo
           .map(
@@ -587,7 +588,7 @@ export function CalculadoraTelhado() {
               `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td><td class="q">${textoComparativo(c)}</td></tr>`,
           )
           .join("")}
-      </table>`
+      </table></div>`
       : "";
     const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <title>Calculo de telhado - Rocha Telhas</title>
