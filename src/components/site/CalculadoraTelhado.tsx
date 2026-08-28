@@ -361,7 +361,7 @@ export function CalculadoraTelhado() {
         0.15,
         (avancado ? num(galgaCustom) : 0) || galgaFicha || 0.33,
       );
-      const vaoLivreAplicado = Math.max(0.5, num(vaoLivre) || 3);
+      const vaoLivreAplicado = vaoLivreEfetivo;
       const bitolaViga = sistema === "pvc" ? "11 cm" : bitolaVigaPorVao(vaoLivreAplicado);
       const fMad = 1 + Math.max(0, margemMadeira) / 100;
 
