@@ -347,7 +347,7 @@ export function CalculadoraTelhado() {
 
         acabamento.push({
           nome: "Telhado de 1 água — sem cumeeira",
-          qtd: "Use rufo de arremate no topo",
+          qtd: "Sem cumeeira — arremate direto no topo",
           chave: null,
         });
       }
@@ -502,7 +502,7 @@ export function CalculadoraTelhado() {
 
 
 
-    // ---- Calhas e rufos ----
+    // ---- Calhas e acessórios (a loja não trabalha com rufo) ----
     const calhas: Item[] = [];
     if (comCalhas) {
       const mCalha = tipo === "1agua" ? c : tipo === "2aguas" ? c * 2 : perimetro;
@@ -649,7 +649,7 @@ export function CalculadoraTelhado() {
           ? ["", "*Acabamento (cumeeira / espigão):*", ...res.acabamento.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
           : []),
         ...(res.calhas.length
-          ? ["", "*Calhas e rufos:*", ...res.calhas.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
+          ? ["", "*Calhas e acessórios:*", ...res.calhas.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
           : []),
         ...(res.estrutura.length
           ? ["", "*Estrutura de madeira:*", ...res.estrutura.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
@@ -793,7 +793,7 @@ export function CalculadoraTelhado() {
           : []),
       ])}
       ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
-      ${bloco("Calhas e rufos", res.calhas)}
+      ${bloco("Calhas e acessórios", res.calhas)}
     </div>
     <div>
       ${bloco(`Estrutura de madeira${nomeEspecie && madeira.length ? ` — ${nomeEspecie}` : ""}`, madeira)}
@@ -1157,11 +1157,11 @@ export function CalculadoraTelhado() {
       {/* Passo 6 — calhas */}
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
-          <p className={passo}>Passo 6 · Incluir calhas, rufos e acessórios?</p>
+          <p className={passo}>Passo 6 · Incluir calhas e acessórios?</p>
           <Toggle on={comCalhas} onClick={() => setComCalhas((v) => !v)} label="Incluir calhas" />
         </div>
         <p className="mt-2 text-xs text-gray-500">
-          Calculamos o metro linear de calha e rufo pelo perímetro do telhado e sugerimos suportes, saídas e cabeceiras
+          Calculamos o metro linear de calha pelo perímetro do telhado e sugerimos suportes, saídas e cabeceiras
           na proporção correta.
         </p>
       </div>
@@ -1445,7 +1445,7 @@ export function CalculadoraTelhado() {
 
           {res.calhas.length > 0 && (
             <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas, rufos e acessórios</p>
+              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas e acessórios</p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.calhas.map((i) => (
                   <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
@@ -1455,7 +1455,7 @@ export function CalculadoraTelhado() {
                 ))}
               </ul>
               <a href="/catalogo/calhas" className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline">
-                Ver linha completa de calhas e rufos →
+                Ver linha completa de calhas →
               </a>
             </>
           )}
