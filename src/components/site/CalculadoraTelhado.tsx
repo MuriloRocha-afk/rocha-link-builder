@@ -425,7 +425,6 @@ export function CalculadoraTelhado() {
       const mRufo = tipo === "1agua" ? c + 2 * l : tipo === "2aguas" ? 2 * l : tipo === "3aguas" ? l : 0;
       const lances = Math.ceil(mCalha / 6);
       const suportes = Math.ceil(mCalha / 0.8);
-      const saidas = Math.max(1, Math.ceil(mCalha / 10));
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
       const vedaCalha = Math.max(1, Math.ceil(lances / 2));
 
@@ -434,7 +433,6 @@ export function CalculadoraTelhado() {
       if (tipo === "4aguas" || tipo === "3aguas")
         calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m`, chave: "aguafurtada.m", valor: Math.ceil(l) });
       calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
-      calhas.push({ nome: "Saída / bocal de calha", qtd: `${saidas} un`, chave: "saida.calha", valor: saidas });
       if (cabeceiras > 0) calhas.push({ nome: "Cabeceira (tampa de extremidade)", qtd: `${cabeceiras} un`, chave: "cabeceira.calha", valor: cabeceiras });
       calhas.push({ nome: "Veda calha PU / silicone", qtd: `${vedaCalha} un`, chave: "vedacalha", valor: vedaCalha });
     }
