@@ -15,7 +15,8 @@ const NAV_PRIMARY: NavItem[] = [
 
 const NAV_MORE: NavItem[] = [
   { label: "Nossa Estrutura", hash: "tecnologia" },
-  { label: "Guias", to: "/ferramentas" },
+  { label: "Guias", to: "/guias" },
+  { label: "Ferramentas", to: "/ferramentas" },
   { label: "FAQ", hash: "faq" },
   { label: "Contato", hash: "contato" },
 ];

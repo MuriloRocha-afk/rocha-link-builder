@@ -8,6 +8,7 @@ import { Tecnologia, CtaFinal } from "@/components/site/Tecnologia";
 import { AvisoEntrega } from "@/components/site/AvisoEntrega";
 import { Ferramentas } from "@/components/site/Ferramentas";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
+import { GuiasHome } from "@/components/site/GuiasHome";
 import { WhatsAppButton } from "@/components/site/shared";
 import heroAsset from "@/assets/IMG_1476.jpg.asset.json";
 
@@ -117,6 +118,7 @@ function Index() {
         <Faq />
         <Unidades />
         <CtaFinal />
+        <GuiasHome />
       </main>
 
       <Footer />

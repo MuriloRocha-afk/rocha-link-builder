@@ -14,7 +14,9 @@ import { Route as CalculadoraRouteImport } from './routes/calculadora'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuiasIndexRouteImport } from './routes/guias.index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
+import { Route as GuiasSlugRouteImport } from './routes/guias.$slug'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
 import { Route as CatalogoTintasIndexRouteImport } from './routes/catalogo.tintas.index'
 import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fixadores.index'
@@ -98,9 +100,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuiasIndexRoute = GuiasIndexRouteImport.update({
+  id: '/guias/',
+  path: '/guias/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoIndexRoute = CatalogoIndexRouteImport.update({
   id: '/catalogo/',
   path: '/catalogo/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuiasSlugRoute = GuiasSlugRouteImport.update({
+  id: '/guias/$slug',
+  path: '/guias/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoCategoriaSlugRouteRoute =
@@ -438,7 +450,9 @@ export interface FileRoutesByFullPath {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
+  '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
+  '/guias/': typeof GuiasIndexRoute
   '/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
@@ -502,7 +516,9 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
+  '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo': typeof CatalogoIndexRoute
+  '/guias': typeof GuiasIndexRoute
   '/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
@@ -569,7 +585,9 @@ export interface FileRoutesById {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
+  '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
+  '/guias/': typeof GuiasIndexRoute
   '/_authenticated/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
@@ -636,7 +654,9 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/catalogo/$categoriaSlug'
+    | '/guias/$slug'
     | '/catalogo/'
+    | '/guias/'
     | '/admin/avaliacoes'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
@@ -700,7 +720,9 @@ export interface FileRouteTypes {
     | '/auth'
     | '/calculadora'
     | '/ferramentas'
+    | '/guias/$slug'
     | '/catalogo'
+    | '/guias'
     | '/admin/avaliacoes'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
@@ -766,7 +788,9 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/catalogo/$categoriaSlug'
+    | '/guias/$slug'
     | '/catalogo/'
+    | '/guias/'
     | '/_authenticated/admin/avaliacoes'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
@@ -833,7 +857,9 @@ export interface RootRouteChildren {
   CalculadoraRoute: typeof CalculadoraRoute
   FerramentasRoute: typeof FerramentasRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
+  GuiasSlugRoute: typeof GuiasSlugRoute
   CatalogoIndexRoute: typeof CatalogoIndexRoute
+  GuiasIndexRoute: typeof GuiasIndexRoute
   CatalogoCalhasProdutoSlugRoute: typeof CatalogoCalhasProdutoSlugRoute
   CatalogoCalhasAcessoriosRoute: typeof CatalogoCalhasAcessoriosRoute
   CatalogoCalhasCalhaAlgeRoute: typeof CatalogoCalhasCalhaAlgeRoute
@@ -927,11 +953,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guias/': {
+      id: '/guias/'
+      path: '/guias'
+      fullPath: '/guias/'
+      preLoaderRoute: typeof GuiasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo/': {
       id: '/catalogo/'
       path: '/catalogo'
       fullPath: '/catalogo/'
       preLoaderRoute: typeof CatalogoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guias/$slug': {
+      id: '/guias/$slug'
+      path: '/guias/$slug'
+      fullPath: '/guias/$slug'
+      preLoaderRoute: typeof GuiasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/$categoriaSlug': {
@@ -1378,7 +1418,9 @@ const rootRouteChildren: RootRouteChildren = {
   CalculadoraRoute: CalculadoraRoute,
   FerramentasRoute: FerramentasRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
+  GuiasSlugRoute: GuiasSlugRoute,
   CatalogoIndexRoute: CatalogoIndexRoute,
+  GuiasIndexRoute: GuiasIndexRoute,
   CatalogoCalhasProdutoSlugRoute: CatalogoCalhasProdutoSlugRoute,
   CatalogoCalhasAcessoriosRoute: CatalogoCalhasAcessoriosRoute,
   CatalogoCalhasCalhaAlgeRoute: CatalogoCalhasCalhaAlgeRoute,
