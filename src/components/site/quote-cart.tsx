@@ -152,7 +152,14 @@ export function QuoteCartButton({ className }: { className?: string }) {
 }
 
 
-function buildMessage(items: QuoteItem[], nome: string, local: string) {
+function buildMessage(
+  items: QuoteItem[],
+  nome: string,
+  local: string,
+  telefone: string,
+  email: string,
+  endereco: string,
+) {
   const linhas = items
     .map(
       (i) =>
@@ -170,6 +177,11 @@ function buildMessage(items: QuoteItem[], nome: string, local: string) {
     "",
     "📍 *LOCAL DE ENTREGA*",
     local.trim() || "[cidade/bairro]",
+    ...(endereco.trim() ? [endereco.trim()] : []),
+    "",
+    "📞 *CONTATO*",
+    `WhatsApp: ${telefone.trim() || "[telefone]"}`,
+    ...(email.trim() ? [`E-mail: ${email.trim()}`] : []),
     "",
     "💬 *Informações adicionais*",
     "Poderia verificar a disponibilidade em estoque, o prazo de entrega e o valor do frete para minha região?",
