@@ -155,8 +155,8 @@ const REGRAS: Regra[] = [
         categoria: "Fixadores",
       },
       {
-        id: "anjo-stain-ipe-3-6",
-        nome: "Anjo Stain Casa — Ipê — 3,6L",
+        id: "sayerlack-polisten-ipe-3-6",
+        nome: "Sayerlack Polisten — Ipê — 3,6L",
         descricao: "Proteção e cor para cambará aparelhado",
         emoji: "🎨",
         unidade: "un",
@@ -269,8 +269,8 @@ const REGRAS: Regra[] = [
         categoria: "Fixadores",
       },
       {
-        id: "anjo-verniz-dura-mais",
-        nome: "Anjo Verniz Dura Mais — Natural 3,6L",
+        id: "sayerlack-poliulack-3-6",
+        nome: "Sayerlack Poliulack — Acetinado 3,6L",
         descricao: "Protege o pinus contra umidade e amarelamento",
         emoji: "✨",
         unidade: "un",
@@ -292,8 +292,8 @@ const REGRAS: Regra[] = [
         categoria: "Madeiramento",
       },
       {
-        id: "anjo-verniz-dura-mais",
-        nome: "Anjo Verniz Dura Mais — Natural 3,6L",
+        id: "sayerlack-poliulack-3-6",
+        nome: "Sayerlack Poliulack — Acetinado 3,6L",
         descricao: "Proteção e acabamento para forro cedrinho",
         emoji: "✨",
         unidade: "un",
@@ -325,7 +325,7 @@ const GENERICOS: ProdutoRelacionado[] = [
   },
   {
     id: "generico-tintas",
-    nome: "Tintas e Vernizes Anjo",
+    nome: "Tintas e Vernizes Sayerlack",
     descricao: "Proteção e acabamento para sua obra",
     emoji: "🎨",
     unidade: "un",

@@ -115,7 +115,7 @@ export default function Tintas() {
   return (
     <CategoriaSubcardPage
       titulo="🎨 Tintas, Vernizes & Proteção"
-      subtitulo="Linha completa Anjo, Sayerlack, Vedacit e mais. Escolha o tipo de produto para ver as opções e cotar."
+      subtitulo="Linha Sayerlack completa e itens de obra. Escolha o tipo de produto para ver as opções e cotar."
       breadcrumb="Tintas, Vernizes & Proteção"
       eyebrow="Escolha o tipo de produto"
       cards={CARDS}
