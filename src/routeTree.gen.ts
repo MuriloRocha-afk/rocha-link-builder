@@ -19,6 +19,7 @@ import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fi
 import { Route as CatalogoCalhasIndexRouteImport } from './routes/catalogo.calhas.index'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
 import { Route as CatalogoTintasVernizRouteImport } from './routes/catalogo.tintas.verniz'
+import { Route as CatalogoTintasTintaEmborrachadaRouteImport } from './routes/catalogo.tintas.tinta-emborrachada'
 import { Route as CatalogoTintasStainRouteImport } from './routes/catalogo.tintas.stain'
 import { Route as CatalogoTintasPuCalhaRouteImport } from './routes/catalogo.tintas.pu-calha'
 import { Route as CatalogoTintasLonaPlasticaRouteImport } from './routes/catalogo.tintas.lona-plastica'
@@ -122,6 +123,12 @@ const CatalogoTintasVernizRoute = CatalogoTintasVernizRouteImport.update({
   path: '/catalogo/tintas/verniz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoTintasTintaEmborrachadaRoute =
+  CatalogoTintasTintaEmborrachadaRouteImport.update({
+    id: '/catalogo/tintas/tinta-emborrachada',
+    path: '/catalogo/tintas/tinta-emborrachada',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoTintasStainRoute = CatalogoTintasStainRouteImport.update({
   id: '/catalogo/tintas/stain',
   path: '/catalogo/tintas/stain',
@@ -463,6 +470,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
+  '/catalogo/tintas/tinta-emborrachada': typeof CatalogoTintasTintaEmborrachadaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
@@ -524,6 +532,7 @@ export interface FileRoutesByTo {
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
+  '/catalogo/tintas/tinta-emborrachada': typeof CatalogoTintasTintaEmborrachadaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas': typeof CatalogoCalhasIndexRoute
@@ -587,6 +596,7 @@ export interface FileRoutesById {
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
+  '/catalogo/tintas/tinta-emborrachada': typeof CatalogoTintasTintaEmborrachadaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
@@ -651,6 +661,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/stain'
+    | '/catalogo/tintas/tinta-emborrachada'
     | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
@@ -712,6 +723,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/stain'
+    | '/catalogo/tintas/tinta-emborrachada'
     | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/calhas'
@@ -774,6 +786,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/stain'
+    | '/catalogo/tintas/tinta-emborrachada'
     | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
@@ -836,6 +849,7 @@ export interface RootRouteChildren {
   CatalogoTintasLonaPlasticaRoute: typeof CatalogoTintasLonaPlasticaRoute
   CatalogoTintasPuCalhaRoute: typeof CatalogoTintasPuCalhaRoute
   CatalogoTintasStainRoute: typeof CatalogoTintasStainRoute
+  CatalogoTintasTintaEmborrachadaRoute: typeof CatalogoTintasTintaEmborrachadaRoute
   CatalogoTintasVernizRoute: typeof CatalogoTintasVernizRoute
   CatalogoCalhasIndexRoute: typeof CatalogoCalhasIndexRoute
   CatalogoFixadoresIndexRoute: typeof CatalogoFixadoresIndexRoute
@@ -912,6 +926,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/tintas/verniz'
       fullPath: '/catalogo/tintas/verniz'
       preLoaderRoute: typeof CatalogoTintasVernizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/tinta-emborrachada': {
+      id: '/catalogo/tintas/tinta-emborrachada'
+      path: '/catalogo/tintas/tinta-emborrachada'
+      fullPath: '/catalogo/tintas/tinta-emborrachada'
+      preLoaderRoute: typeof CatalogoTintasTintaEmborrachadaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/tintas/stain': {
@@ -1343,6 +1364,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTintasLonaPlasticaRoute: CatalogoTintasLonaPlasticaRoute,
   CatalogoTintasPuCalhaRoute: CatalogoTintasPuCalhaRoute,
   CatalogoTintasStainRoute: CatalogoTintasStainRoute,
+  CatalogoTintasTintaEmborrachadaRoute: CatalogoTintasTintaEmborrachadaRoute,
   CatalogoTintasVernizRoute: CatalogoTintasVernizRoute,
   CatalogoCalhasIndexRoute: CatalogoCalhasIndexRoute,
   CatalogoFixadoresIndexRoute: CatalogoFixadoresIndexRoute,

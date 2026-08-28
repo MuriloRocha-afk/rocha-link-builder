@@ -2,75 +2,48 @@ import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/Emoji
 
 const CARDS: EmojiSubcard[] = [
   {
+    slug: "cupicida",
+    name: "Exterminador de Cupim",
+    emoji: "🌿",
+    tags: ["Apus", "Ecol", "Sayerlack"],
+    description:
+      "Exterminador de cupim em 900ml, 5L e 18L. Proteção preventiva e curativa para estruturas de madeira.",
+    cta: "Ver produtos e cotar",
+  },
+  {
     slug: "verniz",
     name: "Verniz para Madeira",
     emoji: "✨",
-    tags: ["Anjo", "Sayerlack", "Irajá"],
+    tags: ["Sayerlack", "Poliulack", "Polikol"],
     description:
-      "Anjo Verniz Dura Mais, Marítimo Premium, Sayerlack Polisten e Sayermar. Para madeira interna e externa.",
+      "Linha Sayerlack: Poliulack e Poliulack Eco, Polikol colorido, Polirex restaurador e Polideck para deck.",
     cta: "Ver produtos e cotar",
   },
   {
     slug: "stain",
     name: "Stain para Madeira",
     emoji: "🪵",
-    tags: ["Anjo Tintas", "4 cores"],
+    tags: ["Sayerlack", "Polisten"],
     description:
-      "Anjo Stain Casa nas cores Imbuia, Ipê, Mogno e Incolor. Penetra na fibra, realça o veio natural da madeira.",
-    cta: "Ver produtos e cotar",
-  },
-  {
-    slug: "tinta-acrilica",
-    name: "Tinta Acrílica",
-    emoji: "🎨",
-    tags: ["Anjo", "Base A/B/C"],
-    description:
-      "Anjo Emborrachada e AnjoMais Premium. Para telhados, fachadas e superfícies externas.",
-    cta: "Ver produtos e cotar",
-  },
-  {
-    slug: "esmalte",
-    name: "Esmalte Sintético",
-    emoji: "🖌️",
-    tags: ["Anjo Tomplus", "Várias cores"],
-    description:
-      "Anjo Tomplus em várias cores brilhantes. Acabamento duro e lavável para madeira e ferro.",
-    cta: "Ver produtos e cotar",
-  },
-  {
-    slug: "seladora",
-    name: "Seladora, Primer & Impermeabilização",
-    emoji: "🛡️",
-    tags: ["Anjo", "Vedacit"],
-    description:
-      "Anjo Selador Acrílico, Primer Base Água, Vedacit Penetrol e Vedalit. Base para qualquer acabamento.",
-    cta: "Ver produtos e cotar",
-  },
-  {
-    slug: "cupicida",
-    name: "Proteção contra Cupim",
-    emoji: "🌿",
-    tags: ["Apus", "Ecol"],
-    description:
-      "Apus Química e Ecol Exterminador de Cupim em 900ml e 5L. Proteção preventiva e curativa para estruturas de madeira.",
-    cta: "Ver produtos e cotar",
-  },
-  {
-    slug: "thinner",
-    name: "Thinner & Diluentes",
-    emoji: "🧪",
-    tags: ["Anjo", "Eucatex"],
-    description:
-      "Anjo Thinner, Aguarraz Mineral e Diluente Premium. Para limpeza e diluição de tintas e vernizes.",
+      "Sayerlack Polisten, Polisten ECO e Polisten Deck. Até 11 cores, penetra na fibra e realça o veio natural.",
     cta: "Ver produtos e cotar",
   },
   {
     slug: "aguarras",
-    name: "Aguarrás",
+    name: "Aguarrás / Thinner",
     emoji: "🧴",
-    tags: ["Mineral", "Vegetal"],
+    tags: ["Sayerlack", "Mineral", "Vegetal"],
     description:
-      "Aguarrás mineral e vegetal para diluir esmaltes e vernizes e limpar ferramentas de pintura.",
+      "Aguarrás mineral e vegetal, thinner profissional e diluentes Sayerlack para vernizes, stains e limpeza.",
+    cta: "Ver produtos e cotar",
+  },
+  {
+    slug: "tinta-emborrachada",
+    name: "Tinta Emborrachada",
+    emoji: "🎨",
+    tags: ["Telhado", "Fachada", "Laje"],
+    description:
+      "Tinta acrílica emborrachada com filme elástico e impermeável para telhados, lajes e fachadas.",
     cta: "Ver produtos e cotar",
   },
   {
@@ -125,25 +98,18 @@ const GRUPOS = [
     id: "madeira",
     label: "Acabamento & Proteção de Madeira",
     descricao:
-      "Stain, verniz, seladora, esmalte, cupicida, lixas e acessórios de aplicação para tratar e acabar madeira.",
-    slugs: [
-      "stain",
-      "verniz",
-      "seladora",
-      "esmalte",
-      "cupicida",
-      "lixas",
-      "acessorios-pintura",
-    ],
+      "Stain e verniz Sayerlack, exterminador de cupim, lixas e acessórios de aplicação para tratar e acabar madeira.",
+    slugs: ["stain", "verniz", "cupicida", "lixas", "acessorios-pintura"],
   },
   {
     id: "construcao",
     label: "Tintas & Vedação para Construção",
     descricao:
-      "Tinta acrílica e emborrachada, diluentes, colas, selante PU para calha e lona plástica de obra.",
-    slugs: ["tinta-acrilica", "thinner", "aguarras", "cola", "pu-calha", "lona-plastica"],
+      "Tinta emborrachada, aguarrás e thinner, colas, selante PU para calha e lona plástica de obra.",
+    slugs: ["tinta-emborrachada", "aguarras", "cola", "pu-calha", "lona-plastica"],
   },
 ];
+
 
 export default function Tintas() {
   return (
