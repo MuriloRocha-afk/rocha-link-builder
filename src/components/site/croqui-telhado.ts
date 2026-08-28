@@ -89,7 +89,7 @@ export function croquiTelhadoSvg({ tipo, comprimento, largura, beiral }: Opts): 
     `<text x="${X1 + 20}" y="${cy}" font-size="10" font-weight="bold" fill="${texto}" transform="rotate(90 ${X1 + 20} ${cy})" text-anchor="middle">${rotLarg}</text>`,
     `<line x1="${X0}" y1="${Y1 + 12}" x2="${X0 + inset}" y2="${Y1 + 12}" stroke="${texto}" stroke-width="1" marker-start="url(#cq-arrow)" marker-end="url(#cq-arrow)"/>`,
     `<text x="${X0 + inset + 6}" y="${Y1 + 16}" font-size="9.5" font-weight="bold" fill="${texto}">${rotBei}</text>`,
-    `<text x="${X0 + 6}" y="${Y0 - 4}" font-size="9" font-weight="bold" letter-spacing="0.6" fill="#7c8798">VISTA SUPERIOR</text>`,
+    `<text x="${X0 + 6}" y="${Y0 - 4}" font-size="9" font-weight="bold" letter-spacing="0.6" fill="#64748b">VISTA SUPERIOR</text>`,
   );
 
   return `<svg viewBox="0 0 330 200" width="100%" font-family="Arial, Helvetica, sans-serif" shape-rendering="geometricPrecision" role="img" aria-label="Croqui do telhado em planta baixa" xmlns="http://www.w3.org/2000/svg">
@@ -185,7 +185,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   linhas.push(
     `<line x1="${xEsq}" y1="${Ybase + 22}" x2="${xDir}" y2="${Ybase + 22}" stroke="${texto}" stroke-width="1" marker-start="url(#pf-arrow)" marker-end="url(#pf-arrow)"/>`,
     `<text x="${cxBase}" y="${Ybase + 34}" font-size="10" font-weight="bold" fill="${texto}" text-anchor="middle">Largura da base ${fmt(L)} m</text>`,
-    `<text x="16" y="18" font-size="9" font-weight="bold" letter-spacing="0.6" fill="#7c8798">VISTA DE PERFIL (CORTE) · INCLINAÇÃO ${fmt(inclinacao)}%</text>`,
+    `<text x="16" y="18" font-size="9" font-weight="bold" letter-spacing="0.6" fill="#64748b">VISTA DE PERFIL (CORTE) · INCLINAÇÃO ${fmt(inclinacao)}%</text>`,
   );
 
   return `<svg viewBox="0 0 330 200" width="100%" font-family="Arial, Helvetica, sans-serif" shape-rendering="geometricPrecision" role="img" aria-label="Croqui do telhado em corte de perfil" xmlns="http://www.w3.org/2000/svg">
