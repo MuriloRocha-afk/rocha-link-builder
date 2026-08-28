@@ -137,7 +137,7 @@ export function CalculadoraTelhado() {
   /** espaçamento entre vigas (m) */
   const [espViga, setEspViga] = useState(String(ESP_VIGA_PADRAO));
   /** vão livre entre apoios (m) — define a bitola da viga */
-  const [vaoLivre, setVaoLivre] = useState("3");
+  const [vaoLivre, setVaoLivre] = useState("");
   const [comRipao, setComRipao] = useState(false);
   const [comCaibrao, setComCaibrao] = useState(false);
 
@@ -862,7 +862,8 @@ export function CalculadoraTelhado() {
             onClick={() =>
               setAvancado((v) => {
                 // ao entrar no avançado, herda as medidas calculadas no modo simples
-                if (!v)
+                if (!v) {
+                  setVaoLivre(String(Number(vaoLivreAuto.toFixed(2))));
                   setAguasCustom(
                     Object.fromEntries(
                       aguasPadrao.map((a) => [
@@ -871,6 +872,7 @@ export function CalculadoraTelhado() {
                       ]),
                     ),
                   );
+                }
                 return !v;
               })
             }
