@@ -19,14 +19,10 @@ import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fi
 import { Route as CatalogoCalhasIndexRouteImport } from './routes/catalogo.calhas.index'
 import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalogo.$categoriaSlug.index'
 import { Route as CatalogoTintasVernizRouteImport } from './routes/catalogo.tintas.verniz'
-import { Route as CatalogoTintasTintaAcrilicaRouteImport } from './routes/catalogo.tintas.tinta-acrilica'
-import { Route as CatalogoTintasThinnerRouteImport } from './routes/catalogo.tintas.thinner'
 import { Route as CatalogoTintasStainRouteImport } from './routes/catalogo.tintas.stain'
-import { Route as CatalogoTintasSeladoraRouteImport } from './routes/catalogo.tintas.seladora'
 import { Route as CatalogoTintasPuCalhaRouteImport } from './routes/catalogo.tintas.pu-calha'
 import { Route as CatalogoTintasLonaPlasticaRouteImport } from './routes/catalogo.tintas.lona-plastica'
 import { Route as CatalogoTintasLixasRouteImport } from './routes/catalogo.tintas.lixas'
-import { Route as CatalogoTintasEsmalteRouteImport } from './routes/catalogo.tintas.esmalte'
 import { Route as CatalogoTintasCupicidaRouteImport } from './routes/catalogo.tintas.cupicida'
 import { Route as CatalogoTintasColaRouteImport } from './routes/catalogo.tintas.cola'
 import { Route as CatalogoTintasAguarrasRouteImport } from './routes/catalogo.tintas.aguarras'
@@ -126,25 +122,9 @@ const CatalogoTintasVernizRoute = CatalogoTintasVernizRouteImport.update({
   path: '/catalogo/tintas/verniz',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CatalogoTintasTintaAcrilicaRoute =
-  CatalogoTintasTintaAcrilicaRouteImport.update({
-    id: '/catalogo/tintas/tinta-acrilica',
-    path: '/catalogo/tintas/tinta-acrilica',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const CatalogoTintasThinnerRoute = CatalogoTintasThinnerRouteImport.update({
-  id: '/catalogo/tintas/thinner',
-  path: '/catalogo/tintas/thinner',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CatalogoTintasStainRoute = CatalogoTintasStainRouteImport.update({
   id: '/catalogo/tintas/stain',
   path: '/catalogo/tintas/stain',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CatalogoTintasSeladoraRoute = CatalogoTintasSeladoraRouteImport.update({
-  id: '/catalogo/tintas/seladora',
-  path: '/catalogo/tintas/seladora',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoTintasPuCalhaRoute = CatalogoTintasPuCalhaRouteImport.update({
@@ -161,11 +141,6 @@ const CatalogoTintasLonaPlasticaRoute =
 const CatalogoTintasLixasRoute = CatalogoTintasLixasRouteImport.update({
   id: '/catalogo/tintas/lixas',
   path: '/catalogo/tintas/lixas',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CatalogoTintasEsmalteRoute = CatalogoTintasEsmalteRouteImport.update({
-  id: '/catalogo/tintas/esmalte',
-  path: '/catalogo/tintas/esmalte',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoTintasCupicidaRoute = CatalogoTintasCupicidaRouteImport.update({
@@ -484,14 +459,10 @@ export interface FileRoutesByFullPath {
   '/catalogo/tintas/aguarras': typeof CatalogoTintasAguarrasRoute
   '/catalogo/tintas/cola': typeof CatalogoTintasColaRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
-  '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
-  '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
-  '/catalogo/tintas/thinner': typeof CatalogoTintasThinnerRoute
-  '/catalogo/tintas/tinta-acrilica': typeof CatalogoTintasTintaAcrilicaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
@@ -549,14 +520,10 @@ export interface FileRoutesByTo {
   '/catalogo/tintas/aguarras': typeof CatalogoTintasAguarrasRoute
   '/catalogo/tintas/cola': typeof CatalogoTintasColaRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
-  '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
-  '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
-  '/catalogo/tintas/thinner': typeof CatalogoTintasThinnerRoute
-  '/catalogo/tintas/tinta-acrilica': typeof CatalogoTintasTintaAcrilicaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas': typeof CatalogoCalhasIndexRoute
@@ -616,14 +583,10 @@ export interface FileRoutesById {
   '/catalogo/tintas/aguarras': typeof CatalogoTintasAguarrasRoute
   '/catalogo/tintas/cola': typeof CatalogoTintasColaRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
-  '/catalogo/tintas/esmalte': typeof CatalogoTintasEsmalteRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
-  '/catalogo/tintas/seladora': typeof CatalogoTintasSeladoraRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
-  '/catalogo/tintas/thinner': typeof CatalogoTintasThinnerRoute
-  '/catalogo/tintas/tinta-acrilica': typeof CatalogoTintasTintaAcrilicaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
   '/catalogo/$categoriaSlug/': typeof CatalogoCategoriaSlugIndexRoute
   '/catalogo/calhas/': typeof CatalogoCalhasIndexRoute
@@ -684,14 +647,10 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/aguarras'
     | '/catalogo/tintas/cola'
     | '/catalogo/tintas/cupicida'
-    | '/catalogo/tintas/esmalte'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
-    | '/catalogo/tintas/seladora'
     | '/catalogo/tintas/stain'
-    | '/catalogo/tintas/thinner'
-    | '/catalogo/tintas/tinta-acrilica'
     | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
@@ -749,14 +708,10 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/aguarras'
     | '/catalogo/tintas/cola'
     | '/catalogo/tintas/cupicida'
-    | '/catalogo/tintas/esmalte'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
-    | '/catalogo/tintas/seladora'
     | '/catalogo/tintas/stain'
-    | '/catalogo/tintas/thinner'
-    | '/catalogo/tintas/tinta-acrilica'
     | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/calhas'
@@ -815,14 +770,10 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/aguarras'
     | '/catalogo/tintas/cola'
     | '/catalogo/tintas/cupicida'
-    | '/catalogo/tintas/esmalte'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
-    | '/catalogo/tintas/seladora'
     | '/catalogo/tintas/stain'
-    | '/catalogo/tintas/thinner'
-    | '/catalogo/tintas/tinta-acrilica'
     | '/catalogo/tintas/verniz'
     | '/catalogo/$categoriaSlug/'
     | '/catalogo/calhas/'
@@ -881,14 +832,10 @@ export interface RootRouteChildren {
   CatalogoTintasAguarrasRoute: typeof CatalogoTintasAguarrasRoute
   CatalogoTintasColaRoute: typeof CatalogoTintasColaRoute
   CatalogoTintasCupicidaRoute: typeof CatalogoTintasCupicidaRoute
-  CatalogoTintasEsmalteRoute: typeof CatalogoTintasEsmalteRoute
   CatalogoTintasLixasRoute: typeof CatalogoTintasLixasRoute
   CatalogoTintasLonaPlasticaRoute: typeof CatalogoTintasLonaPlasticaRoute
   CatalogoTintasPuCalhaRoute: typeof CatalogoTintasPuCalhaRoute
-  CatalogoTintasSeladoraRoute: typeof CatalogoTintasSeladoraRoute
   CatalogoTintasStainRoute: typeof CatalogoTintasStainRoute
-  CatalogoTintasThinnerRoute: typeof CatalogoTintasThinnerRoute
-  CatalogoTintasTintaAcrilicaRoute: typeof CatalogoTintasTintaAcrilicaRoute
   CatalogoTintasVernizRoute: typeof CatalogoTintasVernizRoute
   CatalogoCalhasIndexRoute: typeof CatalogoCalhasIndexRoute
   CatalogoFixadoresIndexRoute: typeof CatalogoFixadoresIndexRoute
@@ -967,32 +914,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoTintasVernizRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/catalogo/tintas/tinta-acrilica': {
-      id: '/catalogo/tintas/tinta-acrilica'
-      path: '/catalogo/tintas/tinta-acrilica'
-      fullPath: '/catalogo/tintas/tinta-acrilica'
-      preLoaderRoute: typeof CatalogoTintasTintaAcrilicaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/catalogo/tintas/thinner': {
-      id: '/catalogo/tintas/thinner'
-      path: '/catalogo/tintas/thinner'
-      fullPath: '/catalogo/tintas/thinner'
-      preLoaderRoute: typeof CatalogoTintasThinnerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/catalogo/tintas/stain': {
       id: '/catalogo/tintas/stain'
       path: '/catalogo/tintas/stain'
       fullPath: '/catalogo/tintas/stain'
       preLoaderRoute: typeof CatalogoTintasStainRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/catalogo/tintas/seladora': {
-      id: '/catalogo/tintas/seladora'
-      path: '/catalogo/tintas/seladora'
-      fullPath: '/catalogo/tintas/seladora'
-      preLoaderRoute: typeof CatalogoTintasSeladoraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/tintas/pu-calha': {
@@ -1014,13 +940,6 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/tintas/lixas'
       fullPath: '/catalogo/tintas/lixas'
       preLoaderRoute: typeof CatalogoTintasLixasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/catalogo/tintas/esmalte': {
-      id: '/catalogo/tintas/esmalte'
-      path: '/catalogo/tintas/esmalte'
-      fullPath: '/catalogo/tintas/esmalte'
-      preLoaderRoute: typeof CatalogoTintasEsmalteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/tintas/cupicida': {
@@ -1420,14 +1339,10 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTintasAguarrasRoute: CatalogoTintasAguarrasRoute,
   CatalogoTintasColaRoute: CatalogoTintasColaRoute,
   CatalogoTintasCupicidaRoute: CatalogoTintasCupicidaRoute,
-  CatalogoTintasEsmalteRoute: CatalogoTintasEsmalteRoute,
   CatalogoTintasLixasRoute: CatalogoTintasLixasRoute,
   CatalogoTintasLonaPlasticaRoute: CatalogoTintasLonaPlasticaRoute,
   CatalogoTintasPuCalhaRoute: CatalogoTintasPuCalhaRoute,
-  CatalogoTintasSeladoraRoute: CatalogoTintasSeladoraRoute,
   CatalogoTintasStainRoute: CatalogoTintasStainRoute,
-  CatalogoTintasThinnerRoute: CatalogoTintasThinnerRoute,
-  CatalogoTintasTintaAcrilicaRoute: CatalogoTintasTintaAcrilicaRoute,
   CatalogoTintasVernizRoute: CatalogoTintasVernizRoute,
   CatalogoCalhasIndexRoute: CatalogoCalhasIndexRoute,
   CatalogoFixadoresIndexRoute: CatalogoFixadoresIndexRoute,
