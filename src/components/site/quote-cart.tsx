@@ -493,6 +493,9 @@ function QuoteDrawer() {
             </button>
           </div>
         ) : null}
+
+        {sucesso && avaliar ? <AvaliacaoModal onClose={() => setAvaliar(false)} /> : null}
+
       </SheetContent>
 
     </Sheet>
