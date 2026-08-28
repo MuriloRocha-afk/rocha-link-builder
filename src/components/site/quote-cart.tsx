@@ -197,16 +197,26 @@ function QuoteDrawer() {
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [endereco, setEndereco] = useState("");
+  const [mostrarEndereco, setMostrarEndereco] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [sucesso, setSucesso] = useState<{ numero: string } | null>(null);
   const enviarPedido = useServerFn(enviarPedidoTiny);
-  const pronto = nome.trim().length >= 2 && local.trim().length >= 2;
+  const pronto =
+    nome.trim().length >= 2 &&
+    local.trim().length >= 2 &&
+    telefone.replace(/\D/g, "").length >= 10;
 
   const handleEnviar = async () => {
     if (!pronto || items.length === 0 || enviando) return;
     setEnviando(true);
     setErro(null);
+    // abre o WhatsApp imediatamente (evita bloqueio de pop-up)
+    window.open(
+      waLink(buildMessage(items, nome, local, telefone, email, endereco)),
+      "_blank",
+      "noopener,noreferrer",
+    );
     try {
       const res = await enviarPedido({
         data: {
