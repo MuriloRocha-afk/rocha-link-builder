@@ -354,10 +354,12 @@ function QuoteDrawer() {
             </div>
             <div>
               <Label htmlFor="quote-tel" className="text-xs font-bold text-primary/80">
-                Telefone / WhatsApp
+                Telefone / WhatsApp <span className="text-accent">*</span>
               </Label>
               <Input
                 id="quote-tel"
+                type="tel"
+                inputMode="tel"
                 value={telefone}
                 onChange={(e) => setTelefone(e.target.value)}
                 placeholder="(11) 90000-0000"
@@ -367,7 +369,7 @@ function QuoteDrawer() {
             </div>
             <div>
               <Label htmlFor="quote-email" className="text-xs font-bold text-primary/80">
-                E-mail
+                E-mail (opcional)
               </Label>
               <Input
                 id="quote-email"
@@ -379,9 +381,12 @@ function QuoteDrawer() {
                 className="mt-1.5"
               />
             </div>
-            <div>
+          </div>
+
+          {mostrarEndereco ? (
+            <div className="mt-3">
               <Label htmlFor="quote-end" className="text-xs font-bold text-primary/80">
-                Endereço de entrega
+                Endereço de entrega (opcional)
               </Label>
               <Input
                 id="quote-end"
@@ -389,15 +394,25 @@ function QuoteDrawer() {
                 onChange={(e) => setEndereco(e.target.value)}
                 placeholder="Rua, número"
                 maxLength={120}
+                autoFocus
                 className="mt-1.5"
               />
             </div>
-          </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setMostrarEndereco(true)}
+              className="mt-3 text-xs font-semibold text-muted-foreground underline-offset-2 transition-colors hover:text-primary hover:underline"
+            >
+              + adicionar endereço (opcional)
+            </button>
+          )}
 
           {items.length > 0 && !pronto ? (
             <p className="mt-3 flex items-start gap-2 rounded-xl border border-accent/40 bg-accent/8 px-4 py-2.5 text-xs font-semibold text-primary/80">
               <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
-              Informe seu nome e o bairro/cidade de entrega para enviar a cotação.
+              Informe seu nome, telefone/WhatsApp e o bairro/cidade de entrega para enviar a
+              cotação.
             </p>
           ) : null}
 
@@ -410,30 +425,17 @@ function QuoteDrawer() {
 
           <Button
             type="button"
+            variant="whats"
             size="xl"
             onClick={handleEnviar}
             disabled={items.length === 0 || !pronto || enviando}
             className="mt-4 w-full"
           >
-            {enviando ? "ENVIANDO..." : "SOLICITAR ORÇAMENTO"}
+            <MessageCircle />
+            {enviando ? "ENVIANDO..." : "ENVIAR ORÇAMENTO VIA WHATSAPP"}
           </Button>
 
-          <Button
-            asChild
-            variant="whats"
-            size="xl"
-            className={`mt-2 w-full ${items.length === 0 || !pronto ? "pointer-events-none opacity-50" : ""}`}
-          >
-            <a
-              href={waLink(buildMessage(items, nome, local))}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={items.length === 0 || !pronto}
-            >
-              <MessageCircle />
-              ENVIAR COTAÇÃO VIA WHATSAPP
-            </a>
-          </Button>
+
 
 
           <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
