@@ -21,6 +21,8 @@ import {
 import { useServerFn } from "@tanstack/react-start";
 import { enviarPedidoTiny } from "@/lib/tiny.functions";
 import { waLink, CONTATO } from "./shared";
+import { AvaliacaoModal } from "./AvaliacaoModal";
+
 
 
 export type QuoteItem = {
@@ -201,6 +203,8 @@ function QuoteDrawer() {
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [sucesso, setSucesso] = useState<{ numero: string } | null>(null);
+  const [avaliar, setAvaliar] = useState(false);
+
   const enviarPedido = useServerFn(enviarPedidoTiny);
   const pronto =
     nome.trim().length >= 2 &&
@@ -235,9 +239,11 @@ function QuoteDrawer() {
       });
       // o WhatsApp já foi aberto; o registro interno acontece em segundo plano
       setSucesso({ numero: res.ok ? res.numeroPedido : "" });
+      setAvaliar(true);
       clear();
     } catch {
       setSucesso({ numero: "" });
+      setAvaliar(true);
       clear();
     } finally {
       setEnviando(false);
@@ -493,6 +499,9 @@ function QuoteDrawer() {
             </button>
           </div>
         ) : null}
+
+        {sucesso && avaliar ? <AvaliacaoModal onClose={() => setAvaliar(false)} /> : null}
+
       </SheetContent>
 
     </Sheet>

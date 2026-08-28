@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as CalculadoraRouteImport } from './routes/calculadora'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
@@ -70,6 +72,7 @@ import { Route as CatalogoCalhasCalhaAlgeRouteImport } from './routes/catalogo.c
 import { Route as CatalogoCalhasAcessoriosRouteImport } from './routes/catalogo.calhas.acessorios'
 import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo.calhas.$produtoSlug'
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
+import { Route as AuthenticatedAdminAvaliacoesRouteImport } from './routes/_authenticated/admin.avaliacoes'
 
 const FerramentasRoute = FerramentasRouteImport.update({
   id: '/ferramentas',
@@ -79,6 +82,15 @@ const FerramentasRoute = FerramentasRouteImport.update({
 const CalculadoraRoute = CalculadoraRouteImport.update({
   id: '/calculadora',
   path: '/calculadora',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -413,13 +425,21 @@ const CatalogoCategoriaSlugProdutoSlugRoute =
     path: '/$produtoSlug',
     getParentRoute: () => CatalogoCategoriaSlugRouteRoute,
   } as any)
+const AuthenticatedAdminAvaliacoesRoute =
+  AuthenticatedAdminAvaliacoesRouteImport.update({
+    id: '/admin/avaliacoes',
+    path: '/admin/avaliacoes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
+  '/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/calhas/acessorios': typeof CatalogoCalhasAcessoriosRoute
@@ -479,9 +499,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/catalogo': typeof CatalogoIndexRoute
+  '/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/calhas/acessorios': typeof CatalogoCalhasAcessoriosRoute
@@ -542,10 +564,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/': typeof CatalogoIndexRoute
+  '/_authenticated/admin/avaliacoes': typeof AuthenticatedAdminAvaliacoesRoute
   '/catalogo/$categoriaSlug/$produtoSlug': typeof CatalogoCategoriaSlugProdutoSlugRoute
   '/catalogo/calhas/$produtoSlug': typeof CatalogoCalhasProdutoSlugRoute
   '/catalogo/calhas/acessorios': typeof CatalogoCalhasAcessoriosRoute
@@ -607,10 +632,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/calculadora'
     | '/ferramentas'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
+    | '/admin/avaliacoes'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/calhas/acessorios'
@@ -670,9 +697,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/calculadora'
     | '/ferramentas'
     | '/catalogo'
+    | '/admin/avaliacoes'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/calhas/acessorios'
@@ -732,10 +761,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/calculadora'
     | '/ferramentas'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/'
+    | '/_authenticated/admin/avaliacoes'
     | '/catalogo/$categoriaSlug/$produtoSlug'
     | '/catalogo/calhas/$produtoSlug'
     | '/catalogo/calhas/acessorios'
@@ -796,6 +828,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   CalculadoraRoute: typeof CalculadoraRoute
   FerramentasRoute: typeof FerramentasRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
@@ -870,6 +904,20 @@ declare module '@tanstack/react-router' {
       path: '/calculadora'
       fullPath: '/calculadora'
       preLoaderRoute: typeof CalculadoraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -1285,8 +1333,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogoCategoriaSlugProdutoSlugRouteImport
       parentRoute: typeof CatalogoCategoriaSlugRouteRoute
     }
+    '/_authenticated/admin/avaliacoes': {
+      id: '/_authenticated/admin/avaliacoes'
+      path: '/admin/avaliacoes'
+      fullPath: '/admin/avaliacoes'
+      preLoaderRoute: typeof AuthenticatedAdminAvaliacoesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminAvaliacoesRoute: typeof AuthenticatedAdminAvaliacoesRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminAvaliacoesRoute: AuthenticatedAdminAvaliacoesRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface CatalogoCategoriaSlugRouteRouteChildren {
   CatalogoCategoriaSlugProdutoSlugRoute: typeof CatalogoCategoriaSlugProdutoSlugRoute
@@ -1307,6 +1373,8 @@ const CatalogoCategoriaSlugRouteRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   CalculadoraRoute: CalculadoraRoute,
   FerramentasRoute: FerramentasRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
