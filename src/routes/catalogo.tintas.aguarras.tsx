@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_AGUARRAS } from "@/data/configs/tintas";
 
-const TITLE = "Aguarrás Mineral e Vegetal | Rocha Telhas";
-const DESCRIPTION = "Aguarrás mineral e vegetal para diluição de esmaltes e vernizes e limpeza de ferramentas. Cote no WhatsApp.";
+const TITLE = "Aguarrás e Thinner Sayerlack | Rocha Telhas";
+const DESCRIPTION = "Aguarrás mineral e vegetal, thinner e diluentes Sayerlack para vernizes, stains e limpeza de ferramentas. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/aguarras")({
   head: () => ({

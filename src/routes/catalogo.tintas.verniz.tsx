@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_VERNIZ } from "@/data/configs/tintas";
 
-const TITLE = "Verniz para Madeira Anjo e Sayerlack | Rocha Telhas";
-const DESCRIPTION = "Verniz Anjo Dura Mais, Marítimo Premium, Sayerlack Polisten e Sayermar. Escolha o volume e cote no WhatsApp.";
+const TITLE = "Verniz para Madeira Sayerlack | Rocha Telhas";
+const DESCRIPTION = "Verniz Sayerlack Poliulack, Polikol, Polirex e Polideck. Escolha a linha, a cor e o volume e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/verniz")({
   head: () => ({
