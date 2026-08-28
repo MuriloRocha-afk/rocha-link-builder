@@ -1255,10 +1255,18 @@ export function CalculadoraTelhado() {
                 {sistemaTelha !== "pvc" && (
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-gray-700">Vão livre entre apoios (m)</label>
-                    <input inputMode="decimal" value={vaoLivre} onChange={(e) => setVaoLivre(e.target.value)} className={input} />
+                    <input
+                      inputMode="decimal"
+                      placeholder={fmtN(vaoLivreAuto)}
+                      value={vaoLivre}
+                      onChange={(e) => setVaoLivre(e.target.value)}
+                      className={input}
+                    />
                     <p className="mt-1 text-[11px] text-gray-500">
-                      Bitola da viga aplicada: <b>{bitolaVigaPorVao(Math.max(0.5, num(vaoLivre) || 3))}</b> (até 3 m →
-                      11 cm · até 4,5 m → 15 cm · até 5,5 m → 20 ou 25 cm · acima → 30 cm).
+                      Padrão automático pelo comprimento do telhado: <b>{fmtN(vaoLivreAuto)} m</b>. Altere apenas se
+                      houver apoio intermediário (poste, pilar ou parede) que reduza o vão real. Bitola da viga
+                      aplicada: <b>{bitolaVigaPorVao(vaoLivreEfetivo)}</b> (até 3 m → 11 cm · até 4,5 m → 15 cm · até
+                      5,5 m → 20 ou 25 cm · acima → 30 cm).
                     </p>
                   </div>
                 )}
