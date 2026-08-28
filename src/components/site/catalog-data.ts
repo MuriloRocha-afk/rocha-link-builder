@@ -499,7 +499,7 @@ export const CATEGORIES: CatalogCategory[] = [
     title: "Tintas, Vernizes & Proteção",
     short: "Tintas & Proteção",
     description:
-      "Anjo, Sayerlack, Vedacit — linha completa para proteger madeira, telha e alvenaria.",
+      "Sayerlack e mais — linha completa para proteger madeira, telha e alvenaria.",
     image: verniz,
     ctaLabel: "Ver Produtos",
     items: [

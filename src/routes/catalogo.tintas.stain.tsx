@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_STAIN } from "@/data/configs/tintas";
 
-const TITLE = "Anjo Stain Casa — Imbuia, Ipê e Mogno | Rocha Telhas";
-const DESCRIPTION = "Stain Anjo Casa em 4 cores acetinadas, protege a madeira contra UV e umidade. Escolha o volume e cote no WhatsApp.";
+const TITLE = "Stain Sayerlack Polisten para Madeira | Rocha Telhas";
+const DESCRIPTION = "Sayerlack Polisten, Polisten ECO e Polisten Deck em até 11 cores. Protege a madeira contra UV e umidade. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/stain")({
   head: () => ({

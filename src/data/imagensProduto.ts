@@ -150,25 +150,19 @@ export const imagensForroPinus: ImagemProduto[] = [
 // TINTAS — por subcategoria
 export const imagensTintas: Record<string, ImagemProduto[]> = {
   verniz: [
-    { src: "", alt: "Linha Anjo Verniz e Sayerlack Polisten", legenda: "Vernizes Anjo e Sayerlack" },
+    { src: "", alt: "Linha Sayerlack de vernizes", legenda: "Vernizes Sayerlack — Poliulack, Polikol e Polideck" },
   ],
   stain: [
-    { src: "", alt: "Anjo Stain Casa nas 4 cores", legenda: "Anjo Stain Casa — Ipê, Imbuia, Mogno, Incolor" },
+    { src: "", alt: "Sayerlack Polisten nas cores disponíveis", legenda: "Sayerlack Polisten — Stain para madeira" },
   ],
-  "tinta-acrilica": [
-    { src: "", alt: "Anjo Emborrachada e AnjoMais Premium", legenda: "Tinta Acrílica — Linha Anjo" },
-  ],
-  esmalte: [
-    { src: "", alt: "Anjo Esmalte Tomplus cores variadas", legenda: "Esmalte Sintético Tomplus" },
-  ],
-  seladora: [
-    { src: "", alt: "Vedacit Penetrol e Anjo Selador", legenda: "Seladora e Impermeabilização" },
+  "tinta-emborrachada": [
+    { src: "", alt: "Tinta emborrachada para telhado e fachada", legenda: "Tinta Emborrachada" },
   ],
   cupicida: [
     { src: "", alt: "Apus e Ecol Exterminador de Cupim", legenda: "Proteção contra Cupim" },
   ],
-  thinner: [
-    { src: "", alt: "Linha de diluentes e thinners", legenda: "Thinner e Diluentes" },
+  aguarras: [
+    { src: "", alt: "Aguarrás, thinner e diluentes Sayerlack", legenda: "Aguarrás / Thinner" },
   ],
 };
 

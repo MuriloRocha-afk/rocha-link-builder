@@ -2,12 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
-import { CONFIG_SELADORA } from "@/data/configs/tintas";
+import { CONFIG_EMBORRACHADA } from "@/data/configs/tintas";
 
-const TITLE = "Seladora, Primer e Impermeabilizantes | Rocha Telhas";
-const DESCRIPTION = "Seladoras Anjo, Vedacit Penetrol, Vedalit e Vedapren para preparar e impermeabilizar superfícies. Cote no WhatsApp.";
+const TITLE = "Tinta Emborrachada para Telhado e Fachada | Rocha Telhas";
+const DESCRIPTION =
+  "Tinta acrílica emborrachada impermeabilizante para telhado, laje e fachada. Escolha cor e volume e cote no WhatsApp.";
 
-export const Route = createFileRoute("/catalogo/tintas/seladora")({
+export const Route = createFileRoute("/catalogo/tintas/tinta-emborrachada")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -18,15 +19,15 @@ export const Route = createFileRoute("/catalogo/tintas/seladora")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: TintasSeladoraRoute,
+  component: TintaEmborrachadaRoute,
 });
 
-function TintasSeladoraRoute() {
+function TintaEmborrachadaRoute() {
   return (
     <>
       <Header />
       <div className="pt-24">
-        <ConfiguradorGenerico config={CONFIG_SELADORA} />
+        <ConfiguradorGenerico config={CONFIG_EMBORRACHADA} />
       </div>
       <Footer />
       <FloatingWhats />
