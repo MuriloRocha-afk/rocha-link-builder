@@ -137,7 +137,7 @@ export function CalculadoraTelhado() {
   /** espaçamento entre vigas (m) */
   const [espViga, setEspViga] = useState(String(ESP_VIGA_PADRAO));
   /** vão livre entre apoios (m) — define a bitola da viga */
-  const [vaoLivre, setVaoLivre] = useState("3");
+  const [vaoLivre, setVaoLivre] = useState("");
   const [comRipao, setComRipao] = useState(false);
   const [comCaibrao, setComCaibrao] = useState(false);
 
@@ -185,6 +185,10 @@ export function CalculadoraTelhado() {
   const larguraNum = num(largura);
   const comprimentoNum = num(comprimento);
   const beiralNum = num(beiral);
+
+  /** vão livre padrão = comprimento real informado no Passo 1 (editável no modo avançado) */
+  const vaoLivreAuto = Math.max(0.5, comprimentoNum || 3);
+  const vaoLivreEfetivo = avancado ? Math.max(0.5, num(vaoLivre) || vaoLivreAuto) : vaoLivreAuto;
 
   // Item 4: ao trocar a telha, sugere automaticamente a inclinação mínima (editável)
   useEffect(() => {
@@ -343,7 +347,7 @@ export function CalculadoraTelhado() {
 
         acabamento.push({
           nome: "Telhado de 1 água — sem cumeeira",
-          qtd: "Use rufo de arremate no topo",
+          qtd: "Sem cumeeira — arremate direto no topo",
           chave: null,
         });
       }
@@ -361,7 +365,7 @@ export function CalculadoraTelhado() {
         0.15,
         (avancado ? num(galgaCustom) : 0) || galgaFicha || 0.33,
       );
-      const vaoLivreAplicado = Math.max(0.5, num(vaoLivre) || 3);
+      const vaoLivreAplicado = vaoLivreEfetivo;
       const bitolaViga = sistema === "pvc" ? "11 cm" : bitolaVigaPorVao(vaoLivreAplicado);
       const fMad = 1 + Math.max(0, margemMadeira) / 100;
 
@@ -384,13 +388,17 @@ export function CalculadoraTelhado() {
         const rampa = rampaAgua(a);
         // comprimento médio efetivo da água (tacaniça = metade da base)
         const cef = a.forma === "tri" ? a.comp / 2 : a.comp;
+        // comprimento da água JÁ COM beiral nas duas empenas — é nele que os
+        // caibros são distribuídos (o beiral também precisa de caibro).
+        const cefBeiral = a.forma === "tri" ? cef : cef + 2 * beiralNum;
         if (rampa <= 0 || cef <= 0) continue;
 
         if (sistema === "ripa") {
           // ripa/ripão: espaçadas pela galga da telha, ao longo da rampa
           const nRipas = Math.ceil(rampa / galga) + 1;
-          // caibro/caibrão: correm no sentido da largura, espaçados no comprimento
-          const nCaibros = Math.ceil(cef / eCaibro) + 1;
+          // caibro/caibrão: atravessam a água acompanhando a inclinação (rampa,
+          // já com beiral) e são espaçados ao longo do comprimento com beiral
+          const nCaibros = Math.ceil(cefBeiral / eCaibro) + 1;
           // viga: corre no sentido do comprimento, espaçada ao longo da largura
           const nVigas = Math.max(2, Math.ceil(rampa / eViga) + 1);
 
@@ -440,7 +448,7 @@ export function CalculadoraTelhado() {
 
       if (sistema === "ripa") {
         addMadeira(
-          comCaibrao ? `Caibrão 7x11 cm — ${nomeEsp}` : `Caibro 5x7 cm — ${nomeEsp}`,
+          comCaibrao ? `Caibrão 5x7 cm — ${nomeEsp}` : `Caibro 5x5 cm — ${nomeEsp}`,
           mCaibro,
           chaveMadeira("caibro"),
         );
@@ -494,18 +502,18 @@ export function CalculadoraTelhado() {
 
 
 
-    // ---- Calhas e rufos ----
+    // ---- Calhas e acessórios (a loja não trabalha com rufo) ----
     const calhas: Item[] = [];
     if (comCalhas) {
       const mCalha = tipo === "1agua" ? c : tipo === "2aguas" ? c * 2 : perimetro;
-      const mRufo = tipo === "1agua" ? c + 2 * l : tipo === "2aguas" ? 2 * l : tipo === "3aguas" ? l : 0;
+      
       const lances = Math.ceil(mCalha / 6);
       const suportes = Math.ceil(mCalha / 0.8);
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
       const vedaCalha = Math.max(1, Math.ceil(lances / 2));
 
       calhas.push({ nome: "Calha (metro linear)", qtd: `${Math.ceil(mCalha)} m`, chave: "calha.m", valor: Math.ceil(mCalha) });
-      if (mRufo > 0) calhas.push({ nome: "Rufo / testeira (metro linear)", qtd: `${Math.ceil(mRufo)} m`, chave: "rufo.m", valor: Math.ceil(mRufo) });
+      
       if (tipo === "4aguas" || tipo === "3aguas")
         calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m`, chave: "aguafurtada.m", valor: Math.ceil(l) });
       calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
@@ -641,7 +649,7 @@ export function CalculadoraTelhado() {
           ? ["", "*Acabamento (cumeeira / espigão):*", ...res.acabamento.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
           : []),
         ...(res.calhas.length
-          ? ["", "*Calhas e rufos:*", ...res.calhas.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
+          ? ["", "*Calhas e acessórios:*", ...res.calhas.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
           : []),
         ...(res.estrutura.length
           ? ["", "*Estrutura de madeira:*", ...res.estrutura.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
@@ -651,10 +659,13 @@ export function CalculadoraTelhado() {
 
   const baixarPdf = () => {
     if (!res) return;
-    const linha = (i: Item) => `<tr><td>${i.nome}</td><td class="qty">${i.qtd}</td></tr>`;
+    const linha = (i: Item) =>
+      i.chave === null && /^Crit\u00e9rios/i.test(i.nome)
+        ? `<div class="criterio"><b>${i.nome}:</b> ${i.qtd}</div>`
+        : `<div class="linha"><span class="nome">${i.nome}</span><span class="leader"></span><span class="qty">${i.qtd}</span></div>`;
     const bloco = (titulo: string, itens: Item[]) =>
       itens.length
-        ? `<div class="section-title">${titulo}</div><table class="data">${itens.map(linha).join("")}</table>`
+        ? `<div class="section-title">${titulo}</div><div class="data">${itens.map(linha).join("")}</div>`
         : "";
 
     const pregos = res.estrutura.filter((i) => /^Prego/i.test(i.nome));
@@ -721,9 +732,12 @@ export function CalculadoraTelhado() {
   .stat .label{font-size:8px;color:#9CA3AF;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
   .stat .value{font-size:13px;font-weight:800;margin-top:2px}
   .section-title{font-size:10.5px;font-weight:800;color:#E8622E;text-transform:uppercase;letter-spacing:.5px;border-bottom:1.5px solid #F0D9CC;padding-bottom:3px;margin:10px 0 5px}
-  table.data{width:100%;border-collapse:collapse;font-size:10px}
-  table.data td{padding:3px 4px;border-bottom:1px solid #F0F0F0;vertical-align:top}
-  table.data td.qty{text-align:right;font-weight:700;color:#B5450F;white-space:nowrap}
+  .data{font-size:9.5px}
+  .data .linha{display:flex;align-items:baseline;gap:4px;padding:2.5px 2px;border-bottom:1px solid #F5F5F5}
+  .data .nome{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
+  .data .leader{flex:1 1 auto;min-width:8px;border-bottom:1px dotted #D1D5DB;transform:translateY(-2px)}
+  .data .qty{white-space:nowrap;font-weight:700;color:#B5450F;flex:0 0 auto}
+  .data .criterio{padding:4px 2px;font-size:8.5px;line-height:1.45;color:#4B5563;background:#FAFAFA;border-radius:4px}
   .two-col-sections{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
   table.comparativo{width:100%;border-collapse:collapse;font-size:9.5px}
   table.comparativo thead th{background:#FFF3EC;color:#B5450F;font-size:8.5px;text-transform:uppercase;letter-spacing:.3px;font-weight:800;padding:5px 6px;text-align:left;border-bottom:2px solid #E8622E}
@@ -785,7 +799,7 @@ export function CalculadoraTelhado() {
           : []),
       ])}
       ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
-      ${bloco("Calhas e rufos", res.calhas)}
+      ${bloco("Calhas e acessórios", res.calhas)}
     </div>
     <div>
       ${bloco(`Estrutura de madeira${nomeEspecie && madeira.length ? ` — ${nomeEspecie}` : ""}`, madeira)}
@@ -816,6 +830,25 @@ export function CalculadoraTelhado() {
     setTimeout(() => w.print(), 300);
   };
 
+
+  /** linha de relatório em texto corrido: nome à esquerda, pontilhado, valor à direita */
+  const LinhaItem = ({ nome, qtd, extra }: { nome: string; qtd: string; extra?: React.ReactNode }) => {
+    if (/^Crit\u00e9rios/i.test(nome)) {
+      return (
+        <li className="p-3 text-[11px] leading-relaxed text-gray-600">
+          <b className="text-gray-700">{nome}:</b> {qtd}
+        </li>
+      );
+    }
+    return (
+      <li className="flex items-baseline gap-2 p-3 text-sm">
+        <span className="shrink truncate whitespace-nowrap text-gray-700">{nome}</span>
+        {extra}
+        <span className="min-w-4 flex-1 translate-y-[-3px] border-b border-dotted border-gray-300" />
+        <span className="shrink-0 font-bold whitespace-nowrap text-orange-600">{qtd}</span>
+      </li>
+    );
+  };
 
   const card = "rounded-xl border border-gray-200 bg-white p-5";
   const passo = "text-xs font-bold uppercase tracking-wider text-orange-600";
@@ -854,7 +887,8 @@ export function CalculadoraTelhado() {
             onClick={() =>
               setAvancado((v) => {
                 // ao entrar no avançado, herda as medidas calculadas no modo simples
-                if (!v)
+                if (!v) {
+                  setVaoLivre(String(Number(vaoLivreAuto.toFixed(2))));
                   setAguasCustom(
                     Object.fromEntries(
                       aguasPadrao.map((a) => [
@@ -863,6 +897,7 @@ export function CalculadoraTelhado() {
                       ]),
                     ),
                   );
+                }
                 return !v;
               })
             }
@@ -1149,11 +1184,11 @@ export function CalculadoraTelhado() {
       {/* Passo 6 — calhas */}
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
-          <p className={passo}>Passo 6 · Incluir calhas, rufos e acessórios?</p>
+          <p className={passo}>Passo 6 · Incluir calhas e acessórios?</p>
           <Toggle on={comCalhas} onClick={() => setComCalhas((v) => !v)} label="Incluir calhas" />
         </div>
         <p className="mt-2 text-xs text-gray-500">
-          Calculamos o metro linear de calha e rufo pelo perímetro do telhado e sugerimos suportes, saídas e cabeceiras
+          Calculamos o metro linear de calha pelo perímetro do telhado e sugerimos suportes, saídas e cabeceiras
           na proporção correta.
         </p>
       </div>
@@ -1247,10 +1282,18 @@ export function CalculadoraTelhado() {
                 {sistemaTelha !== "pvc" && (
                   <div>
                     <label className="mb-1 block text-xs font-semibold text-gray-700">Vão livre entre apoios (m)</label>
-                    <input inputMode="decimal" value={vaoLivre} onChange={(e) => setVaoLivre(e.target.value)} className={input} />
+                    <input
+                      inputMode="decimal"
+                      placeholder={fmtN(vaoLivreAuto)}
+                      value={vaoLivre}
+                      onChange={(e) => setVaoLivre(e.target.value)}
+                      className={input}
+                    />
                     <p className="mt-1 text-[11px] text-gray-500">
-                      Bitola da viga aplicada: <b>{bitolaVigaPorVao(Math.max(0.5, num(vaoLivre) || 3))}</b> (até 3 m →
-                      11 cm · até 4,5 m → 15 cm · até 5,5 m → 20 ou 25 cm · acima → 30 cm).
+                      Padrão automático pelo comprimento do telhado: <b>{fmtN(vaoLivreAuto)} m</b>. Altere apenas se
+                      houver apoio intermediário (poste, pilar ou parede) que reduza o vão real. Bitola da viga
+                      aplicada: <b>{bitolaVigaPorVao(vaoLivreEfetivo)}</b> (até 3 m → 11 cm · até 4,5 m → 15 cm · até
+                      5,5 m → 20 ou 25 cm · acima → 30 cm).
                     </p>
                   </div>
                 )}
@@ -1390,26 +1433,20 @@ export function CalculadoraTelhado() {
 
           <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
           <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-            <li className="flex items-center justify-between gap-3 p-3">
-              <span className="text-sm text-gray-700">{res.telha.label}</span>
-              <span className="shrink-0 text-sm font-bold text-orange-600">{res.telhas} un</span>
-            </li>
+            <LinhaItem nome={res.telha.label} qtd={`${res.telhas} un`} />
             {res.itens.map((i) => (
-              <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                <span className="text-sm text-gray-700">{i.nome}</span>
-                <span className="shrink-0 text-sm font-bold text-orange-600">{i.qtd}</span>
-              </li>
+              <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
             ))}
             {res.luz && (
-              <li className="flex items-center justify-between gap-3 p-3">
-                <span className="text-sm text-gray-700">
-                  Pontos de Luz Natural — {res.luz.label}{" "}
-                  <a href={res.luz.href} className="font-bold text-orange-600 hover:underline">
-                    ver no catálogo →
+              <LinhaItem
+                nome={`Pontos de Luz Natural — ${res.luz.label}`}
+                qtd={`${res.luz.qtd} peças`}
+                extra={
+                  <a href={res.luz.href} className="shrink-0 text-xs font-bold whitespace-nowrap text-orange-600 hover:underline">
+                    ver →
                   </a>
-                </span>
-                <span className="shrink-0 text-sm font-bold text-orange-600">{res.luz.qtd} peças</span>
-              </li>
+                }
+              />
             )}
           </ul>
 
@@ -1420,10 +1457,7 @@ export function CalculadoraTelhado() {
               </p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.acabamento.map((i) => (
-                  <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                    <span className="text-sm text-gray-700">{i.nome}</span>
-                    <span className="shrink-0 text-right text-sm font-bold text-orange-600">{i.qtd}</span>
-                  </li>
+                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
                 ))}
               </ul>
               <a
@@ -1437,17 +1471,14 @@ export function CalculadoraTelhado() {
 
           {res.calhas.length > 0 && (
             <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas, rufos e acessórios</p>
+              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas e acessórios</p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.calhas.map((i) => (
-                  <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                    <span className="text-sm text-gray-700">{i.nome}</span>
-                    <span className="shrink-0 text-sm font-bold text-orange-600">{i.qtd}</span>
-                  </li>
+                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
                 ))}
               </ul>
               <a href="/catalogo/calhas" className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline">
-                Ver linha completa de calhas e rufos →
+                Ver linha completa de calhas →
               </a>
             </>
           )}
@@ -1457,10 +1488,7 @@ export function CalculadoraTelhado() {
               <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Estrutura de madeira</p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.estrutura.map((i) => (
-                  <li key={i.nome} className="flex items-center justify-between gap-3 p-3">
-                    <span className="text-sm text-gray-700">{i.nome}</span>
-                    <span className="shrink-0 text-sm font-bold text-orange-600">{i.qtd}</span>
-                  </li>
+                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
                 ))}
               </ul>
             </>
