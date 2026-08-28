@@ -152,7 +152,14 @@ export function QuoteCartButton({ className }: { className?: string }) {
 }
 
 
-function buildMessage(items: QuoteItem[], nome: string, local: string) {
+function buildMessage(
+  items: QuoteItem[],
+  nome: string,
+  local: string,
+  telefone: string,
+  email: string,
+  endereco: string,
+) {
   const linhas = items
     .map(
       (i) =>
@@ -170,6 +177,11 @@ function buildMessage(items: QuoteItem[], nome: string, local: string) {
     "",
     "📍 *LOCAL DE ENTREGA*",
     local.trim() || "[cidade/bairro]",
+    ...(endereco.trim() ? [endereco.trim()] : []),
+    "",
+    "📞 *CONTATO*",
+    `WhatsApp: ${telefone.trim() || "[telefone]"}`,
+    ...(email.trim() ? [`E-mail: ${email.trim()}`] : []),
     "",
     "💬 *Informações adicionais*",
     "Poderia verificar a disponibilidade em estoque, o prazo de entrega e o valor do frete para minha região?",
@@ -185,16 +197,26 @@ function QuoteDrawer() {
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [endereco, setEndereco] = useState("");
+  const [mostrarEndereco, setMostrarEndereco] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [sucesso, setSucesso] = useState<{ numero: string } | null>(null);
   const enviarPedido = useServerFn(enviarPedidoTiny);
-  const pronto = nome.trim().length >= 2 && local.trim().length >= 2;
+  const pronto =
+    nome.trim().length >= 2 &&
+    local.trim().length >= 2 &&
+    telefone.replace(/\D/g, "").length >= 10;
 
   const handleEnviar = async () => {
     if (!pronto || items.length === 0 || enviando) return;
     setEnviando(true);
     setErro(null);
+    // abre o WhatsApp imediatamente (evita bloqueio de pop-up)
+    window.open(
+      waLink(buildMessage(items, nome, local, telefone, email, endereco)),
+      "_blank",
+      "noopener,noreferrer",
+    );
     try {
       const res = await enviarPedido({
         data: {
@@ -211,14 +233,12 @@ function QuoteDrawer() {
           })),
         },
       });
-      if (res.ok) {
-        setSucesso({ numero: res.numeroPedido });
-        clear();
-      } else {
-        setErro(res.erro);
-      }
+      // o WhatsApp já foi aberto; o registro interno acontece em segundo plano
+      setSucesso({ numero: res.ok ? res.numeroPedido : "" });
+      clear();
     } catch {
-      setErro("Não foi possível enviar agora. Tente novamente ou fale no WhatsApp.");
+      setSucesso({ numero: "" });
+      clear();
     } finally {
       setEnviando(false);
     }
@@ -332,10 +352,12 @@ function QuoteDrawer() {
             </div>
             <div>
               <Label htmlFor="quote-tel" className="text-xs font-bold text-primary/80">
-                Telefone / WhatsApp
+                Telefone / WhatsApp <span className="text-accent">*</span>
               </Label>
               <Input
                 id="quote-tel"
+                type="tel"
+                inputMode="tel"
                 value={telefone}
                 onChange={(e) => setTelefone(e.target.value)}
                 placeholder="(11) 90000-0000"
@@ -345,7 +367,7 @@ function QuoteDrawer() {
             </div>
             <div>
               <Label htmlFor="quote-email" className="text-xs font-bold text-primary/80">
-                E-mail
+                E-mail (opcional)
               </Label>
               <Input
                 id="quote-email"
@@ -357,9 +379,12 @@ function QuoteDrawer() {
                 className="mt-1.5"
               />
             </div>
-            <div>
+          </div>
+
+          {mostrarEndereco ? (
+            <div className="mt-3">
               <Label htmlFor="quote-end" className="text-xs font-bold text-primary/80">
-                Endereço de entrega
+                Endereço de entrega (opcional)
               </Label>
               <Input
                 id="quote-end"
@@ -367,15 +392,25 @@ function QuoteDrawer() {
                 onChange={(e) => setEndereco(e.target.value)}
                 placeholder="Rua, número"
                 maxLength={120}
+                autoFocus
                 className="mt-1.5"
               />
             </div>
-          </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setMostrarEndereco(true)}
+              className="mt-3 text-xs font-semibold text-muted-foreground underline-offset-2 transition-colors hover:text-primary hover:underline"
+            >
+              + adicionar endereço (opcional)
+            </button>
+          )}
 
           {items.length > 0 && !pronto ? (
             <p className="mt-3 flex items-start gap-2 rounded-xl border border-accent/40 bg-accent/8 px-4 py-2.5 text-xs font-semibold text-primary/80">
               <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
-              Informe seu nome e o bairro/cidade de entrega para enviar a cotação.
+              Informe seu nome, telefone/WhatsApp e o bairro/cidade de entrega para enviar a
+              cotação.
             </p>
           ) : null}
 
@@ -388,30 +423,17 @@ function QuoteDrawer() {
 
           <Button
             type="button"
+            variant="whats"
             size="xl"
             onClick={handleEnviar}
             disabled={items.length === 0 || !pronto || enviando}
             className="mt-4 w-full"
           >
-            {enviando ? "ENVIANDO..." : "SOLICITAR ORÇAMENTO"}
+            <MessageCircle />
+            {enviando ? "ENVIANDO..." : "ENVIAR ORÇAMENTO VIA WHATSAPP"}
           </Button>
 
-          <Button
-            asChild
-            variant="whats"
-            size="xl"
-            className={`mt-2 w-full ${items.length === 0 || !pronto ? "pointer-events-none opacity-50" : ""}`}
-          >
-            <a
-              href={waLink(buildMessage(items, nome, local))}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={items.length === 0 || !pronto}
-            >
-              <MessageCircle />
-              ENVIAR COTAÇÃO VIA WHATSAPP
-            </a>
-          </Button>
+
 
 
           <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
