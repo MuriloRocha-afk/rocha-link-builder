@@ -30,8 +30,8 @@ export function croquiTelhadoSvg({ tipo, comprimento, largura, beiral }: Opts): 
   const inset = 16;
 
   const laranja = "#ea580c";
-  const cinza = "#94a3b8";
-  const texto = "#475569";
+  const cinza = "#64748b";
+  const texto = "#1f2937";
 
   const linhas: string[] = [];
 
@@ -89,10 +89,10 @@ export function croquiTelhadoSvg({ tipo, comprimento, largura, beiral }: Opts): 
     `<text x="${X1 + 20}" y="${cy}" font-size="10" font-weight="bold" fill="${texto}" transform="rotate(90 ${X1 + 20} ${cy})" text-anchor="middle">${rotLarg}</text>`,
     `<line x1="${X0}" y1="${Y1 + 12}" x2="${X0 + inset}" y2="${Y1 + 12}" stroke="${texto}" stroke-width="1" marker-start="url(#cq-arrow)" marker-end="url(#cq-arrow)"/>`,
     `<text x="${X0 + inset + 6}" y="${Y1 + 16}" font-size="9.5" font-weight="bold" fill="${texto}">${rotBei}</text>`,
-    `<text x="${X0 + 6}" y="${Y0 - 4}" font-size="9" fill="${cinza}">vista superior</text>`,
+    `<text x="${X0 + 6}" y="${Y0 - 4}" font-size="9" font-weight="bold" letter-spacing="0.6" fill="#64748b">VISTA SUPERIOR</text>`,
   );
 
-  return `<svg viewBox="0 0 330 200" width="100%" role="img" aria-label="Croqui do telhado em planta baixa" xmlns="http://www.w3.org/2000/svg">
+  return `<svg viewBox="0 0 330 200" width="100%" font-family="Arial, Helvetica, sans-serif" shape-rendering="geometricPrecision" role="img" aria-label="Croqui do telhado em planta baixa" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="cq-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M 0 1 L 9 5 L 0 9 z" fill="${texto}"/>
@@ -119,8 +119,8 @@ type PerfilOpts = {
  */
 export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: PerfilOpts): string {
   const laranja = "#ea580c";
-  const cinza = "#94a3b8";
-  const texto = "#475569";
+  const cinza = "#64748b";
+  const texto = "#1f2937";
 
   const L = largura && largura > 0 ? largura : 8;
   const b = beiral > 0 ? beiral : 0;
@@ -185,10 +185,10 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   linhas.push(
     `<line x1="${xEsq}" y1="${Ybase + 22}" x2="${xDir}" y2="${Ybase + 22}" stroke="${texto}" stroke-width="1" marker-start="url(#pf-arrow)" marker-end="url(#pf-arrow)"/>`,
     `<text x="${cxBase}" y="${Ybase + 34}" font-size="10" font-weight="bold" fill="${texto}" text-anchor="middle">Largura da base ${fmt(L)} m</text>`,
-    `<text x="16" y="18" font-size="9" fill="${cinza}">vista de perfil (corte) · inclinação ${fmt(inclinacao)}%</text>`,
+    `<text x="16" y="18" font-size="9" font-weight="bold" letter-spacing="0.6" fill="#64748b">VISTA DE PERFIL (CORTE) · INCLINAÇÃO ${fmt(inclinacao)}%</text>`,
   );
 
-  return `<svg viewBox="0 0 330 200" width="100%" role="img" aria-label="Croqui do telhado em corte de perfil" xmlns="http://www.w3.org/2000/svg">
+  return `<svg viewBox="0 0 330 200" width="100%" font-family="Arial, Helvetica, sans-serif" shape-rendering="geometricPrecision" role="img" aria-label="Croqui do telhado em corte de perfil" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <marker id="pf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M 0 1 L 9 5 L 0 9 z" fill="${texto}"/>

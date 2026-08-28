@@ -10,6 +10,7 @@ import {
   Info,
 } from "lucide-react";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
+import { LOGO_ROCHA_SVG } from "@/components/site/logo-print";
 import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
 import {
@@ -322,12 +323,8 @@ export function CalculadoraTelhado() {
           valor: pcEsp,
         });
       }
-      if (totalM > 0) {
-        if (telha.familia === "ceramica" || telha.familia === "concreto") {
-          const arg = Math.max(1, Math.ceil(totalM / 6));
-          acabamento.push({ nome: "Argamassa / cimento-cola para assentar cumeeira e espigão", qtd: `${arg} saco(s)`, chave: null });
-        }
-      } else {
+      if (totalM <= 0) {
+
         acabamento.push({
           nome: "Telhado de 1 água — sem cumeeira",
           qtd: "Use rufo de arremate no topo",
@@ -429,7 +426,6 @@ export function CalculadoraTelhado() {
       const mRufo = tipo === "1agua" ? c + 2 * l : tipo === "2aguas" ? 2 * l : tipo === "3aguas" ? l : 0;
       const lances = Math.ceil(mCalha / 6);
       const suportes = Math.ceil(mCalha / 0.8);
-      const saidas = Math.max(1, Math.ceil(mCalha / 10));
       const cabeceiras = tipo === "4aguas" ? 0 : lances * 2;
       const vedaCalha = Math.max(1, Math.ceil(lances / 2));
 
@@ -438,7 +434,6 @@ export function CalculadoraTelhado() {
       if (tipo === "4aguas" || tipo === "3aguas")
         calhas.push({ nome: "Água furtada (encontro de águas)", qtd: `${Math.ceil(l)} m`, chave: "aguafurtada.m", valor: Math.ceil(l) });
       calhas.push({ nome: "Suporte de calha (a cada 80 cm)", qtd: `${suportes} un`, chave: "suporte.calha", valor: suportes });
-      calhas.push({ nome: "Saída / bocal de calha", qtd: `${saidas} un`, chave: "saida.calha", valor: saidas });
       if (cabeceiras > 0) calhas.push({ nome: "Cabeceira (tampa de extremidade)", qtd: `${cabeceiras} un`, chave: "cabeceira.calha", valor: cabeceiras });
       calhas.push({ nome: "Veda calha PU / silicone", qtd: `${vedaCalha} un`, chave: "vedacalha", valor: vedaCalha });
     }
@@ -583,9 +578,9 @@ export function CalculadoraTelhado() {
     if (!res) return;
     const linha = (i: Item) => `<tr><td>${i.nome}</td><td class="q">${i.qtd}</td></tr>`;
     const bloco = (titulo: string, itens: Item[]) =>
-      itens.length ? `<h2>${titulo}</h2><table>${itens.map(linha).join("")}</table>` : "";
+      itens.length ? `<div class="sec"><h2>${titulo}</h2><table>${itens.map(linha).join("")}</table></div>` : "";
     const comparaHtml = comparativo.length
-      ? `<h2>Comparativo entre telhas</h2><table>
+      ? `<div class="sec"><h2>Comparativo entre telhas</h2><table>
         <tr><td><b>Telha</b></td><td class="q">Peças</td><td class="q">Peso</td><td class="q">Comparação relativa</td></tr>
         ${comparativo
           .map(
@@ -593,26 +588,39 @@ export function CalculadoraTelhado() {
               `<tr><td>${c.telha.grupo} — ${c.telha.label.replace(" ★", "")}</td><td class="q">${c.pecas} un</td><td class="q">${fmt(c.peso, 0)} kg</td><td class="q">${textoComparativo(c)}</td></tr>`,
           )
           .join("")}
-      </table>`
+      </table></div>`
       : "";
     const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <title>Calculo de telhado - Rocha Telhas</title>
 <style>
-  body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:32px;font-size:13px}
-  h1{color:#ea580c;font-size:20px;margin:0 0 4px}
-  h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:22px 0 6px}
+  @page{size:A4 portrait;margin:10mm}
+  *{box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;color:#111;margin:0;font-size:9.5px;line-height:1.25}
+  header{display:flex;align-items:center;gap:10px;border-bottom:2px solid #ea580c;padding-bottom:6px}
+  header svg{flex:0 0 auto}
+  h1{color:#ea580c;font-size:15px;margin:0}
+  .sub{color:#374151;font-size:9px;margin-top:1px}
+  h2{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#6b7280;margin:0 0 3px;border-bottom:1px solid #f3f4f6;padding-bottom:2px}
   table{width:100%;border-collapse:collapse}
-  td{border-bottom:1px solid #eee;padding:6px 4px}
+  td{border-bottom:1px solid #f1f1f1;padding:2px 3px;vertical-align:top}
   td.q{text-align:right;font-weight:bold;color:#ea580c;white-space:nowrap}
-  .grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-  .box{border:1px solid #eee;border-radius:8px;padding:8px 12px;min-width:150px}
-  .box b{display:block;font-size:15px}
-  .croquis{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-  .croqui{border:1px solid #eee;border-radius:8px;padding:10px;width:330px}
-  .small{color:#6b7280;font-size:11px;margin-top:18px}
+  .grid{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0}
+  .box{border:1px solid #eee;border-radius:5px;padding:4px 7px;flex:1 1 0;text-align:center}
+  .box span{color:#6b7280;font-size:8px;display:block}
+  .box b{display:block;font-size:11px}
+  .croquis{display:flex;gap:8px;margin-top:7px}
+  .croqui{border:1px solid #eee;border-radius:5px;padding:4px;width:50%}
+  .cols{column-count:2;column-gap:12px;margin-top:6px}
+  .sec{break-inside:avoid;page-break-inside:avoid;margin-bottom:8px}
+  .small{color:#6b7280;font-size:8px;margin-top:8px;border-top:1px solid #eee;padding-top:4px}
 </style></head><body>
-<h1>Rocha Telhas — Cálculo de telhado</h1>
-<div>${TIPOS.find((t) => t.id === res.tipo)!.label} · inclinação ${res.incl}% · ${res.telha.label} · margem ${res.margem}%</div>
+<header>
+  ${LOGO_ROCHA_SVG}
+  <div>
+    <h1>Rocha Telhas — Cálculo de Telhado</h1>
+    <div class="sub">${TIPOS.find((t) => t.id === res.tipo)!.label} · inclinação ${res.incl}% · ${res.telha.label} · margem ${res.margem}% · ${new Date().toLocaleDateString("pt-BR")}</div>
+  </div>
+</header>
 <div class="croquis"><div class="croqui">${res.croqui}</div><div class="croqui">${res.perfil}</div></div>
 <div class="grid">
   <div class="box"><span>Área da base (planta)</span><b>${fmt(res.areaBase)} m²</b></div>
@@ -621,6 +629,7 @@ export function CalculadoraTelhado() {
   <div class="box"><span>Perímetro</span><b>${fmt(res.perimetro)} m</b></div>
   <div class="box"><span>Peso da cobertura</span><b>${fmt(res.peso, 0)} kg</b></div>
 </div>
+<div class="cols">
 ${bloco("Cobertura", [
   { nome: res.telha.label, qtd: `${res.telhas} un` },
   ...res.itens,
@@ -630,8 +639,10 @@ ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
 ${bloco("Calhas e rufos", res.calhas)}
 ${bloco("Estrutura de madeira", res.estrutura)}
 ${comparaHtml}
+</div>
 <p class="small">Estimativa de referência gerada automaticamente. Este material não apresenta valores: o preço final sai apenas na cotação com o vendedor, que também confere as quantidades.</p>
 </body></html>`;
+
     const w = window.open("", "_blank");
     if (!w) return;
     w.document.write(html);
