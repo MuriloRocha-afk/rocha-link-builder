@@ -188,13 +188,6 @@
     height: auto;
   }
 
-  /* imagens que preenchem contêineres com altura definida */
-  img.h-full,
-  video.h-full,
-  img.absolute,
-  img.inset-0 {
-    height: 100%;
-  }
 }
 
 @layer base {
