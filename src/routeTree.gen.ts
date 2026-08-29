@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LinksRouteImport } from './routes/links'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as CalculadoraRouteImport } from './routes/calculadora'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -76,6 +77,11 @@ import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 import { Route as AuthenticatedAdminAvaliacoesRouteImport } from './routes/_authenticated/admin.avaliacoes'
 
+const LinksRoute = LinksRouteImport.update({
+  id: '/links',
+  path: '/links',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FerramentasRoute = FerramentasRouteImport.update({
   id: '/ferramentas',
   path: '/ferramentas',
@@ -449,6 +455,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
+  '/links': typeof LinksRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
@@ -516,6 +523,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
+  '/links': typeof LinksRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo': typeof CatalogoIndexRoute
   '/guias': typeof GuiasIndexRoute
@@ -584,6 +592,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
+  '/links': typeof LinksRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
@@ -653,6 +662,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/calculadora'
     | '/ferramentas'
+    | '/links'
     | '/catalogo/$categoriaSlug'
     | '/guias/$slug'
     | '/catalogo/'
@@ -720,6 +730,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/calculadora'
     | '/ferramentas'
+    | '/links'
     | '/guias/$slug'
     | '/catalogo'
     | '/guias'
@@ -787,6 +798,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/calculadora'
     | '/ferramentas'
+    | '/links'
     | '/catalogo/$categoriaSlug'
     | '/guias/$slug'
     | '/catalogo/'
@@ -856,6 +868,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   CalculadoraRoute: typeof CalculadoraRoute
   FerramentasRoute: typeof FerramentasRoute
+  LinksRoute: typeof LinksRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   GuiasSlugRoute: typeof GuiasSlugRoute
   CatalogoIndexRoute: typeof CatalogoIndexRoute
@@ -918,6 +931,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/links': {
+      id: '/links'
+      path: '/links'
+      fullPath: '/links'
+      preLoaderRoute: typeof LinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ferramentas': {
       id: '/ferramentas'
       path: '/ferramentas'
@@ -1417,6 +1437,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   CalculadoraRoute: CalculadoraRoute,
   FerramentasRoute: FerramentasRoute,
+  LinksRoute: LinksRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   GuiasSlugRoute: GuiasSlugRoute,
   CatalogoIndexRoute: CatalogoIndexRoute,
