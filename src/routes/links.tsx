@@ -6,6 +6,7 @@ import {
   Instagram,
   MapPin,
   MessageCircle,
+  Phone,
   ShoppingBag,
   Star,
   Store,
@@ -70,6 +71,12 @@ function LinksPage() {
             href={`https://wa.me/${WHATSAPP_BIO_NUMBER}?text=${encodeURIComponent(WHATSAPP_BIO_MESSAGE)}`}
             icon={<MessageCircle size={22} />}
             label="Falar no WhatsApp"
+          />
+
+          <ExternalButton
+            href="tel:+551144446403"
+            icon={<Phone size={22} />}
+            label="Ligar para a loja"
           />
 
           <HighlightButton
