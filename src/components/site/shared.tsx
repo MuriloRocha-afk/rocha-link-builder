@@ -40,7 +40,7 @@ export function Logo({
   size?: "md" | "lg";
 }) {
   const big = size === "lg";
-  return <RochaLogoHorizontal className={big ? "h-14 shrink-0 xl:h-20" : "h-14 shrink-0"} />;
+  return <RochaLogoHorizontal className={big ? "h-14 shrink-0 xl:h-24" : "h-14 shrink-0"} />;
 
 }
 
