@@ -111,24 +111,60 @@ export function Acao() {
 
 const REVIEWS = [
   {
-    name: "Marcos Andrade",
-    role: "Mestre de obras — Caieiras",
-    text: "Pedi o madeiramento na quinta e na sexta cedo o caminhão já estava na obra. Cambará de primeira, bitola certinha. Não compro em outro lugar.",
+    name: "Elvis Melo",
+    text: "Maravilhosa a experiência! Atenciosos desde o primeiro contato com WhatsApp, até o fechamento do orçamento presencialmente. A equipe é magnífica, muito atenciosa e dificilmente qualquer outro concorrente consegue bater o preço deles ou o atendimento. Sou cliente e já os considero amigos.",
   },
   {
-    name: "Arq. Juliana Prado",
-    role: "Arquiteta — Perus",
-    text: "Especifiquei telha Isotec para três projetos. O atendimento entende de técnica, ajudou no cálculo da estrutura e o acabamento ficou impecável.",
+    name: "Daniel Jose Galvão",
+    text: "Bom atendimento! Melhor preço da região",
   },
   {
-    name: "Roberto Lima",
-    role: "Construtora RL — Franco da Rocha",
-    text: "Trabalho com eles há mais de 10 anos. Volume grande, prazo curto, sempre cumprem. Estrutura de distribuidora grande com atendimento de bairro.",
+    name: "Daiani Pardo",
+    text: "Atendimento excelente e pontualidade na entrega.",
   },
   {
-    name: "Sandra Ferreira",
-    role: "Cliente residencial — Franco da Rocha",
-    text: "Reformei o telhado da minha casa e fui muito bem atendida do orçamento à entrega. Parcelei no cartão e recebi tudo no dia combinado.",
+    name: "Humberto dos Anjos",
+    text: "Para quem não tem tempo a perder. O que precisa acha tudo lá. O atendimento conta com equipe de alto nível. Pessoas educadas e gentis até mesmo no pátio do depósito de madeiras.",
+  },
+  {
+    name: "Hugo Alves de Oliveira",
+    text: "Atendimento no balcão e na entrega top nota 10.",
+  },
+  {
+    name: "Henrique Teles",
+    text: "O único que atendeu meu pedido de uma prancha de 8 x 40 x 0,08.",
+  },
+  {
+    name: "Medina",
+    text: "Compro com frequência. Mercadorias de qualidade, preço justo e entrega rápida. Atendimento ágil e prático por WhatsApp. No resumo, atende todos os quesitos de um bom fornecedor.",
+  },
+  {
+    name: "Thomas Alves",
+    text: "Melhor loja da região, indico sem medo. Confiança e preço justo é aqui 😊",
+  },
+  {
+    name: "Thays Magalhães",
+    text: "Comércio com variedade de produtos, e produtos de qualidade! Excelente atendimento, valores cobrem a concorrência pelo custo benefício. Super indico!!!",
+  },
+  {
+    name: "Loriane Magalhaes",
+    text: "As atendentes são super simpáticas, materiais com preço bom e de boa qualidade!!! Recomendo de Mais!",
+  },
+  {
+    name: "Manuelly Silva",
+    text: "Melhor madeireira da região. Fim. Telhado de 120m2. Entrega rápida e o melhor preço e qualidade.",
+  },
+  {
+    name: "Danilo Pereira",
+    text: "Bom dia, consegui resolver o meu problema na ROCHA Telhas e Madeiras.",
+  },
+  {
+    name: "Vanderlei Apolinario da Silva",
+    text: "Muito bom atendimento a moça com muita educação pra conversar gostei muito parabéns atendente balconista 👏",
+  },
+  {
+    name: "Carlos Roberto Marul",
+    text: "Ótimo atendimento volto novamente 😀",
   },
 ];
 
