@@ -50,10 +50,29 @@ const Ctx = createContext<QuoteCartContext | null>(null);
 
 const STORAGE_KEY = "rocha-telhas-orcamento";
 
+const FALLBACK: QuoteCartContext = {
+  items: [],
+  count: 0,
+  open: false,
+  setOpen: () => {},
+  addItem: () => {},
+  crossSell: null,
+  closeCrossSell: () => {},
+  updateQty: () => {},
+  removeItem: () => {},
+  clear: () => {},
+};
+
+/** Retorna o contexto ou `null` quando renderizado fora do provider. */
+export function useQuoteCartOptional() {
+  return useContext(Ctx);
+}
+
 export function useQuoteCart() {
   const ctx = useContext(Ctx);
-  if (!ctx) throw new Error("useQuoteCart precisa estar dentro de QuoteCartProvider");
-  return ctx;
+  // Sem provider (ex.: render isolado/SSR parcial) usamos um fallback inerte
+  // em vez de quebrar a página inteira.
+  return ctx ?? FALLBACK;
 }
 
 export function QuoteCartProvider({ children }: { children: ReactNode }) {
