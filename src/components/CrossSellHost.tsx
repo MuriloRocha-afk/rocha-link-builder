@@ -1,11 +1,12 @@
-import { useQuoteCart } from "@/components/site/quote-cart";
+import { useQuoteCartOptional } from "@/components/site/quote-cart";
 import CrossSellModal from "@/components/CrossSellModal";
 import { getRelacionados } from "@/data/crossSell";
 
 /** Exibe o pop-up de produtos relacionados sempre que um item é adicionado ao orçamento. */
 export default function CrossSellHost() {
-  const { crossSell, closeCrossSell } = useQuoteCart();
-  if (!crossSell) return null;
+  const ctx = useQuoteCartOptional();
+  if (!ctx?.crossSell) return null;
+  const { crossSell, closeCrossSell } = ctx;
   const relacionados = getRelacionados(crossSell.nome, crossSell.qtd, crossSell.detail);
   return (
     <CrossSellModal
