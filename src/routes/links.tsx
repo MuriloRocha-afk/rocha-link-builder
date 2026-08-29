@@ -73,6 +73,12 @@ function LinksPage() {
             label="Falar no WhatsApp"
           />
 
+          <ExternalButton
+            href="tel:+551144446403"
+            icon={<Phone size={22} />}
+            label="Ligar para a loja"
+          />
+
           <HighlightButton
             to="/calculadora"
             icon={<Calculator size={22} />}
