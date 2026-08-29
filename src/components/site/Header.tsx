@@ -71,7 +71,7 @@ export function Header() {
       className="fixed inset-x-0 top-0 z-50 bg-card/95 shadow-[var(--shadow-card)] backdrop-blur transition-all"
     >
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-5">
-        <Link to="/" aria-label="Rocha Telhas — início">
+        <Link to="/" aria-label="Rocha Telhas — início" className="flex shrink-0 items-center">
           <Logo size="lg" />
         </Link>
 
