@@ -35,8 +35,8 @@ export function Tecnologia() {
           subtitle="Maquinário industrial moderno operando todos os dias para entregar madeira aparelhada com padrão de fábrica."
         />
 
-        <div className="mt-14 grid w-full max-w-full items-center gap-10 lg:grid-cols-2">
-          <div className="grid w-full max-w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="mt-14 grid w-full max-w-full grid-cols-1 items-center gap-10 lg:grid-cols-2">
+          <div className="grid w-full min-w-0 max-w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-1">
             <figure className="overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
               <img
                 src={serra}
@@ -59,17 +59,17 @@ export function Tecnologia() {
             </figure>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <ul className="space-y-5">
               {ITEMS.map((i) => (
                 <li
                   key={i.title}
-                  className="flex gap-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6"
+                  className="flex min-w-0 gap-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6"
                 >
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                     <i.icon className="h-6 w-6" />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="text-lg font-extrabold text-primary-foreground">{i.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-primary-foreground/70">
                       {i.text}
