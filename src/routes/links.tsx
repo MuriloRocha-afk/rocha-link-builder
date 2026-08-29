@@ -6,6 +6,7 @@ import {
   Instagram,
   MapPin,
   MessageCircle,
+  Phone,
   ShoppingBag,
   Star,
   Store,
