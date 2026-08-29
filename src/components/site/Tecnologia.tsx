@@ -35,8 +35,8 @@ export function Tecnologia() {
           subtitle="Maquinário industrial moderno operando todos os dias para entregar madeira aparelhada com padrão de fábrica."
         />
 
-        <div className="mt-14 grid items-center gap-10 lg:grid-cols-2">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="mt-14 grid w-full max-w-full items-center gap-10 lg:grid-cols-2">
+          <div className="grid w-full max-w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-1">
             <figure className="overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
               <img
                 src={serra}
