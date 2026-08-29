@@ -165,9 +165,35 @@
     border-color: var(--color-border);
   }
 
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    height: auto;
+  }
+
+  /* imagens que preenchem contêineres com altura definida */
+  img.h-full,
+  video.h-full,
+  img.absolute,
+  img.inset-0 {
+    height: 100%;
   }
 }
 
