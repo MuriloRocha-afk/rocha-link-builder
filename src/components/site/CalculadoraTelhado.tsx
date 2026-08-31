@@ -424,11 +424,10 @@ export function CalculadoraTelhado() {
 
       for (const a of aguas) {
         const rampa = rampaAgua(a);
-        // comprimento médio efetivo da água (tacaniça = metade da base)
-        const cef = a.forma === "tri" ? a.comp / 2 : a.comp;
-        // comprimento da água JÁ COM o beiral frontal nas duas empenas — é nele
-        // que os caibros são distribuídos (o beiral também precisa de caibro).
-        const cefBeiral = a.forma === "tri" ? cef : cef + 2 * beiralFrontNum;
+        // comprimento da água JÁ COM o beiral frontal nas duas empenas — todas
+        // as peças (ripa, caibro e viga) correm sobre esse comprimento total
+        const cef = a.forma === "tri" ? compAguaTotal(a) / 2 : compAguaTotal(a);
+        const cefBeiral = cef;
         if (rampa <= 0 || cef <= 0) continue;
 
         if (sistema === "ripa") {
@@ -460,6 +459,7 @@ export function CalculadoraTelhado() {
           mViga += nApoios * cef;
         }
       }
+
 
 
       const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => `madeira.cambara.${peca}`;
