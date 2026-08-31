@@ -134,8 +134,9 @@ export function CalculadoraTelhado() {
   const [apoio2, setApoio2] = useState<Apoio2>("caibro");
   /** espaçamento do 2º apoio (m) — vazio = valor da etapa 1 */
   const [espacamento, setEspacamento] = useState("");
-  // modo avançado (item 7)
-  const [avancado, setAvancado] = useState(false);
+  /** fluxo único: todos os campos técnicos sempre visíveis */
+  const avancado = true;
+
   /** galga aplicada (m) — vazio = usa a galga da ficha técnica da telha */
   const [galgaCustom, setGalgaCustom] = useState("");
   /** espaçamento do 3º apoio (m) — vazio = valor definido pela etapa 2 */
@@ -282,9 +283,19 @@ export function CalculadoraTelhado() {
     return { ...a, vao: num(cu.vao) || a.vao, comp: num(cu.comp) || a.comp };
   });
 
-  /** comprimento da rampa da água (do cume à borda), já com o beiral lateral */
-  const rampaAgua = (a: Agua) => a.vao * fatorIncl + beiralLatNum;
-  const areaAgua = (a: Agua) => (a.forma === "tri" ? 0.5 * a.comp : a.comp) * rampaAgua(a);
+  /**
+   * Comprimento da rampa da água (do cume à borda) já com o beiral lateral.
+   * O beiral é somado em cada extremidade que a água possui: no telhado de 1
+   * água ela atravessa a largura inteira (dois beirais laterais); nas demais,
+   * cada água cobre metade do vão e recebe um beiral na sua própria borda.
+   */
+  const rampaAgua = (a: Agua) =>
+    a.vao * fatorIncl + beiralLatNum * (tipo === "1agua" ? 2 : 1);
+  /** comprimento da água no sentido do comprimento, com beiral frontal nas duas empenas */
+  const compAguaTotal = (a: Agua) => (a.forma === "tri" ? a.comp : a.comp + 2 * beiralFrontNum);
+  const areaAgua = (a: Agua) =>
+    (a.forma === "tri" ? 0.5 * compAguaTotal(a) : compAguaTotal(a)) * rampaAgua(a);
+
 
 
   const calcular = () => {
@@ -304,7 +315,7 @@ export function CalculadoraTelhado() {
     const alturaCumeeira = vao * (incl / 100);
     // largura inclinada: do cume até a borda, já somando o beiral na direção da água
     const larguraInclinada = vao * fator;
-    const caibro = larguraInclinada + beiralLatNum;
+    const caibro = larguraInclinada + beiralLatNum * (tipo === "1agua" ? 2 : 1);
 
     // ---- área inclinada: soma das áreas reais de cada água (medidas individuais) ----
     const areaIncl = aguas.reduce((s, a) => s + areaAgua(a), 0);
@@ -348,6 +359,7 @@ export function CalculadoraTelhado() {
               : Math.max(0, c - l);
       // espigão = aresta inclinada do canto até o cume
       const hip = Math.sqrt(Math.pow(larguraInclinada + beiralLatNum, 2) + Math.pow(l / 2, 2));
+
       const mEspigao = tipo === "3aguas" ? 2 * hip : tipo === "4aguas" ? 4 * hip : 0;
       const totalM = mCumeeira + mEspigao;
 
@@ -413,11 +425,10 @@ export function CalculadoraTelhado() {
 
       for (const a of aguas) {
         const rampa = rampaAgua(a);
-        // comprimento médio efetivo da água (tacaniça = metade da base)
-        const cef = a.forma === "tri" ? a.comp / 2 : a.comp;
-        // comprimento da água JÁ COM o beiral frontal nas duas empenas — é nele
-        // que os caibros são distribuídos (o beiral também precisa de caibro).
-        const cefBeiral = a.forma === "tri" ? cef : cef + 2 * beiralFrontNum;
+        // comprimento da água JÁ COM o beiral frontal nas duas empenas — todas
+        // as peças (ripa, caibro e viga) correm sobre esse comprimento total
+        const cef = a.forma === "tri" ? compAguaTotal(a) / 2 : compAguaTotal(a);
+        const cefBeiral = cef;
         if (rampa <= 0 || cef <= 0) continue;
 
         if (sistema === "ripa") {
@@ -449,6 +460,7 @@ export function CalculadoraTelhado() {
           mViga += nApoios * cef;
         }
       }
+
 
 
       const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => `madeira.cambara.${peca}`;
@@ -902,40 +914,7 @@ export function CalculadoraTelhado() {
 
   return (
     <div className="space-y-4">
-      {/* Modo simples x avançado (item 7) */}
-      <div className={card}>
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className={passo}>{avancado ? "Modo avançado" : "Modo simples"}</p>
-            <p className="mt-1 text-xs text-gray-500">
-              {avancado
-                ? "Medida por água, espaçamento por peça, bitola de prego e margem da madeira liberados para edição."
-                : "Usamos valores recomendados de espaçamento, prego e margem. Ative o modo avançado para especificar tudo manualmente."}
-            </p>
-          </div>
-          <Toggle
-            on={avancado}
-            label="Modo avançado"
-            onClick={() =>
-              setAvancado((v) => {
-                // ao entrar no avançado, herda as medidas calculadas no modo simples
-                if (!v) {
 
-                  setAguasCustom(
-                    Object.fromEntries(
-                      aguasPadrao.map((a) => [
-                        a.id,
-                        { vao: a.vao ? String(Number(a.vao.toFixed(2))) : "", comp: a.comp ? String(Number(a.comp.toFixed(2))) : "" },
-                      ]),
-                    ),
-                  );
-                }
-                return !v;
-              })
-            }
-          />
-        </div>
-      </div>
 
 
       {/* Passo 1 */}
@@ -968,9 +947,10 @@ export function CalculadoraTelhado() {
           dangerouslySetInnerHTML={{ __html: croquiAtual }}
         />
         <p className="mt-2 flex items-start gap-1.5 text-[11px] text-gray-500">
-          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da planta (largura × comprimento). O beiral não entra na área da
-          planta — ele é somado apenas no comprimento da água inclinada.
+          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da planta / parede (largura × comprimento), sem beiral. O beiral é
+          somado depois nas duas extremidades: comprimento total = comprimento + 2× beiral frontal; largura total = largura + 2× beiral lateral.
         </p>
+
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div>
             <label className="mb-1 block text-xs font-semibold text-gray-700">Comprimento (m)</label>
