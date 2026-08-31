@@ -142,7 +142,7 @@ function GuiaPost() {
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-extrabold text-accent-foreground transition-colors hover:brightness-95"
               >
                 <Calculator className="h-4 w-4" />
-                Calcular meu telhado
+                {guia.ctaCalculadora ?? "Calcular meu telhado"}
               </Link>
               <a
                 href={waLink(
@@ -153,7 +153,7 @@ function GuiaPost() {
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 px-6 py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-green-700"
               >
                 <MessageCircle className="h-4 w-4" />
-                Falar no WhatsApp
+                {guia.ctaWhatsApp ?? "Falar no WhatsApp"}
               </a>
             </div>
           </div>
