@@ -134,8 +134,9 @@ export function CalculadoraTelhado() {
   const [apoio2, setApoio2] = useState<Apoio2>("caibro");
   /** espaçamento do 2º apoio (m) — vazio = valor da etapa 1 */
   const [espacamento, setEspacamento] = useState("");
-  // modo avançado (item 7)
-  const [avancado, setAvancado] = useState(false);
+  /** fluxo único: todos os campos técnicos sempre visíveis */
+  const avancado = true;
+
   /** galga aplicada (m) — vazio = usa a galga da ficha técnica da telha */
   const [galgaCustom, setGalgaCustom] = useState("");
   /** espaçamento do 3º apoio (m) — vazio = valor definido pela etapa 2 */
