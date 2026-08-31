@@ -359,6 +359,7 @@ export function CalculadoraTelhado() {
               : Math.max(0, c - l);
       // espigão = aresta inclinada do canto até o cume
       const hip = Math.sqrt(Math.pow(larguraInclinada + beiralLatNum, 2) + Math.pow(l / 2, 2));
+
       const mEspigao = tipo === "3aguas" ? 2 * hip : tipo === "4aguas" ? 4 * hip : 0;
       const totalM = mCumeeira + mEspigao;
 
