@@ -947,9 +947,10 @@ export function CalculadoraTelhado() {
           dangerouslySetInnerHTML={{ __html: croquiAtual }}
         />
         <p className="mt-2 flex items-start gap-1.5 text-[11px] text-gray-500">
-          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da planta (largura × comprimento). O beiral não entra na área da
-          planta — ele é somado apenas no comprimento da água inclinada.
+          <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da planta / parede (largura × comprimento), sem beiral. O beiral é
+          somado depois nas duas extremidades: comprimento total = comprimento + 2× beiral frontal; largura total = largura + 2× beiral lateral.
         </p>
+
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div>
             <label className="mb-1 block text-xs font-semibold text-gray-700">Comprimento (m)</label>
