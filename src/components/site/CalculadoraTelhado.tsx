@@ -385,6 +385,16 @@ export function CalculadoraTelhado() {
           valor: pcEsp,
         });
       }
+      if (mLateral > 0) {
+        // consumo por metro: usa a peça especial da linha (espigão) até o cadastro específico da capa lateral
+        const pcLat = Math.ceil((mLateral / telha.espigao.util) * (1 + margem / 100));
+        acabamento.push({
+          nome: `Capa lateral — ${telha.espigao.nome} · ${fmtN(mLateral)} m lineares`,
+          qtd: `${pcLat} un`,
+          chave: telha.espigao.chave,
+          valor: pcLat,
+        });
+      }
       if (totalM <= 0) {
 
         acabamento.push({
