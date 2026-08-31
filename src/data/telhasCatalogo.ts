@@ -16,7 +16,9 @@ export type FamiliaTelha =
   | "policarbonato"
   | "concreto"
   | "translucida"
+  | "pet"
   | "vidro";
+
 
 /** peça de acabamento (cumeeira ou espigão) com o comprimento útil real da peça */
 export type PecaAcabamento = {
@@ -212,7 +214,17 @@ export const TELHAS_CATALOGO: TelhaCatalogo[] = [
   { id: "vid-port", label: "Vidro Portuguesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 29.6, pesoPeca: 1.85, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
   { id: "vid-francesa", label: "Vidro Francesa", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 16, min: 30, familia: "vidro", pesoM2: 35.2, pesoPeca: 2.2, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados de pesquisa — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
   { id: "vid-medit", label: "Vidro Mediterrânea", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 13, min: 30, familia: "vidro", pesoM2: 26, pesoPeca: 2, galga: "35 a 37 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+
+  // ---------- PET transparente (peça plástica no formato da telha cerâmica) ----------
+  { id: "pet-romana", label: "PET Transparente Romana", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: VIDRO, rendimento: 16, min: 30, familia: "pet", pesoM2: 6.4, pesoPeca: 0.4, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "pet-port", label: "PET Transparente Portuguesa", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: VIDRO, rendimento: 16, min: 30, familia: "pet", pesoM2: 6.4, pesoPeca: 0.4, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "pet-medit", label: "PET Transparente Mediterrânea", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: VIDRO, rendimento: 13, min: 30, familia: "pet", pesoM2: 5.2, pesoPeca: 0.4, galga: "35 a 37 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+
+  // ---------- Versões transparentes das linhas de PVC (ponto de luz da própria linha) ----------
+  { id: "pvc-colonial-transp", label: "Colonial PVC Transparente", grupo: "Colonial PVC Transparente", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 2.28, min: 15, familia: "pvc", pesoM2: 4.2, pesoPeca: 9.55, galga: null, chavePreco: null, confirmado: false, notaDados: "Peça transparente da própria linha Colonial — usar o mesmo comprimento da telha principal.", usoCobertura: false, cumeeira: CUM_PVC, espigao: ESP_PVC },
+  { id: "pvc-plan-transp", label: "Plan PVC Transparente", grupo: "Plan PVC Transparente", fabricante: "Afort", href: PLAN, rendimento: 1 / 2.46, min: 15, familia: "pvc", pesoM2: 3.2, pesoPeca: 7.91, galga: null, chavePreco: null, confirmado: false, notaDados: "Peça transparente da própria linha Plan — usar o mesmo comprimento da telha principal.", usoCobertura: false, cumeeira: CUM_PVC, espigao: ESP_PVC },
 ];
+
 
 export const GRUPOS_TELHAS = Array.from(new Set(TELHAS_CATALOGO.map((t) => t.grupo)));
 
@@ -230,6 +242,26 @@ export const GRUPOS_LUZ = Array.from(new Set(TELHAS_LUZ.map((t) => t.grupo)));
 
 export const acharTelha = (id: string) =>
   TELHAS_CATALOGO.find((t) => t.id === id) ?? TELHAS_CATALOGO[0];
+
+/**
+ * Pontos de luz natural compatíveis com a telha principal escolhida:
+ *  - Fibrocimento → polipropileno (translúcida) ou policarbonato;
+ *  - Colonial / Plan PVC → apenas a transparente da própria linha;
+ *  - Barro, Concreto e Esmaltada → telha de Vidro ou de PET transparente;
+ *  - demais casos → sem opção compatível (a etapa é ocultada).
+ */
+export const telhasLuzCompativeis = (t: TelhaCatalogo): TelhaCatalogo[] => {
+  if (t.familia === "fibrocimento")
+    return TELHAS_LUZ.filter((l) => l.familia === "translucida" || l.familia === "policarbonato");
+  if (t.familia === "pvc") {
+    const id = t.grupo.startsWith("Plan") ? "pvc-plan-transp" : "pvc-colonial-transp";
+    return TELHAS_LUZ.filter((l) => l.id === id);
+  }
+  if (t.familia === "ceramica" || t.familia === "concreto")
+    return TELHAS_LUZ.filter((l) => l.familia === "vidro" || l.familia === "pet");
+  return [];
+};
+
 
 /* ============================================================
  * Estrutura de madeira por tipo de telha
@@ -278,14 +310,38 @@ const GALGA_POR_TELHA: Record<string, number> = {
 export const galgaTelha = (t: TelhaCatalogo): number | null =>
   sistemaEstrutura(t) === "ripa" ? (GALGA_POR_TELHA[t.id] ?? 0.33) : null;
 
-/** Bitola da viga conforme o vão livre (m) */
-export const bitolaVigaPorVao = (vaoLivre: number) =>
-  vaoLivre <= 3 ? "11 cm" : vaoLivre <= 4.5 ? "15 cm" : vaoLivre <= 5.5 ? "20 ou 25 cm" : "30 cm";
+/* ============================================================
+ * Estrutura de madeira em Cambará — apoios em 3 etapas
+ * (Barro, Concreto e Esmaltada)
+ * ============================================================ */
+
+/** Espécie única calculável na estrutura */
+export const ESPECIE_ESTRUTURA = "Cambará";
+
+/** Rendimento da madeira aparelhada: 15% menor que a bruta */
+export const FATOR_APARELHADO = 0.85;
+
+export type Apoio1 = "ripa" | "ripao";
+export type Apoio2 = "caibro" | "caibrao" | "viga11";
+
+/** Etapa 1 — peça, bitola de catálogo e espaçamento base (m) até o 2º apoio */
+export const PECAS_APOIO1: Record<Apoio1, { label: string; bitola: string; esp: number }> = {
+  ripa: { label: "Ripa", bitola: "1,5x5 cm", esp: 0.4 },
+  ripao: { label: "Ripão", bitola: "2x5 cm", esp: 0.5 },
+};
+
+/** Etapa 2 — peça, bitola de catálogo e espaçamento base (m) até o 3º apoio */
+export const PECAS_APOIO2: Record<Apoio2, { label: string; bitola: string; esp: number }> = {
+  caibro: { label: "Caibro", bitola: "5x5 cm", esp: 1.5 },
+  caibrao: { label: "Caibrão", bitola: "5x7 cm", esp: 2.5 },
+  viga11: { label: "Viga de 11", bitola: "5x11 cm", esp: 4 },
+};
 
 /** Espaçamento fixo de apoio das telhas de PVC (m) */
 export const APOIO_PVC = 0.66;
 /** Espaçamento padrão de caibro/caibrão (m) */
 export const ESP_CAIBRO_PADRAO = 0.5;
-/** Espaçamento padrão de viga (m) */
+/** Espaçamento padrão do terceiro apoio (m) */
 export const ESP_VIGA_PADRAO = 1.5;
+
 

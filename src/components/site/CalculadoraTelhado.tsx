@@ -16,21 +16,24 @@ import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/component
 import {
   TELHAS_COBERTURA,
   GRUPOS_COBERTURA,
-  TELHAS_LUZ,
-  GRUPOS_LUZ,
   acharTelha,
   rendimentoTelha,
   pesoM2Telha,
   recobrimentoFibro,
   sistemaEstrutura,
   galgaTelha,
-  bitolaVigaPorVao,
+  telhasLuzCompativeis,
+  ESPECIE_ESTRUTURA,
+  FATOR_APARELHADO,
+  PECAS_APOIO1,
+  PECAS_APOIO2,
   APOIO_PVC,
-  ESP_CAIBRO_PADRAO,
-  ESP_VIGA_PADRAO,
+  type Apoio1,
+  type Apoio2,
   type TelhaCatalogo,
 
 } from "@/data/telhasCatalogo";
+import { CroquiEstrutura } from "@/components/site/croqui-estrutura";
 
 type Telha = TelhaCatalogo;
 
@@ -38,11 +41,6 @@ const TELHAS = TELHAS_COBERTURA;
 const GRUPOS = GRUPOS_COBERTURA;
 
 
-const ESPECIES = [
-  { id: "cambara", label: "Cambará Rosa ★" },
-  { id: "eucalipto", label: "Eucalipto Tratado" },
-  { id: "pinus", label: "Pinus Tratado" },
-];
 
 type Tipo = TipoTelhado;
 
@@ -118,7 +116,9 @@ export function CalculadoraTelhado() {
   const [tipo, setTipo] = useState<Tipo>("2aguas");
   const [comprimento, setComprimento] = useState("");
   const [largura, setLargura] = useState("");
-  const [beiral, setBeiral] = useState("0,5");
+  /** beiral lateral (nas águas / largura) e frontal (nas empenas / comprimento) */
+  const [beiralLat, setBeiralLat] = useState("0,5");
+  const [beiralFront, setBeiralFront] = useState("0,5");
   const [incl, setIncl] = useState(30);
   const [telhaId, setTelhaId] = useState("fib-244");
   const [comEstrutura, setComEstrutura] = useState(false);
@@ -127,19 +127,19 @@ export function CalculadoraTelhado() {
   const [margem, setMargem] = useState(2);
   const [ajustarMargem, setAjustarMargem] = useState(false);
   const [margemMadeira, setMargemMadeira] = useState(5);
-  const [especie, setEspecie] = useState("cambara");
-  /** espaçamento de caibro/caibrão (m) — padrão 0,50 m, editável no avançado */
-  const [espacamento, setEspacamento] = useState(String(ESP_CAIBRO_PADRAO));
+  /** acabamento da madeira: bruto (100%) ou aparelhado (-15% de rendimento) */
+  const [acabMadeira, setAcabMadeira] = useState<"bruto" | "aparelhado">("bruto");
+  /** Etapa 1 (1º apoio) e Etapa 2 (2º apoio) */
+  const [apoio1, setApoio1] = useState<Apoio1>("ripa");
+  const [apoio2, setApoio2] = useState<Apoio2>("caibro");
+  /** espaçamento do 2º apoio (m) — vazio = valor da etapa 1 */
+  const [espacamento, setEspacamento] = useState("");
   // modo avançado (item 7)
   const [avancado, setAvancado] = useState(false);
   /** galga aplicada (m) — vazio = usa a galga da ficha técnica da telha */
   const [galgaCustom, setGalgaCustom] = useState("");
-  /** espaçamento entre vigas (m) */
-  const [espViga, setEspViga] = useState(String(ESP_VIGA_PADRAO));
-  /** vão livre entre apoios (m) — define a bitola da viga */
-  const [vaoLivre, setVaoLivre] = useState("");
-  const [comRipao, setComRipao] = useState(false);
-  const [comCaibrao, setComCaibrao] = useState(false);
+  /** espaçamento do 3º apoio (m) — vazio = valor definido pela etapa 2 */
+  const [espViga, setEspViga] = useState("");
 
   /** medidas individuais por água (modo avançado) */
   const [aguasCustom, setAguasCustom] = useState<Record<string, { vao: string; comp: string }>>({});
@@ -148,7 +148,8 @@ export function CalculadoraTelhado() {
   const [compB, setCompB] = useState("pvc-328");
   const [compC, setCompC] = useState("");
   const [comLuz, setComLuz] = useState(false);
-  const [luzId, setLuzId] = useState(TELHAS_LUZ[0]?.id ?? "");
+  const [luzId, setLuzId] = useState("");
+
   const [luzQtd, setLuzQtd] = useState("4");
   const [res, setRes] = useState<null | {
     areaBase: number;
@@ -184,11 +185,23 @@ export function CalculadoraTelhado() {
 
   const larguraNum = num(largura);
   const comprimentoNum = num(comprimento);
-  const beiralNum = num(beiral);
+  /** beiral lateral (direção da água/largura) e frontal (direção do comprimento) */
+  const beiralLatNum = num(beiralLat);
+  const beiralFrontNum = num(beiralFront);
 
-  /** vão livre padrão = comprimento real informado no Passo 1 (editável no modo avançado) */
-  const vaoLivreAuto = Math.max(0.5, comprimentoNum || 3);
-  const vaoLivreEfetivo = avancado ? Math.max(0.5, num(vaoLivre) || vaoLivreAuto) : vaoLivreAuto;
+  /* ---------- Estrutura de madeira em Cambará (3 apoios) ---------- */
+  /** madeira aparelhada rende 15% menos → apoios 15% mais próximos */
+  const fatorMadeira = acabMadeira === "aparelhado" ? FATOR_APARELHADO : 1;
+  /** aparelhado não tem ripa disponível — só ripão */
+  const apoio1Efetivo: Apoio1 = acabMadeira === "aparelhado" ? "ripao" : apoio1;
+  const peca1 = PECAS_APOIO1[apoio1Efetivo];
+  const peca2 = PECAS_APOIO2[apoio2];
+  /** espaçamento até o 2º apoio (m) */
+  const espApoio2Auto = peca1.esp * fatorMadeira;
+  /** espaçamento até o 3º apoio (m) */
+  const espApoio3Auto = peca2.esp * fatorMadeira;
+  const espApoio2 = (avancado && num(espacamento)) || espApoio2Auto;
+  const espApoio3 = (avancado && num(espViga)) || espApoio3Auto;
 
   // Item 4: ao trocar a telha, sugere automaticamente a inclinação mínima (editável)
   useEffect(() => {
@@ -210,15 +223,25 @@ export function CalculadoraTelhado() {
     tipo,
     comprimento: comprimentoNum || undefined,
     largura: larguraNum || undefined,
-    beiral: beiralNum || undefined,
+    beiral: beiralLatNum || undefined,
   });
 
   const calcularPecas = (t: Telha, areaIncl: number, m: number, inclPct: number) =>
     Math.ceil(areaIncl * rendimentoTelha(t, inclPct) * (1 + m / 100));
 
-  const telhaLuz = TELHAS_LUZ.find((t) => t.id === luzId) ?? TELHAS_LUZ[0];
+  /* ---------- Pontos de luz compatíveis com a telha principal ---------- */
+  const luzOpcoes = telhasLuzCompativeis(telha);
+  const gruposLuz = Array.from(new Set(luzOpcoes.map((t) => t.grupo)));
+  const telhaLuz = luzOpcoes.find((t) => t.id === luzId) ?? luzOpcoes[0];
   const luzQtdNum = Math.max(0, Math.floor(Number(luzQtd.replace(",", ".")) || 0));
   const rendimentoAtual = rendimentoTelha(telha, incl);
+
+  // ao trocar a telha principal, reposiciona o ponto de luz para uma opção compatível
+  useEffect(() => {
+    setLuzId((atual) => (luzOpcoes.some((t) => t.id === atual) ? atual : (luzOpcoes[0]?.id ?? "")));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [telha.id]);
+
 
   /* ---------- Item 1: medidas individuais por água do telhado ---------- */
   const fatorIncl = Math.sqrt(1 + Math.pow(incl / 100, 2));
@@ -259,8 +282,8 @@ export function CalculadoraTelhado() {
     return { ...a, vao: num(cu.vao) || a.vao, comp: num(cu.comp) || a.comp };
   });
 
-  /** comprimento da rampa da água (do cume à borda), já com beiral */
-  const rampaAgua = (a: Agua) => a.vao * fatorIncl + beiralNum;
+  /** comprimento da rampa da água (do cume à borda), já com o beiral lateral */
+  const rampaAgua = (a: Agua) => a.vao * fatorIncl + beiralLatNum;
   const areaAgua = (a: Agua) => (a.forma === "tri" ? 0.5 * a.comp : a.comp) * rampaAgua(a);
 
 
@@ -268,8 +291,8 @@ export function CalculadoraTelhado() {
     if (comprimentoNum <= 0 || larguraNum <= 0) return;
 
     // Projeção do telhado (planta) COM beiral — usada só para calhas/cumeeira
-    const c = comprimentoNum + 2 * beiralNum;
-    const l = larguraNum + 2 * beiralNum;
+    const c = comprimentoNum + 2 * beiralFrontNum;
+    const l = larguraNum + 2 * beiralLatNum;
 
     // Área da planta baixa do imóvel: exatamente o que o cliente informou.
     // O beiral NÃO entra aqui — ele é prolongamento do plano inclinado.
@@ -281,11 +304,14 @@ export function CalculadoraTelhado() {
     const alturaCumeeira = vao * (incl / 100);
     // largura inclinada: do cume até a borda, já somando o beiral na direção da água
     const larguraInclinada = vao * fator;
-    const caibro = larguraInclinada + beiralNum;
+    const caibro = larguraInclinada + beiralLatNum;
 
     // ---- área inclinada: soma das áreas reais de cada água (medidas individuais) ----
     const areaIncl = aguas.reduce((s, a) => s + areaAgua(a), 0);
-    const telhas = calcularPecas(telha, areaIncl, margem, incl);
+    // pontos de luz ocupam o lugar de telhas comuns: são descontados do total
+    const luzAtiva = comLuz && telhaLuz && luzQtdNum > 0 ? luzQtdNum : 0;
+    const telhas = Math.max(0, calcularPecas(telha, areaIncl, margem, incl) - luzAtiva);
+
 
 
 
@@ -321,7 +347,7 @@ export function CalculadoraTelhado() {
               ? Math.max(0, c - l / 2)
               : Math.max(0, c - l);
       // espigão = aresta inclinada do canto até o cume
-      const hip = Math.sqrt(Math.pow(larguraInclinada + beiralNum, 2) + Math.pow(l / 2, 2));
+      const hip = Math.sqrt(Math.pow(larguraInclinada + beiralLatNum, 2) + Math.pow(l / 2, 2));
       const mEspigao = tipo === "3aguas" ? 2 * hip : tipo === "4aguas" ? 4 * hip : 0;
       const totalM = mCumeeira + mEspigao;
 
@@ -356,17 +382,18 @@ export function CalculadoraTelhado() {
 
     const estrutura: Item[] = [];
     if (comEstrutura) {
-      const nomeEsp = ESPECIES.find((e) => e.id === especie)!.label.replace(" ★", "");
+      const nomeEsp = ESPECIE_ESTRUTURA;
+      const acab = acabMadeira === "aparelhado" ? "aparelhado" : "bruto";
       const sistema = sistemaEstrutura(telha);
-      const eCaibro = Math.max(0.3, num(espacamento) || ESP_CAIBRO_PADRAO);
-      const eViga = Math.max(0.5, num(espViga) || ESP_VIGA_PADRAO);
+      // espaçamento até o 2º apoio (definido pela peça da Etapa 1) e até o 3º
+      // apoio (definido pela peça da Etapa 2) — ambos com ajuste de aparelhado
+      const eCaibro = Math.max(0.2, espApoio2);
+      const eViga = Math.max(0.5, espApoio3);
       const galgaFicha = galgaTelha(telha);
       const galga = Math.max(
         0.15,
         (avancado ? num(galgaCustom) : 0) || galgaFicha || 0.33,
       );
-      const vaoLivreAplicado = vaoLivreEfetivo;
-      const bitolaViga = sistema === "pvc" ? "11 cm" : bitolaVigaPorVao(vaoLivreAplicado);
       const fMad = 1 + Math.max(0, margemMadeira) / 100;
 
       // comprimento útil de uma telha na direção da rampa (só sistemas de apoio)
@@ -388,18 +415,18 @@ export function CalculadoraTelhado() {
         const rampa = rampaAgua(a);
         // comprimento médio efetivo da água (tacaniça = metade da base)
         const cef = a.forma === "tri" ? a.comp / 2 : a.comp;
-        // comprimento da água JÁ COM beiral nas duas empenas — é nele que os
-        // caibros são distribuídos (o beiral também precisa de caibro).
-        const cefBeiral = a.forma === "tri" ? cef : cef + 2 * beiralNum;
+        // comprimento da água JÁ COM o beiral frontal nas duas empenas — é nele
+        // que os caibros são distribuídos (o beiral também precisa de caibro).
+        const cefBeiral = a.forma === "tri" ? cef : cef + 2 * beiralFrontNum;
         if (rampa <= 0 || cef <= 0) continue;
 
         if (sistema === "ripa") {
           // ripa/ripão: espaçadas pela galga da telha, ao longo da rampa
           const nRipas = Math.ceil(rampa / galga) + 1;
-          // caibro/caibrão: atravessam a água acompanhando a inclinação (rampa,
-          // já com beiral) e são espaçados ao longo do comprimento com beiral
+          // 2º apoio: atravessa a água acompanhando a inclinação (rampa, já com
+          // beiral) e é espaçado ao longo do comprimento com beiral frontal
           const nCaibros = Math.ceil(cefBeiral / eCaibro) + 1;
-          // viga: corre no sentido do comprimento, espaçada ao longo da largura
+          // 3º apoio (viga / terça): corre no sentido do comprimento
           const nVigas = Math.max(2, Math.ceil(rampa / eViga) + 1);
 
           mRipa += nRipas * cef;
@@ -424,15 +451,7 @@ export function CalculadoraTelhado() {
       }
 
 
-      const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => {
-        const k = `madeira.${especie}.${peca}`;
-        return ["madeira.cambara.caibro", "madeira.cambara.viga", "madeira.cambara.ripa",
-          "madeira.eucalipto.caibro", "madeira.eucalipto.viga",
-          "madeira.peroba.caibro", "madeira.peroba.viga", "madeira.peroba.ripa",
-          "madeira.garapeira.ripa"].includes(k)
-          ? k
-          : null;
-      };
+      const chaveMadeira = (peca: "caibro" | "viga" | "ripa") => `madeira.cambara.${peca}`;
       const ml = (n: number) => Math.ceil(n * fMad);
       const addMadeira = (nome: string, metros: number, chave: string | null) => {
         if (metros <= 0) return;
@@ -440,22 +459,32 @@ export function CalculadoraTelhado() {
         estrutura.push({ nome, qtd: `${v} m lineares`, chave, valor: v });
       };
 
-      const nomeViga =
-        sistema === "ripa"
-          ? `Viga / terça ${bitolaViga} — ${nomeEsp}`
-          : `Viga de apoio ${bitolaViga} — ${nomeEsp}`;
-      addMadeira(nomeViga, mViga, chaveMadeira("viga"));
-
       if (sistema === "ripa") {
+        // Etapa 1 — ripa ou ripão
         addMadeira(
-          comCaibrao ? `Caibrão 5x7 cm — ${nomeEsp}` : `Caibro 5x5 cm — ${nomeEsp}`,
-          mCaibro,
-          chaveMadeira("caibro"),
-        );
-        addMadeira(
-          comRipao ? `Ripão 2,5x10 cm — ${nomeEsp}` : `Ripa 1,5x5 cm — ${nomeEsp}`,
+          `Etapa 1 · ${peca1.label} ${peca1.bitola} — ${nomeEsp} ${acab}`,
           mRipa,
           chaveMadeira("ripa"),
+        );
+        // Etapa 2 — caibro, caibrão ou viga de 11
+        addMadeira(
+          `Etapa 2 · ${peca2.label} ${peca2.bitola} — ${nomeEsp} ${acab}`,
+          mCaibro,
+          chaveMadeira(apoio2 === "viga11" ? "viga" : "caibro"),
+        );
+        // Etapa 3 — apoio final: só metragem, sem bitola definida
+        addMadeira(
+          `Etapa 3 · Apoio final (viga / terça) — ${nomeEsp} ${acab} · bitola conforme o projeto`,
+          mViga,
+          chaveMadeira("viga"),
+        );
+      } else {
+        addMadeira(
+          sistema === "pvc"
+            ? `Viga de apoio 5x11 cm — ${nomeEsp} ${acab}`
+            : `Viga de apoio — ${nomeEsp} ${acab} · bitola conforme o projeto`,
+          mViga,
+          chaveMadeira("viga"),
         );
       }
 
@@ -463,12 +492,12 @@ export function CalculadoraTelhado() {
       const PREGOS: { bitola: string; peca: string; un: number; kgUn: number; chave: string | null }[] =
         sistema === "ripa"
           ? [
-              comRipao
+              apoio1Efetivo === "ripao"
                 ? { bitola: "19x36", peca: "ripão", un: pRipa, kgUn: 0.0048, chave: null }
                 : { bitola: "17x21", peca: "ripa", un: pRipa, kgUn: 0.0018, chave: null },
               {
                 bitola: "22x48",
-                peca: comCaibrao ? "caibrão em viga" : "caibro em viga",
+                peca: `${peca2.label.toLowerCase()} no apoio final`,
                 un: pCaibro,
                 kgUn: 0.012,
                 chave: "prego.18x27",
@@ -492,13 +521,14 @@ export function CalculadoraTelhado() {
         nome: "Critérios de estrutura aplicados",
         qtd:
           sistema === "ripa"
-            ? `Galga ${(galga * 100).toFixed(1).replace(".", ",")} cm · caibro a cada ${fmtN(eCaibro)} m · viga a cada ${fmtN(eViga)} m · vão livre ${fmtN(vaoLivreAplicado)} m → viga ${bitolaViga}`
+            ? `Cambará ${acab}${acabMadeira === "aparelhado" ? " (−15% de rendimento: apoios 15% mais próximos)" : ""} · galga da telha ${(galga * 100).toFixed(1).replace(".", ",")} cm · ${peca1.label} ${peca1.bitola} com 2º apoio a cada ${fmtN(eCaibro)} m · ${peca2.label} ${peca2.bitola} com 3º apoio a cada ${fmtN(eViga)} m · apoio final (viga/terça) sem bitola definida`
             : sistema === "pvc"
-              ? `Apoio a cada 66 cm (sem ripa/caibro) · viga 11 cm`
-              : `Apoio no começo, meio e fim de cada telha (compartilhado entre fiadas) · sem ripa/caibro · vão livre ${fmtN(vaoLivreAplicado)} m → viga ${bitolaViga}`,
+              ? `Apoio a cada 66 cm (sem ripa/caibro) · viga 5x11 cm`
+              : `Apoio no começo, meio e fim de cada telha (compartilhado entre fiadas) · sem ripa/caibro · bitola da viga conforme o projeto`,
         chave: null,
       });
     }
+
 
 
 
@@ -550,14 +580,15 @@ export function CalculadoraTelhado() {
         tipo,
         comprimento: comprimentoNum,
         largura: larguraNum,
-        beiral: beiralNum || undefined,
+        beiral: beiralLatNum || undefined,
       }),
       perfil: croquiPerfilSvg({
         tipo,
         largura: larguraNum,
-        beiral: beiralNum,
+        beiral: beiralLatNum,
         inclinacao: incl,
       }),
+
       tipo,
       incl,
       margem,
@@ -614,11 +645,12 @@ export function CalculadoraTelhado() {
         `Telhado`,
         `- Área da base (planta, sem beiral): ${fmt(res.areaBase)} m²`,
         `- Área inclinada (com beiral): ${fmt(res.areaIncl)} m²`,
-        `- Largura inclinada da água: ${fmt(res.larguraInclinada)} m (+ beiral ${fmt(beiralNum)} m)`,
+        `- Largura inclinada da água: ${fmt(res.larguraInclinada)} m (+ beiral lateral ${fmt(beiralLatNum)} m)`,
         `- Perímetro: ${fmt(res.perimetro)} m`,
         `- Tipo: ${TIPOS.find((t) => t.id === res.tipo)!.label} — Inclinação ${res.incl}%`,
-        `- Medidas: ${fmt(comprimentoNum)} × ${fmt(larguraNum)} m · beiral ${fmt(beiralNum)} m`,
+        `- Medidas: ${fmt(comprimentoNum)} × ${fmt(larguraNum)} m · beiral lateral ${fmt(beiralLatNum)} m · beiral frontal ${fmt(beiralFrontNum)} m`,
         `- Margem de recorte/reposição da telha: ${res.margem}%`,
+
         ...(comEstrutura ? [`- Margem de corte da madeira: ${margemMadeira}%`] : []),
         ...(avancado
           ? [
@@ -670,7 +702,7 @@ export function CalculadoraTelhado() {
 
     const pregos = res.estrutura.filter((i) => /^Prego/i.test(i.nome));
     const madeira = res.estrutura.filter((i) => !/^Prego/i.test(i.nome));
-    const nomeEspecie = ESPECIES.find((e) => e.id === especie)?.label.replace(" ★", "") ?? "";
+    const nomeEspecie = ESPECIE_ESTRUTURA;
 
     const comparaHtml = comparativo.length
       ? `<div class="comparativo-wrap">
@@ -888,7 +920,7 @@ export function CalculadoraTelhado() {
               setAvancado((v) => {
                 // ao entrar no avançado, herda as medidas calculadas no modo simples
                 if (!v) {
-                  setVaoLivre(String(Number(vaoLivreAuto.toFixed(2))));
+
                   setAguasCustom(
                     Object.fromEntries(
                       aguasPadrao.map((a) => [
@@ -939,7 +971,7 @@ export function CalculadoraTelhado() {
           <Ruler size={13} className="mt-0.5 shrink-0" /> Informe as medidas da planta (largura × comprimento). O beiral não entra na área da
           planta — ele é somado apenas no comprimento da água inclinada.
         </p>
-        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div>
             <label className="mb-1 block text-xs font-semibold text-gray-700">Comprimento (m)</label>
             <input inputMode="decimal" value={comprimento} onChange={(e) => setComprimento(e.target.value)} placeholder="Ex.: 12" className={input} />
@@ -949,10 +981,17 @@ export function CalculadoraTelhado() {
             <input inputMode="decimal" value={largura} onChange={(e) => setLargura(e.target.value)} placeholder="Ex.: 8" className={input} />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-semibold text-gray-700">Beiral (m)</label>
-            <input inputMode="decimal" value={beiral} onChange={(e) => setBeiral(e.target.value)} placeholder="Ex.: 0,5" className={input} />
+            <label className="mb-1 block text-xs font-semibold text-gray-700">Beiral lateral (m)</label>
+            <input inputMode="decimal" value={beiralLat} onChange={(e) => setBeiralLat(e.target.value)} placeholder="Ex.: 0,5" className={input} />
+            <p className="mt-1 text-[10px] text-gray-500">Avanço no sentido da descida da água.</p>
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-semibold text-gray-700">Beiral frontal (m)</label>
+            <input inputMode="decimal" value={beiralFront} onChange={(e) => setBeiralFront(e.target.value)} placeholder="Ex.: 0,5" className={input} />
+            <p className="mt-1 text-[10px] text-gray-500">Avanço nas empenas / oitões.</p>
           </div>
         </div>
+
 
         {/* Item 1 — medidas individuais por água */}
         {avancado && (
@@ -1146,15 +1185,18 @@ export function CalculadoraTelhado() {
             <div>
               <label className="mb-1 block text-xs font-semibold text-gray-700">Tipo de telha translúcida</label>
               <select value={luzId} onChange={(e) => setLuzId(e.target.value)} className={input}>
-                {GRUPOS_LUZ.map((g) => (
+                {gruposLuz.map((g) => (
                   <optgroup key={g} label={g}>
-                    {TELHAS_LUZ.filter((t) => t.grupo === g).map((t) => (
-                      <option key={t.id} value={t.id}>
-                        {t.label}
-                      </option>
-                    ))}
+                    {luzOpcoes
+                      .filter((t) => t.grupo === g)
+                      .map((t) => (
+                        <option key={t.id} value={t.id}>
+                          {t.label}
+                        </option>
+                      ))}
                   </optgroup>
                 ))}
+
               </select>
             </div>
             <div>
@@ -1201,109 +1243,203 @@ export function CalculadoraTelhado() {
         </div>
         {comEstrutura && (
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-700">Espécie da madeira</label>
-              <select value={especie} onChange={(e) => setEspecie(e.target.value)} className={input}>
-                {ESPECIES.map((e) => (
-                  <option key={e.id} value={e.id}>
-                    {e.label}
-                  </option>
+            <div className="sm:col-span-2 rounded-xl border border-orange-100 bg-orange-50/40 p-3">
+              <p className="text-[11px] font-bold tracking-wider text-orange-700 uppercase">
+                Madeira da estrutura · {ESPECIE_ESTRUTURA}
+              </p>
+              <p className="mt-1 text-[11px] text-gray-600">
+                Calculamos a estrutura apenas em {ESPECIE_ESTRUTURA}, a madeira de telhado que trabalhamos com
+                bitolas padronizadas. A peça aparelhada rende 15% menos vão, então os apoios ficam 15% mais
+                próximos.
+              </p>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {(["bruto", "aparelhado"] as const).map((a) => (
+                  <button
+                    key={a}
+                    type="button"
+                    onClick={() => setAcabMadeira(a)}
+                    className={`rounded-xl border-2 px-3 py-2 text-xs font-bold capitalize transition-all ${
+                      acabMadeira === a
+                        ? "border-orange-500 bg-orange-50 text-orange-700"
+                        : "border-gray-200 bg-white text-gray-600 hover:border-orange-300"
+                    }`}
+                  >
+                    {a === "bruto" ? "Bruto (serrado)" : "Aparelhado (plaina)"}
+                  </button>
                 ))}
-              </select>
+              </div>
             </div>
-            {!avancado && (
+
+            {sistemaTelha === "ripa" && (
+              <>
+                {/* Etapa 1 — ripa ou ripão */}
+                <div className="sm:col-span-2 rounded-xl border border-gray-200 p-3">
+                  <p className="text-[11px] font-bold tracking-wider text-gray-700 uppercase">
+                    Etapa 1 · Peça que recebe a telha
+                  </p>
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    {(Object.keys(PECAS_APOIO1) as Apoio1[]).map((k) => {
+                      const p = PECAS_APOIO1[k];
+                      const bloqueado = k === "ripa" && acabMadeira === "aparelhado";
+                      const ativo = apoio1Efetivo === k;
+                      return (
+                        <button
+                          key={k}
+                          type="button"
+                          disabled={bloqueado}
+                          onClick={() => setApoio1(k)}
+                          className={`rounded-xl border-2 px-3 py-2 text-left transition-all ${
+                            ativo
+                              ? "border-orange-500 bg-orange-50"
+                              : bloqueado
+                                ? "border-gray-100 bg-gray-50 opacity-50"
+                                : "border-gray-200 hover:border-orange-300"
+                          }`}
+                        >
+                          <span className={`block text-xs font-bold ${ativo ? "text-orange-700" : "text-gray-700"}`}>
+                            {p.label} {p.bitola}
+                          </span>
+                          <span className="block text-[10px] text-gray-500">
+                            {bloqueado ? "Só existe em bruto" : `Apoio a cada ${fmtN(p.esp * fatorMadeira)} m`}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-3">
+                    <CroquiEstrutura
+                      destaque="ripa"
+                      cota={`${Math.round(espApoio2 * 100)} cm`}
+                      legenda={`${peca1.label} ${peca1.bitola} apoiada a cada ${fmtN(espApoio2)} m`}
+                    />
+                  </div>
+                </div>
+
+                {/* Etapa 2 — caibro, caibrão ou viga de 11 */}
+                <div className="sm:col-span-2 rounded-xl border border-gray-200 p-3">
+                  <p className="text-[11px] font-bold tracking-wider text-gray-700 uppercase">
+                    Etapa 2 · Peça que sustenta a Etapa 1
+                  </p>
+                  <div className="mt-3 grid grid-cols-3 gap-2">
+                    {(Object.keys(PECAS_APOIO2) as Apoio2[]).map((k) => {
+                      const p = PECAS_APOIO2[k];
+                      const ativo = apoio2 === k;
+                      return (
+                        <button
+                          key={k}
+                          type="button"
+                          onClick={() => setApoio2(k)}
+                          className={`rounded-xl border-2 px-3 py-2 text-left transition-all ${
+                            ativo ? "border-orange-500 bg-orange-50" : "border-gray-200 hover:border-orange-300"
+                          }`}
+                        >
+                          <span className={`block text-xs font-bold ${ativo ? "text-orange-700" : "text-gray-700"}`}>
+                            {p.label}
+                          </span>
+                          <span className="block text-[10px] text-gray-500">{p.bitola}</span>
+                          <span className="block text-[10px] text-gray-500">
+                            3º apoio a cada {fmtN(p.esp * fatorMadeira)} m
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-3">
+                    <CroquiEstrutura
+                      destaque="caibro"
+                      cota={`${fmtN(espApoio3)} m`}
+                      legenda={`${peca2.label} ${peca2.bitola} com terceiro apoio a cada ${fmtN(espApoio3)} m`}
+                    />
+                  </div>
+                </div>
+
+                {/* Etapa 3 — apoio final */}
+                <div className="sm:col-span-2 rounded-xl border border-gray-200 p-3">
+                  <p className="text-[11px] font-bold tracking-wider text-gray-700 uppercase">
+                    Etapa 3 · Apoio final (viga / terça)
+                  </p>
+                  <p className="mt-1 text-[11px] text-gray-600">
+                    Calculamos apenas a metragem linear necessária: a bitola da viga depende do projeto estrutural
+                    (vãos, apoios de alvenaria e carga da cobertura) e é definida com o nosso comercial.
+                  </p>
+                  <div className="mt-3">
+                    <CroquiEstrutura
+                      destaque="viga"
+                      cota={`${fmtN(espApoio3)} m`}
+                      legenda="Viga / terça — bitola conforme o projeto"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            {sistemaTelha !== "ripa" && (
               <div className="sm:col-span-2 rounded-lg bg-gray-50 p-3 text-[11px] text-gray-600">
-                {sistemaTelha === "ripa" ? (
-                  <>
-                    Modo simples: ripa/ripão pela galga da telha escolhida (
-                    <b>{galgaFichaTelha ? `${(galgaFichaTelha * 100).toFixed(1).replace(".", ",")} cm` : "—"}</b>
-                    ), caibro/caibrão a cada 0,50 m e viga a cada 1,50 m, com bitola de viga definida pelo vão
-                    livre (padrão 3 m → 11 cm).
-                  </>
-                ) : sistemaTelha === "pvc" ? (
-                  <>Telha PVC: apoio de madeira a cada 66 cm e viga de 11 cm — sem ripa e sem caibro.</>
+                {sistemaTelha === "pvc" ? (
+                  <>Telha PVC: apoio de madeira a cada 66 cm e viga de 5x11 cm — sem ripa e sem caibro.</>
                 ) : (
                   <>
                     Fibrocimento, policarbonato e translúcida: só viga de apoio (começo, meio e fim de cada telha,
-                    com apoio compartilhado entre fiadas) — sem ripa e sem caibro.
+                    com apoio compartilhado entre fiadas) — sem ripa e sem caibro, com bitola definida pelo projeto.
                   </>
-                )}{" "}
-                Margem de corte da madeira: 5%. Ative o modo avançado no topo para editar esses valores.
+                )}
               </div>
+            )}
+
+            {avancado && sistemaTelha === "ripa" && (
+              <>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">
+                    Galga da telha (m) — espaçamento entre ripas
+                  </label>
+                  <input
+                    inputMode="decimal"
+                    placeholder={galgaFichaTelha ? galgaFichaTelha.toFixed(3) : "0,330"}
+                    value={galgaCustom}
+                    onChange={(e) => setGalgaCustom(e.target.value)}
+                    className={input}
+                  />
+                  <p className="mt-1 text-[11px] text-gray-500">
+                    Ficha técnica: {galgaFichaTelha ? `${(galgaFichaTelha * 100).toFixed(1).replace(".", ",")} cm` : "—"} ·
+                    deixe vazio para usar esse valor.
+                  </p>
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">
+                    Espaçamento entre {peca2.label.toLowerCase()}s (m)
+                  </label>
+                  <input
+                    inputMode="decimal"
+                    placeholder={fmtN(espApoio2Auto)}
+                    value={espacamento}
+                    onChange={(e) => setEspacamento(e.target.value)}
+                    className={input}
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="mb-1 block text-xs font-semibold text-gray-700">
+                    Espaçamento entre o terceiro apoio (m)
+                  </label>
+                  <input
+                    inputMode="decimal"
+                    placeholder={fmtN(espApoio3Auto)}
+                    value={espViga}
+                    onChange={(e) => setEspViga(e.target.value)}
+                    className={input}
+                  />
+                </div>
+              </>
             )}
 
             {avancado && (
               <>
-                {sistemaTelha === "ripa" && (
-                  <>
-                    <div>
-                      <label className="mb-1 block text-xs font-semibold text-gray-700">
-                        Galga da telha (m) — espaçamento entre ripas
-                      </label>
-                      <input
-                        inputMode="decimal"
-                        placeholder={galgaFichaTelha ? galgaFichaTelha.toFixed(3) : "0,330"}
-                        value={galgaCustom}
-                        onChange={(e) => setGalgaCustom(e.target.value)}
-                        className={input}
-                      />
-                      <p className="mt-1 text-[11px] text-gray-500">
-                        Ficha técnica: {galgaFichaTelha ? `${(galgaFichaTelha * 100).toFixed(1).replace(".", ",")} cm` : "—"} ·
-                        deixe vazio para usar esse valor.
-                      </p>
-                    </div>
-                    <div>
-                      <label className="mb-1 block text-xs font-semibold text-gray-700">
-                        Espaçamento entre caibros / caibrões (m)
-                      </label>
-                      <input inputMode="decimal" value={espacamento} onChange={(e) => setEspacamento(e.target.value)} className={input} />
-                    </div>
-
-                    <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
-                      <span className="text-xs font-semibold text-gray-700">
-                        Usar ripão (mesma medida da ripa, bitola reforçada)
-                      </span>
-                      <Toggle on={comRipao} onClick={() => setComRipao((v) => !v)} label="Usar ripão" />
-                    </div>
-                    <div className="sm:col-span-2 flex items-center justify-between gap-3 rounded-lg bg-gray-50 p-3">
-                      <span className="text-xs font-semibold text-gray-700">
-                        Usar caibrão (mesmo espaçamento do caibro, bitola reforçada)
-                      </span>
-                      <Toggle on={comCaibrao} onClick={() => setComCaibrao((v) => !v)} label="Usar caibrão" />
-                    </div>
-
-                    <div>
-                      <label className="mb-1 block text-xs font-semibold text-gray-700">Espaçamento entre vigas (m)</label>
-                      <input inputMode="decimal" value={espViga} onChange={(e) => setEspViga(e.target.value)} className={input} />
-                    </div>
-                  </>
-                )}
-
-                {sistemaTelha !== "pvc" && (
-                  <div>
-                    <label className="mb-1 block text-xs font-semibold text-gray-700">Vão livre entre apoios (m)</label>
-                    <input
-                      inputMode="decimal"
-                      placeholder={fmtN(vaoLivreAuto)}
-                      value={vaoLivre}
-                      onChange={(e) => setVaoLivre(e.target.value)}
-                      className={input}
-                    />
-                    <p className="mt-1 text-[11px] text-gray-500">
-                      Padrão automático pelo comprimento do telhado: <b>{fmtN(vaoLivreAuto)} m</b>. Altere apenas se
-                      houver apoio intermediário (poste, pilar ou parede) que reduza o vão real. Bitola da viga
-                      aplicada: <b>{bitolaVigaPorVao(vaoLivreEfetivo)}</b> (até 3 m → 11 cm · até 4,5 m → 15 cm · até
-                      5,5 m → 20 ou 25 cm · acima → 30 cm).
-                    </p>
-                  </div>
-                )}
-
                 <div>
                   <label className="mb-1 block text-xs font-semibold text-gray-700">Margem de corte da madeira (%)</label>
                   <input
                     type="number"
                     min={0}
                     max={25}
+
                     value={margemMadeira}
                     onChange={(e) => setMargemMadeira(Number(e.target.value))}
                     className={input}
