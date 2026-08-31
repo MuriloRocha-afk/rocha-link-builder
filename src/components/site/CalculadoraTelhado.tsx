@@ -704,7 +704,7 @@ export function CalculadoraTelhado() {
         ...res.itens.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`),
         ...(res.luz ? [`- Pontos de Luz Natural: ${res.luz.qtd} peças de ${res.luz.label}`] : []),
         ...(res.acabamento.length
-          ? ["", "*Acabamento (cumeeira / espigão):*", ...res.acabamento.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
+          ? ["", "*Acabamento (cumeeira / espigão / capa lateral):*", ...res.acabamento.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
           : []),
         ...(res.calhas.length
           ? ["", "*Calhas e acessórios:*", ...res.calhas.map((i) => `- ${i.nome} — Qtd: ${i.qtd}`)]
@@ -856,7 +856,7 @@ export function CalculadoraTelhado() {
           ? [{ nome: `Pontos de Luz Natural — ${res.luz.label}`, qtd: `${res.luz.qtd} peças` }]
           : []),
       ])}
-      ${bloco("Acabamento (cumeeira / espigão)", res.acabamento)}
+      ${bloco("Acabamento (cumeeira / espigão / capa lateral)", res.acabamento)}
       ${bloco("Calhas e acessórios", res.calhas)}
     </div>
     <div>
@@ -1155,11 +1155,11 @@ export function CalculadoraTelhado() {
       {/* Passo 5 — acabamento */}
       <div className={card}>
         <div className="flex items-center justify-between gap-3">
-          <p className={passo}>Passo 5 · Calcular telhas de acabamento (cumeeira, espigão)?</p>
+          <p className={passo}>Passo 5 · Calcular telhas de acabamento (cumeeira, espigão, capa lateral)?</p>
           <Toggle on={comAcabamento} onClick={() => setComAcabamento((v) => !v)} label="Calcular acabamento" />
         </div>
         <p className="mt-2 text-xs text-gray-500">
-          Calculamos o metro linear de cumeeira e de espigão conforme o número de águas e convertemos em peças pelo
+          Calculamos o metro linear de cumeeira, espigão e capa lateral conforme o número de águas e convertemos em peças pelo
           rendimento da cumeeira compatível com a sua telha.
         </p>
       </div>
@@ -1583,7 +1583,7 @@ export function CalculadoraTelhado() {
           {res.acabamento.length > 0 && (
             <>
               <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Telhas de acabamento (cumeeira / espigão)
+                Telhas de acabamento (cumeeira / espigão / capa lateral)
               </p>
               <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
                 {res.acabamento.map((i) => (
