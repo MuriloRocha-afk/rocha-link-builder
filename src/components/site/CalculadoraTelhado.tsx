@@ -283,9 +283,19 @@ export function CalculadoraTelhado() {
     return { ...a, vao: num(cu.vao) || a.vao, comp: num(cu.comp) || a.comp };
   });
 
-  /** comprimento da rampa da água (do cume à borda), já com o beiral lateral */
-  const rampaAgua = (a: Agua) => a.vao * fatorIncl + beiralLatNum;
-  const areaAgua = (a: Agua) => (a.forma === "tri" ? 0.5 * a.comp : a.comp) * rampaAgua(a);
+  /**
+   * Comprimento da rampa da água (do cume à borda) já com o beiral lateral.
+   * O beiral é somado em cada extremidade que a água possui: no telhado de 1
+   * água ela atravessa a largura inteira (dois beirais laterais); nas demais,
+   * cada água cobre metade do vão e recebe um beiral na sua própria borda.
+   */
+  const rampaAgua = (a: Agua) =>
+    a.vao * fatorIncl + beiralLatNum * (tipo === "1agua" ? 2 : 1);
+  /** comprimento da água no sentido do comprimento, com beiral frontal nas duas empenas */
+  const compAguaTotal = (a: Agua) => (a.forma === "tri" ? a.comp : a.comp + 2 * beiralFrontNum);
+  const areaAgua = (a: Agua) =>
+    (a.forma === "tri" ? 0.5 * compAguaTotal(a) : compAguaTotal(a)) * rampaAgua(a);
+
 
 
   const calcular = () => {
