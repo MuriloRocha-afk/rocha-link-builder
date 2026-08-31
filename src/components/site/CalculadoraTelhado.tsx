@@ -361,7 +361,11 @@ export function CalculadoraTelhado() {
       const hip = Math.sqrt(Math.pow(larguraInclinada + beiralLatNum, 2) + Math.pow(l / 2, 2));
 
       const mEspigao = tipo === "3aguas" ? 2 * hip : tipo === "4aguas" ? 4 * hip : 0;
-      const totalM = mCumeeira + mEspigao;
+      // capa lateral = arremate da borda lateral inclinada (empena / beiral lateral)
+      const rampaLateral = larguraInclinada + beiralLatNum;
+      const arestasLaterais = tipo === "1agua" ? 2 : tipo === "2aguas" ? 4 : tipo === "3aguas" ? 2 : 0;
+      const mLateral = arestasLaterais * rampaLateral;
+      const totalM = mCumeeira + mEspigao + mLateral;
 
       if (mCumeeira > 0) {
         const pcCum = Math.ceil((mCumeeira / telha.cumeeira.util) * (1 + margem / 100));
