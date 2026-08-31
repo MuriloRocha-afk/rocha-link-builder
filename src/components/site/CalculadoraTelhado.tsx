@@ -315,7 +315,7 @@ export function CalculadoraTelhado() {
     const alturaCumeeira = vao * (incl / 100);
     // largura inclinada: do cume até a borda, já somando o beiral na direção da água
     const larguraInclinada = vao * fator;
-    const caibro = larguraInclinada + beiralLatNum;
+    const caibro = larguraInclinada + beiralLatNum * (tipo === "1agua" ? 2 : 1);
 
     // ---- área inclinada: soma das áreas reais de cada água (medidas individuais) ----
     const areaIncl = aguas.reduce((s, a) => s + areaAgua(a), 0);
