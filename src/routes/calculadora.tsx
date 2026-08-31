@@ -37,7 +37,7 @@ export const Route = createFileRoute("/calculadora")({
 
 const ABAS = [
   { id: "telhado", label: "Telhado", icon: Home },
-  { id: "forro", label: "Forro", icon: PanelTop },
+  { id: "forro", label: "Forro & Deck", icon: PanelTop },
   { id: "manta", label: "Manta / Impermeabilização", icon: Layers },
   { id: "tinta", label: "Tinta & Verniz", icon: Paintbrush },
   { id: "conversor", label: "Conversor de Medidas", icon: Ruler },
