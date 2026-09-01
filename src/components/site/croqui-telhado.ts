@@ -205,12 +205,12 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
 
   const totalM = L + 2 * bH;
 
-  const escalaX = 286 / totalM;
+  const escalaX = 248 / totalM;
   const escalaY = h > 0 ? Math.min(escalaX, 92 / h) : escalaX;
   const escala = Math.min(escalaX, escalaY);
   const px = (m: number) => m * escala;
 
-  const cxBase = 212;
+  const cxBase = 234;
   const yBeiral = 208; // altura da linha de beiral (borda inferior do telhado)
   const xEsq = cxBase - px(L / 2);
   const xDir = cxBase + px(L / 2);
