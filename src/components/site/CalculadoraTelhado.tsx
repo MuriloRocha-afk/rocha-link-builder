@@ -225,7 +225,9 @@ export function CalculadoraTelhado() {
     comprimento: comprimentoNum || undefined,
     largura: larguraNum || undefined,
     beiral: beiralLatNum || undefined,
+    beiralFrontal: beiralFrontNum || undefined,
   });
+
 
   const calcularPecas = (t: Telha, areaIncl: number, m: number, inclPct: number) =>
     Math.ceil(areaIncl * rendimentoTelha(t, inclPct) * (1 + m / 100));
@@ -607,7 +609,9 @@ export function CalculadoraTelhado() {
         comprimento: comprimentoNum,
         largura: larguraNum,
         beiral: beiralLatNum || undefined,
+        beiralFrontal: beiralFrontNum || undefined,
       }),
+
       perfil: croquiPerfilSvg({
         tipo,
         largura: larguraNum,
@@ -781,21 +785,23 @@ export function CalculadoraTelhado() {
   .header-right .meta{font-size:9.5px;color:#6b7280;margin-top:2px}
   .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
   .chip{background:#FFF3EC;border:1px solid #F7D3BE;color:#B5450F;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px}
-  .diagrams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-  .diagram-box{border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px 6px;background:#FAFAFA}
-  .diagram-title{font-size:9.5px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .diagrams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+  .diagram-box{border:1px solid #E5E7EB;border-radius:10px;padding:8px 10px;background:#fff;min-height:96mm;display:flex;align-items:center}
+  .diagram-box>svg{width:100%}
   svg{display:block}
   .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:6px}
   .stat{border:1px solid #E5E7EB;border-radius:8px;padding:6px 8px;text-align:center;background:#fff}
   .stat .label{font-size:8px;color:#9CA3AF;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
   .stat .value{font-size:13px;font-weight:800;margin-top:2px}
-  .section-title{font-size:10.5px;font-weight:800;color:#E8622E;text-transform:uppercase;letter-spacing:.5px;border-bottom:1.5px solid #F0D9CC;padding-bottom:3px;margin:10px 0 5px}
-  .data{font-size:9.5px}
-  .data .linha{display:flex;align-items:baseline;gap:4px;padding:2.5px 2px;border-bottom:1px solid #F5F5F5}
+  .dados-faixa{background:#F5F6F7;border:1px solid #E5E7EB;border-radius:8px;padding:6px 10px 8px;margin-top:6px}
+  .section-title{font-size:9px;font-weight:800;color:#E8622E;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #E4DAD3;padding-bottom:2px;margin:7px 0 3px}
+  .data{font-size:8.2px}
+  .data .linha{display:flex;align-items:baseline;gap:4px;padding:1.4px 2px;border-bottom:1px solid #EDEEEF}
   .data .nome{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
   .data .leader{flex:1 1 auto;min-width:8px;border-bottom:1px dotted #D1D5DB;transform:translateY(-2px)}
   .data .qty{white-space:nowrap;font-weight:700;color:#B5450F;flex:0 0 auto}
-  .data .criterio{padding:4px 2px;font-size:8.5px;line-height:1.45;color:#4B5563;background:#FAFAFA;border-radius:4px}
+  .data .criterio{padding:3px 2px;font-size:7.6px;line-height:1.4;color:#4B5563;background:#EFF0F1;border-radius:4px}
+
   .two-col-sections{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
   table.comparativo{width:100%;border-collapse:collapse;font-size:9.5px}
   table.comparativo thead th{background:#FFF3EC;color:#B5450F;font-size:8.5px;text-transform:uppercase;letter-spacing:.3px;font-weight:800;padding:5px 6px;text-align:left;border-bottom:2px solid #E8622E}
@@ -835,8 +841,8 @@ export function CalculadoraTelhado() {
   </div>
 
   <div class="diagrams">
-    <div class="diagram-box"><div class="diagram-title">Vista superior</div>${res.croqui}</div>
-    <div class="diagram-box"><div class="diagram-title">Vista de perfil (corte) · inclinação ${res.incl}%</div>${res.perfil}</div>
+    <div class="diagram-box">${res.croqui}</div>
+    <div class="diagram-box">${res.perfil}</div>
   </div>
 
   <div class="stats">
@@ -847,6 +853,7 @@ export function CalculadoraTelhado() {
     <div class="stat"><div class="label">Peso da cobertura</div><div class="value">${fmt(res.peso, 0)} kg</div></div>
   </div>
 
+  <div class="dados-faixa">
   <div class="two-col-sections">
     <div>
       ${bloco("Cobertura", [
@@ -864,6 +871,8 @@ export function CalculadoraTelhado() {
       ${bloco("Pregos", pregos)}
     </div>
   </div>
+  </div>
+
 
   ${comparaHtml}
 
@@ -893,18 +902,19 @@ export function CalculadoraTelhado() {
   const LinhaItem = ({ nome, qtd, extra }: { nome: string; qtd: string; extra?: React.ReactNode }) => {
     if (/^Crit\u00e9rios/i.test(nome)) {
       return (
-        <li className="p-3 text-[11px] leading-relaxed text-gray-600">
+        <li className="px-3 py-2 text-[10.5px] leading-relaxed text-gray-600">
           <b className="text-gray-700">{nome}:</b> {qtd}
         </li>
       );
     }
     return (
-      <li className="flex items-baseline gap-2 p-3 text-sm">
+      <li className="flex items-baseline gap-2 px-3 py-1.5 text-[13px]">
         <span className="shrink truncate whitespace-nowrap text-gray-700">{nome}</span>
         {extra}
         <span className="min-w-4 flex-1 translate-y-[-3px] border-b border-dotted border-gray-300" />
         <span className="shrink-0 font-bold whitespace-nowrap text-orange-600">{qtd}</span>
       </li>
+
     );
   };
 
@@ -1524,11 +1534,18 @@ export function CalculadoraTelhado() {
         <div className="rounded-xl border border-[#fed7aa] bg-[#fff7ed] p-5">
           <p className="text-xs font-bold tracking-wider text-orange-600 uppercase">Resultado estimado</p>
 
-          {/* Croquis: vista superior + vista de perfil */}
+          {/* Croquis: planta baixa + corte-perfil (destaque principal do relatório) */}
           <div className="mt-3 grid gap-3 md:grid-cols-2">
-            <div className="rounded-xl border border-orange-100 bg-white p-3" dangerouslySetInnerHTML={{ __html: res.croqui }} />
-            <div className="rounded-xl border border-orange-100 bg-white p-3" dangerouslySetInnerHTML={{ __html: res.perfil }} />
+            <div
+              className="flex items-center rounded-xl border border-orange-100 bg-white p-4 md:min-h-[380px]"
+              dangerouslySetInnerHTML={{ __html: res.croqui }}
+            />
+            <div
+              className="flex items-center rounded-xl border border-orange-100 bg-white p-4 md:min-h-[380px]"
+              dangerouslySetInnerHTML={{ __html: res.perfil }}
+            />
           </div>
+
 
           <div className="mt-3 grid grid-cols-2 gap-3">
             {[
