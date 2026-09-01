@@ -296,8 +296,8 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
     p.push(
       `<line x1="${x1 + dx}" y1="${y1 + dy}" x2="${x2 + dx}" y2="${y2 + dy}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
       `<g transform="translate(${(x1 + x2) / 2 + dx} ${(y1 + y2) / 2 + dy}) rotate(${ang})">
-        <text x="0" y="-6" text-anchor="middle" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(inclinada)} m</text>
-        <text x="0" y="4" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">comprimento inclinado</text>
+        <text x="0" y="-16" text-anchor="middle" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(inclinada)} m</text>
+        <text x="0" y="-6" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">comprimento inclinado</text>
       </g>`,
     );
   }
