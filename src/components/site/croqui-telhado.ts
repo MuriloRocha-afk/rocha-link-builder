@@ -272,8 +272,8 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
     // altura do oitão
     p.push(
       `<line x1="${xApex}" y1="${yApex + 6}" x2="${xApex}" y2="${yViga}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
-      `<text x="${xApex - 9}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
-      `<text x="${xApex - 9}" y="${(yApex + yViga) / 2 + 11}" text-anchor="end" font-size="9" fill="${CINZA_TXT}">altura do oitão</text>`,
+      `<text x="${xApex - 22}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
+      `<text x="${xApex - 22}" y="${(yApex + yViga) / 2 + 11}" text-anchor="end" font-size="9" fill="${CINZA_TXT}">altura do oitão</text>`,
     );
   }
 
@@ -285,7 +285,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
     const y2 = yBeiral + px(bH * i);
     const ang = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
     const dx = 16;
-    const dy = -13;
+    const dy = -20;
     p.push(
       `<line x1="${x1 + dx}" y1="${y1 + dy}" x2="${x2 + dx}" y2="${y2 + dy}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
       `<g transform="translate(${(x1 + x2) / 2 + dx} ${(y1 + y2) / 2 + dy}) rotate(${ang})">
