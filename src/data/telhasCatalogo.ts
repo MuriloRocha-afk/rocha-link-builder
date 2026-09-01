@@ -106,6 +106,7 @@ const PP = "/catalogo/telhas/polipropileno";
 const CONCRETO = "/catalogo/telhas/concreto";
 const ESMALTADA = "/catalogo/telhas/esmaltada";
 const VIDRO = "/catalogo/telhas/vidro";
+const PET = "/catalogo/telhas/pet";
 
 /* ---------------- peças de acabamento ---------------- */
 
@@ -216,9 +217,9 @@ export const TELHAS_CATALOGO: TelhaCatalogo[] = [
   { id: "vid-medit", label: "Vidro Mediterrânea", grupo: "Vidro", fabricante: "Genérico", href: VIDRO, rendimento: 13, min: 30, familia: "vidro", pesoM2: 26, pesoPeca: 2, galga: "35 a 37 cm", chavePreco: null, confirmado: false, notaDados: "Dados aproximados — não é ficha técnica oficial.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
 
   // ---------- PET transparente (peça plástica no formato da telha cerâmica) ----------
-  { id: "pet-romana", label: "PET Transparente Romana", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: VIDRO, rendimento: 16, min: 30, familia: "pet", pesoM2: 6.4, pesoPeca: 0.4, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "pet-port", label: "PET Transparente Portuguesa", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: VIDRO, rendimento: 16, min: 30, familia: "pet", pesoM2: 6.4, pesoPeca: 0.4, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
-  { id: "pet-medit", label: "PET Transparente Mediterrânea", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: VIDRO, rendimento: 13, min: 30, familia: "pet", pesoM2: 5.2, pesoPeca: 0.4, galga: "35 a 37 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "pet-romana", label: "PET Transparente Romana", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: PET, rendimento: 16, min: 30, familia: "pet", pesoM2: 6.4, pesoPeca: 0.4, galga: "34 a 36 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "pet-port", label: "PET Transparente Portuguesa", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: PET, rendimento: 16, min: 30, familia: "pet", pesoM2: 6.4, pesoPeca: 0.4, galga: "33 a 35 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
+  { id: "pet-medit", label: "PET Transparente Mediterrânea", grupo: "PET transparente", fabricante: "Cejatel/Vilhena", href: PET, rendimento: 13, min: 30, familia: "pet", pesoM2: 5.2, pesoPeca: 0.4, galga: "35 a 37 cm", chavePreco: null, confirmado: false, notaDados: "Peça de PET plástico transparente injetado (não é vidro) — dados aproximados.", usoCobertura: false, cumeeira: CUM_BARRO, espigao: ESP_BARRO },
 
   // ---------- Versões transparentes das linhas de PVC (ponto de luz da própria linha) ----------
   { id: "pvc-colonial-transp", label: "Colonial PVC Transparente", grupo: "Colonial PVC Transparente", fabricante: "Afort", href: COLONIAL, rendimento: 1 / 2.28, min: 15, familia: "pvc", pesoM2: 4.2, pesoPeca: 9.55, galga: null, chavePreco: null, confirmado: false, notaDados: "Peça transparente da própria linha Colonial — usar o mesmo comprimento da telha principal.", usoCobertura: false, cumeeira: CUM_PVC, espigao: ESP_PVC },
