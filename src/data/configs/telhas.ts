@@ -278,9 +278,67 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     `💡 *Telha Translúcida Polipropileno*\n• Comprimento: ${s.comprimento}\n• Quantidade: ${q.qtd ?? 5} peças\n• Cobertura estimada: ~${coberturaPP(s.comprimento, (q.qtd as number) ?? 5)} m²`,
 };
 
+const FORMATOS_PET = [
+  { valor: "Portuguesa", emoji: "💠", sub: "Encaixe compatível com telha cerâmica portuguesa" },
+  { valor: "Romana", emoji: "💠", sub: "Encaixe compatível com telha cerâmica romana" },
+  { valor: "Mediterrânea", emoji: "💠", sub: "Encaixe compatível com telha cerâmica mediterrânea" },
+];
+
+export const CONFIG_PET: ConfiguradorConfig = {
+  breadcrumb: BC("Telha PET Translúcida"),
+  titulo: "💠 Telha PET Translúcida",
+  subtitulo:
+    "Ponto de luz natural em plástico PET transparente 100% reciclado, com encaixe idêntico ao da telha cerâmica. Formatos Portuguesa, Romana e Mediterrânea.",
+  galeriaTitulo: "Telha PET Translúcida",
+  galeriaPlaceholder: "Selecione um formato para ver as fotos",
+  imagens: (s) => (s.formato ? [{ src: "", alt: `Telha PET Translúcida ${s.formato}` }] : []),
+  categoria: "Telhas",
+  produtoKey: "pet",
+  avisoDestaque:
+    "A telha PET deve ser do mesmo formato/modelo da telha cerâmica já usada no telhado (ex.: PET Portuguesa com Cerâmica Portuguesa), para garantir o encaixe correto.",
+  passos: [
+    { chave: "formato", titulo: "Formato", tipo: "grid2", opcoes: FORMATOS_PET },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 6 },
+  ],
+  especificacoes: [
+    ["Marca", "Lubian / Cejatel / Vilhena"],
+    ["Material", "Plástico PET transparente injetado, 100% reciclado"],
+    ["Formatos", "Portuguesa, Romana e Mediterrânea"],
+    ["Proteção", "Aditivo com filtro UV (antiamarelamento)"],
+    ["Compatibilidade", "Encaixe igual ao da telha cerâmica do mesmo formato"],
+    ["Uso indicado", "Pontos de luz natural na cobertura"],
+    ["Recomendação", "1 a 2 telhas a cada 4 m² de ambiente"],
+    ["Peso por peça", "Consultar disponibilidade"],
+  ],
+  informacoes: [
+    {
+      titulo: "Por que escolher a Telha PET",
+      texto:
+        "É produzida com PET 100% reciclado (opção sustentável), resiste a impactos muito acima do vidro comum, tem aditivo com filtro UV que evita amarelamento e reduz a transmissão de calor, não propaga chamas e suporta bem a variação de temperatura em uso externo.",
+    },
+    {
+      titulo: "Não substitui a cobertura",
+      texto:
+        "É usada como ponto de iluminação natural, distribuída em peças avulsas no pano do telhado — não como cobertura completa.",
+    },
+    {
+      titulo: "PET x Vidro real",
+      texto:
+        "A PET é mais leve, mais resistente a impacto e mais barata. A Telha de Vidro real é mais nobre esteticamente e tem textura que suaviza melhor luz e calor, mas é mais pesada e mais frágil a impacto.",
+    },
+  ],
+  resumoNome: () => "Telha PET Translúcida",
+  resumoDetalhe: (s, q) => `${s.formato} · ${q.qtd ?? 6} peças`,
+  unidadeResumo: () => "peças",
+  idItem: (s) => `pet-${s.formato}`,
+  mensagem: (s, q) =>
+    `💠 *Telha PET Translúcida*\n• Formato: ${s.formato}\n• Quantidade: ${q.qtd ?? 6} peças`,
+};
+
 const FORMATOS_VIDRO = [
   { valor: "Portuguesa", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica portuguesa" },
   { valor: "Romana", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica romana" },
+  { valor: "Francesa", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica francesa" },
   { valor: "Mediterrânea", emoji: "🔷", sub: "Encaixe compatível com telha cerâmica mediterrânea" },
 ];
 
@@ -288,32 +346,37 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   breadcrumb: BC("Telha de Vidro"),
   titulo: "🔷 Telha de Vidro",
   subtitulo:
-    "Iluminação natural ponto a ponto. Formatos Portuguesa, Romana e Mediterrânea, com encaixe idêntico ao da telha cerâmica.",
+    "Telha de ponto de luz em vidro de verdade, com textura exclusiva que suaviza a incidência de raios UV e mantém o mesmo encaixe da telha cerâmica correspondente.",
   galeriaTitulo: "Telha de Vidro",
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
   imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
   categoria: "Telhas",
   produtoKey: "vidro",
   avisoDestaque:
-    "A telha de vidro deve ser do mesmo formato/modelo da telha cerâmica já usada no telhado (ex.: Vidro Portuguesa com Cerâmica Portuguesa), para garantir o encaixe correto.",
+    "Formatos, preço e disponibilidade em estoque devem ser confirmados com a loja antes do fechamento do pedido.",
   passos: [
     { chave: "formato", titulo: "Formato", tipo: "grid2", opcoes: FORMATOS_VIDRO },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "peças", padrao: 6 },
   ],
   especificacoes: [
-    ["Marca", "Cejatel / Vilhena"],
-    ["Material real", "PET plástico transparente injetado (não é vidro)"],
-    ["Formatos", "Portuguesa, Romana e Mediterrânea"],
+    ["Material", "Vidro real com textura difusora"],
+    ["Formatos", "Portuguesa, Romana, Francesa e Mediterrânea"],
     ["Compatibilidade", "Encaixe igual ao da telha cerâmica do mesmo formato"],
     ["Uso indicado", "Pontos de luz natural na cobertura"],
-    ["Recomendação", "1 a 2 telhas de vidro a cada 4 m² de ambiente"],
+    ["Recomendação", "1 a 2 telhas a cada 4 m² de ambiente"],
+    ["Compatível com placas solares", "Sim — pode conviver com o sistema no telhado"],
     ["Peso por peça", "Consultar disponibilidade"],
   ],
   informacoes: [
     {
-      titulo: "Nome comercial x material real",
+      titulo: "Por que escolher a Telha de Vidro",
       texto:
-        "É conhecida como “telha de vidro”, mas a peça vendida é de PET plástico transparente injetado (Cejatel/Vilhena). Isso deixa a peça mais leve e com resistência a impacto superior à do vidro comum.",
+        "Proteção térmica no ambiente sob o ponto de luz; textura especial que suaviza os raios UV e protege móveis e acabamentos; ângulo de entrada de luz ampliado em relação a uma abertura simples; economia de energia durante o dia; convivência com sistemas de placas solares; e durabilidade de material rígido e nobre.",
+    },
+    {
+      titulo: "Vidro real x Telha PET",
+      texto:
+        "O vidro é mais nobre esteticamente, com textura que suaviza melhor luz e calor, porém é mais pesado e mais frágil a impacto. A Telha PET é mais leve, mais resistente a quebra no dia a dia e mais barata.",
     },
     {
       titulo: "Não substitui a cobertura",
@@ -321,7 +384,6 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
         "É usada como ponto de iluminação natural, distribuída em peças avulsas no pano do telhado — não como cobertura completa.",
     },
   ],
-
   resumoNome: () => "Telha de Vidro",
   resumoDetalhe: (s, q) => `${s.formato} · ${q.qtd ?? 6} peças`,
   unidadeResumo: () => "peças",
@@ -329,3 +391,4 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
   mensagem: (s, q) =>
     `🔷 *Telha de Vidro*\n• Formato: ${s.formato}\n• Quantidade: ${q.qtd ?? 6} peças`,
 };
+

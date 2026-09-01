@@ -2,13 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
-import { CONFIG_VIDRO } from "@/data/configs/telhas";
+import { CONFIG_PET } from "@/data/configs/telhas";
 
-const TITLE = "Telha de Vidro — Ponto de Luz Natural em Vidro Real | Rocha Telhas";
+const TITLE = "Telha PET Translúcida — Portuguesa, Romana e Mediterrânea | Rocha Telhas";
 const DESCRIPTION =
-  "Telha de vidro real com textura que suaviza os raios UV e encaixe compatível com a telha cerâmica. Escolha o formato e cote no WhatsApp.";
+  "Telha PET translúcida em plástico transparente 100% reciclado, com filtro UV e encaixe igual ao da telha cerâmica. Escolha o formato e cote no WhatsApp.";
 
-export const Route = createFileRoute("/catalogo/telhas/vidro")({
+export const Route = createFileRoute("/catalogo/telhas/pet")({
   head: () => ({
     meta: [
       { title: TITLE },
@@ -19,15 +19,15 @@ export const Route = createFileRoute("/catalogo/telhas/vidro")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: TelhaVidroRoute,
+  component: TelhaPetRoute,
 });
 
-function TelhaVidroRoute() {
+function TelhaPetRoute() {
   return (
     <>
       <Header />
       <div className="pt-24">
-        <ConfiguradorGenerico config={CONFIG_VIDRO} />
+        <ConfiguradorGenerico config={CONFIG_PET} />
       </div>
       <Footer />
       <FloatingWhats />

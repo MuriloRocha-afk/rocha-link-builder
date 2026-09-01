@@ -748,36 +748,67 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
-  vidro: {
+  pet: {
     badges: [
       { icone: "☀️", texto: "Ponto de luz" },
-      { icone: "🪶", texto: "Leve" },
+      { icone: "♻️", texto: "PET 100% reciclado" },
       { icone: "🛡️", texto: "Mais resistente que vidro" },
       { icone: "🧩", texto: "Mesmo formato da cerâmica" },
     ],
     motivos: [
       {
-        titulo: "Não é vidro de verdade — é PET injetado",
+        titulo: "Plástico PET transparente, 100% reciclado",
         descricao:
-          "Apesar do nome comercial, a peça (Cejatel/Vilhena) é de plástico PET transparente injetado. Tem a mesma função de iluminar, sem o peso e a fragilidade do vidro.",
+          "A peça (Lubian/Cejatel/Vilhena) é de PET transparente injetado a partir de material reciclado — opção sustentável com a mesma função de iluminar.",
       },
       {
-        titulo: "Resistência a impacto superior ao vidro comum",
+        titulo: "Resistência a impacto muito superior ao vidro comum",
         descricao:
-          "O PET absorve impactos que estilhaçariam uma telha de vidro tradicional, o que reduz risco de quebra na obra e na manutenção.",
+          "O PET absorve impactos que estilhaçariam uma telha de vidro, reduzindo risco de quebra na obra e na manutenção.",
       },
       {
-        titulo: "Leveza no pano do telhado",
+        titulo: "Filtro UV e menos calor",
         descricao:
-          "Peça leve, sem exigir reforço de estrutura no ponto onde é aplicada.",
+          "Aditivo com filtro UV evita o amarelamento com o tempo e reduz a transmissão de calor para o ambiente. Não propaga chamas e suporta bem a variação de temperatura.",
       },
       {
         titulo: "Uso como ponto de luz, não como cobertura",
         descricao:
-          "Indicada em peças avulsas distribuídas no telhado para iluminar o ambiente — não é feita para cobrir o telhado inteiro.",
+          "Indicada em peças avulsas distribuídas no telhado (1 a 2 a cada 4 m²) — não é feita para cobrir o telhado inteiro.",
       },
     ],
   },
+  vidro: {
+    badges: [
+      { icone: "☀️", texto: "Ponto de luz" },
+      { icone: "🔷", texto: "Vidro real" },
+      { icone: "🛡️", texto: "Textura filtra UV" },
+      { icone: "🧩", texto: "Mesmo formato da cerâmica" },
+    ],
+    motivos: [
+      {
+        titulo: "Proteção térmica e de móveis",
+        descricao:
+          "A textura exclusiva do vidro suaviza a incidência de raios UV, reduzindo o desconforto térmico sob o ponto de luz e protegendo móveis e acabamentos.",
+      },
+      {
+        titulo: "Iluminação ampliada e economia de energia",
+        descricao:
+          "O formato e a textura ampliam o ângulo de entrada da luz natural, reduzindo a necessidade de luz artificial durante o dia.",
+      },
+      {
+        titulo: "Compatível com energia solar",
+        descricao:
+          "Pode ser usada em conjunto com sistemas de placas solares no telhado, sem conflito de instalação.",
+      },
+      {
+        titulo: "Material rígido e nobre",
+        descricao:
+          "Alternativa mais robusta e de acabamento diferenciado em relação ao plástico. Em contrapartida é mais pesada e mais frágil a impacto que a Telha PET.",
+      },
+    ],
+  },
+
   cumeeiras: {
     badges: [
       { icone: "🔺", texto: "Arremate do topo" },

@@ -290,10 +290,27 @@ const telhas: ItemBusca[] = [
     ],
   },
   {
-    id: "vidro",
-    nome: "Telha de Vidro (PET)",
+    id: "pet",
+    nome: "Telha PET Translúcida",
     categoria: "Telhas",
-    material: "PET / acrílico",
+    material: "PET transparente reciclado",
+    rota: "/catalogo/telhas/pet",
+    termos: [
+      "pet",
+      "telha pet",
+      "telha plastica transparente",
+      "lubian",
+      "cejatel",
+      "vilhena",
+      "telha transparente",
+      "ponto de luz",
+    ],
+  },
+  {
+    id: "vidro",
+    nome: "Telha de Vidro",
+    categoria: "Telhas",
+    material: "Vidro",
     rota: "/catalogo/telhas/vidro",
     termos: [
       "vidro",
@@ -302,10 +319,10 @@ const telhas: ItemBusca[] = [
       "romana de vidro",
       "portuguesa de vidro",
       "mediterranea de vidro",
-      "pet",
-      "telha transparente",
+      "ponto de luz",
     ],
   },
+
   {
     id: "cumeeiras",
     nome: "Cumeeiras e Espigões",
