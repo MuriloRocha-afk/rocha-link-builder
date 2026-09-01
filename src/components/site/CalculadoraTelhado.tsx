@@ -13,6 +13,9 @@ import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import { LOGO_ROCHA_SVG } from "@/components/site/logo-print";
 import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
+import { relatorioTelhadoHtml, type RelatorioData } from "@/components/site/relatorio-telhado";
+import { RelatorioPreview } from "@/components/site/RelatorioPreview";
+
 import {
   TELHAS_COBERTURA,
   GRUPOS_COBERTURA,
