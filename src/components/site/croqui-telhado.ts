@@ -200,9 +200,11 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   const h = run * i;
   const fator = Math.sqrt(1 + i * i);
   const inclinada = run * fator;
-  const bH = b / fator; // projeção horizontal do beiral
+  /** o beiral informado é medido em projeção horizontal (mesma base da planta) */
+  const bH = b;
 
   const totalM = L + 2 * bH;
+
   const escalaX = 286 / totalM;
   const escalaY = h > 0 ? Math.min(escalaX, 92 / h) : escalaX;
   const escala = Math.min(escalaX, escalaY);
