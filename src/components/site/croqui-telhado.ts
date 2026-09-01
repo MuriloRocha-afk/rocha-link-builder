@@ -322,18 +322,33 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   }
 
   // ----- cotas inferiores -----
-  const yCota = chao + 20;
+  const yCota = chao + 26;
+  const yCotaTotal = yCota + 44;
+  const yPontaAgua = yBeiral + px(bH * i);
+  /** linha de extensão fina, ligando o elemento desenhado à linha de cota */
+  const ext = (x: number, yDe: number, yAte: number) =>
+    `<line x1="${x}" y1="${yDe}" x2="${x}" y2="${yAte}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`;
+
+  // extensões: pontas reais da água do telhado e cantos externos da parede
+  p.push(
+    ext(xB1, yPontaAgua + 8, yCotaTotal + 8),
+    ext(xB2, yPontaAgua + 8, yCotaTotal + 8),
+    ext(xEsq, chao, yCotaTotal + 8),
+    ext(xDir, chao, yCotaTotal + 8),
+  );
+
   if (b > 0) {
     p.push(cotaH(xB1, xEsq, yCota, `${fmt(b)} m`, "beiral"));
     p.push(cotaH(xDir, xB2, yCota, `${fmt(b)} m`, "beiral"));
   }
-  p.push(cotaH(xEsq, xDir, yCota, `${fmt(L)} m`, "largura da construção"));
-  p.push(cotaH(xB1, xB2, yCota + 40, `${fmt(L + 2 * bH)} m TOTAL (largura do telhado)`, undefined, LARANJA));
+  p.push(cotaH(xEsq, xDir, yCota, `${fmt(L)} m`, "largura da construção (medida externa)"));
+  p.push(cotaH(xB1, xB2, yCotaTotal, `${fmt(L + 2 * bH)} m TOTAL (largura do telhado)`, undefined, LARANJA));
 
-  return `<svg viewBox="0 0 420 340" width="100%" ${FONTE} shape-rendering="geometricPrecision" role="img" aria-label="Corte de perfil do telhado" xmlns="http://www.w3.org/2000/svg">
+  return `<svg viewBox="0 0 420 392" width="100%" ${FONTE} shape-rendering="geometricPrecision" role="img" aria-label="Corte de perfil do telhado" xmlns="http://www.w3.org/2000/svg">
   ${defs}
   <text x="210" y="20" text-anchor="middle" font-size="11.5" font-weight="800" letter-spacing="0.6" fill="${TEXTO}">CORTE — PERFIL (${tipo === "1agua" ? "1 ÁGUA" : tipo === "2aguas" ? "2 ÁGUAS" : tipo === "3aguas" ? "3 ÁGUAS" : "4 ÁGUAS"})</text>
   <text x="210" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="${LARANJA_ESC}">INCLINAÇÃO ${inclinacao.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%</text>
   ${p.join("\n  ")}
 </svg>`;
 }
+
