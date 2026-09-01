@@ -1204,11 +1204,11 @@ export function CalculadoraTelhado() {
                 aria-label="Quantidade de peças de telha translúcida"
               />
             </div>
-            {telhaLuz?.familia === "vidro" && (
+            {(telhaLuz?.familia === "vidro" || telhaLuz?.familia === "pet") && (
               <div className="sm:col-span-2 flex gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3">
                 <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
                 <p className="text-xs text-amber-800">
-                  A telha de vidro deve ser do mesmo formato da telha cerâmica escolhida (ex.: Vidro Portuguesa com
+                  A telha de vidro ou PET deve ser do mesmo formato da telha cerâmica escolhida (ex.: Portuguesa com
                   Cerâmica Portuguesa), para garantir o encaixe correto.
                 </p>
               </div>

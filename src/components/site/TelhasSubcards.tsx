@@ -79,11 +79,19 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     cta: "Escolher Dimensão",
   },
   {
+    slug: "pet",
+    name: "Telha PET Translúcida",
+    image: translucida,
+    description:
+      "Ponto de luz em PET transparente 100% reciclado, com filtro UV. Formatos Portuguesa, Romana e Mediterrânea.",
+    cta: "Escolher Formato",
+  },
+  {
     slug: "vidro",
     name: "Telha de Vidro",
     image: ceramica,
     description:
-      "Formatos Portuguesa, Romana e Americana. Ponto de luz natural com encaixe igual ao da telha cerâmica.",
+      "Vidro real com textura que suaviza os raios UV. Formatos Portuguesa, Romana, Francesa e Mediterrânea.",
     cta: "Escolher Formato",
   },
   {
