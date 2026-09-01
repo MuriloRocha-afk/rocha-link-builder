@@ -1430,112 +1430,31 @@ export function CalculadoraTelhado() {
         <div className="rounded-xl border border-[#fed7aa] bg-[#fff7ed] p-5">
           <p className="text-xs font-bold tracking-wider text-orange-600 uppercase">Resultado estimado</p>
 
-          {/* Croquis: planta baixa + corte-perfil (destaque principal do relatório) */}
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
-            <div
-              className="flex items-center rounded-xl border border-orange-100 bg-white p-4 md:min-h-[380px]"
-              dangerouslySetInnerHTML={{ __html: res.croqui }}
-            />
-            <div
-              className="flex items-center rounded-xl border border-orange-100 bg-white p-4 md:min-h-[380px]"
-              dangerouslySetInnerHTML={{ __html: res.perfil }}
-            />
-          </div>
+          {/* Relatório A4 — mesmo HTML/CSS do PDF, para tela e impressão ficarem idênticos */}
+          {relatorioData && (
+            <div className="mt-3 overflow-hidden rounded-xl border border-orange-200 bg-white shadow-sm">
+              <RelatorioPreview dados={relatorioData} />
+            </div>
+          )}
 
-
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            {[
-              { l: "Área da base (planta)", v: `${fmt(res.areaBase)} m²` },
-              { l: "Área inclinada real", v: `${fmt(res.areaIncl)} m²` },
-              { l: "Perímetro do telhado", v: `${fmt(res.perimetro)} m` },
-              { l: `Telhas (+${res.margem}% margem)`, v: `${res.telhas} un` },
-              { l: "Altura do oitão", v: `${fmt(res.alturaCumeeira)} m` },
-              { l: "Largura inclinada (água)", v: `${fmt(res.larguraInclinada)} m` },
-              { l: "Água + beiral (caibro)", v: `${fmt(res.caibro)} m` },
-            ].map((b) => (
-              <div key={b.l} className="rounded-lg border border-orange-100 bg-white p-3">
-                <p className="text-[11px] font-semibold text-gray-500">{b.l}</p>
-                <p className="mt-0.5 text-lg font-extrabold text-gray-900">{b.v}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Peso e aviso de cotação (sem valores em R$) */}
-          <div className="mt-4 rounded-xl border border-orange-200 bg-white p-4">
-            <p className="flex items-center gap-1.5 text-xs text-gray-600">
-              <Scale size={14} className="text-orange-600" /> Peso estimado da cobertura:{" "}
-              <b className="text-gray-900">{fmt(res.peso, 0)} kg</b>
-            </p>
-            <p className="mt-2 text-[11px] text-gray-500">
-              A calculadora não exibe preços: o valor final sai somente na cotação com o vendedor, que confere as
-              quantidades e as especificações disponíveis em estoque. No comparativo abaixo, mostramos apenas a
-              diferença relativa (%) entre as telhas escolhidas.
-            </p>
-          </div>
-
-
-          <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
-          <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-            <LinhaItem nome={res.telha.label} qtd={`${res.telhas} un`} />
-            {res.itens.map((i) => (
-              <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-            ))}
-            {res.luz && (
-              <LinhaItem
-                nome={`Pontos de Luz Natural — ${res.luz.label}`}
-                qtd={`${res.luz.qtd} peças`}
-                extra={
-                  <a href={res.luz.href} className="shrink-0 text-xs font-bold whitespace-nowrap text-orange-600 hover:underline">
-                    ver →
-                  </a>
-                }
-              />
-            )}
-          </ul>
-
-          {res.acabamento.length > 0 && (
-            <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Telhas de acabamento (cumeeira / espigão / capa lateral)
-              </p>
-              <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-                {res.acabamento.map((i) => (
-                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-                ))}
-              </ul>
-              <a
-                href="/catalogo/telhas/cumeeiras"
-                className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline"
-              >
+          <div className="mt-3 flex flex-wrap gap-4">
+            {res.acabamento.length > 0 && (
+              <a href="/catalogo/telhas/cumeeiras" className="text-xs font-bold text-orange-600 hover:underline">
                 Ver linha completa de cumeeiras e espigões →
               </a>
-            </>
-          )}
-
-          {res.calhas.length > 0 && (
-            <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas e acessórios</p>
-              <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-                {res.calhas.map((i) => (
-                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-                ))}
-              </ul>
-              <a href="/catalogo/calhas" className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline">
+            )}
+            {res.calhas.length > 0 && (
+              <a href="/catalogo/calhas" className="text-xs font-bold text-orange-600 hover:underline">
                 Ver linha completa de calhas →
               </a>
-            </>
-          )}
+            )}
+            {res.luz && (
+              <a href={res.luz.href} className="text-xs font-bold text-orange-600 hover:underline">
+                Ver telhas de luz natural →
+              </a>
+            )}
+          </div>
 
-          {res.estrutura.length > 0 && (
-            <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Estrutura de madeira</p>
-              <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-                {res.estrutura.map((i) => (
-                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-                ))}
-              </ul>
-            </>
-          )}
 
           {/* Comparativo lado a lado — qualquer telha do catálogo */}
           <div className="mt-5">
