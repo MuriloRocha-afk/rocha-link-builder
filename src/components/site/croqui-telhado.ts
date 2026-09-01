@@ -31,8 +31,8 @@ function cotaH(
   <line x1="${x1}" y1="${y - 5}" x2="${x1}" y2="${y + 5}" stroke="${cor}" stroke-width="1"/>
   <line x1="${x2}" y1="${y - 5}" x2="${x2}" y2="${y + 5}" stroke="${cor}" stroke-width="1"/>
   <line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${cor}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>
-  <text x="${meio}" y="${curto ? yT - 18 : yT}" text-anchor="middle" font-size="${curto ? 9 : 10}" font-weight="${peso}" fill="${cor}">${linha1}</text>
-  ${linha2 ? `<text x="${meio}" y="${(curto ? yT - 18 : yT) + 10}" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">${linha2}</text>` : ""}`;
+  <text x="${meio}" y="${(curto ? yT - 18 : yT) - (linha2 ? 10 : 0)}" text-anchor="middle" font-size="${curto ? 9 : 10}" font-weight="${peso}" fill="${cor}">${linha1}</text>
+  ${linha2 ? `<text x="${meio}" y="${curto ? yT - 18 : yT}" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">${linha2}</text>` : ""}`;
 }
 
 /** cota vertical com rótulo à esquerda */
