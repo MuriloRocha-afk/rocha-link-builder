@@ -271,12 +271,16 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
       `<text x="${xApex - 37}" y="${yApex - 28}" text-anchor="end" font-size="9" font-weight="800" letter-spacing="0.4" fill="${TEXTO}">CUMEEIRA</text>`,
     );
 
-    // altura do oitão
+    // altura do oitão — cota externa, à esquerda do telhado (não colide com as águas)
+    const xCotaH = xB1 - 26;
     p.push(
-      `<line x1="${xApex}" y1="${yApex + 6}" x2="${xApex}" y2="${yViga}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
-      `<text x="${xApex - 8}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
-      `<text x="${xApex - 8}" y="${(yApex + yViga) / 2 + 11}" text-anchor="end" font-size="9" fill="${CINZA_TXT}">altura do oitão</text>`,
+      `<line x1="${xCotaH}" y1="${yApex}" x2="${xApex}" y2="${yApex}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaH}" y1="${yViga}" x2="${pilarEsq}" y2="${yViga}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaH}" y1="${yApex}" x2="${xCotaH}" y2="${yViga}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
+      `<text x="${xCotaH - 5}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="9.5" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
+      `<text x="${xCotaH - 5}" y="${(yApex + yViga) / 2 + 10}" text-anchor="end" font-size="8.5" fill="${CINZA_TXT}">altura do oitão</text>`,
     );
+
   }
 
 
