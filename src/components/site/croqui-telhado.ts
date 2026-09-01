@@ -267,17 +267,18 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
     p.push(
       `<ellipse cx="${xApex}" cy="${yApex - 2}" rx="8" ry="7" fill="#FFFFFF" stroke="${LARANJA}" stroke-width="1.8"/>`,
       `<path d="M ${xApex - 5} ${yApex + 1} Q ${xApex} ${yApex - 8} ${xApex + 5} ${yApex + 1}" fill="none" stroke="${LARANJA}" stroke-width="1.4"/>`,
-      `<line x1="${xApex + 8}" y1="${yApex - 6}" x2="${xApex + 42}" y2="${yApex - 30}" stroke="${TEXTO}" stroke-width="0.9"/>`,
-      `<text x="${xApex + 45}" y="${yApex - 31}" font-size="9" font-weight="700" fill="${TEXTO}">cumeeira</text>`,
+      `<line x1="${xApex - 8}" y1="${yApex - 6}" x2="${xApex - 34}" y2="${yApex - 26}" stroke="${TEXTO}" stroke-width="0.9"/>`,
+      `<text x="${xApex - 37}" y="${yApex - 28}" text-anchor="end" font-size="9" font-weight="800" letter-spacing="0.4" fill="${TEXTO}">CUMEEIRA</text>`,
     );
 
     // altura do oitão
     p.push(
       `<line x1="${xApex}" y1="${yApex + 6}" x2="${xApex}" y2="${yViga}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
-      `<text x="${xApex - 22}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
-      `<text x="${xApex - 22}" y="${(yApex + yViga) / 2 + 11}" text-anchor="end" font-size="9" fill="${CINZA_TXT}">altura do oitão</text>`,
+      `<text x="${xApex - 8}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
+      `<text x="${xApex - 8}" y="${(yApex + yViga) / 2 + 11}" text-anchor="end" font-size="9" fill="${CINZA_TXT}">altura do oitão</text>`,
     );
   }
+
 
   // ----- comprimento inclinado (seta dupla ao longo da água direita) -----
   {
