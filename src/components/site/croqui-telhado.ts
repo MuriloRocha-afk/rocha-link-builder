@@ -31,8 +31,8 @@ function cotaH(
   <line x1="${x1}" y1="${y - 5}" x2="${x1}" y2="${y + 5}" stroke="${cor}" stroke-width="1"/>
   <line x1="${x2}" y1="${y - 5}" x2="${x2}" y2="${y + 5}" stroke="${cor}" stroke-width="1"/>
   <line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${cor}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>
-  <text x="${meio}" y="${curto ? yT - 18 : yT}" text-anchor="middle" font-size="${curto ? 9 : 10}" font-weight="${peso}" fill="${cor}">${linha1}</text>
-  ${linha2 ? `<text x="${meio}" y="${(curto ? yT - 18 : yT) + 10}" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">${linha2}</text>` : ""}`;
+  <text x="${meio}" y="${(curto ? yT - 18 : yT) - (linha2 ? 10 : 0)}" text-anchor="middle" font-size="${curto ? 9 : 10}" font-weight="${peso}" fill="${cor}">${linha1}</text>
+  ${linha2 ? `<text x="${meio}" y="${curto ? yT - 18 : yT}" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">${linha2}</text>` : ""}`;
 }
 
 /** cota vertical com rótulo à esquerda */
@@ -200,15 +200,17 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   const h = run * i;
   const fator = Math.sqrt(1 + i * i);
   const inclinada = run * fator;
-  const bH = b / fator; // projeção horizontal do beiral
+  /** o beiral informado é medido em projeção horizontal (mesma base da planta) */
+  const bH = b;
 
   const totalM = L + 2 * bH;
-  const escalaX = 286 / totalM;
+
+  const escalaX = 248 / totalM;
   const escalaY = h > 0 ? Math.min(escalaX, 92 / h) : escalaX;
   const escala = Math.min(escalaX, escalaY);
   const px = (m: number) => m * escala;
 
-  const cxBase = 212;
+  const cxBase = 234;
   const yBeiral = 208; // altura da linha de beiral (borda inferior do telhado)
   const xEsq = cxBase - px(L / 2);
   const xDir = cxBase + px(L / 2);
@@ -265,17 +267,22 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
     p.push(
       `<ellipse cx="${xApex}" cy="${yApex - 2}" rx="8" ry="7" fill="#FFFFFF" stroke="${LARANJA}" stroke-width="1.8"/>`,
       `<path d="M ${xApex - 5} ${yApex + 1} Q ${xApex} ${yApex - 8} ${xApex + 5} ${yApex + 1}" fill="none" stroke="${LARANJA}" stroke-width="1.4"/>`,
-      `<line x1="${xApex + 8}" y1="${yApex - 6}" x2="${xApex + 42}" y2="${yApex - 30}" stroke="${TEXTO}" stroke-width="0.9"/>`,
-      `<text x="${xApex + 45}" y="${yApex - 31}" font-size="9" font-weight="700" fill="${TEXTO}">cumeeira</text>`,
+      `<line x1="${xApex - 8}" y1="${yApex - 6}" x2="${xApex - 34}" y2="${yApex - 26}" stroke="${TEXTO}" stroke-width="0.9"/>`,
+      `<text x="${xApex - 37}" y="${yApex - 28}" text-anchor="end" font-size="9" font-weight="800" letter-spacing="0.4" fill="${TEXTO}">CUMEEIRA</text>`,
     );
 
-    // altura do oitão
+    // altura do oitão — cota externa, à esquerda do telhado (não colide com as águas)
+    const xCotaH = xB1 - 26;
     p.push(
-      `<line x1="${xApex}" y1="${yApex + 6}" x2="${xApex}" y2="${yViga}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
-      `<text x="${xApex - 22}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
-      `<text x="${xApex - 22}" y="${(yApex + yViga) / 2 + 11}" text-anchor="end" font-size="9" fill="${CINZA_TXT}">altura do oitão</text>`,
+      `<line x1="${xCotaH}" y1="${yApex}" x2="${xApex}" y2="${yApex}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaH}" y1="${yViga}" x2="${pilarEsq}" y2="${yViga}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaH}" y1="${yApex}" x2="${xCotaH}" y2="${yViga}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
+      `<text x="${xCotaH - 5}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="9.5" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
+      `<text x="${xCotaH - 5}" y="${(yApex + yViga) / 2 + 10}" text-anchor="end" font-size="8.5" fill="${CINZA_TXT}">altura do oitão</text>`,
     );
+
   }
+
 
   // ----- comprimento inclinado (seta dupla ao longo da água direita) -----
   {
@@ -289,8 +296,8 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
     p.push(
       `<line x1="${x1 + dx}" y1="${y1 + dy}" x2="${x2 + dx}" y2="${y2 + dy}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
       `<g transform="translate(${(x1 + x2) / 2 + dx} ${(y1 + y2) / 2 + dy}) rotate(${ang})">
-        <text x="0" y="-6" text-anchor="middle" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(inclinada)} m</text>
-        <text x="0" y="4" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">comprimento inclinado</text>
+        <text x="0" y="-16" text-anchor="middle" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(inclinada)} m</text>
+        <text x="0" y="-6" text-anchor="middle" font-size="8.5" fill="${CINZA_TXT}">comprimento inclinado</text>
       </g>`,
     );
   }

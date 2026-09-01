@@ -13,6 +13,9 @@ import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import { LOGO_ROCHA_SVG } from "@/components/site/logo-print";
 import { estimarFaixa } from "@/data/precosLoja";
 import { croquiTelhadoSvg, croquiPerfilSvg, type TipoTelhado } from "@/components/site/croqui-telhado";
+import { relatorioTelhadoHtml, type RelatorioData } from "@/components/site/relatorio-telhado";
+import { RelatorioPreview } from "@/components/site/RelatorioPreview";
+
 import {
   TELHAS_COBERTURA,
   GRUPOS_COBERTURA,
@@ -719,176 +722,68 @@ export function CalculadoraTelhado() {
       ].join("\n")
     : "";
 
+  /** dados do relatório A4 — usados tanto no preview em tela quanto no PDF */
+  const relatorioData: RelatorioData | null = res
+    ? (() => {
+        const pregos = res.estrutura.filter((i) => /^Prego/i.test(i.nome));
+        const madeira = res.estrutura.filter((i) => !/^Prego/i.test(i.nome));
+        const nomeEspecie = ESPECIE_ESTRUTURA;
+        return {
+          chips: [
+            TIPOS.find((t) => t.id === res.tipo)!.label,
+            `Inclinação ${res.incl}%`,
+            res.telha.label.replace(" ★", ""),
+            `Margem ${res.margem}%`,
+            comEstrutura ? `Madeira ${nomeEspecie} · margem ${margemMadeira}%` : "",
+          ].filter(Boolean),
+          croqui: res.croqui,
+          perfil: res.perfil,
+          stats: [
+            { label: "Área da base", valor: `${fmt(res.areaBase)} m²`, icone: "base" },
+            { label: "Área inclinada", valor: `${fmt(res.areaIncl)} m²`, icone: "inclinada" },
+            { label: "Largura inclinada", valor: `${fmt(res.larguraInclinada)} m`, icone: "largura" },
+            { label: "Perímetro", valor: `${fmt(res.perimetro)} m`, icone: "perimetro" },
+            { label: "Peso da cobertura", valor: `${fmt(res.peso, 0)} kg`, icone: "peso" },
+          ],
+          colunaEsq: [
+            {
+              titulo: "Cobertura",
+              icone: "cobertura",
+              itens: [
+                { nome: res.telha.label.replace(" ★", ""), qtd: `${res.telhas} un` },
+                ...res.itens,
+                ...(res.luz
+                  ? [{ nome: `Pontos de Luz Natural — ${res.luz.label}`, qtd: `${res.luz.qtd} peças` }]
+                  : []),
+              ],
+            },
+            { titulo: "Acabamento (cumeeira / espigão / capa lateral)", icone: "acabamento", itens: res.acabamento },
+            { titulo: "Calhas e acessórios", icone: "calhas", itens: res.calhas },
+          ],
+          colunaDir: [
+            {
+              titulo: `Estrutura de madeira${nomeEspecie && madeira.length ? ` — ${nomeEspecie}` : ""}`,
+              icone: "estrutura",
+              itens: madeira,
+            },
+            { titulo: "Pregos", icone: "pregos", itens: pregos },
+          ],
+          comparativo: comparativo.map((c) => ({
+            nome: c.telha.label.replace(" ★", ""),
+            grupo: c.telha.grupo,
+            pecas: `${c.pecas} un`,
+            peso: `${fmt(c.peso, 0)} kg`,
+            inclinacaoMin: c.telha.min,
+            compativel: c.compativel,
+            percentual: c.percentual,
+          })),
+        };
+      })()
+    : null;
+
   const baixarPdf = () => {
-    if (!res) return;
-    const linha = (i: Item) =>
-      i.chave === null && /^Crit\u00e9rios/i.test(i.nome)
-        ? `<div class="criterio"><b>${i.nome}:</b> ${i.qtd}</div>`
-        : `<div class="linha"><span class="nome">${i.nome}</span><span class="leader"></span><span class="qty">${i.qtd}</span></div>`;
-    const bloco = (titulo: string, itens: Item[]) =>
-      itens.length
-        ? `<div class="section-title">${titulo}</div><div class="data">${itens.map(linha).join("")}</div>`
-        : "";
-
-    const pregos = res.estrutura.filter((i) => /^Prego/i.test(i.nome));
-    const madeira = res.estrutura.filter((i) => !/^Prego/i.test(i.nome));
-    const nomeEspecie = ESPECIE_ESTRUTURA;
-
-    const comparaHtml = comparativo.length
-      ? `<div class="comparativo-wrap">
-      <div class="section-title">Comparativo entre telhas do catálogo</div>
-      <table class="comparativo">
-        <thead><tr>
-          <th>Telha</th><th class="num">Peças</th><th class="num">Peso</th>
-          <th>Inclinação mínima</th><th>Comparação relativa</th>
-        </tr></thead>
-        <tbody>
-        ${comparativo
-          .map((c) => {
-            const ref = c.percentual === 0;
-            const badge = ref
-              ? `<span class="badge ref">REFERÊNCIA</span> Opção mais econômica`
-              : c.percentual === null
-                ? `<span class="badge pricier">—</span> custo sob cotação`
-                : `<span class="badge pricier">+${c.percentual}%</span> mais cara que a referência`;
-            return `<tr class="${ref ? "reference" : ""}">
-              <td>${ref ? "<strong>" : ""}${c.telha.label.replace(" ★", "")}${ref ? "</strong>" : ""} — ${c.telha.grupo}</td>
-              <td class="num">${c.pecas} un</td>
-              <td class="num">${fmt(c.peso, 0)} kg</td>
-              <td><span class="compat ${c.compativel ? "ok" : "no"}">${c.telha.min}% · ${c.compativel ? "compatível" : "incompatível"}</span></td>
-              <td>${badge}</td>
-            </tr>`;
-          })
-          .join("")}
-        </tbody>
-      </table>
-      <div class="comparativo-note">A diferença percentual é calculada com a tabela interna da loja, sem exibir valores — serve apenas para comparar as opções entre si. Coberturas mais leves (PVC e policarbonato) exigem menos madeira; cerâmica e concreto pedem estrutura reforçada.</div>
-    </div>`
-      : "";
-
-    const agora = new Date();
-    const logoGrande = LOGO_ROCHA_SVG.replace('width="58" height="32"', 'width="104" height="58"');
-
-    const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
-<title>Calculo de telhado - Rocha Telhas</title>
-<style>
-  @page{size:A4 portrait;margin:0}
-  *{box-sizing:border-box}
-  body{font-family:'Helvetica Neue',Arial,Helvetica,sans-serif;color:#1f2937;margin:0}
-  .page{width:210mm;min-height:297mm;padding:11mm 12mm 9mm;display:flex;flex-direction:column}
-  .header{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #E8622E;padding-bottom:8px;margin-bottom:10px}
-  .logo-block{display:flex;align-items:center;gap:12px}
-  .brand{font-size:20px;font-weight:800;letter-spacing:-.3px;line-height:1.1}
-  .brand span{color:#E8622E}
-  .header-right{text-align:right}
-  .header-right .title{font-size:14.5px;font-weight:700}
-  .header-right .meta{font-size:9.5px;color:#6b7280;margin-top:2px}
-  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-  .chip{background:#FFF3EC;border:1px solid #F7D3BE;color:#B5450F;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px}
-  .diagrams{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
-  .diagram-box{border:1px solid #E5E7EB;border-radius:10px;padding:8px 10px;background:#fff;min-height:96mm;display:flex;align-items:center}
-  .diagram-box>svg{width:100%}
-  svg{display:block}
-  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:6px}
-  .stat{border:1px solid #E5E7EB;border-radius:8px;padding:6px 8px;text-align:center;background:#fff}
-  .stat .label{font-size:8px;color:#9CA3AF;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
-  .stat .value{font-size:13px;font-weight:800;margin-top:2px}
-  .dados-faixa{background:#F5F6F7;border:1px solid #E5E7EB;border-radius:8px;padding:6px 10px 8px;margin-top:6px}
-  .section-title{font-size:9px;font-weight:800;color:#E8622E;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #E4DAD3;padding-bottom:2px;margin:7px 0 3px}
-  .data{font-size:8.2px}
-  .data .linha{display:flex;align-items:baseline;gap:4px;padding:1.4px 2px;border-bottom:1px solid #EDEEEF}
-  .data .nome{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto}
-  .data .leader{flex:1 1 auto;min-width:8px;border-bottom:1px dotted #D1D5DB;transform:translateY(-2px)}
-  .data .qty{white-space:nowrap;font-weight:700;color:#B5450F;flex:0 0 auto}
-  .data .criterio{padding:3px 2px;font-size:7.6px;line-height:1.4;color:#4B5563;background:#EFF0F1;border-radius:4px}
-
-  .two-col-sections{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
-  table.comparativo{width:100%;border-collapse:collapse;font-size:9.5px}
-  table.comparativo thead th{background:#FFF3EC;color:#B5450F;font-size:8.5px;text-transform:uppercase;letter-spacing:.3px;font-weight:800;padding:5px 6px;text-align:left;border-bottom:2px solid #E8622E}
-  table.comparativo thead th.num{text-align:right}
-  table.comparativo tbody td{padding:5px 6px;border-bottom:1px solid #F0F0F0;vertical-align:middle}
-  table.comparativo tbody td.num{text-align:right;font-weight:700}
-  table.comparativo tbody tr.reference{background:#FFF8F4}
-  .badge{display:inline-block;font-size:8px;font-weight:800;padding:2px 7px;border-radius:10px}
-  .badge.ref{background:#DCFCE7;color:#15803D}
-  .badge.pricier{background:#FEF3C7;color:#92400E}
-  .compat{font-size:8.5px;font-weight:700}
-  .compat.ok{color:#15803D}
-  .compat.no{color:#B91C1C}
-  .comparativo-note{font-size:8px;color:#9CA3AF;margin-top:4px;line-height:1.4}
-  .footer{margin-top:auto;padding-top:8px;border-top:1.5px solid #E5E7EB}
-  .disclaimer{background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:7px 10px;font-size:8.5px;color:#92400E;font-weight:600;line-height:1.4;margin-bottom:5px}
-  .footer-bottom{display:flex;justify-content:space-between;font-size:8px;color:#9CA3AF}
-</style></head><body>
-<div class="page">
-  <div class="header">
-    <div class="logo-block">
-      ${logoGrande}
-      <div class="brand">ROCHA <span>TELHAS</span> &amp; MADEIRAS</div>
-    </div>
-    <div class="header-right">
-      <div class="title">Cálculo de Telhado — Orçamento Estimado</div>
-      <div class="meta">Gerado em ${agora.toLocaleDateString("pt-BR")} às ${agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</div>
-    </div>
-  </div>
-
-  <div class="chips">
-    <span class="chip">${TIPOS.find((t) => t.id === res.tipo)!.label}</span>
-    <span class="chip">Inclinação ${res.incl}%</span>
-    <span class="chip">${res.telha.label.replace(" ★", "")}</span>
-    <span class="chip">Margem ${res.margem}%</span>
-    ${comEstrutura ? `<span class="chip">Madeira ${nomeEspecie} · margem ${margemMadeira}%</span>` : ""}
-  </div>
-
-  <div class="diagrams">
-    <div class="diagram-box">${res.croqui}</div>
-    <div class="diagram-box">${res.perfil}</div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><div class="label">Área da base</div><div class="value">${fmt(res.areaBase)} m²</div></div>
-    <div class="stat"><div class="label">Área inclinada</div><div class="value">${fmt(res.areaIncl)} m²</div></div>
-    <div class="stat"><div class="label">Largura inclinada</div><div class="value">${fmt(res.larguraInclinada)} m</div></div>
-    <div class="stat"><div class="label">Perímetro</div><div class="value">${fmt(res.perimetro)} m</div></div>
-    <div class="stat"><div class="label">Peso da cobertura</div><div class="value">${fmt(res.peso, 0)} kg</div></div>
-  </div>
-
-  <div class="dados-faixa">
-  <div class="two-col-sections">
-    <div>
-      ${bloco("Cobertura", [
-        { nome: res.telha.label.replace(" ★", ""), qtd: `${res.telhas} un` },
-        ...res.itens,
-        ...(res.luz
-          ? [{ nome: `Pontos de Luz Natural — ${res.luz.label}`, qtd: `${res.luz.qtd} peças` }]
-          : []),
-      ])}
-      ${bloco("Acabamento (cumeeira / espigão / capa lateral)", res.acabamento)}
-      ${bloco("Calhas e acessórios", res.calhas)}
-    </div>
-    <div>
-      ${bloco(`Estrutura de madeira${nomeEspecie && madeira.length ? ` — ${nomeEspecie}` : ""}`, madeira)}
-      ${bloco("Pregos", pregos)}
-    </div>
-  </div>
-  </div>
-
-
-  ${comparaHtml}
-
-  <div class="footer">
-    <div class="disclaimer">
-      ⚠️ ESTE DOCUMENTO É UMA ESTIMATIVA DE REFERÊNCIA gerada automaticamente pela calculadora do site. Não apresenta valores em R$ — o preço final e a
-      conferência definitiva das quantidades são feitos pela nossa equipe técnica na cotação com o vendedor.
-    </div>
-    <div class="footer-bottom">
-      <span>Rocha Telhas &amp; Madeiras · rochatelhas.com.br · (11) 97176-1003</span>
-      <span>Página 1 de 1</span>
-    </div>
-  </div>
-</div>
-</body></html>`;
-
+    if (!relatorioData) return;
+    const html = relatorioTelhadoHtml(relatorioData);
     const w = window.open("", "_blank");
     if (!w) return;
     w.document.write(html);
@@ -896,6 +791,7 @@ export function CalculadoraTelhado() {
     w.focus();
     setTimeout(() => w.print(), 300);
   };
+
 
 
   /** linha de relatório em texto corrido: nome à esquerda, pontilhado, valor à direita */
@@ -1534,112 +1430,31 @@ export function CalculadoraTelhado() {
         <div className="rounded-xl border border-[#fed7aa] bg-[#fff7ed] p-5">
           <p className="text-xs font-bold tracking-wider text-orange-600 uppercase">Resultado estimado</p>
 
-          {/* Croquis: planta baixa + corte-perfil (destaque principal do relatório) */}
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
-            <div
-              className="flex items-center rounded-xl border border-orange-100 bg-white p-4 md:min-h-[380px]"
-              dangerouslySetInnerHTML={{ __html: res.croqui }}
-            />
-            <div
-              className="flex items-center rounded-xl border border-orange-100 bg-white p-4 md:min-h-[380px]"
-              dangerouslySetInnerHTML={{ __html: res.perfil }}
-            />
-          </div>
+          {/* Relatório A4 — mesmo HTML/CSS do PDF, para tela e impressão ficarem idênticos */}
+          {relatorioData && (
+            <div className="mt-3 overflow-hidden rounded-xl border border-orange-200 bg-white shadow-sm">
+              <RelatorioPreview dados={relatorioData} />
+            </div>
+          )}
 
-
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            {[
-              { l: "Área da base (planta)", v: `${fmt(res.areaBase)} m²` },
-              { l: "Área inclinada real", v: `${fmt(res.areaIncl)} m²` },
-              { l: "Perímetro do telhado", v: `${fmt(res.perimetro)} m` },
-              { l: `Telhas (+${res.margem}% margem)`, v: `${res.telhas} un` },
-              { l: "Altura do oitão", v: `${fmt(res.alturaCumeeira)} m` },
-              { l: "Largura inclinada (água)", v: `${fmt(res.larguraInclinada)} m` },
-              { l: "Água + beiral (caibro)", v: `${fmt(res.caibro)} m` },
-            ].map((b) => (
-              <div key={b.l} className="rounded-lg border border-orange-100 bg-white p-3">
-                <p className="text-[11px] font-semibold text-gray-500">{b.l}</p>
-                <p className="mt-0.5 text-lg font-extrabold text-gray-900">{b.v}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Peso e aviso de cotação (sem valores em R$) */}
-          <div className="mt-4 rounded-xl border border-orange-200 bg-white p-4">
-            <p className="flex items-center gap-1.5 text-xs text-gray-600">
-              <Scale size={14} className="text-orange-600" /> Peso estimado da cobertura:{" "}
-              <b className="text-gray-900">{fmt(res.peso, 0)} kg</b>
-            </p>
-            <p className="mt-2 text-[11px] text-gray-500">
-              A calculadora não exibe preços: o valor final sai somente na cotação com o vendedor, que confere as
-              quantidades e as especificações disponíveis em estoque. No comparativo abaixo, mostramos apenas a
-              diferença relativa (%) entre as telhas escolhidas.
-            </p>
-          </div>
-
-
-          <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Lista sugerida</p>
-          <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-            <LinhaItem nome={res.telha.label} qtd={`${res.telhas} un`} />
-            {res.itens.map((i) => (
-              <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-            ))}
-            {res.luz && (
-              <LinhaItem
-                nome={`Pontos de Luz Natural — ${res.luz.label}`}
-                qtd={`${res.luz.qtd} peças`}
-                extra={
-                  <a href={res.luz.href} className="shrink-0 text-xs font-bold whitespace-nowrap text-orange-600 hover:underline">
-                    ver →
-                  </a>
-                }
-              />
-            )}
-          </ul>
-
-          {res.acabamento.length > 0 && (
-            <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">
-                Telhas de acabamento (cumeeira / espigão / capa lateral)
-              </p>
-              <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-                {res.acabamento.map((i) => (
-                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-                ))}
-              </ul>
-              <a
-                href="/catalogo/telhas/cumeeiras"
-                className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline"
-              >
+          <div className="mt-3 flex flex-wrap gap-4">
+            {res.acabamento.length > 0 && (
+              <a href="/catalogo/telhas/cumeeiras" className="text-xs font-bold text-orange-600 hover:underline">
                 Ver linha completa de cumeeiras e espigões →
               </a>
-            </>
-          )}
-
-          {res.calhas.length > 0 && (
-            <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Calhas e acessórios</p>
-              <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-                {res.calhas.map((i) => (
-                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-                ))}
-              </ul>
-              <a href="/catalogo/calhas" className="mt-2 inline-block text-xs font-bold text-orange-600 hover:underline">
+            )}
+            {res.calhas.length > 0 && (
+              <a href="/catalogo/calhas" className="text-xs font-bold text-orange-600 hover:underline">
                 Ver linha completa de calhas →
               </a>
-            </>
-          )}
+            )}
+            {res.luz && (
+              <a href={res.luz.href} className="text-xs font-bold text-orange-600 hover:underline">
+                Ver telhas de luz natural →
+              </a>
+            )}
+          </div>
 
-          {res.estrutura.length > 0 && (
-            <>
-              <p className="mt-5 text-xs font-bold tracking-wider text-gray-500 uppercase">Estrutura de madeira</p>
-              <ul className="mt-2 divide-y divide-orange-100 rounded-lg border border-orange-100 bg-white">
-                {res.estrutura.map((i) => (
-                  <LinhaItem key={i.nome} nome={i.nome} qtd={i.qtd} />
-                ))}
-              </ul>
-            </>
-          )}
 
           {/* Comparativo lado a lado — qualquer telha do catálogo */}
           <div className="mt-5">
