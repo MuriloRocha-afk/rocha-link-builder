@@ -223,18 +223,37 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   const chao = 262;
 
   // ----- estrutura de madeira aparente -----
+  const ESP_TELHA = 7; // espessura desenhada da telha
+  /** face inferior da água do telhado no X informado */
+  const faceInferiorTelhado = (x: number) =>
+    (umaAgua ? yApex + (x - xB1) * i : yApex + Math.abs(x - cxBase) * i) + ESP_TELHA;
+
   const pilarW = 9;
-  const pilarEsq = xEsq + 14;
-  const pilarDir = xDir - 14 - pilarW;
-  const yViga = yBeiral - 22;
+  // pilares simétricos em relação ao eixo central do desenho
+  const offPilar = Math.max(px(L / 2) - 14 - pilarW, 18);
+  const pilarEsq = cxBase - offPilar - pilarW / 2;
+  const pilarDir = cxBase + offPilar - pilarW / 2;
+
+  const vigaX = pilarEsq - 6;
+  const vigaW = pilarDir - pilarEsq + pilarW + 12;
+  // a estrutura nunca pode atravessar a água: fica sempre abaixo da face inferior
+  const limiteTelhado = Math.max(
+    faceInferiorTelhado(vigaX),
+    faceInferiorTelhado(vigaX + vigaW),
+    faceInferiorTelhado(pilarEsq),
+    faceInferiorTelhado(pilarDir + pilarW),
+  );
+  const yViga = Math.max(yBeiral - 22, limiteTelhado + 3);
+  const yPilarTopo = yViga + 10;
   p.push(
     `<line x1="${xB1 - 12}" y1="${chao}" x2="${xB2 + 12}" y2="${chao}" stroke="${CINZA}" stroke-width="1"/>`,
     // viga de amarração
-    `<rect x="${pilarEsq - 6}" y="${yViga}" width="${pilarDir - pilarEsq + pilarW + 12}" height="9" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+    `<rect x="${vigaX}" y="${yViga}" width="${vigaW}" height="9" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
     // pilares
-    `<rect x="${pilarEsq}" y="${yBeiral - 26}" width="${pilarW}" height="${chao - yBeiral + 26}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
-    `<rect x="${pilarDir}" y="${yBeiral - 26}" width="${pilarW}" height="${chao - yBeiral + 26}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+    `<rect x="${pilarEsq}" y="${yPilarTopo}" width="${pilarW}" height="${chao - yPilarTopo}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+    `<rect x="${pilarDir}" y="${yPilarTopo}" width="${pilarW}" height="${chao - yPilarTopo}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
   );
+
 
   /** desenha uma água com espessura de telha + textura de ondas */
   const agua = (x1: number, y1: number, x2: number, y2: number) => {
