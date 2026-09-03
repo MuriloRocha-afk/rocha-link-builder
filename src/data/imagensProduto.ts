@@ -34,6 +34,23 @@ import imgCinza459 from "@/assets/produtos/pvc-cinza/05_459cm_cinza.png.asset.js
 import imgCinza525 from "@/assets/produtos/pvc-cinza/06_525cm_cinza.png.asset.json";
 import imgCinzaAplic from "@/assets/produtos/pvc-cinza/aplicacao_telhado_render_cinza.webp.asset.json";
 import imgCinzaAngulo from "@/assets/produtos/pvc-cinza/extra_angulo_cinza.png.asset.json";
+import planTerra198 from "@/assets/produtos/plan-terracota/p198.png.asset.json";
+import planTerra242 from "@/assets/produtos/plan-terracota/p242.png.asset.json";
+import planTerra330 from "@/assets/produtos/plan-terracota/p330.png.asset.json";
+import planTerraAplic1 from "@/assets/produtos/plan-terracota/aplic1.jpg.asset.json";
+import planTerraAplic2 from "@/assets/produtos/plan-terracota/aplic2.jpg.asset.json";
+import planMarfimCapa from "@/assets/produtos/plan-marfim/capa.jpeg.asset.json";
+import planMarfim198 from "@/assets/produtos/plan-marfim/p198.png.asset.json";
+import planMarfim242 from "@/assets/produtos/plan-marfim/p242.png.asset.json";
+import planMarfim330 from "@/assets/produtos/plan-marfim/p330.png.asset.json";
+import planMarfimAplic1 from "@/assets/produtos/plan-marfim/aplic1.jpeg.asset.json";
+import planMarfimAplic2 from "@/assets/produtos/plan-marfim/aplic2.jfif.asset.json";
+import planCinzaCapa from "@/assets/produtos/plan-cinza/capa.jpg.asset.json";
+import planCinza198 from "@/assets/produtos/plan-cinza/p198.png.asset.json";
+import planCinza242 from "@/assets/produtos/plan-cinza/p242.png.asset.json";
+import planCinza330 from "@/assets/produtos/plan-cinza/p330.png.asset.json";
+import planCinzaAplic1 from "@/assets/produtos/plan-cinza/aplic1.webp.asset.json";
+import planCinzaAplic2 from "@/assets/produtos/plan-cinza/aplic2.webp.asset.json";
 
 export const IMG = {
   ceramicaAmericana: imgCeramicaAmericana.url,
@@ -109,9 +126,6 @@ export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
     { src: imgTerraAngulo.url, alt: "Telha Colonial PVC Terracota em ângulo" },
     { src: imgTerraAplic1.url, alt: "Telhado com Telha Colonial PVC Terracota", legenda: "Exemplo de aplicação" },
     { src: imgTerraAplic2.url, alt: "Telhado com Telha Colonial PVC Terracota e calha", legenda: "Exemplo de aplicação" },
-  ],
-  Branca: [
-    { src: "", alt: "Telha PVC Branca" },
   ],
   Cinza: [
     { src: imgCinzaAngulo.url, alt: "Telha Colonial PVC Cinza em ângulo" },
@@ -318,3 +332,44 @@ export const imagensConcreto: Record<string, ImagemProduto[]> = {
     { src: imgConcretoGrafiteTelhado.url, alt: "Telhado com Telha de Concreto Grafite", legenda: "Aplicação em telhado" },
   ],
 };
+
+// ─────────────────────────────────────────────────────────────
+// TELHA PLAN PVC — por cor e comprimento
+// ─────────────────────────────────────────────────────────────
+const planFotosPorTamanho: Record<string, Record<string, { url: string }>> = {
+  Terracota: { "198 cm": planTerra198, "242 cm": planTerra242, "330 cm": planTerra330 },
+  Marfim: { "198 cm": planMarfim198, "242 cm": planMarfim242, "330 cm": planMarfim330 },
+  Cinza: { "198 cm": planCinza198, "242 cm": planCinza242, "330 cm": planCinza330 },
+};
+
+const planAplicacoesPorCor: Record<string, ImagemProduto[]> = {
+  Terracota: [
+    { src: planTerraAplic1.url, alt: "Telhado com Telha Plan PVC Terracota", legenda: "Exemplo de aplicação" },
+    { src: planTerraAplic2.url, alt: "Telhado com Telha Plan PVC Terracota", legenda: "Exemplo de aplicação" },
+  ],
+  Marfim: [
+    { src: planMarfimAplic1.url, alt: "Telhado com Telha Plan PVC Marfim", legenda: "Exemplo de aplicação" },
+    { src: planMarfimAplic2.url, alt: "Telhado com Telha Plan PVC Marfim", legenda: "Exemplo de aplicação" },
+  ],
+  Cinza: [
+    { src: planCinzaAplic1.url, alt: "Telhado com Telha Plan PVC Cinza", legenda: "Exemplo de aplicação" },
+    { src: planCinzaAplic2.url, alt: "Telhado com Telha Plan PVC Cinza", legenda: "Exemplo de aplicação" },
+  ],
+};
+
+const planCapaPorCor: Record<string, ImagemProduto[]> = {
+  Terracota: [],
+  Marfim: [{ src: planMarfimCapa.url, alt: "Telha Plan PVC Marfim em ângulo" }],
+  Cinza: [{ src: planCinzaCapa.url, alt: "Telha Plan PVC Cinza em ângulo" }],
+};
+
+/** Galeria da Telha Plan PVC considerando cor e comprimento selecionado. */
+export function galeriaPlanPVC(cor: string, comprimento?: string | null): ImagemProduto[] {
+  const aplicacoes = planAplicacoesPorCor[cor] ?? [];
+  const foto = comprimento ? planFotosPorTamanho[cor]?.[comprimento] : undefined;
+  if (!foto) return [...(planCapaPorCor[cor] ?? []), ...aplicacoes];
+  return [
+    { src: foto.url, alt: `Telha Plan PVC ${cor} ${comprimento}`, legenda: `Comprimento ${comprimento}` },
+    ...aplicacoes,
+  ];
+}
