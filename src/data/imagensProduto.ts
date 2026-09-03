@@ -90,6 +90,13 @@ import medCafeTelhado from "@/assets/produtos/ceramica-mediterranea/05_encomenda
 import medCafeTelhado2 from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado_02_sem_marca_vilhena.jpg.asset.json";
 import medGrena from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada.avif.asset.json";
 import medGrenaTelhado from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada_telhado.jpg.asset.json";
+import polCristalProduto from "@/assets/produtos/policarbonato/cristal_produto.webp.asset.json";
+import polCristalTelhado1 from "@/assets/produtos/policarbonato/cristal_telhado_01.jfif.asset.json";
+import polCristalTelhado2 from "@/assets/produtos/policarbonato/cristal_telhado_02.webp.asset.json";
+import polCristalTelhado3 from "@/assets/produtos/policarbonato/cristal_telhado_03.webp.asset.json";
+import polGreccaProduto from "@/assets/produtos/policarbonato/grecca_produto.webp.asset.json";
+import polGreccaTelhado from "@/assets/produtos/policarbonato/grecca_telhado.webp.asset.json";
+
 
 
 
@@ -422,15 +429,20 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
 
 
 // TELHA POLICARBONATO — por versão
+// Cada opção usa APENAS as suas próprias fotos.
 export const imagensPolicarbonato: Record<string, ImagemProduto[]> = {
   cristal: [
-    { src: "", alt: "Telha Policarbonato Cristal" },
-    { src: "", alt: "Detalhe da transparência — Policarbonato Cristal" },
+    { src: polCristalProduto.url, alt: "Telha Policarbonato Cristal", legenda: "Produto" },
+    { src: polCristalTelhado1.url, alt: "Telhado com Policarbonato Cristal", legenda: "Exemplo de aplicação" },
+    { src: polCristalTelhado2.url, alt: "Telhado com Policarbonato Cristal", legenda: "Exemplo de aplicação" },
+    { src: polCristalTelhado3.url, alt: "Telhado com Policarbonato Cristal", legenda: "Exemplo de aplicação" },
   ],
-  "bronze-grecca": [
-    { src: "", alt: "Telha Policarbonato Bronze Grecca 244cm" },
+  grecca: [
+    { src: polGreccaProduto.url, alt: "Telha Policarbonato Grecca", legenda: "Produto" },
+    { src: polGreccaTelhado.url, alt: "Telhado com Policarbonato Grecca", legenda: "Exemplo de aplicação" },
   ],
 };
+
 
 // CEDRINHO — por tipo
 export const imagensCedrinho: Record<string, ImagemProduto[]> = {
