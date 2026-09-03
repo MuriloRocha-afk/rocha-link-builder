@@ -24,7 +24,7 @@ export const MATERIAIS_CUMEEIRA: MaterialDef[] = [
     pecas: ["Cumeeira", "Espigão", "Paulistinha"],
     formatos: ["Central Fixa", "Central Articulada", "Lateral Articulada", "Triangular 3 Vias"],
     cores: [
-      { valor: "Cerâmica", cor: "#B4532A", disponivel: true },
+      { valor: "Terracota", cor: "#B4532A", disponivel: true },
       { valor: "Marfim", cor: "#EFE3C8", disponivel: false },
       { valor: "Cinza", cor: "#9AA0A6", disponivel: false },
     ],

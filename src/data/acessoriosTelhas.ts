@@ -14,7 +14,7 @@ export const chumbador = (qtd: number): AcessorioItem => ({
 
 /** Telha PVC (Colonial e Plan): espigão, calço, kit de fixação e vedação. */
 export const acessoriosPvc = (variante: string, cor: string, qtd: number): AcessorioItem[] => {
-  const c = cor === "Translúcida" ? "Cerâmica" : cor;
+  const c = cor || "Terracota";
   return [
     {
       id: `espigao-pvc-${c}`,
