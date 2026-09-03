@@ -197,7 +197,6 @@ const madeiramentoProdutos: ItemBusca[] = [
 const MODELOS_CERAMICA = [
   { modelo: "Portuguesa", termos: ["portuguesa"] },
   { modelo: "Romana", termos: ["romana", "r13", "r17"] },
-  { modelo: "Americana", termos: ["americana"] },
   { modelo: "Francesa (Marselha)", termos: ["francesa", "marselha"] },
   { modelo: "Mediterrânea", termos: ["mediterranea", "mediterrânea", "prime"] },
 ];

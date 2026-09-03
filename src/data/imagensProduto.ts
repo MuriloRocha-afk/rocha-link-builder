@@ -1,5 +1,4 @@
 import { ImagemProduto } from "../components/GaleriaProduto";
-import imgCeramicaAmericana from "@/assets/produtos/telha_ceramica_americana.webp.asset.json";
 import imgCeramicaMesclada from "@/assets/produtos/telha_ceramica_mesclada.jpg.asset.json";
 import imgColonialPvc from "@/assets/produtos/Telha_Colonial_PVC.png.asset.json";
 import imgPvcCinzaTelhado from "@/assets/produtos/telha_colonial_pvc_cinza_telhado.webp.asset.json";
@@ -53,7 +52,6 @@ import planCinzaAplic1 from "@/assets/produtos/plan-cinza/aplic1.webp.asset.json
 import planCinzaAplic2 from "@/assets/produtos/plan-cinza/aplic2.webp.asset.json";
 
 export const IMG = {
-  ceramicaAmericana: imgCeramicaAmericana.url,
   ceramicaMesclada: imgCeramicaMesclada.url,
   colonialPvc: imgColonialPvc.url,
   pvcCinzaTelhado: imgPvcCinzaTelhado.url,
@@ -92,10 +90,6 @@ export const imagensCeramica: Record<string, ImagemProduto[]> = {
   ],
   "romana-top": [
     { src: "", alt: "Telha Romana Top Telha Terracota Prime" },
-  ],
-  "americana-resinada": [
-    { src: imgCeramicaAmericana.url, alt: "Telha Cerâmica Americana Resinada" },
-    { src: imgColonialPvc.url, alt: "Telhado com telha cerâmica americana", legenda: "Aplicação em telhado" },
   ],
 };
 
