@@ -147,7 +147,27 @@ export function galeriaPortuguesa(cor: string, acabamento: string): ImagemProdut
   return PORTUGUESA[`${cor}|${acabamento}`] ?? [];
 }
 
+// TELHA CERÂMICA ROMANA — galeria por cor + acabamento
+// Apenas Terracota Natural é pronta entrega; Resinada é sob encomenda.
+const ROMANA: Record<string, ImagemProduto[]> = {
+  "Terracota|Natural": [
+    { src: romTerraNat.url, alt: "Telha Romana Terracota Natural" },
+    { src: romTerraNatLoja.url, alt: "Telha Romana Terracota Natural no pátio da loja", legenda: "Foto real — pátio da Rocha Telhas" },
+    { src: romTerraNatTelhado1.url, alt: "Telhado com Telha Romana Terracota Natural", legenda: "Exemplo de aplicação" },
+    { src: romTerraNatTelhado2.url, alt: "Telhado com Telha Romana Terracota Natural", legenda: "Exemplo de aplicação" },
+    { src: romTerraNatTelhado3.url, alt: "Telhado com Telha Romana Terracota Natural", legenda: "Exemplo de aplicação" },
+  ],
+  "Terracota|Resinada": [
+    { src: romResinada.url, alt: "Telha Romana Terracota Resinada" },
+  ],
+};
+
+export function galeriaRomana(cor: string, acabamento: string): ImagemProduto[] {
+  return ROMANA[`${cor}|${acabamento}`] ?? [];
+}
+
 // TELHA FIBROCIMENTO
+
 export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
   "153 × 110 cm": [
     { src: "", alt: "Telha Fibrocimento INFIBRA 153cm", legenda: "Telha Fibrocimento 153 × 110cm — INFIBRA" },
