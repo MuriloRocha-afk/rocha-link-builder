@@ -8,7 +8,7 @@ import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosPvc } from "@/data/acessoriosTelhas";
-import { imagensColonialPVC } from "@/data/imagensProduto";
+import { imagensColonialPVC, galeriaColonialPVC } from "@/data/imagensProduto";
 
 type Variante = "Colonial" | "Plan";
 
@@ -166,7 +166,11 @@ Poderia verificar estoque e frete?`;
         <GaleriaProduto
           titulo={`${nomeProduto} — ${cor ?? "Terracota"}`}
           subtitulo="Foto em breve"
-          imagens={imagensColonialPVC[cor ?? "Terracota"] ?? []}
+          imagens={
+            variante === "Colonial"
+              ? galeriaColonialPVC(cor ?? "Terracota", dimensao)
+              : (imagensColonialPVC[cor ?? "Terracota"] ?? [])
+          }
         />
       }
     >

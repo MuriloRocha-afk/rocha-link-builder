@@ -8,6 +8,16 @@ import imgPvcMarfimTelhado from "@/assets/produtos/telha_colonial_pvc_marfim_tel
 import imgPvcMarfimTelhado2 from "@/assets/produtos/telha_colonial_pvc_marfim_telhado_2.webp.asset.json";
 import imgConcretoGrafiteTelhado from "@/assets/produtos/telha_concreto_grafite_telhado.jfif.asset.json";
 import imgCaibroCambara from "@/assets/produtos/caibro_de_cambara.webp.asset.json";
+import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
+import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
+import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
+import imgTerra262 from "@/assets/produtos/pvc-terracota/t262.png.asset.json";
+import imgTerra328 from "@/assets/produtos/pvc-terracota/t328.png.asset.json";
+import imgTerra394 from "@/assets/produtos/pvc-terracota/t394.png.asset.json";
+import imgTerra459 from "@/assets/produtos/pvc-terracota/t459.png.asset.json";
+import imgTerra525 from "@/assets/produtos/pvc-terracota/t525.png.asset.json";
+import imgTerraAplic1 from "@/assets/produtos/pvc-terracota/aplic1.png.asset.json";
+import imgTerraAplic2 from "@/assets/produtos/pvc-terracota/aplic2.png.asset.json";
 
 export const IMG = {
   ceramicaAmericana: imgCeramicaAmericana.url,
@@ -79,8 +89,10 @@ export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
 // TELHA COLONIAL PVC
 export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
   Terracota: [
-    { src: "", alt: "Telha Colonial PVC Terracota" },
-    { src: "", alt: "Detalhe do encaixe — Colonial PVC Terracota" },
+    { src: imgTerraCapa.url, alt: "Telha Colonial PVC Terracota no pátio da loja", legenda: "Estoque na loja — Terracota" },
+    { src: imgTerraAngulo.url, alt: "Telha Colonial PVC Terracota em ângulo" },
+    { src: imgTerraAplic1.url, alt: "Telhado com Telha Colonial PVC Terracota", legenda: "Exemplo de aplicação" },
+    { src: imgTerraAplic2.url, alt: "Telhado com Telha Colonial PVC Terracota e calha", legenda: "Exemplo de aplicação" },
   ],
   Branca: [
     { src: "", alt: "Telha PVC Branca" },
@@ -95,6 +107,31 @@ export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
     { src: imgPvcMarfimTelhado2.url, alt: "Telhado com Telha Colonial PVC Marfim — obra", legenda: "Instalação em estrutura metálica" },
   ],
 };
+
+// Fotos por comprimento — apenas Terracota (Marfim e Cinza aguardando fornecedor)
+const fotosTerracotaPorTamanho: Record<string, { url: string }> = {
+  "230 cm": imgTerra230,
+  "262 cm": imgTerra262,
+  "328 cm": imgTerra328,
+  "394 cm": imgTerra394,
+  "459 cm": imgTerra459,
+  "525 cm": imgTerra525,
+};
+
+/** Galeria da Telha Colonial PVC considerando cor e comprimento selecionado. */
+export function galeriaColonialPVC(cor: string, comprimento?: string | null): ImagemProduto[] {
+  const base = imagensColonialPVC[cor] ?? [];
+  if (cor !== "Terracota" || !comprimento) return base;
+  const foto = fotosTerracotaPorTamanho[comprimento];
+  if (!foto) return base;
+  return [
+    { src: foto.url, alt: `Telha Colonial PVC Terracota ${comprimento}`, legenda: `Comprimento ${comprimento}` },
+    { src: imgTerraCapa.url, alt: "Telha Colonial PVC Terracota no pátio da loja", legenda: "Estoque na loja" },
+    { src: imgTerraAngulo.url, alt: "Telha Colonial PVC Terracota em ângulo" },
+    { src: imgTerraAplic1.url, alt: "Telhado com Telha Colonial PVC Terracota", legenda: "Exemplo de aplicação" },
+    { src: imgTerraAplic2.url, alt: "Telhado com Telha Colonial PVC Terracota e calha", legenda: "Exemplo de aplicação" },
+  ];
+}
 
 // CAMBARÁ — por tipo
 export const imagensCambara: Record<string, ImagemProduto[]> = {
