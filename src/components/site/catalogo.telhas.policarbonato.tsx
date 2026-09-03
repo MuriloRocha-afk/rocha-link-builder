@@ -229,7 +229,11 @@ Poderia verificar estoque e frete?`;
                     }`}
                   >
                     {c.nome}
-                    {c.verificar ? (
+                    {ehPortuguesa && c.nome !== "Barro Vermelho" ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        sob encomenda
+                      </span>
+                    ) : c.verificar ? (
                       <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
                         verificar disponibilidade
                       </span>
@@ -257,7 +261,11 @@ Poderia verificar estoque e frete?`;
                     }`}
                   >
                     {a.nome}
-                    {a.verificar ? (
+                    {ehPortuguesa && a.nome !== "Natural" ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        sob encomenda
+                      </span>
+                    ) : a.verificar ? (
                       <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
                         verificar disponibilidade
                       </span>
