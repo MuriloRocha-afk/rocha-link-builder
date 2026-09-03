@@ -100,7 +100,8 @@ export function ColonialPvcConfigurator({
   const cobertura = Math.round(areaPorPeca * qty * 10) / 10;
 
   const nomeProduto = `Telha ${variante} PVC`;
-  const espessuraLabel = variante === "Colonial" ? "2 mm" : "1,6 mm";
+  const espessuraLabel = ESPESSURA_LABEL[variante];
+  const cores = CORES[variante];
   const detail = `${variante} PVC · ${cor ?? "-"} · ${dimensao ?? "-"} × ${largura.value} · ${espessuraLabel} · cobertura ~${cobertura} m²`;
 
   const mensagem = `Olá! Gostaria de um orçamento:
@@ -109,7 +110,7 @@ export function ColonialPvcConfigurator({
 - Cor: ${cor}
 - Comprimento: ${dimensao}
 - Largura: ${largura.value}
-- Espessura: ${espessuraLabel} (variação natural de até 10%)
+- Espessura: ${espessuraLabel}
 - Quantidade: ${qty} peças
 - Cobertura estimada: ~${cobertura} m²
 
@@ -124,7 +125,13 @@ Poderia verificar estoque e frete?`;
     <ProdutoLayout
       produtoKey={variante === "Colonial" ? "colonial-pvc" : "plan-pvc"}
       especificacoes={[
-        ["Modelo", variante === "Colonial" ? "Colonial (ondulada)" : "Plan (plana)"],
+        ["Marca", "Lux Telhas"],
+        [
+          "Modelo",
+          variante === "Colonial"
+            ? `Colonial (ondulada) · ${ONDAS.Colonial}`
+            : `Plan (plana) · ${ONDAS.Plan}`,
+        ],
         ["Espessura", espessuraNota],
         ["Largura", largura.value],
         [
@@ -133,12 +140,17 @@ Poderia verificar estoque e frete?`;
         ],
         ["Inclinação mínima", "15%"],
         ["Sobreposição", "8 cm"],
-        ["Cores", "Cerâmica (pronta entrega), Marfim, Cinza e Translúcida"],
+        [
+          "Cores",
+          variante === "Colonial"
+            ? "Terracota (pronta entrega), Marfim e Cinza (sob encomenda)"
+            : "Terracota (pronta entrega), Marfim, Cinza e Branca (sob encomenda)",
+        ],
         ["Fixação", "Kit parafuso + vedação na cor"],
       ]}
-      tituloAcessorios={`Acessórios de PVC ${variante} — ${!cor || cor === "Translúcida" ? "Cerâmica" : cor}`}
+      tituloAcessorios={`Acessórios de PVC ${variante} — ${cor ?? "Terracota"}`}
       acessorios={
-        <BlocoAcessorios itens={acessoriosPvc(variante, cor ?? "Cerâmica", qty)} contexto={detail} />
+        <BlocoAcessorios itens={acessoriosPvc(variante, cor ?? "Terracota", qty)} contexto={detail} />
       }
       cabecalho={
         <div>
@@ -152,9 +164,9 @@ Poderia verificar estoque e frete?`;
       }
       galeria={
         <GaleriaProduto
-          titulo={`${nomeProduto} — ${cor ?? "Cerâmica"}`}
+          titulo={`${nomeProduto} — ${cor ?? "Terracota"}`}
           subtitulo="Foto em breve"
-          imagens={imagensColonialPVC[cor ?? "Cerâmica"] ?? []}
+          imagens={imagensColonialPVC[cor ?? "Terracota"] ?? []}
         />
       }
     >
@@ -162,7 +174,7 @@ Poderia verificar estoque e frete?`;
         <div className="space-y-10">
           <Passo n={1} title="Cor / Acabamento">
             <div className="grid gap-3 sm:grid-cols-2">
-              {CORES.map((c) => {
+              {cores.map((c) => {
                 const active = cor === c.value;
                 return (
                   <button
@@ -174,12 +186,8 @@ Poderia verificar estoque e frete?`;
                   >
                     <span
                       aria-hidden
-                      className={`h-10 w-10 shrink-0 rounded-full border border-border ${
-                        c.translucida
-                          ? "bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(180,210,220,0.5))]"
-                          : ""
-                      }`}
-                      style={c.translucida ? undefined : { backgroundColor: c.hex }}
+                      className="h-10 w-10 shrink-0 rounded-full border border-border"
+                      style={{ backgroundColor: c.hex }}
                     />
                     <span className="flex-1">
                       <span className="block text-base font-extrabold text-primary">{c.value}</span>
@@ -281,7 +289,7 @@ Poderia verificar estoque e frete?`;
           ) : null}
 
           {cor ? (
-            <SugestaoCumeeira material="PVC" cor={cor === "Translúcida" ? "Cerâmica" : cor} />
+            <SugestaoCumeeira material="PVC" cor={cor} />
           ) : null}
 
           {cor && dimensao ? (
