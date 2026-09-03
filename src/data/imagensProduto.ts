@@ -108,6 +108,31 @@ export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
   ],
 };
 
+// Fotos por comprimento — apenas Terracota (Marfim e Cinza aguardando fornecedor)
+const fotosTerracotaPorTamanho: Record<string, { url: string }> = {
+  "230 cm": imgTerra230,
+  "262 cm": imgTerra262,
+  "328 cm": imgTerra328,
+  "394 cm": imgTerra394,
+  "459 cm": imgTerra459,
+  "525 cm": imgTerra525,
+};
+
+/** Galeria da Telha Colonial PVC considerando cor e comprimento selecionado. */
+export function galeriaColonialPVC(cor: string, comprimento?: string | null): ImagemProduto[] {
+  const base = imagensColonialPVC[cor] ?? [];
+  if (cor !== "Terracota" || !comprimento) return base;
+  const foto = fotosTerracotaPorTamanho[comprimento];
+  if (!foto) return base;
+  return [
+    { src: foto.url, alt: `Telha Colonial PVC Terracota ${comprimento}`, legenda: `Comprimento ${comprimento}` },
+    { src: imgTerraCapa.url, alt: "Telha Colonial PVC Terracota no pátio da loja", legenda: "Estoque na loja" },
+    { src: imgTerraAngulo.url, alt: "Telha Colonial PVC Terracota em ângulo" },
+    { src: imgTerraAplic1.url, alt: "Telhado com Telha Colonial PVC Terracota", legenda: "Exemplo de aplicação" },
+    { src: imgTerraAplic2.url, alt: "Telhado com Telha Colonial PVC Terracota e calha", legenda: "Exemplo de aplicação" },
+  ];
+}
+
 // CAMBARÁ — por tipo
 export const imagensCambara: Record<string, ImagemProduto[]> = {
   Viga: [
