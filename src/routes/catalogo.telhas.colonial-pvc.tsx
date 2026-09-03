@@ -6,7 +6,7 @@ import { ColonialPvcConfigurator } from "@/components/site/ColonialPvcConfigurat
 
 const TITLE = "Telha Colonial PVC | Rocha Telhas";
 const DESCRIPTION =
-  "Configure sua Telha Colonial PVC: cores cerâmica, cinza, marfim e translúcida, comprimentos de 230 a 525 cm, cobertura em m² em tempo real e cotação no WhatsApp.";
+  "Configure sua Telha Colonial PVC Lux Telhas: 5 ondas, cores terracota, marfim e cinza, comprimentos de 230 a 525 cm, cobertura em m² em tempo real e cotação no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/colonial-pvc")({
   head: () => ({
