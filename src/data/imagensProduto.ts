@@ -69,6 +69,11 @@ import romTerraNatTelhado1 from "@/assets/produtos/ceramica-romana/00_normal_ter
 import romTerraNatTelhado2 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_02.jpg.asset.json";
 import romTerraNatTelhado3 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_03.jpg.asset.json";
 import romResinada from "@/assets/produtos/ceramica-romana/01_encomenda_resinada.avif.asset.json";
+import franProduto from "@/assets/produtos/ceramica-francesa/00_produto.webp.asset.json";
+import franLoja from "@/assets/produtos/ceramica-francesa/00_foto_real_loja.jpg.asset.json";
+import franAplic1 from "@/assets/produtos/ceramica-francesa/aplicacao_01_telhado.jpg.asset.json";
+import franAplic2 from "@/assets/produtos/ceramica-francesa/aplicacao_02_telhado.jpg.asset.json";
+
 
 
 export const IMG = {
@@ -166,7 +171,16 @@ export function galeriaRomana(cor: string, acabamento: string): ImagemProduto[] 
   return ROMANA[`${cor}|${acabamento}`] ?? [];
 }
 
+// TELHA CERÂMICA FRANCESA — única variante, sem opções de cor/acabamento
+export const galeriaFrancesa: ImagemProduto[] = [
+  { src: franProduto.url, alt: "Telha Francesa (Marselha)" },
+  { src: franLoja.url, alt: "Telha Francesa no pátio da loja", legenda: "Foto real — pátio da Rocha Telhas" },
+  { src: franAplic1.url, alt: "Telhado com Telha Francesa", legenda: "Exemplo de aplicação" },
+  { src: franAplic2.url, alt: "Telhado com Telha Francesa", legenda: "Exemplo de aplicação" },
+];
+
 // TELHA FIBROCIMENTO
+
 
 export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
   "153 × 110 cm": [
