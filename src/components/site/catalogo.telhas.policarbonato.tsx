@@ -136,7 +136,7 @@ export function CeramicaConfigurator() {
 🪨 *Telha Cerâmica*
 - Formato: ${formato.nome}
 - Cor: ${corAtiva.nome}
-- Acabamento: ${acabamentoAtivo.nome}${rendimentoAtivo ? `\n- Rendimento: ${rendimentoAtivo.nome} (${rendimentoAtivo.pecasPorM2} pçs/m²)` : ""}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
+- Acabamento: ${acabamentoAtivo.nome}${sobEncomenda ? " (sob encomenda)" : " (pronta entrega)"}${rendimentoAtivo ? `\n- Rendimento: ${rendimentoAtivo.nome} (${rendimentoAtivo.pecasPorM2} pçs/m²)` : ""}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
 - Quantidade: ${qty} peças
 - Cobertura estimada: ~${cobertura} m²
 
@@ -345,7 +345,15 @@ Poderia verificar estoque e frete?`;
               Quantidade: {qty} peças · Cobertura: ~{cobertura} m²
               {formato.marcas ? ` · Marcas: ${formato.marcas}` : ""}
             </p>
-            {precisaVerificar ? (
+            {sobEncomenda ? (
+              <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
+                Esta combinação: sob encomenda (mostruário)
+              </p>
+            ) : ehPortuguesa ? (
+              <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
+                Pronta entrega
+              </p>
+            ) : precisaVerificar ? (
               <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
                 Esta combinação: verificar disponibilidade
               </p>
