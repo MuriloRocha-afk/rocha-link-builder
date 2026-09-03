@@ -17,6 +17,16 @@ type Props = {
 export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em breve" }: Props) {
   const [indexAtivo, setIndexAtivo] = useState(0);
   const [erros, setErros] = useState<Record<number, boolean>>({});
+  const [zoom, setZoom] = useState(false);
+
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoom(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoom]);
 
   const lista: ImagemProduto[] =
     imagens.length > 0 ? imagens : [{ src: "", alt: titulo }];
