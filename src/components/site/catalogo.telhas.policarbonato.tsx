@@ -159,7 +159,7 @@ Poderia verificar estoque e frete?`;
         <GaleriaProduto
           titulo={`Telha Cerâmica ${nomeCompleto}`}
           subtitulo="Foto em breve"
-          imagens={imagensCeramica[formato.imagemKey] ?? []}
+          imagens={imagensAtivas}
         />
       }
     >
