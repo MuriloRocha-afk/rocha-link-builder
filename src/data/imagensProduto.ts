@@ -89,8 +89,10 @@ export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
 // TELHA COLONIAL PVC
 export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
   Terracota: [
-    { src: "", alt: "Telha Colonial PVC Terracota" },
-    { src: "", alt: "Detalhe do encaixe — Colonial PVC Terracota" },
+    { src: imgTerraCapa.url, alt: "Telha Colonial PVC Terracota no pátio da loja", legenda: "Estoque na loja — Terracota" },
+    { src: imgTerraAngulo.url, alt: "Telha Colonial PVC Terracota em ângulo" },
+    { src: imgTerraAplic1.url, alt: "Telhado com Telha Colonial PVC Terracota", legenda: "Exemplo de aplicação" },
+    { src: imgTerraAplic2.url, alt: "Telhado com Telha Colonial PVC Terracota e calha", legenda: "Exemplo de aplicação" },
   ],
   Branca: [
     { src: "", alt: "Telha PVC Branca" },
