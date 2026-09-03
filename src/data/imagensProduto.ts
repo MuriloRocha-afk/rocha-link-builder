@@ -335,3 +335,44 @@ export const imagensConcreto: Record<string, ImagemProduto[]> = {
     { src: imgConcretoGrafiteTelhado.url, alt: "Telhado com Telha de Concreto Grafite", legenda: "Aplicação em telhado" },
   ],
 };
+
+// ─────────────────────────────────────────────────────────────
+// TELHA PLAN PVC — por cor e comprimento
+// ─────────────────────────────────────────────────────────────
+const planFotosPorTamanho: Record<string, Record<string, { url: string }>> = {
+  Terracota: { "198 cm": planTerra198, "242 cm": planTerra242, "330 cm": planTerra330 },
+  Marfim: { "198 cm": planMarfim198, "242 cm": planMarfim242, "330 cm": planMarfim330 },
+  Cinza: { "198 cm": planCinza198, "242 cm": planCinza242, "330 cm": planCinza330 },
+};
+
+const planAplicacoesPorCor: Record<string, ImagemProduto[]> = {
+  Terracota: [
+    { src: planTerraAplic1.url, alt: "Telhado com Telha Plan PVC Terracota", legenda: "Exemplo de aplicação" },
+    { src: planTerraAplic2.url, alt: "Telhado com Telha Plan PVC Terracota", legenda: "Exemplo de aplicação" },
+  ],
+  Marfim: [
+    { src: planMarfimAplic1.url, alt: "Telhado com Telha Plan PVC Marfim", legenda: "Exemplo de aplicação" },
+    { src: planMarfimAplic2.url, alt: "Telhado com Telha Plan PVC Marfim", legenda: "Exemplo de aplicação" },
+  ],
+  Cinza: [
+    { src: planCinzaAplic1.url, alt: "Telhado com Telha Plan PVC Cinza", legenda: "Exemplo de aplicação" },
+    { src: planCinzaAplic2.url, alt: "Telhado com Telha Plan PVC Cinza", legenda: "Exemplo de aplicação" },
+  ],
+};
+
+const planCapaPorCor: Record<string, ImagemProduto[]> = {
+  Terracota: [],
+  Marfim: [{ src: planMarfimCapa.url, alt: "Telha Plan PVC Marfim em ângulo" }],
+  Cinza: [{ src: planCinzaCapa.url, alt: "Telha Plan PVC Cinza em ângulo" }],
+};
+
+/** Galeria da Telha Plan PVC considerando cor e comprimento selecionado. */
+export function galeriaPlanPVC(cor: string, comprimento?: string | null): ImagemProduto[] {
+  const aplicacoes = planAplicacoesPorCor[cor] ?? [];
+  const foto = comprimento ? planFotosPorTamanho[cor]?.[comprimento] : undefined;
+  if (!foto) return [...(planCapaPorCor[cor] ?? []), ...aplicacoes];
+  return [
+    { src: foto.url, alt: `Telha Plan PVC ${cor} ${comprimento}`, legenda: `Comprimento ${comprimento}` },
+    ...aplicacoes,
+  ];
+}
