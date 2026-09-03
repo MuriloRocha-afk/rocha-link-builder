@@ -12,17 +12,21 @@ import { imagensColonialPVC } from "@/data/imagensProduto";
 
 type Variante = "Colonial" | "Plan";
 
-const CORES = [
-  { value: "Cerâmica", hex: "#C1440E", badge: "Pronta entrega" },
-  { value: "Marfim", hex: "#F5F0DC", nota: "Verificar disponibilidade" },
-  { value: "Cinza", hex: "#808080", nota: "Verificar disponibilidade" },
-  {
-    value: "Translúcida",
-    hex: "transparent",
-    translucida: true,
-    nota: "Verificar disponibilidade",
-  },
-];
+type CorOpcao = { value: string; hex: string; badge?: string; nota?: string };
+
+const CORES: Record<Variante, CorOpcao[]> = {
+  Colonial: [
+    { value: "Terracota", hex: "#C1440E", badge: "Pronta entrega" },
+    { value: "Marfim", hex: "#F5F0DC", nota: "Sob encomenda" },
+    { value: "Cinza", hex: "#808080", nota: "Sob encomenda" },
+  ],
+  Plan: [
+    { value: "Terracota", hex: "#C1440E", badge: "Pronta entrega" },
+    { value: "Marfim", hex: "#F5F0DC", nota: "Sob encomenda" },
+    { value: "Cinza", hex: "#808080", nota: "Sob encomenda" },
+    { value: "Branca", hex: "#F7F7F5", nota: "Sob encomenda" },
+  ],
+};
 
 const COMPRIMENTOS: Record<Variante, { value: string; metros: number; badge?: string }[]> = {
   Colonial: [
@@ -46,8 +50,18 @@ const LARGURA: Record<Variante, { value: string; util: number }> = {
 };
 
 const ESPESSURA_NOTA: Record<Variante, string> = {
-  Colonial: "2 mm (variação natural do processo, podendo variar até 10%)",
+  Colonial: "Varia conforme o comprimento (aproximadamente 1,7 mm a 2,5 mm)",
   Plan: "1,6 mm (variação natural do processo, podendo variar até 10%)",
+};
+
+const ESPESSURA_LABEL: Record<Variante, string> = {
+  Colonial: "1,7 a 2,5 mm",
+  Plan: "1,6 mm",
+};
+
+const ONDAS: Record<Variante, string> = {
+  Colonial: "5 ondas",
+  Plan: "6 ondas",
 };
 
 const SOBREPOSICAO = 0.08;
