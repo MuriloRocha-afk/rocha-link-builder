@@ -8,7 +8,7 @@ import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosPvc } from "@/data/acessoriosTelhas";
-import { imagensColonialPVC, galeriaColonialPVC } from "@/data/imagensProduto";
+import { galeriaColonialPVC, galeriaPlanPVC } from "@/data/imagensProduto";
 
 type Variante = "Colonial" | "Plan";
 
@@ -143,7 +143,7 @@ Poderia verificar estoque e frete?`;
           "Cores",
           variante === "Colonial"
             ? "Terracota (pronta entrega), Marfim e Cinza (sob encomenda)"
-            : "Terracota (pronta entrega), Marfim, Cinza e Branca (sob encomenda)",
+            : "Terracota (pronta entrega), Marfim e Cinza (sob encomenda)",
         ],
         ["Fixação", "Kit parafuso + vedação na cor"],
       ]}
@@ -168,7 +168,7 @@ Poderia verificar estoque e frete?`;
           imagens={
             variante === "Colonial"
               ? galeriaColonialPVC(cor ?? "Terracota", dimensao)
-              : (imagensColonialPVC[cor ?? "Terracota"] ?? [])
+              : galeriaPlanPVC(cor ?? "Terracota", dimensao)
           }
         />
       }
