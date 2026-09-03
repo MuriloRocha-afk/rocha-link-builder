@@ -87,11 +87,6 @@ export const TABELA_PRECOS: Record<string, EntradaPreco> = {
     min: p("00196", "Telha Romana - Resinada (Isotec)", 2.45),
     max: p("011068", "Telha Romana - Top Telha Terracota Prime", 3.05),
   },
-  "telha.cer-amer": {
-    unidade: "un",
-    min: p("00190", "Telha Americana - Resinada - Cerâmica (Top Telha)", 3.05),
-    max: p("00190", "Telha Americana - Resinada - Cerâmica (Top Telha)", 3.05),
-  },
 
   // ---------- Policarbonato ----------
   "telha.pol-183": {

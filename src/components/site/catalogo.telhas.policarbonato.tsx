@@ -57,16 +57,6 @@ const FORMATOS: Formato[] = [
     descricao: "Linhas retas e onda suave, visual contemporâneo.",
   },
   {
-    value: "americana",
-    nome: "Americana",
-    marcas: "Rodrigues",
-    cores: [{ nome: "Barro Vermelho" }],
-    acabamentos: [{ nome: "Resinada" }],
-    pecasPorM2: 16,
-    imagemKey: "americana-resinada",
-    descricao: "Perfil plano com onda larga e alto rendimento.",
-  },
-  {
     value: "francesa",
     nome: "Francesa (Marselha)",
     cores: [{ nome: "Barro Vermelho" }],
@@ -94,7 +84,7 @@ const FORMATOS: Formato[] = [
 ];
 
 const SPECS = [
-  { label: "Formatos", value: "Portuguesa, Romana, Americana, Francesa e Mediterrânea" },
+  { label: "Formatos", value: "Portuguesa, Romana, Francesa e Mediterrânea" },
   { label: "Acabamentos", value: "Natural, Resinada e Prime (Resinado)" },
   { label: "Rendimento Romana", value: "R13 (13 pçs/m²) e R17 (17 pçs/m²)" },
   { label: "Marcas", value: "Isotec, Rodrigues, Laranjal e Top Telha" },
@@ -158,7 +148,7 @@ Poderia verificar estoque e frete?`;
         <div>
           <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">Telha Cerâmica</h1>
           <p className="mt-2 text-sm text-gray-500">
-            Portuguesa, Romana, Americana, Francesa e Mediterrânea — natural ou resinada. Escolha o
+            Portuguesa, Romana, Francesa e Mediterrânea — natural ou resinada. Escolha o
             formato e a galeria atualiza.
           </p>
         </div>

@@ -64,7 +64,6 @@ const MODELOS: Modelo[] = [
     dimensoes: [
       { id: "romana", label: "Romana (41 x 24 cm)", rendimento: 16 },
       { id: "portuguesa", label: "Portuguesa (46 x 24 cm)", rendimento: 17 },
-      { id: "americana", label: "Americana", rendimento: 12.5 },
       { id: "mediterranea", label: "Mediterrânea", rendimento: 12 },
     ],
   },
