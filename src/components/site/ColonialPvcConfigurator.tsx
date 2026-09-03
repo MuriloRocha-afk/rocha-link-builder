@@ -24,7 +24,6 @@ const CORES: Record<Variante, CorOpcao[]> = {
     { value: "Terracota", hex: "#C1440E", badge: "Pronta entrega" },
     { value: "Marfim", hex: "#F5F0DC", nota: "Sob encomenda" },
     { value: "Cinza", hex: "#808080", nota: "Sob encomenda" },
-    { value: "Branca", hex: "#F7F7F5", nota: "Sob encomenda" },
   ],
 };
 
