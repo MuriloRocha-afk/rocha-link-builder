@@ -130,6 +130,56 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
           ))}
         </div>
       )}
+      {/* Lightbox */}
+      {zoom && !temErro && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={imagemAtiva.alt}
+          onClick={() => setZoom(false)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4"
+        >
+          <button
+            type="button"
+            onClick={() => setZoom(false)}
+            aria-label="Fechar"
+            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
+          >
+            <X size={20} />
+          </button>
+          {lista.length > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Imagem anterior"
+                onClick={(e) => { e.stopPropagation(); anterior(); }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                type="button"
+                aria-label="Próxima imagem"
+                onClick={(e) => { e.stopPropagation(); proximo(); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
+          <img
+            src={imagemAtiva.src}
+            alt={imagemAtiva.alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[88vh] max-w-[92vw] object-contain"
+          />
+          {imagemAtiva.legenda && (
+            <p className="absolute bottom-5 left-0 right-0 text-center text-sm text-white/80">
+              {imagemAtiva.legenda}
+            </p>
+          )}
+        </div>
+      )}
     </section>
   );
 }
