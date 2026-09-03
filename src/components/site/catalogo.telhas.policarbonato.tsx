@@ -124,6 +124,7 @@ export function CeramicaConfigurator() {
   }`;
   const ehPortuguesa = formatoId === "portuguesa";
   const ehRomana = formatoId === "romana";
+  const ehFrancesa = formatoId === "francesa";
   const sobEncomenda = ehPortuguesa
     ? !(corAtiva.nome === "Barro Vermelho" && acabamentoAtivo.nome === "Natural")
     : ehRomana
@@ -134,7 +135,10 @@ export function CeramicaConfigurator() {
     ? galeriaPortuguesa(corAtiva.nome, acabamentoAtivo.nome)
     : ehRomana
       ? galeriaRomana(corAtiva.nome, acabamentoAtivo.nome)
-      : (imagensCeramica[formato.imagemKey] ?? []);
+      : ehFrancesa
+        ? galeriaFrancesa
+        : (imagensCeramica[formato.imagemKey] ?? []);
+
 
 
   const detail = `Telha Cerâmica · ${nomeCompleto} · cobertura ~${cobertura} m²`;
