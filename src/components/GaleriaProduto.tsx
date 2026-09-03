@@ -52,13 +52,23 @@ export default function GaleriaProduto({ imagens, titulo, subtitulo = "Foto em b
             </div>
           </div>
         ) : (
-          <img
-            key={imagemAtiva.src}
-            src={imagemAtiva.src}
-            alt={imagemAtiva.alt}
-            onError={() => setErros((e) => ({ ...e, [index]: true }))}
-            className="w-full h-full object-cover transition-opacity duration-300"
-          />
+          <button
+            type="button"
+            onClick={() => setZoom(true)}
+            aria-label="Ampliar imagem"
+            className="group w-full h-full flex items-center justify-center cursor-zoom-in"
+          >
+            <img
+              key={imagemAtiva.src}
+              src={imagemAtiva.src}
+              alt={imagemAtiva.alt}
+              onError={() => setErros((e) => ({ ...e, [index]: true }))}
+              className="w-full h-full object-contain transition-opacity duration-300"
+            />
+            <span className="absolute top-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white opacity-80 group-hover:bg-black/60">
+              <Maximize2 size={15} />
+            </span>
+          </button>
         )}
 
         {/* Setas de navegação — só aparecem com 2+ imagens */}
