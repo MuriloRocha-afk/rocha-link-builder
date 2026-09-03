@@ -6,7 +6,7 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
-import { imagensCeramica, galeriaPortuguesa, galeriaRomana } from "@/data/imagensProduto";
+import { imagensCeramica, galeriaPortuguesa, galeriaRomana, galeriaFrancesa } from "@/data/imagensProduto";
 
 type Opcao = { nome: string; verificar?: boolean };
 
