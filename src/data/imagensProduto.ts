@@ -90,6 +90,13 @@ import medCafeTelhado from "@/assets/produtos/ceramica-mediterranea/05_encomenda
 import medCafeTelhado2 from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado_02_sem_marca_vilhena.jpg.asset.json";
 import medGrena from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada.avif.asset.json";
 import medGrenaTelhado from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada_telhado.jpg.asset.json";
+import polCristalProduto from "@/assets/produtos/policarbonato/cristal_produto.webp.asset.json";
+import polCristalTelhado1 from "@/assets/produtos/policarbonato/cristal_telhado_01.jfif.asset.json";
+import polCristalTelhado2 from "@/assets/produtos/policarbonato/cristal_telhado_02.webp.asset.json";
+import polCristalTelhado3 from "@/assets/produtos/policarbonato/cristal_telhado_03.webp.asset.json";
+import polGreccaProduto from "@/assets/produtos/policarbonato/grecca_produto.webp.asset.json";
+import polGreccaTelhado from "@/assets/produtos/policarbonato/grecca_telhado.webp.asset.json";
+
 
 
 
