@@ -123,12 +123,19 @@ export function CeramicaConfigurator() {
     rendimentoAtivo ? ` · ${rendimentoAtivo.nome}` : ""
   }`;
   const ehPortuguesa = formatoId === "portuguesa";
-  const sobEncomenda =
-    ehPortuguesa && !(corAtiva.nome === "Barro Vermelho" && acabamentoAtivo.nome === "Natural");
+  const ehRomana = formatoId === "romana";
+  const sobEncomenda = ehPortuguesa
+    ? !(corAtiva.nome === "Barro Vermelho" && acabamentoAtivo.nome === "Natural")
+    : ehRomana
+      ? acabamentoAtivo.nome !== "Natural"
+      : false;
   const precisaVerificar = corAtiva.verificar || acabamentoAtivo.verificar || sobEncomenda;
   const imagensAtivas = ehPortuguesa
     ? galeriaPortuguesa(corAtiva.nome, acabamentoAtivo.nome)
-    : (imagensCeramica[formato.imagemKey] ?? []);
+    : ehRomana
+      ? galeriaRomana(corAtiva.nome, acabamentoAtivo.nome)
+      : (imagensCeramica[formato.imagemKey] ?? []);
+
 
   const detail = `Telha Cerâmica · ${nomeCompleto} · cobertura ~${cobertura} m²`;
 
