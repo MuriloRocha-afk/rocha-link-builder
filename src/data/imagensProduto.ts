@@ -78,9 +78,12 @@ export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
 
 // TELHA COLONIAL PVC
 export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
-  "Cerâmica": [
-    { src: "", alt: "Telha Colonial PVC Cerâmica" },
-    { src: "", alt: "Detalhe do encaixe — Colonial PVC Cerâmica" },
+  Terracota: [
+    { src: "", alt: "Telha Colonial PVC Terracota" },
+    { src: "", alt: "Detalhe do encaixe — Colonial PVC Terracota" },
+  ],
+  Branca: [
+    { src: "", alt: "Telha PVC Branca" },
   ],
   Cinza: [
     { src: imgColonialPvc.url, alt: "Telha Colonial PVC" },
@@ -90,9 +93,6 @@ export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
     { src: imgPvcMarfim.url, alt: "Telha Colonial PVC Marfim" },
     { src: imgPvcMarfimTelhado.url, alt: "Telhado com Telha Colonial PVC Marfim", legenda: "Aplicação em telhado" },
     { src: imgPvcMarfimTelhado2.url, alt: "Telhado com Telha Colonial PVC Marfim — obra", legenda: "Instalação em estrutura metálica" },
-  ],
-  "Translúcida": [
-    { src: "", alt: "Telha Colonial PVC Translúcida" },
   ],
 };
 

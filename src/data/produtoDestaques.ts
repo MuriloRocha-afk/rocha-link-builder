@@ -12,7 +12,7 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
   "colonial-pvc": {
     badges: [
       { icone: "🚫", texto: "Não enferruja" },
-      { icone: "🎨", texto: "4 cores" },
+      { icone: "🎨", texto: "3 cores" },
       { icone: "📐", texto: "6 comprimentos" },
       { icone: "⚡", texto: "Fácil instalação" },
     ],

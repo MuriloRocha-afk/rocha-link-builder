@@ -28,7 +28,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     name: "Telha Colonial PVC",
     image: pvc,
     description:
-      "Perfil ondulado com visual de barro. Comprimento, largura e espessura nas cores Cerâmica, Marfim, Cinza e Translúcida.",
+      "Perfil ondulado de 5 ondas com visual de barro. Cores Terracota, Marfim e Cinza.",
     badge: "Top Venda #2",
     cta: "Escolher Modelo e Cor",
   },
@@ -37,7 +37,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     name: "Telha Plan PVC",
     image: pvc,
     description:
-      "Perfil plano e moderno de encaixe reto. Comprimento, largura e espessura nas cores Cerâmica, Marfim e Cinza.",
+      "Perfil plano de 6 ondas com encaixe reto. Cores Terracota, Marfim, Cinza e Branca.",
     cta: "Escolher Modelo e Cor",
   },
   {
