@@ -166,7 +166,11 @@ Poderia verificar estoque e frete?`;
         <GaleriaProduto
           titulo={`${nomeProduto} — ${cor ?? "Terracota"}`}
           subtitulo="Foto em breve"
-          imagens={imagensColonialPVC[cor ?? "Terracota"] ?? []}
+          imagens={
+            variante === "Colonial"
+              ? galeriaColonialPVC(cor ?? "Terracota", dimensao)
+              : (imagensColonialPVC[cor ?? "Terracota"] ?? [])
+          }
         />
       }
     >
