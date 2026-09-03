@@ -6,7 +6,7 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
-import { imagensCeramica, galeriaPortuguesa, galeriaRomana, galeriaFrancesa } from "@/data/imagensProduto";
+import { imagensCeramica, galeriaPortuguesa, galeriaRomana, galeriaFrancesa, galeriaMediterranea } from "@/data/imagensProduto";
 
 type Opcao = { nome: string; verificar?: boolean };
 
@@ -66,14 +66,15 @@ const FORMATOS: Formato[] = [
     value: "mediterranea",
     nome: "Mediterrânea",
     cores: [
+      { nome: "Terracota" },
       { nome: "Marfim" },
-      { nome: "Viga", verificar: true },
-      { nome: "Grená", verificar: true },
-      { nome: "Pérola", verificar: true },
-      { nome: "Café", verificar: true },
-      { nome: "Royal", verificar: true },
+      { nome: "Pérola" },
+      { nome: "Royal" },
+      { nome: "Vigo" },
+      { nome: "Café" },
+      { nome: "Grená" },
     ],
-    acabamentos: [{ nome: "Prime (Resinado)" }],
+    acabamentos: [{ nome: "Resinada" }],
     pecasPorM2: 13,
     imagemKey: "romana-top",
     descricao: "Onda ampla, cobertura maior por peça.",
@@ -82,7 +83,7 @@ const FORMATOS: Formato[] = [
 
 const SPECS = [
   { label: "Formatos", value: "Portuguesa, Romana, Francesa e Mediterrânea" },
-  { label: "Acabamentos", value: "Natural, Resinada e Prime (Resinado)" },
+  { label: "Acabamentos", value: "Natural e Resinada" },
   { label: "Rendimento Romana", value: "R13 (13 pçs/m²) e R17 (17 pçs/m²)" },
   { label: "Marcas", value: "Isotec, Rodrigues, Laranjal e Top Telha" },
   { label: "Inclinação mínima", value: "30%" },
@@ -125,11 +126,14 @@ export function CeramicaConfigurator() {
   const ehPortuguesa = formatoId === "portuguesa";
   const ehRomana = formatoId === "romana";
   const ehFrancesa = formatoId === "francesa";
+  const ehMediterranea = formatoId === "mediterranea";
   const sobEncomenda = ehPortuguesa
     ? !(corAtiva.nome === "Barro Vermelho" && acabamentoAtivo.nome === "Natural")
     : ehRomana
       ? acabamentoAtivo.nome !== "Natural"
-      : false;
+      : ehMediterranea
+        ? corAtiva.nome !== "Terracota"
+        : false;
   const precisaVerificar = corAtiva.verificar || acabamentoAtivo.verificar || sobEncomenda;
   const imagensAtivas = ehPortuguesa
     ? galeriaPortuguesa(corAtiva.nome, acabamentoAtivo.nome)
@@ -137,7 +141,9 @@ export function CeramicaConfigurator() {
       ? galeriaRomana(corAtiva.nome, acabamentoAtivo.nome)
       : ehFrancesa
         ? galeriaFrancesa
-        : (imagensCeramica[formato.imagemKey] ?? []);
+        : ehMediterranea
+          ? galeriaMediterranea(corAtiva.nome)
+          : (imagensCeramica[formato.imagemKey] ?? []);
 
 
 
@@ -241,7 +247,8 @@ Poderia verificar estoque e frete?`;
                     }`}
                   >
                     {c.nome}
-                    {ehPortuguesa && c.nome !== "Barro Vermelho" ? (
+                    {(ehPortuguesa && c.nome !== "Barro Vermelho") ||
+                    (ehMediterranea && c.nome !== "Terracota") ? (
                       <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
                         sob encomenda
                       </span>
