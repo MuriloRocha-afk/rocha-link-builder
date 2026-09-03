@@ -42,8 +42,8 @@ const FORMATOS: Formato[] = [
     nome: "Romana",
     badge: "Campeão",
     marcas: "Laranjal e Top Telha",
-    cores: [{ nome: "Barro Vermelho" }],
-    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
+    cores: [{ nome: "Terracota" }],
+    acabamentos: [{ nome: "Natural" }, { nome: "Resinada" }],
     rendimentos: [
       { nome: "R13", pecasPorM2: 13, descricao: "13 telhas por m² — peça maior" },
       { nome: "R17", pecasPorM2: 17, descricao: "17 telhas por m² — peça menor" },
@@ -52,6 +52,7 @@ const FORMATOS: Formato[] = [
     imagemKey: "romana-resinada",
     descricao: "Linhas retas e onda suave, visual contemporâneo.",
   },
+
   {
     value: "francesa",
     nome: "Francesa (Marselha)",
