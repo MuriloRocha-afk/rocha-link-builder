@@ -18,6 +18,22 @@ import imgTerra459 from "@/assets/produtos/pvc-terracota/t459.png.asset.json";
 import imgTerra525 from "@/assets/produtos/pvc-terracota/t525.png.asset.json";
 import imgTerraAplic1 from "@/assets/produtos/pvc-terracota/aplic1.png.asset.json";
 import imgTerraAplic2 from "@/assets/produtos/pvc-terracota/aplic2.png.asset.json";
+import imgMarfim230 from "@/assets/produtos/pvc-marfim/01_230cm_marfim.png.asset.json";
+import imgMarfim262 from "@/assets/produtos/pvc-marfim/02_262cm_marfim.png.asset.json";
+import imgMarfim328 from "@/assets/produtos/pvc-marfim/03_328cm_marfim.png.asset.json";
+import imgMarfim394 from "@/assets/produtos/pvc-marfim/04_394cm_marfim.png.asset.json";
+import imgMarfim459 from "@/assets/produtos/pvc-marfim/05_459cm_marfim.png.asset.json";
+import imgMarfim525 from "@/assets/produtos/pvc-marfim/06_525cm_marfim.png.asset.json";
+import imgMarfimAplic from "@/assets/produtos/pvc-marfim/aplicacao_telhado_render_marfim.jpg.asset.json";
+import imgMarfimAngulo from "@/assets/produtos/pvc-marfim/extra_angulo_marfim.png.asset.json";
+import imgCinza230 from "@/assets/produtos/pvc-cinza/01_230cm_cinza.png.asset.json";
+import imgCinza262 from "@/assets/produtos/pvc-cinza/02_262cm_cinza.png.asset.json";
+import imgCinza328 from "@/assets/produtos/pvc-cinza/03_328cm_cinza.png.asset.json";
+import imgCinza394 from "@/assets/produtos/pvc-cinza/04_394cm_cinza.png.asset.json";
+import imgCinza459 from "@/assets/produtos/pvc-cinza/05_459cm_cinza.png.asset.json";
+import imgCinza525 from "@/assets/produtos/pvc-cinza/06_525cm_cinza.png.asset.json";
+import imgCinzaAplic from "@/assets/produtos/pvc-cinza/aplicacao_telhado_render_cinza.webp.asset.json";
+import imgCinzaAngulo from "@/assets/produtos/pvc-cinza/extra_angulo_cinza.png.asset.json";
 
 export const IMG = {
   ceramicaAmericana: imgCeramicaAmericana.url,
