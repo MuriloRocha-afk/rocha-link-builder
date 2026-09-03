@@ -50,6 +50,19 @@ import planCinza242 from "@/assets/produtos/plan-cinza/p242.png.asset.json";
 import planCinza330 from "@/assets/produtos/plan-cinza/p330.png.asset.json";
 import planCinzaAplic1 from "@/assets/produtos/plan-cinza/aplic1.webp.asset.json";
 import planCinzaAplic2 from "@/assets/produtos/plan-cinza/aplic2.webp.asset.json";
+import portVermNat from "@/assets/produtos/ceramica-portuguesa/00_normal_barro_vermelho_natural.webp.asset.json";
+import portVermNatTelhado from "@/assets/produtos/ceramica-portuguesa/00_normal_barro_vermelho_natural_telhado.webp.asset.json";
+import portVermNatLoja from "@/assets/produtos/ceramica-portuguesa/00_normal_foto_real_loja.jpg.asset.json";
+import portVermRes from "@/assets/produtos/ceramica-portuguesa/01_encomenda_barro_vermelho_resinado.webp.asset.json";
+import portVermResTelhado from "@/assets/produtos/ceramica-portuguesa/01_encomenda_barro_vermelho_resinado_telhado.webp.asset.json";
+import portBrancoNat from "@/assets/produtos/ceramica-portuguesa/02_encomenda_barro_branco_natural.jfif.asset.json";
+import portBrancoNatTelhado from "@/assets/produtos/ceramica-portuguesa/02_encomenda_barro_branco_natural_telhado.jpg.asset.json";
+import portBrancoRes from "@/assets/produtos/ceramica-portuguesa/03_encomenda_barro_branco_resinado.jfif.asset.json";
+import portBrancoResTelhado from "@/assets/produtos/ceramica-portuguesa/03_encomenda_barro_branco_resinado_telhado.webp.asset.json";
+import portMescNat from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesclada_natural.jfif.asset.json";
+import portMescNatTelhado from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesclada_natural_telhado.webp.asset.json";
+import portMescRes from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado.jpg.asset.json";
+import portMescResTelhado from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado_telhado.jpg.asset.json";
 
 export const IMG = {
   ceramicaMesclada: imgCeramicaMesclada.url,
