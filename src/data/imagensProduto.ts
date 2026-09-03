@@ -63,6 +63,13 @@ import portMescNat from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesc
 import portMescNatTelhado from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesclada_natural_telhado.webp.asset.json";
 import portMescRes from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado.jpg.asset.json";
 import portMescResTelhado from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado_telhado.jpg.asset.json";
+import romTerraNat from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural.avif.asset.json";
+import romTerraNatLoja from "@/assets/produtos/ceramica-romana/00_normal_foto_real_loja.jpg.asset.json";
+import romTerraNatTelhado1 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_01.webp.asset.json";
+import romTerraNatTelhado2 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_02.jpg.asset.json";
+import romTerraNatTelhado3 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_03.jpg.asset.json";
+import romResinada from "@/assets/produtos/ceramica-romana/01_encomenda_resinada.avif.asset.json";
+
 
 export const IMG = {
   ceramicaMesclada: imgCeramicaMesclada.url,
