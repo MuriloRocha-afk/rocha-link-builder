@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, Camera } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, Camera, X, Maximize2 } from "lucide-react";
 
 export type ImagemProduto = {
   src: string;
