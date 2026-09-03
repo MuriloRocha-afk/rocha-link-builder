@@ -50,6 +50,19 @@ import planCinza242 from "@/assets/produtos/plan-cinza/p242.png.asset.json";
 import planCinza330 from "@/assets/produtos/plan-cinza/p330.png.asset.json";
 import planCinzaAplic1 from "@/assets/produtos/plan-cinza/aplic1.webp.asset.json";
 import planCinzaAplic2 from "@/assets/produtos/plan-cinza/aplic2.webp.asset.json";
+import portVermNat from "@/assets/produtos/ceramica-portuguesa/00_normal_barro_vermelho_natural.webp.asset.json";
+import portVermNatTelhado from "@/assets/produtos/ceramica-portuguesa/00_normal_barro_vermelho_natural_telhado.webp.asset.json";
+import portVermNatLoja from "@/assets/produtos/ceramica-portuguesa/00_normal_foto_real_loja.jpg.asset.json";
+import portVermRes from "@/assets/produtos/ceramica-portuguesa/01_encomenda_barro_vermelho_resinado.webp.asset.json";
+import portVermResTelhado from "@/assets/produtos/ceramica-portuguesa/01_encomenda_barro_vermelho_resinado_telhado.webp.asset.json";
+import portBrancoNat from "@/assets/produtos/ceramica-portuguesa/02_encomenda_barro_branco_natural.jfif.asset.json";
+import portBrancoNatTelhado from "@/assets/produtos/ceramica-portuguesa/02_encomenda_barro_branco_natural_telhado.jpg.asset.json";
+import portBrancoRes from "@/assets/produtos/ceramica-portuguesa/03_encomenda_barro_branco_resinado.jfif.asset.json";
+import portBrancoResTelhado from "@/assets/produtos/ceramica-portuguesa/03_encomenda_barro_branco_resinado_telhado.webp.asset.json";
+import portMescNat from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesclada_natural.jfif.asset.json";
+import portMescNatTelhado from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesclada_natural_telhado.webp.asset.json";
+import portMescRes from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado.jpg.asset.json";
+import portMescResTelhado from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado_telhado.jpg.asset.json";
 
 export const IMG = {
   ceramicaMesclada: imgCeramicaMesclada.url,
@@ -92,6 +105,40 @@ export const imagensCeramica: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Telha Romana Top Telha Terracota Prime" },
   ],
 };
+
+// TELHA CERÂMICA PORTUGUESA — galeria por cor + acabamento
+// Cada combinação usa APENAS as suas próprias fotos.
+const PORTUGUESA: Record<string, ImagemProduto[]> = {
+  "Barro Vermelho|Natural": [
+    { src: portVermNat.url, alt: "Telha Portuguesa Barro Vermelho Natural" },
+    { src: portVermNatLoja.url, alt: "Telha Portuguesa Barro Vermelho Natural no pátio da loja", legenda: "Foto real — pátio da Rocha Telhas" },
+    { src: portVermNatTelhado.url, alt: "Telhado com Telha Portuguesa Barro Vermelho Natural", legenda: "Exemplo de aplicação" },
+  ],
+  "Barro Vermelho|Resinado": [
+    { src: portVermRes.url, alt: "Telha Portuguesa Barro Vermelho Resinado" },
+    { src: portVermResTelhado.url, alt: "Telhado com Telha Portuguesa Barro Vermelho Resinado", legenda: "Exemplo de aplicação" },
+  ],
+  "Barro Branco|Natural": [
+    { src: portBrancoNat.url, alt: "Telha Portuguesa Barro Branco Natural" },
+    { src: portBrancoNatTelhado.url, alt: "Telhado com Telha Portuguesa Barro Branco Natural", legenda: "Exemplo de aplicação" },
+  ],
+  "Barro Branco|Resinado": [
+    { src: portBrancoRes.url, alt: "Telha Portuguesa Barro Branco Resinado" },
+    { src: portBrancoResTelhado.url, alt: "Telhado com Telha Portuguesa Barro Branco Resinado", legenda: "Exemplo de aplicação" },
+  ],
+  "Mesclada|Natural": [
+    { src: portMescNat.url, alt: "Telha Portuguesa Mesclada Natural" },
+    { src: portMescNatTelhado.url, alt: "Telhado com Telha Portuguesa Mesclada Natural", legenda: "Exemplo de aplicação" },
+  ],
+  "Mesclada|Resinado": [
+    { src: portMescRes.url, alt: "Telha Portuguesa Mesclada Resinado" },
+    { src: portMescResTelhado.url, alt: "Telhado com Telha Portuguesa Mesclada Resinado", legenda: "Exemplo de aplicação" },
+  ],
+};
+
+export function galeriaPortuguesa(cor: string, acabamento: string): ImagemProduto[] {
+  return PORTUGUESA[`${cor}|${acabamento}`] ?? [];
+}
 
 // TELHA FIBROCIMENTO
 export const imagensFibrocimento: Record<string, ImagemProduto[]> = {

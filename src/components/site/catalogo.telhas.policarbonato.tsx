@@ -6,7 +6,7 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
-import { imagensCeramica } from "@/data/imagensProduto";
+import { imagensCeramica, galeriaPortuguesa } from "@/data/imagensProduto";
 
 type Opcao = { nome: string; verificar?: boolean };
 
@@ -31,12 +31,8 @@ const FORMATOS: Formato[] = [
     nome: "Portuguesa",
     badge: "Campeão #1",
     marcas: "Isotec e Rodrigues",
-    cores: [
-      { nome: "Barro Vermelho" },
-      { nome: "Barro Branco", verificar: true },
-      { nome: "Mesclado", verificar: true },
-    ],
-    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
+    cores: [{ nome: "Barro Vermelho" }, { nome: "Barro Branco" }, { nome: "Mesclada" }],
+    acabamentos: [{ nome: "Natural" }, { nome: "Resinado" }],
     pecasPorM2: 24,
     imagemKey: "portuguesa-isotec",
     descricao: "Encaixe clássico, a mais pedida do pátio.",
@@ -125,7 +121,13 @@ export function CeramicaConfigurator() {
   const nomeCompleto = `${formato.nome} ${acabamentoAtivo.nome} · ${corAtiva.nome}${
     rendimentoAtivo ? ` · ${rendimentoAtivo.nome}` : ""
   }`;
-  const precisaVerificar = corAtiva.verificar || acabamentoAtivo.verificar;
+  const ehPortuguesa = formatoId === "portuguesa";
+  const sobEncomenda =
+    ehPortuguesa && !(corAtiva.nome === "Barro Vermelho" && acabamentoAtivo.nome === "Natural");
+  const precisaVerificar = corAtiva.verificar || acabamentoAtivo.verificar || sobEncomenda;
+  const imagensAtivas = ehPortuguesa
+    ? galeriaPortuguesa(corAtiva.nome, acabamentoAtivo.nome)
+    : (imagensCeramica[formato.imagemKey] ?? []);
 
   const detail = `Telha Cerâmica · ${nomeCompleto} · cobertura ~${cobertura} m²`;
 
@@ -134,7 +136,7 @@ export function CeramicaConfigurator() {
 🪨 *Telha Cerâmica*
 - Formato: ${formato.nome}
 - Cor: ${corAtiva.nome}
-- Acabamento: ${acabamentoAtivo.nome}${rendimentoAtivo ? `\n- Rendimento: ${rendimentoAtivo.nome} (${rendimentoAtivo.pecasPorM2} pçs/m²)` : ""}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
+- Acabamento: ${acabamentoAtivo.nome}${sobEncomenda ? " (sob encomenda)" : " (pronta entrega)"}${rendimentoAtivo ? `\n- Rendimento: ${rendimentoAtivo.nome} (${rendimentoAtivo.pecasPorM2} pçs/m²)` : ""}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}
 - Quantidade: ${qty} peças
 - Cobertura estimada: ~${cobertura} m²
 
@@ -157,7 +159,7 @@ Poderia verificar estoque e frete?`;
         <GaleriaProduto
           titulo={`Telha Cerâmica ${nomeCompleto}`}
           subtitulo="Foto em breve"
-          imagens={imagensCeramica[formato.imagemKey] ?? []}
+          imagens={imagensAtivas}
         />
       }
     >
@@ -227,7 +229,11 @@ Poderia verificar estoque e frete?`;
                     }`}
                   >
                     {c.nome}
-                    {c.verificar ? (
+                    {ehPortuguesa && c.nome !== "Barro Vermelho" ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        sob encomenda
+                      </span>
+                    ) : c.verificar ? (
                       <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
                         verificar disponibilidade
                       </span>
@@ -255,7 +261,11 @@ Poderia verificar estoque e frete?`;
                     }`}
                   >
                     {a.nome}
-                    {a.verificar ? (
+                    {ehPortuguesa && a.nome !== "Natural" ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
+                        sob encomenda
+                      </span>
+                    ) : a.verificar ? (
                       <span className="mt-0.5 block text-[10px] font-semibold tracking-wide uppercase opacity-70">
                         verificar disponibilidade
                       </span>
@@ -343,7 +353,15 @@ Poderia verificar estoque e frete?`;
               Quantidade: {qty} peças · Cobertura: ~{cobertura} m²
               {formato.marcas ? ` · Marcas: ${formato.marcas}` : ""}
             </p>
-            {precisaVerificar ? (
+            {sobEncomenda ? (
+              <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
+                Esta combinação: sob encomenda (mostruário)
+              </p>
+            ) : ehPortuguesa ? (
+              <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
+                Pronta entrega
+              </p>
+            ) : precisaVerificar ? (
               <p className="mt-2 text-xs font-bold text-primary/70 uppercase">
                 Esta combinação: verificar disponibilidade
               </p>
