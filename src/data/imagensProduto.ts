@@ -73,6 +73,23 @@ import franProduto from "@/assets/produtos/ceramica-francesa/00_produto.webp.ass
 import franLoja from "@/assets/produtos/ceramica-francesa/00_foto_real_loja.jpg.asset.json";
 import franAplic1 from "@/assets/produtos/ceramica-francesa/aplicacao_01_telhado.jpg.asset.json";
 import franAplic2 from "@/assets/produtos/ceramica-francesa/aplicacao_02_telhado.jpg.asset.json";
+import medTerra from "@/assets/produtos/ceramica-mediterranea/00_normal_terracota_resinada.avif.asset.json";
+import medTerraLoja from "@/assets/produtos/ceramica-mediterranea/00_normal_foto_real_loja.jpg.asset.json";
+import medTerraTelhado from "@/assets/produtos/ceramica-mediterranea/00_normal_terracota_resinada_telhado.jpg.asset.json";
+import medMarfim from "@/assets/produtos/ceramica-mediterranea/01_encomenda_marfim_resinada.avif.asset.json";
+import medMarfimTelhado from "@/assets/produtos/ceramica-mediterranea/01_encomenda_marfim_resinada_telhado.jpg.asset.json";
+import medPerola from "@/assets/produtos/ceramica-mediterranea/02_encomenda_perola_resinada.avif.asset.json";
+import medPerolaTelhado from "@/assets/produtos/ceramica-mediterranea/02_encomenda_perola_resinada_telhado.jpg.asset.json";
+import medRoyal from "@/assets/produtos/ceramica-mediterranea/03_encomenda_royal_resinada.avif.asset.json";
+import medRoyalTelhado from "@/assets/produtos/ceramica-mediterranea/03_encomenda_royal_resinada_telhado.jpg.asset.json";
+import medVigo from "@/assets/produtos/ceramica-mediterranea/04_encomenda_vigo_resinada.avif.asset.json";
+import medVigoTelhado from "@/assets/produtos/ceramica-mediterranea/04_encomenda_vigo_resinada_telhado.jpg.asset.json";
+import medVigoTelhado2 from "@/assets/produtos/ceramica-mediterranea/04_encomenda_vigo_resinada_telhado_02.jpg.asset.json";
+import medCafe from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada.avif.asset.json";
+import medCafeTelhado from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado.jpg.asset.json";
+import medCafeTelhado2 from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado_02_sem_marca_vilhena.jpg.asset.json";
+import medGrena from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada.avif.asset.json";
+import medGrenaTelhado from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada_telhado.jpg.asset.json";
 
 
 
