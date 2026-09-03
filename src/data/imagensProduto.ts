@@ -8,6 +8,16 @@ import imgPvcMarfimTelhado from "@/assets/produtos/telha_colonial_pvc_marfim_tel
 import imgPvcMarfimTelhado2 from "@/assets/produtos/telha_colonial_pvc_marfim_telhado_2.webp.asset.json";
 import imgConcretoGrafiteTelhado from "@/assets/produtos/telha_concreto_grafite_telhado.jfif.asset.json";
 import imgCaibroCambara from "@/assets/produtos/caibro_de_cambara.webp.asset.json";
+import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
+import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
+import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
+import imgTerra262 from "@/assets/produtos/pvc-terracota/t262.png.asset.json";
+import imgTerra328 from "@/assets/produtos/pvc-terracota/t328.png.asset.json";
+import imgTerra394 from "@/assets/produtos/pvc-terracota/t394.png.asset.json";
+import imgTerra459 from "@/assets/produtos/pvc-terracota/t459.png.asset.json";
+import imgTerra525 from "@/assets/produtos/pvc-terracota/t525.png.asset.json";
+import imgTerraAplic1 from "@/assets/produtos/pvc-terracota/aplic1.png.asset.json";
+import imgTerraAplic2 from "@/assets/produtos/pvc-terracota/aplic2.png.asset.json";
 
 export const IMG = {
   ceramicaAmericana: imgCeramicaAmericana.url,
