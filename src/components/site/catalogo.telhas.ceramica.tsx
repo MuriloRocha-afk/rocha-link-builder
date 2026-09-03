@@ -17,12 +17,13 @@ const VERSOES = [
     emoji: "☀️",
   },
   {
-    value: "bronze-grecca",
-    nome: "Bronze — Grecca 244cm",
-    descricao: "Acabamento bronze. Reduz ofuscamento e filtra UV.",
+    value: "grecca",
+    nome: "Grecca",
+    descricao: "Acabamento fumê/bronze. Reduz ofuscamento e filtra UV.",
     emoji: "🟫",
   },
 ];
+
 
 type Comprimento = { value: string; area: number; badge?: string; somenteCristal?: boolean };
 
