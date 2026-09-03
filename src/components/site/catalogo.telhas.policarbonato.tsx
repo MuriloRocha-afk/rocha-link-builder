@@ -6,7 +6,7 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
-import { imagensCeramica } from "@/data/imagensProduto";
+import { imagensCeramica, galeriaPortuguesa } from "@/data/imagensProduto";
 
 type Opcao = { nome: string; verificar?: boolean };
 
@@ -31,12 +31,8 @@ const FORMATOS: Formato[] = [
     nome: "Portuguesa",
     badge: "Campeão #1",
     marcas: "Isotec e Rodrigues",
-    cores: [
-      { nome: "Barro Vermelho" },
-      { nome: "Barro Branco", verificar: true },
-      { nome: "Mesclado", verificar: true },
-    ],
-    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
+    cores: [{ nome: "Barro Vermelho" }, { nome: "Barro Branco" }, { nome: "Mesclada" }],
+    acabamentos: [{ nome: "Natural" }, { nome: "Resinado" }],
     pecasPorM2: 24,
     imagemKey: "portuguesa-isotec",
     descricao: "Encaixe clássico, a mais pedida do pátio.",
