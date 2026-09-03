@@ -171,7 +171,16 @@ export function galeriaRomana(cor: string, acabamento: string): ImagemProduto[] 
   return ROMANA[`${cor}|${acabamento}`] ?? [];
 }
 
+// TELHA CERÂMICA FRANCESA — única variante, sem opções de cor/acabamento
+export const galeriaFrancesa: ImagemProduto[] = [
+  { src: franProduto.url, alt: "Telha Francesa (Marselha)" },
+  { src: franLoja.url, alt: "Telha Francesa no pátio da loja", legenda: "Foto real — pátio da Rocha Telhas" },
+  { src: franAplic1.url, alt: "Telhado com Telha Francesa", legenda: "Exemplo de aplicação" },
+  { src: franAplic2.url, alt: "Telhado com Telha Francesa", legenda: "Exemplo de aplicação" },
+];
+
 // TELHA FIBROCIMENTO
+
 
 export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
   "153 × 110 cm": [
