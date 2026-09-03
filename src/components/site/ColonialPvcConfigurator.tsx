@@ -8,7 +8,7 @@ import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosPvc } from "@/data/acessoriosTelhas";
-import { imagensColonialPVC } from "@/data/imagensProduto";
+import { imagensColonialPVC, galeriaColonialPVC } from "@/data/imagensProduto";
 
 type Variante = "Colonial" | "Plan";
 
