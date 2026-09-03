@@ -63,6 +63,13 @@ import portMescNat from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesc
 import portMescNatTelhado from "@/assets/produtos/ceramica-portuguesa/04_encomenda_mesclada_natural_telhado.webp.asset.json";
 import portMescRes from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado.jpg.asset.json";
 import portMescResTelhado from "@/assets/produtos/ceramica-portuguesa/05_encomenda_mesclada_resinado_telhado.jpg.asset.json";
+import romTerraNat from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural.avif.asset.json";
+import romTerraNatLoja from "@/assets/produtos/ceramica-romana/00_normal_foto_real_loja.jpg.asset.json";
+import romTerraNatTelhado1 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_01.webp.asset.json";
+import romTerraNatTelhado2 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_02.jpg.asset.json";
+import romTerraNatTelhado3 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_03.jpg.asset.json";
+import romResinada from "@/assets/produtos/ceramica-romana/01_encomenda_resinada.avif.asset.json";
+
 
 export const IMG = {
   ceramicaMesclada: imgCeramicaMesclada.url,
@@ -140,7 +147,27 @@ export function galeriaPortuguesa(cor: string, acabamento: string): ImagemProdut
   return PORTUGUESA[`${cor}|${acabamento}`] ?? [];
 }
 
+// TELHA CERÂMICA ROMANA — galeria por cor + acabamento
+// Apenas Terracota Natural é pronta entrega; Resinada é sob encomenda.
+const ROMANA: Record<string, ImagemProduto[]> = {
+  "Terracota|Natural": [
+    { src: romTerraNat.url, alt: "Telha Romana Terracota Natural" },
+    { src: romTerraNatLoja.url, alt: "Telha Romana Terracota Natural no pátio da loja", legenda: "Foto real — pátio da Rocha Telhas" },
+    { src: romTerraNatTelhado1.url, alt: "Telhado com Telha Romana Terracota Natural", legenda: "Exemplo de aplicação" },
+    { src: romTerraNatTelhado2.url, alt: "Telhado com Telha Romana Terracota Natural", legenda: "Exemplo de aplicação" },
+    { src: romTerraNatTelhado3.url, alt: "Telhado com Telha Romana Terracota Natural", legenda: "Exemplo de aplicação" },
+  ],
+  "Terracota|Resinada": [
+    { src: romResinada.url, alt: "Telha Romana Terracota Resinada" },
+  ],
+};
+
+export function galeriaRomana(cor: string, acabamento: string): ImagemProduto[] {
+  return ROMANA[`${cor}|${acabamento}`] ?? [];
+}
+
 // TELHA FIBROCIMENTO
+
 export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
   "153 × 110 cm": [
     { src: "", alt: "Telha Fibrocimento INFIBRA 153cm", legenda: "Telha Fibrocimento 153 × 110cm — INFIBRA" },

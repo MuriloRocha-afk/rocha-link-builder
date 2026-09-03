@@ -6,7 +6,7 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
-import { imagensCeramica, galeriaPortuguesa } from "@/data/imagensProduto";
+import { imagensCeramica, galeriaPortuguesa, galeriaRomana } from "@/data/imagensProduto";
 
 type Opcao = { nome: string; verificar?: boolean };
 
@@ -42,8 +42,8 @@ const FORMATOS: Formato[] = [
     nome: "Romana",
     badge: "Campeão",
     marcas: "Laranjal e Top Telha",
-    cores: [{ nome: "Barro Vermelho" }],
-    acabamentos: [{ nome: "Resinada" }, { nome: "Natural" }],
+    cores: [{ nome: "Terracota" }],
+    acabamentos: [{ nome: "Natural" }, { nome: "Resinada" }],
     rendimentos: [
       { nome: "R13", pecasPorM2: 13, descricao: "13 telhas por m² — peça maior" },
       { nome: "R17", pecasPorM2: 17, descricao: "17 telhas por m² — peça menor" },
@@ -52,6 +52,7 @@ const FORMATOS: Formato[] = [
     imagemKey: "romana-resinada",
     descricao: "Linhas retas e onda suave, visual contemporâneo.",
   },
+
   {
     value: "francesa",
     nome: "Francesa (Marselha)",
@@ -122,12 +123,19 @@ export function CeramicaConfigurator() {
     rendimentoAtivo ? ` · ${rendimentoAtivo.nome}` : ""
   }`;
   const ehPortuguesa = formatoId === "portuguesa";
-  const sobEncomenda =
-    ehPortuguesa && !(corAtiva.nome === "Barro Vermelho" && acabamentoAtivo.nome === "Natural");
+  const ehRomana = formatoId === "romana";
+  const sobEncomenda = ehPortuguesa
+    ? !(corAtiva.nome === "Barro Vermelho" && acabamentoAtivo.nome === "Natural")
+    : ehRomana
+      ? acabamentoAtivo.nome !== "Natural"
+      : false;
   const precisaVerificar = corAtiva.verificar || acabamentoAtivo.verificar || sobEncomenda;
   const imagensAtivas = ehPortuguesa
     ? galeriaPortuguesa(corAtiva.nome, acabamentoAtivo.nome)
-    : (imagensCeramica[formato.imagemKey] ?? []);
+    : ehRomana
+      ? galeriaRomana(corAtiva.nome, acabamentoAtivo.nome)
+      : (imagensCeramica[formato.imagemKey] ?? []);
+
 
   const detail = `Telha Cerâmica · ${nomeCompleto} · cobertura ~${cobertura} m²`;
 
