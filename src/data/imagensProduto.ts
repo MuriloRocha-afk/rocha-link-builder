@@ -73,6 +73,23 @@ import franProduto from "@/assets/produtos/ceramica-francesa/00_produto.webp.ass
 import franLoja from "@/assets/produtos/ceramica-francesa/00_foto_real_loja.jpg.asset.json";
 import franAplic1 from "@/assets/produtos/ceramica-francesa/aplicacao_01_telhado.jpg.asset.json";
 import franAplic2 from "@/assets/produtos/ceramica-francesa/aplicacao_02_telhado.jpg.asset.json";
+import medTerra from "@/assets/produtos/ceramica-mediterranea/00_normal_terracota_resinada.avif.asset.json";
+import medTerraLoja from "@/assets/produtos/ceramica-mediterranea/00_normal_foto_real_loja.jpg.asset.json";
+import medTerraTelhado from "@/assets/produtos/ceramica-mediterranea/00_normal_terracota_resinada_telhado.jpg.asset.json";
+import medMarfim from "@/assets/produtos/ceramica-mediterranea/01_encomenda_marfim_resinada.avif.asset.json";
+import medMarfimTelhado from "@/assets/produtos/ceramica-mediterranea/01_encomenda_marfim_resinada_telhado.jpg.asset.json";
+import medPerola from "@/assets/produtos/ceramica-mediterranea/02_encomenda_perola_resinada.avif.asset.json";
+import medPerolaTelhado from "@/assets/produtos/ceramica-mediterranea/02_encomenda_perola_resinada_telhado.jpg.asset.json";
+import medRoyal from "@/assets/produtos/ceramica-mediterranea/03_encomenda_royal_resinada.avif.asset.json";
+import medRoyalTelhado from "@/assets/produtos/ceramica-mediterranea/03_encomenda_royal_resinada_telhado.jpg.asset.json";
+import medVigo from "@/assets/produtos/ceramica-mediterranea/04_encomenda_vigo_resinada.avif.asset.json";
+import medVigoTelhado from "@/assets/produtos/ceramica-mediterranea/04_encomenda_vigo_resinada_telhado.jpg.asset.json";
+import medVigoTelhado2 from "@/assets/produtos/ceramica-mediterranea/04_encomenda_vigo_resinada_telhado_02.jpg.asset.json";
+import medCafe from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada.avif.asset.json";
+import medCafeTelhado from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado.jpg.asset.json";
+import medCafeTelhado2 from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado_02_sem_marca_vilhena.jpg.asset.json";
+import medGrena from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada.avif.asset.json";
+import medGrenaTelhado from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada_telhado.jpg.asset.json";
 
 
 
@@ -178,6 +195,47 @@ export const galeriaFrancesa: ImagemProduto[] = [
   { src: franAplic1.url, alt: "Telhado com Telha Francesa", legenda: "Exemplo de aplicação" },
   { src: franAplic2.url, alt: "Telhado com Telha Francesa", legenda: "Exemplo de aplicação" },
 ];
+
+// TELHA CERÂMICA MEDITERRÂNEA — só Resinada, 7 cores.
+// Terracota é pronta entrega; as demais são sob encomenda.
+// Cada cor mostra apenas as suas próprias fotos.
+const MEDITERRANEA: Record<string, ImagemProduto[]> = {
+  Terracota: [
+    { src: medTerra.url, alt: "Telha Mediterrânea Terracota Resinada" },
+    { src: medTerraLoja.url, alt: "Telha Mediterrânea Terracota no pátio da loja", legenda: "Foto real — pátio da Rocha Telhas" },
+    { src: medTerraTelhado.url, alt: "Telhado com Telha Mediterrânea Terracota Resinada", legenda: "Exemplo de aplicação" },
+  ],
+  Marfim: [
+    { src: medMarfim.url, alt: "Telha Mediterrânea Marfim Resinada" },
+    { src: medMarfimTelhado.url, alt: "Telhado com Telha Mediterrânea Marfim Resinada", legenda: "Exemplo de aplicação" },
+  ],
+  "Pérola": [
+    { src: medPerola.url, alt: "Telha Mediterrânea Pérola Resinada" },
+    { src: medPerolaTelhado.url, alt: "Telhado com Telha Mediterrânea Pérola Resinada", legenda: "Exemplo de aplicação" },
+  ],
+  Royal: [
+    { src: medRoyal.url, alt: "Telha Mediterrânea Royal Resinada" },
+    { src: medRoyalTelhado.url, alt: "Telhado com Telha Mediterrânea Royal Resinada", legenda: "Exemplo de aplicação" },
+  ],
+  Vigo: [
+    { src: medVigo.url, alt: "Telha Mediterrânea Vigo Resinada" },
+    { src: medVigoTelhado.url, alt: "Telhado com Telha Mediterrânea Vigo Resinada", legenda: "Exemplo de aplicação" },
+    { src: medVigoTelhado2.url, alt: "Telhado com Telha Mediterrânea Vigo Resinada", legenda: "Exemplo de aplicação" },
+  ],
+  "Café": [
+    { src: medCafe.url, alt: "Telha Mediterrânea Café Resinada" },
+    { src: medCafeTelhado.url, alt: "Telhado com Telha Mediterrânea Café Resinada", legenda: "Exemplo de aplicação" },
+    { src: medCafeTelhado2.url, alt: "Telhado com Telha Mediterrânea Café Resinada", legenda: "Exemplo de aplicação" },
+  ],
+  "Grená": [
+    { src: medGrena.url, alt: "Telha Mediterrânea Grená Resinada" },
+    { src: medGrenaTelhado.url, alt: "Telhado com Telha Mediterrânea Grená Resinada", legenda: "Exemplo de aplicação" },
+  ],
+};
+
+export function galeriaMediterranea(cor: string): ImagemProduto[] {
+  return MEDITERRANEA[cor] ?? [];
+}
 
 // TELHA FIBROCIMENTO
 
