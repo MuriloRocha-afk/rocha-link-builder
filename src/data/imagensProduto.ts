@@ -34,6 +34,23 @@ import imgCinza459 from "@/assets/produtos/pvc-cinza/05_459cm_cinza.png.asset.js
 import imgCinza525 from "@/assets/produtos/pvc-cinza/06_525cm_cinza.png.asset.json";
 import imgCinzaAplic from "@/assets/produtos/pvc-cinza/aplicacao_telhado_render_cinza.webp.asset.json";
 import imgCinzaAngulo from "@/assets/produtos/pvc-cinza/extra_angulo_cinza.png.asset.json";
+import planTerra198 from "@/assets/produtos/plan-terracota/p198.png.asset.json";
+import planTerra242 from "@/assets/produtos/plan-terracota/p242.png.asset.json";
+import planTerra330 from "@/assets/produtos/plan-terracota/p330.png.asset.json";
+import planTerraAplic1 from "@/assets/produtos/plan-terracota/aplic1.jpg.asset.json";
+import planTerraAplic2 from "@/assets/produtos/plan-terracota/aplic2.jpg.asset.json";
+import planMarfimCapa from "@/assets/produtos/plan-marfim/capa.jpeg.asset.json";
+import planMarfim198 from "@/assets/produtos/plan-marfim/p198.png.asset.json";
+import planMarfim242 from "@/assets/produtos/plan-marfim/p242.png.asset.json";
+import planMarfim330 from "@/assets/produtos/plan-marfim/p330.png.asset.json";
+import planMarfimAplic1 from "@/assets/produtos/plan-marfim/aplic1.jpeg.asset.json";
+import planMarfimAplic2 from "@/assets/produtos/plan-marfim/aplic2.jfif.asset.json";
+import planCinzaCapa from "@/assets/produtos/plan-cinza/capa.jpg.asset.json";
+import planCinza198 from "@/assets/produtos/plan-cinza/p198.png.asset.json";
+import planCinza242 from "@/assets/produtos/plan-cinza/p242.png.asset.json";
+import planCinza330 from "@/assets/produtos/plan-cinza/p330.png.asset.json";
+import planCinzaAplic1 from "@/assets/produtos/plan-cinza/aplic1.webp.asset.json";
+import planCinzaAplic2 from "@/assets/produtos/plan-cinza/aplic2.webp.asset.json";
 
 export const IMG = {
   ceramicaAmericana: imgCeramicaAmericana.url,
