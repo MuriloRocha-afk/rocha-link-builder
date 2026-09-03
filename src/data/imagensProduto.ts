@@ -69,6 +69,11 @@ import romTerraNatTelhado1 from "@/assets/produtos/ceramica-romana/00_normal_ter
 import romTerraNatTelhado2 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_02.jpg.asset.json";
 import romTerraNatTelhado3 from "@/assets/produtos/ceramica-romana/00_normal_terracota_natural_telhado_03.jpg.asset.json";
 import romResinada from "@/assets/produtos/ceramica-romana/01_encomenda_resinada.avif.asset.json";
+import franProduto from "@/assets/produtos/ceramica-francesa/00_produto.webp.asset.json";
+import franLoja from "@/assets/produtos/ceramica-francesa/00_foto_real_loja.jpg.asset.json";
+import franAplic1 from "@/assets/produtos/ceramica-francesa/aplicacao_01_telhado.jpg.asset.json";
+import franAplic2 from "@/assets/produtos/ceramica-francesa/aplicacao_02_telhado.jpg.asset.json";
+
 
 
 export const IMG = {
