@@ -127,9 +127,6 @@ export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
     { src: imgTerraAplic1.url, alt: "Telhado com Telha Colonial PVC Terracota", legenda: "Exemplo de aplicação" },
     { src: imgTerraAplic2.url, alt: "Telhado com Telha Colonial PVC Terracota e calha", legenda: "Exemplo de aplicação" },
   ],
-  Branca: [
-    { src: "", alt: "Telha PVC Branca" },
-  ],
   Cinza: [
     { src: imgCinzaAngulo.url, alt: "Telha Colonial PVC Cinza em ângulo" },
     { src: imgCinzaAplic.url, alt: "Telhado com Telha Colonial PVC Cinza", legenda: "Exemplo de aplicação" },
