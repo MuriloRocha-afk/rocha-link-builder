@@ -126,8 +126,6 @@ export function galeriaColonialPVC(cor: string, comprimento?: string | null): Im
   if (!foto) return base;
   return [
     { src: foto.url, alt: `Telha Colonial PVC Terracota ${comprimento}`, legenda: `Comprimento ${comprimento}` },
-    { src: imgTerraCapa.url, alt: "Telha Colonial PVC Terracota no pátio da loja", legenda: "Estoque na loja" },
-    { src: imgTerraAngulo.url, alt: "Telha Colonial PVC Terracota em ângulo" },
     { src: imgTerraAplic1.url, alt: "Telhado com Telha Colonial PVC Terracota", legenda: "Exemplo de aplicação" },
     { src: imgTerraAplic2.url, alt: "Telhado com Telha Colonial PVC Terracota e calha", legenda: "Exemplo de aplicação" },
   ];
