@@ -5,7 +5,7 @@ import { CeramicaConfigurator } from "@/components/site/catalogo.telhas.policarb
 
 const TITLE = "Telha Cerâmica — Portuguesa e Romana | Rocha Telhas";
 const DESCRIPTION =
-  "Telha cerâmica Portuguesa Resinada (Isotec e Rodrigues), Romana e Americana. Escolha o modelo, informe a quantidade e cote no WhatsApp.";
+  "Telha cerâmica Portuguesa, Romana, Francesa e Mediterrânea — natural ou resinada. Escolha o modelo, informe a quantidade e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/ceramica")({
   head: () => ({
