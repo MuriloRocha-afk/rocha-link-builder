@@ -2,6 +2,7 @@ import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink, WHATSAPP_NUMBER } from "@/constants/whatsapp";
 import { RochaLogoHorizontal } from "./RochaLogoMark";
+import { useInView } from "./Reveal";
 
 export { waLink, WHATSAPP_NUMBER };
 
