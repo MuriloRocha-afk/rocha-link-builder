@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Clock } from "lucide-react";
 import { CapaGuia } from "./GuiaCard";
+import { Reveal } from "./Reveal";
 import { GUIAS } from "@/data/guias";
 
 export function GuiasHome() {
