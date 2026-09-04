@@ -132,6 +132,9 @@ import medCafeTelhado from "@/assets/produtos/ceramica-mediterranea/05_encomenda
 import medCafeTelhado2 from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado_02_sem_marca_vilhena.jpg.asset.json";
 import medGrena from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada.avif.asset.json";
 import medGrenaTelhado from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada_telhado.jpg.asset.json";
+import poliProd1 from "@/assets/produtos/polipropileno/00_produto_01.webp.asset.json";
+import poliProd2 from "@/assets/produtos/polipropileno/00_produto_02.jpg.asset.json";
+import poliTelhado from "@/assets/produtos/polipropileno/00_telhado.jpg.asset.json";
 import petPortProduto from "@/assets/produtos/pet/01_portuguesa_produto.webp.asset.json";
 import petPortTelhado from "@/assets/produtos/pet/01_portuguesa_telhado.webp.asset.json";
 import petRomProduto from "@/assets/produtos/pet/02_romana_produto.webp.asset.json";
@@ -690,3 +693,10 @@ export function galeriaPlanPVC(cor: string, comprimento?: string | null): Imagem
     ...aplicacoes,
   ];
 }
+
+// TELHA TRANSLÚCIDA POLIPROPILENO — foto única (mesmo perfil em todos os tamanhos)
+export const imagensPolipropileno: ImagemProduto[] = [
+  { src: poliProd1.url, alt: "Telha Translúcida Polipropileno Onda Alta", legenda: "Produto" },
+  { src: poliProd2.url, alt: "Telha Translúcida Polipropileno — detalhe do perfil", legenda: "Detalhe do perfil" },
+  { src: poliTelhado.url, alt: "Pérgola com telhado translúcido de polipropileno", legenda: "Exemplo de aplicação" },
+];

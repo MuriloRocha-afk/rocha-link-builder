@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { imagensConcreto, imagensEsmaltada, imagensPet, imagensVidro } from "@/data/imagensProduto";
+import { imagensConcreto, imagensEsmaltada, imagensPet, imagensPolipropileno, imagensVidro } from "@/data/imagensProduto";
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 import { acessoriosPlastico, chumbador } from "@/data/acessoriosTelhas";
 
@@ -232,8 +232,8 @@ export const CONFIG_POLIPROPILENO: ConfiguradorConfig = {
     "Onda Alta 177/51 Translúcida de 122cm a 366cm, espessura única de 1,2mm. 100% compatível com telha de fibrocimento.",
   galeriaTitulo: "Telha Translúcida Polipropileno",
   galeriaPlaceholder: "Selecione um tamanho para ver as fotos",
-  imagens: (s) =>
-    s.comprimento ? [{ src: "", alt: `Telha Translúcida Polipropileno ${s.comprimento}` }] : [],
+  imagens: () => imagensPolipropileno,
+
   categoria: "Telhas",
   produtoKey: "polipropileno",
   passos: [
