@@ -1,10 +1,19 @@
 import { SubcardTile } from "@/components/site/SubcardTile";
 import { Reveal } from "@/components/site/Reveal";
-import ceramica from "@/assets/prod-ceramica.jpg";
+import ceramicaAsset from "@/assets/produtos/capas/01_capa_ceramica.jpeg.asset.json";
 import pvc from "@/assets/prod-pvc.jpg";
 import fibro from "@/assets/prod-fibro.jpg";
-import concreto from "@/assets/prod-concreto.jpg";
+import concretoAsset from "@/assets/produtos/capas/02_capa_concreto.jpeg.asset.json";
+import petAsset from "@/assets/produtos/capas/03_capa_pet.jpeg.asset.json";
+import policarbonatoAsset from "@/assets/produtos/capas/04_capa_policarbonato.jpeg.asset.json";
+import polipropilenoAsset from "@/assets/produtos/capas/05_capa_polipropileno.jpeg.asset.json";
 import translucida from "@/assets/prod-translucida.jpg";
+
+const ceramica = ceramicaAsset.url;
+const concreto = concretoAsset.url;
+const pet = petAsset.url;
+const policarbonato = policarbonatoAsset.url;
+const polipropileno = polipropilenoAsset.url;
 
 type Subcard = {
   slug: string;

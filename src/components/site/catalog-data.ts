@@ -3,7 +3,7 @@ import fotoTelhasPatio from "@/assets/IMG_1486.jpg.asset.json";
 import fotoMadeiraPatio from "@/assets/IMG_1490.jpg.asset.json";
 import fotoTintasCat from "@/assets/cat-tintas.jpg.asset.json";
 import fotoFixadoresCat from "@/assets/cat-fixadores.jpg.asset.json";
-import fotoCalhasCat from "@/assets/cat-calhas.png.asset.json";
+import fotoCalhasCat from "@/assets/cat-calhas-oficial.jpeg.asset.json";
 import isotec from "@/assets/prod-isotec.jpg";
 import pvc from "@/assets/prod-pvc.jpg";
 import fibro from "@/assets/prod-fibro.jpg";
