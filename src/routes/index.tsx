@@ -97,9 +97,19 @@ function Index() {
               <span className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/15 px-4 py-1.5 text-xs font-bold tracking-[0.18em] text-accent uppercase">
                 Franco da Rocha · SP
               </span>
-              <h1 className="mt-6 text-4xl leading-[1.05] font-extrabold text-primary-foreground md:text-6xl lg:text-7xl">
-                A Maior Variedade em{" "}
-                <span className="text-gradient-accent">Telhas e Madeiramento Nobre</span> da Região
+              <h1 className="mt-6 text-4xl leading-[1.05] font-black text-primary-foreground md:text-6xl lg:text-7xl">
+                <span className="hero-line" style={{ animationDelay: "80ms" }}>
+                  A Maior Variedade em
+                </span>
+                <span
+                  className="hero-line text-gradient-accent-deep"
+                  style={{ animationDelay: "260ms" }}
+                >
+                  Telhas e Madeiramento Nobre
+                </span>
+                <span className="hero-line" style={{ animationDelay: "440ms" }}>
+                  da Região
+                </span>
               </h1>
               <p className="mt-6 max-w-2xl text-base text-primary-foreground/80 md:text-xl">
                 Entrega rápida com frota própria e madeira aparelhada em plaina industrial de alta
