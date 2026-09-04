@@ -46,6 +46,12 @@ const KPIS = [
   { icon: CreditCard, title: "Até 12x no Cartão", text: "consulte nossas condições de parcelamento" },
 ];
 
+const STATS = [
+  { icon: Truck, value: 30000, label: "entregas realizadas" },
+  { icon: Handshake, value: 50000, label: "clientes com problemas resolvidos" },
+  { icon: Star, value: 100, label: "avaliações 5 estrelas no Google" },
+];
+
 function useParallax() {
   const ref = React.useRef<HTMLImageElement | null>(null);
 
