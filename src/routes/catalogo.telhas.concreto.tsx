@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_CONCRETO } from "@/data/configs/telhas";
 
-const TITLE = "Telha de Concreto Eurotop — Areia, Cinza e Grafite | Rocha Telhas";
-const DESCRIPTION = "Telha de concreto Eurotop nas cores Areia, Cinza e Grafite. Monte seu pedido e cote direto no WhatsApp com a Rocha Telhas.";
+const TITLE = "Telha de Concreto Eurotop — Areia, Cinza, Grafite e Transparente | Rocha Telhas";
+const DESCRIPTION = "Telha de concreto Eurotop nas cores Areia, Cinza, Grafite e Transparente. Monte seu pedido e cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/telhas/concreto")({
   head: () => ({

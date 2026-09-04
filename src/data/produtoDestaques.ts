@@ -162,7 +162,7 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
       {
         titulo: "Acabamento premium",
-        descricao: "Cores Areia, Cinza e Grafite com pigmentação que não desbota.",
+        descricao: "Cores Areia, Cinza, Grafite e Transparente com pigmentação que não desbota.",
       },
       {
         titulo: "Baixa manutenção",
