@@ -27,7 +27,8 @@ const ITEMS = [
 
 export function Tecnologia() {
   return (
-    <section id="tecnologia" className="surface-dark scroll-mt-24 py-24">
+    <section id="tecnologia" className="surface-dark divider-curve-top soft-blob relative scroll-mt-24 py-24">
+      <span className="blob-layer -top-16 right-0 h-96 w-96" />
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeading
           invert

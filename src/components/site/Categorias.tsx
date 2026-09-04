@@ -14,7 +14,9 @@ const EMOJI: Record<string, string> = {
 
 export function Categorias() {
   return (
-    <section id="produtos" className="scroll-mt-24 bg-background py-24">
+    <section id="produtos" className="soft-blob relative scroll-mt-24 bg-background py-24">
+      <span className="blob-layer -top-24 left-1/4 h-96 w-96" />
+      <span className="blob-layer-primary right-0 bottom-10 h-80 w-80" />
       <div className="mx-auto max-w-7xl px-5">
         <SectionHeading
           kicker="Nossas Categorias"
