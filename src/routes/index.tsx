@@ -93,7 +93,7 @@ function Index() {
           <div className="absolute inset-0 bg-[linear-gradient(100deg,var(--primary-deep)_18%,color-mix(in_oklab,var(--primary-deep)_78%,transparent)_55%,color-mix(in_oklab,var(--primary-deep)_45%,transparent)_100%)]" />
 
           <div className="relative mx-auto w-full max-w-7xl px-5 py-20">
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               <span className="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/15 px-4 py-1.5 text-xs font-bold tracking-[0.18em] text-accent uppercase">
                 Franco da Rocha · SP
               </span>
