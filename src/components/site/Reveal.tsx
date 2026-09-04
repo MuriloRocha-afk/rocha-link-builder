@@ -73,6 +73,7 @@ export function CountUp({
 }) {
   const { ref, inView } = useInView<HTMLSpanElement>();
   const [n, setN] = React.useState(0);
+  const [done, setDone] = React.useState(false);
 
   React.useEffect(() => {
     if (!inView) return;
@@ -87,13 +88,14 @@ export function CountUp({
       const eased = 1 - Math.pow(1 - p, 3);
       setN(Math.round(value * eased));
       if (p < 1) raf = requestAnimationFrame(tick);
+      else setDone(true);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, value, duration]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={`inline-block ${done ? "count-pop" : ""} ${className}`}>
       {prefix}
       {n.toLocaleString("pt-BR")}
       {suffix}
