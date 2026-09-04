@@ -17,19 +17,40 @@ export function useInView<T extends HTMLElement>(options?: IntersectionObserverI
       setInView(true);
       return;
     }
+
+    let done = false;
+    const reveal = () => {
+      if (done) return;
+      done = true;
+      setInView(true);
+      obs.disconnect();
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+
+    // Fallback: alguns navegadores demoram a disparar o observer.
+    const check = () => {
+      const r = el.getBoundingClientRect();
+      const h = window.innerHeight || 0;
+      if (r.top < h * 0.92 && r.bottom > 0) reveal();
+    };
+
     const obs = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            setInView(true);
-            obs.disconnect();
-          }
-        }
+        for (const e of entries) if (e.isIntersecting) reveal();
       },
       { threshold: 0.15, rootMargin: "0px 0px -10% 0px", ...options }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+
+    return () => {
+      obs.disconnect();
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
   }, []);
 
   return { ref, inView };
