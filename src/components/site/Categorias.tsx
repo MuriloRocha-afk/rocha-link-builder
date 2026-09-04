@@ -28,7 +28,7 @@ export function Categorias() {
               <Link
                 to="/catalogo/$categoriaSlug"
                 params={{ categoriaSlug: c.id }}
-                className="group relative flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]"
+                className="group relative flex min-h-[22rem] flex-col justify-end overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)] transition-[transform,box-shadow] duration-200 hover:-translate-y-2.5 hover:shadow-[0_36px_70px_-24px_color-mix(in_oklab,var(--primary)_70%,transparent)]"
               >
                 <img
                   src={c.image}
@@ -36,7 +36,7 @@ export function Categorias() {
                   loading="lazy"
                   width={1024}
                   height={768}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.06]"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.09]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 <div className="relative p-6">
