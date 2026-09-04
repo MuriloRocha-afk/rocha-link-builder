@@ -32,7 +32,7 @@ export function SubcardTile({
     <Link
       to="/catalogo/$categoriaSlug/$produtoSlug"
       params={{ categoriaSlug, produtoSlug }}
-      className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+      className="group flex w-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
     >
       {/* Área visual — sem overlay escuro para preservar a nitidez da foto */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">
