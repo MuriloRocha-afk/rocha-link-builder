@@ -1,3 +1,4 @@
+import * as React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Award, Truck, TreePine, CreditCard, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,9 +11,11 @@ import { Ferramentas } from "@/components/site/Ferramentas";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { GuiasHome } from "@/components/site/GuiasHome";
 import { WhatsAppButton } from "@/components/site/shared";
+import { Reveal, CountUp } from "@/components/site/Reveal";
 import heroAsset from "@/assets/IMG_1476.jpg.asset.json";
 
 const hero = heroAsset.url;
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
