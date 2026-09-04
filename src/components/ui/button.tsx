@@ -17,10 +17,10 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         whats:
-          "bg-whats text-primary-deep font-bold shadow-[var(--shadow-card)] hover:brightness-105 hover:-translate-y-0.5 transition-all",
-        cta: "bg-accent text-accent-foreground font-bold shadow-[var(--shadow-card)] hover:brightness-110 hover:-translate-y-0.5 transition-all",
+          "btn-sweep bg-whats text-primary-deep font-bold shadow-[var(--shadow-card)] hover:brightness-105 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] transition-all duration-200",
+        cta: "btn-sweep bg-accent text-accent-foreground font-bold shadow-[var(--shadow-card)] hover:brightness-110 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] transition-all duration-200",
         outlineAccent:
-          "border-2 border-accent bg-transparent text-accent font-semibold hover:bg-accent hover:text-accent-foreground transition-colors",
+          "btn-sweep border-2 border-accent bg-transparent text-accent font-semibold hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_28px_-6px_var(--accent)] transition-all duration-200",
       },
       size: {
         default: "h-9 px-4 py-2",

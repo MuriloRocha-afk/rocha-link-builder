@@ -2,6 +2,7 @@ import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { waLink, WHATSAPP_NUMBER } from "@/constants/whatsapp";
 import { RochaLogoHorizontal } from "./RochaLogoMark";
+import { useInView } from "./Reveal";
 
 export { waLink, WHATSAPP_NUMBER };
 
@@ -64,16 +65,18 @@ export function SectionHeading({
   subtitle?: string;
   invert?: boolean;
 }) {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
-    <div className="mx-auto max-w-3xl text-center">
+    <div ref={ref} className="mx-auto max-w-3xl text-center">
       <span className="inline-flex items-center rounded-full border border-accent/40 bg-accent/10 px-4 py-1 text-xs font-bold tracking-[0.18em] text-accent uppercase">
         {kicker}
       </span>
       <h2
-        className={`mt-5 text-3xl font-extrabold md:text-5xl ${invert ? "text-primary-foreground" : "text-primary"}`}
+        className={`mt-5 text-[2rem] leading-[1.1] font-black tracking-tight md:text-[3.4rem] ${invert ? "text-primary-foreground" : "text-primary"}`}
       >
         {title}
       </h2>
+      <span className="heading-rule mx-auto mt-5" data-in={inView ? "true" : "false"} />
       {subtitle ? (
         <p
           className={`mt-4 text-base md:text-lg ${invert ? "text-primary-foreground/75" : "text-muted-foreground"}`}
