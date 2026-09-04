@@ -138,6 +138,12 @@ import petRomProduto from "@/assets/produtos/pet/02_romana_produto.webp.asset.js
 import petRomTelhado from "@/assets/produtos/pet/02_romana_telhado.webp.asset.json";
 import petMedProduto from "@/assets/produtos/pet/03_mediterranea_produto.webp.asset.json";
 import petMedTelhado from "@/assets/produtos/pet/03_mediterranea_telhado.webp.asset.json";
+import vidroPort from "@/assets/produtos/vidro/01_portuguesa_produto.webp.asset.json";
+import vidroRom from "@/assets/produtos/vidro/02_romana_produto.webp.asset.json";
+import vidroFran from "@/assets/produtos/vidro/03_francesa_produto.webp.asset.json";
+import vidroMed from "@/assets/produtos/vidro/04_mediterranea_produto.webp.asset.json";
+import vidroTelhadoExt from "@/assets/produtos/vidro/05_telhado_externo.jpg.asset.json";
+import vidroTelhadoInt from "@/assets/produtos/vidro/06_telhado_interno.webp.asset.json";
 import polCristalProduto from "@/assets/produtos/policarbonato/cristal_produto.webp.asset.json";
 import polCristalTelhado1 from "@/assets/produtos/policarbonato/cristal_telhado_01.jfif.asset.json";
 import polCristalTelhado2 from "@/assets/produtos/policarbonato/cristal_telhado_02.webp.asset.json";
@@ -492,6 +498,33 @@ export const imagensPet: Record<string, ImagemProduto[]> = {
     { src: petMedTelhado.url, alt: "Telhado com Telha PET Mediterrânea", legenda: "Exemplo de aplicação" },
   ],
 };
+
+// TELHA DE VIDRO — por formato
+// Foto de produto própria de cada formato + as 2 fotos de telhado aplicado (compartilhadas).
+const vidroTelhado: ImagemProduto[] = [
+  { src: vidroTelhadoExt.url, alt: "Telhado com faixa de Telha de Vidro (vista externa)", legenda: "Aplicação — vista externa" },
+  { src: vidroTelhadoInt.url, alt: "Entrada de luz natural pela Telha de Vidro (vista interna)", legenda: "Aplicação — vista interna" },
+];
+
+export const imagensVidro: Record<string, ImagemProduto[]> = {
+  Portuguesa: [
+    { src: vidroPort.url, alt: "Telha de Vidro Portuguesa", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+  Romana: [
+    { src: vidroRom.url, alt: "Telha de Vidro Romana", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+  Francesa: [
+    { src: vidroFran.url, alt: "Telha de Vidro Francesa", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+  "Mediterrânea": [
+    { src: vidroMed.url, alt: "Telha de Vidro Mediterrânea", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+};
+
 
 // TELHA POLICARBONATO — por versão
 // Cada opção usa APENAS as suas próprias fotos.
