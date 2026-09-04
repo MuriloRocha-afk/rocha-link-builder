@@ -62,7 +62,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   {
     slug: "polipropileno",
     name: "Telha Translúcida Polipropileno",
-    image: translucida,
+    image: polipropileno,
     description: "Onda Alta 177/51 Translúcida de 153cm a 366cm. Compatível com fibrocimento.",
     cta: "Ver Comprimentos",
   },
@@ -83,7 +83,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   {
     slug: "policarbonato",
     name: "Telha Policarbonato",
-    image: translucida,
+    image: policarbonato,
     description:
       "Translúcida cristal em 183cm, 244cm, 305cm e 366cm. Para iluminação natural em galpões.",
     cta: "Escolher Dimensão",
@@ -91,7 +91,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   {
     slug: "pet",
     name: "Telha PET Translúcida",
-    image: translucida,
+    image: pet,
     description:
       "Ponto de luz em PET transparente 100% reciclado, com filtro UV. Formatos Portuguesa, Romana e Mediterrânea.",
     cta: "Escolher Formato",
