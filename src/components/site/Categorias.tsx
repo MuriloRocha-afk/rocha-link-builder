@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "./shared";
+import { Reveal } from "./Reveal";
 import { CATEGORIES } from "./catalog-data";
 
 const EMOJI: Record<string, string> = {
