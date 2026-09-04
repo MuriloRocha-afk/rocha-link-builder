@@ -168,7 +168,10 @@
   html,
   body {
     max-width: 100%;
-    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 
   body {
