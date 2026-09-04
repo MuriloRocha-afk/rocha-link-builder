@@ -499,6 +499,33 @@ export const imagensPet: Record<string, ImagemProduto[]> = {
   ],
 };
 
+// TELHA DE VIDRO — por formato
+// Foto de produto própria de cada formato + as 2 fotos de telhado aplicado (compartilhadas).
+const vidroTelhado: ImagemProduto[] = [
+  { src: vidroTelhadoExt.url, alt: "Telhado com faixa de Telha de Vidro (vista externa)", legenda: "Aplicação — vista externa" },
+  { src: vidroTelhadoInt.url, alt: "Entrada de luz natural pela Telha de Vidro (vista interna)", legenda: "Aplicação — vista interna" },
+];
+
+export const imagensVidro: Record<string, ImagemProduto[]> = {
+  Portuguesa: [
+    { src: vidroPort.url, alt: "Telha de Vidro Portuguesa", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+  Romana: [
+    { src: vidroRom.url, alt: "Telha de Vidro Romana", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+  Francesa: [
+    { src: vidroFran.url, alt: "Telha de Vidro Francesa", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+  "Mediterrânea": [
+    { src: vidroMed.url, alt: "Telha de Vidro Mediterrânea", legenda: "Produto" },
+    ...vidroTelhado,
+  ],
+};
+
+
 // TELHA POLICARBONATO — por versão
 // Cada opção usa APENAS as suas próprias fotos.
 export const imagensPolicarbonato: Record<string, ImagemProduto[]> = {
