@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { imagensConcreto, imagensEsmaltada, imagensPet, imagensVidro } from "@/data/imagensProduto";
+import { imagensConcreto, imagensEsmaltada, imagensPet, imagensPolipropileno, imagensVidro } from "@/data/imagensProduto";
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 import { acessoriosPlastico, chumbador } from "@/data/acessoriosTelhas";
 
