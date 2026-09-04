@@ -164,7 +164,7 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
   breadcrumb: BC("Telha Esmaltada"),
   titulo: "✨ Telha Esmaltada",
   subtitulo:
-    "Telha cerâmica com esmalte vitrificado: cor viva e permanente, superfície impermeável e fácil de limpar.",
+    "Telha cerâmica Cejatel linha Wave, com esmalte vitrificado: cor viva e permanente, superfície impermeável e fácil de limpar. 9 cores: Branca, Cinza, Marfim, Azul, Pinhão, Bordô, Grafite, Verde e Chocolate.",
   galeriaTitulo: "Telha Esmaltada",
   galeriaPlaceholder: "Selecione uma cor para ver as fotos",
   imagens: (s) =>
@@ -183,7 +183,9 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
     },
   ],
   especificacoes: [
+    ["Marca", "Cejatel — linha Wave"],
     ["Material", "Cerâmica esmaltada (vitrificada)"],
+    ["Cores", "Branca, Cinza, Marfim, Azul, Pinhão, Bordô, Grafite, Verde e Chocolate"],
     ["Peças por m²", "~17 peças"],
     ["Inclinação mínima", "30%"],
     ["Absorção de água", "Muito baixa (esmalte impermeável)"],
@@ -191,7 +193,7 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
     ["Fixação", "Prego telheiro ou arame"],
   ],
   tituloAcessorios: "Acessórios para Telha Esmaltada",
-  acessorios: (s, q) => acessoriosEsmaltada(s.cor ?? "Vermelho", (q.qtd as number) ?? 100),
+  acessorios: (s, q) => acessoriosEsmaltada(s.cor ?? "Branca", (q.qtd as number) ?? 100),
   resumoNome: () => "Telha Esmaltada",
   resumoDetalhe: (s, q) =>
     `${s.cor} · ${q.qtd ?? 100} peças · ~${(((q.qtd ?? 100) as number) * 0.058).toFixed(1)} m²`,

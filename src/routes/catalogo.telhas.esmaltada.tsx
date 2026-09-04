@@ -4,9 +4,9 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_ESMALTADA } from "@/data/configs/telhas";
 
-const TITLE = "Telha Esmaltada — 6 Cores Vitrificadas | Rocha Telhas";
+const TITLE = "Telha Esmaltada Cejatel Wave — 9 Cores | Rocha Telhas";
 const DESCRIPTION =
-  "Telha cerâmica esmaltada em vermelho, branco, preto, azul, verde e marrom, com cumeeiras e acessórios na mesma cor. Cote direto no WhatsApp.";
+  "Telha cerâmica esmaltada Cejatel linha Wave nas cores Branca, Cinza, Marfim, Azul, Pinhão, Bordô, Grafite, Verde e Chocolate. Cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/esmaltada")({
   head: () => ({
