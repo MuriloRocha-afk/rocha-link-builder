@@ -46,8 +46,8 @@ export function Reveal({ delay = 0, className = "", style, children, ...rest }: 
   return (
     <div
       ref={ref}
-      className={`motion-safe:transition-[opacity,transform] motion-safe:duration-500 motion-safe:ease-out ${
-        inView ? "opacity-100 translate-y-0" : "opacity-0 motion-safe:translate-y-5"
+      className={`motion-safe:transition-[opacity,transform] motion-safe:duration-700 motion-safe:[transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+        inView ? "opacity-100 translate-y-0" : "opacity-0 motion-safe:translate-y-9"
       } ${className}`}
       style={{ transitionDelay: inView ? `${delay}ms` : "0ms", ...style }}
       {...rest}
