@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { imagensConcreto, imagensEsmaltada } from "@/data/imagensProduto";
+import { imagensConcreto, imagensEsmaltada, imagensPet } from "@/data/imagensProduto";
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 import { acessoriosPlastico, chumbador } from "@/data/acessoriosTelhas";
 
@@ -296,7 +296,7 @@ export const CONFIG_PET: ConfiguradorConfig = {
     "Ponto de luz natural em plástico PET transparente 100% reciclado, com encaixe idêntico ao da telha cerâmica. Formatos Portuguesa, Romana e Mediterrânea.",
   galeriaTitulo: "Telha PET Translúcida",
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
-  imagens: (s) => (s.formato ? [{ src: "", alt: `Telha PET Translúcida ${s.formato}` }] : []),
+  imagens: (s) => (s.formato ? (imagensPet[s.formato] ?? []) : []),
   categoria: "Telhas",
   produtoKey: "pet",
   avisoDestaque:

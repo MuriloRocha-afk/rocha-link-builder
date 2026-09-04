@@ -132,6 +132,12 @@ import medCafeTelhado from "@/assets/produtos/ceramica-mediterranea/05_encomenda
 import medCafeTelhado2 from "@/assets/produtos/ceramica-mediterranea/05_encomenda_cafe_resinada_telhado_02_sem_marca_vilhena.jpg.asset.json";
 import medGrena from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada.avif.asset.json";
 import medGrenaTelhado from "@/assets/produtos/ceramica-mediterranea/06_encomenda_grena_resinada_telhado.jpg.asset.json";
+import petPortProduto from "@/assets/produtos/pet/01_portuguesa_produto.webp.asset.json";
+import petPortTelhado from "@/assets/produtos/pet/01_portuguesa_telhado.webp.asset.json";
+import petRomProduto from "@/assets/produtos/pet/02_romana_produto.webp.asset.json";
+import petRomTelhado from "@/assets/produtos/pet/02_romana_telhado.webp.asset.json";
+import petMedProduto from "@/assets/produtos/pet/03_mediterranea_produto.webp.asset.json";
+import petMedTelhado from "@/assets/produtos/pet/03_mediterranea_telhado.webp.asset.json";
 import polCristalProduto from "@/assets/produtos/policarbonato/cristal_produto.webp.asset.json";
 import polCristalTelhado1 from "@/assets/produtos/policarbonato/cristal_telhado_01.jfif.asset.json";
 import polCristalTelhado2 from "@/assets/produtos/policarbonato/cristal_telhado_02.webp.asset.json";
@@ -469,6 +475,23 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
   ],
 };
 
+
+// TELHA PET TRANSLÚCIDA — por formato
+// Cada formato usa APENAS as suas próprias fotos.
+export const imagensPet: Record<string, ImagemProduto[]> = {
+  Portuguesa: [
+    { src: petPortProduto.url, alt: "Telha PET Translúcida Portuguesa", legenda: "Produto" },
+    { src: petPortTelhado.url, alt: "Telhado com Telha PET Portuguesa", legenda: "Exemplo de aplicação" },
+  ],
+  Romana: [
+    { src: petRomProduto.url, alt: "Telha PET Translúcida Romana", legenda: "Produto" },
+    { src: petRomTelhado.url, alt: "Telhado com Telha PET Romana", legenda: "Exemplo de aplicação" },
+  ],
+  "Mediterrânea": [
+    { src: petMedProduto.url, alt: "Telha PET Translúcida Mediterrânea", legenda: "Produto" },
+    { src: petMedTelhado.url, alt: "Telhado com Telha PET Mediterrânea", legenda: "Exemplo de aplicação" },
+  ],
+};
 
 // TELHA POLICARBONATO — por versão
 // Cada opção usa APENAS as suas próprias fotos.
