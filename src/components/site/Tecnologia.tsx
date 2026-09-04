@@ -37,35 +37,36 @@ export function Tecnologia() {
         />
 
         <div className="mt-14 grid w-full max-w-full grid-cols-1 items-center gap-10 lg:grid-cols-2">
-          <div className="grid w-full min-w-0 max-w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-1">
-            <figure className="overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
+          <Reveal className="grid w-full min-w-0 max-w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-1">
+            <figure className="group overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
               <img
                 src={serra}
                 alt="Serra automática de alta precisão cortando madeira no pátio da Rocha Telhas"
                 loading="lazy"
                 width={1024}
                 height={768}
-                className="aspect-[4/3] w-full object-cover"
+                className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.05]"
               />
             </figure>
-            <figure className="overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
+            <figure className="group overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
               <img
                 src={plaina}
                 alt="Plaina dupla face industrial aparelhando pranchas de madeira"
                 loading="lazy"
                 width={1024}
                 height={768}
-                className="aspect-[4/3] w-full object-cover"
+                className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.05]"
               />
             </figure>
-          </div>
+          </Reveal>
 
           <div className="min-w-0">
             <ul className="space-y-5">
-              {ITEMS.map((i) => (
-                <li
+              {ITEMS.map((i, idx) => (
+                <Reveal
                   key={i.title}
-                  className="flex min-w-0 gap-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6"
+                  delay={idx * 90}
+                  className="flex min-w-0 gap-4 rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 p-6 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
                 >
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                     <i.icon className="h-6 w-6" />
@@ -76,9 +77,10 @@ export function Tecnologia() {
                       {i.text}
                     </p>
                   </div>
-                </li>
+                </Reveal>
               ))}
             </ul>
+
 
             <div className="mt-8">
               <WhatsAppButton
