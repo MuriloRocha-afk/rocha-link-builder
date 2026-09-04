@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { imagensConcreto, imagensEsmaltada, imagensPet } from "@/data/imagensProduto";
+import { imagensConcreto, imagensEsmaltada, imagensPet, imagensVidro } from "@/data/imagensProduto";
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 import { acessoriosPlastico, chumbador } from "@/data/acessoriosTelhas";
 
@@ -354,7 +354,7 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
     "Telha de ponto de luz em vidro de verdade, com textura exclusiva que suaviza a incidência de raios UV e mantém o mesmo encaixe da telha cerâmica correspondente.",
   galeriaTitulo: "Telha de Vidro",
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
-  imagens: (s) => (s.formato ? [{ src: "", alt: `Telha de Vidro ${s.formato}` }] : []),
+  imagens: (s) => (s.formato ? (imagensVidro[s.formato] ?? []) : []),
   categoria: "Telhas",
   produtoKey: "vidro",
   avisoDestaque:
