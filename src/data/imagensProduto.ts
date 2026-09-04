@@ -483,15 +483,62 @@ export const imagensMadeirit: Record<string, ImagemProduto[]> = {
   Compensado: [{ src: "", alt: "Compensado estrutural" }],
 };
 
-// TELHA ESMALTADA — por cor
+// TELHA ESMALTADA — Cejatel linha Wave, por cor
+const esmProd = (src: string, cor: string): ImagemProduto => ({
+  src,
+  alt: `Telha Esmaltada Cejatel Wave ${cor}`,
+  legenda: "Foto do produto",
+});
+const esmTel = (src: string, cor: string): ImagemProduto => ({
+  src,
+  alt: `Telhado com Telha Esmaltada ${cor}`,
+  legenda: "Aplicação em telhado",
+});
+
 export const imagensEsmaltada: Record<string, ImagemProduto[]> = {
-  Vermelho: [{ src: "", alt: "Telha Esmaltada Vermelha" }],
-  Branco: [{ src: "", alt: "Telha Esmaltada Branca" }],
-  Preto: [{ src: "", alt: "Telha Esmaltada Preta" }],
-  Azul: [{ src: "", alt: "Telha Esmaltada Azul" }],
-  Verde: [{ src: "", alt: "Telha Esmaltada Verde" }],
-  Marrom: [{ src: "", alt: "Telha Esmaltada Marrom" }],
+  Branca: [
+    esmProd(eBrancaProd.url, "Branca"),
+    esmTel(eBrancaTel1.url, "Branca"),
+    esmTel(eBrancaTel2.url, "Branca"),
+  ],
+  Cinza: [
+    esmProd(eCinzaProd.url, "Cinza"),
+    esmTel(eCinzaTel1.url, "Cinza"),
+    esmTel(eCinzaTel2.url, "Cinza"),
+  ],
+  Marfim: [
+    esmProd(eMarfimProd.url, "Marfim"),
+    esmTel(eMarfimTel1.url, "Marfim"),
+    esmTel(eMarfimTel2.url, "Marfim"),
+  ],
+  Azul: [esmProd(eAzulProd.url, "Azul"), esmTel(eAzulTel1.url, "Azul"), esmTel(eAzulTel2.url, "Azul")],
+  "Pinhão": [
+    esmProd(ePinhaoProd.url, "Pinhão"),
+    esmTel(ePinhaoTel1.url, "Pinhão"),
+    esmTel(ePinhaoTel2.url, "Pinhão"),
+  ],
+  "Bordô": [
+    esmProd(eBordoProd.url, "Bordô"),
+    esmTel(eBordoTel1.url, "Bordô"),
+    esmTel(eBordoTel2.url, "Bordô"),
+  ],
+  Grafite: [
+    esmProd(eGrafiteProd.url, "Grafite"),
+    esmProd(eGrafiteProd2.url, "Grafite"),
+    esmTel(eGrafiteTel1.url, "Grafite"),
+  ],
+  Verde: [
+    esmProd(eVerdeProd.url, "Verde"),
+    esmTel(eVerdeTel1.url, "Verde"),
+    esmTel(eVerdeTel2.url, "Verde"),
+  ],
+  Chocolate: [
+    esmProd(eChocoProd.url, "Chocolate"),
+    esmTel(eChocoTel1.url, "Chocolate"),
+    esmTel(eChocoTel2.url, "Chocolate"),
+  ],
 };
+
 
 // TELHA DE CONCRETO — por cor
 export const imagensConcreto: Record<string, ImagemProduto[]> = {
