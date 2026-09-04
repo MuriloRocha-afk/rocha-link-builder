@@ -21,6 +21,33 @@ import cGrafTel2 from "@/assets/produtos/concreto/02_grafite_telhado_02.webp.ass
 import cTranspLoja from "@/assets/produtos/concreto/03_transparente_foto_real_loja.jpg.asset.json";
 import cTranspTel1 from "@/assets/produtos/concreto/03_transparente_telhado_01.webp.asset.json";
 import cTranspTel2 from "@/assets/produtos/concreto/03_transparente_telhado_02.webp.asset.json";
+import eBrancaProd from "@/assets/produtos/esmaltada/01_branca_produto.png.asset.json";
+import eBrancaTel1 from "@/assets/produtos/esmaltada/01_branca_telhado_01.webp.asset.json";
+import eBrancaTel2 from "@/assets/produtos/esmaltada/01_branca_telhado_02.webp.asset.json";
+import eCinzaProd from "@/assets/produtos/esmaltada/02_cinza_produto.jpg.asset.json";
+import eCinzaTel1 from "@/assets/produtos/esmaltada/02_cinza_telhado_01.jpg.asset.json";
+import eCinzaTel2 from "@/assets/produtos/esmaltada/02_cinza_telhado_02.jpg.asset.json";
+import eMarfimProd from "@/assets/produtos/esmaltada/03_marfim_produto.jpg.asset.json";
+import eMarfimTel1 from "@/assets/produtos/esmaltada/03_marfim_telhado_01.webp.asset.json";
+import eMarfimTel2 from "@/assets/produtos/esmaltada/03_marfim_telhado_02.webp.asset.json";
+import eAzulProd from "@/assets/produtos/esmaltada/04_azul_produto.jpg.asset.json";
+import eAzulTel1 from "@/assets/produtos/esmaltada/04_azul_telhado_01.jpg.asset.json";
+import eAzulTel2 from "@/assets/produtos/esmaltada/04_azul_telhado_02.jpg.asset.json";
+import ePinhaoProd from "@/assets/produtos/esmaltada/05_pinhao_produto.jpg.asset.json";
+import ePinhaoTel1 from "@/assets/produtos/esmaltada/05_pinhao_telhado_01.jpg.asset.json";
+import ePinhaoTel2 from "@/assets/produtos/esmaltada/05_pinhao_telhado_02.jpg.asset.json";
+import eBordoProd from "@/assets/produtos/esmaltada/06_bordo_produto.jpg.asset.json";
+import eBordoTel1 from "@/assets/produtos/esmaltada/06_bordo_telhado_01.jpg.asset.json";
+import eBordoTel2 from "@/assets/produtos/esmaltada/06_bordo_telhado_02.jpg.asset.json";
+import eGrafiteProd from "@/assets/produtos/esmaltada/07_grafite_produto.jpg.asset.json";
+import eGrafiteProd2 from "@/assets/produtos/esmaltada/07_grafite_produto_02.webp.asset.json";
+import eGrafiteTel1 from "@/assets/produtos/esmaltada/07_grafite_telhado_01.webp.asset.json";
+import eVerdeProd from "@/assets/produtos/esmaltada/08_verde_produto.jpg.asset.json";
+import eVerdeTel1 from "@/assets/produtos/esmaltada/08_verde_telhado_01.jpg.asset.json";
+import eVerdeTel2 from "@/assets/produtos/esmaltada/08_verde_telhado_02.jpeg.asset.json";
+import eChocoProd from "@/assets/produtos/esmaltada/09_chocolate_produto.jpg.asset.json";
+import eChocoTel1 from "@/assets/produtos/esmaltada/09_chocolate_telhado_01.webp.asset.json";
+import eChocoTel2 from "@/assets/produtos/esmaltada/09_chocolate_telhado_02.jpg.asset.json";
 import imgCaibroCambara from "@/assets/produtos/caibro_de_cambara.webp.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
@@ -483,15 +510,62 @@ export const imagensMadeirit: Record<string, ImagemProduto[]> = {
   Compensado: [{ src: "", alt: "Compensado estrutural" }],
 };
 
-// TELHA ESMALTADA — por cor
+// TELHA ESMALTADA — Cejatel linha Wave, por cor
+const esmProd = (src: string, cor: string): ImagemProduto => ({
+  src,
+  alt: `Telha Esmaltada Cejatel Wave ${cor}`,
+  legenda: "Foto do produto",
+});
+const esmTel = (src: string, cor: string): ImagemProduto => ({
+  src,
+  alt: `Telhado com Telha Esmaltada ${cor}`,
+  legenda: "Aplicação em telhado",
+});
+
 export const imagensEsmaltada: Record<string, ImagemProduto[]> = {
-  Vermelho: [{ src: "", alt: "Telha Esmaltada Vermelha" }],
-  Branco: [{ src: "", alt: "Telha Esmaltada Branca" }],
-  Preto: [{ src: "", alt: "Telha Esmaltada Preta" }],
-  Azul: [{ src: "", alt: "Telha Esmaltada Azul" }],
-  Verde: [{ src: "", alt: "Telha Esmaltada Verde" }],
-  Marrom: [{ src: "", alt: "Telha Esmaltada Marrom" }],
+  Branca: [
+    esmProd(eBrancaProd.url, "Branca"),
+    esmTel(eBrancaTel1.url, "Branca"),
+    esmTel(eBrancaTel2.url, "Branca"),
+  ],
+  Cinza: [
+    esmProd(eCinzaProd.url, "Cinza"),
+    esmTel(eCinzaTel1.url, "Cinza"),
+    esmTel(eCinzaTel2.url, "Cinza"),
+  ],
+  Marfim: [
+    esmProd(eMarfimProd.url, "Marfim"),
+    esmTel(eMarfimTel1.url, "Marfim"),
+    esmTel(eMarfimTel2.url, "Marfim"),
+  ],
+  Azul: [esmProd(eAzulProd.url, "Azul"), esmTel(eAzulTel1.url, "Azul"), esmTel(eAzulTel2.url, "Azul")],
+  "Pinhão": [
+    esmProd(ePinhaoProd.url, "Pinhão"),
+    esmTel(ePinhaoTel1.url, "Pinhão"),
+    esmTel(ePinhaoTel2.url, "Pinhão"),
+  ],
+  "Bordô": [
+    esmProd(eBordoProd.url, "Bordô"),
+    esmTel(eBordoTel1.url, "Bordô"),
+    esmTel(eBordoTel2.url, "Bordô"),
+  ],
+  Grafite: [
+    esmProd(eGrafiteProd.url, "Grafite"),
+    esmProd(eGrafiteProd2.url, "Grafite"),
+    esmTel(eGrafiteTel1.url, "Grafite"),
+  ],
+  Verde: [
+    esmProd(eVerdeProd.url, "Verde"),
+    esmTel(eVerdeTel1.url, "Verde"),
+    esmTel(eVerdeTel2.url, "Verde"),
+  ],
+  Chocolate: [
+    esmProd(eChocoProd.url, "Chocolate"),
+    esmTel(eChocoTel1.url, "Chocolate"),
+    esmTel(eChocoTel2.url, "Chocolate"),
+  ],
 };
+
 
 // TELHA DE CONCRETO — por cor
 export const imagensConcreto: Record<string, ImagemProduto[]> = {

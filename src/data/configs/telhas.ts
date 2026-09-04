@@ -105,13 +105,17 @@ const acessoriosConcreto = (cor: string, qtd: number): AcessorioItem[] => [
 ];
 
 const CORES_ESMALTADA = [
-  { valor: "Vermelho", cor: "#B4372A" },
-  { valor: "Branco", cor: "#F2F2EF" },
-  { valor: "Preto", cor: "#2B2B2B", badge: "Verificar disponibilidade" },
-  { valor: "Azul", cor: "#2E5D8C", badge: "Verificar disponibilidade" },
-  { valor: "Verde", cor: "#2F6B4F", badge: "Verificar disponibilidade" },
-  { valor: "Marrom", cor: "#6B4530", badge: "Verificar disponibilidade" },
+  { valor: "Branca", cor: "#F2F2EF" },
+  { valor: "Cinza", cor: "#8E9398" },
+  { valor: "Marfim", cor: "#E6DCC3" },
+  { valor: "Azul", cor: "#2E5D8C" },
+  { valor: "Pinhão", cor: "#C4772F" },
+  { valor: "Bordô", cor: "#6E1B26" },
+  { valor: "Grafite", cor: "#3A3F45" },
+  { valor: "Verde", cor: "#2F6B4F" },
+  { valor: "Chocolate", cor: "#4A2C1D" },
 ];
+
 
 const acessoriosEsmaltada = (cor: string, qtd: number): AcessorioItem[] => [
   {
@@ -160,7 +164,7 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
   breadcrumb: BC("Telha Esmaltada"),
   titulo: "✨ Telha Esmaltada",
   subtitulo:
-    "Telha cerâmica com esmalte vitrificado: cor viva e permanente, superfície impermeável e fácil de limpar.",
+    "Telha cerâmica Cejatel linha Wave, com esmalte vitrificado: cor viva e permanente, superfície impermeável e fácil de limpar. 9 cores: Branca, Cinza, Marfim, Azul, Pinhão, Bordô, Grafite, Verde e Chocolate.",
   galeriaTitulo: "Telha Esmaltada",
   galeriaPlaceholder: "Selecione uma cor para ver as fotos",
   imagens: (s) =>
@@ -179,7 +183,9 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
     },
   ],
   especificacoes: [
+    ["Marca", "Cejatel — linha Wave"],
     ["Material", "Cerâmica esmaltada (vitrificada)"],
+    ["Cores", "Branca, Cinza, Marfim, Azul, Pinhão, Bordô, Grafite, Verde e Chocolate"],
     ["Peças por m²", "~17 peças"],
     ["Inclinação mínima", "30%"],
     ["Absorção de água", "Muito baixa (esmalte impermeável)"],
@@ -187,7 +193,7 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
     ["Fixação", "Prego telheiro ou arame"],
   ],
   tituloAcessorios: "Acessórios para Telha Esmaltada",
-  acessorios: (s, q) => acessoriosEsmaltada(s.cor ?? "Vermelho", (q.qtd as number) ?? 100),
+  acessorios: (s, q) => acessoriosEsmaltada(s.cor ?? "Branca", (q.qtd as number) ?? 100),
   resumoNome: () => "Telha Esmaltada",
   resumoDetalhe: (s, q) =>
     `${s.cor} · ${q.qtd ?? 100} peças · ~${(((q.qtd ?? 100) as number) * 0.058).toFixed(1)} m²`,

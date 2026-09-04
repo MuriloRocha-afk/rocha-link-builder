@@ -312,7 +312,7 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
   esmaltada: {
     badges: [
       { icone: "✨", texto: "Esmalte vitrificado" },
-      { icone: "🎨", texto: "6 cores" },
+      { icone: "🎨", texto: "9 cores" },
       { icone: "💧", texto: "Impermeável" },
       { icone: "🧹", texto: "Fácil de limpar" },
     ],
