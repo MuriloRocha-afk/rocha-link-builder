@@ -24,7 +24,7 @@ export function Categorias() {
 
         <div className="mt-14 grid gap-6 grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.map((c, i) => (
-            <Reveal key={c.id} delay={i * 90} className="contents-none">
+            <Reveal key={c.id} delay={i * 90}>
               <Link
                 to="/catalogo/$categoriaSlug"
                 params={{ categoriaSlug: c.id }}
