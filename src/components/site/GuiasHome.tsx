@@ -33,34 +33,36 @@ export function GuiasHome() {
         </div>
 
         <div className="mt-12 space-y-5">
-          {guias.map((g) => (
-            <Link
-              key={g.slug}
-              to="/guias/$slug"
-              params={{ slug: g.slug }}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 transition-colors hover:bg-primary-foreground/10 sm:flex-row"
-            >
-              <div className="h-44 w-full shrink-0 overflow-hidden sm:h-auto sm:w-64">
-                <CapaGuia
-                  guia={g}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-1 flex-col justify-center gap-3 p-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-accent/15 px-3 py-1 text-[10px] font-extrabold tracking-wider text-accent uppercase">
-                    {g.categoria}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary-foreground/60">
-                    <Clock className="h-3 w-3" />
-                    {g.tempoLeitura}
-                  </span>
+          {guias.map((g, i) => (
+            <Reveal key={g.slug} delay={i * 90}>
+              <Link
+                to="/guias/$slug"
+                params={{ slug: g.slug }}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-primary-foreground/15 bg-primary-foreground/5 transition-[transform,box-shadow,background-color] duration-200 hover:-translate-y-1.5 hover:bg-primary-foreground/10 hover:shadow-[var(--shadow-lift)] sm:flex-row"
+              >
+                <div className="h-44 w-full shrink-0 overflow-hidden sm:h-auto sm:w-64">
+                  <CapaGuia
+                    guia={g}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.06]"
+                  />
                 </div>
-                <h3 className="text-xl font-extrabold text-primary-foreground">{g.titulo}</h3>
-                <p className="text-sm text-primary-foreground/70">{g.resumo}</p>
-              </div>
-            </Link>
+                <div className="flex flex-1 flex-col justify-center gap-3 p-6">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-accent/15 px-3 py-1 text-[10px] font-extrabold tracking-wider text-accent uppercase">
+                      {g.categoria}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary-foreground/60">
+                      <Clock className="h-3 w-3" />
+                      {g.tempoLeitura}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-extrabold text-primary-foreground">{g.titulo}</h3>
+                  <p className="text-sm text-primary-foreground/70">{g.resumo}</p>
+                </div>
+              </Link>
+            </Reveal>
           ))}
+
         </div>
       </div>
     </section>
