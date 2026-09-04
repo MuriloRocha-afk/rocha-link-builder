@@ -130,16 +130,18 @@ function Index() {
           </div>
         </section>
 
-        <section className="relative z-10 bg-card">
+        <section className="soft-blob relative z-10 bg-card">
+          <span className="blob-layer -top-10 -left-24 h-80 w-80" />
+          <span className="blob-layer-primary -right-20 bottom-0 h-72 w-72" />
           <div className="mx-auto max-w-7xl px-5">
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-[var(--shadow-lift)] md:-mt-14 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:-mt-14 md:grid-cols-2 lg:grid-cols-4">
               {KPIS.map((k, i) => (
                 <Reveal
                   key={k.title}
                   delay={i * 90}
-                  className="group flex items-start gap-4 bg-card p-7 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+                  className="group glass-card flex items-start gap-4 rounded-2xl p-7 shadow-[var(--shadow-card)] transition-[transform,box-shadow] duration-200 hover:-translate-y-2.5 hover:shadow-[0_36px_70px_-24px_color-mix(in_oklab,var(--primary)_70%,transparent)]"
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent transition-transform duration-200 group-hover:scale-105">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent transition-transform duration-200 group-hover:scale-110">
                     <k.icon className="h-6 w-6" />
                   </span>
                   <div>
@@ -155,9 +157,10 @@ function Index() {
 
         <Categorias />
 
-        <section className="bg-accent py-14">
+        <section className="divider-diagonal soft-blob relative bg-accent py-16">
+          <span className="blob-layer-primary top-0 left-1/3 h-64 w-64" />
           <div className="mx-auto max-w-7xl px-5 text-center">
-            <p className="text-5xl font-extrabold text-accent-foreground md:text-6xl">
+            <p className="text-5xl font-black text-accent-foreground md:text-7xl">
               <CountUp value={30000} prefix="+" />
             </p>
             <p className="mt-3 text-sm font-bold tracking-[0.18em] text-accent-foreground/80 uppercase">
