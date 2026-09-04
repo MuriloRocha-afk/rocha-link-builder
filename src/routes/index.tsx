@@ -157,15 +157,21 @@ function Index() {
 
         <Categorias />
 
-        <section className="divider-diagonal soft-blob relative bg-accent py-16">
-          <span className="blob-layer-primary top-0 left-1/3 h-64 w-64" />
-          <div className="mx-auto max-w-7xl px-5 text-center">
-            <p className="text-5xl font-black text-accent-foreground md:text-7xl">
-              <CountUp value={30000} prefix="+" />
-            </p>
-            <p className="mt-3 text-sm font-bold tracking-[0.18em] text-accent-foreground/80 uppercase">
-              entregas realizadas
-            </p>
+        <section className="stat-band relative overflow-hidden py-16">
+          <div className="relative mx-auto max-w-7xl px-5">
+            <div className="grid gap-10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-accent-foreground/20">
+              {STATS.map((s, i) => (
+                <Reveal key={s.label} delay={i * 110} className="px-4 text-center">
+                  <s.icon className="mx-auto h-7 w-7 text-accent-foreground/85" />
+                  <p className="mt-3 text-4xl font-black text-accent-foreground md:text-6xl">
+                    <CountUp value={s.value} prefix="+" />
+                  </p>
+                  <p className="mt-3 text-xs font-bold tracking-[0.18em] text-accent-foreground/80 uppercase md:text-sm">
+                    {s.label}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
