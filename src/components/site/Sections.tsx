@@ -23,14 +23,10 @@ import acao4 from "@/assets/acao-4.jpg";
 import video1 from "@/assets/videos/01_carga_montada.mp4.asset.json";
 import video2 from "@/assets/videos/02_carga_montada.mp4.asset.json";
 import video3 from "@/assets/videos/03_aparelhagem_dormente.mp4.asset.json";
+import video4 from "@/assets/videos/04_corte_sarrafa_amescla.mp4.asset.json";
+import { StoriesViewer, type StoryItem } from "./StoriesViewer";
 
-type GalleryItem = {
-  src: string;
-  alt: string;
-  label: string;
-  tag: string;
-  video?: boolean;
-};
+type GalleryItem = StoryItem;
 
 const GALLERY: GalleryItem[] = [
   {
@@ -38,114 +34,76 @@ const GALLERY: GalleryItem[] = [
     alt: "Carregamento de madeira no pátio da Rocha Telhas",
     label: "Pátio logístico",
     tag: "Bastidores",
+    tipo: "foto",
   },
   {
     src: video1.url,
     alt: "Carga de telhas e madeira montada no caminhão, pronta para entrega",
     label: "Carga pronta pra entrega",
     tag: "Frota própria",
-    video: true,
+    tipo: "video",
   },
   {
     src: acao2,
     alt: "Telhado residencial finalizado com telha colonial",
     label: "Obra entregue",
     tag: "Antes & depois",
+    tipo: "foto",
   },
   {
     src: video2.url,
     alt: "Carga montada no pátio da Rocha Telhas",
     label: "Carga montada",
     tag: "Bastidores",
-    video: true,
+    tipo: "video",
   },
   {
     src: acao3,
     alt: "Galpão de estocagem de madeira tratada",
     label: "Estoque coberto",
     tag: "Tour da loja",
+    tipo: "foto",
   },
   {
     src: video3.url,
     alt: "Aparelhagem de dormente na plaina industrial",
     label: "Aparelhagem de dormente",
     tag: "Tecnologia",
-    video: true,
+    tipo: "video",
+  },
+  {
+    src: video4.url,
+    alt: "Corte de sarrafa de amescla na serra da Rocha Telhas",
+    label: "Corte de sarrafa amescla",
+    tag: "Tecnologia",
+    tipo: "video",
   },
   {
     src: acao4,
     alt: "Estrutura de madeiramento de galpão industrial",
     label: "Grande porte",
     tag: "Obra em ação",
+    tipo: "foto",
   },
   {
     src: acao2,
     alt: "Entrega de telhas com frota própria",
     label: "Entrega em 24h",
     tag: "Frota própria",
+    tipo: "foto",
   },
   {
     src: acao1,
     alt: "Equipe separando madeiramento no pátio",
     label: "Separação de pedido",
     tag: "Bastidores",
+    tipo: "foto",
   },
 ];
 
-function VideoLightbox({ item, onClose }: { item: GalleryItem; onClose: () => void }) {
-  const ref = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    if (ref.current) {
-      ref.current.muted = false;
-      void ref.current.play().catch(() => {});
-    }
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={item.label}
-      onClick={onClose}
-      className="fixed inset-0 z-[120] flex items-center justify-center bg-black/90 p-4"
-    >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Fechar vídeo"
-        className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
-      >
-        <X className="h-5 w-5" />
-      </button>
-      <video
-        ref={ref}
-        src={item.src}
-        controls
-        playsInline
-        autoPlay
-        loop
-        onClick={(e) => e.stopPropagation()}
-        className="max-h-[88vh] max-w-[92vw] rounded-2xl"
-      />
-      <p className="absolute bottom-5 left-0 right-0 text-center text-sm text-white/80">
-        {item.label}
-      </p>
-    </div>
-  );
-}
-
 export function Acao() {
-  const [ativo, setAtivo] = useState<GalleryItem | null>(null);
+  const [ativo, setAtivo] = useState<number | null>(null);
+
 
   return (
     <section id="acao" className="surface-dark scroll-mt-24 overflow-hidden py-24">
