@@ -1,4 +1,5 @@
 import { SubcardTile } from "@/components/site/SubcardTile";
+import { Reveal } from "@/components/site/Reveal";
 import ceramica from "@/assets/prod-ceramica.jpg";
 import pvc from "@/assets/prod-pvc.jpg";
 import fibro from "@/assets/prod-fibro.jpg";
@@ -107,9 +108,9 @@ export const TELHAS_SUBCARDS: Subcard[] = [
 export function TelhasSubcardGrid() {
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
-      {TELHAS_SUBCARDS.map((card) => (
+      {TELHAS_SUBCARDS.map((card, i) => (
+        <Reveal key={card.slug} delay={(i % 3) * 90} className="flex">
         <SubcardTile
-          key={card.slug}
           categoriaSlug="telhas"
           produtoSlug={card.slug}
           name={card.name}
@@ -118,6 +119,7 @@ export function TelhasSubcardGrid() {
           badge={card.badge}
           cta={card.cta}
         />
+        </Reveal>
       ))}
     </div>
   );
