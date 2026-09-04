@@ -16,26 +16,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { CONTATO, SectionHeading, WhatsAppButton } from "./shared";
-import acao1 from "@/assets/acao-1.jpg";
-import acao2 from "@/assets/acao-2.jpg";
-import acao3 from "@/assets/acao-3.jpg";
-import acao4 from "@/assets/acao-4.jpg";
 import video1 from "@/assets/videos/01_carga_montada.mp4.asset.json";
 import video2 from "@/assets/videos/02_carga_montada.mp4.asset.json";
 import video3 from "@/assets/videos/03_aparelhagem_dormente.mp4.asset.json";
 import video4 from "@/assets/videos/04_corte_sarrafa_amescla.mp4.asset.json";
+import video5 from "@/assets/videos/05_estoque.mp4.asset.json";
+import video6 from "@/assets/videos/06_estoque_parte2_cambara.mp4.asset.json";
+import video7 from "@/assets/videos/07_construcao_telhado.mp4.asset.json";
+import foto8 from "@/assets/videos/08_foto_madeiramento_estoque.jpg.asset.json";
 import { StoriesViewer, type StoryItem } from "./StoriesViewer";
 
 type GalleryItem = StoryItem;
 
 const GALLERY: GalleryItem[] = [
-  {
-    src: acao1,
-    alt: "Carregamento de madeira no pátio da Rocha Telhas",
-    label: "Pátio logístico",
-    tag: "Bastidores",
-    tipo: "foto",
-  },
   {
     src: video1.url,
     alt: "Carga de telhas e madeira montada no caminhão, pronta para entrega",
@@ -44,11 +37,25 @@ const GALLERY: GalleryItem[] = [
     tipo: "video",
   },
   {
-    src: acao2,
-    alt: "Telhado residencial finalizado com telha colonial",
-    label: "Obra entregue",
-    tag: "Antes & depois",
+    src: video5.url,
+    alt: "Estoque de materiais no galpão da Rocha Telhas",
+    label: "Estoque",
+    tag: "Tour da loja",
+    tipo: "video",
+  },
+  {
+    src: foto8.url,
+    alt: "Estoque de madeiramento empilhado no galpão da Rocha Telhas",
+    label: "Madeiramento em estoque",
+    tag: "Tour da loja",
     tipo: "foto",
+  },
+  {
+    src: video6.url,
+    alt: "Reposição do estoque de Cambará no galpão",
+    label: "Estoque Parte 2",
+    tag: "Tour da loja",
+    tipo: "video",
   },
   {
     src: video2.url,
@@ -56,13 +63,6 @@ const GALLERY: GalleryItem[] = [
     label: "Carga montada",
     tag: "Bastidores",
     tipo: "video",
-  },
-  {
-    src: acao3,
-    alt: "Galpão de estocagem de madeira tratada",
-    label: "Estoque coberto",
-    tag: "Tour da loja",
-    tipo: "foto",
   },
   {
     src: video3.url,
@@ -79,27 +79,14 @@ const GALLERY: GalleryItem[] = [
     tipo: "video",
   },
   {
-    src: acao4,
-    alt: "Estrutura de madeiramento de galpão industrial",
-    label: "Grande porte",
+    src: video7.url,
+    alt: "Construção do telhado da própria loja Rocha Telhas",
+    label: "Construção do Nosso Telhado",
     tag: "Obra em ação",
-    tipo: "foto",
-  },
-  {
-    src: acao2,
-    alt: "Entrega de telhas com frota própria",
-    label: "Entrega em 24h",
-    tag: "Frota própria",
-    tipo: "foto",
-  },
-  {
-    src: acao1,
-    alt: "Equipe separando madeiramento no pátio",
-    label: "Separação de pedido",
-    tag: "Bastidores",
-    tipo: "foto",
+    tipo: "video",
   },
 ];
+
 
 export function Acao() {
   const [ativo, setAtivo] = useState<number | null>(null);
