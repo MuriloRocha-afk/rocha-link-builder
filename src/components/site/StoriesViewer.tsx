@@ -190,7 +190,7 @@ export function StoriesViewer({
           type="button"
           aria-label="Anterior"
           onClick={anterior}
-          className="absolute top-0 bottom-0 left-0 hidden w-1/4 cursor-w-resize items-center justify-start pl-2 text-white/0 hover:text-white/70 sm:flex"
+          className="absolute top-0 bottom-16 left-0 hidden w-1/4 cursor-w-resize items-center justify-start pl-2 text-white/0 hover:text-white/70 sm:flex"
         >
           <ChevronLeft className="h-8 w-8" />
         </button>
@@ -198,7 +198,7 @@ export function StoriesViewer({
           type="button"
           aria-label="Próximo"
           onClick={proximo}
-          className="absolute top-0 right-0 bottom-0 hidden w-1/4 cursor-e-resize items-center justify-end pr-2 text-white/0 hover:text-white/70 sm:flex"
+          className="absolute top-0 right-0 bottom-16 hidden w-1/4 cursor-e-resize items-center justify-end pr-2 text-white/0 hover:text-white/70 sm:flex"
         >
           <ChevronRight className="h-8 w-8" />
         </button>
