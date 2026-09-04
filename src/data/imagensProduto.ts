@@ -135,6 +135,8 @@ import medGrenaTelhado from "@/assets/produtos/ceramica-mediterranea/06_encomend
 import poliProd1 from "@/assets/produtos/polipropileno/00_produto_01.webp.asset.json";
 import poliProd2 from "@/assets/produtos/polipropileno/00_produto_02.jpg.asset.json";
 import poliTelhado from "@/assets/produtos/polipropileno/00_telhado.jpg.asset.json";
+import poliPatio from "@/assets/produtos/capas/07_extra_patio_polipropileno.jpeg.asset.json";
+import polPatio from "@/assets/produtos/capas/06_extra_patio_policarbonato.jpeg.asset.json";
 import petPortProduto from "@/assets/produtos/pet/01_portuguesa_produto.webp.asset.json";
 import petPortTelhado from "@/assets/produtos/pet/01_portuguesa_telhado.webp.asset.json";
 import petRomProduto from "@/assets/produtos/pet/02_romana_produto.webp.asset.json";
@@ -537,10 +539,12 @@ export const imagensPolicarbonato: Record<string, ImagemProduto[]> = {
     { src: polCristalTelhado1.url, alt: "Telhado com Policarbonato Cristal", legenda: "Exemplo de aplicação" },
     { src: polCristalTelhado2.url, alt: "Telhado com Policarbonato Cristal", legenda: "Exemplo de aplicação" },
     { src: polCristalTelhado3.url, alt: "Telhado com Policarbonato Cristal", legenda: "Exemplo de aplicação" },
+    { src: polPatio.url, alt: "Telhas de policarbonato no pátio da Rocha Telhas", legenda: "No pátio da loja" },
   ],
   grecca: [
     { src: polGreccaProduto.url, alt: "Telha Policarbonato Grecca", legenda: "Produto" },
     { src: polGreccaTelhado.url, alt: "Telhado com Policarbonato Grecca", legenda: "Exemplo de aplicação" },
+    { src: polPatio.url, alt: "Telhas de policarbonato no pátio da Rocha Telhas", legenda: "No pátio da loja" },
   ],
 };
 
@@ -699,4 +703,5 @@ export const imagensPolipropileno: ImagemProduto[] = [
   { src: poliProd1.url, alt: "Telha Translúcida Polipropileno Onda Alta", legenda: "Produto" },
   { src: poliProd2.url, alt: "Telha Translúcida Polipropileno — detalhe do perfil", legenda: "Detalhe do perfil" },
   { src: poliTelhado.url, alt: "Pérgola com telhado translúcido de polipropileno", legenda: "Exemplo de aplicação" },
+  { src: poliPatio.url, alt: "Telhas translúcidas de polipropileno no pátio da Rocha Telhas", legenda: "No pátio da loja" },
 ];
