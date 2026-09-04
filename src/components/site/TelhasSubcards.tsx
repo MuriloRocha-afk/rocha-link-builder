@@ -60,7 +60,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     slug: "concreto",
     name: "Telha de Concreto",
     image: concreto,
-    description: "Areia, Cinza e Grafite — linha Eurotop. Durabilidade e acabamento premium.",
+    description: "Areia, Cinza, Grafite e Transparente — linha Eurotop. Durabilidade e acabamento premium.",
     cta: "Escolher Modelo",
   },
   {
