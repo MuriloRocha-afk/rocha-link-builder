@@ -105,13 +105,17 @@ const acessoriosConcreto = (cor: string, qtd: number): AcessorioItem[] => [
 ];
 
 const CORES_ESMALTADA = [
-  { valor: "Vermelho", cor: "#B4372A" },
-  { valor: "Branco", cor: "#F2F2EF" },
-  { valor: "Preto", cor: "#2B2B2B", badge: "Verificar disponibilidade" },
-  { valor: "Azul", cor: "#2E5D8C", badge: "Verificar disponibilidade" },
-  { valor: "Verde", cor: "#2F6B4F", badge: "Verificar disponibilidade" },
-  { valor: "Marrom", cor: "#6B4530", badge: "Verificar disponibilidade" },
+  { valor: "Branca", cor: "#F2F2EF" },
+  { valor: "Cinza", cor: "#8E9398" },
+  { valor: "Marfim", cor: "#E6DCC3" },
+  { valor: "Azul", cor: "#2E5D8C" },
+  { valor: "Pinhão", cor: "#C4772F" },
+  { valor: "Bordô", cor: "#6E1B26" },
+  { valor: "Grafite", cor: "#3A3F45" },
+  { valor: "Verde", cor: "#2F6B4F" },
+  { valor: "Chocolate", cor: "#4A2C1D" },
 ];
+
 
 const acessoriosEsmaltada = (cor: string, qtd: number): AcessorioItem[] => [
   {

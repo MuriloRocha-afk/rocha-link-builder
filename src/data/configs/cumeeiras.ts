@@ -55,13 +55,17 @@ export const MATERIAIS_CUMEEIRA: MaterialDef[] = [
     formatos: ["Central Articulada", "Central Fixa", "Triangular 3 Vias"],
     formatosIndisponiveis: true,
     cores: [
-      { valor: "Vermelho", cor: "#A62B1F", disponivel: false },
-      { valor: "Branco", cor: "#F3F3F0", disponivel: false },
-      { valor: "Preto", cor: "#1F2124", disponivel: false },
+      { valor: "Branca", cor: "#F3F3F0", disponivel: false },
+      { valor: "Cinza", cor: "#8E9398", disponivel: false },
+      { valor: "Marfim", cor: "#E6DCC3", disponivel: false },
       { valor: "Azul", cor: "#1F4E8C", disponivel: false },
+      { valor: "Pinhão", cor: "#C4772F", disponivel: false },
+      { valor: "Bordô", cor: "#6E1B26", disponivel: false },
+      { valor: "Grafite", cor: "#3A3F45", disponivel: false },
       { valor: "Verde", cor: "#1F6B3B", disponivel: false },
-      { valor: "Marrom", cor: "#5A3A25", disponivel: false },
+      { valor: "Chocolate", cor: "#4A2C1D", disponivel: false },
     ],
+
   },
   {
     valor: "Barro",
