@@ -46,19 +46,49 @@ const KPIS = [
   { icon: CreditCard, title: "Até 12x no Cartão", text: "consulte nossas condições de parcelamento" },
 ];
 
+function useParallax() {
+  const ref = React.useRef<HTMLImageElement | null>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const y = Math.min(window.scrollY, 900) * 0.18;
+        el.style.transform = `translate3d(0, ${y}px, 0) scale(1.12)`;
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return ref;
+}
+
 function Index() {
+  const heroRef = useParallax();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       <main>
-        <section id="inicio" className="relative flex min-h-[92vh] items-center pt-24">
+        <section id="inicio" className="relative flex min-h-[92vh] items-center overflow-hidden pt-24">
           <img
+            ref={heroRef}
             src={hero}
             alt="Pátio logístico da Rocha Telhas com caminhões carregando madeira e telhas"
             width={1920}
             height={1088}
-            className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
+            className="absolute inset-0 h-full w-full object-cover object-[center_20%] will-change-transform"
           />
           <div className="absolute inset-0 bg-[linear-gradient(100deg,var(--primary-deep)_18%,color-mix(in_oklab,var(--primary-deep)_78%,transparent)_55%,color-mix(in_oklab,var(--primary-deep)_45%,transparent)_100%)]" />
 
@@ -93,16 +123,20 @@ function Index() {
         <section className="relative z-10 bg-card">
           <div className="mx-auto max-w-7xl px-5">
             <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-[var(--shadow-lift)] md:-mt-14 md:grid-cols-2 lg:grid-cols-4">
-              {KPIS.map((k) => (
-                <div key={k.title} className="flex items-start gap-4 bg-card p-7">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
+              {KPIS.map((k, i) => (
+                <Reveal
+                  key={k.title}
+                  delay={i * 90}
+                  className="group flex items-start gap-4 bg-card p-7 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent transition-transform duration-200 group-hover:scale-105">
                     <k.icon className="h-6 w-6" />
                   </span>
                   <div>
                     <p className="text-base font-extrabold text-primary">{k.title}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{k.text}</p>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -110,7 +144,20 @@ function Index() {
         </section>
 
         <Categorias />
+
+        <section className="bg-accent py-14">
+          <div className="mx-auto max-w-7xl px-5 text-center">
+            <p className="text-5xl font-extrabold text-accent-foreground md:text-6xl">
+              <CountUp value={30000} prefix="+" />
+            </p>
+            <p className="mt-3 text-sm font-bold tracking-[0.18em] text-accent-foreground/80 uppercase">
+              entregas realizadas
+            </p>
+          </div>
+        </section>
+
         <Tecnologia />
+
         <Acao />
         <AvisoEntrega />
         <section id="calculadora" className="scroll-mt-24">
