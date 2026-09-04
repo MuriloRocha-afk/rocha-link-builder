@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Calculator, ChevronRight, Crown } from "lucide-react";
 import { Header } from "@/components/site/Header";
+import { Reveal } from "@/components/site/Reveal";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { CATEGORIES, type CatalogItem } from "@/components/site/catalog-data";
 import { ProductCatalogCard } from "@/components/site/ProductCard";
@@ -113,14 +114,15 @@ function CategoriaPage() {
                       Destaques e campeões de venda
                     </div>
                     <div className="mt-5 grid gap-7 xl:grid-cols-2">
-                      {destaques.map((item: CatalogItem) => (
+                      {destaques.map((item: CatalogItem, i: number) => (
+                        <Reveal key={item.slug} delay={(i % 2) * 100} className="flex">
                         <ProductCatalogCard
-                          key={item.slug}
                           item={item}
                           categoryShort={category.short}
                           categoryId={category.id}
                           expansive
                         />
+                        </Reveal>
                       ))}
                     </div>
                   </>
@@ -132,13 +134,14 @@ function CategoriaPage() {
                       Demais opções da categoria
                     </div>
                     <div className="mt-5 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-                      {demais.map((item: CatalogItem) => (
+                      {demais.map((item: CatalogItem, i: number) => (
+                        <Reveal key={item.slug} delay={(i % 3) * 90} className="flex">
                         <ProductCatalogCard
-                          key={item.slug}
                           item={item}
                           categoryShort={category.short}
                           categoryId={category.id}
                         />
+                        </Reveal>
                       ))}
                     </div>
                   </>

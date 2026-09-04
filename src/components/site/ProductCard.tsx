@@ -32,7 +32,7 @@ export function ProductCatalogCard({
 
   return (
     <article
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-card shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] ${
+      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl border bg-card shadow-[var(--shadow-card)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-24px_color-mix(in_oklab,var(--primary)_60%,transparent)] ${
         item.bestseller ? "border-accent/60 ring-1 ring-accent/25" : "border-border"
       } ${expansive ? "lg:flex-row" : ""}`}
     >
@@ -87,7 +87,7 @@ export function ProductCatalogCard({
           <Button
             asChild
             variant={item.bestseller ? "cta" : "outlineAccent"}
-            className="h-12 w-full"
+            className="btn-sweep h-12 w-full"
           >
             <Link to={productLink.to} params={productLink.params}>
               Ver Ficha Técnica Completa

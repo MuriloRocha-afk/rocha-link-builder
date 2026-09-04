@@ -168,7 +168,11 @@
   html,
   body {
     max-width: 100%;
-    overflow-x: hidden;
+  }
+
+  /* Evita rolagem horizontal sem travar a rolagem vertical da página. */
+  body > * {
+    overflow-x: clip;
   }
 
   body {
@@ -316,14 +320,33 @@
   }
 }
 
-/* Divisor diagonal / curvo entre seções */
-@utility divider-diagonal {
-  clip-path: polygon(0 2.2rem, 100% 0, 100% 100%, 0 100%);
+/* Faixa de estatísticas: gradiente sutil + textura pontilhada */
+@utility stat-band {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 92%, white 8%),
+    var(--accent) 45%,
+    color-mix(in oklab, var(--accent) 88%, black 12%)
+  );
 }
 
-@utility divider-curve-top {
-  border-top-left-radius: 50% 3rem;
-  border-top-right-radius: 50% 3rem;
+.stat-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    radial-gradient(currentColor 1px, transparent 1px),
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in oklab, currentColor 22%, transparent) 0 1px,
+      transparent 1px 14px
+    );
+  background-size:
+    14px 14px,
+    auto;
+  color: var(--accent-foreground);
 }
 
 /* Traço decorativo que "desenha" sob o título */

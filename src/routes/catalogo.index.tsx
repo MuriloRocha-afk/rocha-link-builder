@@ -14,6 +14,7 @@ import {
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { SectionHeading } from "@/components/site/shared";
+import { Reveal } from "@/components/site/Reveal";
 import { CATEGORIES } from "@/components/site/catalog-data";
 
 const ICONS: Record<string, LucideIcon> = {
@@ -58,7 +59,7 @@ function CategoriaCard({
       to="/catalogo/$categoriaSlug"
       params={{ categoriaSlug: categoria.id }}
       className={`group relative flex overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] ${
-        hero ? "min-h-[22rem] sm:col-span-2 lg:col-span-2" : "min-h-[19rem]"
+        hero ? "min-h-[22rem] w-full" : "min-h-[19rem] w-full"
       }`}
     >
       <img
@@ -175,8 +176,14 @@ function CatalogoPage() {
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[...CATEGORIES]
                 .sort((a, b) => ORDEM.indexOf(a.id) - ORDEM.indexOf(b.id))
-                .map((c) => (
-                  <CategoriaCard key={c.id} categoria={c} hero={c.id === "telhas"} />
+                .map((c, i) => (
+                  <Reveal
+                    key={c.id}
+                    delay={i * 100}
+                    className={`flex ${c.id === "telhas" ? "sm:col-span-2 lg:col-span-2" : ""}`}
+                  >
+                    <CategoriaCard categoria={c} hero={c.id === "telhas"} />
+                  </Reveal>
                 ))}
             </div>
           </div>

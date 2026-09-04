@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SubcardTile } from "@/components/site/SubcardTile";
+import { Reveal } from "@/components/site/Reveal";
 import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucalipto from "@/assets/prod-eucalipto.jpg";
 import cedrinho from "@/assets/prod-cedrinho.jpg";
@@ -165,9 +166,9 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
 function SubcardGrid({ cards }: { cards: Subcard[] }) {
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
-      {cards.map((card) => (
+      {cards.map((card, i) => (
+        <Reveal key={card.slug} delay={(i % 3) * 90} className="flex">
         <SubcardTile
-          key={card.slug}
           categoriaSlug="madeiramento"
           produtoSlug={card.slug}
           name={card.name}
@@ -177,6 +178,7 @@ function SubcardGrid({ cards }: { cards: Subcard[] }) {
           tags={card.tag ? [card.tag] : undefined}
           cta={card.cta}
         />
+        </Reveal>
       ))}
     </div>
   );

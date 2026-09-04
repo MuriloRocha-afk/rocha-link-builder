@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { getDestaques } from "@/data/produtoDestaques";
+import { Reveal } from "@/components/site/Reveal";
 
 type Props = {
   /** chave em DESTAQUES_PRODUTO — habilita badges e "Por que escolher?" */
@@ -69,7 +70,7 @@ export default function ProdutoLayout({
 
           {/* POR QUE ESCOLHER — abaixo da galeria no desktop, após o configurador no mobile */}
           {destaques?.motivos?.length ? (
-            <section className="rounded-2xl bg-white p-5 shadow-sm md:col-span-3 md:row-start-2">
+            <Reveal className="rounded-2xl bg-white p-5 shadow-sm md:col-span-3 md:row-start-2">
               <h2 className="mb-4 font-bold text-gray-900">Por que escolher este produto?</h2>
               <ul className="space-y-4">
                 {destaques.motivos.map((m) => (
@@ -89,13 +90,13 @@ export default function ProdutoLayout({
                   </li>
                 ))}
               </ul>
-            </section>
+            </Reveal>
           ) : null}
         </div>
 
         {/* DADOS TÉCNICOS — largura total */}
         {specs?.length ? (
-          <section className="mt-10 rounded-2xl bg-white p-5 shadow-sm md:p-6">
+          <Reveal className="mt-10 rounded-2xl bg-white p-5 shadow-sm md:p-6">
             <h2 className="border-b border-gray-200 pb-3 text-lg font-bold text-gray-900">
               Especificações Técnicas
             </h2>
@@ -111,12 +112,12 @@ export default function ProdutoLayout({
                 ))}
               </tbody>
             </table>
-          </section>
+          </Reveal>
         ) : null}
 
         {/* INFORMAÇÕES */}
         {informacoes?.length ? (
-          <section className="mt-10 rounded-2xl bg-white p-5 shadow-sm md:p-6">
+          <Reveal className="mt-10 rounded-2xl bg-white p-5 shadow-sm md:p-6">
             <h2 className="border-b border-gray-200 pb-3 text-lg font-bold text-gray-900">
               Informações
             </h2>
@@ -128,17 +129,17 @@ export default function ProdutoLayout({
                 </div>
               ))}
             </div>
-          </section>
+          </Reveal>
         ) : null}
 
         {/* ACESSÓRIOS RELACIONADOS */}
         {acessorios ? (
-          <section className="mt-10">
+          <Reveal className="mt-10">
             <h2 className="border-b border-gray-200 pb-3 text-lg font-bold text-gray-900">
               {tituloAcessorios}
             </h2>
             <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">{acessorios}</div>
-          </section>
+          </Reveal>
         ) : null}
       </div>
     </div>
