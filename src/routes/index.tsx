@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Award, Truck, TreePine, CreditCard, ArrowRight } from "lucide-react";
+import { Award, Truck, TreePine, CreditCard, ArrowRight, Handshake, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Categorias } from "@/components/site/Categorias";
