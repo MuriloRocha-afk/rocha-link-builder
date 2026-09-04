@@ -23,14 +23,10 @@ import acao4 from "@/assets/acao-4.jpg";
 import video1 from "@/assets/videos/01_carga_montada.mp4.asset.json";
 import video2 from "@/assets/videos/02_carga_montada.mp4.asset.json";
 import video3 from "@/assets/videos/03_aparelhagem_dormente.mp4.asset.json";
+import video4 from "@/assets/videos/04_corte_sarrafa_amescla.mp4.asset.json";
+import { StoriesViewer, type StoryItem } from "./StoriesViewer";
 
-type GalleryItem = {
-  src: string;
-  alt: string;
-  label: string;
-  tag: string;
-  video?: boolean;
-};
+type GalleryItem = StoryItem;
 
 const GALLERY: GalleryItem[] = [
   {
@@ -38,114 +34,76 @@ const GALLERY: GalleryItem[] = [
     alt: "Carregamento de madeira no pátio da Rocha Telhas",
     label: "Pátio logístico",
     tag: "Bastidores",
+    tipo: "foto",
   },
   {
     src: video1.url,
     alt: "Carga de telhas e madeira montada no caminhão, pronta para entrega",
     label: "Carga pronta pra entrega",
     tag: "Frota própria",
-    video: true,
+    tipo: "video",
   },
   {
     src: acao2,
     alt: "Telhado residencial finalizado com telha colonial",
     label: "Obra entregue",
     tag: "Antes & depois",
+    tipo: "foto",
   },
   {
     src: video2.url,
     alt: "Carga montada no pátio da Rocha Telhas",
     label: "Carga montada",
     tag: "Bastidores",
-    video: true,
+    tipo: "video",
   },
   {
     src: acao3,
     alt: "Galpão de estocagem de madeira tratada",
     label: "Estoque coberto",
     tag: "Tour da loja",
+    tipo: "foto",
   },
   {
     src: video3.url,
     alt: "Aparelhagem de dormente na plaina industrial",
     label: "Aparelhagem de dormente",
     tag: "Tecnologia",
-    video: true,
+    tipo: "video",
+  },
+  {
+    src: video4.url,
+    alt: "Corte de sarrafa de amescla na serra da Rocha Telhas",
+    label: "Corte de sarrafa amescla",
+    tag: "Tecnologia",
+    tipo: "video",
   },
   {
     src: acao4,
     alt: "Estrutura de madeiramento de galpão industrial",
     label: "Grande porte",
     tag: "Obra em ação",
+    tipo: "foto",
   },
   {
     src: acao2,
     alt: "Entrega de telhas com frota própria",
     label: "Entrega em 24h",
     tag: "Frota própria",
+    tipo: "foto",
   },
   {
     src: acao1,
     alt: "Equipe separando madeiramento no pátio",
     label: "Separação de pedido",
     tag: "Bastidores",
+    tipo: "foto",
   },
 ];
 
-function VideoLightbox({ item, onClose }: { item: GalleryItem; onClose: () => void }) {
-  const ref = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    if (ref.current) {
-      ref.current.muted = false;
-      void ref.current.play().catch(() => {});
-    }
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={item.label}
-      onClick={onClose}
-      className="fixed inset-0 z-[120] flex items-center justify-center bg-black/90 p-4"
-    >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Fechar vídeo"
-        className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
-      >
-        <X className="h-5 w-5" />
-      </button>
-      <video
-        ref={ref}
-        src={item.src}
-        controls
-        playsInline
-        autoPlay
-        loop
-        onClick={(e) => e.stopPropagation()}
-        className="max-h-[88vh] max-w-[92vw] rounded-2xl"
-      />
-      <p className="absolute bottom-5 left-0 right-0 text-center text-sm text-white/80">
-        {item.label}
-      </p>
-    </div>
-  );
-}
-
 export function Acao() {
-  const [ativo, setAtivo] = useState<GalleryItem | null>(null);
+  const [ativo, setAtivo] = useState<number | null>(null);
+
 
   return (
     <section id="acao" className="surface-dark scroll-mt-24 overflow-hidden py-24">
@@ -164,7 +122,7 @@ export function Acao() {
                 className="basis-[78%] pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <figure className="group relative aspect-[9/16] overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
-                  {g.video ? (
+                  {g.tipo === "video" ? (
                     <video
                       src={g.src}
                       aria-label={g.alt}
@@ -173,7 +131,7 @@ export function Acao() {
                       loop
                       playsInline
                       preload="metadata"
-                      onClick={() => setAtivo(g)}
+                      onClick={() => setAtivo(i)}
                       className="h-full w-full cursor-pointer object-cover"
                     />
                   ) : (
@@ -181,19 +139,20 @@ export function Acao() {
                       src={g.src}
                       alt={g.alt}
                       loading="lazy"
+                      onClick={() => setAtivo(i)}
                       width={900}
                       height={1600}
-                      className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-110"
+                      className="h-full w-full cursor-pointer object-cover transition-transform duration-[900ms] group-hover:scale-110"
                     />
                   )}
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/25" />
                   <span className="pointer-events-none absolute top-4 left-4 rounded-full border border-primary-foreground/25 bg-black/35 px-3 py-1 text-[0.65rem] font-bold tracking-[0.16em] text-primary-foreground uppercase backdrop-blur-sm">
                     {g.tag}
                   </span>
-                  {g.video ? (
+                  {g.tipo === "video" ? (
                     <button
                       type="button"
-                      onClick={() => setAtivo(g)}
+                      onClick={() => setAtivo(i)}
                       aria-label={`Assistir: ${g.label}`}
                       className="absolute top-1/2 left-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary-foreground/40 bg-primary-foreground/15 text-primary-foreground backdrop-blur-md transition-all duration-300 hover:scale-110"
                     >
@@ -216,7 +175,9 @@ export function Acao() {
           <CarouselNext className="-right-2 border-primary-foreground/25 bg-primary-foreground/10 text-primary-foreground hover:bg-accent hover:text-accent-foreground lg:-right-6" />
         </Carousel>
       </div>
-      {ativo ? <VideoLightbox item={ativo} onClose={() => setAtivo(null)} /> : null}
+      {ativo !== null ? (
+        <StoriesViewer items={GALLERY} startIndex={ativo} onClose={() => setAtivo(null)} />
+      ) : null}
     </section>
   );
 }
