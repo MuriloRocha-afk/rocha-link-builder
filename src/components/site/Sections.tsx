@@ -122,7 +122,7 @@ export function Acao() {
                 className="basis-[78%] pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <figure className="group relative aspect-[9/16] overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
-                  {g.video ? (
+                  {g.tipo === "video" ? (
                     <video
                       src={g.src}
                       aria-label={g.alt}
@@ -131,7 +131,7 @@ export function Acao() {
                       loop
                       playsInline
                       preload="metadata"
-                      onClick={() => setAtivo(g)}
+                      onClick={() => setAtivo(i)}
                       className="h-full w-full cursor-pointer object-cover"
                     />
                   ) : (
@@ -139,19 +139,20 @@ export function Acao() {
                       src={g.src}
                       alt={g.alt}
                       loading="lazy"
+                      onClick={() => setAtivo(i)}
                       width={900}
                       height={1600}
-                      className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-110"
+                      className="h-full w-full cursor-pointer object-cover transition-transform duration-[900ms] group-hover:scale-110"
                     />
                   )}
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/25" />
                   <span className="pointer-events-none absolute top-4 left-4 rounded-full border border-primary-foreground/25 bg-black/35 px-3 py-1 text-[0.65rem] font-bold tracking-[0.16em] text-primary-foreground uppercase backdrop-blur-sm">
                     {g.tag}
                   </span>
-                  {g.video ? (
+                  {g.tipo === "video" ? (
                     <button
                       type="button"
-                      onClick={() => setAtivo(g)}
+                      onClick={() => setAtivo(i)}
                       aria-label={`Assistir: ${g.label}`}
                       className="absolute top-1/2 left-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary-foreground/40 bg-primary-foreground/15 text-primary-foreground backdrop-blur-md transition-all duration-300 hover:scale-110"
                     >
@@ -174,7 +175,9 @@ export function Acao() {
           <CarouselNext className="-right-2 border-primary-foreground/25 bg-primary-foreground/10 text-primary-foreground hover:bg-accent hover:text-accent-foreground lg:-right-6" />
         </Carousel>
       </div>
-      {ativo ? <VideoLightbox item={ativo} onClose={() => setAtivo(null)} /> : null}
+      {ativo !== null ? (
+        <StoriesViewer items={GALLERY} startIndex={ativo} onClose={() => setAtivo(null)} />
+      ) : null}
     </section>
   );
 }
