@@ -13,8 +13,7 @@ const CORES_CONCRETO = [
   { valor: "Areia", cor: "#D9C7A3" },
   { valor: "Cinza", cor: "#9AA0A6" },
   { valor: "Grafite", cor: "#3A3F45" },
-  { valor: "Marfim", cor: "#EFE3C8" },
-  { valor: "Tabaco", cor: "#7A4B2A" },
+  { valor: "Transparente", cor: "#DCE7EF", sub: "Ponto de luz natural" },
 ];
 
 export const CONFIG_CONCRETO: ConfiguradorConfig = {
@@ -22,7 +21,7 @@ export const CONFIG_CONCRETO: ConfiguradorConfig = {
   produtoKey: "concreto",
   breadcrumb: BC("Telha de Concreto"),
   titulo: "🏗️ Telha de Concreto",
-  subtitulo: "Areia, Cinza e Grafite — linha Eurotop. Durabilidade máxima e acabamento premium.",
+  subtitulo: "Areia, Cinza, Grafite e Transparente — linha Eurotop. Durabilidade máxima e acabamento premium.",
   galeriaTitulo: "Telha de Concreto Eurotop",
   galeriaPlaceholder: "Selecione uma cor para ver as fotos",
   imagens: (s) =>

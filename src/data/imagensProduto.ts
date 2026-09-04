@@ -6,6 +6,21 @@ import imgPvcMarfim from "@/assets/produtos/telha_colonial_pvc_marfim.webp.asset
 import imgPvcMarfimTelhado from "@/assets/produtos/telha_colonial_pvc_marfim_telhado.webp.asset.json";
 import imgPvcMarfimTelhado2 from "@/assets/produtos/telha_colonial_pvc_marfim_telhado_2.webp.asset.json";
 import imgConcretoGrafiteTelhado from "@/assets/produtos/telha_concreto_grafite_telhado.jfif.asset.json";
+import cAreiaProd from "@/assets/produtos/concreto/00_areia_produto.jpg.asset.json";
+import cAreiaLoja from "@/assets/produtos/concreto/00_areia_foto_real_loja.jpg.asset.json";
+import cAreiaTel1 from "@/assets/produtos/concreto/00_areia_telhado_01.jpg.asset.json";
+import cAreiaTel2 from "@/assets/produtos/concreto/00_areia_telhado_02.jpeg.asset.json";
+import cCinzaProd from "@/assets/produtos/concreto/01_cinza_produto.jpg.asset.json";
+import cCinzaLoja from "@/assets/produtos/concreto/01_cinza_foto_real_loja.jpg.asset.json";
+import cCinzaTel1 from "@/assets/produtos/concreto/01_cinza_telhado_01.webp.asset.json";
+import cCinzaTel2 from "@/assets/produtos/concreto/01_cinza_telhado_02.jpg.asset.json";
+import cGrafProd from "@/assets/produtos/concreto/02_grafite_produto.jpg.asset.json";
+import cGrafLoja from "@/assets/produtos/concreto/02_grafite_foto_real_loja.jpg.asset.json";
+import cGrafTel1 from "@/assets/produtos/concreto/02_grafite_telhado_01.jfif.asset.json";
+import cGrafTel2 from "@/assets/produtos/concreto/02_grafite_telhado_02.webp.asset.json";
+import cTranspLoja from "@/assets/produtos/concreto/03_transparente_foto_real_loja.jpg.asset.json";
+import cTranspTel1 from "@/assets/produtos/concreto/03_transparente_telhado_01.webp.asset.json";
+import cTranspTel2 from "@/assets/produtos/concreto/03_transparente_telhado_02.webp.asset.json";
 import imgCaibroCambara from "@/assets/produtos/caibro_de_cambara.webp.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
@@ -480,8 +495,28 @@ export const imagensEsmaltada: Record<string, ImagemProduto[]> = {
 
 // TELHA DE CONCRETO — por cor
 export const imagensConcreto: Record<string, ImagemProduto[]> = {
+  Areia: [
+    { src: cAreiaProd.url, alt: "Telha de Concreto Eurotop Areia", legenda: "Foto do produto" },
+    { src: cAreiaLoja.url, alt: "Telha de Concreto Eurotop Areia na loja", legenda: "Foto real na loja" },
+    { src: cAreiaTel1.url, alt: "Telhado com Telha de Concreto Areia", legenda: "Aplicação em telhado" },
+    { src: cAreiaTel2.url, alt: "Telhado com Telha de Concreto Areia", legenda: "Aplicação em telhado" },
+  ],
+  Cinza: [
+    { src: cCinzaProd.url, alt: "Telha de Concreto Eurotop Cinza", legenda: "Foto do produto" },
+    { src: cCinzaLoja.url, alt: "Telha de Concreto Eurotop Cinza na loja", legenda: "Foto real na loja" },
+    { src: cCinzaTel1.url, alt: "Telhado com Telha de Concreto Cinza", legenda: "Aplicação em telhado" },
+    { src: cCinzaTel2.url, alt: "Telhado com Telha de Concreto Cinza", legenda: "Aplicação em telhado" },
+  ],
   Grafite: [
-    { src: imgConcretoGrafiteTelhado.url, alt: "Telhado com Telha de Concreto Grafite", legenda: "Aplicação em telhado" },
+    { src: cGrafProd.url, alt: "Telha de Concreto Eurotop Grafite", legenda: "Foto do produto" },
+    { src: cGrafLoja.url, alt: "Telha de Concreto Eurotop Grafite na loja", legenda: "Foto real na loja" },
+    { src: cGrafTel1.url, alt: "Telhado com Telha de Concreto Grafite", legenda: "Aplicação em telhado" },
+    { src: cGrafTel2.url, alt: "Telhado com Telha de Concreto Grafite", legenda: "Aplicação em telhado" },
+  ],
+  Transparente: [
+    { src: cTranspLoja.url, alt: "Telha de Concreto Eurotop Transparente na loja", legenda: "Foto real na loja" },
+    { src: cTranspTel1.url, alt: "Telhado com Telha de Concreto Transparente", legenda: "Aplicação em telhado" },
+    { src: cTranspTel2.url, alt: "Telhado com Telha de Concreto Transparente", legenda: "Aplicação em telhado" },
   ],
 };
 
