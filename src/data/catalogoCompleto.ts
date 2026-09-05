@@ -153,17 +153,51 @@ function fotosDaConfig(cfg: ConfiguradorConfig) {
   return juntarFotos(...listas);
 }
 
-type Extra = { fotos?: ImagemProduto[]; config?: ConfiguradorConfig };
+type Grupo = { label: string; valores: string[] };
+type Extra = { fotos?: ImagemProduto[]; config?: ConfiguradorConfig; opcoes?: Grupo[] };
+
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Opções derivadas das chaves das galerias já cadastradas. */
+function chaves(mapa: Record<string, unknown>, label: string, prefixo = false): Grupo {
+  const brutas = Object.keys(mapa).map((k) => (prefixo ? k.split("-")[0] : k));
+  return { label, valores: Array.from(new Set(brutas)).map(cap) };
+}
+
+const OPCOES_MADEIRA: Grupo[] = [
+  { label: "Tipos", valores: [...TIPOS_MADEIRA] },
+  { label: "Acabamento", valores: ["Bruto", "Aparelhado em plaina"] },
+  { label: "Comprimentos", valores: [COMPRIMENTOS_MADEIRA[0], "…", COMPRIMENTOS_MADEIRA.at(-1)!] },
+];
 
 const EXTRAS: Record<string, Extra> = {
   // Telhas
-  fibrocimento: { fotos: todasDoMapa(imagensFibrocimento) },
-  "colonial-pvc": { fotos: todasDoMapa(imagensColonialPVC) },
+  fibrocimento: {
+    fotos: todasDoMapa(imagensFibrocimento),
+    opcoes: [
+      chaves(imagensFibrocimento, "Dimensões"),
+      { label: "Espessuras", valores: ["5mm", "6mm", "8mm"] },
+    ],
+  },
+  "colonial-pvc": {
+    fotos: todasDoMapa(imagensColonialPVC),
+    opcoes: [chaves(imagensColonialPVC, "Cores")],
+  },
   "plan-pvc": {
     fotos: [...galeriaPlanPVC("Terracota"), ...galeriaPlanPVC("Marfim"), ...galeriaPlanPVC("Cinza")],
+    opcoes: [{ label: "Cores", valores: ["Terracota", "Marfim", "Cinza"] }],
   },
-  ceramica: { fotos: todasDoMapa(imagensCeramica) },
-  policarbonato: { fotos: todasDoMapa(imagensPolicarbonato) },
+  ceramica: {
+    fotos: todasDoMapa(imagensCeramica),
+    opcoes: [
+      chaves(imagensCeramica, "Formatos", true),
+      { label: "Acabamento", valores: ["Natural", "Resinado", "Esmaltado"] },
+    ],
+  },
+  policarbonato: {
+    fotos: todasDoMapa(imagensPolicarbonato),
+    opcoes: [chaves(imagensPolicarbonato, "Perfis")],
+  },
   concreto: { config: CONFIG_CONCRETO },
   esmaltada: { config: CONFIG_ESMALTADA },
   polipropileno: { config: CONFIG_POLIPROPILENO },
@@ -172,11 +206,11 @@ const EXTRAS: Record<string, Extra> = {
   cumeeiras: { config: CONFIG_CUMEEIRAS },
 
   // Madeiramento
-  cambara: { fotos: todasDoMapa(imagensCambara) },
-  cedrinho: { fotos: todasDoMapa(imagensCedrinho) },
-  pinus: { fotos: todasDoMapa(imagensPinus) },
+  cambara: { fotos: todasDoMapa(imagensCambara), opcoes: OPCOES_MADEIRA },
+  cedrinho: { fotos: todasDoMapa(imagensCedrinho), opcoes: [chaves(imagensCedrinho, "Tipos")] },
+  pinus: { fotos: todasDoMapa(imagensPinus), opcoes: [chaves(imagensPinus, "Tipos")] },
   eucalipto: { fotos: todasDoMapa(imagensEucalipto) },
-  madeirit: { fotos: todasDoMapa(imagensMadeirit) },
+  madeirit: { fotos: todasDoMapa(imagensMadeirit), opcoes: [chaves(imagensMadeirit, "Linhas")] },
   "forro-pvc": { fotos: imagensForroPVC },
   "forro-cedrinho": { fotos: imagensForroCedrinho },
   "forro-pinus": { fotos: imagensForroPinus },
@@ -187,6 +221,7 @@ const EXTRAS: Record<string, Extra> = {
   tabeira: { config: CONFIG_TABEIRA },
   "tabeiras-deck": { config: CONFIG_TABEIRAS_DECK },
   "mourao-tratado": { config: CONFIG_MOURAO },
+
 
   // Calhas
   "calha-alge": { config: CONFIG_CALHA_ALGE, fotos: todasDoMapa(imagensCalhas) },
