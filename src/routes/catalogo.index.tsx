@@ -3,6 +3,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Boxes,
+  Download,
   CloudRain,
   Layers,
   Paintbrush,
