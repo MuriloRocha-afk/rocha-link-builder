@@ -18,6 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as GuiasIndexRouteImport } from './routes/guias.index'
 import { Route as CatalogoIndexRouteImport } from './routes/catalogo.index'
 import { Route as GuiasSlugRouteImport } from './routes/guias.$slug'
+import { Route as CatalogoCompletoRouteImport } from './routes/catalogo.completo'
 import { Route as CatalogoCategoriaSlugRouteRouteImport } from './routes/catalogo.$categoriaSlug.route'
 import { Route as CatalogoTintasIndexRouteImport } from './routes/catalogo.tintas.index'
 import { Route as CatalogoFixadoresIndexRouteImport } from './routes/catalogo.fixadores.index'
@@ -120,6 +121,11 @@ const CatalogoIndexRoute = CatalogoIndexRouteImport.update({
 const GuiasSlugRoute = GuiasSlugRouteImport.update({
   id: '/guias/$slug',
   path: '/guias/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoCompletoRoute = CatalogoCompletoRouteImport.update({
+  id: '/catalogo/completo',
+  path: '/catalogo/completo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoCategoriaSlugRouteRoute =
@@ -463,6 +469,7 @@ export interface FileRoutesByFullPath {
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
+  '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
   '/guias/': typeof GuiasIndexRoute
@@ -531,6 +538,7 @@ export interface FileRoutesByTo {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
+  '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo': typeof CatalogoIndexRoute
   '/guias': typeof GuiasIndexRoute
@@ -602,6 +610,7 @@ export interface FileRoutesById {
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
+  '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo/': typeof CatalogoIndexRoute
   '/guias/': typeof GuiasIndexRoute
@@ -673,6 +682,7 @@ export interface FileRouteTypes {
     | '/ferramentas'
     | '/links'
     | '/catalogo/$categoriaSlug'
+    | '/catalogo/completo'
     | '/guias/$slug'
     | '/catalogo/'
     | '/guias/'
@@ -741,6 +751,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/links'
+    | '/catalogo/completo'
     | '/guias/$slug'
     | '/catalogo'
     | '/guias'
@@ -811,6 +822,7 @@ export interface FileRouteTypes {
     | '/ferramentas'
     | '/links'
     | '/catalogo/$categoriaSlug'
+    | '/catalogo/completo'
     | '/guias/$slug'
     | '/catalogo/'
     | '/guias/'
@@ -882,6 +894,7 @@ export interface RootRouteChildren {
   FerramentasRoute: typeof FerramentasRoute
   LinksRoute: typeof LinksRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
+  CatalogoCompletoRoute: typeof CatalogoCompletoRoute
   GuiasSlugRoute: typeof GuiasSlugRoute
   CatalogoIndexRoute: typeof CatalogoIndexRoute
   GuiasIndexRoute: typeof GuiasIndexRoute
@@ -1005,6 +1018,13 @@ declare module '@tanstack/react-router' {
       path: '/guias/$slug'
       fullPath: '/guias/$slug'
       preLoaderRoute: typeof GuiasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/completo': {
+      id: '/catalogo/completo'
+      path: '/catalogo/completo'
+      fullPath: '/catalogo/completo'
+      preLoaderRoute: typeof CatalogoCompletoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/$categoriaSlug': {
@@ -1459,6 +1479,7 @@ const rootRouteChildren: RootRouteChildren = {
   FerramentasRoute: FerramentasRoute,
   LinksRoute: LinksRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
+  CatalogoCompletoRoute: CatalogoCompletoRoute,
   GuiasSlugRoute: GuiasSlugRoute,
   CatalogoIndexRoute: CatalogoIndexRoute,
   GuiasIndexRoute: GuiasIndexRoute,
