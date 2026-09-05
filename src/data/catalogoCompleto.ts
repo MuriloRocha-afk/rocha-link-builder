@@ -25,6 +25,8 @@ import {
   CONFIG_TABEIRAS_DECK,
   CONFIG_MOURAO,
   CONFIG_JATOBA,
+  TIPOS_MADEIRA,
+  COMPRIMENTOS_MADEIRA,
 } from "@/data/configs/madeiramento";
 import {
   CONFIG_CALHA_ALGE,
@@ -268,11 +270,13 @@ function montar(categoriaSlug: string, entradas: Entrada[]): ProdutoPdf[] {
       extra.fotos,
       e.image ? [{ src: e.image, alt: e.name }] : [],
     );
-    const opcoes = extra.config
-      ? opcoesDaConfig(extra.config)
-      : e.tags?.length
-        ? [{ label: "Opções disponíveis", valores: e.tags }]
-        : [];
+    const opcoes = extra.opcoes
+      ? extra.opcoes
+      : extra.config
+        ? opcoesDaConfig(extra.config)
+        : e.tags?.length
+          ? [{ label: "Opções disponíveis", valores: e.tags }]
+          : [];
     return {
       slug: e.slug,
       nome: limpar(e.name),
