@@ -1,6 +1,6 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
 
-const CARDS: EmojiSubcard[] = [
+export const CARDS: EmojiSubcard[] = [
   {
     slug: "cupicida",
     name: "Exterminador de Cupim",
