@@ -3,6 +3,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Boxes,
+  Download,
   CloudRain,
   Layers,
   Paintbrush,
@@ -162,6 +163,13 @@ function CatalogoPage() {
               bitola, cor e dimensão e envie seu orçamento pelo WhatsApp — sem preços no site,
               sempre a melhor condição para a sua obra.
             </p>
+            <Link
+              to="/catalogo/completo"
+              className="mt-7 inline-flex items-center gap-2 rounded-xl bg-[#F97316] px-6 py-3.5 text-sm font-extrabold text-white shadow-lg transition-colors hover:bg-[#EA580C]"
+            >
+              <Download className="h-4 w-4" />
+              Baixar catálogo completo
+            </Link>
           </div>
         </section>
 
