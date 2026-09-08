@@ -5,9 +5,9 @@ export const CARDS: EmojiSubcard[] = [
     slug: "cupicida",
     name: "Exterminador de Cupim",
     emoji: "🌿",
-    tags: ["Apus", "Ecol", "Sayerlack"],
+    tags: ["Sayerlack", "3 tamanhos", "Cupim"],
     description:
-      "Exterminador de cupim em 900ml, 5L e 18L. Proteção preventiva e curativa para estruturas de madeira.",
+      "Exterminador de cupim Sayerlack em 900ml, 5L e 18L. Proteção preventiva e curativa para estruturas de madeira.",
     cta: "Ver produtos e cotar",
   },
   {

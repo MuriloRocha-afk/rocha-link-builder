@@ -173,8 +173,8 @@ const REGRAS: Regra[] = [
         categoria: "Fixadores",
       },
       {
-        id: "apus-cupim-5l",
-        nome: "Apus Química — Exterminador de Cupim 5L",
+        id: "sayerlack-cupim-5l",
+        nome: "Sayerlack — Exterminador de Cupim 5L",
         descricao: "Proteção preventiva para estrutura de madeira",
         emoji: "🌿",
         unidade: "un",

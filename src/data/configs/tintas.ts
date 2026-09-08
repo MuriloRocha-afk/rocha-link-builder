@@ -134,45 +134,33 @@ export const CONFIG_EMBORRACHADA: ConfiguradorConfig = {
 };
 
 
-const VOLUMES_CUPIM: Record<string, string[]> = {
-  "Apus Química": ["900ml", "5L"],
-  Ecol: ["900ml", "5L", "18L"],
-  "Sayerlack Exterminador": ["900ml"],
-};
+const VOLUMES_CUPIM = ["900ml", "5L", "18L"];
 
 export const CONFIG_CUPICIDA: ConfiguradorConfig = {
+  produtoKey: "cupicida",
   breadcrumb: BC("Proteção contra Cupim"),
-  titulo: "🌿 Proteção contra Cupim",
-  subtitulo: "Apus Química e Ecol. Preventivo e curativo para estruturas de madeira.",
-  galeriaTitulo: "Exterminador de Cupim",
-  galeriaPlaceholder: "Selecione a marca para ver as fotos",
-  imagens: (s) => (s.marca ? [{ src: "", alt: `Exterminador de Cupim ${s.marca}` }] : []),
+  titulo: "🌿 Exterminador de Cupim — Sayerlack",
+  subtitulo:
+    "Exterminador de cupim Sayerlack. Preventivo e curativo para estruturas de madeira, incolor e de alta eficácia.",
+  galeriaTitulo: "Exterminador de Cupim Sayerlack",
+  galeriaPlaceholder: "Selecione o tamanho para ver as fotos",
+  imagens: (s) => (s.volume ? [{ src: "", alt: `Exterminador de Cupim Sayerlack ${s.volume}` }] : []),
   categoria: "Tintas",
   passos: [
-    {
-      chave: "marca",
-      titulo: "Marca",
-      tipo: "lista",
-      opcoes: [
-        { valor: "Apus Química", sub: "Exterminador de Cupim" },
-        { valor: "Ecol", sub: "Exterminador de Cupim" },
-        { valor: "Sayerlack Exterminador", sub: "900ml" },
-      ],
-    },
     {
       chave: "volume",
       titulo: "Volume",
       tipo: "grid3",
-      opcoes: (s) => (VOLUMES_CUPIM[s.marca] ?? []).map((v) => ({ valor: v })),
+      opcoes: VOLUMES_CUPIM.map((v) => ({ valor: v })),
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: (s) => `Exterminador de Cupim — ${s.marca ?? ""}`,
+  resumoNome: () => "Exterminador de Cupim — Sayerlack",
   resumoDetalhe: (s, q) => `${s.volume} · ${q.qtd ?? 1} un`,
   unidadeResumo: () => "un",
-  idItem: (s) => `cupicida-${s.marca}-${s.volume}`,
+  idItem: (s) => `cupicida-sayerlack-${s.volume}`,
   mensagem: (s, q) =>
-    `🌿 *Exterminador de Cupim — ${s.marca}*\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
+    `🌿 *Exterminador de Cupim — Sayerlack*\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
 /* ---------------- Aguarrás & Thinner (Sayerlack) ---------------- */

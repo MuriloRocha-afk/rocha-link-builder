@@ -40,8 +40,7 @@ const ACABAMENTOS: Record<string, Acabamento> = {
     id: "cupicida",
     label: "Cupicida preventivo",
     produtos: [
-      { nome: "Cupicida Apus Química 5L", rendimento: 8, volume: 5 },
-      { nome: "Cupicida Ecol 5L", rendimento: 8, volume: 5 },
+      { nome: "Cupicida Sayerlack 5L", rendimento: 8, volume: 5 },
     ],
   },
   acrilica: {
