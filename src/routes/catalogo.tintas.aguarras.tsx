@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_AGUARRAS } from "@/data/configs/tintas";
 
-const TITLE = "Aguarrás e Thinner Sayerlack | Rocha Telhas";
-const DESCRIPTION = "Aguarrás mineral e vegetal, thinner e diluentes Sayerlack para vernizes, stains e limpeza de ferramentas. Cote no WhatsApp.";
+const TITLE = "Thinner Profissional Sayerlack 900ml e 5L | Rocha Telhas";
+const DESCRIPTION = "Sayerlack Thinner Profissional em 900ml e 5L para diluir tintas e vernizes e limpar pincéis, rolos e equipamentos. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/aguarras")({
   head: () => ({

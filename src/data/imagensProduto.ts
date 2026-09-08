@@ -465,7 +465,11 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Exterminador de Cupim Sayerlack", legenda: "Exterminador de Cupim Sayerlack" },
   ],
   aguarras: [
-    { src: "", alt: "Aguarrás, thinner e diluentes Sayerlack", legenda: "Aguarrás / Thinner" },
+    {
+      src: "",
+      alt: "Sayerlack Thinner Profissional",
+      legenda: "Sayerlack Thinner Profissional",
+    },
   ],
 };
 

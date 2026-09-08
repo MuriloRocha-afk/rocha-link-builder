@@ -157,45 +157,36 @@ export const CONFIG_CUPICIDA: ConfiguradorConfig = {
     `🌿 *Exterminador de Cupim — Sayerlack*\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
-/* ---------------- Aguarrás & Thinner (Sayerlack) ---------------- */
+/* ---------------- Thinner Profissional (Sayerlack) ---------------- */
 
-const AGUARRAS: { nome: string; volumes: string[] }[] = [
-  { nome: "Sayerlack Aguarrás Mineral", volumes: ["500ml", "900ml", "5L", "18L"] },
-  { nome: "Sayerlack Aguarrás Vegetal", volumes: ["900ml", "5L"] },
-  { nome: "Sayerlack Thinner Profissional", volumes: ["900ml", "5L"] },
-  { nome: "Sayerlack Diluente para Verniz e Stain", volumes: ["900ml", "5L"] },
-];
+const VOLUMES_THINNER = ["900ml", "5L"];
 
 export const CONFIG_AGUARRAS: ConfiguradorConfig = {
-  breadcrumb: BC("Aguarrás / Thinner"),
-  titulo: "🧴 Aguarrás / Thinner — Sayerlack",
+  produtoKey: "aguarras",
+  breadcrumb: BC("Thinner Profissional"),
+  titulo: "🧴 Thinner Profissional — Sayerlack",
   subtitulo:
-    "Aguarrás mineral e vegetal, thinner e diluentes Sayerlack para diluição de vernizes, stains e limpeza de ferramentas.",
-  galeriaTitulo: "Aguarrás / Thinner",
-  galeriaPlaceholder: "Selecione o produto para ver as fotos",
-  imagens: (s) => (s.produto ? [{ src: "", alt: s.produto }] : []),
+    "Sayerlack Thinner Profissional nos tamanhos 900ml e 5L. Para diluição de tintas e vernizes e limpeza de pincéis, rolos e equipamentos.",
+  galeriaTitulo: "Sayerlack Thinner Profissional",
+  galeriaPlaceholder: "Selecione o tamanho para ver as fotos",
+  imagens: (s) =>
+    s.volume ? [{ src: "", alt: `Sayerlack Thinner Profissional ${s.volume}` }] : [],
   categoria: "Tintas",
   passos: [
     {
-      chave: "produto",
-      titulo: "Produto",
-      tipo: "lista",
-      opcoes: AGUARRAS.map((p) => ({ valor: p.nome, sub: p.volumes.join(" · ") })),
-    },
-    {
       chave: "volume",
       titulo: "Volume",
-      tipo: "grid3",
-      opcoes: (s) =>
-        (AGUARRAS.find((p) => p.nome === s.produto)?.volumes ?? []).map((v) => ({ valor: v })),
+      tipo: "grid2",
+      opcoes: VOLUMES_THINNER.map((v) => ({ valor: v })),
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: (s) => s.produto ?? "Aguarrás / Thinner",
+  resumoNome: () => "Sayerlack Thinner Profissional",
   resumoDetalhe: (s, q) => `${s.volume} · ${q.qtd ?? 1} un`,
   unidadeResumo: () => "un",
-  idItem: (s) => `aguarras-${s.produto}-${s.volume}`,
-  mensagem: (s, q) => `🧴 *${s.produto} ${s.volume}*\n• Quantidade: ${q.qtd ?? 1} un`,
+  idItem: (s) => `thinner-sayerlack-${s.volume}`,
+  mensagem: (s, q) =>
+    `🧴 *Sayerlack Thinner Profissional*\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
 
