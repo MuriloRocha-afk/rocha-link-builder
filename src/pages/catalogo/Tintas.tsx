@@ -25,7 +25,7 @@ export const CARDS: EmojiSubcard[] = [
     emoji: "🪵",
     tags: ["Sayerlack", "Polisten"],
     description:
-      "Sayerlack Polisten, Polisten ECO e Polisten Deck. Até 11 cores, penetra na fibra e realça o veio natural.",
+      "Sayerlack Polisten em Imbuia, Mogno Inglês e Transparente, nos tamanhos 900ml e 3,6L. Penetra na fibra e realça o veio natural.",
     cta: "Ver produtos e cotar",
   },
   {
