@@ -14,9 +14,9 @@ export const CARDS: EmojiSubcard[] = [
     slug: "verniz",
     name: "Verniz para Madeira",
     emoji: "✨",
-    tags: ["Sayerlack", "Poliulack", "Polikol"],
+    tags: ["Sayerlack", "Polirex", "Restaurador"],
     description:
-      "Linha Sayerlack: Poliulack e Poliulack Eco, Polikol colorido, Polirex restaurador e Polideck para deck.",
+      "Verniz restaurador Sayerlack Polirex nas cores Imbuia e Mogno. Recupera e protege madeira já envernizada.",
     cta: "Ver produtos e cotar",
   },
   {
