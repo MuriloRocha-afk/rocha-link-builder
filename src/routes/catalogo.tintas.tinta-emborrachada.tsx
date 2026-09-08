@@ -4,9 +4,9 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_EMBORRACHADA } from "@/data/configs/tintas";
 
-const TITLE = "Tinta Emborrachada para Telhado e Fachada | Rocha Telhas";
+const TITLE = "Tinta Emborrachada Brazilian Color Cinza Espacial | Rocha Telhas";
 const DESCRIPTION =
-  "Tinta acrílica emborrachada impermeabilizante para telhado, laje e fachada. Escolha cor e volume e cote no WhatsApp.";
+  "Tinta emborrachada Brazilian Color Super Proteção, Cinza Espacial, em 3,6L e 18L. Impermeável para laje, telhado e fachada. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/tinta-emborrachada")({
   head: () => ({

@@ -41,9 +41,9 @@ export const CARDS: EmojiSubcard[] = [
     slug: "tinta-emborrachada",
     name: "Tinta Emborrachada",
     emoji: "🎨",
-    tags: ["Telhado", "Fachada", "Laje"],
+    tags: ["Brazilian Color", "Cinza Espacial", "3,6L e 18L"],
     description:
-      "Tinta acrílica emborrachada com filme elástico e impermeável para telhados, lajes e fachadas.",
+      "Tinta emborrachada Brazilian Color Super Proteção na cor Cinza Espacial, em 3,6L e 18L. Filme elástico e impermeável para laje, telhado e fachada.",
     cta: "Ver produtos e cotar",
   },
   {
