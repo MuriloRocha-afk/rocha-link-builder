@@ -87,7 +87,7 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
       },
       {
         q: "Preciso tratar o Cambará contra cupim?",
-        a: "O Cambará já tem resistência natural razoável, mas em regiões com cupim de madeira seca ou de solo, o tratamento preventivo é recomendado. Vendemos o Apus Química e o Ecol Exterminador de Cupim que podem ser aplicados antes da instalação para máxima proteção.",
+        a: "O Cambará já tem resistência natural razoável, mas em regiões com cupim de madeira seca ou de solo, o tratamento preventivo é recomendado. Vendemos o Exterminador de Cupim Sayerlack, que pode ser aplicado antes da instalação para máxima proteção.",
       },
       {
         q: "O que significa DOF/IBAMA na madeira?",

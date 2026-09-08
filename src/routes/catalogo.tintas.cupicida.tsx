@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_CUPICIDA } from "@/data/configs/tintas";
 
-const TITLE = "Exterminador de Cupim Apus, Ecol e Sayerlack | Rocha Telhas";
-const DESCRIPTION = "Cupicida preventivo e curativo Apus Química, Ecol e Sayerlack de 900ml a 18L. Cote direto no WhatsApp.";
+const TITLE = "Exterminador de Cupim Sayerlack | Rocha Telhas";
+const DESCRIPTION = "Cupicida preventivo e curativo Sayerlack nos tamanhos 900ml, 5L e 18L. Proteção para madeira. Cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/cupicida")({
   head: () => ({

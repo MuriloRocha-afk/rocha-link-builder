@@ -462,7 +462,7 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Tinta emborrachada para telhado e fachada", legenda: "Tinta Emborrachada" },
   ],
   cupicida: [
-    { src: "", alt: "Apus e Ecol Exterminador de Cupim", legenda: "Proteção contra Cupim" },
+    { src: "", alt: "Exterminador de Cupim Sayerlack", legenda: "Exterminador de Cupim Sayerlack" },
   ],
   aguarras: [
     { src: "", alt: "Aguarrás, thinner e diluentes Sayerlack", legenda: "Aguarrás / Thinner" },
