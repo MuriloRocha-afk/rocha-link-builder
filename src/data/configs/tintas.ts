@@ -91,31 +91,25 @@ export const CONFIG_STAIN: ConfiguradorConfig = {
 
 /* ---------------- Tinta Emborrachada ---------------- */
 
-const CORES_EMBORRACHADA = [
-  "Branco",
-  "Cerâmica",
-  "Concreto",
-  "Cinza",
-  "Grafite",
-  "Terracota",
-  "Verde",
-];
+const CORES_EMBORRACHADA = ["Cinza Espacial"];
 
 export const CONFIG_EMBORRACHADA: ConfiguradorConfig = {
+  produtoKey: "tinta-emborrachada",
   breadcrumb: BC("Tinta Emborrachada"),
-  titulo: "🎨 Tinta Emborrachada",
+  titulo: "🎨 Tinta Emborrachada — Brazilian Color",
   subtitulo:
-    "Tinta acrílica emborrachada para telhado, laje e fachada. Filme elástico, impermeável e resistente ao sol e à chuva.",
-  galeriaTitulo: "Tinta Emborrachada",
+    "Tinta emborrachada Brazilian Color, linha Super Proteção, na cor Cinza Espacial (3,6L e 18L). Filme elástico e impermeável para laje, telhado e fachada.",
+  galeriaTitulo: "Tinta Emborrachada Brazilian Color",
   galeriaPlaceholder: "Selecione a cor para ver as fotos",
-  imagens: (s) => (s.cor ? [{ src: "", alt: `Tinta Emborrachada ${s.cor}` }] : []),
+  imagens: (s) =>
+    s.cor ? [{ src: "", alt: `Tinta Emborrachada Brazilian Color ${s.cor}` }] : [],
   categoria: "Tintas",
   passos: [
     {
       chave: "cor",
       titulo: "Cor",
-      tipo: "chips",
-      opcoes: CORES_EMBORRACHADA.map((v) => ({ valor: v })),
+      tipo: "lista",
+      opcoes: CORES_EMBORRACHADA.map((v) => ({ valor: v, sub: "Linha Super Proteção" })),
     },
     {
       chave: "volume",
@@ -125,12 +119,12 @@ export const CONFIG_EMBORRACHADA: ConfiguradorConfig = {
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: () => "Tinta Emborrachada",
+  resumoNome: () => "Tinta Emborrachada Brazilian Color",
   resumoDetalhe: (s, q) => `${s.cor} · ${s.volume} · ${q.qtd ?? 1} un`,
   unidadeResumo: () => "un",
-  idItem: (s) => `emborrachada-${s.cor}-${s.volume}`,
+  idItem: (s) => `emborrachada-brazilian-color-${s.cor}-${s.volume}`,
   mensagem: (s, q) =>
-    `🎨 *Tinta Emborrachada*\n• Cor: ${s.cor}\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
+    `🎨 *Tinta Emborrachada Brazilian Color — Super Proteção*\n• Cor: ${s.cor}\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
 
