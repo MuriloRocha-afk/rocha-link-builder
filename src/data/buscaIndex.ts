@@ -489,10 +489,10 @@ const tintas: ItemBusca[] = [
   },
   {
     id: "acessorios-pintura",
-    nome: "Acessórios de Pintura",
+    nome: "Acessórios para Fixação",
     categoria: "Tintas",
     rota: "/catalogo/tintas/acessorios-pintura",
-    termos: ["rolo", "pincel", "bandeja", "fita crepe"],
+    termos: ["rolo", "roloflex", "pincel", "broxa", "espátula", "suporte de rolo", "bestfer"],
   },
 ];
 
