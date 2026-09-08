@@ -190,6 +190,37 @@ export const CONFIG_AGUARRAS: ConfiguradorConfig = {
 };
 
 
+/* ---------------- Aguarrás Sayerlack (Sayerraz) ---------------- */
+
+const VOLUMES_SAYERRAZ = ["900ml", "5L"];
+
+export const CONFIG_SAYERRAZ: ConfiguradorConfig = {
+  produtoKey: "sayerraz",
+  breadcrumb: BC("Aguarrás Sayerraz"),
+  titulo: "🪣 Aguarrás — Sayerlack Sayerraz",
+  subtitulo:
+    "Aguarrás Sayerlack Sayerraz nos tamanhos 900ml e 5L. Diluição de tintas e vernizes à base de óleo e limpeza de pincéis, rolos e ferramentas.",
+  galeriaTitulo: "Sayerlack Sayerraz",
+  galeriaPlaceholder: "Selecione o tamanho para ver as fotos",
+  imagens: (s) => (s.volume ? [{ src: "", alt: `Sayerlack Sayerraz ${s.volume}` }] : []),
+  categoria: "Tintas",
+  passos: [
+    {
+      chave: "volume",
+      titulo: "Volume",
+      tipo: "grid2",
+      opcoes: VOLUMES_SAYERRAZ.map((v) => ({ valor: v })),
+    },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
+  ],
+  resumoNome: () => "Sayerlack Sayerraz (Aguarrás)",
+  resumoDetalhe: (s, q) => `${s.volume} · ${q.qtd ?? 1} un`,
+  unidadeResumo: () => "un",
+  idItem: (s) => `sayerraz-aguarras-${s.volume}`,
+  mensagem: (s, q) =>
+    `🪣 *Sayerlack Sayerraz (Aguarrás)*\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
+};
+
 /* ---------------- Acessórios de aplicação ---------------- */
 
 const ACESSORIOS_PINTURA: { nome: string; opcoes: string[] }[] = [

@@ -464,6 +464,13 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
   cupicida: [
     { src: "", alt: "Exterminador de Cupim Sayerlack", legenda: "Exterminador de Cupim Sayerlack" },
   ],
+  sayerraz: [
+    {
+      src: "",
+      alt: "Sayerlack Sayerraz Aguarrás",
+      legenda: "Sayerlack Sayerraz (Aguarrás)",
+    },
+  ],
   aguarras: [
     {
       src: "",

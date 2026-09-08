@@ -27,6 +27,7 @@ import { Route as CatalogoCategoriaSlugIndexRouteImport } from './routes/catalog
 import { Route as CatalogoTintasVernizRouteImport } from './routes/catalogo.tintas.verniz'
 import { Route as CatalogoTintasTintaEmborrachadaRouteImport } from './routes/catalogo.tintas.tinta-emborrachada'
 import { Route as CatalogoTintasStainRouteImport } from './routes/catalogo.tintas.stain'
+import { Route as CatalogoTintasSayerrazRouteImport } from './routes/catalogo.tintas.sayerraz'
 import { Route as CatalogoTintasPuCalhaRouteImport } from './routes/catalogo.tintas.pu-calha'
 import { Route as CatalogoTintasLonaPlasticaRouteImport } from './routes/catalogo.tintas.lona-plastica'
 import { Route as CatalogoTintasLixasRouteImport } from './routes/catalogo.tintas.lixas'
@@ -169,6 +170,11 @@ const CatalogoTintasTintaEmborrachadaRoute =
 const CatalogoTintasStainRoute = CatalogoTintasStainRouteImport.update({
   id: '/catalogo/tintas/stain',
   path: '/catalogo/tintas/stain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CatalogoTintasSayerrazRoute = CatalogoTintasSayerrazRouteImport.update({
+  id: '/catalogo/tintas/sayerraz',
+  path: '/catalogo/tintas/sayerraz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoTintasPuCalhaRoute = CatalogoTintasPuCalhaRouteImport.update({
@@ -524,6 +530,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
+  '/catalogo/tintas/sayerraz': typeof CatalogoTintasSayerrazRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
   '/catalogo/tintas/tinta-emborrachada': typeof CatalogoTintasTintaEmborrachadaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
@@ -593,6 +600,7 @@ export interface FileRoutesByTo {
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
+  '/catalogo/tintas/sayerraz': typeof CatalogoTintasSayerrazRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
   '/catalogo/tintas/tinta-emborrachada': typeof CatalogoTintasTintaEmborrachadaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
@@ -665,6 +673,7 @@ export interface FileRoutesById {
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
+  '/catalogo/tintas/sayerraz': typeof CatalogoTintasSayerrazRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
   '/catalogo/tintas/tinta-emborrachada': typeof CatalogoTintasTintaEmborrachadaRoute
   '/catalogo/tintas/verniz': typeof CatalogoTintasVernizRoute
@@ -737,6 +746,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
+    | '/catalogo/tintas/sayerraz'
     | '/catalogo/tintas/stain'
     | '/catalogo/tintas/tinta-emborrachada'
     | '/catalogo/tintas/verniz'
@@ -806,6 +816,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
+    | '/catalogo/tintas/sayerraz'
     | '/catalogo/tintas/stain'
     | '/catalogo/tintas/tinta-emborrachada'
     | '/catalogo/tintas/verniz'
@@ -877,6 +888,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
     | '/catalogo/tintas/pu-calha'
+    | '/catalogo/tintas/sayerraz'
     | '/catalogo/tintas/stain'
     | '/catalogo/tintas/tinta-emborrachada'
     | '/catalogo/tintas/verniz'
@@ -947,6 +959,7 @@ export interface RootRouteChildren {
   CatalogoTintasLixasRoute: typeof CatalogoTintasLixasRoute
   CatalogoTintasLonaPlasticaRoute: typeof CatalogoTintasLonaPlasticaRoute
   CatalogoTintasPuCalhaRoute: typeof CatalogoTintasPuCalhaRoute
+  CatalogoTintasSayerrazRoute: typeof CatalogoTintasSayerrazRoute
   CatalogoTintasStainRoute: typeof CatalogoTintasStainRoute
   CatalogoTintasTintaEmborrachadaRoute: typeof CatalogoTintasTintaEmborrachadaRoute
   CatalogoTintasVernizRoute: typeof CatalogoTintasVernizRoute
@@ -1081,6 +1094,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/tintas/stain'
       fullPath: '/catalogo/tintas/stain'
       preLoaderRoute: typeof CatalogoTintasStainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/sayerraz': {
+      id: '/catalogo/tintas/sayerraz'
+      path: '/catalogo/tintas/sayerraz'
+      fullPath: '/catalogo/tintas/sayerraz'
+      preLoaderRoute: typeof CatalogoTintasSayerrazRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/tintas/pu-calha': {
@@ -1536,6 +1556,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTintasLixasRoute: CatalogoTintasLixasRoute,
   CatalogoTintasLonaPlasticaRoute: CatalogoTintasLonaPlasticaRoute,
   CatalogoTintasPuCalhaRoute: CatalogoTintasPuCalhaRoute,
+  CatalogoTintasSayerrazRoute: CatalogoTintasSayerrazRoute,
   CatalogoTintasStainRoute: CatalogoTintasStainRoute,
   CatalogoTintasTintaEmborrachadaRoute: CatalogoTintasTintaEmborrachadaRoute,
   CatalogoTintasVernizRoute: CatalogoTintasVernizRoute,

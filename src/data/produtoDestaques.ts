@@ -150,6 +150,40 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Aplicação", "Laje, telhado e fachada"],
     ],
   },
+  sayerraz: {
+    badges: [
+      { icone: "🧰", texto: "Uso profissional" },
+      { icone: "📦", texto: "2 tamanhos" },
+      { icone: "💧", texto: "Alta pureza" },
+      { icone: "🎯", texto: "Diluição eficiente" },
+    ],
+    motivos: [
+      {
+        titulo: "Diluição eficiente",
+        descricao:
+          "Prepara tintas e vernizes à base de óleo para uma aplicação mais uniforme.",
+      },
+      {
+        titulo: "Limpeza de equipamentos",
+        descricao: "Remove resíduos de tinta de pincéis, rolos e ferramentas.",
+      },
+      {
+        titulo: "Qualidade Sayerlack",
+        descricao:
+          "Mesma marca de referência já usada em outros produtos da loja: verniz, stain e thinner.",
+      },
+      {
+        titulo: "Uso versátil",
+        descricao: "Indicado tanto para preparo de superfícies quanto para limpeza pós-aplicação.",
+      },
+    ],
+    especificacoes: [
+      ["Marca", "Sayerlack"],
+      ["Produto", "Aguarrás Sayerraz"],
+      ["Tamanhos", "900ml e 5L"],
+      ["Uso", "Diluição e limpeza"],
+    ],
+  },
   aguarras: {
     badges: [
       { icone: "🧰", texto: "Uso profissional" },
