@@ -105,79 +105,45 @@ export const CONFIG_VERNIZ: ConfiguradorConfig = {
 
 /* ---------------- Stain Sayerlack Polisten ---------------- */
 
-type LinhaStain = { nome: string; sub: string; cores: string[]; volumes: string[] };
-
-const LINHAS_STAIN: LinhaStain[] = [
-  {
-    nome: "Sayerlack Polisten",
-    sub: "Stain impregnante premium · durabilidade até 3 anos",
-    cores: [
-      "Natural",
-      "Clear",
-      "Transparente",
-      "Cerejeira",
-      "Mogno Inglês",
-      "Canela",
-      "Castanheira",
-      "Imbuia",
-      "Nogueira",
-      "Ipê",
-      "Branco",
-    ],
-    volumes: ["900ml", "3,6L", "18L"],
-  },
-  {
-    nome: "Sayerlack Polisten ECO",
-    sub: "Base água, sem cheiro · durabilidade até 3 anos",
-    cores: ["Natural", "Castanheira", "Mogno Inglês", "Imbuia"],
-    volumes: ["900ml", "3,6L"],
-  },
-  {
-    nome: "Sayerlack Polisten Deck",
-    sub: "Altíssima durabilidade · até 4 anos",
-    cores: ["Natural", "Castanho"],
-    volumes: ["900ml", "3,6L"],
-  },
+const CORES_STAIN = [
+  { valor: "Imbuia", sub: "Tom marrom médio amadeirado" },
+  { valor: "Mogno Inglês", sub: "Tom avermelhado clássico" },
+  { valor: "Transparente", sub: "Realça a cor natural da madeira" },
 ];
 
-const linhaStain = (nome: string) => LINHAS_STAIN.find((l) => l.nome === nome);
+const VOLUMES_STAIN = ["900ml", "3,6L"];
 
 export const CONFIG_STAIN: ConfiguradorConfig = {
+  produtoKey: "stain",
   breadcrumb: BC("Stain para Madeira"),
   titulo: "🪵 Stain para Madeira — Sayerlack Polisten",
   subtitulo:
-    "Linhas Polisten, Polisten ECO e Polisten Deck. Penetra na fibra, realça o veio e protege contra UV e umidade.",
+    "Linha Polisten em 3 cores (Imbuia, Mogno Inglês e Transparente), nos tamanhos 900ml e 3,6L. Penetra na fibra, realça o veio e protege contra UV e umidade.",
   galeriaTitulo: "Sayerlack Polisten",
-  galeriaPlaceholder: "Selecione a linha para ver as fotos",
-  imagens: (s) => (s.linha ? [{ src: "", alt: s.linha }] : []),
+  galeriaPlaceholder: "Selecione a cor para ver as fotos",
+  imagens: (s) => (s.cor ? [{ src: "", alt: `Sayerlack Polisten ${s.cor}` }] : []),
   categoria: "Tintas",
   passos: [
     {
-      chave: "linha",
-      titulo: "Linha Polisten",
-      tipo: "lista",
-      opcoes: LINHAS_STAIN.map((l) => ({ valor: l.nome, sub: l.sub })),
-    },
-    {
       chave: "cor",
       titulo: "Cor",
-      tipo: "chips",
-      opcoes: (s) => (linhaStain(s.linha)?.cores ?? []).map((v) => ({ valor: v })),
+      tipo: "lista",
+      opcoes: CORES_STAIN,
     },
     {
       chave: "volume",
       titulo: "Volume",
       tipo: "grid3",
-      opcoes: (s) => (linhaStain(s.linha)?.volumes ?? []).map((v) => ({ valor: v })),
+      opcoes: VOLUMES_STAIN.map((v) => ({ valor: v })),
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: (s) => s.linha ?? "Sayerlack Polisten",
+  resumoNome: () => "Sayerlack Polisten",
   resumoDetalhe: (s, q) => `${s.cor} · ${s.volume} · ${q.qtd ?? 1} un`,
   unidadeResumo: () => "un",
-  idItem: (s) => `stain-${s.linha}-${s.cor}-${s.volume}`,
+  idItem: (s) => `stain-polisten-${s.cor}-${s.volume}`,
   mensagem: (s, q) =>
-    `🪵 *${s.linha}*\n• Cor: ${s.cor}\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
+    `🪵 *Sayerlack Polisten*\n• Cor: ${s.cor}\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
 /* ---------------- Tinta Emborrachada ---------------- */
