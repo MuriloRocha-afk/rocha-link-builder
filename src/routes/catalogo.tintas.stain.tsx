@@ -5,7 +5,7 @@ import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_STAIN } from "@/data/configs/tintas";
 
 const TITLE = "Stain Sayerlack Polisten para Madeira | Rocha Telhas";
-const DESCRIPTION = "Sayerlack Polisten, Polisten ECO e Polisten Deck em até 11 cores. Protege a madeira contra UV e umidade. Cote no WhatsApp.";
+const DESCRIPTION = "Sayerlack Polisten em Imbuia, Mogno Inglês e Transparente, nos tamanhos 900ml e 3,6L. Protege a madeira contra UV e umidade. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/stain")({
   head: () => ({

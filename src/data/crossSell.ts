@@ -155,8 +155,8 @@ const REGRAS: Regra[] = [
         categoria: "Fixadores",
       },
       {
-        id: "sayerlack-polisten-ipe-3-6",
-        nome: "Sayerlack Polisten — Ipê — 3,6L",
+        id: "sayerlack-polisten-imbuia-3-6",
+        nome: "Sayerlack Polisten — Imbuia — 3,6L",
         descricao: "Proteção e cor para cambará aparelhado",
         emoji: "🎨",
         unidade: "un",

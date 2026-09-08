@@ -9,6 +9,41 @@ export type DestaquesProdutoInfo = {
 };
 
 export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
+  stain: {
+    badges: [
+      { icone: "🎨", texto: "3 cores" },
+      { icone: "⏳", texto: "Até 3 anos" },
+      { icone: "☀️", texto: "Proteção UV" },
+      { icone: "🪵", texto: "Impregnante premium" },
+    ],
+    motivos: [
+      {
+        titulo: "Durabilidade de até 3 anos",
+        descricao:
+          "Impregnante premium Sayerlack que protege a madeira por mais tempo, sem reaplicação frequente.",
+      },
+      {
+        titulo: "Proteção contra o sol",
+        descricao: "Filtro UV que evita o desbotamento e o ressecamento da madeira exposta.",
+      },
+      {
+        titulo: "Acabamento natural",
+        descricao:
+          "Penetra na fibra e realça o veio da madeira sem formar película como o verniz tradicional.",
+      },
+      {
+        titulo: "Fácil manutenção",
+        descricao: "Não descasca nem esfola — a reaplicação é feita direto sobre a peça limpa.",
+      },
+    ],
+    especificacoes: [
+      ["Marca", "Sayerlack"],
+      ["Linha", "Polisten"],
+      ["Cores", "Imbuia, Mogno Inglês e Transparente"],
+      ["Tamanhos", "900ml e 3,6L"],
+      ["Durabilidade", "Até 3 anos"],
+    ],
+  },
   "colonial-pvc": {
     badges: [
       { icone: "🚫", texto: "Não enferruja" },
