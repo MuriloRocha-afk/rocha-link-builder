@@ -115,6 +115,41 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Aplicação", "Madeira"],
     ],
   },
+  "tinta-emborrachada": {
+    badges: [
+      { icone: "🛡️", texto: "Super proteção" },
+      { icone: "🎯", texto: "Alta cobertura" },
+      { icone: "💧", texto: "Impermeável" },
+      { icone: "📦", texto: "2 tamanhos" },
+    ],
+    motivos: [
+      {
+        titulo: "Alta impermeabilização",
+        descricao:
+          "Forma uma película elástica que veda microfissuras e protege contra infiltração e umidade.",
+      },
+      {
+        titulo: "Resistente a intempéries",
+        descricao:
+          "Protege lajes, telhados e fachadas expostos ao sol e à chuva por muito mais tempo.",
+      },
+      {
+        titulo: "Fácil aplicação",
+        descricao: "Pode ser aplicada com rolo ou trincha, sem equipamento especial.",
+      },
+      {
+        titulo: "Alto rendimento",
+        descricao: "Cobre grandes áreas com poucas demãos, reduzindo custo e tempo de obra.",
+      },
+    ],
+    especificacoes: [
+      ["Marca", "Brazilian Color"],
+      ["Linha", "Super Proteção"],
+      ["Cor", "Cinza Espacial"],
+      ["Tamanhos", "3,6L e 18L"],
+      ["Aplicação", "Laje, telhado e fachada"],
+    ],
+  },
   lixas: {
     badges: [
       { icone: "📐", texto: "Vários grãos" },
