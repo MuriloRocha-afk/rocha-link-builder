@@ -468,7 +468,7 @@ const tintas: ItemBusca[] = [
   },
   {
     id: "aguarras",
-    nome: "Aguarrás / Thinner",
+    nome: "Thinner Profissional Sayerlack",
     categoria: "Tintas",
     rota: "/catalogo/tintas/aguarras",
     termos: ["aguarras", "thinner", "solvente", "diluente"],
