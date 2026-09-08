@@ -9,6 +9,41 @@ export type DestaquesProdutoInfo = {
 };
 
 export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
+  verniz: {
+    badges: [
+      { icone: "🎨", texto: "2 cores" },
+      { icone: "🛠️", texto: "Restaurador" },
+      { icone: "💪", texto: "Alta durabilidade" },
+      { icone: "⚡", texto: "Fácil aplicação" },
+    ],
+    motivos: [
+      {
+        titulo: "Restaura e protege",
+        descricao:
+          "Recupera a beleza da madeira já envernizada, sem precisar remover o verniz antigo por completo.",
+      },
+      {
+        titulo: "Alta durabilidade",
+        descricao: "Acabamento resistente ao desgaste do dia a dia e às intempéries.",
+      },
+      {
+        titulo: "Fácil aplicação",
+        descricao:
+          "Pode ser aplicado direto sobre superfícies já envernizadas, agilizando a restauração.",
+      },
+      {
+        titulo: "Acabamento uniforme",
+        descricao: "Nivela o aspecto de áreas desgastadas com o restante da peça.",
+      },
+    ],
+    especificacoes: [
+      ["Marca", "Sayerlack"],
+      ["Linha", "Polirex"],
+      ["Cores", "Imbuia e Mogno"],
+      ["Tamanhos", "Imbuia: 230ml, 900ml e 3,6L | Mogno: 900ml e 3,6L"],
+      ["Aplicação", "Restauração de madeira envernizada"],
+    ],
+  },
   stain: {
     badges: [
       { icone: "🎨", texto: "3 cores" },
