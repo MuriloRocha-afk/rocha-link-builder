@@ -5,7 +5,7 @@ import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_LIXAS } from "@/data/configs/tintas";
 
 const TITLE = "Lixas para Madeira e Massa | Rocha Telhas";
-const DESCRIPTION = "Lixas para madeira, lixa d\u2019água e lixa de massa em vários grãos. Cote no WhatsApp com a Rocha Telhas.";
+const DESCRIPTION = "Disco de lixa 180mm Bestfer (10 pe\u00e7as) e lixa madeira/massa em folha avulsa, grãos 36 a 220. Cote no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/tintas/lixas")({
   head: () => ({

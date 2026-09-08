@@ -115,6 +115,41 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Aplicação", "Madeira"],
     ],
   },
+  lixas: {
+    badges: [
+      { icone: "📐", texto: "Vários grãos" },
+      { icone: "🛡️", texto: "Alta durabilidade" },
+      { icone: "🧰", texto: "Uso profissional" },
+      { icone: "✨", texto: "Ideal para acabamento" },
+    ],
+    motivos: [
+      {
+        titulo: "Variedade de grãos",
+        descricao:
+          "Do desbaste mais grosso ao acabamento fino, cobrindo todas as etapas do lixamento.",
+      },
+      {
+        titulo: "Alta durabilidade",
+        descricao: "Grão resistente, rende mais antes de precisar trocar a peça.",
+      },
+      {
+        titulo: "Uso versátil",
+        descricao:
+          "Serve tanto para madeira bruta quanto para preparação antes de verniz, stain ou tinta.",
+      },
+      {
+        titulo: "Disco compatível com lixadeiras",
+        descricao: "Encaixe padrão 180mm x 22,23mm, direto na lixadeira ou politriz.",
+      },
+    ],
+    especificacoes: [
+      ["Disco de lixa", "180mm x 22,23mm x 0,6mm (Bestfer)"],
+      ["Embalagem do disco", "10 peças"],
+      ["Grãos do disco", "36, 60 e 100"],
+      ["Folha avulsa", "Lixa madeira/massa"],
+      ["Grãos da folha", "60, 100, 120, 150, 180 e 220"],
+    ],
+  },
   "colonial-pvc": {
     badges: [
       { icone: "🚫", texto: "Não enferruja" },

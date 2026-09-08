@@ -256,17 +256,19 @@ export const CONFIG_ACESSORIOS_PINTURA: ConfiguradorConfig = {
 /* ---------------- Lixas ---------------- */
 
 const LIXAS: { nome: string; graos: string[] }[] = [
-  { nome: "Lixa para Madeira (folha)", graos: ["50", "80", "100", "120", "150", "180", "220"] },
-  { nome: "Lixa d'Água (folha)", graos: ["120", "180", "220", "320", "400", "600"] },
-  { nome: "Lixa para Massa/Parede (folha)", graos: ["80", "100", "120", "150", "180"] },
-  { nome: "Lixa em Rolo", graos: ["80", "100", "120", "150"] },
-  { nome: "Esponja Abrasiva", graos: ["Média", "Fina"] },
+  {
+    nome: "Disco de Lixa 180mm x 22,23mm x 0,6mm (Bestfer — 10 peças)",
+    graos: ["36", "60", "100"],
+  },
+  { nome: "Lixa Madeira/Massa (folha avulsa)", graos: ["60", "100", "120", "150", "180", "220"] },
 ];
 
 export const CONFIG_LIXAS: ConfiguradorConfig = {
+  produtoKey: "lixas",
   breadcrumb: BC("Lixas"),
   titulo: "🧽 Lixas para Madeira",
-  subtitulo: "Lixas de madeira, d'água e massa em vários grãos. Preparo perfeito antes do acabamento.",
+  subtitulo:
+    "Disco de lixa 180mm Bestfer (embalagem com 10 peças) e lixa de madeira/massa em folha avulsa, nos grãos reais de estoque.",
   galeriaTitulo: "Lixas",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
   imagens: (s) => (s.tipo ? [{ src: "", alt: s.tipo }] : []),
