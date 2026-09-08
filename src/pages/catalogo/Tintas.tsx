@@ -59,9 +59,9 @@ export const CARDS: EmojiSubcard[] = [
     slug: "lixas",
     name: "Lixas para Madeira",
     emoji: "🧽",
-    tags: ["Grãos 50 a 600", "Rolo e folha"],
+    tags: ["Disco 180mm", "Folha avulsa", "Grãos 36 a 220"],
     description:
-      "Lixas para madeira, lixa d'água, lixa de massa e esponja abrasiva em todos os grãos.",
+      "Disco de lixa 180mm Bestfer (10 peças) nos grãos 36, 60 e 100 e lixa madeira/massa em folha avulsa dos grãos 60 ao 220.",
     cta: "Ver produtos e cotar",
   },
   {
