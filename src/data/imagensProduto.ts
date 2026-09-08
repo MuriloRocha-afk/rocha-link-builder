@@ -1,4 +1,10 @@
 import { ImagemProduto } from "../components/GaleriaProduto";
+import fibroPadrao from "@/assets/produtos/fibrocimento/01_produto_padrao.jpg.asset.json";
+import fibroComprimento from "@/assets/produtos/fibrocimento/02_produto_comprimento.jpg.asset.json";
+import fibroDetalhe from "@/assets/produtos/fibrocimento/03_produto_detalhe.jpg.asset.json";
+import fibroMedidas from "@/assets/produtos/fibrocimento/04_medidas.jpg.asset.json";
+import fibroTelhado1 from "@/assets/produtos/fibrocimento/05_telhado_aplicado_01.jpg.asset.json";
+import fibroTelhado2 from "@/assets/produtos/fibrocimento/06_telhado_aplicado_02.jpg.asset.json";
 import imgCeramicaMesclada from "@/assets/produtos/telha_ceramica_mesclada.jpg.asset.json";
 import imgColonialPvc from "@/assets/produtos/Telha_Colonial_PVC.png.asset.json";
 import imgPvcCinzaTelhado from "@/assets/produtos/telha_colonial_pvc_cinza_telhado.webp.asset.json";

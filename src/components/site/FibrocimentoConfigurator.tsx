@@ -6,7 +6,7 @@ import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
-import { imagensFibrocimento } from "@/data/imagensProduto";
+import { galeriaFibrocimento } from "@/data/imagensProduto";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosFibrocimento } from "@/data/acessoriosTelhas";
 
@@ -166,7 +166,7 @@ Poderia verificar estoque e frete para minha região?`;
         <GaleriaProduto
           titulo={`Telha Fibrocimento INFIBRA — ${dimensao ?? "escolha o tamanho"}`}
           subtitulo="Foto em breve"
-          imagens={imagensFibrocimento[dimensao ?? ""] ?? []}
+          imagens={galeriaFibrocimento(dimensao)}
         />
       }
       tituloAcessorios="Acessórios para Telha de Fibrocimento"
