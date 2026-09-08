@@ -467,6 +467,13 @@ const tintas: ItemBusca[] = [
     termos: ["cola", "adesivo", "cola de pvc"],
   },
   {
+    id: "sayerraz",
+    nome: "Aguarrás Sayerlack (Sayerraz)",
+    categoria: "Tintas",
+    rota: "/catalogo/tintas/sayerraz",
+    termos: ["aguarras", "sayerraz", "solvente", "diluente", "sayerlack"],
+  },
+  {
     id: "aguarras",
     nome: "Thinner Profissional Sayerlack",
     categoria: "Tintas",

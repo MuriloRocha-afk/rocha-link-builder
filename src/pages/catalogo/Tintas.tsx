@@ -38,6 +38,15 @@ export const CARDS: EmojiSubcard[] = [
     cta: "Ver produtos e cotar",
   },
   {
+    slug: "sayerraz",
+    name: "Aguarrás Sayerraz",
+    emoji: "🪣",
+    tags: ["Sayerlack", "900ml e 5L", "Aguarrás"],
+    description:
+      "Aguarrás Sayerlack Sayerraz em 900ml e 5L. Dilui tintas e vernizes à base de óleo e limpa pincéis, rolos e ferramentas.",
+    cta: "Ver produtos e cotar",
+  },
+  {
     slug: "tinta-emborrachada",
     name: "Tinta Emborrachada",
     emoji: "🎨",
@@ -106,7 +115,7 @@ const GRUPOS = [
     label: "Tintas & Vedação para Construção",
     descricao:
       "Tinta emborrachada, thinner, colas, selante PU para calha e lona plástica de obra.",
-    slugs: ["tinta-emborrachada", "aguarras", "cola", "pu-calha", "lona-plastica"],
+    slugs: ["tinta-emborrachada", "aguarras", "sayerraz", "cola", "pu-calha", "lona-plastica"],
   },
 ];
 
