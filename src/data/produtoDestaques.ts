@@ -795,6 +795,43 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
+  "acessorios-pintura": {
+    badges: [
+      { icone: "📐", texto: "Vários tamanhos" },
+      { icone: "🧰", texto: "Uso profissional" },
+      { icone: "🛡️", texto: "Alta durabilidade" },
+      { icone: "💧", texto: "Fácil limpeza" },
+    ],
+    motivos: [
+      {
+        titulo: "Variedade de tamanhos",
+        descricao:
+          "De 5cm a 15cm nos rolos e de 2\" a 4\" nos pincéis: o acessório certo do detalhe ao acabamento de área grande.",
+      },
+      {
+        titulo: "Alta durabilidade",
+        descricao:
+          "Cerdas e espumas resistentes, que aguentam vários usos sem soltar fiapos nem perder a forma.",
+      },
+      {
+        titulo: "Compatibilidade",
+        descricao:
+          "Encaixe padrão Roloflex/Bestfer, compatível com o suporte de rolo de 23cm e cabos já usados na obra.",
+      },
+      {
+        titulo: "Acabamento profissional",
+        descricao:
+          "Aplicação de tinta e verniz mais uniforme, com menos marcas, respingos e retrabalho.",
+      },
+    ],
+    especificacoes: [
+      ["Rolo com capa", "Roloflex Resistance 9cm e 15cm"],
+      ["Rolo espuma", "Roloflex sem capa 5cm"],
+      ["Broxa", "Retangular sintética Média e Grande"],
+      ["Pincéis", 'Bestfer 2", 2.1/2", 3" e 4" + jogo com 3 un'],
+      ["Suporte e espátula", "Suporte 23cm · Espátula 4P/10cm e 5P/12,5cm"],
+    ],
+  },
   acessorios: {
     badges: [
       { icone: "🔧", texto: "Linha completa" },

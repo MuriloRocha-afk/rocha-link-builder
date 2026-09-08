@@ -4,8 +4,9 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_ACESSORIOS_PINTURA } from "@/data/configs/tintas";
 
-const TITLE = "Rolos, Pincéis, Trinchas e Extensores | Rocha Telhas";
-const DESCRIPTION = "Acessórios de aplicação: rolos, pincéis, trinchas, brochas, extensores e bandejas. Cote no WhatsApp.";
+const TITLE = "Rolos Roloflex, Pincéis Bestfer e Espátulas | Rocha Telhas";
+const DESCRIPTION =
+  "Acessórios para fixação e aplicação: rolos Roloflex, broxas, pincéis Bestfer, suporte para rolo e espátulas de aço. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/acessorios-pintura")({
   head: () => ({

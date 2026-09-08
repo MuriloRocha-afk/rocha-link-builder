@@ -48,11 +48,11 @@ export const CARDS: EmojiSubcard[] = [
   },
   {
     slug: "acessorios-pintura",
-    name: "Acessórios de Aplicação",
+    name: "Acessórios para Fixação",
     emoji: "🖌️",
-    tags: ["Rolos", "Pincéis", "Extensores"],
+    tags: ["Roloflex", "Bestfer", "Espátulas"],
     description:
-      "Rolos de lã e espuma, pincéis, trinchas, brochas, extensores telescópicos, bandejas e fitas.",
+      "Rolos Roloflex com e sem capa, broxas, pincéis e jogos Bestfer, suporte para rolo e espátulas de aço.",
     cta: "Ver produtos e cotar",
   },
   {

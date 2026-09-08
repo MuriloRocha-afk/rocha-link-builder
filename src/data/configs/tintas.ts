@@ -208,25 +208,30 @@ export const CONFIG_AGUARRAS: ConfiguradorConfig = {
 /* ---------------- Acessórios de aplicação ---------------- */
 
 const ACESSORIOS_PINTURA: { nome: string; opcoes: string[] }[] = [
-  { nome: "Rolo de Lã (com cabo)", opcoes: ['9"', '15"', '23"'] },
-  { nome: "Rolo de Espuma", opcoes: ['5"', '9"', '15"'] },
-  { nome: "Rolo Anti-Gota / Antirrespingo", opcoes: ['9"', '23"'] },
-  { nome: "Refil / Capa de Rolo", opcoes: ['9"', '15"', '23"'] },
-  { nome: "Pincel (Trincha Chata)", opcoes: ['1"', '1.1/2"', '2"', '2.1/2"', '3"', '4"'] },
-  { nome: "Trincha para Verniz", opcoes: ['2"', '3"', '4"'] },
-  { nome: "Brocha Retangular", opcoes: ["Pequena", "Média", "Grande"] },
-  { nome: "Extensor / Cabo Telescópico", opcoes: ["1,0 m", "1,5 m a 3,0 m", "2,0 m a 4,0 m"] },
-  { nome: "Bandeja para Pintura", opcoes: ["Plástica", "Metálica"] },
-  { nome: "Fita Crepe", opcoes: ["18mm", "24mm", "48mm"] },
-  { nome: "Lona / Plástico Protetor", opcoes: ["4x5 m", "8x10 m"] },
+  { nome: "Roloflex Resistance com Capa", opcoes: ["15cm", "9cm"] },
+  { nome: "Roloflex Rolo Espuma sem Capa", opcoes: ["5cm"] },
+  { nome: "Broxa Retangular Sintética (Roloflex)", opcoes: ["Média", "Grande"] },
+  { nome: "Jogo de Pincéis Bestfer", opcoes: ["Jogo com 3 unidades"] },
+  {
+    nome: "Pincel com Cerdas Bestfer",
+    opcoes: [
+      'Nº 4 — Plástico Laranja 4"',
+      'Nº 3 — Plástico Laranja 3"',
+      '2.1/2" / 65mm — Cabo Plástico',
+      '2" / 50mm — Cabo Plástico',
+    ],
+  },
+  { nome: "Roloflex Suporte para Rolo", opcoes: ["23cm"] },
+  { nome: "Espátula de Aço Polido Bestfer", opcoes: ["4P / 10cm", "5P / 12,5cm"] },
 ];
 
 export const CONFIG_ACESSORIOS_PINTURA: ConfiguradorConfig = {
-  breadcrumb: BC("Acessórios de Aplicação"),
-  titulo: "🖌️ Acessórios de Aplicação",
+  produtoKey: "acessorios-pintura",
+  breadcrumb: BC("Acessórios para Fixação"),
+  titulo: "🖌️ Acessórios para Fixação",
   subtitulo:
-    "Rolos, pincéis, trinchas, brochas, extensores e itens de proteção para pintura e envernizamento.",
-  galeriaTitulo: "Acessórios de Aplicação",
+    "Rolos Roloflex, broxas, pincéis e jogos Bestfer, suporte para rolo e espátulas de aço — só o que temos em estoque.",
+  galeriaTitulo: "Acessórios para Fixação",
   galeriaPlaceholder: "Selecione o item para ver as fotos",
   imagens: (s) => (s.item ? [{ src: "", alt: s.item }] : []),
   categoria: "Tintas",
