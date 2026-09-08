@@ -150,6 +150,39 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Aplicação", "Laje, telhado e fachada"],
     ],
   },
+  "massa-madeira": {
+    badges: [
+      { icone: "🎨", texto: "4 cores" },
+      { icone: "🔧", texto: "Ideal para reparos" },
+      { icone: "🖌️", texto: "Fácil aplicação" },
+      { icone: "🪵", texto: "Acabamento natural" },
+    ],
+    motivos: [
+      {
+        titulo: "Repara com naturalidade",
+        descricao:
+          "Preenche rachaduras, furos e imperfeições combinando com o tom da madeira.",
+      },
+      {
+        titulo: "4 cores disponíveis",
+        descricao: "Eucalipto, Imbuia Tabaco, Mogno e Pinus, cobrindo os tons mais usados.",
+      },
+      {
+        titulo: "Fácil aplicação",
+        descricao: "Pode ser lixada e recebe verniz ou stain por cima depois de seca.",
+      },
+      {
+        titulo: "Ideal para manutenção",
+        descricao: "Perfeita para restaurar móveis, pisos e estruturas de madeira já instaladas.",
+      },
+    ],
+    especificacoes: [
+      ["Marca", "Sayerlack"],
+      ["Produto", "Sayermassa — Massa para Madeira"],
+      ["Cores", "Eucalipto, Imbuia Tabaco, Mogno e Pinus"],
+      ["Uso", "Reparos antes do acabamento"],
+    ],
+  },
   sayerraz: {
     badges: [
       { icone: "🧰", texto: "Uso profissional" },

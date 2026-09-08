@@ -29,6 +29,7 @@ import { Route as CatalogoTintasTintaEmborrachadaRouteImport } from './routes/ca
 import { Route as CatalogoTintasStainRouteImport } from './routes/catalogo.tintas.stain'
 import { Route as CatalogoTintasSayerrazRouteImport } from './routes/catalogo.tintas.sayerraz'
 import { Route as CatalogoTintasPuCalhaRouteImport } from './routes/catalogo.tintas.pu-calha'
+import { Route as CatalogoTintasMassaMadeiraRouteImport } from './routes/catalogo.tintas.massa-madeira'
 import { Route as CatalogoTintasLonaPlasticaRouteImport } from './routes/catalogo.tintas.lona-plastica'
 import { Route as CatalogoTintasLixasRouteImport } from './routes/catalogo.tintas.lixas'
 import { Route as CatalogoTintasCupicidaRouteImport } from './routes/catalogo.tintas.cupicida'
@@ -182,6 +183,12 @@ const CatalogoTintasPuCalhaRoute = CatalogoTintasPuCalhaRouteImport.update({
   path: '/catalogo/tintas/pu-calha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoTintasMassaMadeiraRoute =
+  CatalogoTintasMassaMadeiraRouteImport.update({
+    id: '/catalogo/tintas/massa-madeira',
+    path: '/catalogo/tintas/massa-madeira',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CatalogoTintasLonaPlasticaRoute =
   CatalogoTintasLonaPlasticaRouteImport.update({
     id: '/catalogo/tintas/lona-plastica',
@@ -529,6 +536,7 @@ export interface FileRoutesByFullPath {
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
+  '/catalogo/tintas/massa-madeira': typeof CatalogoTintasMassaMadeiraRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/sayerraz': typeof CatalogoTintasSayerrazRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
@@ -599,6 +607,7 @@ export interface FileRoutesByTo {
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
+  '/catalogo/tintas/massa-madeira': typeof CatalogoTintasMassaMadeiraRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/sayerraz': typeof CatalogoTintasSayerrazRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
@@ -672,6 +681,7 @@ export interface FileRoutesById {
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
+  '/catalogo/tintas/massa-madeira': typeof CatalogoTintasMassaMadeiraRoute
   '/catalogo/tintas/pu-calha': typeof CatalogoTintasPuCalhaRoute
   '/catalogo/tintas/sayerraz': typeof CatalogoTintasSayerrazRoute
   '/catalogo/tintas/stain': typeof CatalogoTintasStainRoute
@@ -745,6 +755,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
+    | '/catalogo/tintas/massa-madeira'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/sayerraz'
     | '/catalogo/tintas/stain'
@@ -815,6 +826,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
+    | '/catalogo/tintas/massa-madeira'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/sayerraz'
     | '/catalogo/tintas/stain'
@@ -887,6 +899,7 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
+    | '/catalogo/tintas/massa-madeira'
     | '/catalogo/tintas/pu-calha'
     | '/catalogo/tintas/sayerraz'
     | '/catalogo/tintas/stain'
@@ -958,6 +971,7 @@ export interface RootRouteChildren {
   CatalogoTintasCupicidaRoute: typeof CatalogoTintasCupicidaRoute
   CatalogoTintasLixasRoute: typeof CatalogoTintasLixasRoute
   CatalogoTintasLonaPlasticaRoute: typeof CatalogoTintasLonaPlasticaRoute
+  CatalogoTintasMassaMadeiraRoute: typeof CatalogoTintasMassaMadeiraRoute
   CatalogoTintasPuCalhaRoute: typeof CatalogoTintasPuCalhaRoute
   CatalogoTintasSayerrazRoute: typeof CatalogoTintasSayerrazRoute
   CatalogoTintasStainRoute: typeof CatalogoTintasStainRoute
@@ -1108,6 +1122,13 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/tintas/pu-calha'
       fullPath: '/catalogo/tintas/pu-calha'
       preLoaderRoute: typeof CatalogoTintasPuCalhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catalogo/tintas/massa-madeira': {
+      id: '/catalogo/tintas/massa-madeira'
+      path: '/catalogo/tintas/massa-madeira'
+      fullPath: '/catalogo/tintas/massa-madeira'
+      preLoaderRoute: typeof CatalogoTintasMassaMadeiraRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/tintas/lona-plastica': {
@@ -1555,6 +1576,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTintasCupicidaRoute: CatalogoTintasCupicidaRoute,
   CatalogoTintasLixasRoute: CatalogoTintasLixasRoute,
   CatalogoTintasLonaPlasticaRoute: CatalogoTintasLonaPlasticaRoute,
+  CatalogoTintasMassaMadeiraRoute: CatalogoTintasMassaMadeiraRoute,
   CatalogoTintasPuCalhaRoute: CatalogoTintasPuCalhaRoute,
   CatalogoTintasSayerrazRoute: CatalogoTintasSayerrazRoute,
   CatalogoTintasStainRoute: CatalogoTintasStainRoute,
