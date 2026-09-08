@@ -105,7 +105,7 @@ const GRUPOS = [
     id: "construcao",
     label: "Tintas & Vedação para Construção",
     descricao:
-      "Tinta emborrachada, aguarrás e thinner, colas, selante PU para calha e lona plástica de obra.",
+      "Tinta emborrachada, thinner, colas, selante PU para calha e lona plástica de obra.",
     slugs: ["tinta-emborrachada", "aguarras", "cola", "pu-calha", "lona-plastica"],
   },
 ];
