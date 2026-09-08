@@ -175,9 +175,9 @@ const OPCOES_MADEIRA: Grupo[] = [
 const EXTRAS: Record<string, Extra> = {
   // Telhas
   fibrocimento: {
-    fotos: todasDoMapa(imagensFibrocimento),
+    fotos: imagensFibrocimento,
     opcoes: [
-      chaves(imagensFibrocimento, "Dimensões"),
+      { label: "Dimensões", valores: ["153 x 110 cm", "183 x 110 cm", "213 x 110 cm", "244 x 110 cm", "305 x 110 cm", "366 x 110 cm"] },
       { label: "Espessuras", valores: ["5mm", "6mm", "8mm"] },
     ],
   },

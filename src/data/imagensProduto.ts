@@ -1,4 +1,10 @@
 import { ImagemProduto } from "../components/GaleriaProduto";
+import fibroPadrao from "@/assets/produtos/fibrocimento/01_produto_padrao.jpg.asset.json";
+import fibroComprimento from "@/assets/produtos/fibrocimento/02_produto_comprimento.jpg.asset.json";
+import fibroDetalhe from "@/assets/produtos/fibrocimento/03_produto_detalhe.jpg.asset.json";
+import fibroMedidas from "@/assets/produtos/fibrocimento/04_medidas.jpg.asset.json";
+import fibroTelhado1 from "@/assets/produtos/fibrocimento/05_telhado_aplicado_01.jpg.asset.json";
+import fibroTelhado2 from "@/assets/produtos/fibrocimento/06_telhado_aplicado_02.jpg.asset.json";
 import imgCeramicaMesclada from "@/assets/produtos/telha_ceramica_mesclada.jpg.asset.json";
 import imgColonialPvc from "@/assets/produtos/Telha_Colonial_PVC.png.asset.json";
 import imgPvcCinzaTelhado from "@/assets/produtos/telha_colonial_pvc_cinza_telhado.webp.asset.json";
@@ -303,27 +309,23 @@ export function galeriaMediterranea(cor: string): ImagemProduto[] {
   return MEDITERRANEA[cor] ?? [];
 }
 
-// TELHA FIBROCIMENTO
+// TELHA FIBROCIMENTO — mesmo perfil de onda em todos os comprimentos padrão (largura 110 cm)
+export const imagensFibrocimento: ImagemProduto[] = [
+  { src: fibroPadrao.url, alt: "Telha Fibrocimento Ondulada INFIBRA", legenda: "Produto" },
+  { src: fibroComprimento.url, alt: "Telha Fibrocimento Ondulada vista de cima", legenda: "Peça inteira" },
+  { src: fibroDetalhe.url, alt: "Detalhe da onda da Telha Fibrocimento", legenda: "Detalhe da onda" },
+  { src: fibroMedidas.url, alt: "Telha Fibrocimento com cotas 244 x 110 cm", legenda: "Medidas da peça padrão (244 × 110 cm)" },
+  { src: fibroTelhado1.url, alt: "Telhado montado com telhas de fibrocimento", legenda: "Exemplo de aplicação" },
+  { src: fibroTelhado2.url, alt: "Telhado de fibrocimento instalado", legenda: "Exemplo de aplicação" },
+];
 
+/** Galeria por dimensão: variantes de onda curta ainda não têm foto real. */
+export function galeriaFibrocimento(dimensao?: string | null): ImagemProduto[] {
+  if (!dimensao) return imagensFibrocimento;
+  const larguraPadrao = dimensao.replace(/\s/g, "").includes("x110");
+  return larguraPadrao ? imagensFibrocimento : [];
+}
 
-export const imagensFibrocimento: Record<string, ImagemProduto[]> = {
-  "153 × 110 cm": [
-    { src: "", alt: "Telha Fibrocimento INFIBRA 153cm", legenda: "Telha Fibrocimento 153 × 110cm — INFIBRA" },
-  ],
-  "183 × 110 cm": [
-    { src: "", alt: "Telha Fibrocimento INFIBRA 183cm", legenda: "183 × 110cm" },
-  ],
-  "244 × 110 cm": [
-    { src: "", alt: "Telha Fibrocimento INFIBRA 244cm — Líder de vendas", legenda: "244 × 110cm — A mais vendida" },
-    { src: "", alt: "Detalhe sobreposição fibrocimento 244cm" },
-  ],
-  "305 × 110 cm": [
-    { src: "", alt: "Telha Fibrocimento INFIBRA 305cm", legenda: "305 × 110cm" },
-  ],
-  "366 × 110 cm": [
-    { src: "", alt: "Telha Fibrocimento INFIBRA 366cm", legenda: "366 × 110cm" },
-  ],
-};
 
 // TELHA COLONIAL PVC
 export const imagensColonialPVC: Record<string, ImagemProduto[]> = {
