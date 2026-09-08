@@ -150,6 +150,39 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Aplicação", "Laje, telhado e fachada"],
     ],
   },
+  aguarras: {
+    badges: [
+      { icone: "🧰", texto: "Uso profissional" },
+      { icone: "📦", texto: "2 tamanhos" },
+      { icone: "💧", texto: "Alta pureza" },
+      { icone: "⚡", texto: "Rápida evaporação" },
+    ],
+    motivos: [
+      {
+        titulo: "Diluição precisa",
+        descricao:
+          "Formulado para diluir tintas e vernizes sem comprometer o acabamento final.",
+      },
+      {
+        titulo: "Limpeza eficiente",
+        descricao: "Remove resíduos de tinta de pincéis, rolos e equipamentos de aplicação.",
+      },
+      {
+        titulo: "Uso profissional",
+        descricao: "Qualidade Sayerlack, indicada tanto para uso doméstico quanto profissional.",
+      },
+      {
+        titulo: "Evaporação controlada",
+        descricao: "Favorece um acabamento mais uniforme durante a secagem.",
+      },
+    ],
+    especificacoes: [
+      ["Marca", "Sayerlack"],
+      ["Produto", "Thinner Profissional"],
+      ["Tamanhos", "900ml e 5L"],
+      ["Uso", "Diluição e limpeza"],
+    ],
+  },
   lixas: {
     badges: [
       { icone: "📐", texto: "Vários grãos" },
