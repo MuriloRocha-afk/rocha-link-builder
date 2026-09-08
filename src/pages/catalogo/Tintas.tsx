@@ -30,11 +30,11 @@ export const CARDS: EmojiSubcard[] = [
   },
   {
     slug: "aguarras",
-    name: "Aguarrás / Thinner",
+    name: "Thinner Profissional",
     emoji: "🧴",
-    tags: ["Sayerlack", "Mineral", "Vegetal"],
+    tags: ["Sayerlack", "900ml e 5L", "Diluição"],
     description:
-      "Aguarrás mineral e vegetal, thinner profissional e diluentes Sayerlack para vernizes, stains e limpeza.",
+      "Sayerlack Thinner Profissional em 900ml e 5L. Dilui tintas e vernizes e limpa pincéis, rolos e equipamentos.",
     cta: "Ver produtos e cotar",
   },
   {
