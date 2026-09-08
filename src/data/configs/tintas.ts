@@ -6,101 +6,44 @@ const BC = (nome: string) => [
   { label: nome },
 ];
 
-/* ---------------- Verniz Sayerlack ---------------- */
+/* ---------------- Verniz Sayerlack Polirex ---------------- */
 
-type LinhaVerniz = {
-  nome: string;
-  sub: string;
-  cores: string[];
-  acabamentos: string[];
-  volumes: string[];
+const CORES_VERNIZ: Record<string, string[]> = {
+  Imbuia: ["230ml", "900ml", "3,6L"],
+  Mogno: ["900ml", "3,6L"],
 };
 
-const LINHAS_VERNIZ: LinhaVerniz[] = [
-  {
-    nome: "Sayerlack Poliulack",
-    sub: "Verniz incolor — Brilhante ou Acetinado",
-    cores: ["Incolor"],
-    acabamentos: ["Brilhante", "Acetinado"],
-    volumes: ["900ml", "3,6L", "18L"],
-  },
-  {
-    nome: "Sayerlack Poliulack Eco",
-    sub: "Base água, sem cheiro — Acetinado",
-    cores: ["Incolor"],
-    acabamentos: ["Acetinado"],
-    volumes: ["900ml", "3,6L"],
-  },
-  {
-    nome: "Sayerlack Polikol",
-    sub: "Verniz colorido — Canela, Mogno, Imbuia e Cristal",
-    cores: ["Canela", "Mogno", "Imbuia", "Cristal"],
-    acabamentos: ["Brilhante", "Acetinado"],
-    volumes: ["900ml", "3,6L", "18L"],
-  },
-  {
-    nome: "Sayerlack Polirex",
-    sub: "Verniz restaurador — Mogno e Imbuia",
-    cores: ["Mogno", "Imbuia"],
-    acabamentos: [],
-    volumes: ["900ml", "3,6L"],
-  },
-  {
-    nome: "Sayerlack Polideck",
-    sub: "Verniz para deck e piso — Natural e Ipê",
-    cores: ["Natural", "Ipê"],
-    acabamentos: [],
-    volumes: ["900ml", "3,6L"],
-  },
-];
-
-const linhaVerniz = (nome: string) => LINHAS_VERNIZ.find((l) => l.nome === nome);
-
 export const CONFIG_VERNIZ: ConfiguradorConfig = {
+  produtoKey: "verniz",
   breadcrumb: BC("Verniz para Madeira"),
-  titulo: "✨ Verniz para Madeira — Sayerlack",
+  titulo: "✨ Verniz para Madeira — Sayerlack Polirex",
   subtitulo:
-    "Linha Sayerlack completa: Poliulack, Poliulack Eco, Polikol, Polirex e Polideck. Proteção e beleza para madeira.",
-  galeriaTitulo: "Verniz Sayerlack",
-  galeriaPlaceholder: "Selecione a linha para ver as fotos",
-  imagens: (s) => (s.linha ? [{ src: "", alt: s.linha }] : []),
+    "Verniz restaurador Sayerlack Polirex. Recupera e protege madeiras já envernizadas, sem remover o acabamento antigo.",
+  galeriaTitulo: "Verniz Sayerlack Polirex",
+  galeriaPlaceholder: "Selecione a cor para ver as fotos",
+  imagens: (s) => (s.cor ? [{ src: "", alt: `Sayerlack Polirex ${s.cor}` }] : []),
   categoria: "Tintas",
   passos: [
-    {
-      chave: "linha",
-      titulo: "Linha Sayerlack",
-      tipo: "lista",
-      opcoes: LINHAS_VERNIZ.map((l) => ({ valor: l.nome, sub: l.sub })),
-    },
     {
       chave: "cor",
       titulo: "Cor",
       tipo: "chips",
-      visivel: (s) => (linhaVerniz(s.linha)?.cores.length ?? 0) > 0,
-      opcoes: (s) => (linhaVerniz(s.linha)?.cores ?? []).map((v) => ({ valor: v })),
-    },
-    {
-      chave: "acabamento",
-      titulo: "Acabamento",
-      tipo: "chips",
-      visivel: (s) => (linhaVerniz(s.linha)?.acabamentos.length ?? 0) > 0,
-      opcoes: (s) => (linhaVerniz(s.linha)?.acabamentos ?? []).map((v) => ({ valor: v })),
+      opcoes: Object.keys(CORES_VERNIZ).map((v) => ({ valor: v })),
     },
     {
       chave: "volume",
       titulo: "Volume",
       tipo: "grid3",
-      opcoes: (s) => (linhaVerniz(s.linha)?.volumes ?? []).map((v) => ({ valor: v })),
+      opcoes: (s) => (CORES_VERNIZ[s.cor] ?? []).map((v) => ({ valor: v })),
     },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: (s) => s.linha ?? "Verniz Sayerlack",
-  resumoDetalhe: (s, q) =>
-    `${s.cor ? `${s.cor} · ` : ""}${s.acabamento ? `${s.acabamento} · ` : ""}${s.volume} · ${q.qtd ?? 1} un`,
+  resumoNome: () => "Sayerlack Polirex",
+  resumoDetalhe: (s, q) => `${s.cor} · ${s.volume} · ${q.qtd ?? 1} un`,
   unidadeResumo: () => "un",
-  idItem: (s) => `verniz-${s.linha}-${s.cor ?? ""}-${s.acabamento ?? ""}-${s.volume}`,
+  idItem: (s) => `verniz-polirex-${s.cor}-${s.volume}`,
   mensagem: (s, q) =>
-    `✨ *${s.linha}${s.cor ? ` — ${s.cor}` : ""}*${s.acabamento ? `\n• Acabamento: ${s.acabamento}` : ""}\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
+    `✨ *Sayerlack Polirex*\n• Cor: ${s.cor}\n• Volume: ${s.volume}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
 /* ---------------- Stain Sayerlack Polisten ---------------- */

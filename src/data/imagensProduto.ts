@@ -453,7 +453,7 @@ export const imagensForroPinus: ImagemProduto[] = [
 // TINTAS — por subcategoria
 export const imagensTintas: Record<string, ImagemProduto[]> = {
   verniz: [
-    { src: "", alt: "Linha Sayerlack de vernizes", legenda: "Vernizes Sayerlack — Poliulack, Polikol e Polideck" },
+    { src: "", alt: "Verniz Sayerlack Polirex", legenda: "Verniz Sayerlack Polirex — Restaurador de madeira" },
   ],
   stain: [
     { src: "", alt: "Sayerlack Polisten nas cores disponíveis", legenda: "Sayerlack Polisten — Stain para madeira" },
