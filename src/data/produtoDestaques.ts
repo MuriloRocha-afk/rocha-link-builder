@@ -79,6 +79,42 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Durabilidade", "Até 3 anos"],
     ],
   },
+  cupicida: {
+    badges: [
+      { icone: "🛡️", texto: "Ação prolongada" },
+      { icone: "🎯", texto: "Alta eficácia" },
+      { icone: "📐", texto: "3 tamanhos" },
+      { icone: "🧰", texto: "Uso profissional" },
+    ],
+    motivos: [
+      {
+        titulo: "Proteção duradoura",
+        descricao:
+          "Combate e previne infestação de cupim de forma eficaz por um longo período.",
+      },
+      {
+        titulo: "Fácil aplicação",
+        descricao: "Pode ser aplicado por pincel, rolo ou pulverizador, direto na madeira.",
+      },
+      {
+        titulo: "Incolor",
+        descricao:
+          "Não altera a cor natural da madeira, permitindo acabamento posterior (verniz, stain etc.).",
+      },
+      {
+        titulo: "Uso interno e externo",
+        descricao:
+          "Indicado tanto para estruturas expostas quanto para madeira em ambientes fechados.",
+      },
+    ],
+    especificacoes: [
+      ["Marca", "Sayerlack"],
+      ["Função", "Preventivo e curativo"],
+      ["Tamanhos", "900ml, 5L e 18L"],
+      ["Acabamento", "Incolor"],
+      ["Aplicação", "Madeira"],
+    ],
+  },
   "colonial-pvc": {
     badges: [
       { icone: "🚫", texto: "Não enferruja" },
