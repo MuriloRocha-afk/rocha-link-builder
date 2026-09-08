@@ -38,6 +38,15 @@ export const CARDS: EmojiSubcard[] = [
     cta: "Ver produtos e cotar",
   },
   {
+    slug: "massa-madeira",
+    name: "Massa para Madeira",
+    emoji: "🪵",
+    tags: ["Sayerlack", "Sayermassa", "4 cores"],
+    description:
+      "Massa Sayerlack Sayermassa nas cores Eucalipto, Imbuia Tabaco, Mogno e Pinus. Preenche rachaduras, furos e imperfeições antes do acabamento.",
+    cta: "Ver produtos e cotar",
+  },
+  {
     slug: "sayerraz",
     name: "Aguarrás Sayerraz",
     emoji: "🪣",
@@ -108,7 +117,7 @@ const GRUPOS = [
     label: "Acabamento & Proteção de Madeira",
     descricao:
       "Stain e verniz Sayerlack, exterminador de cupim, lixas e acessórios de aplicação para tratar e acabar madeira.",
-    slugs: ["stain", "verniz", "cupicida", "lixas", "acessorios-pintura"],
+    slugs: ["stain", "verniz", "massa-madeira", "cupicida", "lixas", "acessorios-pintura"],
   },
   {
     id: "construcao",

@@ -448,3 +448,34 @@ export const CONFIG_LONA: ConfiguradorConfig = {
   mensagem: (s, q) =>
     `🟦 *${s.tipo}*\n• Espessura: ${s.espessura}\n• Medida: ${s.medida}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
+
+/* ---------------- Massa para Madeira (Sayermassa) ---------------- */
+
+const CORES_MASSA = [
+  { valor: "Eucalipto", sub: "Tom claro acinzentado" },
+  { valor: "Imbuia Tabaco", sub: "Tom marrom médio" },
+  { valor: "Mogno", sub: "Tom avermelhado" },
+  { valor: "Pinus", sub: "Tom claro amadeirado" },
+];
+
+export const CONFIG_MASSA_MADEIRA: ConfiguradorConfig = {
+  produtoKey: "massa-madeira",
+  breadcrumb: BC("Massa para Madeira"),
+  titulo: "🪵 Massa para Madeira — Sayerlack Sayermassa",
+  subtitulo:
+    "Massa para reparos em madeira Sayerlack Sayermassa em 4 cores: Eucalipto, Imbuia Tabaco, Mogno e Pinus. Preenche rachaduras, furos e imperfeições antes do acabamento.",
+  galeriaTitulo: "Sayerlack Sayermassa",
+  galeriaPlaceholder: "Selecione a cor para ver as fotos",
+  imagens: (s) => (s.cor ? [{ src: "", alt: `Sayerlack Sayermassa ${s.cor}` }] : []),
+  categoria: "Tintas",
+  passos: [
+    { chave: "cor", titulo: "Cor", tipo: "lista", opcoes: CORES_MASSA },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
+  ],
+  resumoNome: () => "Sayerlack Sayermassa (Massa para Madeira)",
+  resumoDetalhe: (s, q) => `${s.cor} · ${q.qtd ?? 1} un`,
+  unidadeResumo: () => "un",
+  idItem: (s) => `sayermassa-${s.cor}`,
+  mensagem: (s, q) =>
+    `🪵 *Sayerlack Sayermassa (Massa para Madeira)*\n• Cor: ${s.cor}\n• Quantidade: ${q.qtd ?? 1} un`,
+};

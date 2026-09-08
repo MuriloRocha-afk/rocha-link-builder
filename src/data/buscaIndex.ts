@@ -467,6 +467,13 @@ const tintas: ItemBusca[] = [
     termos: ["cola", "adesivo", "cola de pvc"],
   },
   {
+    id: "massa-madeira",
+    nome: "Massa para Madeira Sayerlack (Sayermassa)",
+    categoria: "Tintas",
+    rota: "/catalogo/tintas/massa-madeira",
+    termos: ["massa", "sayermassa", "reparo", "madeira", "sayerlack"],
+  },
+  {
     id: "sayerraz",
     nome: "Aguarrás Sayerlack (Sayerraz)",
     categoria: "Tintas",
