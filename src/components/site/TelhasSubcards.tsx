@@ -47,7 +47,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
     name: "Telha Plan PVC",
     image: pvc,
     description:
-      "Perfil plano de 6 ondas com encaixe reto. Cores Terracota, Marfim, Cinza e Branca.",
+      "Perfil plano de 6 ondas com encaixe reto. Cores Terracota, Marfim e Cinza.",
     cta: "Escolher Modelo e Cor",
   },
   {

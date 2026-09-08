@@ -28,6 +28,51 @@ import { StoriesViewer, type StoryItem } from "./StoriesViewer";
 
 type GalleryItem = StoryItem;
 
+function VideoTile({
+  src,
+  label,
+  onClick,
+}: {
+  src: string;
+  label: string;
+  onClick: () => void;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [visivel, setVisivel] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisivel(true);
+          void el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      src={visivel ? src : undefined}
+      aria-label={label}
+      muted
+      loop
+      playsInline
+      preload="none"
+      onClick={onClick}
+      className="h-full w-full cursor-pointer bg-black/40 object-cover"
+    />
+  );
+}
+
 const GALLERY: GalleryItem[] = [
   {
     src: video1.url,
@@ -110,17 +155,7 @@ export function Acao() {
               >
                 <figure className="group relative aspect-[9/16] overflow-hidden rounded-3xl border border-primary-foreground/15 shadow-[var(--shadow-lift)]">
                   {g.tipo === "video" ? (
-                    <video
-                      src={g.src}
-                      aria-label={g.alt}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      onClick={() => setAtivo(i)}
-                      className="h-full w-full cursor-pointer object-cover"
-                    />
+                    <VideoTile src={g.src} label={g.alt} onClick={() => setAtivo(i)} />
                   ) : (
                     <img
                       src={g.src}
