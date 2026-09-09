@@ -316,48 +316,6 @@ export const CONFIG_LIXAS: ConfiguradorConfig = {
   mensagem: (s, q) => `🧽 *${s.tipo}*\n• Grão: ${s.grao}\n• Quantidade: ${q.qtd ?? 5} un`,
 };
 
-/* ---------------- Colas ---------------- */
-
-const COLAS: { nome: string; volumes: string[] }[] = [
-  { nome: "Cola Branca PVA para Madeira", volumes: ["500g", "1kg", "5kg"] },
-  { nome: "Cola de Madeira Extra (Cascola/Similar)", volumes: ["250g", "500g", "1kg"] },
-  { nome: "Cola de Contato", volumes: ["200g", "750g", "2,8kg"] },
-  { nome: "Cola PU Poliuretano para Madeira", volumes: ["250g", "1kg"] },
-  { nome: "Adesivo Instantâneo (Super Cola)", volumes: ["20g", "100g"] },
-  { nome: "Cola para PVC", volumes: ["75g", "175g", "850g"] },
-];
-
-export const CONFIG_COLA: ConfiguradorConfig = {
-  breadcrumb: BC("Colas & Adesivos"),
-  titulo: "🧴 Colas & Adesivos",
-  subtitulo: "Cola branca PVA, cola de contato, cola PU e adesivos para madeira e PVC.",
-  galeriaTitulo: "Colas & Adesivos",
-  galeriaPlaceholder: "Selecione o produto para ver as fotos",
-  imagens: (s) => (s.produto ? [{ src: "", alt: s.produto }] : []),
-  categoria: "Tintas",
-  passos: [
-    {
-      chave: "produto",
-      titulo: "Produto",
-      tipo: "lista",
-      opcoes: COLAS.map((p) => ({ valor: p.nome, sub: p.volumes.join(" · ") })),
-    },
-    {
-      chave: "volume",
-      titulo: "Embalagem",
-      tipo: "grid3",
-      opcoes: (s) =>
-        (COLAS.find((p) => p.nome === s.produto)?.volumes ?? []).map((v) => ({ valor: v })),
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
-  ],
-  resumoNome: (s) => s.produto ?? "Cola",
-  resumoDetalhe: (s, q) => `${s.volume} · ${q.qtd ?? 1} un`,
-  unidadeResumo: () => "un",
-  idItem: (s) => `cola-${s.produto}-${s.volume}`,
-  mensagem: (s, q) => `🧴 *${s.produto} ${s.volume}*\n• Quantidade: ${q.qtd ?? 1} un`,
-};
-
 /* ---------------- PU para Calha ---------------- */
 
 const CORES_PU = ["Branco", "Cinza", "Preto", "Alumínio"];

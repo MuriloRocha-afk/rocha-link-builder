@@ -83,15 +83,6 @@ export const CARDS: EmojiSubcard[] = [
     cta: "Ver produtos e cotar",
   },
   {
-    slug: "cola",
-    name: "Colas & Adesivos",
-    emoji: "🧷",
-    tags: ["PVA", "Contato", "PU"],
-    description:
-      "Cola branca PVA, cola de madeira extra, cola de contato, cola PU, super cola e cola para PVC.",
-    cta: "Ver produtos e cotar",
-  },
-  {
     slug: "pu-calha",
     name: "PU para Calha",
     emoji: "🛠️",
@@ -123,8 +114,8 @@ const GRUPOS = [
     id: "construcao",
     label: "Tintas & Vedação para Construção",
     descricao:
-      "Tinta emborrachada, thinner, colas, selante PU para calha e lona plástica de obra.",
-    slugs: ["tinta-emborrachada", "aguarras", "sayerraz", "cola", "pu-calha", "lona-plastica"],
+      "Tinta emborrachada, thinner, selante PU para calha e lona plástica de obra.",
+    slugs: ["tinta-emborrachada", "aguarras", "sayerraz", "pu-calha", "lona-plastica"],
   },
 ];
 
