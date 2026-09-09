@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_PU_CALHA } from "@/data/configs/tintas";
 
-const TITLE = "PU para Calha — Selante Poliuretano | Rocha Telhas";
-const DESCRIPTION = "Selante PU para vedação de calhas, rufos e água furtada, em várias cores. Cote no WhatsApp.";
+const TITLE = "PU40 Cinza 400g — Selante para Calha | Rocha Telhas";
+const DESCRIPTION = "Selante poliuretano PU40 Cinza em bisnaga de 400g para vedar calhas, rufos e água furtada. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/pu-calha")({
   head: () => ({

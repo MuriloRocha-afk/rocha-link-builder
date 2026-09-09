@@ -454,10 +454,10 @@ const tintas: ItemBusca[] = [
   },
   {
     id: "pu-calha",
-    nome: "PU para Calha",
+    nome: "PU40 Cinza — Selante para Calha",
     categoria: "Tintas",
     rota: "/catalogo/tintas/pu-calha",
-    termos: ["pu", "poliuretano", "vedacao de calha", "cola de calha", "silicone"],
+    termos: ["pu", "pu40", "poliuretano", "vedacao de calha", "selante", "bisnaga 400g"],
   },
   {
     id: "massa-madeira",
