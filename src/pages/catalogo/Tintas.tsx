@@ -95,9 +95,9 @@ export const CARDS: EmojiSubcard[] = [
     slug: "lona-plastica",
     name: "Lona Plástica Preta",
     emoji: "⬛",
-    tags: ["Preta", "4 medidas", "3 espessuras"],
+    tags: ["Preta", "Por metro", "6 espessuras"],
     description:
-      "Lona plástica preta em várias medidas e espessuras. Proteção de obra, cobertura provisória, pintura e transporte de cargas.",
+      "Lona plástica preta vendida por metro linear, rolo de 4 m de largura. Escolha a espessura (09 a 40 kg) e a metragem.",
     cta: "Ver produtos e cotar",
   },
 ];
