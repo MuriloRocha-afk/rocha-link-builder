@@ -930,6 +930,43 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
+  "pu-calha": {
+    badges: [
+      { icone: "🔗", texto: "Alta aderência" },
+      { icone: "💧", texto: "Impermeável" },
+      { icone: "🧰", texto: "Uso profissional" },
+      { icone: "📦", texto: "Bisnaga 400g" },
+    ],
+    motivos: [
+      {
+        titulo: "Vedação eficiente",
+        descricao:
+          "Veda juntas, emendas e parafusos de calhas e rufos, impedindo a passagem de água nesses pontos.",
+      },
+      {
+        titulo: "Alta aderência",
+        descricao:
+          "Fixa bem em chapa galvanizada, PVC, alumínio e outros materiais usados no sistema de calhas.",
+      },
+      {
+        titulo: "Resistente às intempéries",
+        descricao:
+          "Mantém a elasticidade e a vedação mesmo exposto ao sol, à chuva e à variação de temperatura.",
+      },
+      {
+        titulo: "Fácil aplicação",
+        descricao:
+          "Bisnaga de 400g com aplicação direta, sem necessidade de pistola aplicadora.",
+      },
+    ],
+    especificacoes: [
+      ["Produto", "PU40 — selante poliuretano"],
+      ["Cor", "Cinza"],
+      ["Embalagem", "Bisnaga de 400g"],
+      ["Aplicação", "Calhas, rufos, água furtada e emendas metálicas"],
+      ["Uso", "Interno e externo"],
+    ],
+  },
   "acessorios-pintura": {
     badges: [
       { icone: "📐", texto: "Vários tamanhos" },
