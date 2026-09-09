@@ -4,8 +4,8 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_LONA } from "@/data/configs/tintas";
 
-const TITLE = "Lona Plástica Preta, Leitosa e Encerada | Rocha Telhas";
-const DESCRIPTION = "Lona plástica preta, leitosa, azul e encerada em várias medidas e espessuras para proteção de obra. Cote no WhatsApp.";
+const TITLE = "Lona Plástica Preta | Rocha Telhas";
+const DESCRIPTION = "Lona plástica preta em várias medidas e espessuras para proteção de obra, cobertura provisória, pintura e transporte de cargas. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/lona-plastica")({
   head: () => ({

@@ -349,26 +349,24 @@ export const CONFIG_PU_CALHA: ConfiguradorConfig = {
 
 const LONAS: { nome: string; medidas: string[] }[] = [
   { nome: "Lona Plástica Preta", medidas: ["4x5 m", "6x8 m", "8x10 m", "Metro linear (4 m larg.)"] },
-  { nome: "Lona Plástica Branca/Leitosa", medidas: ["4x5 m", "6x8 m", "Metro linear (4 m larg.)"] },
-  { nome: "Lona Plástica Azul", medidas: ["3x4 m", "5x6 m", "8x10 m"] },
-  { nome: "Lona Encerada / Reforçada", medidas: ["4x5 m", "5x8 m", "8x10 m"] },
 ];
 
 export const CONFIG_LONA: ConfiguradorConfig = {
+  produtoKey: "lona-plastica",
   breadcrumb: BC("Lona Plástica"),
-  titulo: "🟦 Lona Plástica",
+  titulo: "⬛ Lona Plástica Preta",
   subtitulo:
-    "Lona preta, leitosa, azul e encerada para proteção de obra, cobertura provisória e pintura.",
-  galeriaTitulo: "Lona Plástica",
-  galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: s.tipo }] : []),
+    "Lona preta para proteção de obra, cobertura provisória, pintura e transporte de cargas. Disponível em várias medidas e espessuras.",
+  galeriaTitulo: "Lona Plástica Preta",
+  galeriaPlaceholder: "Selecione a medida para ver as fotos",
+  imagens: (s) => (s.medida ? [{ src: "", alt: `Lona Plástica Preta ${s.medida}` }] : []),
   categoria: "Tintas",
   passos: [
     {
-      chave: "tipo",
-      titulo: "Tipo de lona",
-      tipo: "lista",
-      opcoes: LONAS.map((l) => ({ valor: l.nome, sub: l.medidas.join(" · ") })),
+      chave: "medida",
+      titulo: "Medida",
+      tipo: "grid2",
+      opcoes: LONAS[0].medidas.map((v) => ({ valor: v })),
     },
     {
       chave: "espessura",
@@ -378,20 +376,14 @@ export const CONFIG_LONA: ConfiguradorConfig = {
         valor: v,
       })),
     },
-    {
-      chave: "medida",
-      titulo: "Medida",
-      tipo: "grid2",
-      opcoes: (s) => (LONAS.find((l) => l.nome === s.tipo)?.medidas ?? []).map((v) => ({ valor: v })),
-    },
     { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: (s) => s.tipo ?? "Lona Plástica",
+  resumoNome: () => "Lona Plástica Preta",
   resumoDetalhe: (s, q) => `${s.espessura} · ${s.medida} · ${q.qtd ?? 1} un`,
   unidadeResumo: () => "un",
-  idItem: (s) => `lona-${s.tipo}-${s.espessura}-${s.medida}`,
+  idItem: (s) => `lona-preta-${s.espessura}-${s.medida}`,
   mensagem: (s, q) =>
-    `🟦 *${s.tipo}*\n• Espessura: ${s.espessura}\n• Medida: ${s.medida}\n• Quantidade: ${q.qtd ?? 1} un`,
+    `⬛ *Lona Plástica Preta*\n• Espessura: ${s.espessura}\n• Medida: ${s.medida}\n• Quantidade: ${q.qtd ?? 1} un`,
 };
 
 /* ---------------- Massa para Madeira (Sayermassa) ---------------- */
