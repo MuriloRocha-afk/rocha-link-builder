@@ -996,8 +996,9 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
     ],
     especificacoes: [
       ["Cor", "Preta"],
-      ["Medidas", "4x5 m · 6x8 m · 8x10 m · Metro linear (4 m larg.)"],
-      ["Espessuras", "Leve (100 micras) · Média (150 micras) · Reforçada (200 micras)"],
+      ["Venda", "Por metro linear, cortada do rolo"],
+      ["Largura do rolo", "4 m"],
+      ["Espessuras (peso do rolo 4 x 100 m)", "09 kg · 12 kg · 15 kg · 20 kg · 30 kg · 40 kg"],
       ["Uso", "Proteção de obra, cobertura provisória e transporte"],
     ],
   },
