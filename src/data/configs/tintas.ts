@@ -1,4 +1,4 @@
-import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
