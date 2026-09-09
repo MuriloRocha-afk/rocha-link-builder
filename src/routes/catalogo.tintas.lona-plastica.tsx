@@ -5,7 +5,7 @@ import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_LONA } from "@/data/configs/tintas";
 
 const TITLE = "Lona Plástica Preta | Rocha Telhas";
-const DESCRIPTION = "Lona plástica preta em várias medidas e espessuras para proteção de obra, cobertura provisória, pintura e transporte de cargas. Cote no WhatsApp.";
+const DESCRIPTION = "Lona plástica preta vendida por metro linear, rolo de 4 m de largura, nas espessuras de 09 a 40 kg. Proteção de obra e transporte. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/lona-plastica")({
   head: () => ({
