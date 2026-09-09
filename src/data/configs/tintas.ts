@@ -347,8 +347,14 @@ export const CONFIG_PU_CALHA: ConfiguradorConfig = {
 
 /* ---------------- Lona Plástica ---------------- */
 
-const LONAS: { nome: string; medidas: string[] }[] = [
-  { nome: "Lona Plástica Preta", medidas: ["4x5 m", "6x8 m", "8x10 m", "Metro linear (4 m larg.)"] },
+/** Espessuras da lona preta: identificadas pelo peso do rolo de 4 m x 100 m. */
+const ESPESSURAS_LONA: OpcaoConfig[] = [
+  { valor: "09 kg", label: "09 kg", sub: "Rolo 4 x 100 m — leve, uso rápido" },
+  { valor: "12 kg", label: "12 kg", sub: "Rolo 4 x 100 m — proteção geral" },
+  { valor: "15 kg", label: "15 kg", sub: "Rolo 4 x 100 m — uso frequente" },
+  { valor: "20 kg", label: "20 kg", sub: "Rolo 4 x 100 m — reforçada" },
+  { valor: "30 kg", label: "30 kg", sub: "Rolo 4 x 100 m — alta resistência" },
+  { valor: "40 kg", label: "40 kg", sub: "Rolo 4 x 100 m — extra reforçada" },
 ];
 
 export const CONFIG_LONA: ConfiguradorConfig = {
@@ -356,34 +362,40 @@ export const CONFIG_LONA: ConfiguradorConfig = {
   breadcrumb: BC("Lona Plástica"),
   titulo: "⬛ Lona Plástica Preta",
   subtitulo:
-    "Lona preta para proteção de obra, cobertura provisória, pintura e transporte de cargas. Disponível em várias medidas e espessuras.",
+    "Lona preta vendida por metro linear, em rolo de 4 m de largura cortado sob medida. Escolha a espessura (peso do rolo) e informe quantos metros você precisa.",
   galeriaTitulo: "Lona Plástica Preta",
-  galeriaPlaceholder: "Selecione a medida para ver as fotos",
-  imagens: (s) => (s.medida ? [{ src: "", alt: `Lona Plástica Preta ${s.medida}` }] : []),
+  galeriaPlaceholder: "Selecione a espessura para ver as fotos",
+  imagens: (s) => (s.espessura ? [{ src: "", alt: `Lona Plástica Preta ${s.espessura}` }] : []),
   categoria: "Tintas",
   passos: [
     {
-      chave: "medida",
-      titulo: "Medida",
-      tipo: "grid2",
-      opcoes: LONAS[0].medidas.map((v) => ({ valor: v })),
+      chave: "espessura",
+      titulo: "Espessura (peso do rolo 4 x 100 m)",
+      tipo: "grid3",
+      opcoes: ESPESSURAS_LONA,
     },
     {
-      chave: "espessura",
-      titulo: "Espessura",
-      tipo: "chips",
-      opcoes: ["Leve (100 micras)", "Média (150 micras)", "Reforçada (200 micras)"].map((v) => ({
-        valor: v,
-      })),
+      chave: "metros",
+      titulo: "Quantos metros você precisa?",
+      tipo: "quantidade",
+      unidade: "metros (largura 4 m)",
+      padrao: 1,
+      decimal: true,
+      multiplo: 0.5,
+      nota: (s, q) =>
+        s.espessura
+          ? `${q} m de lona ${s.espessura} · área total ${(q * 4).toFixed(1)} m² (largura fixa de 4 m).`
+          : null,
+      aviso: "Venda por metro linear, cortada do rolo de 4 m de largura. Preço por metro varia conforme a espessura — confirme no orçamento.",
     },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
   ],
-  resumoNome: () => "Lona Plástica Preta",
-  resumoDetalhe: (s, q) => `${s.espessura} · ${s.medida} · ${q.qtd ?? 1} un`,
-  unidadeResumo: () => "un",
-  idItem: (s) => `lona-preta-${s.espessura}-${s.medida}`,
+  resumoNome: () => "Lona Plástica Preta (por metro)",
+  resumoDetalhe: (s, q) =>
+    `Espessura ${s.espessura} · ${q.metros ?? 1} m lineares · largura 4 m`,
+  unidadeResumo: () => "m",
+  idItem: (s) => `lona-preta-${s.espessura}`,
   mensagem: (s, q) =>
-    `⬛ *Lona Plástica Preta*\n• Espessura: ${s.espessura}\n• Medida: ${s.medida}\n• Quantidade: ${q.qtd ?? 1} un`,
+    `⬛ *Lona Plástica Preta (por metro)*\n• Espessura: ${s.espessura} (rolo 4 x 100 m)\n• Metros: ${q.metros ?? 1} m lineares\n• Largura: 4 m\n• Preço por metro conforme espessura`,
 };
 
 /* ---------------- Massa para Madeira (Sayermassa) ---------------- */
