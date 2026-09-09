@@ -39,6 +39,7 @@ function VideoTile({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [visivel, setVisivel] = useState(false);
+  const [ativoNaTela, setAtivoNaTela] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
