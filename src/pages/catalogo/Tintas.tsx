@@ -86,9 +86,9 @@ export const CARDS: EmojiSubcard[] = [
     slug: "pu-calha",
     name: "PU para Calha",
     emoji: "🛠️",
-    tags: ["Selante", "4 cores"],
+    tags: ["PU40 Cinza", "Bisnaga 400g"],
     description:
-      "Selante poliuretano para emendas de calhas, rufos e água furtada. Alta aderência e resistência a UV.",
+      "Selante poliuretano PU40 Cinza em bisnaga de 400g para emendas de calhas, rufos e água furtada.",
     cta: "Ver produtos e cotar",
   },
   {
