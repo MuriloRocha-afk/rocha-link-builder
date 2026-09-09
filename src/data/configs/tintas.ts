@@ -318,44 +318,31 @@ export const CONFIG_LIXAS: ConfiguradorConfig = {
 
 /* ---------------- PU para Calha ---------------- */
 
-const CORES_PU = ["Branco", "Cinza", "Preto", "Alumínio"];
-
 export const CONFIG_PU_CALHA: ConfiguradorConfig = {
+  produtoKey: "pu-calha",
   breadcrumb: BC("PU para Calha"),
-  titulo: "🛠️ PU para Calha (Vedação)",
+  titulo: "🛠️ PU40 Cinza para Calha (Vedação)",
   subtitulo:
-    "Selante poliuretano de alta aderência para emendas de calhas, rufos e água furtada. Resistente a chuva e UV.",
-  galeriaTitulo: "PU para Calha",
-  galeriaPlaceholder: "Selecione o produto para ver as fotos",
-  imagens: (s) => (s.produto ? [{ src: "", alt: s.produto }] : []),
+    "Selante poliuretano PU40 Cinza em bisnaga de 400g. Alta aderência para emendas de calhas, rufos e água furtada.",
+  galeriaTitulo: "PU40 Cinza — Bisnaga 400g",
+  galeriaPlaceholder: "Foto em breve",
+  imagens: () => [{ src: "", alt: "PU40 Cinza bisnaga 400g para vedação de calha" }],
   categoria: "Tintas",
   passos: [
     {
       chave: "produto",
       titulo: "Produto",
       tipo: "lista",
-      opcoes: [
-        { valor: "Selante PU — Cartucho 280g/310ml", sub: "Uso com pistola aplicadora" },
-        { valor: "Selante PU — Bisnaga 400ml", sub: "Alto rendimento" },
-        { valor: "Silicone Neutro para Calha — 280g", sub: "Vedação complementar" },
-        { valor: "Pistola Aplicadora para Cartucho", sub: "Acessório de aplicação" },
-      ],
+      opcoes: [{ valor: "PU40 Cinza — Bisnaga 400g", sub: "Vedação de calhas e rufos" }],
     },
-    {
-      chave: "cor",
-      titulo: "Cor",
-      tipo: "chips",
-      visivel: (s) => Boolean(s.produto) && !s.produto.startsWith("Pistola"),
-      opcoes: CORES_PU.map((v) => ({ valor: v })),
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 1 },
+    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "bisnagas", padrao: 1 },
   ],
-  resumoNome: (s) => s.produto ?? "PU para Calha",
-  resumoDetalhe: (s, q) => `${s.cor ? `${s.cor} · ` : ""}${q.qtd ?? 1} un`,
-  unidadeResumo: () => "un",
-  idItem: (s) => `pu-calha-${s.produto}-${s.cor ?? ""}`,
+  resumoNome: () => "PU40 Cinza — Bisnaga 400g",
+  resumoDetalhe: (s, q) => `Cinza · 400g · ${q.qtd ?? 1} bisnagas`,
+  unidadeResumo: () => "bisnagas",
+  idItem: () => "pu-calha-pu40-cinza-400g",
   mensagem: (s, q) =>
-    `🛠️ *${s.produto}*${s.cor ? `\n• Cor: ${s.cor}` : ""}\n• Quantidade: ${q.qtd ?? 1} un`,
+    `🛠️ *PU40 Cinza — Bisnaga 400g*\n• Cor: Cinza\n• Quantidade: ${q.qtd ?? 1} bisnagas`,
 };
 
 /* ---------------- Lona Plástica ---------------- */
