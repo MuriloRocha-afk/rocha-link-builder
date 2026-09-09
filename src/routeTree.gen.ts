@@ -33,7 +33,6 @@ import { Route as CatalogoTintasMassaMadeiraRouteImport } from './routes/catalog
 import { Route as CatalogoTintasLonaPlasticaRouteImport } from './routes/catalogo.tintas.lona-plastica'
 import { Route as CatalogoTintasLixasRouteImport } from './routes/catalogo.tintas.lixas'
 import { Route as CatalogoTintasCupicidaRouteImport } from './routes/catalogo.tintas.cupicida'
-import { Route as CatalogoTintasColaRouteImport } from './routes/catalogo.tintas.cola'
 import { Route as CatalogoTintasAguarrasRouteImport } from './routes/catalogo.tintas.aguarras'
 import { Route as CatalogoTintasAcessoriosPinturaRouteImport } from './routes/catalogo.tintas.acessorios-pintura'
 import { Route as CatalogoTintasProdutoSlugRouteImport } from './routes/catalogo.tintas.$produtoSlug'
@@ -203,11 +202,6 @@ const CatalogoTintasLixasRoute = CatalogoTintasLixasRouteImport.update({
 const CatalogoTintasCupicidaRoute = CatalogoTintasCupicidaRouteImport.update({
   id: '/catalogo/tintas/cupicida',
   path: '/catalogo/tintas/cupicida',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CatalogoTintasColaRoute = CatalogoTintasColaRouteImport.update({
-  id: '/catalogo/tintas/cola',
-  path: '/catalogo/tintas/cola',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoTintasAguarrasRoute = CatalogoTintasAguarrasRouteImport.update({
@@ -532,7 +526,6 @@ export interface FileRoutesByFullPath {
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/tintas/acessorios-pintura': typeof CatalogoTintasAcessoriosPinturaRoute
   '/catalogo/tintas/aguarras': typeof CatalogoTintasAguarrasRoute
-  '/catalogo/tintas/cola': typeof CatalogoTintasColaRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
@@ -603,7 +596,6 @@ export interface FileRoutesByTo {
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/tintas/acessorios-pintura': typeof CatalogoTintasAcessoriosPinturaRoute
   '/catalogo/tintas/aguarras': typeof CatalogoTintasAguarrasRoute
-  '/catalogo/tintas/cola': typeof CatalogoTintasColaRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
@@ -677,7 +669,6 @@ export interface FileRoutesById {
   '/catalogo/tintas/$produtoSlug': typeof CatalogoTintasProdutoSlugRoute
   '/catalogo/tintas/acessorios-pintura': typeof CatalogoTintasAcessoriosPinturaRoute
   '/catalogo/tintas/aguarras': typeof CatalogoTintasAguarrasRoute
-  '/catalogo/tintas/cola': typeof CatalogoTintasColaRoute
   '/catalogo/tintas/cupicida': typeof CatalogoTintasCupicidaRoute
   '/catalogo/tintas/lixas': typeof CatalogoTintasLixasRoute
   '/catalogo/tintas/lona-plastica': typeof CatalogoTintasLonaPlasticaRoute
@@ -751,7 +742,6 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/tintas/acessorios-pintura'
     | '/catalogo/tintas/aguarras'
-    | '/catalogo/tintas/cola'
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
@@ -822,7 +812,6 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/tintas/acessorios-pintura'
     | '/catalogo/tintas/aguarras'
-    | '/catalogo/tintas/cola'
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
@@ -895,7 +884,6 @@ export interface FileRouteTypes {
     | '/catalogo/tintas/$produtoSlug'
     | '/catalogo/tintas/acessorios-pintura'
     | '/catalogo/tintas/aguarras'
-    | '/catalogo/tintas/cola'
     | '/catalogo/tintas/cupicida'
     | '/catalogo/tintas/lixas'
     | '/catalogo/tintas/lona-plastica'
@@ -967,7 +955,6 @@ export interface RootRouteChildren {
   CatalogoTintasProdutoSlugRoute: typeof CatalogoTintasProdutoSlugRoute
   CatalogoTintasAcessoriosPinturaRoute: typeof CatalogoTintasAcessoriosPinturaRoute
   CatalogoTintasAguarrasRoute: typeof CatalogoTintasAguarrasRoute
-  CatalogoTintasColaRoute: typeof CatalogoTintasColaRoute
   CatalogoTintasCupicidaRoute: typeof CatalogoTintasCupicidaRoute
   CatalogoTintasLixasRoute: typeof CatalogoTintasLixasRoute
   CatalogoTintasLonaPlasticaRoute: typeof CatalogoTintasLonaPlasticaRoute
@@ -1150,13 +1137,6 @@ declare module '@tanstack/react-router' {
       path: '/catalogo/tintas/cupicida'
       fullPath: '/catalogo/tintas/cupicida'
       preLoaderRoute: typeof CatalogoTintasCupicidaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/catalogo/tintas/cola': {
-      id: '/catalogo/tintas/cola'
-      path: '/catalogo/tintas/cola'
-      fullPath: '/catalogo/tintas/cola'
-      preLoaderRoute: typeof CatalogoTintasColaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo/tintas/aguarras': {
@@ -1572,7 +1552,6 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoTintasProdutoSlugRoute: CatalogoTintasProdutoSlugRoute,
   CatalogoTintasAcessoriosPinturaRoute: CatalogoTintasAcessoriosPinturaRoute,
   CatalogoTintasAguarrasRoute: CatalogoTintasAguarrasRoute,
-  CatalogoTintasColaRoute: CatalogoTintasColaRoute,
   CatalogoTintasCupicidaRoute: CatalogoTintasCupicidaRoute,
   CatalogoTintasLixasRoute: CatalogoTintasLixasRoute,
   CatalogoTintasLonaPlasticaRoute: CatalogoTintasLonaPlasticaRoute,

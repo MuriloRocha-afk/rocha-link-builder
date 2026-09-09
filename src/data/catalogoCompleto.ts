@@ -51,7 +51,6 @@ import {
   CONFIG_AGUARRAS,
   CONFIG_ACESSORIOS_PINTURA,
   CONFIG_LIXAS,
-  CONFIG_COLA,
   CONFIG_PU_CALHA,
   CONFIG_LONA,
 } from "@/data/configs/tintas";
@@ -248,7 +247,6 @@ const EXTRAS: Record<string, Extra> = {
   aguarras: { config: CONFIG_AGUARRAS },
   "acessorios-pintura": { config: CONFIG_ACESSORIOS_PINTURA },
   lixas: { config: CONFIG_LIXAS },
-  cola: { config: CONFIG_COLA },
   "pu-calha": { config: CONFIG_PU_CALHA },
   "lona-plastica": { config: CONFIG_LONA },
 };
@@ -314,7 +312,7 @@ export const SECOES_PDF: SecaoPdf[] = [
     id: "tintas",
     titulo: "Tintas, Vernizes e Acabamentos",
     descricao:
-      "Linha Sayerlack completa, tintas emborrachadas, colas, selantes e acessórios de pintura.",
+      "Linha Sayerlack completa, tintas emborrachadas, selantes e acessórios de pintura.",
     produtos: montar("tintas", CARDS_TINTAS),
   },
   {

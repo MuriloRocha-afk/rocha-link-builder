@@ -460,13 +460,6 @@ const tintas: ItemBusca[] = [
     termos: ["pu", "poliuretano", "vedacao de calha", "cola de calha", "silicone"],
   },
   {
-    id: "cola",
-    nome: "Cola",
-    categoria: "Tintas",
-    rota: "/catalogo/tintas/cola",
-    termos: ["cola", "adesivo", "cola de pvc"],
-  },
-  {
     id: "massa-madeira",
     nome: "Massa para Madeira Sayerlack (Sayermassa)",
     categoria: "Tintas",
