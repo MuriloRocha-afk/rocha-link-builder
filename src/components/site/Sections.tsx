@@ -39,6 +39,7 @@ function VideoTile({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [visivel, setVisivel] = useState(false);
+  const [ativoNaTela, setAtivoNaTela] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -47,8 +48,9 @@ function VideoTile({
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisivel(true);
-          void el.play().catch(() => {});
+          setAtivoNaTela(true);
         } else {
+          setAtivoNaTela(false);
           el.pause();
         }
       },
@@ -58,6 +60,12 @@ function VideoTile({
     return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !visivel || !ativoNaTela) return;
+    void el.play().catch(() => {});
+  }, [visivel, ativoNaTela]);
+
   return (
     <video
       ref={ref}
@@ -66,7 +74,11 @@ function VideoTile({
       muted
       loop
       playsInline
-      preload="none"
+      autoPlay
+      preload="metadata"
+      onLoadedData={() => {
+        if (ativoNaTela) void ref.current?.play().catch(() => {});
+      }}
       onClick={onClick}
       className="h-full w-full cursor-pointer bg-black/40 object-cover"
     />
