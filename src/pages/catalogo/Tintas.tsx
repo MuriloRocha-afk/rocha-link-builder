@@ -93,11 +93,11 @@ export const CARDS: EmojiSubcard[] = [
   },
   {
     slug: "lona-plastica",
-    name: "Lona Plástica",
-    emoji: "🟦",
-    tags: ["Preta", "Leitosa", "Encerada"],
+    name: "Lona Plástica Preta",
+    emoji: "⬛",
+    tags: ["Preta", "4 medidas", "3 espessuras"],
     description:
-      "Lona preta, leitosa, azul e encerada em várias medidas e espessuras. Proteção de obra, pintura e cobertura provisória.",
+      "Lona plástica preta em várias medidas e espessuras. Proteção de obra, cobertura provisória, pintura e transporte de cargas.",
     cta: "Ver produtos e cotar",
   },
 ];

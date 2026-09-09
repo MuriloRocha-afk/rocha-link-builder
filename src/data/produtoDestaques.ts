@@ -967,6 +967,40 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["Uso", "Interno e externo"],
     ],
   },
+  "lona-plastica": {
+    badges: [
+      { icone: "💪", texto: "Alta resistência" },
+      { icone: "💧", texto: "Impermeável" },
+      { icone: "🧰", texto: "Uso versátil" },
+      { icone: "☀️", texto: "Proteção UV" },
+    ],
+    motivos: [
+      {
+        titulo: "Proteção contra intempéries",
+        descricao:
+          "Protege materiais, móveis e obras da chuva e do sol durante serviços externos.",
+      },
+      {
+        titulo: "Alta resistência",
+        descricao: "Material reforçado que resiste a rasgos e ao uso contínuo na obra.",
+      },
+      {
+        titulo: "Uso versátil",
+        descricao:
+          "Serve tanto para cobertura temporária de obra quanto para proteção de cargas em transporte.",
+      },
+      {
+        titulo: "Fácil manuseio",
+        descricao: "Leve e fácil de dobrar, guardar e reutilizar conforme a necessidade.",
+      },
+    ],
+    especificacoes: [
+      ["Cor", "Preta"],
+      ["Medidas", "4x5 m · 6x8 m · 8x10 m · Metro linear (4 m larg.)"],
+      ["Espessuras", "Leve (100 micras) · Média (150 micras) · Reforçada (200 micras)"],
+      ["Uso", "Proteção de obra, cobertura provisória e transporte"],
+    ],
+  },
   "acessorios-pintura": {
     badges: [
       { icone: "📐", texto: "Vários tamanhos" },
