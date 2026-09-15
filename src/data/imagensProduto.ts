@@ -590,6 +590,29 @@ export function galeriaMassaMadeira(cor?: string): ImagemProduto[] {
   return especifica && especifica.length ? especifica : capa;
 }
 
+const CUPICIDA_SAYERLACK: Record<string, ImagemProduto[]> = {
+  "900ml": [
+    { src: cupim900.url, alt: "Exterminador de Cupim Sayerlack 900ml", legenda: "900ml" },
+  ],
+  "5L": [
+    { src: cupim5L.url, alt: "Exterminador de Cupim Sayerlack 5 litros", legenda: "5L" },
+  ],
+  "18L": [
+    { src: cupim18L.url, alt: "Exterminador de Cupim Sayerlack 18 litros", legenda: "18L" },
+  ],
+};
+
+export const capaCupicida = cupimCapa.url;
+
+export function galeriaCupicida(volume?: string): ImagemProduto[] {
+  const capa = imagensTintas.cupicida ?? [];
+  if (!volume) return capa;
+  const especifica = CUPICIDA_SAYERLACK[volume];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+
+
 // CALHAS — por subcategoria
 export const imagensCalhas: Record<string, ImagemProduto[]> = {
   "calha-alge": [
