@@ -1,4 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
+import { capaStainPolisten } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -23,6 +24,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "stain",
     name: "Stain para Madeira",
     emoji: "🪵",
+    image: capaStainPolisten,
     tags: ["Sayerlack", "Polisten"],
     description:
       "Sayerlack Polisten em Imbuia, Mogno Inglês e Transparente, nos tamanhos 900ml e 3,6L. Penetra na fibra e realça o veio natural.",
