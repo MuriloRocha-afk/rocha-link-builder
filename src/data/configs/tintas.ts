@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
+import { galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -416,7 +416,7 @@ export const CONFIG_MASSA_MADEIRA: ConfiguradorConfig = {
     "Massa para reparos em madeira Sayerlack Sayermassa em 4 cores: Eucalipto, Imbuia Tabaco, Mogno e Pinus. Preenche rachaduras, furos e imperfeições antes do acabamento.",
   galeriaTitulo: "Sayerlack Sayermassa",
   galeriaPlaceholder: "Selecione a cor para ver as fotos",
-  imagens: (s) => (s.cor ? [{ src: "", alt: `Sayerlack Sayermassa ${s.cor}` }] : []),
+  imagens: (s) => galeriaMassaMadeira(s.cor),
   categoria: "Tintas",
   passos: [
     { chave: "cor", titulo: "Cor", tipo: "lista", opcoes: CORES_MASSA },
