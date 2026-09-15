@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaSayerraz, capaStainPolisten, capaThinner, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaPu40, capaSayerraz, capaStainPolisten, capaThinner, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -96,6 +96,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "pu-calha",
     name: "PU para Calha",
     emoji: "🛠️",
+    image: capaPu40,
     tags: ["PU40 Cinza", "Bisnaga 400g"],
     description:
       "Selante poliuretano PU40 Cinza em bisnaga de 400g para emendas de calhas, rufos e água furtada.",
