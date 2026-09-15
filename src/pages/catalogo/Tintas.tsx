@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaCupicida, capaLixas, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaAcessoriosPintura, capaCupicida, capaLixas, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -73,6 +73,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "acessorios-pintura",
     name: "Acessórios para Fixação",
     emoji: "🖌️",
+    image: capaAcessoriosPintura,
     tags: ["Roloflex", "Bestfer", "Espátulas"],
     description:
       "Rolos Roloflex com e sem capa, broxas, pincéis e jogos Bestfer, suporte para rolo e espátulas de aço.",

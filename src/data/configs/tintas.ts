@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaCupicida, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
+import { galeriaAcessoriosPintura, galeriaCupicida, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -250,7 +250,7 @@ export const CONFIG_ACESSORIOS_PINTURA: ConfiguradorConfig = {
     "Rolos Roloflex, broxas, pincéis e jogos Bestfer, suporte para rolo e espátulas de aço — só o que temos em estoque.",
   galeriaTitulo: "Acessórios para Fixação",
   galeriaPlaceholder: "Selecione o item para ver as fotos",
-  imagens: (s) => (s.item ? [{ src: "", alt: s.item }] : []),
+  imagens: (s) => galeriaAcessoriosPintura(s.item, s.medida),
   categoria: "Tintas",
   passos: [
     {
