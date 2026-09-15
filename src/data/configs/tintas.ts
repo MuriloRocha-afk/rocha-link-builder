@@ -5,6 +5,7 @@ import {
   galeriaEmborrachada,
   galeriaLixas,
   galeriaMassaMadeira,
+  galeriaSayerraz,
   galeriaStainPolisten,
   galeriaThinner,
   galeriaVernizPolirex,
@@ -210,7 +211,7 @@ export const CONFIG_SAYERRAZ: ConfiguradorConfig = {
     "Aguarrás Sayerlack Sayerraz nos tamanhos 900ml e 5L. Diluição de tintas e vernizes à base de óleo e limpeza de pincéis, rolos e ferramentas.",
   galeriaTitulo: "Sayerlack Sayerraz",
   galeriaPlaceholder: "Selecione o tamanho para ver as fotos",
-  imagens: (s) => (s.volume ? [{ src: "", alt: `Sayerlack Sayerraz ${s.volume}` }] : []),
+  imagens: (s) => galeriaSayerraz(s.volume),
   categoria: "Tintas",
   passos: [
     {

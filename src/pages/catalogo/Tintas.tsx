@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaStainPolisten, capaThinner, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaSayerraz, capaStainPolisten, capaThinner, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -56,6 +56,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "sayerraz",
     name: "Aguarrás Sayerraz",
     emoji: "🪣",
+    image: capaSayerraz,
     tags: ["Sayerlack", "900ml e 5L", "Aguarrás"],
     description:
       "Aguarrás Sayerlack Sayerraz em 900ml e 5L. Dilui tintas e vernizes à base de óleo e limpa pincéis, rolos e ferramentas.",
