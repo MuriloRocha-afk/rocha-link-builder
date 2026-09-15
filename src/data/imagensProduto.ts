@@ -193,6 +193,9 @@ import discoLixa60 from "@/assets/produtos/lixas/08_disco_grao60.jpg.asset.json"
 import discoLixa100 from "@/assets/produtos/lixas/09_disco_grao100.jpg.asset.json";
 import discoLixa36 from "@/assets/produtos/lixas/10_disco_grao36.jpg.asset.json";
 import acessCapa from "@/assets/produtos/acessorios/01_capa_acessorios.jpg.asset.json";
+import emborrachadaCapa from "@/assets/produtos/emborrachada/01_capa_e_3600ml_real.jpg.asset.json";
+// TODO: foto temporária (imagem de internet). Substituir pela foto real do 18L quando o produto chegar na loja.
+import emborrachada18L from "@/assets/produtos/emborrachada/02_18litros_foto_internet_temporaria.jpg.asset.json";
 import acessRolo15 from "@/assets/produtos/acessorios/02_roloflex_15cm.jpg.asset.json";
 import acessRolo9 from "@/assets/produtos/acessorios/03_roloflex_9cm.jpg.asset.json";
 import acessPincel4 from "@/assets/produtos/acessorios/04_pincel_4pol.jpg.asset.json";
