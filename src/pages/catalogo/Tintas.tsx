@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaAcessoriosPintura, capaCupicida, capaLixas, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -64,6 +64,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "tinta-emborrachada",
     name: "Tinta Emborrachada",
     emoji: "🎨",
+    image: capaEmborrachada,
     tags: ["Brazilian Color", "Cinza Espacial", "3,6L e 18L"],
     description:
       "Tinta emborrachada Brazilian Color Super Proteção na cor Cinza Espacial, em 3,6L e 18L. Filme elástico e impermeável para laje, telhado e fachada.",

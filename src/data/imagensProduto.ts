@@ -193,6 +193,9 @@ import discoLixa60 from "@/assets/produtos/lixas/08_disco_grao60.jpg.asset.json"
 import discoLixa100 from "@/assets/produtos/lixas/09_disco_grao100.jpg.asset.json";
 import discoLixa36 from "@/assets/produtos/lixas/10_disco_grao36.jpg.asset.json";
 import acessCapa from "@/assets/produtos/acessorios/01_capa_acessorios.jpg.asset.json";
+import emborrachadaCapa from "@/assets/produtos/emborrachada/01_capa_e_3600ml_real.jpg.asset.json";
+// TODO: foto temporária (imagem de internet). Substituir pela foto real do 18L quando o produto chegar na loja.
+import emborrachada18L from "@/assets/produtos/emborrachada/02_18litros_foto_internet_temporaria.jpg.asset.json";
 import acessRolo15 from "@/assets/produtos/acessorios/02_roloflex_15cm.jpg.asset.json";
 import acessRolo9 from "@/assets/produtos/acessorios/03_roloflex_9cm.jpg.asset.json";
 import acessPincel4 from "@/assets/produtos/acessorios/04_pincel_4pol.jpg.asset.json";
@@ -501,7 +504,11 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     { src: stainCapa.url, alt: "Sayerlack Polisten nas cores Imbuia, Mogno Inglês e Transparente", legenda: "Sayerlack Polisten — cores disponíveis" },
   ],
   "tinta-emborrachada": [
-    { src: "", alt: "Tinta emborrachada para telhado e fachada", legenda: "Tinta Emborrachada" },
+    {
+      src: emborrachadaCapa.url,
+      alt: "Tinta Emborrachada Brazilian Color Super Proteção Cinza Espacial 3,6L",
+      legenda: "Tinta Emborrachada Brazilian Color — Cinza Espacial",
+    },
   ],
   cupicida: [
     {
@@ -698,6 +705,37 @@ export function galeriaAcessoriosPintura(item?: string, medida?: string): Imagem
   const especifica = imagensAcessoriosPintura[`${item}|${medida}`];
   return especifica && especifica.length ? especifica : capa;
 }
+
+/* ---- Tinta Emborrachada Brazilian Color ---- */
+
+const EMBORRACHADA: Record<string, ImagemProduto[]> = {
+  "3,6L": [
+    {
+      src: emborrachadaCapa.url,
+      alt: "Tinta Emborrachada Brazilian Color Cinza Espacial 3,6L",
+      legenda: "Cinza Espacial — 3,6L",
+    },
+  ],
+  // PENDENTE: foto real do 18L (produto ainda não chegou na loja) — substituir esta imagem de internet.
+  "18L": [
+    {
+      src: emborrachada18L.url,
+      alt: "Tinta Emborrachada Brazilian Color Cinza Espacial 18L",
+      legenda: "Cinza Espacial — 18L (foto ilustrativa temporária)",
+    },
+  ],
+};
+
+export const capaEmborrachada = emborrachadaCapa.url;
+
+export function galeriaEmborrachada(volume?: string): ImagemProduto[] {
+  const capa = imagensTintas["tinta-emborrachada"] ?? [];
+  if (!volume) return capa;
+  const especifica = EMBORRACHADA[volume];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+
 
 
 

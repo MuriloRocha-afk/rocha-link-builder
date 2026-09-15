@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaAcessoriosPintura, galeriaCupicida, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
+import { galeriaAcessoriosPintura, galeriaCupicida, galeriaEmborrachada, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -102,8 +102,7 @@ export const CONFIG_EMBORRACHADA: ConfiguradorConfig = {
     "Tinta emborrachada Brazilian Color, linha Super Proteção, na cor Cinza Espacial (3,6L e 18L). Filme elástico e impermeável para laje, telhado e fachada.",
   galeriaTitulo: "Tinta Emborrachada Brazilian Color",
   galeriaPlaceholder: "Selecione a cor para ver as fotos",
-  imagens: (s) =>
-    s.cor ? [{ src: "", alt: `Tinta Emborrachada Brazilian Color ${s.cor}` }] : [],
+  imagens: (s) => galeriaEmborrachada(s.volume),
   categoria: "Tintas",
   passos: [
     {
