@@ -188,6 +188,8 @@ import thinner900 from "@/assets/produtos/thinner/03_900ml.jpg.asset.json";
 import sayerrazCapa from "@/assets/produtos/sayerraz/01_capa_sayerraz.jpg.asset.json";
 import sayerraz5L from "@/assets/produtos/sayerraz/02_5litros.jpg.asset.json";
 import sayerraz900 from "@/assets/produtos/sayerraz/03_900ml.jpg.asset.json";
+import pu40Capa from "@/assets/produtos/pu40/capa_pu40.jpg.asset.json";
+import pu40Produto from "@/assets/produtos/pu40/produto_pu40.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
