@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaCupicida, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
+import { galeriaAcessoriosPintura, galeriaCupicida, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
