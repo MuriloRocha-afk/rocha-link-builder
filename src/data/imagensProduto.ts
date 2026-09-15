@@ -670,6 +670,36 @@ export function galeriaLixas(tipo?: string, grao?: string): ImagemProduto[] {
   return especifica && especifica.length ? especifica : capa;
 }
 
+const ITEM_ROLOFLEX = "Roloflex Resistance com Capa";
+const ITEM_BROXA = "Broxa Retangular Sintética (Roloflex)";
+const ITEM_PINCEL = "Pincel com Cerdas Bestfer";
+const ITEM_SUPORTE = "Roloflex Suporte para Rolo";
+const ITEM_ESPATULA = "Espátula de Aço Polido Bestfer";
+
+export const imagensAcessoriosPintura: Record<string, ImagemProduto[]> = {
+  [`${ITEM_ROLOFLEX}|15cm`]: [{ src: acessRolo15.url, alt: "Roloflex Resistance com Capa 15cm", legenda: "Roloflex Resistance — 15cm" }],
+  [`${ITEM_ROLOFLEX}|9cm`]: [{ src: acessRolo9.url, alt: "Roloflex Resistance com Capa 9cm", legenda: "Roloflex Resistance — 9cm" }],
+  [`${ITEM_BROXA}|Média`]: [{ src: acessBroxa.url, alt: "Broxa Retangular Sintética Roloflex", legenda: "Broxa Retangular — Média" }],
+  [`${ITEM_BROXA}|Grande`]: [{ src: acessBroxa.url, alt: "Broxa Retangular Sintética Roloflex", legenda: "Broxa Retangular — Grande" }],
+  [`${ITEM_PINCEL}|Nº 4 — Plástico Laranja 4"`]: [{ src: acessPincel4.url, alt: 'Pincel Bestfer 4 polegadas 230x97mm', legenda: 'Pincel Bestfer 4"' }],
+  [`${ITEM_PINCEL}|Nº 3 — Plástico Laranja 3"`]: [{ src: acessPincel3.url, alt: 'Pincel Bestfer 3 polegadas 230x73mm', legenda: 'Pincel Bestfer 3"' }],
+  [`${ITEM_PINCEL}|2.1/2" / 65mm — Cabo Plástico`]: [{ src: acessPincel25.url, alt: 'Pincel Bestfer 2 1/2 polegadas cabo plástico', legenda: 'Pincel Bestfer 2.1/2"' }],
+  [`${ITEM_PINCEL}|2" / 50mm — Cabo Plástico`]: [{ src: acessPincel2.url, alt: 'Pincel Bestfer 2 polegadas 50mm cabo plástico', legenda: 'Pincel Bestfer 2"' }],
+  [`${ITEM_SUPORTE}|23cm`]: [{ src: acessSuporte.url, alt: "Roloflex Suporte para Rolo 23cm", legenda: "Suporte para Rolo — 23cm" }],
+  [`${ITEM_ESPATULA}|4P / 10cm`]: [{ src: acessEspatula4.url, alt: "Espátula de Aço Polido Bestfer 4 polegadas", legenda: 'Espátula Bestfer 4" (10cm)' }],
+  [`${ITEM_ESPATULA}|5P / 12,5cm`]: [{ src: acessEspatula5.url, alt: "Espátula de Aço Polido Bestfer 5 polegadas", legenda: 'Espátula Bestfer 5" (12,5cm)' }],
+};
+
+export const capaAcessoriosPintura = acessCapa.url;
+
+export function galeriaAcessoriosPintura(item?: string, medida?: string): ImagemProduto[] {
+  const capa = imagensTintas["acessorios-pintura"] ?? [];
+  if (!item || !medida) return capa;
+  const especifica = imagensAcessoriosPintura[`${item}|${medida}`];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+
 
 
 // CALHAS — por subcategoria
