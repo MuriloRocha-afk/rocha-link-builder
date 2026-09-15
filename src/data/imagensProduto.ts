@@ -182,6 +182,9 @@ import cupimCapa from "@/assets/produtos/cupim/01_capa_exterminador_cupim.jpg.as
 import cupim18L from "@/assets/produtos/cupim/02_18litros.jpg.asset.json";
 import cupim5L from "@/assets/produtos/cupim/03_5litros.jpg.asset.json";
 import cupim900 from "@/assets/produtos/cupim/04_900ml.jpg.asset.json";
+import thinnerCapa from "@/assets/produtos/thinner/01_capa_thinner.jpg.asset.json";
+import thinner5L from "@/assets/produtos/thinner/02_5litros.jpg.asset.json";
+import thinner900 from "@/assets/produtos/thinner/03_900ml.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -547,9 +550,9 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
   ],
   aguarras: [
     {
-      src: "",
-      alt: "Sayerlack Thinner Profissional",
-      legenda: "Sayerlack Thinner Profissional",
+      src: thinnerCapa.url,
+      alt: "Latas de Thinner Profissional Sayerlack 5L e 900ml",
+      legenda: "Thinner Profissional Sayerlack — tamanhos disponíveis",
     },
   ],
 };
