@@ -178,6 +178,10 @@ import massaMadeiraEucalipto from "@/assets/produtos/massa-madeira/02_eucalipto.
 import massaMadeiraImbuiaTabaco from "@/assets/produtos/massa-madeira/03_imbuia_tabaco.jpg.asset.json";
 import massaMadeiraMogno from "@/assets/produtos/massa-madeira/04_mogno.jpg.asset.json";
 import massaMadeiraPinus from "@/assets/produtos/massa-madeira/05_pinus.jpg.asset.json";
+import cupimCapa from "@/assets/produtos/cupim/01_capa_exterminador_cupim.jpg.asset.json";
+import cupim18L from "@/assets/produtos/cupim/02_18litros.jpg.asset.json";
+import cupim5L from "@/assets/produtos/cupim/03_5litros.jpg.asset.json";
+import cupim900 from "@/assets/produtos/cupim/04_900ml.jpg.asset.json";
 
 
 
