@@ -182,6 +182,16 @@ import cupimCapa from "@/assets/produtos/cupim/01_capa_exterminador_cupim.jpg.as
 import cupim18L from "@/assets/produtos/cupim/02_18litros.jpg.asset.json";
 import cupim5L from "@/assets/produtos/cupim/03_5litros.jpg.asset.json";
 import cupim900 from "@/assets/produtos/cupim/04_900ml.jpg.asset.json";
+import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
+import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
+import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
+import lixaMassa120 from "@/assets/produtos/lixas/04_lixa_massa_grao120.jpg.asset.json";
+import lixaMassa150 from "@/assets/produtos/lixas/05_lixa_massa_grao150.jpg.asset.json";
+import lixaMassa180 from "@/assets/produtos/lixas/06_lixa_massa_grao180.jpg.asset.json";
+import lixaMassa220 from "@/assets/produtos/lixas/07_lixa_massa_grao220.jpg.asset.json";
+import discoLixa60 from "@/assets/produtos/lixas/08_disco_grao60.jpg.asset.json";
+import discoLixa100 from "@/assets/produtos/lixas/09_disco_grao100.jpg.asset.json";
+import discoLixa36 from "@/assets/produtos/lixas/10_disco_grao36.jpg.asset.json";
 
 
 
@@ -496,6 +506,13 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
       legenda: "Sayerlack Sayermassa — cores disponíveis",
     },
   ],
+  lixas: [
+    {
+      src: lixasCapa.url,
+      alt: "Discos de Lixa Bestfer nos grãos 36, 60 e 100",
+      legenda: "Discos de Lixa Bestfer — grãos disponíveis",
+    },
+  ],
   sayerraz: [
     {
       src: "",
@@ -608,6 +625,30 @@ export function galeriaCupicida(volume?: string): ImagemProduto[] {
   const capa = imagensTintas.cupicida ?? [];
   if (!volume) return capa;
   const especifica = CUPICIDA_SAYERLACK[volume];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+const TIPO_DISCO_LIXA = "Disco de Lixa 180mm x 22,23mm x 0,6mm (Bestfer — 10 peças)";
+const TIPO_LIXA_MASSA = "Lixa Madeira/Massa (folha avulsa)";
+
+export const imagensLixas: Record<string, ImagemProduto[]> = {
+  [`${TIPO_LIXA_MASSA}|60`]: [{ src: lixaMassa60.url, alt: "Lixa Massa/Madeira 225x275mm grão 60", legenda: "Folha — grão 60" }],
+  [`${TIPO_LIXA_MASSA}|100`]: [{ src: lixaMassa100.url, alt: "Lixa Massa/Madeira 225x275mm grão 100", legenda: "Folha — grão 100" }],
+  [`${TIPO_LIXA_MASSA}|120`]: [{ src: lixaMassa120.url, alt: "Lixa Massa/Madeira 225x275mm grão 120", legenda: "Folha — grão 120" }],
+  [`${TIPO_LIXA_MASSA}|150`]: [{ src: lixaMassa150.url, alt: "Lixa Massa/Madeira 225x275mm grão 150", legenda: "Folha — grão 150" }],
+  [`${TIPO_LIXA_MASSA}|180`]: [{ src: lixaMassa180.url, alt: "Lixa Massa/Madeira 225x275mm grão 180", legenda: "Folha — grão 180" }],
+  [`${TIPO_LIXA_MASSA}|220`]: [{ src: lixaMassa220.url, alt: "Lixa Massa/Madeira 225x275mm grão 220", legenda: "Folha — grão 220" }],
+  [`${TIPO_DISCO_LIXA}|36`]: [{ src: discoLixa36.url, alt: "Disco de Lixa Bestfer 180mm grão 36", legenda: "Disco — grão 36" }],
+  [`${TIPO_DISCO_LIXA}|60`]: [{ src: discoLixa60.url, alt: "Disco de Lixa Bestfer 180mm grão 60", legenda: "Disco — grão 60" }],
+  [`${TIPO_DISCO_LIXA}|100`]: [{ src: discoLixa100.url, alt: "Disco de Lixa Bestfer 180mm grão 100", legenda: "Disco — grão 100" }],
+};
+
+export const capaLixas = lixasCapa.url;
+
+export function galeriaLixas(tipo?: string, grao?: string): ImagemProduto[] {
+  const capa = imagensTintas.lixas ?? [];
+  if (!tipo || !grao) return capa;
+  const especifica = imagensLixas[`${tipo}|${grao}`];
   return especifica && especifica.length ? especifica : capa;
 }
 

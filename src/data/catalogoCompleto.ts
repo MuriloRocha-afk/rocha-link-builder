@@ -70,6 +70,7 @@ import {
   imagensForroPinus,
   imagensTintas,
   imagensVernizPolirex,
+  imagensLixas,
   imagensCalhas,
   galeriaPlanPVC,
 } from "@/data/imagensProduto";
@@ -248,7 +249,7 @@ const EXTRAS: Record<string, Extra> = {
   cupicida: { config: CONFIG_CUPICIDA, fotos: imagensTintas.cupicida ?? [] },
   aguarras: { config: CONFIG_AGUARRAS },
   "acessorios-pintura": { config: CONFIG_ACESSORIOS_PINTURA },
-  lixas: { config: CONFIG_LIXAS },
+  lixas: { config: CONFIG_LIXAS, fotos: todasDoMapa(imagensLixas) },
   "pu-calha": { config: CONFIG_PU_CALHA },
   "lona-plastica": { config: CONFIG_LONA },
   "massa-madeira": { config: CONFIG_MASSA_MADEIRA, fotos: imagensTintas["massa-madeira"] ?? [] },
