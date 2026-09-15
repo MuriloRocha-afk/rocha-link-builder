@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
+import { galeriaStainPolisten } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -64,7 +65,7 @@ export const CONFIG_STAIN: ConfiguradorConfig = {
     "Linha Polisten em 3 cores (Imbuia, Mogno Inglês e Transparente), nos tamanhos 900ml e 3,6L. Penetra na fibra, realça o veio e protege contra UV e umidade.",
   galeriaTitulo: "Sayerlack Polisten",
   galeriaPlaceholder: "Selecione a cor para ver as fotos",
-  imagens: (s) => (s.cor ? [{ src: "", alt: `Sayerlack Polisten ${s.cor}` }] : []),
+  imagens: (s) => galeriaStainPolisten(s.cor, s.volume),
   categoria: "Tintas",
   passos: [
     {

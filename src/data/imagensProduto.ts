@@ -161,6 +161,12 @@ import polCristalTelhado2 from "@/assets/produtos/policarbonato/cristal_telhado_
 import polCristalTelhado3 from "@/assets/produtos/policarbonato/cristal_telhado_03.webp.asset.json";
 import polGreccaProduto from "@/assets/produtos/policarbonato/grecca_produto.webp.asset.json";
 import polGreccaTelhado from "@/assets/produtos/policarbonato/grecca_telhado.webp.asset.json";
+import stainCapa from "@/assets/produtos/stain-polisten/01_capa_stain_polisten.jpg.asset.json";
+import stainImbuia900 from "@/assets/produtos/stain-polisten/02_imbuia_900ml.jpg.asset.json";
+import stainImbuia3600 from "@/assets/produtos/stain-polisten/03_imbuia_3600ml.jpg.asset.json";
+import stainMogno900 from "@/assets/produtos/stain-polisten/04_mogno_900ml.jpg.asset.json";
+import stainTransparente900 from "@/assets/produtos/stain-polisten/05_transparente_900ml.jpg.asset.json";
+import stainTransparente3600 from "@/assets/produtos/stain-polisten/06_transparente_3600ml.jpg.asset.json";
 
 
 
@@ -456,7 +462,7 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Verniz Sayerlack Polirex", legenda: "Verniz Sayerlack Polirex — Restaurador de madeira" },
   ],
   stain: [
-    { src: "", alt: "Sayerlack Polisten nas cores disponíveis", legenda: "Sayerlack Polisten — Stain para madeira" },
+    { src: stainCapa.url, alt: "Sayerlack Polisten nas cores Imbuia, Mogno Inglês e Transparente", legenda: "Sayerlack Polisten — cores disponíveis" },
   ],
   "tinta-emborrachada": [
     { src: "", alt: "Tinta emborrachada para telhado e fachada", legenda: "Tinta Emborrachada" },
@@ -486,6 +492,32 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     },
   ],
 };
+
+const STAIN_POLISTEN: Record<string, ImagemProduto[]> = {
+  "Imbuia|900ml": [
+    { src: stainImbuia900.url, alt: "Sayerlack Polisten Imbuia 900ml", legenda: "Imbuia — 900ml" },
+  ],
+  "Imbuia|3,6L": [
+    { src: stainImbuia3600.url, alt: "Sayerlack Polisten Imbuia 3,6L", legenda: "Imbuia — 3,6L" },
+  ],
+  "Mogno Inglês|900ml": [
+    { src: stainMogno900.url, alt: "Sayerlack Polisten Mogno Inglês 900ml", legenda: "Mogno Inglês — 900ml" },
+  ],
+  "Transparente|900ml": [
+    { src: stainTransparente900.url, alt: "Sayerlack Polisten Transparente 900ml", legenda: "Transparente — 900ml" },
+  ],
+  "Transparente|3,6L": [
+    { src: stainTransparente3600.url, alt: "Sayerlack Polisten Transparente 3,6L", legenda: "Transparente — 3,6L" },
+  ],
+};
+
+export const capaStainPolisten = stainCapa.url;
+
+export function galeriaStainPolisten(cor?: string, volume?: string): ImagemProduto[] {
+  if (!cor) return imagensTintas.stain ?? [];
+  if (!volume) return [];
+  return STAIN_POLISTEN[`${cor}|${volume}`] ?? [];
+}
 
 // CALHAS — por subcategoria
 export const imagensCalhas: Record<string, ImagemProduto[]> = {

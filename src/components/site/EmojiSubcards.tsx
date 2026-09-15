@@ -7,6 +7,7 @@ export type EmojiSubcard = {
   slug: string;
   name: string;
   emoji: string;
+  image?: string;
   description: string;
   badge?: string;
   tags?: string[];
@@ -32,6 +33,7 @@ export function EmojiSubcardGrid({
           produtoSlug={card.slug}
           name={card.name}
           description={card.description}
+          image={card.image}
           emoji={card.emoji}
           badge={card.badge}
           tags={card.tags}
