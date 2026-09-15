@@ -1,5 +1,14 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaAcessoriosPintura, galeriaCupicida, galeriaEmborrachada, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
+import {
+  galeriaAcessoriosPintura,
+  galeriaCupicida,
+  galeriaEmborrachada,
+  galeriaLixas,
+  galeriaMassaMadeira,
+  galeriaStainPolisten,
+  galeriaThinner,
+  galeriaVernizPolirex,
+} from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -169,8 +178,7 @@ export const CONFIG_AGUARRAS: ConfiguradorConfig = {
     "Sayerlack Thinner Profissional nos tamanhos 900ml e 5L. Para diluição de tintas e vernizes e limpeza de pincéis, rolos e equipamentos.",
   galeriaTitulo: "Sayerlack Thinner Profissional",
   galeriaPlaceholder: "Selecione o tamanho para ver as fotos",
-  imagens: (s) =>
-    s.volume ? [{ src: "", alt: `Sayerlack Thinner Profissional ${s.volume}` }] : [],
+  imagens: (s) => galeriaThinner(s.volume),
   categoria: "Tintas",
   passos: [
     {

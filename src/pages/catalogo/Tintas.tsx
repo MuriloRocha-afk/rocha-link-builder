@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaStainPolisten, capaThinner, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -36,6 +36,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "aguarras",
     name: "Thinner Profissional",
     emoji: "🧴",
+    image: capaThinner,
     tags: ["Sayerlack", "900ml e 5L", "Diluição"],
     description:
       "Sayerlack Thinner Profissional em 900ml e 5L. Dilui tintas e vernizes e limpa pincéis, rolos e equipamentos.",
