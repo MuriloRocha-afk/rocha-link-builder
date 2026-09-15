@@ -704,6 +704,21 @@ export function galeriaSayerraz(volume?: string): ImagemProduto[] {
   return especifica && especifica.length ? especifica : capa;
 }
 
+export const capaPu40 = pu40Capa.url;
+
+export function galeriaPu40(produto?: string): ImagemProduto[] {
+  const capa = imagensTintas["pu-calha"] ?? [];
+  if (!produto) return capa;
+  return [
+    {
+      src: pu40Produto.url,
+      alt: "Bisnaga individual de PU40 Cinza 400g (close)",
+      legenda: "PU40 Cinza — Bisnaga 400g",
+    },
+    ...capa,
+  ];
+}
+
 const TIPO_DISCO_LIXA = "Disco de Lixa 180mm x 22,23mm x 0,6mm (Bestfer — 10 peças)";
 const TIPO_LIXA_MASSA = "Lixa Madeira/Massa (folha avulsa)";
 
