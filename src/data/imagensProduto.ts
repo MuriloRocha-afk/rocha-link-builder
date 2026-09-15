@@ -188,6 +188,8 @@ import thinner900 from "@/assets/produtos/thinner/03_900ml.jpg.asset.json";
 import sayerrazCapa from "@/assets/produtos/sayerraz/01_capa_sayerraz.jpg.asset.json";
 import sayerraz5L from "@/assets/produtos/sayerraz/02_5litros.jpg.asset.json";
 import sayerraz900 from "@/assets/produtos/sayerraz/03_900ml.jpg.asset.json";
+import pu40Capa from "@/assets/produtos/pu40/capa_pu40.jpg.asset.json";
+import pu40Produto from "@/assets/produtos/pu40/produto_pu40.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -551,6 +553,13 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
       legenda: "Sayerlack Sayerraz (Aguarrás) — tamanhos disponíveis",
     },
   ],
+  "pu-calha": [
+    {
+      src: pu40Capa.url,
+      alt: "Caixa de PU40 Cinza com 12 bisnagas e 2 bisnagas avulsas",
+      legenda: "PU40 Cinza — Bisnaga 400g",
+    },
+  ],
   aguarras: [
     {
       src: thinnerCapa.url,
@@ -693,6 +702,21 @@ export function galeriaSayerraz(volume?: string): ImagemProduto[] {
   if (!volume) return capa;
   const especifica = SAYERRAZ_AGUARRAS[volume];
   return especifica && especifica.length ? especifica : capa;
+}
+
+export const capaPu40 = pu40Capa.url;
+
+export function galeriaPu40(produto?: string): ImagemProduto[] {
+  const capa = imagensTintas["pu-calha"] ?? [];
+  if (!produto) return capa;
+  return [
+    {
+      src: pu40Produto.url,
+      alt: "Bisnaga individual de PU40 Cinza 400g (close)",
+      legenda: "PU40 Cinza — Bisnaga 400g",
+    },
+    ...capa,
+  ];
 }
 
 const TIPO_DISCO_LIXA = "Disco de Lixa 180mm x 22,23mm x 0,6mm (Bestfer — 10 peças)";

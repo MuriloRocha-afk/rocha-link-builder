@@ -5,6 +5,7 @@ import {
   galeriaEmborrachada,
   galeriaLixas,
   galeriaMassaMadeira,
+  galeriaPu40,
   galeriaSayerraz,
   galeriaStainPolisten,
   galeriaThinner,
@@ -334,8 +335,8 @@ export const CONFIG_PU_CALHA: ConfiguradorConfig = {
   subtitulo:
     "Selante poliuretano PU40 Cinza em bisnaga de 400g. Alta aderência para emendas de calhas, rufos e água furtada.",
   galeriaTitulo: "PU40 Cinza — Bisnaga 400g",
-  galeriaPlaceholder: "Foto em breve",
-  imagens: () => [{ src: "", alt: "PU40 Cinza bisnaga 400g para vedação de calha" }],
+  galeriaPlaceholder: "Foto em breve", // exigido pelo tipo; nunca exibido (sempre há foto real)
+  imagens: (s) => galeriaPu40(s.produto),
   categoria: "Tintas",
   passos: [
     {
