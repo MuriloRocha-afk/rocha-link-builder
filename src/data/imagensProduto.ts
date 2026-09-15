@@ -504,7 +504,11 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     { src: stainCapa.url, alt: "Sayerlack Polisten nas cores Imbuia, Mogno Inglês e Transparente", legenda: "Sayerlack Polisten — cores disponíveis" },
   ],
   "tinta-emborrachada": [
-    { src: "", alt: "Tinta emborrachada para telhado e fachada", legenda: "Tinta Emborrachada" },
+    {
+      src: emborrachadaCapa.url,
+      alt: "Tinta Emborrachada Brazilian Color Super Proteção Cinza Espacial 3,6L",
+      legenda: "Tinta Emborrachada Brazilian Color — Cinza Espacial",
+    },
   ],
   cupicida: [
     {
