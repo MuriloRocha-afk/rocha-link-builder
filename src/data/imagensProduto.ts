@@ -192,6 +192,17 @@ import lixaMassa220 from "@/assets/produtos/lixas/07_lixa_massa_grao220.jpg.asse
 import discoLixa60 from "@/assets/produtos/lixas/08_disco_grao60.jpg.asset.json";
 import discoLixa100 from "@/assets/produtos/lixas/09_disco_grao100.jpg.asset.json";
 import discoLixa36 from "@/assets/produtos/lixas/10_disco_grao36.jpg.asset.json";
+import acessCapa from "@/assets/produtos/acessorios/01_capa_acessorios.jpg.asset.json";
+import acessRolo15 from "@/assets/produtos/acessorios/02_roloflex_15cm.jpg.asset.json";
+import acessRolo9 from "@/assets/produtos/acessorios/03_roloflex_9cm.jpg.asset.json";
+import acessPincel4 from "@/assets/produtos/acessorios/04_pincel_4pol.jpg.asset.json";
+import acessPincel3 from "@/assets/produtos/acessorios/05_pincel_3pol.jpg.asset.json";
+import acessPincel25 from "@/assets/produtos/acessorios/06_pincel_2_5pol.jpg.asset.json";
+import acessPincel2 from "@/assets/produtos/acessorios/07_pincel_2pol.jpg.asset.json";
+import acessEspatula4 from "@/assets/produtos/acessorios/08_espatula_4pol.jpg.asset.json";
+import acessEspatula5 from "@/assets/produtos/acessorios/09_espatula_5pol.jpg.asset.json";
+import acessBroxa from "@/assets/produtos/acessorios/10_broxa_retangular.jpg.asset.json";
+import acessSuporte from "@/assets/produtos/acessorios/11_suporte_rolo.jpg.asset.json";
 
 
 
@@ -511,6 +522,13 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
       src: lixasCapa.url,
       alt: "Discos de Lixa Bestfer nos grãos 36, 60 e 100",
       legenda: "Discos de Lixa Bestfer — grãos disponíveis",
+    },
+  ],
+  "acessorios-pintura": [
+    {
+      src: acessCapa.url,
+      alt: "Rolos Roloflex, broxa, pincéis Bestfer e espátula",
+      legenda: "Acessórios para Fixação — itens disponíveis",
     },
   ],
   sayerraz: [
