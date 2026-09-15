@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
+import { galeriaCupicida, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -139,7 +139,7 @@ export const CONFIG_CUPICIDA: ConfiguradorConfig = {
     "Exterminador de cupim Sayerlack. Preventivo e curativo para estruturas de madeira, incolor e de alta eficácia.",
   galeriaTitulo: "Exterminador de Cupim Sayerlack",
   galeriaPlaceholder: "Selecione o tamanho para ver as fotos",
-  imagens: (s) => (s.volume ? [{ src: "", alt: `Exterminador de Cupim Sayerlack ${s.volume}` }] : []),
+  imagens: (s) => galeriaCupicida(s.volume),
   categoria: "Tintas",
   passos: [
     {

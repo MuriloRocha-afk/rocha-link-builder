@@ -178,6 +178,10 @@ import massaMadeiraEucalipto from "@/assets/produtos/massa-madeira/02_eucalipto.
 import massaMadeiraImbuiaTabaco from "@/assets/produtos/massa-madeira/03_imbuia_tabaco.jpg.asset.json";
 import massaMadeiraMogno from "@/assets/produtos/massa-madeira/04_mogno.jpg.asset.json";
 import massaMadeiraPinus from "@/assets/produtos/massa-madeira/05_pinus.jpg.asset.json";
+import cupimCapa from "@/assets/produtos/cupim/01_capa_exterminador_cupim.jpg.asset.json";
+import cupim18L from "@/assets/produtos/cupim/02_18litros.jpg.asset.json";
+import cupim5L from "@/assets/produtos/cupim/03_5litros.jpg.asset.json";
+import cupim900 from "@/assets/produtos/cupim/04_900ml.jpg.asset.json";
 
 
 
@@ -479,7 +483,11 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Tinta emborrachada para telhado e fachada", legenda: "Tinta Emborrachada" },
   ],
   cupicida: [
-    { src: "", alt: "Exterminador de Cupim Sayerlack", legenda: "Exterminador de Cupim Sayerlack" },
+    {
+      src: cupimCapa.url,
+      alt: "Exterminador de Cupim Sayerlack nos tamanhos 18L, 5L e 900ml",
+      legenda: "Exterminador de Cupim Sayerlack — tamanhos disponíveis",
+    },
   ],
   "massa-madeira": [
     {
@@ -581,6 +589,29 @@ export function galeriaMassaMadeira(cor?: string): ImagemProduto[] {
   const especifica = MASSA_MADEIRA[cor];
   return especifica && especifica.length ? especifica : capa;
 }
+
+const CUPICIDA_SAYERLACK: Record<string, ImagemProduto[]> = {
+  "900ml": [
+    { src: cupim900.url, alt: "Exterminador de Cupim Sayerlack 900ml", legenda: "900ml" },
+  ],
+  "5L": [
+    { src: cupim5L.url, alt: "Exterminador de Cupim Sayerlack 5 litros", legenda: "5L" },
+  ],
+  "18L": [
+    { src: cupim18L.url, alt: "Exterminador de Cupim Sayerlack 18 litros", legenda: "18L" },
+  ],
+};
+
+export const capaCupicida = cupimCapa.url;
+
+export function galeriaCupicida(volume?: string): ImagemProduto[] {
+  const capa = imagensTintas.cupicida ?? [];
+  if (!volume) return capa;
+  const especifica = CUPICIDA_SAYERLACK[volume];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+
 
 // CALHAS — por subcategoria
 export const imagensCalhas: Record<string, ImagemProduto[]> = {

@@ -1,11 +1,12 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaCupicida, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
     slug: "cupicida",
     name: "Exterminador de Cupim",
     emoji: "🌿",
+    image: capaCupicida,
     tags: ["Sayerlack", "3 tamanhos", "Cupim"],
     description:
       "Exterminador de cupim Sayerlack em 900ml, 5L e 18L. Proteção preventiva e curativa para estruturas de madeira.",

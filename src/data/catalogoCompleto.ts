@@ -245,7 +245,7 @@ const EXTRAS: Record<string, Extra> = {
   verniz: { config: CONFIG_VERNIZ, fotos: todasDoMapa(imagensVernizPolirex) },
   stain: { config: CONFIG_STAIN, fotos: imagensTintas.stain ?? [] },
   "tinta-emborrachada": { config: CONFIG_EMBORRACHADA },
-  cupicida: { config: CONFIG_CUPICIDA },
+  cupicida: { config: CONFIG_CUPICIDA, fotos: imagensTintas.cupicida ?? [] },
   aguarras: { config: CONFIG_AGUARRAS },
   "acessorios-pintura": { config: CONFIG_ACESSORIOS_PINTURA },
   lixas: { config: CONFIG_LIXAS },
