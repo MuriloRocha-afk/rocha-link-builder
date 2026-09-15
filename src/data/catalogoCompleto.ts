@@ -247,7 +247,7 @@ const EXTRAS: Record<string, Extra> = {
   stain: { config: CONFIG_STAIN, fotos: imagensTintas.stain ?? [] },
   "tinta-emborrachada": { config: CONFIG_EMBORRACHADA },
   cupicida: { config: CONFIG_CUPICIDA, fotos: imagensTintas.cupicida ?? [] },
-  aguarras: { config: CONFIG_AGUARRAS },
+  aguarras: { config: CONFIG_AGUARRAS, fotos: imagensTintas.aguarras ?? [] },
   "acessorios-pintura": { config: CONFIG_ACESSORIOS_PINTURA },
   lixas: { config: CONFIG_LIXAS, fotos: todasDoMapa(imagensLixas) },
   "pu-calha": { config: CONFIG_PU_CALHA },
