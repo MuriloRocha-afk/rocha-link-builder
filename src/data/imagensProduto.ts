@@ -167,6 +167,12 @@ import stainImbuia3600 from "@/assets/produtos/stain-polisten/03_imbuia_3600ml.j
 import stainMogno900 from "@/assets/produtos/stain-polisten/04_mogno_900ml.jpg.asset.json";
 import stainTransparente900 from "@/assets/produtos/stain-polisten/05_transparente_900ml.jpg.asset.json";
 import stainTransparente3600 from "@/assets/produtos/stain-polisten/06_transparente_3600ml.jpg.asset.json";
+import vernizCapa from "@/assets/produtos/verniz-polirex/01_capa_verniz_polirex.jpg.asset.json";
+import vernizImbuia230 from "@/assets/produtos/verniz-polirex/02_imbuia_225ml.jpg.asset.json";
+import vernizImbuia900 from "@/assets/produtos/verniz-polirex/03_imbuia_900ml.jpg.asset.json";
+import vernizImbuia3600 from "@/assets/produtos/verniz-polirex/04_imbuia_3600ml.jpg.asset.json";
+import vernizMogno900 from "@/assets/produtos/verniz-polirex/05_mogno_900ml.jpg.asset.json";
+import vernizMogno3600 from "@/assets/produtos/verniz-polirex/06_mogno_3600ml.jpg.asset.json";
 
 
 
@@ -459,7 +465,7 @@ export const imagensForroPinus: ImagemProduto[] = [
 // TINTAS — por subcategoria
 export const imagensTintas: Record<string, ImagemProduto[]> = {
   verniz: [
-    { src: "", alt: "Verniz Sayerlack Polirex", legenda: "Verniz Sayerlack Polirex — Restaurador de madeira" },
+    { src: vernizCapa.url, alt: "Cinco latas de Verniz Sayerlack Polirex", legenda: "Sayerlack Polirex — tamanhos e cores disponíveis" },
   ],
   stain: [
     { src: stainCapa.url, alt: "Sayerlack Polisten nas cores Imbuia, Mogno Inglês e Transparente", legenda: "Sayerlack Polisten — cores disponíveis" },
@@ -492,6 +498,32 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     },
   ],
 };
+
+export const imagensVernizPolirex: Record<string, ImagemProduto[]> = {
+  "Imbuia|230ml": [
+    { src: vernizImbuia230.url, alt: "Verniz Sayerlack Polirex Imbuia 230ml", legenda: "Imbuia — 230ml" },
+  ],
+  "Imbuia|900ml": [
+    { src: vernizImbuia900.url, alt: "Verniz Sayerlack Polirex Imbuia 900ml", legenda: "Imbuia — 900ml" },
+  ],
+  "Imbuia|3,6L": [
+    { src: vernizImbuia3600.url, alt: "Verniz Sayerlack Polirex Imbuia 3,6L", legenda: "Imbuia — 3,6L" },
+  ],
+  "Mogno|900ml": [
+    { src: vernizMogno900.url, alt: "Verniz Sayerlack Polirex Mogno 900ml", legenda: "Mogno — 900ml" },
+  ],
+  "Mogno|3,6L": [
+    { src: vernizMogno3600.url, alt: "Verniz Sayerlack Polirex Mogno 3,6L", legenda: "Mogno — 3,6L" },
+  ],
+};
+
+export const capaVernizPolirex = vernizCapa.url;
+
+export function galeriaVernizPolirex(cor?: string, volume?: string): ImagemProduto[] {
+  if (!cor) return imagensTintas.verniz ?? [];
+  if (!volume) return [];
+  return imagensVernizPolirex[`${cor}|${volume}`] ?? [];
+}
 
 const STAIN_POLISTEN: Record<string, ImagemProduto[]> = {
   "Imbuia|900ml": [

@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaStainPolisten } from "@/data/imagensProduto";
+import { galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -22,7 +22,7 @@ export const CONFIG_VERNIZ: ConfiguradorConfig = {
     "Verniz restaurador Sayerlack Polirex. Recupera e protege madeiras já envernizadas, sem remover o acabamento antigo.",
   galeriaTitulo: "Verniz Sayerlack Polirex",
   galeriaPlaceholder: "Selecione a cor para ver as fotos",
-  imagens: (s) => (s.cor ? [{ src: "", alt: `Sayerlack Polirex ${s.cor}` }] : []),
+  imagens: (s) => galeriaVernizPolirex(s.cor, s.volume),
   categoria: "Tintas",
   passos: [
     {
