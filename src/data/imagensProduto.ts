@@ -185,6 +185,9 @@ import cupim900 from "@/assets/produtos/cupim/04_900ml.jpg.asset.json";
 import thinnerCapa from "@/assets/produtos/thinner/01_capa_thinner.jpg.asset.json";
 import thinner5L from "@/assets/produtos/thinner/02_5litros.jpg.asset.json";
 import thinner900 from "@/assets/produtos/thinner/03_900ml.jpg.asset.json";
+import sayerrazCapa from "@/assets/produtos/sayerraz/01_capa_sayerraz.jpg.asset.json";
+import sayerraz5L from "@/assets/produtos/sayerraz/02_5litros.jpg.asset.json";
+import sayerraz900 from "@/assets/produtos/sayerraz/03_900ml.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -543,9 +546,9 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
   ],
   sayerraz: [
     {
-      src: "",
-      alt: "Sayerlack Sayerraz Aguarrás",
-      legenda: "Sayerlack Sayerraz (Aguarrás)",
+      src: sayerrazCapa.url,
+      alt: "Latas de Aguarrás Sayerlack Sayerraz 5L e 900ml",
+      legenda: "Sayerlack Sayerraz (Aguarrás) — tamanhos disponíveis",
     },
   ],
   aguarras: [
