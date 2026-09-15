@@ -173,6 +173,11 @@ import vernizImbuia900 from "@/assets/produtos/verniz-polirex/03_imbuia_900ml.jp
 import vernizImbuia3600 from "@/assets/produtos/verniz-polirex/04_imbuia_3600ml.jpg.asset.json";
 import vernizMogno900 from "@/assets/produtos/verniz-polirex/05_mogno_900ml.jpg.asset.json";
 import vernizMogno3600 from "@/assets/produtos/verniz-polirex/06_mogno_3600ml.jpg.asset.json";
+import massaMadeiraCapa from "@/assets/produtos/massa-madeira/01_capa_massa_madeira.jpg.asset.json";
+import massaMadeiraEucalipto from "@/assets/produtos/massa-madeira/02_eucalipto.jpg.asset.json";
+import massaMadeiraImbuiaTabaco from "@/assets/produtos/massa-madeira/03_imbuia_tabaco.jpg.asset.json";
+import massaMadeiraMogno from "@/assets/produtos/massa-madeira/04_mogno.jpg.asset.json";
+import massaMadeiraPinus from "@/assets/produtos/massa-madeira/05_pinus.jpg.asset.json";
 
 
 
@@ -478,9 +483,9 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
   ],
   "massa-madeira": [
     {
-      src: "",
-      alt: "Sayerlack Sayermassa Massa para Madeira",
-      legenda: "Sayerlack Sayermassa (Massa para Madeira)",
+      src: massaMadeiraCapa.url,
+      alt: "Sayerlack Sayermassa nas cores Eucalipto, Imbuia Tabaco, Mogno e Pinus",
+      legenda: "Sayerlack Sayermassa — cores disponíveis",
     },
   ],
   sayerraz: [
@@ -550,6 +555,30 @@ export function galeriaStainPolisten(cor?: string, volume?: string): ImagemProdu
   const capa = imagensTintas.stain ?? [];
   if (!cor || !volume) return capa;
   const especifica = STAIN_POLISTEN[`${cor}|${volume}`];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+const MASSA_MADEIRA: Record<string, ImagemProduto[]> = {
+  Eucalipto: [
+    { src: massaMadeiraEucalipto.url, alt: "Sayerlack Sayermassa Eucalipto", legenda: "Eucalipto" },
+  ],
+  "Imbuia Tabaco": [
+    { src: massaMadeiraImbuiaTabaco.url, alt: "Sayerlack Sayermassa Imbuia Tabaco", legenda: "Imbuia Tabaco" },
+  ],
+  Mogno: [
+    { src: massaMadeiraMogno.url, alt: "Sayerlack Sayermassa Mogno", legenda: "Mogno" },
+  ],
+  Pinus: [
+    { src: massaMadeiraPinus.url, alt: "Sayerlack Sayermassa Pinus", legenda: "Pinus" },
+  ],
+};
+
+export const capaMassaMadeira = massaMadeiraCapa.url;
+
+export function galeriaMassaMadeira(cor?: string): ImagemProduto[] {
+  const capa = imagensTintas["massa-madeira"] ?? [];
+  if (!cor) return capa;
+  const especifica = MASSA_MADEIRA[cor];
   return especifica && especifica.length ? especifica : capa;
 }
 

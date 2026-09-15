@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -44,6 +44,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "massa-madeira",
     name: "Massa para Madeira",
     emoji: "🪵",
+    image: capaMassaMadeira,
     tags: ["Sayerlack", "Sayermassa", "4 cores"],
     description:
       "Massa Sayerlack Sayermassa nas cores Eucalipto, Imbuia Tabaco, Mogno e Pinus. Preenche rachaduras, furos e imperfeições antes do acabamento.",

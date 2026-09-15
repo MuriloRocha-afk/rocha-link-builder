@@ -53,6 +53,7 @@ import {
   CONFIG_LIXAS,
   CONFIG_PU_CALHA,
   CONFIG_LONA,
+  CONFIG_MASSA_MADEIRA,
 } from "@/data/configs/tintas";
 import {
   imagensCeramica,
@@ -250,6 +251,7 @@ const EXTRAS: Record<string, Extra> = {
   lixas: { config: CONFIG_LIXAS },
   "pu-calha": { config: CONFIG_PU_CALHA },
   "lona-plastica": { config: CONFIG_LONA },
+  "massa-madeira": { config: CONFIG_MASSA_MADEIRA, fotos: imagensTintas["massa-madeira"] ?? [] },
 };
 
 type Entrada = {
