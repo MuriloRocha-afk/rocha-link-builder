@@ -68,6 +68,7 @@ import {
   imagensForroCedrinho,
   imagensForroPinus,
   imagensTintas,
+  imagensVernizPolirex,
   imagensCalhas,
   galeriaPlanPVC,
 } from "@/data/imagensProduto";
@@ -240,7 +241,7 @@ const EXTRAS: Record<string, Extra> = {
   ferramentas: { config: CONFIG_FERRAMENTAS },
 
   // Tintas
-  verniz: { config: CONFIG_VERNIZ, fotos: todasDoMapa(imagensTintas) },
+  verniz: { config: CONFIG_VERNIZ, fotos: todasDoMapa(imagensVernizPolirex) },
   stain: { config: CONFIG_STAIN, fotos: imagensTintas.stain ?? [] },
   "tinta-emborrachada": { config: CONFIG_EMBORRACHADA },
   cupicida: { config: CONFIG_CUPICIDA },

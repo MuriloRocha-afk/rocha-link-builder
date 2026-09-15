@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaStainPolisten } from "@/data/imagensProduto";
+import { capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -15,6 +15,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "verniz",
     name: "Verniz para Madeira",
     emoji: "✨",
+    image: capaVernizPolirex,
     tags: ["Sayerlack", "Polirex", "Restaurador"],
     description:
       "Verniz restaurador Sayerlack Polirex nas cores Imbuia e Mogno. Recupera e protege madeira já envernizada.",
