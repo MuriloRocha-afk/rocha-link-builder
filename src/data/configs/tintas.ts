@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaCupicida, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
+import { galeriaCupicida, galeriaLixas, galeriaMassaMadeira, galeriaStainPolisten, galeriaVernizPolirex } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -292,8 +292,8 @@ export const CONFIG_LIXAS: ConfiguradorConfig = {
   subtitulo:
     "Disco de lixa 180mm Bestfer (embalagem com 10 peças) e lixa de madeira/massa em folha avulsa, nos grãos reais de estoque.",
   galeriaTitulo: "Lixas",
-  galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: s.tipo }] : []),
+  galeriaPlaceholder: "Selecione o tipo e o grão para ver a foto",
+  imagens: (s) => galeriaLixas(s.tipo, s.grao),
   categoria: "Tintas",
   passos: [
     {

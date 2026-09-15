@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaCupicida, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaCupicida, capaLixas, capaMassaMadeira, capaStainPolisten, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -82,6 +82,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "lixas",
     name: "Lixas para Madeira",
     emoji: "🧽",
+    image: capaLixas,
     tags: ["Disco 180mm", "Folha avulsa", "Grãos 36 a 220"],
     description:
       "Disco de lixa 180mm Bestfer (10 peças) nos grãos 36, 60 e 100 e lixa madeira/massa em folha avulsa dos grãos 60 ao 220.",
