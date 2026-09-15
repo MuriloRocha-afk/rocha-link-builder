@@ -553,6 +553,13 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
       legenda: "Sayerlack Sayerraz (Aguarrás) — tamanhos disponíveis",
     },
   ],
+  "pu-calha": [
+    {
+      src: pu40Capa.url,
+      alt: "Caixa de PU40 Cinza com 12 bisnagas e 2 bisnagas avulsas",
+      legenda: "PU40 Cinza — Bisnaga 400g",
+    },
+  ],
   aguarras: [
     {
       src: thinnerCapa.url,
