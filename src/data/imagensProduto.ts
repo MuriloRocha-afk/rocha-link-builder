@@ -677,6 +677,24 @@ export function galeriaThinner(volume?: string): ImagemProduto[] {
   return especifica && especifica.length ? especifica : capa;
 }
 
+const SAYERRAZ_AGUARRAS: Record<string, ImagemProduto[]> = {
+  "900ml": [
+    { src: sayerraz900.url, alt: "Aguarrás Sayerlack Sayerraz 900ml", legenda: "900ml" },
+  ],
+  "5L": [
+    { src: sayerraz5L.url, alt: "Aguarrás Sayerlack Sayerraz 5 litros", legenda: "5L" },
+  ],
+};
+
+export const capaSayerraz = sayerrazCapa.url;
+
+export function galeriaSayerraz(volume?: string): ImagemProduto[] {
+  const capa = imagensTintas.sayerraz ?? [];
+  if (!volume) return capa;
+  const especifica = SAYERRAZ_AGUARRAS[volume];
+  return especifica && especifica.length ? especifica : capa;
+}
+
 const TIPO_DISCO_LIXA = "Disco de Lixa 180mm x 22,23mm x 0,6mm (Bestfer — 10 peças)";
 const TIPO_LIXA_MASSA = "Lixa Madeira/Massa (folha avulsa)";
 
