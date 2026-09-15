@@ -656,6 +656,24 @@ export function galeriaCupicida(volume?: string): ImagemProduto[] {
   return especifica && especifica.length ? especifica : capa;
 }
 
+const THINNER_SAYERLACK: Record<string, ImagemProduto[]> = {
+  "900ml": [
+    { src: thinner900.url, alt: "Thinner Profissional Sayerlack 900ml", legenda: "900ml" },
+  ],
+  "5L": [
+    { src: thinner5L.url, alt: "Thinner Profissional Sayerlack 5 litros", legenda: "5L" },
+  ],
+};
+
+export const capaThinner = thinnerCapa.url;
+
+export function galeriaThinner(volume?: string): ImagemProduto[] {
+  const capa = imagensTintas.aguarras ?? [];
+  if (!volume) return capa;
+  const especifica = THINNER_SAYERLACK[volume];
+  return especifica && especifica.length ? especifica : capa;
+}
+
 const TIPO_DISCO_LIXA = "Disco de Lixa 180mm x 22,23mm x 0,6mm (Bestfer — 10 peças)";
 const TIPO_LIXA_MASSA = "Lixa Madeira/Massa (folha avulsa)";
 
