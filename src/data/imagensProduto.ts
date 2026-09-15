@@ -520,9 +520,10 @@ export const imagensVernizPolirex: Record<string, ImagemProduto[]> = {
 export const capaVernizPolirex = vernizCapa.url;
 
 export function galeriaVernizPolirex(cor?: string, volume?: string): ImagemProduto[] {
-  if (!cor) return imagensTintas.verniz ?? [];
-  if (!volume) return [];
-  return imagensVernizPolirex[`${cor}|${volume}`] ?? [];
+  const capa = imagensTintas.verniz ?? [];
+  if (!cor || !volume) return capa;
+  const especifica = imagensVernizPolirex[`${cor}|${volume}`];
+  return especifica && especifica.length ? especifica : capa;
 }
 
 const STAIN_POLISTEN: Record<string, ImagemProduto[]> = {
@@ -546,9 +547,10 @@ const STAIN_POLISTEN: Record<string, ImagemProduto[]> = {
 export const capaStainPolisten = stainCapa.url;
 
 export function galeriaStainPolisten(cor?: string, volume?: string): ImagemProduto[] {
-  if (!cor) return imagensTintas.stain ?? [];
-  if (!volume) return [];
-  return STAIN_POLISTEN[`${cor}|${volume}`] ?? [];
+  const capa = imagensTintas.stain ?? [];
+  if (!cor || !volume) return capa;
+  const especifica = STAIN_POLISTEN[`${cor}|${volume}`];
+  return especifica && especifica.length ? especifica : capa;
 }
 
 // CALHAS — por subcategoria
