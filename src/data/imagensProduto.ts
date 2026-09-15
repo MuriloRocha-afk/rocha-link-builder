@@ -483,7 +483,11 @@ export const imagensTintas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Tinta emborrachada para telhado e fachada", legenda: "Tinta Emborrachada" },
   ],
   cupicida: [
-    { src: "", alt: "Exterminador de Cupim Sayerlack", legenda: "Exterminador de Cupim Sayerlack" },
+    {
+      src: cupimCapa.url,
+      alt: "Exterminador de Cupim Sayerlack nos tamanhos 18L, 5L e 900ml",
+      legenda: "Exterminador de Cupim Sayerlack — tamanhos disponíveis",
+    },
   ],
   "massa-madeira": [
     {
