@@ -706,6 +706,37 @@ export function galeriaAcessoriosPintura(item?: string, medida?: string): Imagem
   return especifica && especifica.length ? especifica : capa;
 }
 
+/* ---- Tinta Emborrachada Brazilian Color ---- */
+
+const EMBORRACHADA: Record<string, ImagemProduto[]> = {
+  "3,6L": [
+    {
+      src: emborrachadaCapa.url,
+      alt: "Tinta Emborrachada Brazilian Color Cinza Espacial 3,6L",
+      legenda: "Cinza Espacial — 3,6L",
+    },
+  ],
+  // PENDENTE: foto real do 18L (produto ainda não chegou na loja) — substituir esta imagem de internet.
+  "18L": [
+    {
+      src: emborrachada18L.url,
+      alt: "Tinta Emborrachada Brazilian Color Cinza Espacial 18L",
+      legenda: "Cinza Espacial — 18L (foto ilustrativa temporária)",
+    },
+  ],
+};
+
+export const capaEmborrachada = emborrachadaCapa.url;
+
+export function galeriaEmborrachada(volume?: string): ImagemProduto[] {
+  const capa = imagensTintas["tinta-emborrachada"] ?? [];
+  if (!volume) return capa;
+  const especifica = EMBORRACHADA[volume];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+
+
 
 
 
