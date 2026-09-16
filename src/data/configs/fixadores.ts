@@ -350,62 +350,55 @@ export const CONFIG_PARAFUSOS_MADEIRA: ConfiguradorConfig = {
 const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
   {
     nome: "Serra / Serrote",
-    opcoes: ['Serrote 20"', 'Serrote 24"', "Serra Copo", "Arco de Serra", "Serra Tico-Tico"],
-  },
-  {
-    nome: "Disco de Serra",
-    opcoes: [
-      '4.3/8" 24 dentes',
-      '7.1/4" 24 dentes',
-      '7.1/4" 40 dentes',
-      '10" 60 dentes',
-      '12" 80 dentes',
-    ],
+    opcoes: ['Serrote cabo plástico 18"', "Arco de Serra"],
   },
   {
     nome: "Martelo",
-    opcoes: ["Unha 25mm", "Unha 27mm", "Unha 29mm", "Bola 500g", "Marreta 1kg", "Marreta 3kg"],
+    opcoes: ["21", "23", "25", "27", "29", "Marreta de borracha 60mm"],
   },
   { nome: "Trena", opcoes: ["3 m", "5 m", "7,5 m", "10 m", "30 m (fita)"] },
-  { nome: "Esquadro", opcoes: ['8"', '12"', "Esquadro de Combinação"] },
+  { nome: "Esquadro", opcoes: ["Esquadro Metálico 35cm"] },
   {
-    nome: "Furadeira / Parafusadeira",
-    opcoes: ["Furadeira de Impacto 1/2", "Parafusadeira a Bateria 12V", "Parafusadeira 20V"],
+    nome: "Furadeira",
+    opcoes: ["Furadeira de Impacto 1/2"],
   },
   {
     nome: "Brocas",
-    opcoes: [
-      "Jogo p/ Madeira",
-      "Jogo p/ Concreto",
-      "Jogo p/ Metal",
-      "Broca Chata p/ Madeira",
-      "Broca SDS",
-    ],
+    opcoes: ["Broca para Mourão", "Kit Broca Chata", "Kit Broca para Madeira"],
   },
-  { nome: "Nível", opcoes: ['9"', '12"', '18"', '24"', "Nível de Mangueira", "Nível a Laser"] },
+  { nome: "Nível", opcoes: ["Nível de Madeira", "Nível de Alumínio"] },
   {
     nome: "Chaves",
     opcoes: [
-      "Jogo Chave de Fenda/Phillips",
-      "Chave Inglesa 8-12",
-      "Jogo Chave Combinada",
-      "Chave Catraca",
-      "Jogo Chave Allen",
+      "Chave Philips 3x16",
+      "Chave Philips 1/4",
+      'Chave de Fenda Stanley 1/8"x5" (3mm x 125mm)',
     ],
   },
   {
     nome: "Alicate",
     opcoes: ["Universal 8", "Bico Meia-Cana", "Corte Diagonal", "Pressão 10", "Rebitador"],
   },
-  { nome: "Formão / Talhadeira", opcoes: ['1/2"', '3/4"', '1"', "Talhadeira 12"] },
-  { nome: "Prumo, Linha e Riscador", opcoes: ["Prumo de Face", "Linha de Pedreiro", "Lápis de Carpinteiro"] },
+  {
+    nome: "Formão / Talhadeira",
+    opcoes: [
+      'Formão 1/4"',
+      'Formão 1/2"',
+      'Formão 5/8"',
+      'Formão 3/4"',
+      'Formão 1"',
+      "Talhadeira Curvada SDS Plus 16mm x 265mm",
+      "Talhadeira SDS Plus 250mm x 40mm",
+      "Talhadeira SDS Plus 14mm x 250mm x 20mm",
+    ],
+  },
 ];
 
 export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
   breadcrumb: BC("Ferramentas Bestfer"),
   titulo: "🧰 Ferramentas Bestfer",
   subtitulo:
-    "Linha Bestfer para carpintaria e obra: serras, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves e alicates.",
+    "Linha Bestfer para carpintaria e obra: serrotes, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves, alicates e formões.",
   galeriaTitulo: "Ferramentas Bestfer",
   galeriaPlaceholder: "Selecione a ferramenta para ver as fotos",
   imagens: (s) => (s.ferramenta ? [{ src: "", alt: `Bestfer ${s.ferramenta}` }] : []),
