@@ -249,6 +249,12 @@ import ferramentasFormao12 from "@/assets/produtos/ferramentas/12_formao_1_2pol.
 import ferramentasTalhadeiraCurvada from "@/assets/produtos/ferramentas/01_talhadeira_curvada_16x265mm.jpg.asset.json";
 import ferramentasTalhadeira250x40 from "@/assets/produtos/ferramentas/02_talhadeira_250x40mm.jpg.asset.json";
 import ferramentasTalhadeira14x250x20 from "@/assets/produtos/ferramentas/03_talhadeira_14x250x20mm.jpg.asset.json";
+// Calha Galvanizada — 01 é foto real da loja; 02..05 são de catálogo/internet (TEMPORÁRIAS, trocar por fotos reais)
+import calhaCapaReal from "@/assets/produtos/calhas_01_capa_foto_real_instalada.jpg.asset.json";
+import calhaMolduraPerfil from "@/assets/produtos/calhas_02_calha_moldura_todos_tamanhos.jpg.asset.json";
+import calhaPlatibandaPerfil from "@/assets/produtos/calhas_03_calha_platibanda_todos_tamanhos.jpg.asset.json";
+import calhaMolduraIlustra from "@/assets/produtos/calhas_04_acessorio_ilustracao_moldura.jpg.asset.json";
+import calhaPlatibandaIlustra from "@/assets/produtos/calhas_05_acessorio_ilustracao_platibanda.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
