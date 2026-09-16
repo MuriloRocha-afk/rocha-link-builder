@@ -1122,20 +1122,90 @@ const KIT_COLONIAL_CORES: Record<string, ImagemProduto> = {
 export const capaParafusoVedacao = paraf110k10.url;
 export const capaKitColonial = kitColonialCeramica.url;
 
+export const capaParafusosTelha: ImagemProduto = {
+  src: capaParafusosTelhaImg.url,
+  alt: "Kits de fixação colonial e saquinhos de parafusos para telha",
+  legenda: "Parafusos e kits para telha",
+};
+
+const parafusoAvulso: ImagemProduto = {
+  src: parafAvulsoImg.url,
+  alt: "Prateleira com parafusos e pregos vendidos avulsos",
+  legenda: "Venda avulsa",
+};
+
 export function galeriaParafusosTelha(
   tipo?: string,
   tamanho?: string,
   embalagem?: string,
   cor?: string,
 ): ImagemProduto[] {
+  if (!tipo) return [capaParafusosTelha];
   if (tipo === "Kit de Fixação e Vedação") {
     const capa = KIT_COLONIAL_CORES["Cerâmica"];
     const especifica = cor ? KIT_COLONIAL_CORES[cor] : undefined;
     return [especifica ?? capa];
   }
   const capa = PARAFUSO_110_KITS["10 un"];
+  if (embalagem === "Avulso") return [parafusoAvulso];
   if (tamanho === "110mm" && embalagem) {
     return [PARAFUSO_110_KITS[embalagem] ?? capa];
   }
   return [capa];
+}
+
+/* Pregos — fotos reais por tipo e bitola */
+export const capaPregos: ImagemProduto = {
+  src: pregosCapaImg.url,
+  alt: "Pacotes de pregos Pregofix",
+  legenda: "Pregos",
+};
+
+const foto = (m: { url: string }, alt: string, legenda: string): ImagemProduto => ({
+  src: m.url,
+  alt,
+  legenda,
+});
+
+const PREGOS_ACO: Record<string, ImagemProduto> = {
+  "12×12": foto(pregoAco12, "Prego de aço 12×12", "Prego de Aço · 12×12"),
+  "15×15": foto(pregoAco15, "Prego de aço 15×15", "Prego de Aço · 15×15"),
+  "18×27": foto(pregoAco1827, "Prego de aço 18×27", "Prego de Aço · 18×27"),
+};
+
+const PREGOS_COM_CABECA: Record<string, ImagemProduto> = {
+  "15×15": foto(pregoCab1515, "Prego polido com cabeça 15×15", "Polido com Cabeça · 15×15"),
+  "15×21": foto(pregoCab1521, "Prego polido com cabeça 15×21", "Polido com Cabeça · 15×21"),
+  "17×21": foto(pregoCab1721, "Prego polido com cabeça 17×21", "Polido com Cabeça · 17×21"),
+  "18×27": foto(pregoCab1827, "Prego polido com cabeça 18×27", "Polido com Cabeça · 18×27"),
+  "19×36": foto(pregoCab1936, "Prego polido com cabeça 19×36", "Polido com Cabeça · 19×36"),
+  "20×48": foto(pregoCab2048, "Prego polido com cabeça 20×48", "Polido com Cabeça · 20×48"),
+  "22×48": foto(pregoCab2248, "Prego polido com cabeça 22×48", "Polido com Cabeça · 22×48"),
+  "24×60": foto(pregoCab2460, "Prego polido com cabeça 24×60", "Polido com Cabeça · 24×60"),
+  "25×72": foto(pregoCab2572, "Prego polido com cabeça 25×72", "Polido com Cabeça · 25×72"),
+};
+
+const PREGOS_SEM_CABECA: Record<string, ImagemProduto> = {
+  "10×10": foto(pregoSem1010, "Prego polido sem cabeça 7/8×17, 500g", "Sem Cabeça · 10×10"),
+  "12×12": foto(pregoSem1212, "Prego polido sem cabeça 1kg", "Sem Cabeça · 12×12"),
+};
+
+export function galeriaPregos(tipo?: string, bitola?: string): ImagemProduto[] {
+  if (!tipo) return [capaPregos];
+  const mapa =
+    tipo === "Prego de Aço"
+      ? PREGOS_ACO
+      : tipo === "Polido com Cabeça"
+        ? PREGOS_COM_CABECA
+        : PREGOS_SEM_CABECA;
+  const capaTipo =
+    tipo === "Prego de Aço"
+      ? PREGOS_ACO["12×12"]
+      : tipo === "Polido com Cabeça"
+        ? PREGOS_COM_CABECA["15×15"]
+        : PREGOS_SEM_CABECA["10×10"];
+  if (!bitola) return [capaTipo];
+  const especifica = mapa[bitola];
+  // Bitolas ainda sem foto real ficam com o placeholder "Foto em breve".
+  return especifica ? [especifica] : [];
 }
