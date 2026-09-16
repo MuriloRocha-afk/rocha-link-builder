@@ -234,6 +234,18 @@ import ferramentasMarreta60 from "@/assets/produtos/ferramentas/11_marreta_borra
 import ferramentasTrena3 from "@/assets/produtos/ferramentas/12_trena_3m.jpg.asset.json";
 import ferramentasTrena5 from "@/assets/produtos/ferramentas/13_trena_5m.jpg.asset.json";
 import ferramentasTrena8 from "@/assets/produtos/ferramentas/14_trena_8m.jpg.asset.json";
+import ferramentasEsquadro35 from "@/assets/produtos/ferramentas/01_esquadro_metalico_35cm.jpg.asset.json";
+import ferramentasBrocaChata from "@/assets/produtos/ferramentas/02_broca_chata_6pc.jpg.asset.json";
+import ferramentasBrocaMourao from "@/assets/produtos/ferramentas/03_broca_mourao_3pc.jpg.asset.json";
+import ferramentasBrocaMadeira from "@/assets/produtos/ferramentas/04_kit_broca_3pontas_madeira_6pc.jpg.asset.json";
+import ferramentasNivelMadeira from "@/assets/produtos/ferramentas/05_nivel_madeira.jpg.asset.json";
+import ferramentasNivelAluminio from "@/assets/produtos/ferramentas/06_nivel_aluminio.jpg.asset.json";
+import ferramentasChavePhilips316 from "@/assets/produtos/ferramentas/07_chave_philips_3x16.jpg.asset.json";
+import ferramentasChavePhilips14 from "@/assets/produtos/ferramentas/08_chave_philips_1_4.jpg.asset.json";
+import ferramentasChaveFendaStanley from "@/assets/produtos/ferramentas/09_chave_fenda_stanley.jpg.asset.json";
+import ferramentasFormao1 from "@/assets/produtos/ferramentas/10_formao_1pol.jpg.asset.json";
+import ferramentasFormao34 from "@/assets/produtos/ferramentas/11_formao_3_4pol.jpg.asset.json";
+import ferramentasFormao12 from "@/assets/produtos/ferramentas/12_formao_1_2pol.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -1268,6 +1280,18 @@ const FERRAMENTAS_MODELOS: Record<string, ImagemProduto> = {
   "Trena|Trena Transparente 5m x 25mm": foto(ferramentasTrena5, "Trena transparente 5m por 25mm", "Trena · 5m x 25mm"),
   "Trena|Trena Transparente 8m x 25mm": foto(ferramentasTrena8, "Trena transparente 8m por 25mm", "Trena · 8m x 25mm"),
   "Alicate|Alicate Bico Meia-Cana Liso": foto(ferramentasAlicate, "Alicate bico meia-cana liso", "Alicate Bico Meia-Cana Liso"),
+  "Esquadro|Esquadro Metálico 35cm": foto(ferramentasEsquadro35, "Esquadro metálico de 35cm", "Esquadro Metálico · 35cm"),
+  'Broca|Kit Broca Chata para Madeira, 6 peças (3/8" a 1")': foto(ferramentasBrocaChata, "Kit Bestfer com 6 brocas chatas para madeira", "Kit Broca Chata · 6 peças"),
+  "Broca|Broca para Mourão": foto(ferramentasBrocaMourao, "Jogo de brocas para mourão com 3 peças", "Broca para Mourão · 3 peças"),
+  "Broca|Kit Broca para Madeira, 3 pontas, 6 peças (3mm a 8mm)": foto(ferramentasBrocaMadeira, "Kit de brocas de três pontas para madeira com 6 peças", "Kit Broca para Madeira · 6 peças"),
+  "Nível|Nível de Madeira": foto(ferramentasNivelMadeira, "Nível de madeira", "Nível de Madeira"),
+  "Nível|Nível de Alumínio": foto(ferramentasNivelAluminio, "Nível de alumínio", "Nível de Alumínio"),
+  "Chaves|Chave Philips 3x16": foto(ferramentasChavePhilips316, "Chave Philips Tramontina 3x16", "Chave Philips · 3x16"),
+  "Chaves|Chave Philips 1/4": foto(ferramentasChavePhilips14, "Chave Philips Tramontina 1/4", "Chave Philips · 1/4"),
+  'Chaves|Chave de Fenda Stanley 1/8"x5" (3mm x 125mm)': foto(ferramentasChaveFendaStanley, "Chave de fenda Stanley 1/8 por 5 polegadas", "Chave de Fenda Stanley · 3mm x 125mm"),
+  'Formão / Talhadeira|Formão 1"': foto(ferramentasFormao1, "Formão Bestfer de 1 polegada", 'Formão · 1"'),
+  'Formão / Talhadeira|Formão 3/4"': foto(ferramentasFormao34, "Formão Bestfer de 3/4 de polegada", 'Formão · 3/4"'),
+  'Formão / Talhadeira|Formão 1/2"': foto(ferramentasFormao12, "Formão Bestfer de 1/2 polegada", 'Formão · 1/2"'),
 };
 
 const FERRAMENTAS_CAPAS_TIPO: Record<string, ImagemProduto> = {
@@ -1275,6 +1299,11 @@ const FERRAMENTAS_CAPAS_TIPO: Record<string, ImagemProduto> = {
   Martelo: FERRAMENTAS_MODELOS["Martelo|Martelo 29mm"],
   Trena: FERRAMENTAS_MODELOS["Trena|Trena Transparente 3m x 16mm"],
   Alicate: FERRAMENTAS_MODELOS["Alicate|Alicate Bico Meia-Cana Liso"],
+  Esquadro: FERRAMENTAS_MODELOS["Esquadro|Esquadro Metálico 35cm"],
+  Broca: FERRAMENTAS_MODELOS['Broca|Kit Broca Chata para Madeira, 6 peças (3/8" a 1")'],
+  Nível: FERRAMENTAS_MODELOS["Nível|Nível de Madeira"],
+  Chaves: FERRAMENTAS_MODELOS["Chaves|Chave Philips 3x16"],
+  "Formão / Talhadeira": FERRAMENTAS_MODELOS['Formão / Talhadeira|Formão 1"'],
 };
 
 export const imagensFerramentas: Record<string, ImagemProduto[]> = Object.fromEntries(
