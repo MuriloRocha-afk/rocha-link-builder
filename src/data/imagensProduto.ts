@@ -894,6 +894,29 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
   ],
 };
 
+export const capaCalhaGalvanizada = calhaCapaReal.url;
+
+// TEMPORÁRIO: fotos 02..05 são de catálogo/internet, substituir por fotos reais da loja
+const CALHA_CORTES: Record<string, ImagemProduto[]> = {
+  "Moldura Corte 33": [
+    { src: calhaMolduraPerfil.url, alt: "Calha galvanizada Moldura Corte 33", legenda: "Perfil Moldura Corte 33" },
+    { src: calhaMolduraIlustra.url, alt: "Ilustração de calha Moldura encaixada sob a telha", legenda: "Como é instalada (ilustração)" },
+  ],
+  "Platibanda Corte 33": [
+    { src: calhaPlatibandaPerfil.url, alt: "Calha galvanizada Platibanda Corte 33", legenda: "Perfil Platibanda Corte 33" },
+    { src: calhaPlatibandaIlustra.url, alt: "Ilustração de calha Platibanda instalada na platibanda", legenda: "Como é instalada (ilustração)" },
+  ],
+};
+
+export function galeriaCalhaGalvanizada(corte?: string): ImagemProduto[] {
+  const capa = imagensCalhas["calha-alge"] ?? [];
+  if (!corte) return capa;
+  const especifica = CALHA_CORTES[corte];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+
+
 
 // TELHA PET TRANSLÚCIDA — por formato
 // Cada formato usa APENAS as suas próprias fotos.
