@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaParafusosTelha } from "@/data/imagensProduto";
+import { galeriaParafusosTelha, galeriaPregos } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -109,7 +109,7 @@ export const CONFIG_PREGOS: ConfiguradorConfig = {
     "Prego de aço em pacote de 100 unidades e pregos polidos com e sem cabeça em pacote fechado de 1kg.",
   galeriaTitulo: "Pregos",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: `Prego ${s.tipo}` }] : []),
+  imagens: (s) => galeriaPregos(s.tipo, s.bitolaAco ?? s.bitolaCom ?? s.bitolaSem),
   categoria: "Fixadores",
   passos: [
     {
@@ -141,6 +141,7 @@ export const CONFIG_PREGOS: ConfiguradorConfig = {
         "19×36",
         "20×48",
         "22×48",
+        "24×60",
         "25×72",
       ].map((v) => ({ valor: v })),
     },
