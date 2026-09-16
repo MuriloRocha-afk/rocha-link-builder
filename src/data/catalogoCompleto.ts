@@ -71,6 +71,8 @@ import {
   imagensTintas,
   imagensVernizPolirex,
   imagensLixas,
+  capaFerramentas,
+  imagensFerramentas,
   imagensCalhas,
   galeriaPlanPVC,
 } from "@/data/imagensProduto";
