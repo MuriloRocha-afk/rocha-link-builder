@@ -868,7 +868,11 @@ export function galeriaEmborrachada(volume?: string): ImagemProduto[] {
 // CALHAS — por subcategoria
 export const imagensCalhas: Record<string, ImagemProduto[]> = {
   "calha-alge": [
-    { src: "", alt: "Calha galvanizada no pátio", legenda: "Calha Galvanizada — Moldura" },
+    {
+      src: calhaCapaReal.url,
+      alt: "Calha galvanizada branca instalada no telhado da Rocha Telhas",
+      legenda: "Calha Galvanizada instalada",
+    },
   ],
   rufo: [
     { src: "", alt: "Rufo galvanizado instalado", legenda: "Rufo Galvanizado" },
