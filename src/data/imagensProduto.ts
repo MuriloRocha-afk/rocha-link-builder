@@ -246,6 +246,9 @@ import ferramentasChaveFendaStanley from "@/assets/produtos/ferramentas/09_chave
 import ferramentasFormao1 from "@/assets/produtos/ferramentas/10_formao_1pol.jpg.asset.json";
 import ferramentasFormao34 from "@/assets/produtos/ferramentas/11_formao_3_4pol.jpg.asset.json";
 import ferramentasFormao12 from "@/assets/produtos/ferramentas/12_formao_1_2pol.jpg.asset.json";
+import ferramentasTalhadeiraCurvada from "@/assets/produtos/ferramentas/01_talhadeira_curvada_16x265mm.jpg.asset.json";
+import ferramentasTalhadeira250x40 from "@/assets/produtos/ferramentas/02_talhadeira_250x40mm.jpg.asset.json";
+import ferramentasTalhadeira14x250x20 from "@/assets/produtos/ferramentas/03_talhadeira_14x250x20mm.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -1292,6 +1295,9 @@ const FERRAMENTAS_MODELOS: Record<string, ImagemProduto> = {
   'Formão / Talhadeira|Formão 1"': foto(ferramentasFormao1, "Formão Bestfer de 1 polegada", 'Formão · 1"'),
   'Formão / Talhadeira|Formão 3/4"': foto(ferramentasFormao34, "Formão Bestfer de 3/4 de polegada", 'Formão · 3/4"'),
   'Formão / Talhadeira|Formão 1/2"': foto(ferramentasFormao12, "Formão Bestfer de 1/2 polegada", 'Formão · 1/2"'),
+  "Formão / Talhadeira|Talhadeira Curvada SDS Plus 16mm x 265mm": foto(ferramentasTalhadeiraCurvada, "Talhadeira curvada SDS Plus Bestfer 16mm por 265mm", "Talhadeira Curvada SDS Plus · 16mm x 265mm"),
+  "Formão / Talhadeira|Talhadeira SDS Plus 250mm x 40mm": foto(ferramentasTalhadeira250x40, "Talhadeira SDS Plus Bestfer 250mm por 40mm", "Talhadeira SDS Plus · 250mm x 40mm"),
+  "Formão / Talhadeira|Talhadeira SDS Plus 14mm x 250mm x 20mm": foto(ferramentasTalhadeira14x250x20, "Talhadeira SDS Plus Bestfer 14mm por 250mm por 20mm", "Talhadeira SDS Plus · 14mm x 250mm x 20mm"),
 };
 
 const FERRAMENTAS_CAPAS_TIPO: Record<string, ImagemProduto> = {
