@@ -1212,3 +1212,23 @@ export function galeriaPregos(tipo?: string, bitola?: string): ImagemProduto[] {
   // Bitolas ainda sem foto real ficam com o placeholder "Foto em breve".
   return especifica ? [especifica] : [];
 }
+
+/* Arames — fotos reais (parcial: Galvanizado BWG18 e Recozido N12 Liso) */
+export const capaArames: ImagemProduto = {
+  src: aramesCapaImg.url,
+  alt: "Rolos de arame galvanizado e recozido",
+  legenda: "Arames",
+};
+
+const ARAMES_BITOLAS: Record<string, ImagemProduto> = {
+  "Galvanizado|BWG18": foto(arameGalv18, "Arame Galvanizado BWG18", "Galvanizado · BWG18"),
+  "Recozido|N12 Liso": foto(arameRecozidoN12, "Arame Recozido N12 Liso", "Recozido · N12 Liso"),
+};
+
+export function galeriaArames(tipo?: string, bitola?: string): ImagemProduto[] {
+  if (!tipo || !bitola) return [capaArames];
+  const especifica = ARAMES_BITOLAS[`${tipo}|${bitola}`];
+  // Bitolas ainda sem foto real (BWG14, BWG16 e N18 Torcido) ficam com o
+  // placeholder "Foto em breve" até as fotos chegarem.
+  return especifica ? [especifica] : [];
+}
