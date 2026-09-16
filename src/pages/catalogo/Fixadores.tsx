@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaParafusosTelha, capaPregos } from "@/data/imagensProduto";
+import { capaParafusosTelha, capaPregos, capaArames } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -27,6 +27,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "arames",
     name: "Arames",
     emoji: "〰️",
+    image: capaArames.src,
     tags: ["Galvanizado", "Recozido"],
     description:
       "Arame Galvanizado BWG14, 16 e 18. Arame Recozido Liso e Torcido. Para amarrações, cercas e estruturas rurais.",
