@@ -194,9 +194,11 @@ import paraf110k10 from "@/assets/produtos/parafusos/01_kit110mm_menor.jpg.asset
 import paraf110k20 from "@/assets/produtos/parafusos/02_kit110mm.jpg.asset.json";
 import paraf110k30 from "@/assets/produtos/parafusos/03_kit110mm.jpg.asset.json";
 import paraf110k40 from "@/assets/produtos/parafusos/04_kit110mm.jpg.asset.json";
-import paraf110k50 from "@/assets/produtos/parafusos/05_kit110mm_maior.jpg.asset.json";
-import kitColonialCeramica from "@/assets/produtos/parafusos/06_fixacao_colonial_ceramica.jpg.asset.json";
-import kitColonialCinza from "@/assets/produtos/parafusos/07_fixacao_colonial_cinza.jpg.asset.json";
+// Obs.: os nomes dos arquivos 05 e 06 vieram trocados no envio — o mapeamento abaixo
+// segue o conteúdo real das fotos (06 = kit de parafusos maior; 05 = kit Colonial PVC).
+import paraf110k50 from "@/assets/produtos/parafusos/06_fixacao_colonial_ceramica.jpg.asset.json";
+import kitColonialCeramica from "@/assets/produtos/parafusos/07_fixacao_colonial_cinza.jpg.asset.json";
+import kitColonialCinza from "@/assets/produtos/parafusos/05_kit110mm_maior.jpg.asset.json";
 import kitColonialMarfim from "@/assets/produtos/parafusos/08_fixacao_colonial_marfim.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
