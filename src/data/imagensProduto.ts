@@ -1052,3 +1052,71 @@ export const imagensPolipropileno: ImagemProduto[] = [
   { src: poliTelhado.url, alt: "Pérgola com telhado translúcido de polipropileno", legenda: "Exemplo de aplicação" },
   { src: poliPatio.url, alt: "Telhas translúcidas de polipropileno no pátio da Rocha Telhas", legenda: "No pátio da loja" },
 ];
+
+/* Parafusos para Telha — kits reais 110mm e Kit de Fixação Colonial PVC */
+const PARAFUSO_110_KITS: Record<string, ImagemProduto> = {
+  "10 un": {
+    src: paraf110k10.url,
+    alt: "Kit de parafusos com vedação 110mm — 10 unidades",
+    legenda: "110mm · 10 un",
+  },
+  "20 un": {
+    src: paraf110k20.url,
+    alt: "Kit de parafusos com vedação 110mm — 20 unidades",
+    legenda: "110mm · 20 un",
+  },
+  "30 un": {
+    src: paraf110k30.url,
+    alt: "Kit de parafusos com vedação 110mm — 30 unidades",
+    legenda: "110mm · 30 un",
+  },
+  "40 un": {
+    src: paraf110k40.url,
+    alt: "Kit de parafusos com vedação 110mm — 40 unidades",
+    legenda: "110mm · 40 un",
+  },
+  "50 un": {
+    src: paraf110k50.url,
+    alt: "Kit de parafusos com vedação 110mm — 50 unidades",
+    legenda: "110mm · 50 un",
+  },
+};
+
+const KIT_COLONIAL_CORES: Record<string, ImagemProduto> = {
+  Cerâmica: {
+    src: kitColonialCeramica.url,
+    alt: "Kit de fixação e vedação para telha Colonial PVC — cor Cerâmica",
+    legenda: "Kit Colonial · Cerâmica",
+  },
+  Cinza: {
+    src: kitColonialCinza.url,
+    alt: "Kit de fixação e vedação para telha Colonial PVC — cor Cinza",
+    legenda: "Kit Colonial · Cinza",
+  },
+  Marfim: {
+    src: kitColonialMarfim.url,
+    alt: "Kit de fixação e vedação para telha Colonial PVC — cor Marfim",
+    legenda: "Kit Colonial · Marfim",
+  },
+};
+
+export const capaParafusoVedacao = paraf110k10.url;
+export const capaKitColonial = kitColonialCeramica.url;
+
+export function galeriaParafusosTelha(
+  tipo?: string,
+  tamanho?: string,
+  embalagem?: string,
+  cor?: string,
+): ImagemProduto[] {
+  if (tipo === "Kit de Fixação e Vedação") {
+    const capa = KIT_COLONIAL_CORES["Cerâmica"];
+    const especifica = cor ? KIT_COLONIAL_CORES[cor] : undefined;
+    return [especifica ?? capa];
+  }
+  const capa = PARAFUSO_110_KITS["10 un"];
+  if (tamanho === "110mm" && embalagem) {
+    return [PARAFUSO_110_KITS[embalagem] ?? capa];
+  }
+  return [capa];
+}
