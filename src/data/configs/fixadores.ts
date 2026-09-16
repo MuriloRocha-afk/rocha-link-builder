@@ -18,7 +18,7 @@ export const CONFIG_PARAFUSOS_TELHA: ConfiguradorConfig = {
   subtitulo: "Parafusos com vedação para fibrocimento e kits coloridos para Colonial PVC.",
   galeriaTitulo: "Parafusos para Telha",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: s.tipo }] : []),
+  imagens: (s) => galeriaParafusosTelha(s.tipo, s.tamanho, s.embalagem, s.cor),
   categoria: "Fixadores",
   passos: [
     {
