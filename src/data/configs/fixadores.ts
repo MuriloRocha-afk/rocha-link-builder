@@ -394,6 +394,19 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
   },
 ];
 
+const FAMILIAS: { nome: string; emoji: string; tipos: string[] }[] = [
+  { nome: "Corte", emoji: "🪚", tipos: ["Serra / Serrote"] },
+  { nome: "Furação", emoji: "🛠️", tipos: ["Furadeira", "Brocas"] },
+  {
+    nome: "Marcenaria & Acabamento",
+    emoji: "🪵",
+    tipos: ["Formão / Talhadeira", "Esquadro"],
+  },
+  { nome: "Medição", emoji: "📏", tipos: ["Trena", "Nível"] },
+  { nome: "Fixação & Aperto", emoji: "🔧", tipos: ["Chaves", "Alicate"] },
+  { nome: "Impacto", emoji: "🔨", tipos: ["Martelo"] },
+];
+
 export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
   breadcrumb: BC("Ferramentas Bestfer"),
   titulo: "🧰 Ferramentas Bestfer",
