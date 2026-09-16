@@ -57,7 +57,7 @@ export const CARDS: EmojiSubcard[] = [
     emoji: "🧰",
     tags: ["Bestfer", "Serras", "Furadeiras"],
     description:
-      "Serras e discos de serra, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves e alicates da linha Bestfer.",
+      "Serrotes, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves, alicates e formões da linha Bestfer.",
     cta: "Escolher e cotar",
   },
 ];
