@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaParafusosTelha, capaPregos, capaArames } from "@/data/imagensProduto";
+import { capaParafusosTelha, capaPregos, capaArames, capaFerramentas } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -55,6 +55,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "ferramentas",
     name: "Ferramentas Bestfer",
     emoji: "🧰",
+    image: capaFerramentas.src,
     tags: ["Bestfer", "Serras", "Furadeiras"],
     description:
       "Serrotes, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves, alicates e formões da linha Bestfer.",

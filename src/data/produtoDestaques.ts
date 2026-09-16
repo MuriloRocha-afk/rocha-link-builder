@@ -1512,6 +1512,32 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
+  ferramentas: {
+    badges: [
+      { icone: "🧰", texto: "Marca Bestfer" },
+      { icone: "🛠️", texto: "Qualidade profissional" },
+      { icone: "⚡", texto: "Pronta entrega" },
+      { icone: "💰", texto: "Preço justo" },
+    ],
+    motivos: [
+      {
+        titulo: "Marca confiável",
+        descricao: "Linha Bestfer, referência em ferramentas para construção e marcenaria.",
+      },
+      {
+        titulo: "Variedade completa",
+        descricao: "Do corte à furação, da medição à fixação, tudo em um só lugar.",
+      },
+      {
+        titulo: "Pronta entrega",
+        descricao: "Sem espera de fornecedor: leve para a obra no mesmo dia, conforme disponibilidade em estoque.",
+      },
+      {
+        titulo: "Custo-benefício",
+        descricao: "Preço justo para uso profissional ou doméstico.",
+      },
+    ],
+  },
 };
 
 

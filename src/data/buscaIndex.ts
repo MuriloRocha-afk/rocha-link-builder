@@ -419,7 +419,7 @@ const fixadores: ItemBusca[] = [
     nome: "Ferramentas",
     categoria: "Fixadores",
     rota: "/catalogo/fixadores/ferramentas",
-    termos: ["ferramenta", "broca", "serra", "martelo"],
+    termos: ["ferramenta", "broca", "serra", "disco de serra", "disco diamantado", "martelo", "marreta", "trena", "alicate"],
   },
 ];
 

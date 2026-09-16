@@ -71,6 +71,8 @@ import {
   imagensTintas,
   imagensVernizPolirex,
   imagensLixas,
+  capaFerramentas,
+  imagensFerramentas,
   imagensCalhas,
   galeriaPlanPVC,
 } from "@/data/imagensProduto";
@@ -240,7 +242,7 @@ const EXTRAS: Record<string, Extra> = {
   arames: { config: CONFIG_ARAMES },
   "buchas-arruelas": { config: CONFIG_BUCHAS_ARRUELAS },
   "parafusos-madeira": { config: CONFIG_PARAFUSOS_MADEIRA },
-  ferramentas: { config: CONFIG_FERRAMENTAS },
+  ferramentas: { config: CONFIG_FERRAMENTAS, fotos: [capaFerramentas, ...Object.values(imagensFerramentas).flat()] },
 
   // Tintas
   verniz: { config: CONFIG_VERNIZ, fotos: todasDoMapa(imagensVernizPolirex) },
