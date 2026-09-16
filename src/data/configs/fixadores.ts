@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import { galeriaParafusosTelha } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -17,7 +18,7 @@ export const CONFIG_PARAFUSOS_TELHA: ConfiguradorConfig = {
   subtitulo: "Parafusos com vedação para fibrocimento e kits coloridos para Colonial PVC.",
   galeriaTitulo: "Parafusos para Telha",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: s.tipo }] : []),
+  imagens: (s) => galeriaParafusosTelha(s.tipo, s.tamanho, s.embalagem, s.cor),
   categoria: "Fixadores",
   passos: [
     {
@@ -40,8 +41,13 @@ export const CONFIG_PARAFUSOS_TELHA: ConfiguradorConfig = {
       chave: "embalagem",
       titulo: "Embalagem",
       tipo: "grid3",
-      visivel: ehParafusoVedacao,
-      opcoes: ["Avulso", "10 un", "20 un", "30 un", "40 un", "50 un"].map((v) => ({ valor: v })),
+      visivel: (s) => ehParafusoVedacao(s) && Boolean(s.tamanho),
+      opcoes: (s) =>
+        s.tamanho === "110mm"
+          ? ["10 un", "20 un", "30 un", "40 un", "50 un"].map((v) => ({ valor: v }))
+          : [{ valor: "Avulso", sub: "quantidade livre" }],
+      aviso:
+        "Somente o 110mm é vendido em kit fechado. Os tamanhos 150mm e 200mm são vendidos avulsos, na quantidade que você precisar.",
     },
     {
       chave: "cor",

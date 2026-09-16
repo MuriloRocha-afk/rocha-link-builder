@@ -190,6 +190,16 @@ import sayerraz5L from "@/assets/produtos/sayerraz/02_5litros.jpg.asset.json";
 import sayerraz900 from "@/assets/produtos/sayerraz/03_900ml.jpg.asset.json";
 import pu40Capa from "@/assets/produtos/pu40/capa_pu40.jpg.asset.json";
 import pu40Produto from "@/assets/produtos/pu40/produto_pu40.jpg.asset.json";
+import paraf110k10 from "@/assets/produtos/parafusos/01_kit110mm_menor.jpg.asset.json";
+import paraf110k20 from "@/assets/produtos/parafusos/02_kit110mm.jpg.asset.json";
+import paraf110k30 from "@/assets/produtos/parafusos/03_kit110mm.jpg.asset.json";
+import paraf110k40 from "@/assets/produtos/parafusos/04_kit110mm.jpg.asset.json";
+// Obs.: os nomes dos arquivos 05 e 06 vieram trocados no envio — o mapeamento abaixo
+// segue o conteúdo real das fotos (06 = kit de parafusos maior; 05 = kit Colonial PVC).
+import paraf110k50 from "@/assets/produtos/parafusos/06_fixacao_colonial_ceramica.jpg.asset.json";
+import kitColonialCeramica from "@/assets/produtos/parafusos/07_fixacao_colonial_cinza.jpg.asset.json";
+import kitColonialCinza from "@/assets/produtos/parafusos/05_kit110mm_maior.jpg.asset.json";
+import kitColonialMarfim from "@/assets/produtos/parafusos/08_fixacao_colonial_marfim.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -1044,3 +1054,71 @@ export const imagensPolipropileno: ImagemProduto[] = [
   { src: poliTelhado.url, alt: "Pérgola com telhado translúcido de polipropileno", legenda: "Exemplo de aplicação" },
   { src: poliPatio.url, alt: "Telhas translúcidas de polipropileno no pátio da Rocha Telhas", legenda: "No pátio da loja" },
 ];
+
+/* Parafusos para Telha — kits reais 110mm e Kit de Fixação Colonial PVC */
+const PARAFUSO_110_KITS: Record<string, ImagemProduto> = {
+  "10 un": {
+    src: paraf110k10.url,
+    alt: "Kit de parafusos com vedação 110mm — 10 unidades",
+    legenda: "110mm · 10 un",
+  },
+  "20 un": {
+    src: paraf110k20.url,
+    alt: "Kit de parafusos com vedação 110mm — 20 unidades",
+    legenda: "110mm · 20 un",
+  },
+  "30 un": {
+    src: paraf110k30.url,
+    alt: "Kit de parafusos com vedação 110mm — 30 unidades",
+    legenda: "110mm · 30 un",
+  },
+  "40 un": {
+    src: paraf110k40.url,
+    alt: "Kit de parafusos com vedação 110mm — 40 unidades",
+    legenda: "110mm · 40 un",
+  },
+  "50 un": {
+    src: paraf110k50.url,
+    alt: "Kit de parafusos com vedação 110mm — 50 unidades",
+    legenda: "110mm · 50 un",
+  },
+};
+
+const KIT_COLONIAL_CORES: Record<string, ImagemProduto> = {
+  Cerâmica: {
+    src: kitColonialCeramica.url,
+    alt: "Kit de fixação e vedação para telha Colonial PVC — cor Cerâmica",
+    legenda: "Kit Colonial · Cerâmica",
+  },
+  Cinza: {
+    src: kitColonialCinza.url,
+    alt: "Kit de fixação e vedação para telha Colonial PVC — cor Cinza",
+    legenda: "Kit Colonial · Cinza",
+  },
+  Marfim: {
+    src: kitColonialMarfim.url,
+    alt: "Kit de fixação e vedação para telha Colonial PVC — cor Marfim",
+    legenda: "Kit Colonial · Marfim",
+  },
+};
+
+export const capaParafusoVedacao = paraf110k10.url;
+export const capaKitColonial = kitColonialCeramica.url;
+
+export function galeriaParafusosTelha(
+  tipo?: string,
+  tamanho?: string,
+  embalagem?: string,
+  cor?: string,
+): ImagemProduto[] {
+  if (tipo === "Kit de Fixação e Vedação") {
+    const capa = KIT_COLONIAL_CORES["Cerâmica"];
+    const especifica = cor ? KIT_COLONIAL_CORES[cor] : undefined;
+    return [especifica ?? capa];
+  }
+  const capa = PARAFUSO_110_KITS["10 un"];
+  if (tamanho === "110mm" && embalagem) {
+    return [PARAFUSO_110_KITS[embalagem] ?? capa];
+  }
+  return [capa];
+}
