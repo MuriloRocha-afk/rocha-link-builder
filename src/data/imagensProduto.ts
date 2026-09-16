@@ -217,6 +217,9 @@ import pregoCab2572 from "@/assets/produtos/pregos/13_cabeca_25x72.jpg.asset.jso
 import pregoCab2248 from "@/assets/produtos/pregos/14_cabeca_22x48.jpg.asset.json";
 import pregoSem1010 from "@/assets/produtos/pregos/15_polido_sem_cabeca_10x10.jpg.asset.json";
 import pregoSem1212 from "@/assets/produtos/pregos/16_polido_sem_cabeca_12x12.jpg.asset.json";
+import aramesCapaImg from "@/assets/produtos/arames/01_capa_arames.jpg.asset.json";
+import arameRecozidoN12 from "@/assets/produtos/arames/02_recozido_n12_liso.jpg.asset.json";
+import arameGalv18 from "@/assets/produtos/arames/03_galvanizado_bwg18.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
