@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaParafusosTelha, galeriaPregos, galeriaArames } from "@/data/imagensProduto";
+import { galeriaParafusosTelha, galeriaPregos, galeriaArames, galeriaFerramentas } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -354,9 +354,20 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
   },
   {
     nome: "Martelo",
-    opcoes: ["21", "23", "25", "27", "29", "Marreta de borracha 60mm"],
+    opcoes: ["Martelo 21mm", "Martelo 23mm", "Martelo 25mm", "Martelo 27mm", "Martelo 29mm", "Marreta de Borracha 60mm"],
   },
-  { nome: "Trena", opcoes: ["3 m", "5 m", "7,5 m", "10 m", "30 m (fita)"] },
+  {
+    nome: "Disco de Serra",
+    opcoes: [
+      "Serra Circular para Madeira Bestfer, 24 dentes, 110mm",
+      "Serra Circular para Madeira Bestfer, 36 dentes, 180mm",
+      "Disco Diamantado Samafer Linha Prata, contínuo, 110x20mm",
+    ],
+  },
+  {
+    nome: "Trena",
+    opcoes: ["Trena Transparente 3m x 16mm", "Trena Transparente 5m x 25mm", "Trena Transparente 8m x 25mm"],
+  },
   { nome: "Esquadro", opcoes: ["Esquadro Metálico 35cm"] },
   {
     nome: "Furadeira",
@@ -377,7 +388,7 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
   },
   {
     nome: "Alicate",
-    opcoes: ["Universal 8", "Bico Meia-Cana", "Corte Diagonal", "Pressão 10", "Rebitador"],
+    opcoes: ["Alicate Bico Meia-Cana Liso"],
   },
   {
     nome: "Formão / Talhadeira",
@@ -395,7 +406,7 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
 ];
 
 const FAMILIAS: { nome: string; emoji: string; tipos: string[] }[] = [
-  { nome: "Corte", emoji: "🪚", tipos: ["Serra / Serrote"] },
+  { nome: "Corte", emoji: "🪚", tipos: ["Serra / Serrote", "Disco de Serra"] },
   { nome: "Furação", emoji: "🛠️", tipos: ["Furadeira", "Brocas"] },
   {
     nome: "Marcenaria & Acabamento",
@@ -410,11 +421,12 @@ const FAMILIAS: { nome: string; emoji: string; tipos: string[] }[] = [
 export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
   breadcrumb: BC("Ferramentas Bestfer"),
   titulo: "🧰 Ferramentas Bestfer",
+  produtoKey: "ferramentas",
   subtitulo:
     "Linha Bestfer para carpintaria e obra: serrotes, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves, alicates e formões.",
   galeriaTitulo: "Ferramentas Bestfer",
   galeriaPlaceholder: "Selecione a ferramenta para ver as fotos",
-  imagens: (s) => (s.ferramenta ? [{ src: "", alt: `Bestfer ${s.ferramenta}` }] : []),
+  imagens: (s) => galeriaFerramentas(s.ferramenta, s.modelo),
   categoria: "Fixadores",
   passos: [
     {

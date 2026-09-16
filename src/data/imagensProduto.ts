@@ -220,6 +220,20 @@ import pregoSem1212 from "@/assets/produtos/pregos/16_polido_sem_cabeca_12x12.jp
 import aramesCapaImg from "@/assets/produtos/arames/01_capa_arames.jpg.asset.json";
 import arameRecozidoN12 from "@/assets/produtos/arames/02_recozido_n12_liso.jpg.asset.json";
 import arameGalv18 from "@/assets/produtos/arames/03_galvanizado_bwg18.jpg.asset.json";
+import ferramentasAlicate from "@/assets/produtos/ferramentas/01_alicate_bico_meia_cana.jpg.asset.json";
+import ferramentasCapa from "@/assets/produtos/ferramentas/02_capa_geral_ferramentas.jpg.asset.json";
+import ferramentasDisco24 from "@/assets/produtos/ferramentas/03_disco_serra_24dentes.jpg.asset.json";
+import ferramentasDisco36 from "@/assets/produtos/ferramentas/04_disco_serra_36dentes.jpg.asset.json";
+import ferramentasDiscoDiamantado from "@/assets/produtos/ferramentas/05_disco_diamantado_110mm.jpg.asset.json";
+import ferramentasMartelo29 from "@/assets/produtos/ferramentas/06_martelo_29mm.jpg.asset.json";
+import ferramentasMartelo27 from "@/assets/produtos/ferramentas/07_martelo_27mm.jpg.asset.json";
+import ferramentasMartelo25 from "@/assets/produtos/ferramentas/08_martelo_25mm.jpg.asset.json";
+import ferramentasMartelo23 from "@/assets/produtos/ferramentas/09_martelo_23mm.jpg.asset.json";
+import ferramentasMartelo21 from "@/assets/produtos/ferramentas/10_martelo_21mm.jpg.asset.json";
+import ferramentasMarreta60 from "@/assets/produtos/ferramentas/11_marreta_borracha_60mm.jpg.asset.json";
+import ferramentasTrena3 from "@/assets/produtos/ferramentas/12_trena_3m.jpg.asset.json";
+import ferramentasTrena5 from "@/assets/produtos/ferramentas/13_trena_5m.jpg.asset.json";
+import ferramentasTrena8 from "@/assets/produtos/ferramentas/14_trena_8m.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -1230,5 +1244,47 @@ export function galeriaArames(tipo?: string, bitola?: string): ImagemProduto[] {
   const especifica = ARAMES_BITOLAS[`${tipo}|${bitola}`];
   // Bitolas ainda sem foto real (BWG14, BWG16 e N18 Torcido) ficam com o
   // placeholder "Foto em breve" até as fotos chegarem.
+  return especifica ? [especifica] : [];
+}
+
+/* Ferramentas — capa geral, capas por tipo e fotos por modelo */
+export const capaFerramentas: ImagemProduto = foto(
+  ferramentasCapa,
+  "Ferramentas para construção e marcenaria disponíveis na Rocha Telhas",
+  "Ferramentas",
+);
+
+const FERRAMENTAS_MODELOS: Record<string, ImagemProduto> = {
+  "Disco de Serra|Serra Circular para Madeira Bestfer, 24 dentes, 110mm": foto(ferramentasDisco24, "Serra circular para madeira Bestfer com 24 dentes e 110mm", "Disco de Serra · 24 dentes · 110mm"),
+  "Disco de Serra|Serra Circular para Madeira Bestfer, 36 dentes, 180mm": foto(ferramentasDisco36, "Serra circular para madeira Bestfer com 36 dentes e 180mm", "Disco de Serra · 36 dentes · 180mm"),
+  "Disco de Serra|Disco Diamantado Samafer Linha Prata, contínuo, 110x20mm": foto(ferramentasDiscoDiamantado, "Disco diamantado Samafer Linha Prata contínuo 110 por 20mm", "Disco Diamantado · 110x20mm"),
+  "Martelo|Martelo 29mm": foto(ferramentasMartelo29, "Martelo Bestfer 29mm", "Martelo · 29mm"),
+  "Martelo|Martelo 27mm": foto(ferramentasMartelo27, "Martelo Bestfer 27mm", "Martelo · 27mm"),
+  "Martelo|Martelo 25mm": foto(ferramentasMartelo25, "Martelo Bestfer 25mm", "Martelo · 25mm"),
+  "Martelo|Martelo 23mm": foto(ferramentasMartelo23, "Martelo Bestfer 23mm", "Martelo · 23mm"),
+  "Martelo|Martelo 21mm": foto(ferramentasMartelo21, "Martelo Bestfer 21mm", "Martelo · 21mm"),
+  "Martelo|Marreta de Borracha 60mm": foto(ferramentasMarreta60, "Marreta de borracha 60mm", "Marreta de Borracha · 60mm"),
+  "Trena|Trena Transparente 3m x 16mm": foto(ferramentasTrena3, "Trena transparente 3m por 16mm", "Trena · 3m x 16mm"),
+  "Trena|Trena Transparente 5m x 25mm": foto(ferramentasTrena5, "Trena transparente 5m por 25mm", "Trena · 5m x 25mm"),
+  "Trena|Trena Transparente 8m x 25mm": foto(ferramentasTrena8, "Trena transparente 8m por 25mm", "Trena · 8m x 25mm"),
+  "Alicate|Alicate Bico Meia-Cana Liso": foto(ferramentasAlicate, "Alicate bico meia-cana liso", "Alicate Bico Meia-Cana Liso"),
+};
+
+const FERRAMENTAS_CAPAS_TIPO: Record<string, ImagemProduto> = {
+  "Disco de Serra": FERRAMENTAS_MODELOS["Disco de Serra|Serra Circular para Madeira Bestfer, 24 dentes, 110mm"],
+  Martelo: FERRAMENTAS_MODELOS["Martelo|Martelo 29mm"],
+  Trena: FERRAMENTAS_MODELOS["Trena|Trena Transparente 3m x 16mm"],
+  Alicate: FERRAMENTAS_MODELOS["Alicate|Alicate Bico Meia-Cana Liso"],
+};
+
+export const imagensFerramentas: Record<string, ImagemProduto[]> = Object.fromEntries(
+  Object.entries(FERRAMENTAS_MODELOS).map(([chave, imagem]) => [chave, [imagem]]),
+);
+
+export function galeriaFerramentas(ferramenta?: string, modelo?: string): ImagemProduto[] {
+  if (!ferramenta) return [capaFerramentas];
+  const capaTipo = FERRAMENTAS_CAPAS_TIPO[ferramenta];
+  if (!modelo) return [capaTipo ?? capaFerramentas];
+  const especifica = FERRAMENTAS_MODELOS[`${ferramenta}|${modelo}`];
   return especifica ? [especifica] : [];
 }
