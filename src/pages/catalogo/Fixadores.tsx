@@ -1,10 +1,12 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
+import { capaParafusosTelha, capaPregos } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
     slug: "parafusos-telha",
     name: "Parafusos para Telha",
     emoji: "🔩",
+    image: capaParafusosTelha.src,
     badge: "Campeão de Vendas",
     tags: ["Fibrocimento", "Colonial PVC"],
     description:
@@ -15,6 +17,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "pregos",
     name: "Pregos",
     emoji: "🔨",
+    image: capaPregos.src,
     tags: ["Pacote 1kg", "Pacote 100 un"],
     description:
       "Prego de aço em pacote de 100 unidades e pregos polidos com e sem cabeça em pacote fechado de 1kg.",
