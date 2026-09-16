@@ -5,7 +5,7 @@ import ConfiguradorGenerico from "@/components/site/ConfiguradorGenerico";
 import { CONFIG_FERRAMENTAS } from "@/data/configs/fixadores";
 
 const TITLE = "Ferramentas Bestfer — Serras, Martelos e Trenas | Rocha Telhas";
-const DESCRIPTION = "Ferramentas Bestfer: serras e discos, martelos, trenas, esquadros, furadeiras, brocas, níveis, chaves e alicates. Cote no WhatsApp.";
+const DESCRIPTION = "Ferramentas Bestfer: serrotes, martelos, trenas, esquadros, furadeiras, brocas, níveis, chaves, alicates e formões. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/fixadores/ferramentas")({
   head: () => ({
