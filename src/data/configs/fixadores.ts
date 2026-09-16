@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import { galeriaParafusosTelha } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
