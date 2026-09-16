@@ -374,8 +374,12 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
     opcoes: ["Furadeira de Impacto 1/2"],
   },
   {
-    nome: "Brocas",
-    opcoes: ["Broca para Mourão", "Kit Broca Chata", "Kit Broca para Madeira"],
+    nome: "Broca",
+    opcoes: [
+      'Kit Broca Chata para Madeira, 6 peças (3/8" a 1")',
+      "Broca para Mourão",
+      "Kit Broca para Madeira, 3 pontas, 6 peças (3mm a 8mm)",
+    ],
   },
   { nome: "Nível", opcoes: ["Nível de Madeira", "Nível de Alumínio"] },
   {
@@ -407,7 +411,7 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
 
 const FAMILIAS: { nome: string; emoji: string; tipos: string[] }[] = [
   { nome: "Corte", emoji: "🪚", tipos: ["Serra / Serrote", "Disco de Serra"] },
-  { nome: "Furação", emoji: "🛠️", tipos: ["Furadeira", "Brocas"] },
+  { nome: "Furação", emoji: "🛠️", tipos: ["Furadeira", "Broca"] },
   {
     nome: "Marcenaria & Acabamento",
     emoji: "🪵",
