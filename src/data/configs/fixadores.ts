@@ -398,7 +398,7 @@ export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
   breadcrumb: BC("Ferramentas Bestfer"),
   titulo: "🧰 Ferramentas Bestfer",
   subtitulo:
-    "Linha Bestfer para carpintaria e obra: serras, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves e alicates.",
+    "Linha Bestfer para carpintaria e obra: serrotes, martelos, trenas, esquadros, furadeiras e brocas, níveis, chaves, alicates e formões.",
   galeriaTitulo: "Ferramentas Bestfer",
   galeriaPlaceholder: "Selecione a ferramenta para ver as fotos",
   imagens: (s) => (s.ferramenta ? [{ src: "", alt: `Bestfer ${s.ferramenta}` }] : []),
