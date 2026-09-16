@@ -249,6 +249,12 @@ import ferramentasFormao12 from "@/assets/produtos/ferramentas/12_formao_1_2pol.
 import ferramentasTalhadeiraCurvada from "@/assets/produtos/ferramentas/01_talhadeira_curvada_16x265mm.jpg.asset.json";
 import ferramentasTalhadeira250x40 from "@/assets/produtos/ferramentas/02_talhadeira_250x40mm.jpg.asset.json";
 import ferramentasTalhadeira14x250x20 from "@/assets/produtos/ferramentas/03_talhadeira_14x250x20mm.jpg.asset.json";
+// Calha Galvanizada — 01 é foto real da loja; 02..05 são de catálogo/internet (TEMPORÁRIAS, trocar por fotos reais)
+import calhaCapaReal from "@/assets/produtos/calhas_01_capa_foto_real_instalada.jpg.asset.json";
+import calhaMolduraPerfil from "@/assets/produtos/calhas_02_calha_moldura_todos_tamanhos.jpg.asset.json";
+import calhaPlatibandaPerfil from "@/assets/produtos/calhas_03_calha_platibanda_todos_tamanhos.jpg.asset.json";
+import calhaMolduraIlustra from "@/assets/produtos/calhas_04_acessorio_ilustracao_moldura.jpg.asset.json";
+import calhaPlatibandaIlustra from "@/assets/produtos/calhas_05_acessorio_ilustracao_platibanda.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -868,7 +874,11 @@ export function galeriaEmborrachada(volume?: string): ImagemProduto[] {
 // CALHAS — por subcategoria
 export const imagensCalhas: Record<string, ImagemProduto[]> = {
   "calha-alge": [
-    { src: "", alt: "Calha galvanizada no pátio", legenda: "Calha Galvanizada — Moldura" },
+    {
+      src: calhaCapaReal.url,
+      alt: "Calha galvanizada branca instalada no telhado da Rocha Telhas",
+      legenda: "Calha Galvanizada instalada",
+    },
   ],
   rufo: [
     { src: "", alt: "Rufo galvanizado instalado", legenda: "Rufo Galvanizado" },
@@ -883,6 +893,29 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Acessórios para calha galvanizada Moldura e Platibanda", legenda: "Acessórios — Suportes, Cabeceiras e Saídas" },
   ],
 };
+
+export const capaCalhaGalvanizada = calhaCapaReal.url;
+
+// TEMPORÁRIO: fotos 02..05 são de catálogo/internet, substituir por fotos reais da loja
+const CALHA_CORTES: Record<string, ImagemProduto[]> = {
+  "Moldura Corte 33": [
+    { src: calhaMolduraPerfil.url, alt: "Calha galvanizada Moldura Corte 33", legenda: "Perfil Moldura Corte 33" },
+    { src: calhaMolduraIlustra.url, alt: "Ilustração de calha Moldura encaixada sob a telha", legenda: "Como é instalada (ilustração)" },
+  ],
+  "Platibanda Corte 33": [
+    { src: calhaPlatibandaPerfil.url, alt: "Calha galvanizada Platibanda Corte 33", legenda: "Perfil Platibanda Corte 33" },
+    { src: calhaPlatibandaIlustra.url, alt: "Ilustração de calha Platibanda instalada na platibanda", legenda: "Como é instalada (ilustração)" },
+  ],
+};
+
+export function galeriaCalhaGalvanizada(corte?: string): ImagemProduto[] {
+  const capa = imagensCalhas["calha-alge"] ?? [];
+  if (!corte) return capa;
+  const especifica = CALHA_CORTES[corte];
+  return especifica && especifica.length ? especifica : capa;
+}
+
+
 
 
 // TELHA PET TRANSLÚCIDA — por formato
