@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaParafusosTelha, galeriaPregos } from "@/data/imagensProduto";
+import { galeriaParafusosTelha, galeriaPregos, galeriaArames } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -191,7 +191,7 @@ export const CONFIG_ARAMES: ConfiguradorConfig = {
   subtitulo: "Galvanizado BWG14, 16 e 18. Recozido Liso e Torcido. Para amarrações e cercas.",
   galeriaTitulo: "Arames",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: `Arame ${s.tipo}` }] : []),
+  imagens: (s) => galeriaArames(s.tipo, s.bitola),
   categoria: "Fixadores",
   passos: [
     {
