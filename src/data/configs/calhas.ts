@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import { galeriaCalhaGalvanizada } from "@/data/imagensProduto";
 
 
 const BC = (nome: string) => [
