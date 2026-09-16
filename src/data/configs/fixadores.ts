@@ -418,10 +418,27 @@ export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
   categoria: "Fixadores",
   passos: [
     {
+      chave: "familia",
+      titulo: "Família",
+      tipo: "grid3",
+      opcoes: FAMILIAS.map((f) => ({
+        valor: f.nome,
+        emoji: f.emoji,
+        sub: f.tipos.join(" · "),
+      })),
+    },
+    {
       chave: "ferramenta",
       titulo: "Ferramenta",
       tipo: "lista",
-      opcoes: FERRAMENTAS.map((f) => ({ valor: f.nome, sub: f.opcoes.join(" · ") })),
+      visivel: (s) => Boolean(s.familia),
+      opcoes: (s) => {
+        const tipos = FAMILIAS.find((f) => f.nome === s.familia)?.tipos ?? [];
+        return FERRAMENTAS.filter((f) => tipos.includes(f.nome)).map((f) => ({
+          valor: f.nome,
+          sub: f.opcoes.join(" · "),
+        }));
+      },
     },
     {
       chave: "modelo",
