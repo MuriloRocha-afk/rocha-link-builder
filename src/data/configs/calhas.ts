@@ -17,18 +17,7 @@ export const CONFIG_CALHA_ALGE: ConfiguradorConfig = {
   subtitulo: "Calha galvanizada nos cortes Moldura e Platibanda de 2,0m a 6,0m.",
   galeriaTitulo: "Calha Galvanizada",
   galeriaPlaceholder: "Selecione o corte para ver as fotos",
-  imagens: (s) =>
-    s.corte
-      ? [
-          {
-            src: "",
-            alt:
-              s.corte === "Moldura Corte 33"
-                ? "Calha galvanizada Moldura"
-                : "Calha galvanizada Platibanda",
-          },
-        ]
-      : [],
+  imagens: (s) => galeriaCalhaGalvanizada(s.corte),
   categoria: "Calhas",
   passos: [
     {
