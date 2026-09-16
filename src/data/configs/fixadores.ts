@@ -394,6 +394,19 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
   },
 ];
 
+const FAMILIAS: { nome: string; emoji: string; tipos: string[] }[] = [
+  { nome: "Corte", emoji: "🪚", tipos: ["Serra / Serrote"] },
+  { nome: "Furação", emoji: "🛠️", tipos: ["Furadeira", "Brocas"] },
+  {
+    nome: "Marcenaria & Acabamento",
+    emoji: "🪵",
+    tipos: ["Formão / Talhadeira", "Esquadro"],
+  },
+  { nome: "Medição", emoji: "📏", tipos: ["Trena", "Nível"] },
+  { nome: "Fixação & Aperto", emoji: "🔧", tipos: ["Chaves", "Alicate"] },
+  { nome: "Impacto", emoji: "🔨", tipos: ["Martelo"] },
+];
+
 export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
   breadcrumb: BC("Ferramentas Bestfer"),
   titulo: "🧰 Ferramentas Bestfer",
@@ -405,10 +418,27 @@ export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
   categoria: "Fixadores",
   passos: [
     {
+      chave: "familia",
+      titulo: "Família",
+      tipo: "grid3",
+      opcoes: FAMILIAS.map((f) => ({
+        valor: f.nome,
+        emoji: f.emoji,
+        sub: f.tipos.join(" · "),
+      })),
+    },
+    {
       chave: "ferramenta",
       titulo: "Ferramenta",
       tipo: "lista",
-      opcoes: FERRAMENTAS.map((f) => ({ valor: f.nome, sub: f.opcoes.join(" · ") })),
+      visivel: (s) => Boolean(s.familia),
+      opcoes: (s) => {
+        const tipos = FAMILIAS.find((f) => f.nome === s.familia)?.tipos ?? [];
+        return FERRAMENTAS.filter((f) => tipos.includes(f.nome)).map((f) => ({
+          valor: f.nome,
+          sub: f.opcoes.join(" · "),
+        }));
+      },
     },
     {
       chave: "modelo",
