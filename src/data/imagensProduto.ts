@@ -198,8 +198,25 @@ import paraf110k40 from "@/assets/produtos/parafusos/04_kit110mm.jpg.asset.json"
 // segue o conteúdo real das fotos (06 = kit de parafusos maior; 05 = kit Colonial PVC).
 import paraf110k50 from "@/assets/produtos/parafusos/06_fixacao_colonial_ceramica.jpg.asset.json";
 import kitColonialCeramica from "@/assets/produtos/parafusos/07_fixacao_colonial_cinza.jpg.asset.json";
-import kitColonialCinza from "@/assets/produtos/parafusos/05_kit110mm_maior.jpg.asset.json";
-import kitColonialMarfim from "@/assets/produtos/parafusos/08_fixacao_colonial_marfim.jpg.asset.json";
+import kitColonialMarfim from "@/assets/produtos/parafusos/05_kit110mm_maior.jpg.asset.json";
+import kitColonialCinza from "@/assets/produtos/parafusos/08_fixacao_colonial_marfim.jpg.asset.json";
+import capaParafusosTelhaImg from "@/assets/produtos/parafusos/02_capa_parafusos_telha.jpg.asset.json";
+import parafAvulsoImg from "@/assets/produtos/parafusos/00_avulso_prateleira.jpg.asset.json";
+import pregosCapaImg from "@/assets/produtos/pregos/01_capa_pregos.jpg.asset.json";
+import pregoAco12 from "@/assets/produtos/pregos/03_aco_12x12.jpg.asset.json";
+import pregoAco15 from "@/assets/produtos/pregos/04_aco_15x15.jpg.asset.json";
+import pregoAco1827 from "@/assets/produtos/pregos/05_aco_18x27.jpg.asset.json";
+import pregoCab1515 from "@/assets/produtos/pregos/06_cabeca_15x15.jpg.asset.json";
+import pregoCab1521 from "@/assets/produtos/pregos/07_cabeca_15x21.jpg.asset.json";
+import pregoCab1721 from "@/assets/produtos/pregos/08_cabeca_17x21.jpg.asset.json";
+import pregoCab1827 from "@/assets/produtos/pregos/09_cabeca_18x27_polido.jpg.asset.json";
+import pregoCab1936 from "@/assets/produtos/pregos/10_cabeca_19x36_polido.jpg.asset.json";
+import pregoCab2048 from "@/assets/produtos/pregos/11_cabeca_20x48.jpg.asset.json";
+import pregoCab2460 from "@/assets/produtos/pregos/12_cabeca_24x60.jpg.asset.json";
+import pregoCab2572 from "@/assets/produtos/pregos/13_cabeca_25x72.jpg.asset.json";
+import pregoCab2248 from "@/assets/produtos/pregos/14_cabeca_22x48.jpg.asset.json";
+import pregoSem1010 from "@/assets/produtos/pregos/15_polido_sem_cabeca_10x10.jpg.asset.json";
+import pregoSem1212 from "@/assets/produtos/pregos/16_polido_sem_cabeca_12x12.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
