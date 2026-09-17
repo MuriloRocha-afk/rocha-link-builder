@@ -34,15 +34,6 @@ export const CARDS: EmojiSubcard[] = [
     cta: "Escolher e cotar",
   },
   {
-    slug: "buchas-arruelas",
-    name: "Buchas, Arruelas & Barras Roscadas",
-    emoji: "⚙️",
-    tags: ["Barras Roscadas", "Arruelas"],
-    description:
-      "Buchas plásticas e com anel, arruelas lisas zincadas e barras roscadas de 1/4 a 1/2 polegada por 1,0m.",
-    cta: "Escolher e cotar",
-  },
-  {
     slug: "parafusos-madeira",
     name: "Parafusos para Madeira",
     emoji: "🪛",
@@ -68,12 +59,12 @@ const GRUPOS = [
     id: "fixacao",
     label: "Fixação & Ferragens",
     descricao:
-      "Parafusos, pregos, arames, buchas, arruelas e barras roscadas para telhas e estruturas.",
+      "Parafusos, pregos e arames para telhas e estruturas.",
     slugs: [
       "parafusos-telha",
       "pregos",
       "arames",
-      "buchas-arruelas",
+      
       "parafusos-madeira",
     ],
   },

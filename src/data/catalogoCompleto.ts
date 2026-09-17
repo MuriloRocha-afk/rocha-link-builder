@@ -38,7 +38,7 @@ import {
   CONFIG_PARAFUSOS_TELHA,
   CONFIG_PREGOS,
   CONFIG_ARAMES,
-  CONFIG_BUCHAS_ARRUELAS,
+  
   CONFIG_PARAFUSOS_MADEIRA,
   CONFIG_FERRAMENTAS,
 } from "@/data/configs/fixadores";
@@ -238,7 +238,7 @@ const EXTRAS: Record<string, Extra> = {
   "parafusos-telha": { config: CONFIG_PARAFUSOS_TELHA },
   pregos: { config: CONFIG_PREGOS },
   arames: { config: CONFIG_ARAMES },
-  "buchas-arruelas": { config: CONFIG_BUCHAS_ARRUELAS },
+  
   "parafusos-madeira": { config: CONFIG_PARAFUSOS_MADEIRA },
   ferramentas: { config: CONFIG_FERRAMENTAS, fotos: [capaFerramentas, ...Object.values(imagensFerramentas).flat()] },
 
@@ -323,7 +323,7 @@ export const SECOES_PDF: SecaoPdf[] = [
     id: "fixadores",
     titulo: "Ferramentas, Ferragens e Materiais de Fixação",
     descricao:
-      "Parafusos, pregos, arames, buchas, barras roscadas e a linha de ferramentas Bestfer.",
+      "Parafusos, pregos, arames e a linha de ferramentas Bestfer.",
     produtos: montar("fixadores", CARDS_FIXADORES),
   },
 ];

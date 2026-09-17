@@ -223,66 +223,6 @@ export const CONFIG_ARAMES: ConfiguradorConfig = {
     `〰️ *Arame ${s.tipo}*\n• Bitola/Modelo: ${s.bitola}\n• Quantidade: ${q.qtd ?? 1} rolos`,
 };
 
-const PRODUTOS_FIXACAO: Record<string, string[]> = {
-  Buchas: [
-    "Bucha nº06",
-    "Bucha nº08",
-    "Bucha nº10",
-    "Bucha nº12",
-    "Bucha Fix. com Anel nº06",
-    "Bucha Fix. com Anel nº08",
-    "Bucha Fix. com Anel nº10",
-  ],
-  Arruelas: [
-    "Arruela Lisa Zincada 1/4",
-    "Arruela Lisa Zincada 3/8",
-    "Arruela Lisa Zincada 5/16",
-    "Arruela Lisa Zincada 1/2",
-  ],
-  "Barras Roscadas": [
-    "Barra Roscada 1/4 × 1,0m",
-    "Barra Roscada 3/8 × 1,0m",
-    "Barra Roscada 1/2 × 1,0m",
-    "Barra Roscada 5/16 × 1,0m",
-  ],
-};
-
-export const CONFIG_BUCHAS_ARRUELAS: ConfiguradorConfig = {
-  breadcrumb: BC("Buchas, Arruelas & Barras"),
-  titulo: "⚙️ Buchas, Arruelas & Barras Roscadas",
-  produtoKey: "buchas-arruelas",
-  subtitulo: "Buchas plásticas, arruelas zincadas e barras roscadas de 1/4 a 1/2 por 1,0m.",
-  galeriaTitulo: "Fixadores",
-  galeriaPlaceholder: "Selecione uma categoria para ver as fotos",
-  imagens: (s) => (s.categoria ? [{ src: "", alt: s.categoria }] : []),
-  categoria: "Fixadores",
-  passos: [
-    {
-      chave: "categoria",
-      titulo: "Categoria",
-      tipo: "grid3",
-      opcoes: [
-        { valor: "Buchas", emoji: "🔵", sub: "Plásticas e com anel" },
-        { valor: "Arruelas", emoji: "⭕", sub: "Lisas zincadas" },
-        { valor: "Barras Roscadas", emoji: "〰️", sub: "1/4, 3/8, 1/2 e 5/16 × 1,0m" },
-      ],
-    },
-    {
-      chave: "produto",
-      titulo: "Produto",
-      tipo: "lista",
-      opcoes: (s) => (PRODUTOS_FIXACAO[s.categoria] ?? []).map((v) => ({ valor: v })),
-    },
-    { chave: "qtd", titulo: "Quantidade", tipo: "quantidade", unidade: "un", padrao: 10 },
-  ],
-  resumoNome: (s) =>
-    s.categoria === "Buchas" ? "Bucha" : s.categoria === "Arruelas" ? "Arruela" : "Barra Roscada",
-  resumoDetalhe: (s, q) => `${s.produto} · ${q.qtd ?? 10} un`,
-  unidadeResumo: () => "un",
-  idItem: (s) => `fixacao-${s.produto}`,
-  mensagem: (s, q) =>
-    `⚙️ *${s.categoria === "Buchas" ? "Bucha" : s.categoria === "Arruelas" ? "Arruela" : "Barra Roscada"}*\n• Produto: ${s.produto}\n• Quantidade: ${q.qtd ?? 10} un`,
-};
 
 const BITOLAS_MADEIRA: Record<string, string[]> = {
   "Parafuso Chipboard Chata Phs": [

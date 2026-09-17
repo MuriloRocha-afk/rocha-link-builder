@@ -1429,31 +1429,6 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       },
     ],
   },
-  "buchas-arruelas": {
-    badges: [
-      { icone: "📏", texto: "Várias medidas" },
-      { icone: "🔩", texto: "Complemento do parafuso" },
-      { icone: "🔒", texto: "Evita folga" },
-      { icone: "⚙️", texto: "Uso geral" },
-    ],
-    motivos: [
-      {
-        titulo: "Variedade de medidas",
-        descricao:
-          "Buchas, arruelas e barras roscadas em diferentes bitolas para cada aplicação.",
-      },
-      {
-        titulo: "Complemento essencial da fixação",
-        descricao:
-          "Praticamente toda fixação com parafuso pede bucha ou arruela correspondente.",
-      },
-      {
-        titulo: "Evita folga e garante firmeza",
-        descricao:
-          "A arruela distribui o aperto e a bucha fixa o parafuso na alvenaria sem folga.",
-      },
-    ],
-  },
   "parafusos-madeira": {
     badges: [
       { icone: "🪵", texto: "Estrutura de telhado" },
