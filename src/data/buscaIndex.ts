@@ -368,14 +368,6 @@ const calhas: ItemBusca[] = [
     rota: "/catalogo/calhas/manta-termica",
     termos: ["manta termica", "manta aluminizada", "isolamento", "subcobertura", "calor"],
   },
-  {
-    id: "manta-asfaltica",
-    nome: "Manta Asfáltica",
-    categoria: "Calhas",
-    material: "Asfalto",
-    rota: "/catalogo/calhas/manta-asfaltica",
-    termos: ["manta asfaltica", "impermeabilizacao", "infiltracao", "laje"],
-  },
 ];
 
 const fixadores: ItemBusca[] = [
@@ -554,7 +546,7 @@ export const SINONIMOS: Record<string, string[]> = {
   testeira: ["tabeira"],
   "agua de chuva": ["calha"],
   goteira: ["calha", "manta"],
-  infiltracao: ["manta asfaltica", "vedacao"],
+  infiltracao: ["calha", "rufo", "vedacao"],
   cupim: ["cupicida"],
   "telha de cimento": ["fibrocimento", "concreto"],
 };

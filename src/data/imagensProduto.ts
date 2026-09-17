@@ -270,6 +270,15 @@ import acessoriosCalhaPlatibandaSuporte from "@/assets/produtos/acessorios-calha
 import acessoriosCalhaPlatibandaCabeceira from "@/assets/produtos/acessorios-calha/08_platibanda_cabeceira.jpg.asset.json";
 import acessoriosCalhaPlatibandaSaidaCentral from "@/assets/produtos/acessorios-calha/09_platibanda_saida_central.jpg.asset.json";
 import acessoriosCalhaPlatibandaSaidaLateral from "@/assets/produtos/acessorios-calha/10_platibanda_saida_lateral.jpg.asset.json";
+import mantaTermicaCapa from "@/assets/produtos/manta-termica/01_capa_foto_prateleira.jpg.asset.json";
+import mantaTermica2Faces50 from "@/assets/produtos/manta-termica/02_2faces_50m2.jpg.asset.json";
+import mantaTermica2FacesComparativo from "@/assets/produtos/manta-termica/03_2faces_comparativo_tamanhos.jpg.asset.json";
+import mantaTermica2Faces25 from "@/assets/produtos/manta-termica/04_2faces_25m2.jpg.asset.json";
+import mantaTermica2Faces10 from "@/assets/produtos/manta-termica/05_2faces_10m2.jpg.asset.json";
+import mantaTermica1Face50 from "@/assets/produtos/manta-termica/06_1face_50m2.jpg.asset.json";
+import mantaTermica1FaceComparativo from "@/assets/produtos/manta-termica/07_1face_comparativo_tamanhos.jpg.asset.json";
+import mantaTermica1Face25 from "@/assets/produtos/manta-termica/08_1face_25m2.jpg.asset.json";
+import mantaTermica1Face10 from "@/assets/produtos/manta-termica/09_1face_10m2.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -903,10 +912,11 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
     },
   ],
   "manta-termica": [
-    { src: "", alt: "Manta térmica aluminizada instalada", legenda: "Manta Térmica Aluminizada 2F" },
-  ],
-  "manta-asfaltica": [
-    { src: "", alt: "Manta asfáltica terracota", legenda: "Manta Asfáltica Aluminizada" },
+    {
+      src: mantaTermicaCapa.url,
+      alt: "Rolos de manta térmica aluminizada na prateleira da Rocha Telhas",
+      legenda: "Manta Térmica Aluminizada na loja",
+    },
   ],
   "acessorios": [
     {
@@ -999,6 +1009,65 @@ export function galeriaAcessoriosCalha(
     : `${tipoCalha}|${acessorio}`;
   const especifica = ACESSORIOS_CALHA[chave];
   return especifica && especifica.length ? especifica : capa;
+}
+
+export const capaMantaTermica = mantaTermicaCapa.url;
+
+const MANTA_TERMICA_COMPARATIVO: Record<string, ImagemProduto> = {
+  "1F": {
+    src: mantaTermica1FaceComparativo.url,
+    alt: "Comparativo dos tamanhos de Manta Térmica Aluminizada 1 Face",
+    legenda: "1 Face — comparativo dos tamanhos",
+  },
+  "2F": {
+    src: mantaTermica2FacesComparativo.url,
+    alt: "Comparativo dos tamanhos de Manta Térmica Aluminizada 2 Faces",
+    legenda: "2 Faces — comparativo dos tamanhos",
+  },
+};
+
+const MANTA_TERMICA: Record<string, ImagemProduto> = {
+  "2F|50 m²": {
+    src: mantaTermica2Faces50.url,
+    alt: "Manta Térmica Aluminizada 2 Faces 50 m²",
+    legenda: "2 Faces — rolo 50 m²",
+  },
+  "2F|25 m²": {
+    src: mantaTermica2Faces25.url,
+    alt: "Manta Térmica Aluminizada 2 Faces 25 m²",
+    legenda: "2 Faces — rolo 25 m²",
+  },
+  "2F|10 m²": {
+    src: mantaTermica2Faces10.url,
+    alt: "Manta Térmica Aluminizada 2 Faces 10 m²",
+    legenda: "2 Faces — rolo 10 m²",
+  },
+  "1F|50 m²": {
+    src: mantaTermica1Face50.url,
+    alt: "Manta Térmica Aluminizada 1 Face 50 m²",
+    legenda: "1 Face — rolo 50 m²",
+  },
+  "1F|25 m²": {
+    src: mantaTermica1Face25.url,
+    alt: "Manta Térmica Aluminizada 1 Face 25 m²",
+    legenda: "1 Face — rolo 25 m²",
+  },
+  "1F|10 m²": {
+    src: mantaTermica1Face10.url,
+    alt: "Manta Térmica Aluminizada 1 Face 10 m²",
+    legenda: "1 Face — rolo 10 m²",
+  },
+};
+
+export function galeriaMantaTermica(faces?: string, tamanho?: string): ImagemProduto[] {
+  const capa = imagensCalhas["manta-termica"] ?? [];
+  if (!faces || !tamanho) return capa;
+
+  const principal = MANTA_TERMICA[`${faces}|${tamanho}`];
+  if (!principal) return capa;
+
+  const comparativo = MANTA_TERMICA_COMPARATIVO[faces];
+  return comparativo ? [principal, comparativo] : [principal];
 }
 
 

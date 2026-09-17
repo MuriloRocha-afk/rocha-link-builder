@@ -594,7 +594,7 @@ export const CATEGORIES: CatalogCategory[] = [
     title: "Calhas, Rufos & Funilaria",
     short: "Calhas & Rufos",
     description:
-      "Calha galvanizada, rufos e mantas térmicas e asfálticas.",
+      "Calha galvanizada, rufos, manta térmica e acessórios.",
     image: fotoCalhasCat.url,
     ctaLabel: "Ver Produtos",
     items: [
@@ -637,10 +637,10 @@ export const CATEGORIES: CatalogCategory[] = [
       },
       {
         slug: "mantas-vedacao",
-        name: "Mantas Térmicas e Asfálticas",
+        name: "Manta Térmica Aluminizada",
         image: vedacao,
         summary:
-          "Manta térmica de alumínio dupla face e fitas asfálticas para vedação completa da cobertura.",
+          "Manta térmica de alumínio para conforto térmico sob telhas metálicas, fibrocimento, PVC e cerâmica.",
         showQty: true,
         selectors: [
           {
@@ -648,7 +648,6 @@ export const CATEGORIES: CatalogCategory[] = [
             label: "Escolha o item",
             options: [
               { value: "Manta Térmica Alumínio Dupla Face", label: "Manta Térmica Alumínio Dupla Face", image: vedacao, note: "Rolos de 25 m² e 50 m²" },
-              { value: "Fita Asfáltica Multiuso", label: "Fita Asfáltica Multiuso", image: vedacao, note: "Vedação de rufos, calhas e trincas" },
             ],
           },
           {
@@ -663,7 +662,6 @@ export const CATEGORIES: CatalogCategory[] = [
         ],
         specs: [
           { label: "Manta Térmica", value: "Alumínio dupla face (25 e 50 m²)" },
-          { label: "Fita Asfáltica", value: "Multiuso para vedação e calhas" },
           { label: "Aplicação", value: "Coberturas, rufos e trincas" },
           { label: "Disponibilidade", value: "Pronta entrega" },
         ],

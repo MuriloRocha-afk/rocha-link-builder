@@ -131,15 +131,6 @@ const REGRAS: Regra[] = [
         quantidadeSugerida: 5,
         categoria: "Telhas",
       },
-      {
-        id: "manta-asfaltica-10x10m",
-        nome: "Manta Asfáltica Aluminizada 10cm × 10m",
-        descricao: "Impermeabilização em calhas e rufos",
-        emoji: "🛡️",
-        unidade: "un",
-        quantidadeSugerida: 1,
-        categoria: "Calhas",
-      },
     ],
   },
   {

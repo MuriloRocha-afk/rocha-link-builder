@@ -24,14 +24,6 @@ const MANTAS: Manta[] = [
     rolo: 50,
     nota: "Reduz a temperatura sob o telhado. Aplicada sobre caibros/terças.",
   },
-  {
-    id: "asfaltica",
-    label: "Manta asfáltica",
-    slug: "manta-asfaltica",
-    largura: 1,
-    rolo: 10,
-    nota: "Impermeabilização de lajes, calhas e rufos.",
-  },
 ];
 
 function Campo({

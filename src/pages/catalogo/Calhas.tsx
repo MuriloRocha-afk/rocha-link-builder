@@ -2,6 +2,7 @@ import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/Emoji
 import capaCalhaCardAsset from "@/assets/produtos/cards-calhas/capa_card_calha_galvanizada.jpg.asset.json";
 import capaRufoCardAsset from "@/assets/produtos/cards-calhas/capa_card_rufo_galvanizado.jpg.asset.json";
 import capaAcessoriosCardAsset from "@/assets/produtos/cards-calhas/capa_card_acessorios_calha.jpg.asset.json";
+import capaMantaTermicaAsset from "@/assets/produtos/manta-termica/01_capa_foto_prateleira.jpg.asset.json";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -29,18 +30,10 @@ export const CARDS: EmojiSubcard[] = [
     slug: "manta-termica",
     name: "Manta Térmica Aluminizada",
     emoji: "🌡️",
+    image: capaMantaTermicaAsset.url,
     tags: ["1F e 2F", "10 a 50m²"],
     description:
       "1 face e 2 faces, de 10m² a 50m². Reduz até 70% do calor radiante. Essencial sob telhas metálicas e fibrocimento.",
-    cta: "Escolher e cotar",
-  },
-  {
-    slug: "manta-asfaltica",
-    name: "Manta Asfáltica",
-    emoji: "🛡️",
-    tags: ["Impermeabilização", "Terracota"],
-    description:
-      "Aluminizada Terracota em 10cm e 20cm de largura por 10m. Impermeabilização de calhas, rufos e junções.",
     cta: "Escolher e cotar",
   },
   {
@@ -67,8 +60,8 @@ const GRUPOS = [
     id: "mantas",
     label: "Mantas & Impermeabilização",
     descricao:
-      "Manta térmica aluminizada e manta asfáltica para conforto térmico e vedação definitiva.",
-    slugs: ["manta-termica", "manta-asfaltica"],
+      "Manta térmica aluminizada para conforto térmico sob telhas metálicas, fibrocimento, PVC e cerâmica.",
+    slugs: ["manta-termica"],
   },
 ];
 
@@ -76,7 +69,7 @@ export default function Calhas() {
   return (
     <CategoriaSubcardPage
       titulo="🌧️ Calhas, Rufos & Funilaria"
-      subtitulo="Calha galvanizada, rufos, mantas térmicas e asfálticas. Escolha o produto."
+      subtitulo="Calha galvanizada, rufos, manta térmica e acessórios. Escolha o produto."
       breadcrumb="Calhas, Rufos & Funilaria"
       eyebrow="Escolha o produto"
       cards={CARDS}

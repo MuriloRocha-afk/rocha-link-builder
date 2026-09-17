@@ -866,40 +866,6 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       ["NCM", "68071000"],
     ],
   },
-  "manta-asfaltica": {
-    badges: [
-      { icone: "💧", texto: "100% impermeável" },
-      { icone: "☀️", texto: "Face aluminizada" },
-      { icone: "📐", texto: "10cm e 20cm" },
-      { icone: "🔥", texto: "Aplicação a quente" },
-    ],
-    motivos: [
-      {
-        titulo: "Veda emendas e junções",
-        descricao:
-          "Ideal para emendas de calha, rufos, encontros de parede e pequenos reparos no telhado.",
-      },
-      {
-        titulo: "Alumínio reflete o calor",
-        descricao: "A face aluminizada terracota protege o asfalto do sol e aumenta a durabilidade.",
-      },
-      {
-        titulo: "Adesão imediata",
-        descricao: "Autoadesiva com aquecimento leve, cola em metal, alvenaria, fibrocimento e PVC.",
-      },
-      {
-        titulo: "Rolo prático de 10m",
-        descricao: "Duas larguras para escolher conforme o tamanho da junção a impermeabilizar.",
-      },
-    ],
-    especificacoes: [
-      ["Material", "Asfalto elastomérico + alumínio"],
-      ["Cor", "Terracota"],
-      ["Larguras", "10cm e 20cm"],
-      ["Comprimento", "10m por rolo"],
-      ["Aplicação", "Calhas, rufos e junções"],
-    ],
-  },
   rufo: {
     badges: [
       { icone: "🛡️", texto: "Aço galvanizado" },
