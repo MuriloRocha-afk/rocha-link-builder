@@ -131,7 +131,7 @@ const GALLERY: GalleryItem[] = [
   {
     src: video4.url,
     alt: "Corte de sarrafa de amescla na serra da Rocha Telhas",
-    label: "Corte de sarrafa amescla",
+    label: "Corte de sarrafo amescla",
     tag: "Tecnologia",
     tipo: "video",
   },
