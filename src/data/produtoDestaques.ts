@@ -1055,7 +1055,7 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       {
         titulo: "Acessório para cada ponto crítico",
         descricao:
-          "Suporte, cabeceira, saída, água furtada e pingadeira cobrem todos os pontos de escoamento e arremate.",
+          "Suporte, cabeceira e saída atendem os pontos essenciais de sustentação, fechamento e escoamento da calha.",
       },
       {
         titulo: "Instalação completa e vedada",

@@ -258,6 +258,17 @@ import calhaPlatibandaIlustra from "@/assets/produtos/calhas_05_acessorio_ilustr
 import rufoCapaReal from "@/assets/produtos/rufos/rufo_capa_foto_real_instalada.jpg.asset.json";
 import rufoPerfil from "@/assets/produtos/rufos/rufo_perfil_todos_cortes.jpg.asset.json";
 import rufoIlustra from "@/assets/produtos/rufos/rufo_ilustracao_instalado.jpg.asset.json";
+// Acessórios de Calha — 01 é foto real da loja; 02..10 são de catálogo/internet (TEMPORÁRIAS, trocar por fotos reais)
+import acessoriosCalhaCapaReal from "@/assets/produtos/acessorios-calha/01_capa_foto_real_instalada.jpg.asset.json";
+import acessoriosCalhaMolduraSuporte from "@/assets/produtos/acessorios-calha/02_moldura_suporte.jpg.asset.json";
+import acessoriosCalhaMolduraCabeceira from "@/assets/produtos/acessorios-calha/03_moldura_cabeceira.jpg.asset.json";
+import acessoriosCalhaMolduraSaidaCentral from "@/assets/produtos/acessorios-calha/04_moldura_saida_central.jpg.asset.json";
+import acessoriosCalhaMolduraSaidaEsquerda from "@/assets/produtos/acessorios-calha/05_moldura_saida_lateral_esquerda.jpg.asset.json";
+import acessoriosCalhaMolduraSaidaDireita from "@/assets/produtos/acessorios-calha/06_moldura_saida_lateral_direita.jpg.asset.json";
+import acessoriosCalhaPlatibandaSuporte from "@/assets/produtos/acessorios-calha/07_platibanda_suporte.jpg.asset.json";
+import acessoriosCalhaPlatibandaCabeceira from "@/assets/produtos/acessorios-calha/08_platibanda_cabeceira.jpg.asset.json";
+import acessoriosCalhaPlatibandaSaidaCentral from "@/assets/produtos/acessorios-calha/09_platibanda_saida_central.jpg.asset.json";
+import acessoriosCalhaPlatibandaSaidaLateral from "@/assets/produtos/acessorios-calha/10_platibanda_saida_lateral.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -897,7 +908,11 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
     { src: "", alt: "Manta asfáltica terracota", legenda: "Manta Asfáltica Aluminizada" },
   ],
   "acessorios": [
-    { src: "", alt: "Acessórios para calha galvanizada Moldura e Platibanda", legenda: "Acessórios — Suportes, Cabeceiras e Saídas" },
+    {
+      src: acessoriosCalhaCapaReal.url,
+      alt: "Telhado com calha instalada e acessórios de captação",
+      legenda: "Acessórios de Calha Galvanizada",
+    },
   ],
 };
 
@@ -936,6 +951,53 @@ export function galeriaRufo(corte?: string): ImagemProduto[] {
   const capa = imagensCalhas.rufo ?? [];
   if (!corte) return capa;
   return RUFO_CORTES.length ? RUFO_CORTES : capa;
+}
+
+export const capaAcessoriosCalha = acessoriosCalhaCapaReal.url;
+
+// TEMPORÁRIO: fotos 02..10 são de catálogo/internet, substituir por fotos reais da loja
+const ACESSORIOS_CALHA: Record<string, ImagemProduto[]> = {
+  "Moldura|Suporte": [
+    { src: acessoriosCalhaMolduraSuporte.url, alt: "Suporte para calha Moldura", legenda: "Suporte — Moldura" },
+  ],
+  "Moldura|Cabeceira": [
+    { src: acessoriosCalhaMolduraCabeceira.url, alt: "Cabeceira para calha Moldura", legenda: "Cabeceira — Moldura" },
+  ],
+  "Moldura|Saída|Central": [
+    { src: acessoriosCalhaMolduraSaidaCentral.url, alt: "Saída central para calha Moldura", legenda: "Saída Central — Moldura" },
+  ],
+  "Moldura|Saída|Lateral Esquerda": [
+    { src: acessoriosCalhaMolduraSaidaEsquerda.url, alt: "Saída lateral esquerda para calha Moldura", legenda: "Saída Lateral Esquerda — Moldura" },
+  ],
+  "Moldura|Saída|Lateral Direita": [
+    { src: acessoriosCalhaMolduraSaidaDireita.url, alt: "Saída lateral direita para calha Moldura", legenda: "Saída Lateral Direita — Moldura" },
+  ],
+  "Platibanda|Suporte": [
+    { src: acessoriosCalhaPlatibandaSuporte.url, alt: "Suporte para calha Platibanda", legenda: "Suporte — Platibanda" },
+  ],
+  "Platibanda|Cabeceira": [
+    { src: acessoriosCalhaPlatibandaCabeceira.url, alt: "Cabeceira para calha Platibanda", legenda: "Cabeceira — Platibanda" },
+  ],
+  "Platibanda|Saída|Central": [
+    { src: acessoriosCalhaPlatibandaSaidaCentral.url, alt: "Saída central para calha Platibanda", legenda: "Saída Central — Platibanda" },
+  ],
+  "Platibanda|Saída|Lateral": [
+    { src: acessoriosCalhaPlatibandaSaidaLateral.url, alt: "Saída lateral para calha Platibanda", legenda: "Saída Lateral — Platibanda" },
+  ],
+};
+
+export function galeriaAcessoriosCalha(
+  tipoCalha?: string,
+  acessorio?: string,
+  posicao?: string | null,
+): ImagemProduto[] {
+  const capa = imagensCalhas.acessorios ?? [];
+  if (!tipoCalha || !acessorio) return capa;
+  const chave = acessorio === "Saída"
+    ? `${tipoCalha}|${acessorio}|${posicao ?? ""}`
+    : `${tipoCalha}|${acessorio}`;
+  const especifica = ACESSORIOS_CALHA[chave];
+  return especifica && especifica.length ? especifica : capa;
 }
 
 

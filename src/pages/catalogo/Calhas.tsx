@@ -48,7 +48,7 @@ export const CARDS: EmojiSubcard[] = [
     emoji: "🔧",
     tags: ["Moldura", "Platibanda"],
     description:
-      "Suporte, cabeceira, saída, água furtada e pingadeira para calha galvanizada Moldura e Platibanda.",
+      "Suporte, cabeceira e saída para calha galvanizada Moldura e Platibanda.",
     cta: "Escolher e cotar",
   },
 ];

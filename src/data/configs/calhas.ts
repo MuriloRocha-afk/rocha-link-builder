@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaCalhaGalvanizada, galeriaRufo } from "@/data/imagensProduto";
+import { galeriaAcessoriosCalha, galeriaCalhaGalvanizada, galeriaRufo } from "@/data/imagensProduto";
 
 
 const BC = (nome: string) => [
@@ -196,8 +196,6 @@ const TIPOS_ACESSORIO = [
   { valor: "Suporte", sub: "Sustenta a calha na estrutura" },
   { valor: "Cabeceira", sub: "Fecha a ponta da calha" },
   { valor: "Saída", sub: "Ponto de descida para o condutor" },
-  { valor: "Água Furtada", sub: "Rincão — encontro entre duas águas" },
-  { valor: "Pingadeira", sub: "Arremate de borda, direciona o gotejamento" },
 ];
 
 const posicaoAcessorio = (s: Record<string, string>) => {
@@ -211,16 +209,11 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   breadcrumb: BC("Acessórios de Calha"),
   titulo: "Acessórios de Calha",
   subtitulo:
-    "Suporte, cabeceira, saída, água furtada e pingadeira para calha galvanizada Moldura e Platibanda.",
+    "Suporte, cabeceira e saída para calha galvanizada Moldura e Platibanda.",
   galeriaTitulo: "Acessórios de Calha",
-  galeriaPlaceholder: "Selecione o tipo de calha para ver as fotos",
+  galeriaPlaceholder: "Acessórios para calha galvanizada",
   produtoKey: "acessorios",
-  imagens: (s) =>
-    s.acessorio
-      ? [{ src: "", alt: `${s.acessorio} para calha ${s.tipoCalha}` }]
-      : s.tipoCalha
-        ? [{ src: "", alt: `Acessórios para calha ${s.tipoCalha}` }]
-        : [],
+  imagens: (s) => galeriaAcessoriosCalha(s.tipoCalha, s.acessorio, posicaoAcessorio(s)),
   categoria: "Calhas",
   passos: [
     {
@@ -268,7 +261,7 @@ export const CONFIG_ACESSORIOS_CALHA: ConfiguradorConfig = {
   especificacoes: [
     ["Material", "Chapa galvanizada"],
     ["Sistemas", "Moldura e Platibanda"],
-    ["Acessórios", "Suporte, cabeceira, saída, água furtada e pingadeira"],
+    ["Acessórios", "Suporte, cabeceira e saída"],
     ["Bitola", "28/33"],
   ],
   resumoNome: (s) => `${s.acessorio ?? "Acessório"} de Calha`,
