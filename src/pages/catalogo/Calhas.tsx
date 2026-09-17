@@ -1,6 +1,7 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
 import capaCalhaCardAsset from "@/assets/produtos/cards-calhas/capa_card_calha_galvanizada.jpg.asset.json";
 import capaRufoCardAsset from "@/assets/produtos/cards-calhas/capa_card_rufo_galvanizado.jpg.asset.json";
+import capaAcessoriosCardAsset from "@/assets/produtos/cards-calhas/capa_card_acessorios_calha.jpg.asset.json";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -46,6 +47,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "acessorios",
     name: "Acessórios de Calha",
     emoji: "🔧",
+    image: capaAcessoriosCardAsset.url,
     tags: ["Moldura", "Platibanda"],
     description:
       "Suporte, cabeceira e saída para calha galvanizada Moldura e Platibanda.",

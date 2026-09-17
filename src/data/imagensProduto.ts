@@ -262,7 +262,8 @@ import rufoIlustra from "@/assets/produtos/rufos/rufo_ilustracao_instalado.jpg.a
 import acessoriosCalhaCapaReal from "@/assets/produtos/acessorios-calha/01_capa_foto_real_instalada.jpg.asset.json";
 import acessoriosCalhaMolduraSuporte from "@/assets/produtos/acessorios-calha/02_moldura_suporte.jpg.asset.json";
 import acessoriosCalhaMolduraCabeceira from "@/assets/produtos/acessorios-calha/03_moldura_cabeceira.jpg.asset.json";
-import acessoriosCalhaMolduraSaidaCentral from "@/assets/produtos/acessorios-calha/04_moldura_saida_central.jpg.asset.json";
+// Prompt 48: foto substituída pela nova imagem real da Saída Central (Moldura) — antiga removida do CDN
+import acessoriosCalhaMolduraSaidaCentral from "@/assets/produtos/acessorios-calha/04_moldura_saida_central_v2.jpg.asset.json";
 import acessoriosCalhaMolduraSaidaEsquerda from "@/assets/produtos/acessorios-calha/05_moldura_saida_lateral_esquerda.jpg.asset.json";
 import acessoriosCalhaMolduraSaidaDireita from "@/assets/produtos/acessorios-calha/06_moldura_saida_lateral_direita.jpg.asset.json";
 import acessoriosCalhaPlatibandaSuporte from "@/assets/produtos/acessorios-calha/07_platibanda_suporte.jpg.asset.json";
