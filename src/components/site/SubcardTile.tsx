@@ -41,7 +41,7 @@ export function SubcardTile({
             src={image}
             alt=""
             aria-hidden="true"
-            loading="lazy"
+            loading="eager"
             className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.05]"
           />
         ) : (
