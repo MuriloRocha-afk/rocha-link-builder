@@ -32,7 +32,6 @@ import {
   CONFIG_CALHA_ALGE,
   CONFIG_RUFO,
   CONFIG_MANTA_TERMICA,
-  CONFIG_MANTA_ASFALTICA,
   CONFIG_ACESSORIOS_CALHA,
 } from "@/data/configs/calhas";
 import {
@@ -233,7 +232,6 @@ const EXTRAS: Record<string, Extra> = {
   "calha-alge": { config: CONFIG_CALHA_ALGE, fotos: todasDoMapa(imagensCalhas) },
   rufo: { config: CONFIG_RUFO, fotos: imagensCalhas.rufo ?? [] },
   "manta-termica": { config: CONFIG_MANTA_TERMICA },
-  "manta-asfaltica": { config: CONFIG_MANTA_ASFALTICA },
   acessorios: { config: CONFIG_ACESSORIOS_CALHA, fotos: imagensCalhas.acessorios ?? [] },
 
   // Fixadores
@@ -311,7 +309,7 @@ export const SECOES_PDF: SecaoPdf[] = [
     id: "calhas",
     titulo: "Calhas, Rufos e Funilaria",
     descricao:
-      "Calhas e rufos galvanizados, mantas térmicas e asfálticas e todos os acessórios de captação.",
+      "Calhas e rufos galvanizados, manta térmica e todos os acessórios de captação.",
     produtos: montar("calhas", CARDS_CALHAS),
   },
   {

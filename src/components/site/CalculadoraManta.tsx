@@ -24,14 +24,6 @@ const MANTAS: Manta[] = [
     rolo: 50,
     nota: "Reduz a temperatura sob o telhado. Aplicada sobre caibros/terças.",
   },
-  {
-    id: "asfaltica",
-    label: "Manta asfáltica",
-    slug: "manta-asfaltica",
-    largura: 1,
-    rolo: 10,
-    nota: "Impermeabilização de lajes, calhas e rufos.",
-  },
 ];
 
 function Campo({
@@ -71,7 +63,9 @@ export function CalculadoraManta() {
   const [sobreposicao, setSobreposicao] = useState(10);
   const [mantaId, setMantaId] = useState("termica");
 
-  const manta = MANTAS.find((m) => m.id === mantaId) ?? MANTAS[0]!;
+  const manta = MANTAS.find((m) => m.id === mantaId) ?? MANTAS[0];
+
+  if (!manta) return null;
 
   const areaTelhado = useMemo(() => {
     if (area > 0) return area;

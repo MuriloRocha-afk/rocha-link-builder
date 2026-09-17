@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaAcessoriosCalha, galeriaCalhaGalvanizada, galeriaRufo } from "@/data/imagensProduto";
+import { galeriaAcessoriosCalha, galeriaCalhaGalvanizada, galeriaMantaTermica, galeriaRufo } from "@/data/imagensProduto";
 
 
 const BC = (nome: string) => [
@@ -95,7 +95,7 @@ export const CONFIG_RUFO: ConfiguradorConfig = {
     {
       titulo: "Instalação",
       texto:
-        "A aba superior é fixada na parede e recebe vedação (manta asfáltica ou selante) na linha de topo; a aba inferior fica sobre a telha, no sentido do escoamento. Entre peças, mantenha sobreposição de aproximadamente 10 cm, sempre no sentido da descida da água.",
+        "A aba superior é fixada na parede e recebe selante na linha de topo; a aba inferior fica sobre a telha, no sentido do escoamento. Entre peças, mantenha sobreposição de aproximadamente 10 cm, sempre no sentido da descida da água.",
     },
     {
       titulo: "Disponibilidade",
@@ -117,11 +117,8 @@ export const CONFIG_MANTA_TERMICA: ConfiguradorConfig = {
   titulo: "🌡️ Manta Térmica Aluminizada",
   subtitulo: "Reduz até 70% do calor radiante. 1 face e 2 faces, de 10m² a 50m².",
   galeriaTitulo: "Manta Térmica Aluminizada",
-  galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) =>
-    s.faces
-      ? [{ src: "", alt: `Manta Térmica Aluminizada ${s.faces === "1F" ? "1 Face" : "2 Faces"}` }]
-      : [],
+  galeriaPlaceholder: "Manta térmica na prateleira da loja",
+  imagens: (s) => galeriaMantaTermica(s.faces, s.tamanho),
   categoria: "Calhas",
   passos: [
     {
@@ -156,40 +153,6 @@ export const CONFIG_MANTA_TERMICA: ConfiguradorConfig = {
   idItem: (s) => `manta-termica-${s.faces}-${s.tamanho}`,
   mensagem: (s, q) =>
     `🌡️ *Manta Térmica Aluminizada*\n• Tipo: ${s.faces}\n• Tamanho do rolo: ${s.tamanho}\n• Quantidade: ${q.qtd ?? 1} rolos\n• Cobertura total: ~${((q.qtd as number) ?? 1) * parseFloat(s.tamanho)} m²`,
-};
-
-export const CONFIG_MANTA_ASFALTICA: ConfiguradorConfig = {
-  breadcrumb: BC("Manta Asfáltica"),
-  titulo: "🛡️ Manta Asfáltica Aluminizada",
-  subtitulo:
-    "Terracota em 10cm e 20cm de largura × 10m. Impermeabilização de calhas, rufos e junções.",
-  galeriaTitulo: "Manta Asfáltica Aluminizada",
-  galeriaPlaceholder: "Foto em breve",
-  produtoKey: "manta-asfaltica",
-
-  imagens: () => [{ src: "", alt: "Manta Asfáltica Aluminizada Terracota" }],
-  categoria: "Calhas",
-  passos: [
-    {
-      chave: "largura",
-      titulo: "Largura",
-      tipo: "grid2",
-      opcoes: [{ valor: "10 cm" }, { valor: "20 cm" }],
-    },
-    {
-      chave: "qtd",
-      titulo: "Quantidade",
-      tipo: "quantidade",
-      unidade: "rolos de 10m",
-      padrao: 1,
-    },
-  ],
-  resumoNome: () => "Manta Asfáltica Aluminizada — Terracota",
-  resumoDetalhe: (s, q) => `${s.largura} × 10m · ${q.qtd ?? 1} rolos`,
-  unidadeResumo: () => "rolos de 10m",
-  idItem: (s) => `manta-asfaltica-${s.largura}`,
-  mensagem: (s, q) =>
-    `🛡️ *Manta Asfáltica Aluminizada — Terracota*\n• Largura: ${s.largura}\n• Comprimento por rolo: 10m\n• Quantidade: ${q.qtd ?? 1} rolos`,
 };
 
 const TIPOS_ACESSORIO = [
