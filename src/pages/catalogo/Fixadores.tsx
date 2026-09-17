@@ -89,7 +89,7 @@ const GRUPOS = [
 export default function Fixadores() {
   return (
     <CategoriaSubcardPage
-      titulo="🔩 Fixadores & Acessórios de Instalação"
+      titulo=" Fixadores & Acessórios de Instalação"
       subtitulo="Parafusos, pregos, arames e tudo para fixação de telhas e estruturas de madeira."
       breadcrumb="Fixadores & Acessórios"
       eyebrow="Escolha a categoria"
