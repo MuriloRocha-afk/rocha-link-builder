@@ -400,13 +400,6 @@ const fixadores: ItemBusca[] = [
     termos: ["arame", "arame recozido", "amarracao de telha", "arame galvanizado"],
   },
   {
-    id: "buchas-arruelas",
-    nome: "Buchas e Arruelas",
-    categoria: "Fixadores",
-    rota: "/catalogo/fixadores/buchas-arruelas",
-    termos: ["bucha", "arruela", "vedacao", "chumbador"],
-  },
-  {
     id: "ferramentas",
     nome: "Ferramentas",
     categoria: "Fixadores",
