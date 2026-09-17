@@ -68,7 +68,7 @@ const GRUPOS = [
 export default function Calhas() {
   return (
     <CategoriaSubcardPage
-      titulo="🌧️ Calhas, Rufos & Funilaria"
+      titulo=" Calhas, Rufos & Funilaria"
       subtitulo="Calha galvanizada, rufos, manta térmica e acessórios. Escolha o produto."
       breadcrumb="Calhas, Rufos & Funilaria"
       eyebrow="Escolha o produto"
