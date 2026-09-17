@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaCalhaGalvanizada } from "@/data/imagensProduto";
+import { galeriaRufo } from "@/data/imagensProduto";
 
 
 const BC = (nome: string) => [
@@ -54,7 +54,7 @@ export const CONFIG_RUFO: ConfiguradorConfig = {
     "Arremate entre telhado e parede. Impermeabilização definitiva em qualquer cobertura.",
   galeriaTitulo: "Rufo Galvanizado",
   galeriaPlaceholder: "Selecione o corte para ver as fotos",
-  imagens: (s) => (s.corte ? [{ src: "", alt: `Rufo Galvanizado ${s.corte}` }] : []),
+  imagens: (s) => galeriaRufo(s.corte),
   categoria: "Calhas",
   passos: [
     {
