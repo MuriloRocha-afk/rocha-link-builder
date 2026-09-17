@@ -255,6 +255,9 @@ import calhaMolduraPerfil from "@/assets/produtos/calhas_02_calha_moldura_todos_
 import calhaPlatibandaPerfil from "@/assets/produtos/calhas_03_calha_platibanda_todos_tamanhos.jpg.asset.json";
 import calhaMolduraIlustra from "@/assets/produtos/calhas_04_acessorio_ilustracao_moldura.jpg.asset.json";
 import calhaPlatibandaIlustra from "@/assets/produtos/calhas_05_acessorio_ilustracao_platibanda.jpg.asset.json";
+import rufoCapaReal from "@/assets/produtos/rufos/rufo_capa_foto_real_instalada.jpg.asset.json";
+import rufoPerfil from "@/assets/produtos/rufos/rufo_perfil_todos_cortes.jpg.asset.json";
+import rufoIlustra from "@/assets/produtos/rufos/rufo_ilustracao_instalado.jpg.asset.json";
 import lixasCapa from "@/assets/produtos/lixas/01_capa_lixas.jpg.asset.json";
 import lixaMassa60 from "@/assets/produtos/lixas/02_lixa_massa_grao60.jpg.asset.json";
 import lixaMassa100 from "@/assets/produtos/lixas/03_lixa_massa_grao100.jpg.asset.json";
@@ -881,7 +884,11 @@ export const imagensCalhas: Record<string, ImagemProduto[]> = {
     },
   ],
   rufo: [
-    { src: "", alt: "Rufo galvanizado instalado", legenda: "Rufo Galvanizado" },
+    {
+      src: rufoCapaReal.url,
+      alt: "Rufo galvanizado instalado no telhado da Rocha Telhas",
+      legenda: "Rufo Galvanizado instalado",
+    },
   ],
   "manta-termica": [
     { src: "", alt: "Manta térmica aluminizada instalada", legenda: "Manta Térmica Aluminizada 2F" },
@@ -914,6 +921,24 @@ export function galeriaCalhaGalvanizada(corte?: string): ImagemProduto[] {
   const especifica = CALHA_CORTES[corte];
   return especifica && especifica.length ? especifica : capa;
 }
+
+export const capaRufo = rufoCapaReal.url;
+
+// TEMPORÁRIO: fotos de catálogo/internet — substituir por fotos reais da loja
+// O rufo só tem 1 seletor (Corte 25/33); o corte não muda a aparência, então
+// uma única foto de perfil serve para ambos os cortes e todos os comprimentos.
+const RUFO_CORTES: ImagemProduto[] = [
+  { src: rufoPerfil.url, alt: "Rufo galvanizado — perfil em L", legenda: "Perfil do Rufo Galvanizado" },
+  { src: rufoIlustra.url, alt: "Ilustração de rufo instalado no encontro entre parede e telha", legenda: "Como é instalado (ilustração)" },
+];
+
+export function galeriaRufo(corte?: string): ImagemProduto[] {
+  const capa = imagensCalhas.rufo ?? [];
+  if (!corte) return capa;
+  return RUFO_CORTES.length ? RUFO_CORTES : capa;
+}
+
+
 
 
 
