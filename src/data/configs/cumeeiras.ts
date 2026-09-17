@@ -3,9 +3,9 @@ import type { ConfiguradorConfig, Selecao, OpcaoConfig } from "@/components/site
 const VERIFICAR = "Verificar disponibilidade";
 
 export const PECAS_CUMEEIRA: OpcaoConfig[] = [
-  { valor: "Cumeeira", emoji: "🔺", sub: "Arremate do topo (espinha) do telhado" },
-  { valor: "Espigão", emoji: "📐", sub: "Arremate das arestas inclinadas (quatro águas)" },
-  { valor: "Paulistinha", label: "Paulistinha (Capa Lateral)", emoji: "🧱", sub: "Capa lateral / arremate de borda" },
+  { valor: "Cumeeira", emoji: "\n", sub: "Arremate do topo (espinha) do telhado" },
+  { valor: "Espigão", emoji: "\n", sub: "Arremate das arestas inclinadas (quatro águas)" },
+  { valor: "Paulistinha", label: "Paulistinha (Capa Lateral)", emoji: "\n", sub: "Capa lateral / arremate de borda" },
 ];
 
 type MaterialDef = {
