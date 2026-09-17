@@ -14,13 +14,13 @@ const VERSOES = [
     value: "cristal",
     nome: "Cristal",
     descricao: "Transparente. Máxima luminosidade natural.",
-    emoji: "☀️",
+    emoji: "",
   },
   {
     value: "grecca",
     nome: "Grecca",
     descricao: "Acabamento fumê/bronze. Reduz ofuscamento e filtra UV.",
-    emoji: "🟫",
+    emoji: "",
   },
 ];
 
