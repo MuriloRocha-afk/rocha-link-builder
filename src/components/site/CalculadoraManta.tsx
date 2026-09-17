@@ -63,7 +63,9 @@ export function CalculadoraManta() {
   const [sobreposicao, setSobreposicao] = useState(10);
   const [mantaId, setMantaId] = useState("termica");
 
-  const manta = MANTAS.find((m) => m.id === mantaId) ?? MANTAS[0]!;
+  const manta = MANTAS.find((m) => m.id === mantaId) ?? MANTAS[0];
+
+  if (!manta) return null;
 
   const areaTelhado = useMemo(() => {
     if (area > 0) return area;

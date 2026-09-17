@@ -95,7 +95,7 @@ export const CONFIG_RUFO: ConfiguradorConfig = {
     {
       titulo: "Instalação",
       texto:
-        "A aba superior é fixada na parede e recebe vedação (manta asfáltica ou selante) na linha de topo; a aba inferior fica sobre a telha, no sentido do escoamento. Entre peças, mantenha sobreposição de aproximadamente 10 cm, sempre no sentido da descida da água.",
+        "A aba superior é fixada na parede e recebe selante na linha de topo; a aba inferior fica sobre a telha, no sentido do escoamento. Entre peças, mantenha sobreposição de aproximadamente 10 cm, sempre no sentido da descida da água.",
     },
     {
       titulo: "Disponibilidade",
