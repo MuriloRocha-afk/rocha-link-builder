@@ -1,10 +1,13 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
+import capaCalhaCardAsset from "@/assets/produtos/cards-calhas/capa_card_calha_galvanizada.jpg.asset.json";
+import capaRufoCardAsset from "@/assets/produtos/cards-calhas/capa_card_rufo_galvanizado.jpg.asset.json";
 
 export const CARDS: EmojiSubcard[] = [
   {
     slug: "calha-alge",
     name: "Calha Galvanizada",
     emoji: "🌧️",
+    image: capaCalhaCardAsset.url,
     badge: "Campeão de Vendas",
     tags: ["Galvanizada", "Moldura e Platibanda", "2m a 6m"],
     description:
@@ -15,6 +18,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "rufo",
     name: "Rufo Galvanizado",
     emoji: "🏠",
+    image: capaRufoCardAsset.url,
     tags: ["Galvanizado", "Corte 25 e 33", "2m a 6m"],
     description:
       "Rufo galvanizado nos cortes 25 e 33, de 2,0m a 6,0m. Arremate entre telhado e parede, impermeabilização definitiva.",
