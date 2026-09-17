@@ -234,7 +234,7 @@ const EXTRAS: Record<string, Extra> = {
   rufo: { config: CONFIG_RUFO, fotos: imagensCalhas.rufo ?? [] },
   "manta-termica": { config: CONFIG_MANTA_TERMICA },
   "manta-asfaltica": { config: CONFIG_MANTA_ASFALTICA },
-  acessorios: { config: CONFIG_ACESSORIOS_CALHA },
+  acessorios: { config: CONFIG_ACESSORIOS_CALHA, fotos: imagensCalhas.acessorios ?? [] },
 
   // Fixadores
   "parafusos-telha": { config: CONFIG_PARAFUSOS_TELHA },
