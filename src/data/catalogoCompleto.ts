@@ -231,7 +231,7 @@ const EXTRAS: Record<string, Extra> = {
 
   // Calhas
   "calha-alge": { config: CONFIG_CALHA_ALGE, fotos: todasDoMapa(imagensCalhas) },
-  rufo: { config: CONFIG_RUFO },
+  rufo: { config: CONFIG_RUFO, fotos: imagensCalhas.rufo ?? [] },
   "manta-termica": { config: CONFIG_MANTA_TERMICA },
   "manta-asfaltica": { config: CONFIG_MANTA_ASFALTICA },
   acessorios: { config: CONFIG_ACESSORIOS_CALHA },
