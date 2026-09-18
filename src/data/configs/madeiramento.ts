@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaTabeira } from "@/data/imagensProduto";
+import { galeriaDeck, galeriaTabeira } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -313,9 +313,8 @@ export const CONFIG_TABEIRAS_DECK: ConfiguradorConfig = {
   titulo: "Deck",
   subtitulo: "Deck de cumaru mesclado, garapeia e pinus tratado, calculado por m².",
   galeriaTitulo: "Deck",
-  galeriaPlaceholder: "Selecione uma categoria para ver as fotos",
-  imagens: (s) =>
-    s.categoria ? [{ src: "", alt: `Deck ${especieDeck(s.categoria)}` }] : [],
+  galeriaPlaceholder: "Deck",
+  imagens: (s) => galeriaDeck(s.categoria),
   categoria: "Madeiramento",
   passos: [
     { chave: "categoria", titulo: "Tipo de Deck", tipo: "grid2", opcoes: CAT_DECK },

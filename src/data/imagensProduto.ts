@@ -85,6 +85,12 @@ import tabeiraM4 from "@/assets/produtos/tabeira/04_desenhada_modelo4.jpg.asset.
 import tabeiraM5 from "@/assets/produtos/tabeira/05_desenhada_modelo5.jpg.asset.json";
 import tabeiraM6 from "@/assets/produtos/tabeira/06_lisa_boleada_modelo6.jpg.asset.json";
 import tabeiraM7 from "@/assets/produtos/tabeira/07_lisa_boleada_modelo7.jpg.asset.json";
+import deckCumaru1 from "@/assets/produtos/deck/01_capa_e_cumaru_1.jpg.asset.json";
+import deckCumaru2 from "@/assets/produtos/deck/02_cumaru_2.jpg.asset.json";
+import deckGarapeira1 from "@/assets/produtos/deck/03_garapeira_1.jpg.asset.json";
+import deckGarapeira2 from "@/assets/produtos/deck/04_garapeira_2.jpg.asset.json";
+import deckPinus1 from "@/assets/produtos/deck/05_pinus_1.jpg.asset.json";
+import deckPinus2 from "@/assets/produtos/deck/06_pinus_2.jpg.asset.json";
 import madeiritCompensadoVermelho from "@/assets/produtos/madeirit/02_compensado_pilha_vermelho.jpg.asset.json";
 import madeiritCoresVariadas from "@/assets/produtos/madeirit/03_pilhas_cores_variadas.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
@@ -1576,4 +1582,30 @@ export const capaTabeira: ImagemProduto = {
 export function galeriaTabeira(modelo?: string): ImagemProduto[] {
   const especifica = modelo ? TABEIRA_MODELOS[modelo] : undefined;
   return [especifica ?? capaTabeira];
+}
+
+// DECK — capa antes da seleção e galeria própria para cada madeira
+export const capaDeck: ImagemProduto = {
+  src: deckCumaru1.url,
+  alt: "Deck de Cumaru instalado ao redor de piscina",
+  legenda: "Deck Cumaru",
+};
+
+const GALERIAS_DECK: Record<string, ImagemProduto[]> = {
+  "Deck Cumaru Mesclado": [
+    capaDeck,
+    { src: deckCumaru2.url, alt: "Deck de Cumaru instalado em área externa", legenda: "Deck Cumaru" },
+  ],
+  "Deck Garapeia": [
+    { src: deckGarapeira1.url, alt: "Deck de Garapeira instalado ao redor de piscina", legenda: "Deck Garapeira" },
+    { src: deckGarapeira2.url, alt: "Detalhe de Deck de Garapeira instalado", legenda: "Deck Garapeira" },
+  ],
+  "Deck Pinus Tratado": [
+    { src: deckPinus1.url, alt: "Deck de Pinus instalado ao redor de piscina", legenda: "Deck Pinus" },
+    { src: deckPinus2.url, alt: "Deck de Pinus em piscina curva", legenda: "Deck Pinus" },
+  ],
+};
+
+export function galeriaDeck(categoria?: string): ImagemProduto[] {
+  return categoria ? (GALERIAS_DECK[categoria] ?? [capaDeck]) : [capaDeck];
 }
