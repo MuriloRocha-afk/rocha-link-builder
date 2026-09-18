@@ -350,16 +350,16 @@ const FERRAMENTAS: { nome: string; opcoes: string[] }[] = [
 ];
 
 const FAMILIAS: { nome: string; emoji: string; tipos: string[] }[] = [
-  { nome: "Corte", emoji: "🪚", tipos: ["Serra / Serrote", "Disco de Serra"] },
-  { nome: "Furação", emoji: "🛠️", tipos: ["Furadeira", "Broca"] },
+  { nome: "Corte", emoji: "\n", tipos: ["Serra / Serrote", "Disco de Serra"] },
+  { nome: "Furação", emoji: "\n", tipos: ["Furadeira", "Broca"] },
   {
     nome: "Marcenaria & Acabamento",
-    emoji: "🪵",
+    emoji: "\n",
     tipos: ["Formão / Talhadeira", "Esquadro"],
   },
-  { nome: "Medição", emoji: "📏", tipos: ["Trena", "Nível"] },
-  { nome: "Fixação & Aperto", emoji: "🔧", tipos: ["Chaves", "Alicate"] },
-  { nome: "Impacto", emoji: "🔨", tipos: ["Martelo"] },
+  { nome: "Medição", emoji: "\n", tipos: ["Trena", "Nível"] },
+  { nome: "Fixação & Aperto", emoji: "\n", tipos: ["Chaves", "Alicate"] },
+  { nome: "Impacto", emoji: "\n", tipos: ["Martelo"] },
 ];
 
 export const CONFIG_FERRAMENTAS: ConfiguradorConfig = {
