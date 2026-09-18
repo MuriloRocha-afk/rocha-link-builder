@@ -66,6 +66,8 @@ import pinusPilhaCeu from "@/assets/produtos/pinus-patio/04_pinus_pilha_ceu.jpg.
 import eucaliptoPatioPontaletes from "@/assets/produtos/eucalipto-pontalete/01_patio_pontaletes_eucalipto.jpg.asset.json";
 import eucaliptoPilhaMuro from "@/assets/produtos/eucalipto-pontalete/02_pontaletes_pilha_muro.jpg.asset.json";
 import eucaliptoPilhaDetalhe from "@/assets/produtos/eucalipto-pontalete/03_pontaletes_pilha_detalhe.jpg.asset.json";
+import cedrinhoPatioPilha from "@/assets/produtos/cedrinho-patio/01_patio_pilha_cedrinho.jpg.asset.json";
+import cedrinhoPilhaDetalhe from "@/assets/produtos/cedrinho-patio/02_cedrinho_pilha_detalhe.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
 import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
@@ -1129,11 +1131,11 @@ export const imagensPolicarbonato: Record<string, ImagemProduto[]> = {
 };
 
 
-// CEDRINHO — por tipo
-export const imagensCedrinho: Record<string, ImagemProduto[]> = {
-  sarrafo: [{ src: "", alt: "Sarrafo Cedrinho no pátio" }],
-  tabua: [{ src: "", alt: "Tábua Cedrinho bruto e aparelhado" }],
-};
+// CEDRINHO — galeria fixa do estoque real do pátio, independente da variante.
+export const imagensCedrinho: ImagemProduto[] = [
+  { src: cedrinhoPatioPilha.url, alt: "Pilha de tábuas de Cedrinho no pátio coberto da Rocha Telhas", legenda: "Estoque real no pátio coberto" },
+  { src: cedrinhoPilhaDetalhe.url, alt: "Detalhe da pilha de peças de Cedrinho", legenda: "Detalhe das peças em estoque" },
+];
 
 // PINUS — galeria fixa do estoque real do pátio, independente da variante.
 export const imagensPinus: ImagemProduto[] = [

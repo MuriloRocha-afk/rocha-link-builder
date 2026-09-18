@@ -64,8 +64,8 @@ export default function Cedrinho() {
       galeria={
         <GaleriaProduto
           titulo={tipoObj ? `Cedrinho — ${tipoObj.nome}` : "Cedrinho"}
-          subtitulo={tipoObj ? "Foto em breve" : "Selecione o tipo para ver as fotos"}
-          imagens={tipo ? (imagensCedrinho[tipo] ?? []) : []}
+          subtitulo="Fotos reais do estoque no pátio da Rocha Telhas"
+          imagens={imagensCedrinho}
         />
       }
     >
