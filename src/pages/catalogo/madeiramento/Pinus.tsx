@@ -108,9 +108,9 @@ export default function Pinus() {
       }
       galeria={
         <GaleriaProduto
-          titulo={produto ? `Pinus — ${produto.tipo}` : aba ? `Pinus — ${aba}` : "Pinus"}
-          subtitulo={produto || aba ? "Foto em breve" : "Selecione o tipo de peça para ver as fotos"}
-          imagens={imagensPinus[produto ? produto.tipo : (aba ?? "")] ?? []}
+          titulo="Pinus"
+          subtitulo="Fotos reais do estoque no pátio da Rocha Telhas"
+          imagens={imagensPinus}
         />
       }
     >
