@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import { galeriaTabeira } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -243,10 +244,7 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
     "Tabeiras lisas (boleadas) ou desenhadas de 15cm a 30cm, com 6 modelos de desenho. Vendidas por metro linear.",
   galeriaTitulo: "Tabeira",
   galeriaPlaceholder: "Selecione o acabamento para ver as fotos",
-  imagens: (s) =>
-    s.acabamento
-      ? [{ src: "", alt: `Tabeira ${s.acabamento}` }]
-      : [],
+  imagens: (s) => galeriaTabeira(s.modelo),
   categoria: "Madeiramento",
   passos: [
     {
@@ -266,10 +264,11 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
     },
     {
       chave: "modelo",
-      titulo: "Modelo",
+      titulo: "Desenho",
       tipo: "grid3",
-      visivel: ehDesenhada,
-      opcoes: [1, 2, 3, 4, 5, 6].map((n) => ({ valor: `Modelo ${n}` })),
+      visivel: (s) => Boolean(s.acabamento),
+      opcoes: (s) =>
+        (ehDesenhada(s) ? [1, 2, 3, 4, 5] : [6, 7]).map((n) => ({ valor: `Modelo ${n}` })),
     },
     {
       chave: "qtd",
