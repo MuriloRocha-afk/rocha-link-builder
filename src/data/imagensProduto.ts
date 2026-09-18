@@ -54,7 +54,11 @@ import eVerdeTel2 from "@/assets/produtos/esmaltada/08_verde_telhado_02.jpeg.ass
 import eChocoProd from "@/assets/produtos/esmaltada/09_chocolate_produto.jpg.asset.json";
 import eChocoTel1 from "@/assets/produtos/esmaltada/09_chocolate_telhado_01.webp.asset.json";
 import eChocoTel2 from "@/assets/produtos/esmaltada/09_chocolate_telhado_02.jpg.asset.json";
-import imgCaibroCambara from "@/assets/produtos/caibro_de_cambara.webp.asset.json";
+import cambaraPatioGeral from "@/assets/produtos/cambara-patio/01_patio_pilhas_gerais.jpg.asset.json";
+import cambaraPatioVariado from "@/assets/produtos/cambara-patio/02_patio_pilhas_variadas.jpg.asset.json";
+import cambaraVigasCeu from "@/assets/produtos/cambara-patio/03_vigas_topo_ceu.jpg.asset.json";
+import cambaraPecasCortadas from "@/assets/produtos/cambara-patio/04_detalhe_pecas_cortadas.jpg.asset.json";
+import cambaraSarrafosGalpao from "@/assets/produtos/cambara-patio/05_pilha_sarrafos_galpao.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
 import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
@@ -541,25 +545,14 @@ export function galeriaColonialPVC(cor: string, comprimento?: string | null): Im
   ];
 }
 
-// CAMBARÁ — por tipo
-export const imagensCambara: Record<string, ImagemProduto[]> = {
-  Viga: [
-    { src: "", alt: "Viga Cambará Rosa no pátio" },
-    { src: "", alt: "Detalhe seção transversal — Viga Cambará" },
-  ],
-  Caibro: [
-    { src: imgCaibroCambara.url, alt: "Caibros Cambará Rosa 5x5cm e 5x7cm" },
-  ],
-  Ripa: [
-    { src: "", alt: "Ripas Cambará Rosa 1,5x5cm" },
-  ],
-  "Ripão": [
-    { src: "", alt: "Ripões Cambará Rosa 2x5cm" },
-  ],
-  Dormente: [
-    { src: "", alt: "Dormentes Cambará Rosa" },
-  ],
-};
+// CAMBARÁ — galeria fixa do estoque real do pátio, independente da variante.
+export const imagensCambara: ImagemProduto[] = [
+  { src: cambaraPatioGeral.url, alt: "Pilhas de peças de Cambará Rosa no pátio da Rocha Telhas", legenda: "Estoque real no pátio" },
+  { src: cambaraPatioVariado.url, alt: "Variedade de peças de Cambará Rosa armazenadas no pátio", legenda: "Variedade de peças em estoque" },
+  { src: cambaraVigasCeu.url, alt: "Vigas de Cambará Rosa empilhadas vistas de baixo", legenda: "Vigas disponíveis no pátio" },
+  { src: cambaraPecasCortadas.url, alt: "Detalhe de peças cortadas de Cambará Rosa", legenda: "Detalhe das peças cortadas" },
+  { src: cambaraSarrafosGalpao.url, alt: "Pilha de sarrafos de Cambará Rosa no galpão", legenda: "Sarrafos no estoque da Rocha Telhas" },
+];
 
 // PONTALETES EUCALIPTO
 export const imagensEucalipto: Record<string, ImagemProduto[]> = {

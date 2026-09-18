@@ -4,7 +4,7 @@ import { useOrcamento } from "../../../context/OrcamentoContext";
 import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
-import { imagensCambara, IMG } from "../../../data/imagensProduto";
+import { imagensCambara } from "../../../data/imagensProduto";
 import { TIPOS_MADEIRA, BITOLAS_MADEIRA, COMPRIMENTOS_MADEIRA } from "../../../data/configs/madeiramento";
 import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
 
@@ -136,13 +136,8 @@ export default function Cambara() {
       }
       galeria={
         <GaleriaProduto
-          titulo={tipo ? `Cambará Rosa — ${tipo}` : "Cambará Rosa"}
-          subtitulo={tipo ? "Foto em breve" : "Selecione o tipo de peça para ver as fotos"}
-          imagens={
-            (tipo && imagensCambara[tipo]?.some((i) => i.src) && imagensCambara[tipo]) || [
-              { src: IMG.caibroCambara, alt: "Peça de Cambará Rosa aparelhada" },
-            ]
-          }
+          titulo="Cambará Rosa"
+          imagens={imagensCambara}
         />
       }
     >
