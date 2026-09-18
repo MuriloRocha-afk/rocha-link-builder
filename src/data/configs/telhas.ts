@@ -1,5 +1,15 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { imagensConcreto, imagensEsmaltada, imagensPet, imagensPolipropileno, imagensVidro } from "@/data/imagensProduto";
+import {
+  capaConcreto,
+  capaEsmaltada,
+  capaPet,
+  capaVidro,
+  imagensConcreto,
+  imagensEsmaltada,
+  imagensPet,
+  imagensPolipropileno,
+  imagensVidro,
+} from "@/data/imagensProduto";
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 import { acessoriosPlastico, chumbador } from "@/data/acessoriosTelhas";
 
@@ -27,7 +37,7 @@ export const CONFIG_CONCRETO: ConfiguradorConfig = {
   imagens: (s) =>
     s.cor
       ? (imagensConcreto[s.cor] ?? [{ src: "", alt: `Telha de Concreto ${s.cor} Eurotop` }])
-      : [],
+      : capaConcreto,
   categoria: "Telhas",
   passos: [
     {
@@ -168,7 +178,7 @@ export const CONFIG_ESMALTADA: ConfiguradorConfig = {
   galeriaTitulo: "Telha Esmaltada",
   galeriaPlaceholder: "Selecione uma cor para ver as fotos",
   imagens: (s) =>
-    s.cor ? (imagensEsmaltada[s.cor] ?? [{ src: "", alt: `Telha Esmaltada ${s.cor}` }]) : [],
+    s.cor ? (imagensEsmaltada[s.cor] ?? capaEsmaltada) : capaEsmaltada,
   categoria: "Telhas",
   passos: [
     { chave: "cor", titulo: "Cor do Esmalte", tipo: "grid3", opcoes: CORES_ESMALTADA },
@@ -296,7 +306,7 @@ export const CONFIG_PET: ConfiguradorConfig = {
     "Ponto de luz natural em plástico PET transparente 100% reciclado, com encaixe idêntico ao da telha cerâmica. Formatos Portuguesa, Romana e Mediterrânea.",
   galeriaTitulo: "Telha PET Translúcida",
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
-  imagens: (s) => (s.formato ? (imagensPet[s.formato] ?? []) : []),
+  imagens: (s) => (s.formato ? (imagensPet[s.formato] ?? capaPet) : capaPet),
   categoria: "Telhas",
   produtoKey: "pet",
   avisoDestaque:
@@ -354,7 +364,7 @@ export const CONFIG_VIDRO: ConfiguradorConfig = {
     "Telha de ponto de luz em vidro de verdade, com textura exclusiva que suaviza a incidência de raios UV e mantém o mesmo encaixe da telha cerâmica correspondente.",
   galeriaTitulo: "Telha de Vidro",
   galeriaPlaceholder: "Selecione um formato para ver as fotos",
-  imagens: (s) => (s.formato ? (imagensVidro[s.formato] ?? []) : []),
+  imagens: (s) => (s.formato ? (imagensVidro[s.formato] ?? capaVidro) : capaVidro),
   categoria: "Telhas",
   produtoKey: "vidro",
   avisoDestaque:

@@ -168,7 +168,7 @@ Poderia verificar estoque e frete?`;
           imagens={
             variante === "Colonial"
               ? galeriaColonialPVC(cor ?? "Terracota", dimensao)
-              : galeriaPlanPVC(cor ?? "Terracota", dimensao)
+              : galeriaPlanPVC(cor, dimensao)
           }
         />
       }
