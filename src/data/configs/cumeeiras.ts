@@ -6,6 +6,12 @@ import espigaoFibrocimento from "@/assets/produtos/espigao/04_espigao_fibrocimen
 import espigaoPvc from "@/assets/produtos/espigao/05_espigao_pvc.jpg.asset.json";
 import paulistinhaBarro from "@/assets/produtos/paulistinha/01_paulistinha_barro.jpg.asset.json";
 import paulistinhaEsmaltada from "@/assets/produtos/paulistinha/02_paulistinha_esmaltada.jpg.asset.json";
+import cumeeiraCapa from "@/assets/produtos/cumeeira/01_capa_cumeeira_amostras.jpg.asset.json";
+import cumeeiraBarro from "@/assets/produtos/cumeeira/02_cumeeira_barro.jpg.asset.json";
+import cumeeiraEsmaltada from "@/assets/produtos/cumeeira/03_cumeeira_esmaltada.jpg.asset.json";
+import cumeeiraConcreto from "@/assets/produtos/cumeeira/04_cumeeira_cimento_concreto.jpg.asset.json";
+import cumeeiraFibrocimento from "@/assets/produtos/cumeeira/05_cumeeira_fibrocimento.jpg.asset.json";
+import cumeeiraPvc from "@/assets/produtos/cumeeira/06_cumeeira_pvc.jpg.asset.json";
 
 const VERIFICAR = "Verificar disponibilidade";
 
