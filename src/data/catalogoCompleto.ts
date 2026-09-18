@@ -66,6 +66,7 @@ import {
   imagensMadeirit,
   imagensForroPVC,
   imagensForroCedrinho,
+  galeriaForroCedrinho,
   imagensForroPinus,
   imagensTintas,
   imagensVernizPolirex,
@@ -217,7 +218,13 @@ const EXTRAS: Record<string, Extra> = {
   eucalipto: { fotos: imagensEucalipto },
   madeirit: { fotos: todasDoMapa(imagensMadeirit), opcoes: [chaves(imagensMadeirit, "Linhas")] },
   "forro-pvc": { fotos: imagensForroPVC },
-  "forro-cedrinho": { fotos: imagensForroCedrinho },
+  "forro-cedrinho": {
+    fotos: juntarFotos(
+      imagensForroCedrinho,
+      galeriaForroCedrinho("cerne"),
+      galeriaForroCedrinho("mesclado"),
+    ),
+  },
   "forro-pinus": { fotos: imagensForroPinus },
   peroba: { config: CONFIG_PEROBA },
   garapeira: { config: CONFIG_GARAPEIRA },
