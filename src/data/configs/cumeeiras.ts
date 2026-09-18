@@ -126,28 +126,30 @@ function coresOpcoes(sel: Selecao): OpcaoConfig[] {
 }
 
 const FOTOS_ESPIGAO: Record<string, { url: string; alt: string }> = {
-  Barro: { url: espigaoBarro.url, alt: "Espigão de barro" },
-  Concreto: { url: espigaoConcreto.url, alt: "Espigão de concreto" },
-  Esmaltada: { url: espigaoEsmaltado.url, alt: "Espigão esmaltado" },
-  Fibrocimento: { url: espigaoFibrocimento.url, alt: "Espigão de fibrocimento" },
-  PVC: { url: espigaoPvc.url, alt: "Espigão de PVC" },
+  barro: { url: espigaoBarro.url, alt: "Espigão de barro" },
+  concreto: { url: espigaoConcreto.url, alt: "Espigão de concreto" },
+  esmaltada: { url: espigaoEsmaltado.url, alt: "Espigão esmaltado" },
+  fibrocimento: { url: espigaoFibrocimento.url, alt: "Espigão de fibrocimento" },
+  pvc: { url: espigaoPvc.url, alt: "Espigão de PVC" },
 };
 
 const FOTOS_PAULISTINHA: Record<string, { url: string; alt: string }> = {
-  Barro: { url: paulistinhaBarro.url, alt: "Paulistinha de barro" },
-  Esmaltada: { url: paulistinhaEsmaltada.url, alt: "Paulistinha esmaltada" },
+  barro: { url: paulistinhaBarro.url, alt: "Paulistinha de barro" },
+  esmaltada: { url: paulistinhaEsmaltada.url, alt: "Paulistinha esmaltada" },
 };
 
 function imagensArremate(sel: Selecao) {
-  if (sel.peca === "Espigão") {
-    const foto = FOTOS_ESPIGAO[sel.material ?? "Barro"] ?? FOTOS_ESPIGAO.Barro;
+  const peca = norm(sel.peca);
+  const material = norm(sel.material);
+
+  if (peca === "espigao") {
+    const foto = FOTOS_ESPIGAO[material || "barro"] ?? FOTOS_ESPIGAO.barro;
     return foto ? [{ src: foto.url, alt: foto.alt, legenda: `${sel.peca} ${sel.material ?? "Barro"}` }] : [];
   }
 
-  if (sel.peca === "Paulistinha") {
-    const material = sel.material ?? "Barro";
-    const foto = FOTOS_PAULISTINHA[material];
-    return foto ? [{ src: foto.url, alt: foto.alt, legenda: `${sel.peca} ${material}` }] : [];
+  if (peca === "paulistinha") {
+    const foto = FOTOS_PAULISTINHA[material || "barro"];
+    return foto ? [{ src: foto.url, alt: foto.alt, legenda: `${sel.peca} ${sel.material ?? "Barro"}` }] : [];
   }
 
   return [];
