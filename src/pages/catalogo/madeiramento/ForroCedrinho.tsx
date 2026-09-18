@@ -10,7 +10,7 @@ import AcessoriosForroPergunta, {
   opcoesMeiaCanaMeioMetro,
 } from "@/components/site/AcessoriosForroPergunta";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
-import { imagensForroCedrinho } from "../../../data/imagensProduto";
+import { galeriaForroCedrinho } from "../../../data/imagensProduto";
 
 const CATEGORIAS = [
   {
@@ -93,7 +93,7 @@ export default function ForroCedrinho() {
         <GaleriaProduto
           titulo="Forro Cedrinho"
           subtitulo="Venda por m² · Foto em breve"
-          imagens={imagensForroCedrinho}
+          imagens={galeriaForroCedrinho(categoriaId)}
         />
       }
     >

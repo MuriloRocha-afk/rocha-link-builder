@@ -68,6 +68,10 @@ import eucaliptoPilhaMuro from "@/assets/produtos/eucalipto-pontalete/02_pontale
 import eucaliptoPilhaDetalhe from "@/assets/produtos/eucalipto-pontalete/03_pontaletes_pilha_detalhe.jpg.asset.json";
 import cedrinhoPatioPilha from "@/assets/produtos/cedrinho-patio/01_patio_pilha_cedrinho.jpg.asset.json";
 import cedrinhoPilhaDetalhe from "@/assets/produtos/cedrinho-patio/02_cedrinho_pilha_detalhe.jpg.asset.json";
+import forroCedrinhoCerne1 from "@/assets/produtos/forro-cedrinho/01_capa_card_e_cerne_1.jpg.asset.json";
+import forroCedrinhoCerne2 from "@/assets/produtos/forro-cedrinho/02_cerne_2.jpg.asset.json";
+import forroCedrinhoMesclado1 from "@/assets/produtos/forro-cedrinho/03_mesclado_1.jpg.asset.json";
+import forroCedrinhoMesclado2 from "@/assets/produtos/forro-cedrinho/04_mesclado_2.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
 import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
@@ -574,11 +578,26 @@ export const imagensForroPVC: ImagemProduto[] = [
   { src: "", alt: "Forro PVC Branco instalado" },
 ];
 
-// FORRO CEDRINHO
+// FORRO CEDRINHO — capa padrão e galerias próprias por categoria.
 export const imagensForroCedrinho: ImagemProduto[] = [
-  { src: "", alt: "Forro Cedrinho Mesclado instalado" },
-  { src: "", alt: "Detalhe régua Forro Cedrinho" },
+  { src: forroCedrinhoCerne1.url, alt: "Forro Cedrinho Cerne instalado em teto e beiral", legenda: "Forro Cedrinho Cerne" },
 ];
+
+const imagensForroCedrinhoPorCategoria: Record<string, ImagemProduto[]> = {
+  cerne: [
+    { src: forroCedrinhoCerne1.url, alt: "Forro Cedrinho Cerne instalado em teto e beiral", legenda: "Forro Cedrinho Cerne" },
+    { src: forroCedrinhoCerne2.url, alt: "Forro Cedrinho Cerne em acabamento uniforme", legenda: "Detalhe do acabamento Cerne" },
+  ],
+  mesclado: [
+    { src: forroCedrinhoMesclado1.url, alt: "Forro Cedrinho Mesclado instalado", legenda: "Forro Cedrinho Mesclado" },
+    { src: forroCedrinhoMesclado2.url, alt: "Forro Cedrinho Mesclado em área externa coberta", legenda: "Variação natural de tons" },
+  ],
+};
+
+export function galeriaForroCedrinho(categoria?: string | null): ImagemProduto[] {
+  if (!categoria) return imagensForroCedrinho;
+  return imagensForroCedrinhoPorCategoria[categoria] ?? imagensForroCedrinho;
+}
 
 // FORRO PINUS
 export const imagensForroPinus: ImagemProduto[] = [
