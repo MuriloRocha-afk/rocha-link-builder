@@ -82,11 +82,12 @@ function IconTelhado({ tipo, ativo }: { tipo: Tipo; ativo: boolean }) {
   );
 }
 
-const TIPOS: { id: Tipo; label: string }[] = [
-  { id: "1agua", label: "1 água" },
-  { id: "2aguas", label: "2 águas" },
-  { id: "3aguas", label: "3 águas" },
-  { id: "4aguas", label: "4 águas" },
+const TIPOS: { id: Tipo; label: string; disponivel?: boolean }[] = [
+  { id: "1agua", label: "1 água", disponivel: true },
+  { id: "2aguas", label: "2 águas", disponivel: true },
+  // Temporariamente indisponíveis no cálculo online — podem ser reativados depois
+  { id: "3aguas", label: "3 águas", disponivel: false },
+  { id: "4aguas", label: "4 águas", disponivel: false },
 ];
 
 type Item = {
