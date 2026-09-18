@@ -14,7 +14,7 @@ import madeiritAsset from "@/assets/produtos/madeirit/01_capa_madeirit_azul.jpg.
 import tabeira from "@/assets/prod-tabeira.jpg";
 import tabeiraCapa from "@/assets/produtos/tabeira/00_capa_tabeira_todos_modelos.jpg.asset.json";
 import deckCapa from "@/assets/produtos/deck/01_capa_e_cumaru_1.jpg.asset.json";
-import mourao from "@/assets/prod-mourao.jpg";
+import mouraoCapa from "@/assets/produtos/mourao-tratado/01_capa_mourao_patio.jpg.asset.json";
 
 const cambara = cambaraAsset.url;
 const pinus = pinusAsset.url;
@@ -146,7 +146,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "mourao-tratado",
     name: "Mourão Tratado",
-    image: mourao,
+    image: mouraoCapa.url,
     description: "Mourão autoclave de 4cm a 20cm de diâmetro e 2,20m a 10m de comprimento.",
     cta: "Configurar Mourão",
     grupo: "gerais",
