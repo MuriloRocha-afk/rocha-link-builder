@@ -62,8 +62,8 @@ export default function Eucalipto() {
       galeria={
         <GaleriaProduto
           titulo={NOME}
-          subtitulo="Foto em breve"
-          imagens={imagensEucalipto["eucalipto-in-natura"] ?? []}
+          subtitulo="Fotos reais do estoque no pátio da Rocha Telhas"
+          imagens={imagensEucalipto}
         />
       }
     >

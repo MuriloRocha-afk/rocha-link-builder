@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { SubcardTile } from "@/components/site/SubcardTile";
 import { Reveal } from "@/components/site/Reveal";
 import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
-import eucalipto from "@/assets/prod-eucalipto.jpg";
+import eucaliptoAsset from "@/assets/produtos/eucalipto-pontalete/01_patio_pontaletes_eucalipto.jpg.asset.json";
 import cedrinho from "@/assets/prod-cedrinho.jpg";
 import pinusAsset from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinus.jpg.asset.json";
 import garapeira from "@/assets/prod-garapeira.jpg";
@@ -15,6 +15,7 @@ import mourao from "@/assets/prod-mourao.jpg";
 
 const cambara = cambaraAsset.url;
 const pinus = pinusAsset.url;
+const eucalipto = eucaliptoAsset.url;
 
 type Subcard = {
   slug: string;
