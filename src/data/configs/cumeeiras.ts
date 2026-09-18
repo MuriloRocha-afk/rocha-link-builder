@@ -1,4 +1,11 @@
 import type { ConfiguradorConfig, Selecao, OpcaoConfig } from "@/components/site/ConfiguradorGenerico";
+import espigaoBarro from "@/assets/produtos/espigao/01_espigao_barro.jpg.asset.json";
+import espigaoConcreto from "@/assets/produtos/espigao/02_espigao_concreto.jpg.asset.json";
+import espigaoEsmaltado from "@/assets/produtos/espigao/03_espigao_esmaltado.jpg.asset.json";
+import espigaoFibrocimento from "@/assets/produtos/espigao/04_espigao_fibrocimento.jpg.asset.json";
+import espigaoPvc from "@/assets/produtos/espigao/05_espigao_pvc.jpg.asset.json";
+import paulistinhaBarro from "@/assets/produtos/paulistinha/01_paulistinha_barro.jpg.asset.json";
+import paulistinhaEsmaltada from "@/assets/produtos/paulistinha/02_paulistinha_esmaltada.jpg.asset.json";
 
 const VERIFICAR = "Verificar disponibilidade";
 
@@ -118,6 +125,36 @@ function coresOpcoes(sel: Selecao): OpcaoConfig[] {
   }));
 }
 
+const FOTOS_ESPIGAO: Record<string, { url: string; alt: string }> = {
+  barro: { url: espigaoBarro.url, alt: "Espigão de barro" },
+  concreto: { url: espigaoConcreto.url, alt: "Espigão de concreto" },
+  esmaltada: { url: espigaoEsmaltado.url, alt: "Espigão esmaltado" },
+  fibrocimento: { url: espigaoFibrocimento.url, alt: "Espigão de fibrocimento" },
+  pvc: { url: espigaoPvc.url, alt: "Espigão de PVC" },
+};
+
+const FOTOS_PAULISTINHA: Record<string, { url: string; alt: string }> = {
+  barro: { url: paulistinhaBarro.url, alt: "Paulistinha de barro" },
+  esmaltada: { url: paulistinhaEsmaltada.url, alt: "Paulistinha esmaltada" },
+};
+
+function imagensArremate(sel: Selecao) {
+  const peca = norm(sel.peca);
+  const material = norm(sel.material);
+
+  if (peca === "espigao") {
+    const foto = FOTOS_ESPIGAO[material || "barro"] ?? FOTOS_ESPIGAO.barro;
+    return foto ? [{ src: foto.url, alt: foto.alt, legenda: `${sel.peca} ${sel.material ?? "Barro"}` }] : [];
+  }
+
+  if (peca === "paulistinha") {
+    const foto = FOTOS_PAULISTINHA[material || "barro"];
+    return foto ? [{ src: foto.url, alt: foto.alt, legenda: `${sel.peca} ${sel.material ?? "Barro"}` }] : [];
+  }
+
+  return [];
+}
+
 /** Traduz parâmetros de URL (?peca=cumeeira&material=pvc&cor=ceramica) em seleção inicial. */
 export function selecaoInicialCumeeira(search: Record<string, unknown>): Selecao {
   const sel: Selecao = {};
@@ -165,8 +202,7 @@ export const CONFIG_CUMEEIRAS: ConfiguradorConfig = {
     "Escolha o tipo de peça e o material — PVC, fibrocimento, concreto, esmaltada ou barro.",
   galeriaTitulo: "Arremates de Cobertura",
   galeriaPlaceholder: "Selecione o tipo de peça para ver as fotos",
-  imagens: (s) =>
-    s.material ? [{ src: "", alt: `${s.peca ?? "Cumeeira"} ${s.material} ${s.cor ?? ""}`.trim() }] : [],
+  imagens: imagensArremate,
   categoria: "Telhas",
   produtoKey: "cumeeiras",
   especificacoes: [
