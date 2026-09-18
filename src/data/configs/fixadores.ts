@@ -199,8 +199,8 @@ export const CONFIG_ARAMES: ConfiguradorConfig = {
       titulo: "Tipo",
       tipo: "grid2",
       opcoes: [
-        { valor: "Galvanizado", emoji: "〰️", sub: "Para cercas e amarrações gerais" },
-        { valor: "Recozido", emoji: "🌀", sub: "Para amarração de ferragem" },
+        { valor: "Galvanizado", emoji: "\n", sub: "Para cercas e amarrações gerais" },
+        { valor: "Recozido", emoji: "\n", sub: "Para amarração de ferragem" },
       ],
     },
     {
