@@ -1331,7 +1331,7 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
       {
         titulo: "6 modelos numerados",
         descricao:
-          "Os desenhos vão do modelo 1 ao 6, permitindo combinar com o estilo da fachada.",
+          "Os desenhos vão do modelo 1 ao 7, permitindo combinar com o estilo da fachada.",
       },
       {
         titulo: "Fechamento visual do telhado",
