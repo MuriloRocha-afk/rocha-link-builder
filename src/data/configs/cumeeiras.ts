@@ -144,9 +144,34 @@ const FOTOS_PAULISTINHA: Record<string, { url: string; alt: string }> = {
   esmaltada: { url: paulistinhaEsmaltada.url, alt: "Paulistinha esmaltada" },
 };
 
+const FOTOS_CUMEEIRA: Record<string, { url: string; alt: string }> = {
+  barro: { url: cumeeiraBarro.url, alt: "Cumeeira de barro" },
+  ceramica: { url: cumeeiraBarro.url, alt: "Cumeeira de barro" },
+  esmaltada: { url: cumeeiraEsmaltada.url, alt: "Cumeeira esmaltada" },
+  concreto: { url: cumeeiraConcreto.url, alt: "Cumeeira de cimento/concreto" },
+  cimento: { url: cumeeiraConcreto.url, alt: "Cumeeira de cimento/concreto" },
+  fibrocimento: { url: cumeeiraFibrocimento.url, alt: "Cumeeira de fibrocimento" },
+  pvc: { url: cumeeiraPvc.url, alt: "Cumeeira de PVC" },
+};
+
 function imagensArremate(sel: Selecao) {
   const peca = norm(sel.peca);
   const material = norm(sel.material);
+
+  if (!peca || peca === "cumeeira") {
+    const foto = material ? FOTOS_CUMEEIRA[material] : undefined;
+    if (foto) {
+      return [{ src: foto.url, alt: foto.alt, legenda: `Cumeeira ${sel.material}` }];
+    }
+    return [
+      {
+        src: cumeeiraCapa.url,
+        alt: "Amostras de cumeeiras na loja Rocha Telhas",
+        legenda: "Cumeeiras disponíveis",
+      },
+    ];
+  }
+
 
   if (peca === "espigao") {
     const foto = FOTOS_ESPIGAO[material || "barro"] ?? FOTOS_ESPIGAO.barro;
