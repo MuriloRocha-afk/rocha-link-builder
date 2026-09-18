@@ -6,6 +6,12 @@ import espigaoFibrocimento from "@/assets/produtos/espigao/04_espigao_fibrocimen
 import espigaoPvc from "@/assets/produtos/espigao/05_espigao_pvc.jpg.asset.json";
 import paulistinhaBarro from "@/assets/produtos/paulistinha/01_paulistinha_barro.jpg.asset.json";
 import paulistinhaEsmaltada from "@/assets/produtos/paulistinha/02_paulistinha_esmaltada.jpg.asset.json";
+import cumeeiraCapa from "@/assets/produtos/cumeeira/01_capa_cumeeira_amostras.jpg.asset.json";
+import cumeeiraBarro from "@/assets/produtos/cumeeira/02_cumeeira_barro.jpg.asset.json";
+import cumeeiraEsmaltada from "@/assets/produtos/cumeeira/03_cumeeira_esmaltada.jpg.asset.json";
+import cumeeiraConcreto from "@/assets/produtos/cumeeira/04_cumeeira_cimento_concreto.jpg.asset.json";
+import cumeeiraFibrocimento from "@/assets/produtos/cumeeira/05_cumeeira_fibrocimento.jpg.asset.json";
+import cumeeiraPvc from "@/assets/produtos/cumeeira/06_cumeeira_pvc.jpg.asset.json";
 
 const VERIFICAR = "Verificar disponibilidade";
 
@@ -138,9 +144,34 @@ const FOTOS_PAULISTINHA: Record<string, { url: string; alt: string }> = {
   esmaltada: { url: paulistinhaEsmaltada.url, alt: "Paulistinha esmaltada" },
 };
 
+const FOTOS_CUMEEIRA: Record<string, { url: string; alt: string }> = {
+  barro: { url: cumeeiraBarro.url, alt: "Cumeeira de barro" },
+  ceramica: { url: cumeeiraBarro.url, alt: "Cumeeira de barro" },
+  esmaltada: { url: cumeeiraEsmaltada.url, alt: "Cumeeira esmaltada" },
+  concreto: { url: cumeeiraConcreto.url, alt: "Cumeeira de cimento/concreto" },
+  cimento: { url: cumeeiraConcreto.url, alt: "Cumeeira de cimento/concreto" },
+  fibrocimento: { url: cumeeiraFibrocimento.url, alt: "Cumeeira de fibrocimento" },
+  pvc: { url: cumeeiraPvc.url, alt: "Cumeeira de PVC" },
+};
+
 function imagensArremate(sel: Selecao) {
   const peca = norm(sel.peca);
   const material = norm(sel.material);
+
+  if (!peca || peca === "cumeeira") {
+    const foto = material ? FOTOS_CUMEEIRA[material] : undefined;
+    if (foto) {
+      return [{ src: foto.url, alt: foto.alt, legenda: `Cumeeira ${sel.material}` }];
+    }
+    return [
+      {
+        src: cumeeiraCapa.url,
+        alt: "Amostras de cumeeiras na loja Rocha Telhas",
+        legenda: "Cumeeiras disponíveis",
+      },
+    ];
+  }
+
 
   if (peca === "espigao") {
     const foto = FOTOS_ESPIGAO[material || "barro"] ?? FOTOS_ESPIGAO.barro;

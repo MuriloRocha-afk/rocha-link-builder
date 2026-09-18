@@ -10,6 +10,9 @@ import colonialPvcAsset from "@/assets/produtos/capas/04_capa_colonial_pvc.jpg.a
 import polipropilenoAsset from "@/assets/produtos/capas/05_capa_polipropileno.jpeg.asset.json";
 import esmaltadaAsset from "@/assets/produtos/capas/05_capa_esmaltada.jpg.asset.json";
 import vidroAsset from "@/assets/produtos/capas/01_capa_telha_vidro.jpg.asset.json";
+import cumeeiraCapaAsset from "@/assets/produtos/cumeeira/01_capa_cumeeira_amostras.jpg.asset.json";
+
+const cumeeiraCapa = cumeeiraCapaAsset.url;
 
 const ceramica = ceramicaAsset.url;
 const fibrocimento = fibrocimentoAsset.url;
@@ -114,7 +117,7 @@ export const TELHAS_SUBCARDS: Subcard[] = [
   {
     slug: "cumeeiras",
     name: "Cumeeiras & Acessórios de Cobertura",
-    image: fibrocimento,
+    image: cumeeiraCapa,
     description:
       "Cumeeiras de barro, concreto, esmaltada, PVC e fibrocimento. Tudo para fechar a cobertura.",
     cta: "Ver Cumeeiras",
