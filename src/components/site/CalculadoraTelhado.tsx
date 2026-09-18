@@ -846,13 +846,31 @@ export function CalculadoraTelhado() {
             <button
               key={t.id}
               type="button"
-              onClick={() => setTipo(t.id)}
-              className={`rounded-xl border-2 p-2 transition-all ${
-                tipo === t.id ? "border-orange-500 bg-orange-50" : "border-gray-200 hover:border-orange-300"
+              disabled={t.disponivel === false}
+              onClick={() => t.disponivel !== false && setTipo(t.id)}
+              className={`relative rounded-xl border-2 p-2 transition-all ${
+                t.disponivel === false
+                  ? "cursor-not-allowed border-gray-200 bg-gray-50 opacity-60"
+                  : tipo === t.id
+                    ? "border-orange-500 bg-orange-50"
+                    : "border-gray-200 hover:border-orange-300"
               }`}
             >
-              <IconTelhado tipo={t.id} ativo={tipo === t.id} />
-              <span className={`mt-1 block text-xs font-bold ${tipo === t.id ? "text-orange-600" : "text-gray-600"}`}>
+              {t.disponivel === false && (
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-gray-500 px-1.5 py-px text-[9px] font-bold uppercase tracking-wide text-white">
+                  Em breve
+                </span>
+              )}
+              <IconTelhado tipo={t.id} ativo={t.disponivel !== false && tipo === t.id} />
+              <span
+                className={`mt-1 block text-xs font-bold ${
+                  t.disponivel === false
+                    ? "text-gray-400"
+                    : tipo === t.id
+                      ? "text-orange-600"
+                      : "text-gray-600"
+                }`}
+              >
                 {t.label}
               </span>
             </button>
