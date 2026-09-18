@@ -141,25 +141,25 @@ export function croquiTelhadoSvg({ tipo, comprimento, largura, beiral, beiralFro
     p.push(fluxoH(cy, X0 + H / 2 - 14, ax0 + 10), fluxoH(cy, X1 - H / 2 + 14, ax1 - 10));
   }
 
-  // ----- cotas horizontais (topo) -----
+  // ----- cotas horizontais (topo) — comprimento -----
   p.push(
-    cotaH(X0, X1, 44, `${fmt(L + 2 * bLat)} m TOTAL (largura do telhado)`, undefined, LARANJA),
+    cotaH(X0, X1, 44, `${fmt(C + 2 * bFro)} m TOTAL (comprimento do telhado)`, undefined, LARANJA),
   );
-  if (bLat > 0) {
-    p.push(cotaH(X0, ax0, 86, `${fmt(bLat)} m`, "beiral"));
-    p.push(cotaH(ax1, X1, 86, `${fmt(bLat)} m`, "beiral"));
-  }
-  p.push(cotaH(ax0, ax1, 86, `${fmt(L)} m`, "largura da construção"));
-
-  // ----- cotas verticais (esquerda) -----
   if (bFro > 0) {
-    p.push(cotaV(Y0, ay0, 108, `${fmt(bFro)} m`, "beiral"));
-    p.push(cotaV(ay1, Y1, 108, `${fmt(bFro)} m`, "beiral"));
+    p.push(cotaH(X0, ax0, 86, `${fmt(bFro)} m`, "beiral"));
+    p.push(cotaH(ax1, X1, 86, `${fmt(bFro)} m`, "beiral"));
   }
-  p.push(cotaV(ay0, ay1, 108, `${fmt(C)} m`, "comprimento"));
+  p.push(cotaH(ax0, ax1, 86, `${fmt(C)} m`, "comprimento da construção"));
+
+  // ----- cotas verticais (esquerda) — largura -----
+  if (bLat > 0) {
+    p.push(cotaV(Y0, ay0, 108, `${fmt(bLat)} m`, "beiral"));
+    p.push(cotaV(ay1, Y1, 108, `${fmt(bLat)} m`, "beiral"));
+  }
+  p.push(cotaV(ay0, ay1, 108, `${fmt(L)} m`, "largura"));
   p.push(
     `<line x1="52" y1="${Y0}" x2="52" y2="${Y1}" stroke="${LARANJA}" stroke-width="1" marker-start="url(#seta-laranja)" marker-end="url(#seta-laranja)"/>
-     <text x="44" y="${cy}" text-anchor="middle" font-size="10" font-weight="700" fill="${LARANJA}" transform="rotate(-90 44 ${cy})">${fmt(C + 2 * bFro)} m TOTAL (comprimento)</text>`,
+     <text x="44" y="${cy}" text-anchor="middle" font-size="10" font-weight="700" fill="${LARANJA}" transform="rotate(-90 44 ${cy})">${fmt(L + 2 * bLat)} m TOTAL (largura do telhado)</text>`,
   );
 
   // ----- legenda -----
