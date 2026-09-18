@@ -10,10 +10,10 @@ import { imagensMadeirit } from "../../../data/imagensProduto";
 type Tipo = "Plastificado" | "Rosa" | "OSB" | "Compensado";
 
 const TIPOS: { id: Tipo; nome: string; descricao: string; icone: string; badge?: string }[] = [
-  { id: "Plastificado", nome: "Plastificado", descricao: "Chapas pretas revestidas para formas e revestimentos", icone: "⬛", badge: "★ Mais vendido" },
-  { id: "Rosa", nome: "Rosa", descricao: "Chapas resinadas rosa para construção civil e formas", icone: "🟥" },
-  { id: "OSB", nome: "OSB", descricao: "Oriented Strand Board para estruturas e revestimentos", icone: "🪵" },
-  { id: "Compensado", nome: "Compensado", descricao: "Compensado naval/multilaminado para diversos usos", icone: "📐" },
+  { id: "Plastificado", nome: "Plastificado", descricao: "Chapas pretas revestidas para formas e revestimentos", icone: "\n", badge: "★ Mais vendido" },
+  { id: "Rosa", nome: "Rosa", descricao: "Chapas resinadas rosa para construção civil e formas", icone: "\n" },
+  { id: "OSB", nome: "OSB", descricao: "Oriented Strand Board para estruturas e revestimentos", icone: "\n" },
+  { id: "Compensado", nome: "Compensado", descricao: "Compensado naval/multilaminado para diversos usos", icone: "\n" },
 ];
 
 const ESPESSURAS: Record<Tipo, string[]> = {
