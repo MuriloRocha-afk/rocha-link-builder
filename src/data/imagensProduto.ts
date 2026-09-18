@@ -599,10 +599,18 @@ export function galeriaForroCedrinho(categoria?: string | null): ImagemProduto[]
   return imagensForroCedrinhoPorCategoria[categoria] ?? imagensForroCedrinho;
 }
 
-// FORRO PINUS
+// FORRO PINUS — fotos reais do forro instalado.
 export const imagensForroPinus: ImagemProduto[] = [
-  { src: "", alt: "Forro de Pinus instalado" },
-  { src: "", alt: "Detalhe régua macho-fêmea de Pinus" },
+  {
+    src: forroPinusCapa.url,
+    alt: "Forro de Pinus instalado em telhado e varanda",
+    legenda: "Forro de Pinus instalado",
+  },
+  {
+    src: forroPinusDetalhe.url,
+    alt: "Detalhe das réguas de Pinus macho-fêmea",
+    legenda: "Detalhe das réguas de Pinus",
+  },
 ];
 
 // TINTAS — por subcategoria
