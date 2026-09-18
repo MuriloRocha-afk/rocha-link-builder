@@ -91,8 +91,8 @@ export function croquiTelhadoSvg({ tipo, comprimento, largura, beiral, beiralFro
   const cx = X0 + W / 2;
   const cy = Y0 + H / 2;
 
-  const insetX = bLat > 0 ? Math.min(38, Math.max(16, (bLat / (L + 2 * bLat)) * W)) : 0;
-  const insetY = bFro > 0 ? Math.min(34, Math.max(14, (bFro / (C + 2 * bFro)) * H)) : 0;
+  const insetX = bFro > 0 ? Math.min(38, Math.max(16, (bFro / (C + 2 * bFro)) * W)) : 0;
+  const insetY = bLat > 0 ? Math.min(34, Math.max(14, (bLat / (L + 2 * bLat)) * H)) : 0;
 
   const ax0 = X0 + insetX;
   const ay0 = Y0 + insetY;
