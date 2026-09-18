@@ -12,6 +12,7 @@ import forroCedrinhoAsset from "@/assets/produtos/forro-cedrinho/01_capa_card_e_
 import forroPinusCapaAsset from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
 import madeiritAsset from "@/assets/produtos/madeirit/01_capa_madeirit_azul.jpg.asset.json";
 import tabeira from "@/assets/prod-tabeira.jpg";
+import tabeiraCapa from "@/assets/produtos/tabeira/00_capa_tabeira_todos_modelos.jpg.asset.json";
 import mourao from "@/assets/prod-mourao.jpg";
 
 const cambara = cambaraAsset.url;
@@ -128,7 +129,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "tabeira",
     name: "Tabeira",
-    image: tabeira,
+    image: tabeiraCapa.url,
     description: "Tabeira lisa (boleada) ou desenhada de 15cm a 30cm, com 6 modelos de desenho.",
     cta: "Ver Modelos",
     grupo: "gerais",
