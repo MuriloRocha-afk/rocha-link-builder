@@ -13,6 +13,7 @@ import forroPinusCapaAsset from "@/assets/produtos/forro-pinus/01_capa_forro_pin
 import madeiritAsset from "@/assets/produtos/madeirit/01_capa_madeirit_azul.jpg.asset.json";
 import tabeira from "@/assets/prod-tabeira.jpg";
 import tabeiraCapa from "@/assets/produtos/tabeira/00_capa_tabeira_todos_modelos.jpg.asset.json";
+import deckCapa from "@/assets/produtos/deck/01_capa_e_cumaru_1.jpg.asset.json";
 import mourao from "@/assets/prod-mourao.jpg";
 
 const cambara = cambaraAsset.url;
@@ -137,7 +138,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "tabeiras-deck",
     name: "Deck",
-    image: tabeira,
+    image: deckCapa.url,
     description: "Deck de cumaru mesclado, garapeia e pinus tratado, calculado por m².",
     cta: "Calcular m²",
     grupo: "gerais",
