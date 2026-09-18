@@ -9,6 +9,7 @@ import garapeira from "@/assets/prod-garapeira.jpg";
 import amescla from "@/assets/prod-amescla.jpg";
 import forroPvc from "@/assets/prod-forro-pvc.jpg";
 import forroCedrinhoAsset from "@/assets/produtos/forro-cedrinho/01_capa_card_e_cerne_1.jpg.asset.json";
+import forroPinusCapaAsset from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
 import madeirite from "@/assets/prod-madeirite.jpg";
 import tabeira from "@/assets/prod-tabeira.jpg";
 import mourao from "@/assets/prod-mourao.jpg";
@@ -18,6 +19,7 @@ const pinus = pinusAsset.url;
 const eucalipto = eucaliptoAsset.url;
 const cedrinho = cedrinhoAsset.url;
 const forroCedrinho = forroCedrinhoAsset.url;
+const forroPinusCapa = forroPinusCapaAsset.url;
 
 type Subcard = {
   slug: string;
@@ -99,7 +101,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "forro-pinus",
     name: "Forro Pinus",
-    image: forroCedrinho,
+    image: forroPinusCapa,
     description:
       "Réguas de pinus macho-fêmea 1cm x 10cm, vendido por m². Claro e fácil de envernizar.",
     cta: "Cotar em m²",

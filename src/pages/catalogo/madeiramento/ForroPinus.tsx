@@ -79,7 +79,7 @@ export default function ForroPinus() {
       galeria={
         <GaleriaProduto
           titulo="Forro de Pinus"
-          subtitulo="Venda por m² · Foto em breve"
+          subtitulo="Venda por m²"
           imagens={imagensForroPinus}
         />
       }
