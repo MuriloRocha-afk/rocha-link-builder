@@ -129,8 +129,8 @@ export default function Madeirit() {
       galeria={
         <GaleriaProduto
           titulo={tipo ? `Madeirit & Compensado — ${tipo}` : "Madeirit & Compensado"}
-          subtitulo={tipo ? "Foto em breve" : "Selecione um tipo para ver as fotos"}
-          imagens={tipo ? (imagensMadeirit[tipo] ?? []) : []}
+          subtitulo="Fotos reais do estoque da Rocha Telhas"
+          imagens={imagensMadeirit}
         />
       }
     >

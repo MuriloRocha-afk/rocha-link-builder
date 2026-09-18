@@ -10,7 +10,7 @@ import amescla from "@/assets/prod-amescla.jpg";
 import forroPvcAsset from "@/assets/produtos/forro-pvc/01_capa_forro_pvc.jpg.asset.json";
 import forroCedrinhoAsset from "@/assets/produtos/forro-cedrinho/01_capa_card_e_cerne_1.jpg.asset.json";
 import forroPinusCapaAsset from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
-import madeirite from "@/assets/prod-madeirite.jpg";
+import madeiritAsset from "@/assets/produtos/madeirit/01_capa_madeirit_azul.jpg.asset.json";
 import tabeira from "@/assets/prod-tabeira.jpg";
 import mourao from "@/assets/prod-mourao.jpg";
 
@@ -21,6 +21,7 @@ const cedrinho = cedrinhoAsset.url;
 const forroCedrinho = forroCedrinhoAsset.url;
 const forroPinusCapa = forroPinusCapaAsset.url;
 const forroPvc = forroPvcAsset.url;
+const madeirite = madeiritAsset.url;
 
 type Subcard = {
   slug: string;
