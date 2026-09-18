@@ -7,7 +7,7 @@ import cedrinhoAsset from "@/assets/produtos/cedrinho-patio/01_patio_pilha_cedri
 import pinusAsset from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinus.jpg.asset.json";
 import garapeira from "@/assets/prod-garapeira.jpg";
 import amescla from "@/assets/prod-amescla.jpg";
-import forroPvc from "@/assets/prod-forro-pvc.jpg";
+import forroPvcAsset from "@/assets/produtos/forro-pvc/01_capa_forro_pvc.jpg.asset.json";
 import forroCedrinhoAsset from "@/assets/produtos/forro-cedrinho/01_capa_card_e_cerne_1.jpg.asset.json";
 import forroPinusCapaAsset from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
 import madeirite from "@/assets/prod-madeirite.jpg";
@@ -20,6 +20,7 @@ const eucalipto = eucaliptoAsset.url;
 const cedrinho = cedrinhoAsset.url;
 const forroCedrinho = forroCedrinhoAsset.url;
 const forroPinusCapa = forroPinusCapaAsset.url;
+const forroPvc = forroPvcAsset.url;
 
 type Subcard = {
   slug: string;
