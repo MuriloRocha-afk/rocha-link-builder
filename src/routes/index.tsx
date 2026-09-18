@@ -47,7 +47,7 @@ const KPIS = [
 ];
 
 const STATS = [
-  { icon: Truck, value: 30000, label: "entregas realizadas" },
+  { icon: Truck, value: 100000, label: "entregas realizadas" },
   { icon: Handshake, value: 50000, label: "clientes com problemas resolvidos" },
   { icon: Star, value: 100, label: "avaliações 5 estrelas no Google" },
 ];

@@ -194,7 +194,7 @@ function CatalogoCompletoPage() {
               madeira aparelhada em plaina no nosso pátio e frota própria de entrega.
             </p>
             <p>
-              São mais de 30.000 entregas realizadas, 50.000 clientes atendidos e uma equipe que
+              São mais de 100.000 entregas realizadas, 50.000 clientes atendidos e uma equipe que
               acompanha a obra do primeiro orçamento até a última telha assentada — indicando
               telha, madeiramento, calha e fixação corretos para cada projeto.
             </p>
