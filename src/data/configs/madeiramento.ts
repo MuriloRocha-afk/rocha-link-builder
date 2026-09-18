@@ -300,9 +300,9 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
 /* ---------------- DECK ---------------- */
 
 const CAT_DECK = [
-  { valor: "Deck Cumaru Mesclado", emoji: "🟤", sub: "10cm × 2cm por m²" },
-  { valor: "Deck Garapeia", emoji: "🟫", sub: "8cm × 2cm por m²" },
-  { valor: "Deck Pinus Tratado", emoji: "🌲", sub: "10cm × 2cm por m²" },
+  { valor: "Deck Cumaru Mesclado", emoji: "\n", sub: "10cm × 2cm por m²" },
+  { valor: "Deck Garapeia", emoji: "\n", sub: "8cm × 2cm por m²" },
+  { valor: "Deck Pinus Tratado", emoji: "\n", sub: "10cm × 2cm por m²" },
 ];
 
 const especieDeck = (cat: string) => cat.replace("Deck ", "");
