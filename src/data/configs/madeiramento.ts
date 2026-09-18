@@ -285,16 +285,16 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
   especificacoes: [
     ["Acabamentos", "Lisa (boleada) ou desenhada"],
     ["Tamanhos", "15cm, 20cm, 25cm e 30cm"],
-    ["Modelos", "Desenhada nº1 a nº6"],
+    ["Modelos", "Desenhada nº1 a nº5 · Lisa (boleada) nº6 e nº7"],
     ["Venda", "Por metro linear"],
   ],
   resumoNome: (s) => (ehDesenhada(s) ? "Tabeira Desenhada" : "Tabeira Lisa (Boleada)"),
   resumoDetalhe: (s, q) =>
-    `${s.tamanho}${ehDesenhada(s) ? ` · ${s.modelo}` : ""} · ${q.qtd ?? 10} Mt`,
+    `${s.tamanho}${s.modelo ? ` · ${s.modelo}` : ""} · ${q.qtd ?? 10} Mt`,
   unidadeResumo: () => "Mt",
   idItem: (s) => `tabeira-${s.acabamento}-${s.tamanho}-${s.modelo ?? ""}`,
   mensagem: (s, q) =>
-    `*Tabeira ${ehDesenhada(s) ? "Desenhada" : "Lisa (Boleada)"}*\n• Tamanho: ${s.tamanho}${ehDesenhada(s) ? `\n• Modelo: ${s.modelo?.replace("Modelo ", "nº ")}` : ""}\n• Quantidade: ${q.qtd ?? 10} Mt`,
+    `*Tabeira ${ehDesenhada(s) ? "Desenhada" : "Lisa (Boleada)"}*\n• Tamanho: ${s.tamanho}${s.modelo ? `\n• Desenho: ${s.modelo.replace("Modelo ", "nº ")}` : ""}\n• Quantidade: ${q.qtd ?? 10} Mt`,
 };
 
 /* ---------------- DECK ---------------- */
