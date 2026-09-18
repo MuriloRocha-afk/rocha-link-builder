@@ -244,6 +244,9 @@ import kitColonialCeramica from "@/assets/produtos/parafusos/07_fixacao_colonial
 import kitColonialMarfim from "@/assets/produtos/parafusos/05_kit110mm_maior.jpg.asset.json";
 import kitColonialCinza from "@/assets/produtos/parafusos/08_fixacao_colonial_marfim.jpg.asset.json";
 import capaParafusosTelhaImg from "@/assets/produtos/parafusos/02_capa_parafusos_telha.jpg.asset.json";
+import parafMadeira01 from "@/assets/produtos/parafusos-madeira/01_capa_estoque_parafusos.jpg.asset.json";
+import parafMadeira02 from "@/assets/produtos/parafusos-madeira/02_estoque_parafusos_prateleira.jpg.asset.json";
+import parafMadeira03 from "@/assets/produtos/parafusos-madeira/03_estoque_parafusos_caixas.jpg.asset.json";
 import parafAvulsoImg from "@/assets/produtos/parafusos/00_avulso_prateleira.jpg.asset.json";
 import pregosCapaImg from "@/assets/produtos/pregos/01_capa_pregos.jpg.asset.json";
 import pregoAco12 from "@/assets/produtos/pregos/03_aco_12x12.jpg.asset.json";
@@ -1396,6 +1399,30 @@ const KIT_COLONIAL_CORES: Record<string, ImagemProduto> = {
 
 export const capaParafusoVedacao = paraf110k10.url;
 export const capaKitColonial = kitColonialCeramica.url;
+
+export const capaParafusosMadeira: ImagemProduto = {
+  src: parafMadeira01.url,
+  alt: "Estoque de parafusos para madeira na loja Rocha Telhas",
+  legenda: "Parafusos para madeira em estoque",
+};
+
+const GALERIA_PARAFUSOS_MADEIRA: ImagemProduto[] = [
+  capaParafusosMadeira,
+  {
+    src: parafMadeira02.url,
+    alt: "Prateleira com parafusos para madeira em diversas bitolas",
+    legenda: "Variedade de bitolas",
+  },
+  {
+    src: parafMadeira03.url,
+    alt: "Caixas de parafusos para madeira no estoque",
+    legenda: "Caixas fechadas",
+  },
+];
+
+export function galeriaParafusosMadeira(): ImagemProduto[] {
+  return GALERIA_PARAFUSOS_MADEIRA;
+}
 
 export const capaParafusosTelha: ImagemProduto = {
   src: capaParafusosTelhaImg.url,

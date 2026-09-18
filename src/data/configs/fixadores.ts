@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaParafusosTelha, galeriaPregos, galeriaArames, galeriaFerramentas } from "@/data/imagensProduto";
+import { galeriaParafusosTelha, galeriaPregos, galeriaArames, galeriaFerramentas, galeriaParafusosMadeira } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -255,7 +255,7 @@ export const CONFIG_PARAFUSOS_MADEIRA: ConfiguradorConfig = {
     "Chipboard, Autobrocante e Frances Completo em diversas bitolas para estruturas e caixaria.",
   galeriaTitulo: "Parafusos para Madeira",
   galeriaPlaceholder: "Selecione o tipo para ver as fotos",
-  imagens: (s) => (s.tipo ? [{ src: "", alt: s.tipo }] : []),
+  imagens: () => galeriaParafusosMadeira(),
   categoria: "Fixadores",
   passos: [
     {

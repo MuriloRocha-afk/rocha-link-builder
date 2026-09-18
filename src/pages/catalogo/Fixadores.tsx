@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaParafusosTelha, capaPregos, capaArames, capaFerramentas } from "@/data/imagensProduto";
+import { capaParafusosTelha, capaPregos, capaArames, capaFerramentas, capaParafusosMadeira } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -37,6 +37,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "parafusos-madeira",
     name: "Parafusos para Madeira",
     emoji: "🪛",
+    image: capaParafusosMadeira.src,
     tags: ["Chipboard", "Frances", "Autobrocante"],
     description:
       "Parafuso Chipboard, Autobrocante e Frances Completo em diversas bitolas para estruturas e caixaria.",
