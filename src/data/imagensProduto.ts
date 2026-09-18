@@ -349,6 +349,11 @@ import acessEspatula4 from "@/assets/produtos/acessorios/08_espatula_4pol.jpg.as
 import acessEspatula5 from "@/assets/produtos/acessorios/09_espatula_5pol.jpg.asset.json";
 import acessBroxa from "@/assets/produtos/acessorios/10_broxa_retangular.jpg.asset.json";
 import acessSuporte from "@/assets/produtos/acessorios/11_suporte_rolo.jpg.asset.json";
+import capaInicialPlanPvc from "@/assets/produtos/capas-iniciais-telhas/01_capa_telha_plan_pvc.jpg.asset.json";
+import capaInicialConcreto from "@/assets/produtos/capas-iniciais-telhas/02_capa_telha_concreto.jpg.asset.json";
+import capaInicialPet from "@/assets/produtos/capas-iniciais-telhas/03_capa_telha_pet_translucida.jpg.asset.json";
+import capaInicialVidro from "@/assets/produtos/capas-iniciais-telhas/04_capa_telha_vidro.jpg.asset.json";
+import capaInicialEsmaltada from "@/assets/produtos/capas-iniciais-telhas/05_capa_telha_esmaltada.jpg.asset.json";
 
 
 
@@ -362,6 +367,26 @@ export const IMG = {
   pvcMarfimTelhado2: imgPvcMarfimTelhado2.url,
   concretoGrafiteTelhado: imgConcretoGrafiteTelhado.url,
 };
+
+export const capaPlanPVC: ImagemProduto[] = [
+  { src: capaInicialPlanPvc.url, alt: "Telha Plan PVC no showroom da Rocha Telhas", legenda: "Foto real na loja" },
+];
+
+export const capaConcreto: ImagemProduto[] = [
+  { src: capaInicialConcreto.url, alt: "Telhas de Concreto no estoque da Rocha Telhas", legenda: "Foto real na loja" },
+];
+
+export const capaPet: ImagemProduto[] = [
+  { src: capaInicialPet.url, alt: "Modelos de Telha PET Translúcida", legenda: "Foto real na loja" },
+];
+
+export const capaVidro: ImagemProduto[] = [
+  { src: capaInicialVidro.url, alt: "Telha de Vidro real", legenda: "Foto real na loja" },
+];
+
+export const capaEsmaltada: ImagemProduto[] = [
+  { src: capaInicialEsmaltada.url, alt: "Amostras de Telha Esmaltada", legenda: "Foto real na loja" },
+];
 
 
 // ─────────────────────────────────────────────────────────────
@@ -1332,7 +1357,8 @@ const planCapaPorCor: Record<string, ImagemProduto[]> = {
 };
 
 /** Galeria da Telha Plan PVC considerando cor e comprimento selecionado. */
-export function galeriaPlanPVC(cor: string, comprimento?: string | null): ImagemProduto[] {
+export function galeriaPlanPVC(cor?: string | null, comprimento?: string | null): ImagemProduto[] {
+  if (!cor) return capaPlanPVC;
   const aplicacoes = planAplicacoesPorCor[cor] ?? [];
   const foto = comprimento ? planFotosPorTamanho[cor]?.[comprimento] : undefined;
   if (!foto) return [...(planCapaPorCor[cor] ?? []), ...aplicacoes];
