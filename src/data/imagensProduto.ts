@@ -1555,3 +1555,25 @@ export function galeriaFerramentas(ferramenta?: string, modelo?: string): Imagem
   const especifica = FERRAMENTAS_MODELOS[`${ferramenta}|${modelo}`];
   return especifica ? [especifica] : [];
 }
+
+// TABEIRA — foto por modelo de desenho (capa antes da seleção)
+const TABEIRA_MODELOS: Record<string, ImagemProduto> = {
+  "Modelo 1": { src: tabeiraM1.url, alt: "Tabeira desenhada modelo 1", legenda: "Desenho · Modelo 1" },
+  "Modelo 2": { src: tabeiraM2.url, alt: "Tabeira desenhada modelo 2", legenda: "Desenho · Modelo 2" },
+  "Modelo 3": { src: tabeiraM3.url, alt: "Tabeira desenhada modelo 3", legenda: "Desenho · Modelo 3" },
+  "Modelo 4": { src: tabeiraM4.url, alt: "Tabeira desenhada modelo 4", legenda: "Desenho · Modelo 4" },
+  "Modelo 5": { src: tabeiraM5.url, alt: "Tabeira desenhada modelo 5", legenda: "Desenho · Modelo 5" },
+  "Modelo 6": { src: tabeiraM6.url, alt: "Tabeira lisa boleada modelo 6", legenda: "Lisa (Boleada) · Modelo 6" },
+  "Modelo 7": { src: tabeiraM7.url, alt: "Tabeira lisa boleada modelo 7", legenda: "Lisa (Boleada) · Modelo 7" },
+};
+
+export const capaTabeira: ImagemProduto = {
+  src: tabeiraCapa.url,
+  alt: "Modelos de tabeira expostos na Rocha Telhas",
+  legenda: "Modelos disponíveis",
+};
+
+export function galeriaTabeira(modelo?: string): ImagemProduto[] {
+  const especifica = modelo ? TABEIRA_MODELOS[modelo] : undefined;
+  return [especifica ?? capaTabeira];
+}
