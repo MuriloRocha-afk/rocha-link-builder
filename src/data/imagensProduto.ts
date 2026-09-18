@@ -91,6 +91,11 @@ import deckGarapeira1 from "@/assets/produtos/deck/03_garapeira_1.jpg.asset.json
 import deckGarapeira2 from "@/assets/produtos/deck/04_garapeira_2.jpg.asset.json";
 import deckPinus1 from "@/assets/produtos/deck/05_pinus_1.jpg.asset.json";
 import deckPinus2 from "@/assets/produtos/deck/06_pinus_2.jpg.asset.json";
+import mouraoPatioCapa from "@/assets/produtos/mourao-tratado/01_capa_mourao_patio.jpg.asset.json";
+import mouraoPilhaCarretinha from "@/assets/produtos/mourao-tratado/02_mourao_pilha_carretinha.jpg.asset.json";
+import mouraoDetalheTopo from "@/assets/produtos/mourao-tratado/03_mourao_detalhe_topo.jpg.asset.json";
+import mouraoPilhasMuro from "@/assets/produtos/mourao-tratado/04_mourao_pilhas_muro.jpg.asset.json";
+import mouraoPilhasLongas from "@/assets/produtos/mourao-tratado/05_mourao_pilhas_longas.jpg.asset.json";
 import madeiritCompensadoVermelho from "@/assets/produtos/madeirit/02_compensado_pilha_vermelho.jpg.asset.json";
 import madeiritCoresVariadas from "@/assets/produtos/madeirit/03_pilhas_cores_variadas.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
@@ -1609,3 +1614,12 @@ const GALERIAS_DECK: Record<string, ImagemProduto[]> = {
 export function galeriaDeck(categoria?: string): ImagemProduto[] {
   return categoria ? (GALERIAS_DECK[categoria] ?? [capaDeck]) : [capaDeck];
 }
+
+// MOURÃO TRATADO — galeria fixa do produto no pátio para todas as combinações
+export const imagensMouraoTratado: ImagemProduto[] = [
+  { src: mouraoPatioCapa.url, alt: "Mourões tratados no pátio da Rocha Telhas", legenda: "Mourão Tratado · Pátio" },
+  { src: mouraoPilhaCarretinha.url, alt: "Pilha de mourões tratados ao lado de uma carretinha", legenda: "Estoque de Mourão Tratado" },
+  { src: mouraoDetalheTopo.url, alt: "Detalhe do topo dos mourões tratados", legenda: "Detalhe do Mourão Tratado" },
+  { src: mouraoPilhasMuro.url, alt: "Pilhas de mourões tratados junto ao muro do pátio", legenda: "Mourões no pátio" },
+  { src: mouraoPilhasLongas.url, alt: "Pilhas longas de mourões tratados", legenda: "Variedade de comprimentos" },
+];

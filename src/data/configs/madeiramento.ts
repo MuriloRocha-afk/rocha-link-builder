@@ -1,5 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
-import { galeriaDeck, galeriaTabeira } from "@/data/imagensProduto";
+import { galeriaDeck, galeriaTabeira, imagensMouraoTratado } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -389,8 +389,7 @@ export const CONFIG_MOURAO: ConfiguradorConfig = {
     "Autoclave de 04x06cm a 28x30cm e 2,20m a 10m de comprimento. Cercas e estruturas rurais.",
   tagInfo: "✓ Tratado em Autoclave · Reflorestamento",
   galeriaTitulo: "Mourão Tratado",
-  galeriaPlaceholder: "Selecione o diâmetro para ver as fotos",
-  imagens: (s) => (s.diametro ? [{ src: "", alt: `Mourão Tratado ${s.diametro}` }] : []),
+  imagens: () => imagensMouraoTratado,
   categoria: "Madeiramento",
   passos: [
     {
