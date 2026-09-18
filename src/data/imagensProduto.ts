@@ -74,6 +74,8 @@ import forroCedrinhoMesclado1 from "@/assets/produtos/forro-cedrinho/03_mesclado
 import forroCedrinhoMesclado2 from "@/assets/produtos/forro-cedrinho/04_mesclado_2.jpg.asset.json";
 import forroPinusCapa from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
 import forroPinusDetalhe from "@/assets/produtos/forro-pinus/02_forro_pinus_detalhe.jpg.asset.json";
+import forroPvcCapa from "@/assets/produtos/forro-pvc/01_capa_forro_pvc.jpg.asset.json";
+import forroPvcDetalhe from "@/assets/produtos/forro-pvc/02_forro_pvc_detalhe.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
 import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
@@ -575,9 +577,18 @@ export const imagensEucalipto: ImagemProduto[] = [
   { src: eucaliptoPilhaDetalhe.url, alt: "Detalhe da pilha de pontaletes de Eucalipto", legenda: "Detalhe das peças em estoque" },
 ];
 
-// FORRO PVC
+// FORRO PVC — fotos reais do forro instalado.
 export const imagensForroPVC: ImagemProduto[] = [
-  { src: "", alt: "Forro PVC Branco instalado" },
+  {
+    src: forroPvcCapa.url,
+    alt: "Forro de PVC branco instalado no teto",
+    legenda: "Forro de PVC instalado",
+  },
+  {
+    src: forroPvcDetalhe.url,
+    alt: "Perfil das réguas de PVC branco frisado",
+    legenda: "Perfil das réguas de PVC",
+  },
 ];
 
 // FORRO CEDRINHO — capa padrão e galerias próprias por categoria.
