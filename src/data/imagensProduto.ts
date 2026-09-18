@@ -72,6 +72,8 @@ import forroCedrinhoCerne1 from "@/assets/produtos/forro-cedrinho/01_capa_card_e
 import forroCedrinhoCerne2 from "@/assets/produtos/forro-cedrinho/02_cerne_2.jpg.asset.json";
 import forroCedrinhoMesclado1 from "@/assets/produtos/forro-cedrinho/03_mesclado_1.jpg.asset.json";
 import forroCedrinhoMesclado2 from "@/assets/produtos/forro-cedrinho/04_mesclado_2.jpg.asset.json";
+import forroPinusCapa from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
+import forroPinusDetalhe from "@/assets/produtos/forro-pinus/02_forro_pinus_detalhe.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
 import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
