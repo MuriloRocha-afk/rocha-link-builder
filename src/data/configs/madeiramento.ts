@@ -241,7 +241,7 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
   breadcrumb: BC("Tabeira"),
   titulo: "Tabeira",
   subtitulo:
-    "Tabeiras lisas (boleadas) ou desenhadas de 15cm a 30cm, com 6 modelos de desenho. Vendidas por metro linear.",
+    "Tabeiras lisas (boleadas) ou desenhadas de 15cm a 30cm, com 7 modelos de desenho. Vendidas por metro linear.",
   galeriaTitulo: "Tabeira",
   galeriaPlaceholder: "Selecione o acabamento para ver as fotos",
   imagens: (s) => galeriaTabeira(s.modelo),
