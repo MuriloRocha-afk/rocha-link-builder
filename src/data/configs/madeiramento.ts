@@ -389,6 +389,7 @@ export const CONFIG_MOURAO: ConfiguradorConfig = {
     "Autoclave de 04x06cm a 28x30cm e 2,20m a 10m de comprimento. Cercas e estruturas rurais.",
   tagInfo: "✓ Tratado em Autoclave · Reflorestamento",
   galeriaTitulo: "Mourão Tratado",
+  galeriaPlaceholder: "Mourão Tratado",
   imagens: () => imagensMouraoTratado,
   categoria: "Madeiramento",
   passos: [
