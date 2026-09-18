@@ -8,7 +8,7 @@ import pinusAsset from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinus.jpg.
 import garapeira from "@/assets/prod-garapeira.jpg";
 import amescla from "@/assets/prod-amescla.jpg";
 import forroPvc from "@/assets/prod-forro-pvc.jpg";
-import forroCedrinho from "@/assets/prod-forro-cedrinho.jpg";
+import forroCedrinhoAsset from "@/assets/produtos/forro-cedrinho/01_capa_card_e_cerne_1.jpg.asset.json";
 import madeirite from "@/assets/prod-madeirite.jpg";
 import tabeira from "@/assets/prod-tabeira.jpg";
 import mourao from "@/assets/prod-mourao.jpg";
@@ -17,6 +17,7 @@ const cambara = cambaraAsset.url;
 const pinus = pinusAsset.url;
 const eucalipto = eucaliptoAsset.url;
 const cedrinho = cedrinhoAsset.url;
+const forroCedrinho = forroCedrinhoAsset.url;
 
 type Subcard = {
   slug: string;
