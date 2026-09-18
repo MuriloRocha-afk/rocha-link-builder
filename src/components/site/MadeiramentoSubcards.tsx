@@ -9,6 +9,7 @@ import garapeira from "@/assets/prod-garapeira.jpg";
 import amescla from "@/assets/prod-amescla.jpg";
 import forroPvc from "@/assets/prod-forro-pvc.jpg";
 import forroCedrinhoAsset from "@/assets/produtos/forro-cedrinho/01_capa_card_e_cerne_1.jpg.asset.json";
+import forroPinusCapaAsset from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
 import madeirite from "@/assets/prod-madeirite.jpg";
 import tabeira from "@/assets/prod-tabeira.jpg";
 import mourao from "@/assets/prod-mourao.jpg";
