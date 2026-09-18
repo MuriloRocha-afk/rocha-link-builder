@@ -94,8 +94,8 @@ export default function PontaleteEucalipto() {
       galeria={
         <GaleriaProduto
           titulo="Pontalete de Eucalipto"
-          subtitulo="Foto em breve"
-          imagens={imagensEucalipto["pontalete-eucalipto"] ?? []}
+          subtitulo="Fotos reais do estoque no pátio da Rocha Telhas"
+          imagens={imagensEucalipto}
         />
       }
     >

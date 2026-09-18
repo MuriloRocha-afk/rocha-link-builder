@@ -63,6 +63,9 @@ import pinusPatioPilhas from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinu
 import pinusTopoPilha from "@/assets/produtos/pinus-patio/02_pinus_topo_pilha.jpg.asset.json";
 import pinusPilhasGalpao from "@/assets/produtos/pinus-patio/03_pinus_pilhas_galpao.jpg.asset.json";
 import pinusPilhaCeu from "@/assets/produtos/pinus-patio/04_pinus_pilha_ceu.jpg.asset.json";
+import eucaliptoPatioPontaletes from "@/assets/produtos/eucalipto-pontalete/01_patio_pontaletes_eucalipto.jpg.asset.json";
+import eucaliptoPilhaMuro from "@/assets/produtos/eucalipto-pontalete/02_pontaletes_pilha_muro.jpg.asset.json";
+import eucaliptoPilhaDetalhe from "@/assets/produtos/eucalipto-pontalete/03_pontaletes_pilha_detalhe.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
 import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
@@ -557,19 +560,12 @@ export const imagensCambara: ImagemProduto[] = [
   { src: cambaraSarrafosGalpao.url, alt: "Pilha de sarrafos de Cambará Rosa no galpão", legenda: "Sarrafos no estoque da Rocha Telhas" },
 ];
 
-// PONTALETES EUCALIPTO
-export const imagensEucalipto: Record<string, ImagemProduto[]> = {
-  "pontalete-eucalipto": [
-    { src: "", alt: "Pontalete Roliço Eucalipto Tratado" },
-    { src: "", alt: "Pilha de pontaletes no pátio" },
-  ],
-  "eucalipto-in-natura": [
-    { src: "", alt: "Eucalipto roliço in natura" },
-  ],
-  "eucalipto-tratado": [
-    { src: "", alt: "Eucalipto tratado em autoclave" },
-  ],
-};
+// PONTALETES EUCALIPTO — galeria fixa do estoque real, independente da variante.
+export const imagensEucalipto: ImagemProduto[] = [
+  { src: eucaliptoPatioPontaletes.url, alt: "Pilha de pontaletes de Eucalipto no pátio da Rocha Telhas", legenda: "Estoque real no pátio" },
+  { src: eucaliptoPilhaMuro.url, alt: "Pontaletes de Eucalipto empilhados junto ao muro do pátio", legenda: "Variedade disponível no pátio" },
+  { src: eucaliptoPilhaDetalhe.url, alt: "Detalhe da pilha de pontaletes de Eucalipto", legenda: "Detalhe das peças em estoque" },
+];
 
 // FORRO PVC
 export const imagensForroPVC: ImagemProduto[] = [
