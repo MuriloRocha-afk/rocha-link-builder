@@ -117,7 +117,7 @@ export default function ForroPVC() {
       galeria={
         <GaleriaProduto
           titulo="Forro PVC Branco Frisado"
-          subtitulo="Réguas brancas · Foto em breve"
+          subtitulo="Réguas brancas"
           imagens={imagensForroPVC}
         />
       }
