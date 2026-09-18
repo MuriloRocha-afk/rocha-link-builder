@@ -19,7 +19,7 @@ const pinus = pinusAsset.url;
 const eucalipto = eucaliptoAsset.url;
 const cedrinho = cedrinhoAsset.url;
 const forroCedrinho = forroCedrinhoAsset.url;
-const forroPinusCapa = forroPinusCapaAsset.url;
+const forroPvc = forroPvcAsset.url;
 
 type Subcard = {
   slug: string;
