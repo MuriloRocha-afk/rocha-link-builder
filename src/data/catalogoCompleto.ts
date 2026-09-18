@@ -211,7 +211,7 @@ const EXTRAS: Record<string, Extra> = {
   cumeeiras: { config: CONFIG_CUMEEIRAS },
 
   // Madeiramento
-  cambara: { fotos: todasDoMapa(imagensCambara), opcoes: OPCOES_MADEIRA },
+  cambara: { fotos: imagensCambara, opcoes: OPCOES_MADEIRA },
   cedrinho: { fotos: todasDoMapa(imagensCedrinho), opcoes: [chaves(imagensCedrinho, "Tipos")] },
   pinus: { fotos: todasDoMapa(imagensPinus), opcoes: [chaves(imagensPinus, "Tipos")] },
   eucalipto: { fotos: todasDoMapa(imagensEucalipto) },

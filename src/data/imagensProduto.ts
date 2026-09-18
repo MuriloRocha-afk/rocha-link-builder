@@ -319,7 +319,6 @@ export const IMG = {
   pvcMarfimTelhado: imgPvcMarfimTelhado.url,
   pvcMarfimTelhado2: imgPvcMarfimTelhado2.url,
   concretoGrafiteTelhado: imgConcretoGrafiteTelhado.url,
-  caibroCambara: imgCaibroCambara.url,
 };
 
 
