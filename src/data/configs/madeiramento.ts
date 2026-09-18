@@ -1,4 +1,5 @@
 import type { ConfiguradorConfig } from "@/components/site/ConfiguradorGenerico";
+import { galeriaTabeira } from "@/data/imagensProduto";
 
 const BC = (nome: string) => [
   { label: "Catálogo", href: "/catalogo" },
@@ -243,10 +244,7 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
     "Tabeiras lisas (boleadas) ou desenhadas de 15cm a 30cm, com 6 modelos de desenho. Vendidas por metro linear.",
   galeriaTitulo: "Tabeira",
   galeriaPlaceholder: "Selecione o acabamento para ver as fotos",
-  imagens: (s) =>
-    s.acabamento
-      ? [{ src: "", alt: `Tabeira ${s.acabamento}` }]
-      : [],
+  imagens: (s) => galeriaTabeira(s.modelo),
   categoria: "Madeiramento",
   passos: [
     {
@@ -266,10 +264,11 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
     },
     {
       chave: "modelo",
-      titulo: "Modelo",
+      titulo: "Desenho",
       tipo: "grid3",
-      visivel: ehDesenhada,
-      opcoes: [1, 2, 3, 4, 5, 6].map((n) => ({ valor: `Modelo ${n}` })),
+      visivel: (s) => Boolean(s.acabamento),
+      opcoes: (s) =>
+        (ehDesenhada(s) ? [1, 2, 3, 4, 5] : [6, 7]).map((n) => ({ valor: `Modelo ${n}` })),
     },
     {
       chave: "qtd",
@@ -286,16 +285,16 @@ export const CONFIG_TABEIRA: ConfiguradorConfig = {
   especificacoes: [
     ["Acabamentos", "Lisa (boleada) ou desenhada"],
     ["Tamanhos", "15cm, 20cm, 25cm e 30cm"],
-    ["Modelos", "Desenhada nº1 a nº6"],
+    ["Modelos", "Desenhada nº1 a nº5 · Lisa (boleada) nº6 e nº7"],
     ["Venda", "Por metro linear"],
   ],
   resumoNome: (s) => (ehDesenhada(s) ? "Tabeira Desenhada" : "Tabeira Lisa (Boleada)"),
   resumoDetalhe: (s, q) =>
-    `${s.tamanho}${ehDesenhada(s) ? ` · ${s.modelo}` : ""} · ${q.qtd ?? 10} Mt`,
+    `${s.tamanho}${s.modelo ? ` · ${s.modelo}` : ""} · ${q.qtd ?? 10} Mt`,
   unidadeResumo: () => "Mt",
   idItem: (s) => `tabeira-${s.acabamento}-${s.tamanho}-${s.modelo ?? ""}`,
   mensagem: (s, q) =>
-    `*Tabeira ${ehDesenhada(s) ? "Desenhada" : "Lisa (Boleada)"}*\n• Tamanho: ${s.tamanho}${ehDesenhada(s) ? `\n• Modelo: ${s.modelo?.replace("Modelo ", "nº ")}` : ""}\n• Quantidade: ${q.qtd ?? 10} Mt`,
+    `*Tabeira ${ehDesenhada(s) ? "Desenhada" : "Lisa (Boleada)"}*\n• Tamanho: ${s.tamanho}${s.modelo ? `\n• Desenho: ${s.modelo.replace("Modelo ", "nº ")}` : ""}\n• Quantidade: ${q.qtd ?? 10} Mt`,
 };
 
 /* ---------------- DECK ---------------- */

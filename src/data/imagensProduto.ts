@@ -77,6 +77,14 @@ import forroPinusDetalhe from "@/assets/produtos/forro-pinus/02_forro_pinus_deta
 import forroPvcCapa from "@/assets/produtos/forro-pvc/01_capa_forro_pvc.jpg.asset.json";
 import forroPvcDetalhe from "@/assets/produtos/forro-pvc/02_forro_pvc_detalhe.jpg.asset.json";
 import madeiritCapa from "@/assets/produtos/madeirit/01_capa_madeirit_azul.jpg.asset.json";
+import tabeiraCapa from "@/assets/produtos/tabeira/00_capa_tabeira_todos_modelos.jpg.asset.json";
+import tabeiraM1 from "@/assets/produtos/tabeira/01_desenhada_modelo1.jpg.asset.json";
+import tabeiraM2 from "@/assets/produtos/tabeira/02_desenhada_modelo2.jpg.asset.json";
+import tabeiraM3 from "@/assets/produtos/tabeira/03_desenhada_modelo3.jpg.asset.json";
+import tabeiraM4 from "@/assets/produtos/tabeira/04_desenhada_modelo4.jpg.asset.json";
+import tabeiraM5 from "@/assets/produtos/tabeira/05_desenhada_modelo5.jpg.asset.json";
+import tabeiraM6 from "@/assets/produtos/tabeira/06_lisa_boleada_modelo6.jpg.asset.json";
+import tabeiraM7 from "@/assets/produtos/tabeira/07_lisa_boleada_modelo7.jpg.asset.json";
 import madeiritCompensadoVermelho from "@/assets/produtos/madeirit/02_compensado_pilha_vermelho.jpg.asset.json";
 import madeiritCoresVariadas from "@/assets/produtos/madeirit/03_pilhas_cores_variadas.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
@@ -1546,4 +1554,26 @@ export function galeriaFerramentas(ferramenta?: string, modelo?: string): Imagem
   if (!modelo) return [capaTipo ?? capaFerramentas];
   const especifica = FERRAMENTAS_MODELOS[`${ferramenta}|${modelo}`];
   return especifica ? [especifica] : [];
+}
+
+// TABEIRA — foto por modelo de desenho (capa antes da seleção)
+const TABEIRA_MODELOS: Record<string, ImagemProduto> = {
+  "Modelo 1": { src: tabeiraM1.url, alt: "Tabeira desenhada modelo 1", legenda: "Desenho · Modelo 1" },
+  "Modelo 2": { src: tabeiraM2.url, alt: "Tabeira desenhada modelo 2", legenda: "Desenho · Modelo 2" },
+  "Modelo 3": { src: tabeiraM3.url, alt: "Tabeira desenhada modelo 3", legenda: "Desenho · Modelo 3" },
+  "Modelo 4": { src: tabeiraM4.url, alt: "Tabeira desenhada modelo 4", legenda: "Desenho · Modelo 4" },
+  "Modelo 5": { src: tabeiraM5.url, alt: "Tabeira desenhada modelo 5", legenda: "Desenho · Modelo 5" },
+  "Modelo 6": { src: tabeiraM6.url, alt: "Tabeira lisa boleada modelo 6", legenda: "Lisa (Boleada) · Modelo 6" },
+  "Modelo 7": { src: tabeiraM7.url, alt: "Tabeira lisa boleada modelo 7", legenda: "Lisa (Boleada) · Modelo 7" },
+};
+
+export const capaTabeira: ImagemProduto = {
+  src: tabeiraCapa.url,
+  alt: "Modelos de tabeira expostos na Rocha Telhas",
+  legenda: "Modelos disponíveis",
+};
+
+export function galeriaTabeira(modelo?: string): ImagemProduto[] {
+  const especifica = modelo ? TABEIRA_MODELOS[modelo] : undefined;
+  return [especifica ?? capaTabeira];
 }
