@@ -101,7 +101,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "forro-pinus",
     name: "Forro Pinus",
-    image: forroCedrinho,
+    image: forroPinusCapa,
     description:
       "Réguas de pinus macho-fêmea 1cm x 10cm, vendido por m². Claro e fácil de envernizar.",
     cta: "Cotar em m²",
