@@ -4,7 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucalipto from "@/assets/prod-eucalipto.jpg";
 import cedrinho from "@/assets/prod-cedrinho.jpg";
-import pinus from "@/assets/prod-pinus.jpg";
+import pinusAsset from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinus.jpg.asset.json";
 import garapeira from "@/assets/prod-garapeira.jpg";
 import amescla from "@/assets/prod-amescla.jpg";
 import forroPvc from "@/assets/prod-forro-pvc.jpg";
@@ -14,6 +14,7 @@ import tabeira from "@/assets/prod-tabeira.jpg";
 import mourao from "@/assets/prod-mourao.jpg";
 
 const cambara = cambaraAsset.url;
+const pinus = pinusAsset.url;
 
 type Subcard = {
   slug: string;

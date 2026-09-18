@@ -59,6 +59,10 @@ import cambaraPatioVariado from "@/assets/produtos/cambara-patio/02_patio_pilhas
 import cambaraVigasCeu from "@/assets/produtos/cambara-patio/03_vigas_topo_ceu.jpg.asset.json";
 import cambaraPecasCortadas from "@/assets/produtos/cambara-patio/04_detalhe_pecas_cortadas.jpg.asset.json";
 import cambaraSarrafosGalpao from "@/assets/produtos/cambara-patio/05_pilha_sarrafos_galpao.jpg.asset.json";
+import pinusPatioPilhas from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinus.jpg.asset.json";
+import pinusTopoPilha from "@/assets/produtos/pinus-patio/02_pinus_topo_pilha.jpg.asset.json";
+import pinusPilhasGalpao from "@/assets/produtos/pinus-patio/03_pinus_pilhas_galpao.jpg.asset.json";
+import pinusPilhaCeu from "@/assets/produtos/pinus-patio/04_pinus_pilha_ceu.jpg.asset.json";
 import imgTerraCapa from "@/assets/produtos/pvc-terracota/capa_patio.jpg.asset.json";
 import imgTerraAngulo from "@/assets/produtos/pvc-terracota/angulo.jpg.asset.json";
 import imgTerra230 from "@/assets/produtos/pvc-terracota/t230.png.asset.json";
@@ -1135,12 +1139,13 @@ export const imagensCedrinho: Record<string, ImagemProduto[]> = {
   tabua: [{ src: "", alt: "Tábua Cedrinho bruto e aparelhado" }],
 };
 
-// PINUS — por tipo de peça
-export const imagensPinus: Record<string, ImagemProduto[]> = {
-  Sarrafo: [{ src: "", alt: "Sarrafo Pinus no pátio" }],
-  "Tábua": [{ src: "", alt: "Tábua Pinus bruto 30cm" }],
-  Pontalete: [{ src: "", alt: "Pontalete Pinus 6x6cm" }],
-};
+// PINUS — galeria fixa do estoque real do pátio, independente da variante.
+export const imagensPinus: ImagemProduto[] = [
+  { src: pinusPatioPilhas.url, alt: "Pilhas de Pinus no pátio da Rocha Telhas", legenda: "Estoque real no pátio" },
+  { src: pinusTopoPilha.url, alt: "Topo de uma pilha de peças de Pinus", legenda: "Variedade de bitolas em estoque" },
+  { src: pinusPilhasGalpao.url, alt: "Pilhas de Pinus armazenadas no galpão", legenda: "Volume disponível no galpão" },
+  { src: pinusPilhaCeu.url, alt: "Grande pilha de peças de Pinus vista de baixo", legenda: "Pinus disponível no pátio" },
+];
 
 // MADEIRIT & COMPENSADO — por categoria
 export const imagensMadeirit: Record<string, ImagemProduto[]> = {
