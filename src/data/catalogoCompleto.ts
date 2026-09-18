@@ -216,7 +216,10 @@ const EXTRAS: Record<string, Extra> = {
   cedrinho: { fotos: imagensCedrinho },
   pinus: { fotos: imagensPinus },
   eucalipto: { fotos: imagensEucalipto },
-  madeirit: { fotos: todasDoMapa(imagensMadeirit), opcoes: [chaves(imagensMadeirit, "Linhas")] },
+  madeirit: {
+    fotos: imagensMadeirit,
+    opcoes: [{ label: "Linhas", valores: ["Plastificado", "Rosa", "OSB", "Compensado"] }],
+  },
   "forro-pvc": { fotos: imagensForroPVC },
   "forro-cedrinho": {
     fotos: juntarFotos(
