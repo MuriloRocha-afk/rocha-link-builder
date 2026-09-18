@@ -1314,7 +1314,7 @@ export const DESTAQUES_PRODUTO: Record<string, DestaquesProdutoInfo> = {
     badges: [
       { icone: "✨", texto: "Acabamento do beiral" },
       { icone: "🪵", texto: "Lisa ou desenhada" },
-      { icone: "🔢", texto: "6 modelos" },
+      { icone: "🔢", texto: "7 modelos" },
       { icone: "📏", texto: "15cm a 30cm" },
     ],
     motivos: [
