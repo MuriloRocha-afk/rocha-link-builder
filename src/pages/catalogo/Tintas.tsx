@@ -1,5 +1,5 @@
 import { CategoriaSubcardPage, type EmojiSubcard } from "@/components/site/EmojiSubcards";
-import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaMassaMadeira, capaPu40, capaSayerraz, capaStainPolisten, capaThinner, capaVernizPolirex } from "@/data/imagensProduto";
+import { capaAcessoriosPintura, capaCupicida, capaEmborrachada, capaLixas, capaLonaPreta, capaMassaMadeira, capaPu40, capaSayerraz, capaStainPolisten, capaThinner, capaVernizPolirex } from "@/data/imagensProduto";
 
 export const CARDS: EmojiSubcard[] = [
   {
@@ -106,6 +106,7 @@ export const CARDS: EmojiSubcard[] = [
     slug: "lona-plastica",
     name: "Lona Plástica Preta",
     emoji: "⬛",
+    image: capaLonaPreta,
     tags: ["Preta", "Por metro", "6 espessuras"],
     description:
       "Lona plástica preta vendida por metro linear, rolo de 4 m de largura. Escolha a espessura (09 a 40 kg) e a metragem.",

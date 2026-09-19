@@ -4,6 +4,7 @@ import {
   galeriaCupicida,
   galeriaEmborrachada,
   galeriaLixas,
+  galeriaLonaPreta,
   galeriaMassaMadeira,
   galeriaPu40,
   galeriaSayerraz,
@@ -374,8 +375,8 @@ export const CONFIG_LONA: ConfiguradorConfig = {
   subtitulo:
     "Lona preta vendida por metro linear, em rolo de 4 m de largura cortado sob medida. Escolha a espessura (peso do rolo) e informe quantos metros você precisa.",
   galeriaTitulo: "Lona Plástica Preta",
-  galeriaPlaceholder: "Selecione a espessura para ver as fotos",
-  imagens: (s) => (s.espessura ? [{ src: "", alt: `Lona Plástica Preta ${s.espessura}` }] : []),
+  galeriaPlaceholder: "",
+  imagens: () => galeriaLonaPreta(),
   categoria: "Tintas",
   passos: [
     {
