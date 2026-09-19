@@ -100,7 +100,6 @@ export default function CrossSellModal({
                     </div>
                     <span className="text-xs text-gray-400">{produto.unidade}</span>
                   </div>
-                </div>
 
                 <Link
                   to={produto.url}
