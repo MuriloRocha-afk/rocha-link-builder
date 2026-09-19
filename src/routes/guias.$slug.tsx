@@ -146,7 +146,7 @@ function GuiaPost() {
               </Link>
               <a
                 href={waLink(
-                  `Olá! Li o guia "${guia.titulo}" no site e quero ajuda com o meu telhado.`,
+                  `Olá! Vim pelo site da Rocha Telhas e gostaria de ajuda com o meu telhado. Li o guia "${guia.titulo}".`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

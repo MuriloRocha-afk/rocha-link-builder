@@ -169,8 +169,9 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
   },
 ];
 
-const WHATS_FAQ =
-  "https://wa.me/5511971761003?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20um%20produto%20da%20Rocha%20Telhas.";
+const WHATS_FAQ = `https://wa.me/5511971761003?text=${encodeURIComponent(
+  "Olá! Vim pelo site da Rocha Telhas e gostaria de tirar uma dúvida sobre um produto.",
+)}`;
 
 export function Faq() {
   const [aba, setAba] = useState(FAQ_DATA[0].id);

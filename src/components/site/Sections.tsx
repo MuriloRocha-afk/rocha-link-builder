@@ -432,7 +432,7 @@ export function Unidades() {
               <WhatsAppButton
                 size="lg"
                 className="w-full"
-                message="Olá! Quero falar com a Rocha Telhas em Franco da Rocha."
+                message="Olá! Vim pelo site da Rocha Telhas e gostaria de falar com a loja de Franco da Rocha."
               >
                 Falar com a loja no WhatsApp
               </WhatsAppButton>

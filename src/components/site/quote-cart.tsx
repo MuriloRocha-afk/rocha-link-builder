@@ -189,9 +189,8 @@ function buildMessage(
     .join("\n");
 
   return [
-    "Olá, equipe Rocha Telhas!",
+    "Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar uma cotação para os itens abaixo:",
     `Meu nome é ${nome.trim() || "[nome]"} e estou em ${local.trim() || "[cidade/bairro]"}.`,
-    "Gostaria de solicitar uma cotação para os itens abaixo:",
     "",
     "📋 *LISTA DE MATERIAIS*",
     linhas,
@@ -497,7 +496,7 @@ function QuoteDrawer() {
             <Button asChild variant="whats" size="xl" className="w-full">
               <a
                 href={waLink(
-                  `Olá, equipe Rocha Telhas! Sou ${nome.trim()} e acabei de enviar um orçamento pelo site${sucesso.numero ? ` (pedido nº ${sucesso.numero})` : ""}. Poderiam dar andamento?`,
+                  `Olá! Vim pelo site da Rocha Telhas e gostaria de dar andamento ao orçamento que acabei de enviar${sucesso.numero ? ` (pedido nº ${sucesso.numero})` : ""}. Sou ${nome.trim()}.`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

@@ -32,7 +32,7 @@ export function Footer() {
             </ul>
             <div className="mt-6 flex gap-3">
               <a
-                href={waLink("Olá! Vim pelo site da Rocha Telhas.")}
+                href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de falar com um vendedor.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -83,7 +83,7 @@ export function Footer() {
             <div className="mt-6">
               <WhatsAppButton
                 className="w-full"
-                message="Olá! Quero um orçamento completo com a Rocha Telhas."
+                message="Olá! Vim pelo site da Rocha Telhas e gostaria de um orçamento completo."
               >
                 Cotar pelo WhatsApp
               </WhatsAppButton>
@@ -102,7 +102,7 @@ export function Footer() {
 export function FloatingWhats() {
   return (
     <a
-      href={waLink("Olá! Vim pelo site e gostaria de falar com o comercial.")}
+      href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de falar com o comercial.")}
       target="_blank"
       rel="noopener noreferrer"
       className="pulse-whats fixed right-5 bottom-5 z-50 flex items-center gap-2 rounded-full bg-whats px-5 py-4 text-sm font-bold text-primary-deep shadow-[var(--shadow-lift)] transition-transform hover:scale-105"
