@@ -1,5 +1,4 @@
 import { X, Check } from "lucide-react";
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import type { ProdutoRelacionado } from "../data/crossSell";
 
@@ -16,10 +15,6 @@ export default function CrossSellModal({
   produtoPrincipal,
   relacionados,
 }: Props) {
-  const [quantidades, setQuantidades] = useState<Record<string, number>>(
-    Object.fromEntries(relacionados.map((r) => [r.id, r.quantidadeSugerida])),
-  );
-
   if (!aberto) return null;
 
   return (
@@ -59,7 +54,6 @@ export default function CrossSellModal({
         {/* lista de relacionados */}
         <div className="flex-1 space-y-3 overflow-y-auto px-5 pb-2">
           {relacionados.map((produto) => {
-            const qtd = quantidades[produto.id] ?? produto.quantidadeSugerida;
             return (
               <div
                 key={produto.id}
@@ -68,42 +62,9 @@ export default function CrossSellModal({
                 <p className="truncate text-sm font-bold text-gray-900">{produto.nome}</p>
                 <p className="mt-0.5 text-xs text-gray-500">{produto.descricao}</p>
 
-                  <div className="mt-2 flex items-center gap-2">
-                    <div className="flex items-center overflow-hidden rounded-lg border border-gray-200 bg-white">
-                      <button
-                        onClick={() =>
-                          setQuantidades((q) => ({
-                            ...q,
-                            [produto.id]: Math.max(1, (q[produto.id] ?? qtd) - 1),
-                          }))
-                        }
-                        aria-label="Diminuir quantidade"
-                        className="px-2 py-1 text-sm font-bold text-gray-500 hover:bg-gray-100"
-                      >
-                        −
-                      </button>
-                      <span className="min-w-[28px] px-2 py-1 text-center text-xs font-bold text-gray-800">
-                        {qtd}
-                      </span>
-                      <button
-                        onClick={() =>
-                          setQuantidades((q) => ({
-                            ...q,
-                            [produto.id]: (q[produto.id] ?? qtd) + 1,
-                          }))
-                        }
-                        aria-label="Aumentar quantidade"
-                        className="px-2 py-1 text-sm font-bold text-gray-500 hover:bg-gray-100"
-                      >
-                        +
-                      </button>
-                    </div>
-                    <span className="text-xs text-gray-400">{produto.unidade}</span>
-                  </div>
-
                 <Link
                   to={produto.url}
-                  className="flex flex-shrink-0 items-center gap-1 rounded-lg bg-orange-500 px-3 py-2 text-xs font-bold text-white transition-all hover:bg-orange-600"
+                  className="mt-3 inline-flex items-center gap-1 rounded-lg bg-orange-500 px-3 py-2 text-xs font-bold text-white transition-all hover:bg-orange-600"
                 >
                   Ver página
                 </Link>
