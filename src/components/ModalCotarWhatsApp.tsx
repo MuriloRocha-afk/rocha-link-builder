@@ -112,7 +112,7 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
                     onChange={(e) => setNome(e.target.value)}
                     placeholder="Ex: João Silva"
                     autoFocus
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
                   />
                 </div>
                 <div>
@@ -125,7 +125,7 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
                     onChange={(e) => setCidade(e.target.value)}
                     placeholder="Ex: Caieiras - SP"
                     onKeyDown={(e) => e.key === "Enter" && handleEnviar()}
-                    className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-base sm:text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
                   />
                 </div>
               </div>
