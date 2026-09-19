@@ -521,7 +521,7 @@ export function galeriaMediterranea(cor: string): ImagemProduto[] {
   return MEDITERRANEA[cor] ?? [];
 }
 
-// TELHA FIBROCIMENTO — mesmo perfil de onda em todos os comprimentos padrão (largura 110 cm)
+// TELHA FIBROCIMENTO — galeria compartilhada por todas as dimensões disponíveis
 export const imagensFibrocimento: ImagemProduto[] = [
   { src: fibroPadrao.url, alt: "Telha Fibrocimento Ondulada INFIBRA", legenda: "Produto" },
   { src: fibroComprimento.url, alt: "Telha Fibrocimento Ondulada vista de cima", legenda: "Peça inteira" },
@@ -531,11 +531,9 @@ export const imagensFibrocimento: ImagemProduto[] = [
   { src: fibroTelhado2.url, alt: "Telhado de fibrocimento instalado", legenda: "Exemplo de aplicação" },
 ];
 
-/** Galeria por dimensão: variantes de onda curta ainda não têm foto real. */
-export function galeriaFibrocimento(dimensao?: string | null): ImagemProduto[] {
-  if (!dimensao) return imagensFibrocimento;
-  const larguraPadrao = dimensao.replace(/\s/g, "").includes("x110");
-  return larguraPadrao ? imagensFibrocimento : [];
+/** As fotos existentes são reaproveitadas em todas as dimensões. */
+export function galeriaFibrocimento(_dimensao?: string | null): ImagemProduto[] {
+  return imagensFibrocimento;
 }
 
 
