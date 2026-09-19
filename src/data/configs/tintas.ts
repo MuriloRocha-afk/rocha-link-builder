@@ -359,12 +359,12 @@ export const CONFIG_PU_CALHA: ConfiguradorConfig = {
 
 /** Espessuras da lona preta: identificadas pelo peso do rolo de 4 m x 100 m. */
 const ESPESSURAS_LONA: OpcaoConfig[] = [
-  { valor: "09 kg", label: "09 kg", sub: "Rolo 4 x 100 m — leve, uso rápido" },
-  { valor: "12 kg", label: "12 kg", sub: "Rolo 4 x 100 m — proteção geral" },
-  { valor: "15 kg", label: "15 kg", sub: "Rolo 4 x 100 m — uso frequente" },
-  { valor: "20 kg", label: "20 kg", sub: "Rolo 4 x 100 m — reforçada" },
-  { valor: "30 kg", label: "30 kg", sub: "Rolo 4 x 100 m — alta resistência" },
-  { valor: "40 kg", label: "40 kg", sub: "Rolo 4 x 100 m — extra reforçada" },
+  { valor: "09 kg", label: "09 kg", sub: "Rolo 4 x 1m — leve, uso rápido" },
+  { valor: "12 kg", label: "12 kg", sub: "Rolo 4 x 1m — proteção geral" },
+  { valor: "15 kg", label: "15 kg", sub: "Rolo 4 x 1m — uso frequente" },
+  { valor: "20 kg", label: "20 kg", sub: "Rolo 4 x 1m — reforçada" },
+  { valor: "30 kg", label: "30 kg", sub: "Rolo 4 x 1m — alta resistência" },
+  { valor: "40 kg", label: "40 kg", sub: "Rolo 4 x 1m — extra reforçada" },
 ];
 
 export const CONFIG_LONA: ConfiguradorConfig = {
@@ -380,7 +380,7 @@ export const CONFIG_LONA: ConfiguradorConfig = {
   passos: [
     {
       chave: "espessura",
-      titulo: "Espessura (peso do rolo 4 x 100 m)",
+      titulo: "Espessura (peso do rolo 4 x 1m)",
       tipo: "grid3",
       opcoes: ESPESSURAS_LONA,
     },
