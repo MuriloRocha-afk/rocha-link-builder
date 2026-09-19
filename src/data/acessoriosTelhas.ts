@@ -1,7 +1,7 @@
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 
 /** Fixador geral — disponível a partir de qualquer tipo de telha. */
-export const chumbador = (qtd: number, emoji = "🔩"): AcessorioItem => ({
+export const chumbador = (qtd: number, emoji = "\n"): AcessorioItem => ({
   id: "chumbador-parabolt",
   nome: "Chumbador (Parabolt)",
   descricao:
@@ -20,7 +20,7 @@ export const acessoriosPvc = (variante: string, cor: string, qtd: number): Acess
       id: `espigao-pvc-${c}`,
       nome: `Espigão PVC — ${c}`,
       descricao: `Arremate de espigão e rincão no perfil ${variante}.`,
-      emoji: "📐",
+      emoji: "\n",
       unidade: "un",
       categoria: "Telhas",
       quantidadeSugerida: Math.max(2, Math.ceil(qtd * 0.08)),
@@ -29,7 +29,7 @@ export const acessoriosPvc = (variante: string, cor: string, qtd: number): Acess
       id: `calco-pvc-${variante}`,
       nome: `Calço de Encaixe PVC — ${variante}`,
       descricao: "Preenche a onda da telha no beiral e sob a cumeeira.",
-      emoji: "🧩",
+      emoji: "\n",
       unidade: "un",
       categoria: "Telhas",
       quantidadeSugerida: Math.max(4, Math.ceil(qtd * 0.5)),
@@ -38,7 +38,7 @@ export const acessoriosPvc = (variante: string, cor: string, qtd: number): Acess
       id: `kit-fixacao-vedacao-${c}`,
       nome: `Kit de Fixação e Vedação — ${c}`,
       descricao: "Parafuso, arruela e vedação na cor da telha.",
-      emoji: "🧰",
+      emoji: "\n",
       unidade: "kit",
       categoria: "Fixadores",
       quantidadeSugerida: Math.max(1, Math.ceil(qtd / 5)),
