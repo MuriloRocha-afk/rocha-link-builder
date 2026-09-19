@@ -99,21 +99,21 @@ export function CroquiEstrutura({
         {destaque === "viga" && <Cota orientacao="v" a={52} b={112} pos={305} texto={cota} />}
 
         <g aria-label="Identificação das peças">
-          <line x1="282" y1="36" x2="316" y2="24" stroke={corRipa} strokeWidth="1.5" />
+          <line x1="282" y1="36" x2="350" y2="24" stroke={corRipa} strokeWidth="1.5" />
           <circle cx="282" cy="36" r="3" fill={corRipa} />
-          <text x="320" y="27" fontSize="10" fontWeight={destaque === "ripa" ? "800" : "600"} fill={corRipa}>
+          <text x="350" y="21" textAnchor="end" fontSize="9" fontWeight={destaque === "ripa" ? "800" : "600"} fill={corRipa}>
             {nomeRipa}
           </text>
 
-          <line x1="238" y1="79" x2="316" y2="70" stroke={corCaibro} strokeWidth="1.5" />
+          <line x1="238" y1="79" x2="350" y2="70" stroke={corCaibro} strokeWidth="1.5" />
           <circle cx="238" cy="79" r="3" fill={corCaibro} />
-          <text x="320" y="73" fontSize="10" fontWeight={destaque === "caibro" ? "800" : "600"} fill={corCaibro}>
+          <text x="350" y="67" textAnchor="end" fontSize="9" fontWeight={destaque === "caibro" ? "800" : "600"} fill={corCaibro}>
             {nomeCaibro}
           </text>
 
-          <line x1="286" y1="112" x2="316" y2="121" stroke={corViga} strokeWidth="1.5" />
+          <line x1="286" y1="112" x2="350" y2="121" stroke={corViga} strokeWidth="1.5" />
           <circle cx="286" cy="112" r="3" fill={corViga} />
-          <text x="320" y="124" fontSize="10" fontWeight={destaque === "viga" ? "800" : "600"} fill={corViga}>
+          <text x="350" y="132" textAnchor="end" fontSize="9" fontWeight={destaque === "viga" ? "800" : "600"} fill={corViga}>
             {nomeViga}
           </text>
         </g>
