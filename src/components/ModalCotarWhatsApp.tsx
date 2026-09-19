@@ -66,10 +66,10 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
   };
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div className="fixed inset-0 z-[70] flex max-w-full items-end justify-center overflow-x-hidden p-0 sm:items-center sm:p-4">
       <div className="absolute inset-0 bg-black/50" onClick={onFechar} />
 
-      <div className="relative bg-white w-full sm:max-w-sm rounded-t-3xl sm:rounded-2xl shadow-2xl animate-in slide-in-from-bottom sm:zoom-in-95 duration-300">
+      <div className="relative w-full min-w-0 max-w-full overflow-x-hidden rounded-t-3xl bg-white shadow-2xl animate-in slide-in-from-bottom duration-300 sm:max-w-sm sm:rounded-2xl sm:zoom-in-95">
         {/* handle mobile */}
         <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mt-3 sm:hidden" />
 
@@ -87,12 +87,12 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
           ) : (
             <>
               {/* header */}
-              <div className="flex items-center justify-between mb-4">
-                <div>
+              <div className="mb-4 flex min-w-0 items-center justify-between gap-3">
+                <div className="min-w-0">
                   <h2 className="font-bold text-gray-900">Cotar pelo WhatsApp</h2>
-                  <p className="text-gray-500 text-xs mt-0.5">{nomeProduto}</p>
+                  <p className="mt-0.5 break-words text-xs text-gray-500">{nomeProduto}</p>
                 </div>
-                <button onClick={onFechar} className="text-gray-300 hover:text-gray-600 transition-colors">
+                <button onClick={onFechar} className="shrink-0 text-gray-300 transition-colors hover:text-gray-600">
                   <X size={20} />
                 </button>
               </div>
@@ -135,7 +135,7 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
                 <p className="text-xs text-gray-400 font-medium mb-1.5 uppercase tracking-wide">
                   Prévia da mensagem
                 </p>
-                <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-line">
+                <p className="break-words text-xs leading-relaxed whitespace-pre-line text-gray-600 [overflow-wrap:anywhere]">
                   {tipo === "calculadora"
                     ? "Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar um orçamento sem sair de casa. Vou enviar a minha lista de materiais.\n"
                     : "Olá! Vim pelo site da Rocha Telhas e gostaria de cotar o seguinte produto:\n"}

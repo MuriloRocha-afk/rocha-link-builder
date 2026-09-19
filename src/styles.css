@@ -167,7 +167,9 @@
 
   html,
   body {
+    width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
   }
 
   /* Evita rolagem horizontal sem travar a rolagem vertical da página. */
