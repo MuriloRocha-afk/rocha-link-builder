@@ -31,11 +31,11 @@ const ORDEM = ["telhas", "madeiramento", "calhas", "fixadores", "tintas"];
 
 /** Contagem real de subcategorias de cada página de categoria. */
 const VARIEDADE: Record<string, string> = {
-  telhas: "10 tipos de telha em linha",
+  telhas: "11 TIPOS DE TELHA EM LINHA",
   madeiramento: "15 espécies e beneficiados no pátio",
-  calhas: "7 linhas de calha, rufo e manta",
-  fixadores: "7 famílias de fixação e ferramentas",
-  tintas: "13 produtos de pintura e proteção",
+  calhas: "4 LINHAS DE CALHA, RUFO E MANTA",
+  fixadores: "5 FAMÍLIAS DE FIXAÇÃO E FERRAMENTAS",
+  tintas: "11 PRODUTOS DE PINTURA E PROTEÇÃO",
 };
 
 const MAIS_VENDIDOS: Record<string, string> = {
