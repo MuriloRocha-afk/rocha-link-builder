@@ -103,9 +103,7 @@ export function ColonialPvcConfigurator({
   const cores = CORES[variante];
   const detail = `${variante} PVC · ${cor ?? "-"} · ${dimensao ?? "-"} × ${largura.value} · ${espessuraLabel} · cobertura ~${cobertura} m²`;
 
-  const mensagem = `Olá! Gostaria de um orçamento:
-
-🧱 *${nomeProduto}*
+  const mensagem = `🧱 *${nomeProduto}*
 - Cor: ${cor}
 - Comprimento: ${dimensao}
 - Largura: ${largura.value}

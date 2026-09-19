@@ -102,9 +102,7 @@ export function CambaraConfigurator() {
 
   const detail = [tipoLabel, bitola, comprimento, acabamento].filter(Boolean).join(" · ");
 
-  const mensagem = `Olá! Gostaria de um orçamento:
-
-*Cambará Rosa*
+  const mensagem = `*Cambará Rosa*
 - Tipo: ${tipoLabel ?? "-"}
 - Bitola: ${bitola ?? "-"}
 - Comprimento: ${comprimento ?? "-"}

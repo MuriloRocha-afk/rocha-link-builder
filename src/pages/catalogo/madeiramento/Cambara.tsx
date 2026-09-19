@@ -76,7 +76,7 @@ export default function Cambara() {
 
   const msgWhatsApp = pronto
     ? encodeURIComponent(
-        `Olá! Gostaria de um orçamento:\n\n` +
+        `🪵 *Cambará Rosa*\n` +
         `🪵 *Cambará Rosa*\n` +
         `• Tipo: ${tipo}\n` +
         `• Bitola: ${bitola}\n` +
