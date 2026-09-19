@@ -41,7 +41,7 @@ const FORMATOS: Formato[] = [
     value: "romana",
     nome: "Romana",
     badge: "Campeão",
-    marcas: "Laranjal e Top Telha",
+    marcas: "Top Telha",
     cores: [{ nome: "Terracota" }],
     acabamentos: [{ nome: "Natural" }, { nome: "Resinada" }],
     rendimentos: [
@@ -85,7 +85,7 @@ const SPECS = [
   { label: "Formatos", value: "Portuguesa, Romana, Francesa e Mediterrânea" },
   { label: "Acabamentos", value: "Natural e Resinada" },
   { label: "Rendimento Romana", value: "R13 (13 pçs/m²) e R17 (17 pçs/m²)" },
-  { label: "Marcas", value: "Isotec, Rodrigues, Laranjal e Top Telha" },
+  { label: "Marcas", value: "Isotec, Rodrigues, e Top Telha" },
   { label: "Inclinação mínima", value: "30%" },
   { label: "Fixação", value: "Prego telheiro ou arame" },
 ];
