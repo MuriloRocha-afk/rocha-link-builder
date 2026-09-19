@@ -173,6 +173,58 @@ export function QuoteCartButton({ className }: { className?: string }) {
 }
 
 
+function formatarLinhaItem(i: QuoteItem): string {
+  const nome = i.name.replace(/\s+/g, " ").trim();
+  const unit = i.unit ?? "un";
+  if (!i.detail) return `· ${nome} — Qtd: ${i.qty} ${unit}`;
+
+  const norm = (s: string) =>
+    s
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  const palavrasNome = new Set(norm(nome).split(/[^a-z0-9]+/).filter(Boolean));
+
+  const segmentos = i.detail
+    .split(/\s*·\s*/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  let cobertura = "";
+  let especificacoes: string[] = [];
+  for (const seg of segmentos) {
+    const m = seg.match(/^(?:cobertura|área)\s*~?\s*([\d.,]+)\s*m²?$/i);
+    if (m) {
+      cobertura = `cobertura ~${m[1].replace(".", ",")} m²`;
+      continue;
+    }
+    especificacoes.push(seg);
+  }
+
+  // variação principal: primeiro trecho textual que não repete o nome
+  let nomeFinal = nome;
+  while (especificacoes.length > 0) {
+    const seg = especificacoes[0];
+    // medidas, espessuras, volumes e chaves ("Cor: X") ficam como especificações
+    if (/\d|:/.test(seg)) break;
+    if (/^recomendad/i.test(norm(seg))) break;
+    const palavras = norm(seg).split(/[^a-z0-9]+/).filter(Boolean);
+    if (palavras.length > 0 && palavras.every((p) => palavrasNome.has(p))) {
+      // já está contido no nome: descarta a repetição
+      especificacoes = especificacoes.slice(1);
+      continue;
+    }
+    nomeFinal = `${nomeFinal} ${seg}`.replace(/\s+/g, " ");
+    especificacoes = especificacoes.slice(1);
+    break;
+  }
+
+  const partes: string[] = [];
+  if (especificacoes.length > 0) partes.push(especificacoes.join(" · "));
+  if (cobertura) partes.push(`(${cobertura})`);
+
+  return `· ${nomeFinal}${partes.length ? ` — ${partes.join(" ")}` : ""} — Qtd: ${i.qty} ${unit}`;
+}
+
 function buildMessage(
   items: QuoteItem[],
   nome: string,
@@ -181,12 +233,7 @@ function buildMessage(
   email: string,
   endereco: string,
 ) {
-  const linhas = items
-    .map(
-      (i) =>
-        `- ${i.name}${i.detail ? ` — ${i.detail}` : ""} — Qtd: ${i.qty} ${i.unit ?? "un"}`,
-    )
-    .join("\n");
+  const linhas = items.map(formatarLinhaItem).join("\n");
 
   return [
     "Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar uma cotação para os itens abaixo:",
