@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { QuoteCartProvider } from "@/components/site/quote-cart";
 import CrossSellHost from "@/components/CrossSellHost";
+import { MobileBottomNav } from "@/components/site/MobileBottomNav";
 
 
 function NotFoundComponent() {
@@ -131,8 +132,11 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <QuoteCartProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
+        <div className="pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
+          <Outlet />
+        </div>
         <CrossSellHost />
+        <MobileBottomNav />
       </QuoteCartProvider>
     </QueryClientProvider>
   );

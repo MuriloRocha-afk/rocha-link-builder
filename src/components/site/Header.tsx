@@ -161,17 +161,6 @@ export function Header() {
       {open ? (
         <div className="border-t border-border bg-card px-5 py-5 lg:hidden">
           <nav className="flex flex-col gap-2">
-            {NAV_PRIMARY.map((item) => (
-              <NavLink
-                key={item.label}
-                item={item}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-base font-semibold text-primary transition-colors hover:bg-muted"
-              />
-            ))}
-
-            <div className="my-2 border-t border-border" />
-
             <p className="px-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Mais
             </p>

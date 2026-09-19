@@ -105,7 +105,7 @@ export function FloatingWhats() {
       href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de falar com o comercial.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="pulse-whats fixed right-5 bottom-5 z-50 flex items-center gap-2 rounded-full bg-whats px-5 py-4 text-sm font-bold text-primary-deep shadow-[var(--shadow-lift)] transition-transform hover:scale-105"
+      className="pulse-whats fixed right-5 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-50 flex items-center gap-2 rounded-full bg-whats px-5 py-4 text-sm font-bold text-primary-deep shadow-[var(--shadow-lift)] transition-transform hover:scale-105 md:bottom-5"
     >
       <MessageCircle className="h-5 w-5" />
       Fale Conosco
