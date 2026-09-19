@@ -233,6 +233,8 @@ import sayerraz5L from "@/assets/produtos/sayerraz/02_5litros.jpg.asset.json";
 import sayerraz900 from "@/assets/produtos/sayerraz/03_900ml.jpg.asset.json";
 import pu40Capa from "@/assets/produtos/pu40/capa_pu40.jpg.asset.json";
 import pu40Produto from "@/assets/produtos/pu40/produto_pu40.jpg.asset.json";
+import lonaPretaRolo from "@/assets/produtos/lona-preta/01_capa_lona_preta_rolo.jpg.asset.json";
+import lonaPretaPrateleira from "@/assets/produtos/lona-preta/02_lona_preta_prateleira.jpg.asset.json";
 import paraf110k10 from "@/assets/produtos/parafusos/01_kit110mm_menor.jpg.asset.json";
 import paraf110k20 from "@/assets/produtos/parafusos/02_kit110mm.jpg.asset.json";
 import paraf110k30 from "@/assets/produtos/parafusos/03_kit110mm.jpg.asset.json";
