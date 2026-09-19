@@ -71,9 +71,7 @@ export function PolicarbonatoConfigurator() {
 
   const detail = `Policarbonato · ${versao.nome} · ${dimensaoAtiva} · área ~${area} m²`;
 
-  const mensagem = `Olá! Gostaria de um orçamento:
-
-☀️ *Telha Policarbonato*
+  const mensagem = `☀️ *Telha Policarbonato*
 - Versão: ${versao.nome}
 - Comprimento: ${dimensaoAtiva}
 - Quantidade: ${qty} chapas
