@@ -6,6 +6,8 @@ export type ProdutoRelacionado = {
   unidade: string;
   quantidadeSugerida: number;
   categoria: string;
+  /** Página da ficha técnica do produto complementar. */
+  url: string;
 };
 
 type Regra = {
@@ -36,6 +38,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: Math.max(20, Math.round(qtd * 2)),
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/parafusos-telha",
       },
       {
         id: "manta-termica-1f-10m2",
@@ -45,6 +48,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 1,
         categoria: "Calhas",
+        url: "/catalogo/calhas/manta-termica",
       },
       {
         id: "cumeeira-fibrocimento-articulada",
@@ -54,6 +58,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 3,
         categoria: "Telhas",
+        url: "/catalogo/telhas/cumeeiras",
       },
       {
         id: "espigao-120cm",
@@ -63,6 +68,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 4,
         categoria: "Fixadores",
+        url: "/catalogo/telhas/cumeeiras",
       },
     ],
   },
@@ -79,6 +85,7 @@ const REGRAS: Regra[] = [
           unidade: "kit",
           quantidadeSugerida: 2,
           categoria: "Fixadores",
+          url: "/catalogo/fixadores/parafusos-telha",
         },
         {
           id: `cumeeira-pvc-central-fixa-${cor}`,
@@ -88,6 +95,7 @@ const REGRAS: Regra[] = [
           unidade: "un",
           quantidadeSugerida: 3,
           categoria: "Telhas",
+          url: "/catalogo/telhas/cumeeiras",
         },
         {
           id: "manta-termica-1f-10m2",
@@ -97,6 +105,7 @@ const REGRAS: Regra[] = [
           unidade: "un",
           quantidadeSugerida: 1,
           categoria: "Calhas",
+          url: "/catalogo/calhas/manta-termica",
         },
         {
           id: "calha-aquapluv-cinza",
@@ -106,6 +115,7 @@ const REGRAS: Regra[] = [
           unidade: "un",
           quantidadeSugerida: 2,
           categoria: "Calhas",
+          url: "/catalogo/calhas",
         },
       ];
     },
@@ -121,6 +131,7 @@ const REGRAS: Regra[] = [
         unidade: "emb",
         quantidadeSugerida: 2,
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/pregos",
       },
       {
         id: "cumeeira-barro-resinada",
@@ -130,6 +141,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 5,
         categoria: "Telhas",
+        url: "/catalogo/telhas/cumeeiras",
       },
     ],
   },
@@ -144,6 +156,7 @@ const REGRAS: Regra[] = [
         unidade: "Kg",
         quantidadeSugerida: 2,
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/pregos",
       },
       {
         id: "sayerlack-polisten-imbuia-3-6",
@@ -153,6 +166,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 1,
         categoria: "Tintas",
+        url: "/catalogo/tintas/stain",
       },
       {
         id: "prego-polido-17x21",
@@ -162,6 +176,7 @@ const REGRAS: Regra[] = [
         unidade: "Kg",
         quantidadeSugerida: 1,
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/pregos",
       },
       {
         id: "sayerlack-cupim-5l",
@@ -171,6 +186,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 1,
         categoria: "Tintas",
+        url: "/catalogo/tintas/cupicida",
       },
     ],
   },
@@ -185,6 +201,7 @@ const REGRAS: Regra[] = [
         unidade: "Kg",
         quantidadeSugerida: 1,
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/pregos",
       },
       {
         id: "arame-galvanizado-bwg14",
@@ -194,6 +211,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 1,
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/arames",
       },
     ],
   },
@@ -208,6 +226,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 4,
         categoria: "Madeiramento",
+        url: "/catalogo/madeiramento/forro-pvc",
       },
       {
         id: "canto-meia-cana-externo",
@@ -217,6 +236,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 4,
         categoria: "Madeiramento",
+        url: "/catalogo/madeiramento/forro-pvc",
       },
       {
         id: "moldura-pvc-3m",
@@ -226,6 +246,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 6,
         categoria: "Madeiramento",
+        url: "/catalogo/madeiramento/forro-pvc",
       },
     ],
   },
@@ -240,6 +261,7 @@ const REGRAS: Regra[] = [
         unidade: "m",
         quantidadeSugerida: 10,
         categoria: "Madeiramento",
+        url: "/catalogo/madeiramento/forro-pinus",
       },
       {
         id: "sarrafo-pinus-apoio",
@@ -249,6 +271,7 @@ const REGRAS: Regra[] = [
         unidade: "m",
         quantidadeSugerida: 20,
         categoria: "Madeiramento",
+        url: "/catalogo/madeiramento/forro-pinus",
       },
       {
         id: "prego-polido-15x15",
@@ -258,6 +281,7 @@ const REGRAS: Regra[] = [
         unidade: "Kg",
         quantidadeSugerida: 1,
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/pregos",
       },
       {
         id: "sayerlack-polisten-transparente-3-6",
@@ -267,6 +291,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 1,
         categoria: "Tintas",
+        url: "/catalogo/tintas/stain",
       },
     ],
   },
@@ -281,6 +306,7 @@ const REGRAS: Regra[] = [
         unidade: "m",
         quantidadeSugerida: 8,
         categoria: "Madeiramento",
+        url: "/catalogo/madeiramento/forro-cedrinho",
       },
       {
         id: "sayerlack-polisten-transparente-3-6",
@@ -290,6 +316,7 @@ const REGRAS: Regra[] = [
         unidade: "un",
         quantidadeSugerida: 1,
         categoria: "Tintas",
+        url: "/catalogo/tintas/stain",
       },
       {
         id: "prego-polido-17x21",
@@ -299,6 +326,7 @@ const REGRAS: Regra[] = [
         unidade: "Kg",
         quantidadeSugerida: 1,
         categoria: "Fixadores",
+        url: "/catalogo/fixadores/pregos",
       },
     ],
   },
@@ -313,6 +341,7 @@ const GENERICOS: ProdutoRelacionado[] = [
     unidade: "un",
     quantidadeSugerida: 1,
     categoria: "Fixadores",
+    url: "/catalogo/fixadores",
   },
   {
     id: "generico-tintas",
@@ -322,6 +351,7 @@ const GENERICOS: ProdutoRelacionado[] = [
     unidade: "un",
     quantidadeSugerida: 1,
     categoria: "Tintas",
+    url: "/catalogo/tintas",
   },
   {
     id: "generico-calhas",
@@ -331,6 +361,7 @@ const GENERICOS: ProdutoRelacionado[] = [
     unidade: "un",
     quantidadeSugerida: 1,
     categoria: "Calhas",
+    url: "/catalogo/calhas",
   },
 ];
 
