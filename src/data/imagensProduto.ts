@@ -879,6 +879,25 @@ export function galeriaSayerraz(volume?: string): ImagemProduto[] {
 
 export const capaPu40 = pu40Capa.url;
 
+export const imagensLonaPreta: ImagemProduto[] = [
+  {
+    src: lonaPretaRolo.url,
+    alt: "Rolo de lona plástica preta em estoque na Rocha Telhas",
+    legenda: "Lona Plástica Preta — rolo em estoque",
+  },
+  {
+    src: lonaPretaPrateleira.url,
+    alt: "Lonas plásticas pretas organizadas na prateleira da loja",
+    legenda: "Lona Plástica Preta — estoque da loja",
+  },
+];
+
+export const capaLonaPreta = lonaPretaRolo.url;
+
+export function galeriaLonaPreta(): ImagemProduto[] {
+  return imagensLonaPreta;
+}
+
 export function galeriaPu40(produto?: string): ImagemProduto[] {
   const capa = imagensTintas["pu-calha"] ?? [];
   if (!produto) return capa;
