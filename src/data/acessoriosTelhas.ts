@@ -1,12 +1,12 @@
 import type { AcessorioItem } from "@/components/site/BlocoAcessorios";
 
 /** Fixador geral — disponível a partir de qualquer tipo de telha. */
-export const chumbador = (qtd: number): AcessorioItem => ({
+export const chumbador = (qtd: number, emoji = "🔩"): AcessorioItem => ({
   id: "chumbador-parabolt",
   nome: "Chumbador (Parabolt)",
   descricao:
     "Fixação geral de estrutura e perfis em alvenaria ou concreto. Serve para qualquer tipo de telha.",
-  emoji: "🔩",
+  emoji,
   unidade: "un",
   categoria: "Fixadores",
   quantidadeSugerida: Math.max(4, Math.ceil(qtd / 5)),
@@ -53,7 +53,7 @@ export const acessoriosFibrocimento = (qtd: number): AcessorioItem[] => [
     id: "espigao-fibrocimento-120",
     nome: "Espigão Fibrocimento 120cm",
     descricao: "Arremate e vedação lateral da cobertura.",
-    emoji: "📐",
+    emoji: "\n",
     unidade: "un",
     categoria: "Telhas",
     quantidadeSugerida: Math.max(2, Math.ceil(qtd * 0.1)),
@@ -62,7 +62,7 @@ export const acessoriosFibrocimento = (qtd: number): AcessorioItem[] => [
     id: "parafuso-vedacao-110",
     nome: "Parafuso de Fixação com Vedação 110mm",
     descricao: "Conjunto parafuso + arruela + vedação para fibrocimento.",
-    emoji: "🔩",
+    emoji: "\n",
     unidade: "un",
     categoria: "Fixadores",
     quantidadeSugerida: Math.max(8, qtd * 4),
@@ -71,12 +71,12 @@ export const acessoriosFibrocimento = (qtd: number): AcessorioItem[] => [
     id: "prego-telheiro-500g",
     nome: "Prego Telheiro 18×27 — 500g",
     descricao: "Fixação em estrutura de madeira.",
-    emoji: "🔨",
+    emoji: "\n",
     unidade: "emb",
     categoria: "Fixadores",
     quantidadeSugerida: Math.max(1, Math.ceil(qtd / 20)),
   },
-  chumbador(qtd),
+  chumbador(qtd, "\n"),
 ];
 
 /** Telhas plásticas (policarbonato / polipropileno): parafuso com vedação e calço. */
