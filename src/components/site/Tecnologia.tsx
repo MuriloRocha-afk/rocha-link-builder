@@ -86,7 +86,7 @@ export function Tecnologia() {
             <div className="mt-8">
               <WhatsAppButton
                 className="w-full sm:w-auto"
-                message="Olá! Gostaria de solicitar madeira aparelhada sob medida na Rocha Telhas."
+                message="Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar madeira aparelhada sob medida."
               >
                 Solicitar Madeira Aparelhada Sob Medida
               </WhatsAppButton>
@@ -112,7 +112,7 @@ export function CtaFinal() {
             no seu WhatsApp.
           </p>
           <div className="relative mt-9 flex justify-center">
-            <WhatsAppButton message="Olá! Quero solicitar um orçamento sem sair de casa. Vou enviar a minha lista de materiais.">
+            <WhatsAppButton message="Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar um orçamento sem sair de casa. Vou enviar a minha lista de materiais.">
               Solicitar Orçamento sem Sair de Casa
             </WhatsAppButton>
           </div>

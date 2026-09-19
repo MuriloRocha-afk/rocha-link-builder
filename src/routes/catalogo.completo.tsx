@@ -276,7 +276,7 @@ function CatalogoCompletoPage() {
                 WhatsApp
               </p>
               <a
-                href={waLink("Olá! Vi o catálogo em PDF da Rocha Telhas e quero um orçamento.")}
+                href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de um orçamento. Vi o catálogo em PDF.")}
                 className="text-[16px] font-extrabold text-[#0F1B2D]"
               >
                 (11) 97176-1003

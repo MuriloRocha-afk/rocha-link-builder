@@ -95,7 +95,7 @@ export function SobreModal({
           <div className="mt-4 flex justify-center">
             <WhatsAppButton
               size="lg"
-              message="Olá! Conheci a história da Rocha Telhas no site e gostaria de um orçamento."
+              message="Olá! Vim pelo site da Rocha Telhas e gostaria de falar com o comercial."
             >
               Falar com o comercial
             </WhatsAppButton>

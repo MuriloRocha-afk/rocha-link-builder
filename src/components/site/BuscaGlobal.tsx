@@ -151,7 +151,7 @@ export function BuscaGlobal({
               </div>
               <a
                 href={waLink(
-                  `Olá! Procurei por "${termo}" no site da Rocha Telhas e não encontrei. Vocês têm esse produto?`,
+                  `Olá! Vim pelo site da Rocha Telhas e gostaria de saber se vocês têm "${termo}". Não encontrei na busca.`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

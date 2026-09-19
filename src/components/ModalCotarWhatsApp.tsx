@@ -28,8 +28,8 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
     const mensagemCompleta =
       tipo === "calculadora"
         ? [
-            "Olá, equipe Rocha Telhas!",
-            `Meu nome é ${nome.trim()} e utilizei a calculadora do site.`,
+            "Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar um orçamento sem sair de casa. Vou enviar a minha lista de materiais.",
+            `Meu nome é ${nome.trim()}.`,
             "",
             "📐 *RESULTADO DO CÁLCULO*",
             corpoMensagem,
@@ -40,9 +40,8 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
             "Poderia confirmar as quantidades e enviar a cotação completa? Obrigado!",
           ].join("\n")
         : [
-            "Olá, equipe Rocha Telhas!",
+            "Olá! Vim pelo site da Rocha Telhas e gostaria de cotar o seguinte produto:",
             `Meu nome é ${nome.trim()} e estou em ${cidade.trim()}.`,
-            "Gostaria de cotar o seguinte produto:",
             "",
             "🏷️ *PRODUTO SOLICITADO*",
             corpoMensagem,
@@ -137,6 +136,9 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
                   Prévia da mensagem
                 </p>
                 <p className="text-xs text-gray-600 leading-relaxed whitespace-pre-line">
+                  {tipo === "calculadora"
+                    ? "Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar um orçamento sem sair de casa. Vou enviar a minha lista de materiais.\n"
+                    : "Olá! Vim pelo site da Rocha Telhas e gostaria de cotar o seguinte produto:\n"}
                   {nome || "[seu nome]"} em {cidade || "[sua cidade]"}.{"\n\n"}
                   {corpoMensagem.length > 150
                     ? corpoMensagem.slice(0, 150) + "..."

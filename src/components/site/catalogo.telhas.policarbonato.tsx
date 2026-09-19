@@ -149,9 +149,7 @@ export function CeramicaConfigurator() {
 
   const detail = `Telha Cerâmica · ${nomeCompleto} · cobertura ~${cobertura} m²`;
 
-  const mensagem = `Olá! Gostaria de um orçamento:
-
-🪨 *Telha Cerâmica*
+  const mensagem = `🪨 *Telha Cerâmica*
 - Formato: ${formato.nome}
 - Cor: ${corAtiva.nome}
 - Acabamento: ${acabamentoAtivo.nome}${sobEncomenda ? " (sob encomenda)" : " (pronta entrega)"}${rendimentoAtivo ? `\n- Rendimento: ${rendimentoAtivo.nome} (${rendimentoAtivo.pecasPorM2} pçs/m²)` : ""}${formato.marcas ? `\n- Marcas: ${formato.marcas}` : ""}

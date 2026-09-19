@@ -128,7 +128,7 @@ function Index() {
                     <ArrowRight />
                   </Link>
                 </Button>
-                <WhatsAppButton message="Olá! Quero falar com um vendedor da Rocha Telhas.">
+                <WhatsAppButton message="Olá! Vim pelo site da Rocha Telhas e gostaria de falar com um vendedor.">
                   Falar com um Vendedor
                 </WhatsAppButton>
               </div>

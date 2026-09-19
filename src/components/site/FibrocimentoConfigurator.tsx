@@ -132,9 +132,7 @@ export function FibrocimentoConfigurator() {
 
   const detail = `Fibrocimento INFIBRA · ${dimensao ?? "-"} · ${espessura ?? "-"} · cobertura ~${cobertura} m²`;
 
-  const mensagem = `Olá! Gostaria de um orçamento:
-
-🧱 *Telha Fibrocimento Ondulada INFIBRA*
+  const mensagem = `🧱 *Telha Fibrocimento Ondulada INFIBRA*
 - Dimensão: ${dimensao}
 - Espessura: ${espessura}
 - Quantidade: ${qty} peças

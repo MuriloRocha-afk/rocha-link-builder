@@ -94,7 +94,7 @@ export function Header() {
           <QuoteCartButton />
           <WhatsAppButton
             size="lg"
-            message="Olá! Gostaria de solicitar um orçamento na Rocha Telhas."
+            message="Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar um orçamento."
           >
             Falar no WhatsApp
           </WhatsAppButton>
@@ -188,7 +188,7 @@ export function Header() {
             <WhatsAppButton
               size="lg"
               className="w-full"
-              message="Olá! Gostaria de solicitar um orçamento na Rocha Telhas."
+              message="Olá! Vim pelo site da Rocha Telhas e gostaria de solicitar um orçamento."
             >
               Solicitar Orçamento
             </WhatsAppButton>
