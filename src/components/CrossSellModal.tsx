@@ -63,13 +63,10 @@ export default function CrossSellModal({
             return (
               <div
                 key={produto.id}
-                className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 p-3"
+                className="rounded-xl border border-gray-100 bg-gray-50 p-3"
               >
-                <span className="text-2xl leading-none">{produto.emoji}</span>
-
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-bold text-gray-900">{produto.nome}</p>
-                  <p className="mt-0.5 text-xs text-gray-500">{produto.descricao}</p>
+                <p className="truncate text-sm font-bold text-gray-900">{produto.nome}</p>
+                <p className="mt-0.5 text-xs text-gray-500">{produto.descricao}</p>
 
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex items-center overflow-hidden rounded-lg border border-gray-200 bg-white">
