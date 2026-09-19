@@ -192,9 +192,12 @@ function formatarLinhaItem(i: QuoteItem): string {
   let cobertura = "";
   let especificacoes: string[] = [];
   for (const seg of segmentos) {
-    const m = seg.match(/^(?:cobertura|área)\s*~?\s*([\d.,]+)\s*m²?$/i);
+    // quantidade já é exibida uma única vez no fim da linha ("— Qtd: X un")
+    if (/^qtd\s*:/i.test(seg)) continue;
+    if (/^\d+(?:[.,]\d+)?\s*(?:peças|pecas|un|unidades?|rolos?|bisnagas?|barras?|kg|g|cx|caixas?|m\s*lineares)$/i.test(seg)) continue;
+    const m = seg.match(/^(?:cobertura|área)?\s*~?\s*([\d.,]+)\s*m²$/i);
     if (m) {
-      cobertura = `cobertura ~${m[1].replace(".", ",")} m²`;
+      cobertura = `cobertura ~${m[1].replace(/\./g, ",")} m²`;
       continue;
     }
     especificacoes.push(seg);
