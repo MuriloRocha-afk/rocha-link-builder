@@ -37,6 +37,7 @@ import {
 
 } from "@/data/telhasCatalogo";
 import { CroquiEstrutura } from "@/components/site/croqui-estrutura";
+import estruturaMadeiraReferencia from "@/assets/referencias/estrutura-madeira-ripa-caibro-terca.png.asset.json";
 
 type Telha = TelhaCatalogo;
 
@@ -1189,6 +1190,17 @@ export function CalculadoraTelhado() {
               </div>
             </div>
 
+            <figure className="sm:col-span-2 overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <img
+                src={estruturaMadeiraReferencia.url}
+                alt="Referência de montagem com ripa, caibro e terça encaixados na estrutura do telhado"
+                className="max-h-72 w-full object-contain"
+              />
+              <figcaption className="border-t border-gray-200 px-3 py-2 text-[11px] text-gray-600">
+                Referência de montagem completa: as ripas apoiam sobre os caibros, que apoiam sobre as terças.
+              </figcaption>
+            </figure>
+
             {sistemaTelha === "ripa" && (
               <>
                 {/* Etapa 1 — ripa ou ripão */}
@@ -1230,6 +1242,8 @@ export function CalculadoraTelhado() {
                       destaque="ripa"
                       cota={`${Math.round(espApoio2 * 100)} cm`}
                       legenda={`${peca1.label} ${peca1.bitola} apoiada a cada ${fmtN(espApoio2)} m`}
+                      nomeRipa={`${peca1.label} ${peca1.bitola}`}
+                      nomeCaibro={`${peca2.label} ${peca2.bitola}`}
                     />
                   </div>
                 </div>
@@ -1268,6 +1282,8 @@ export function CalculadoraTelhado() {
                       destaque="caibro"
                       cota={`${fmtN(espApoio3)} m`}
                       legenda={`${peca2.label} ${peca2.bitola} com terceiro apoio a cada ${fmtN(espApoio3)} m`}
+                      nomeRipa={`${peca1.label} ${peca1.bitola}`}
+                      nomeCaibro={`${peca2.label} ${peca2.bitola}`}
                     />
                   </div>
                 </div>
@@ -1286,6 +1302,8 @@ export function CalculadoraTelhado() {
                       destaque="viga"
                       cota={`${fmtN(espApoio3)} m`}
                       legenda="Viga / terça — bitola conforme o projeto"
+                      nomeRipa={`${peca1.label} ${peca1.bitola}`}
+                      nomeCaibro={`${peca2.label} ${peca2.bitola}`}
                     />
                   </div>
                 </div>
