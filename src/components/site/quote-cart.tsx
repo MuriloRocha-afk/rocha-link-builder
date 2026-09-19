@@ -221,11 +221,11 @@ function formatarLinhaItem(i: QuoteItem): string {
     break;
   }
 
-  const partes: string[] = [];
-  if (especificacoes.length > 0) partes.push(especificacoes.join(" · "));
-  if (cobertura) partes.push(`(${cobertura})`);
+  const sufixo: string[] = [];
+  if (especificacoes.length > 0) sufixo.push(` — ${especificacoes.join(" · ")}`);
+  if (cobertura) sufixo.push(` (${cobertura})`);
 
-  return `· ${nomeFinal}${partes.length ? ` — ${partes.join(" ")}` : ""} — Qtd: ${i.qty} ${unit}`;
+  return `· ${nomeFinal}${sufixo.join("")} — Qtd: ${i.qty} ${unit}`;
 }
 
 function buildMessage(
