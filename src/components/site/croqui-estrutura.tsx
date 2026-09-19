@@ -61,11 +61,17 @@ export function CroquiEstrutura({
   destaque,
   cota,
   legenda,
+  nomeRipa = "Ripa / ripão",
+  nomeCaibro = "Caibro / caibrão",
+  nomeViga = "Viga / terça",
 }: {
   destaque: Destaque;
   /** texto da cota desenhada sobre a imagem (ex.: "40 cm") */
   cota: string;
   legenda?: string;
+  nomeRipa?: string;
+  nomeCaibro?: string;
+  nomeViga?: string;
 }) {
   const corRipa = destaque === "ripa" || destaque === "galga" ? LARANJA : NEUTRO;
   const corCaibro = destaque === "caibro" ? LARANJA : NEUTRO;
@@ -73,7 +79,7 @@ export function CroquiEstrutura({
 
   return (
     <figure className="rounded-xl border border-gray-200 bg-gray-50 p-3">
-      <svg viewBox="0 0 330 175" className="h-auto w-full" role="img" aria-label={legenda ?? "Estrutura de madeira"}>
+      <svg viewBox="0 0 360 196" className="h-auto w-full" role="img" aria-label={legenda ?? "Estrutura de madeira"}>
         {/* vigas / terças (3º apoio) — sob tudo */}
         {VIGAS_Y.map((y) => (
           <rect key={`v${y}`} x="20" y={y} width="270" height="12" rx="2" fill={corViga} opacity={destaque === "viga" ? 1 : 0.45} />
@@ -91,6 +97,26 @@ export function CroquiEstrutura({
         {destaque === "ripa" && <Cota orientacao="h" a={60} b={120} pos={155} texto={cota} />}
         {destaque === "caibro" && <Cota orientacao="v" a={52} b={112} pos={305} texto={cota} />}
         {destaque === "viga" && <Cota orientacao="v" a={52} b={112} pos={305} texto={cota} />}
+
+        <g aria-label="Identificação das peças">
+          <line x1="282" y1="36" x2="316" y2="24" stroke={corRipa} strokeWidth="1.5" />
+          <circle cx="282" cy="36" r="3" fill={corRipa} />
+          <text x="320" y="27" fontSize="10" fontWeight={destaque === "ripa" ? "800" : "600"} fill={corRipa}>
+            {nomeRipa}
+          </text>
+
+          <line x1="238" y1="79" x2="316" y2="70" stroke={corCaibro} strokeWidth="1.5" />
+          <circle cx="238" cy="79" r="3" fill={corCaibro} />
+          <text x="320" y="73" fontSize="10" fontWeight={destaque === "caibro" ? "800" : "600"} fill={corCaibro}>
+            {nomeCaibro}
+          </text>
+
+          <line x1="286" y1="112" x2="316" y2="121" stroke={corViga} strokeWidth="1.5" />
+          <circle cx="286" cy="112" r="3" fill={corViga} />
+          <text x="320" y="124" fontSize="10" fontWeight={destaque === "viga" ? "800" : "600"} fill={corViga}>
+            {nomeViga}
+          </text>
+        </g>
       </svg>
       {legenda && <figcaption className="mt-1 text-[11px] text-gray-500">{legenda}</figcaption>}
     </figure>
