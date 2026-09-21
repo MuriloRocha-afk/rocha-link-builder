@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useQuoteCart } from "./quote-cart";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";
 import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import { acessoriosPvc } from "@/data/acessoriosTelhas";
