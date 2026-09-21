@@ -120,6 +120,7 @@ Poderia verificar estoque e frete?`;
 
   return (
     <ProdutoLayout
+      breadcrumb={<Breadcrumbs atual={variante === "Colonial" ? "Colonial PVC" : "Plan PVC"} />}
       produtoKey={variante === "Colonial" ? "colonial-pvc" : "plan-pvc"}
       especificacoes={[
         ["Marca", "Lux Telhas"],
