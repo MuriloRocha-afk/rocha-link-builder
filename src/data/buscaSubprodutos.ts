@@ -50,11 +50,17 @@ function limpar(texto: string) {
     .trim();
 }
 
+/** produtoKey que não corresponde ao slug real da rota */
+const SLUG_ROTA: Record<string, string> = {
+  deck: "tabeiras-deck",
+};
+
 function rotaBase(config: ConfiguradorConfig): string | null {
   const hrefs = config.breadcrumb.filter((b) => b.href).map((b) => b.href as string);
   const categoria = hrefs[hrefs.length - 1];
   if (!categoria || !config.produtoKey) return null;
-  return `${categoria}/${config.produtoKey}`;
+  const slug = SLUG_ROTA[config.produtoKey] ?? config.produtoKey;
+  return `${categoria}/${slug}`;
 }
 
 function opcoesDo(passo: PassoConfig, sel: Selecao): OpcaoConfig[] {
