@@ -8,6 +8,7 @@ import BlocoAcessorios from "@/components/site/BlocoAcessorios";
 import AcessoriosForroPergunta from "@/components/site/AcessoriosForroPergunta";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { imagensForroPinus } from "../../../data/imagensProduto";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 
 export default function ForroPinus() {
   const { adicionar } = useOrcamento();
@@ -38,21 +39,7 @@ export default function ForroPinus() {
   return (
     <ProdutoLayout
       produtoKey="forro-pinus"
-      breadcrumb={
-        <div className="bg-white border-b px-4 py-3">
-          <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-            <a href="/catalogo" className="hover:text-orange-500">
-              Catálogo
-            </a>
-            <ChevronRight size={12} />
-            <a href="/catalogo/madeiramento" className="hover:text-orange-500">
-              Madeiramento
-            </a>
-            <ChevronRight size={12} />
-            <span className="text-gray-900 font-medium">Forro Pinus</span>
-          </div>
-        </div>
-      }
+      breadcrumb={<Breadcrumbs atual="Forro Pinus" />}
       cabecalho={
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Forro de Pinus</h1>

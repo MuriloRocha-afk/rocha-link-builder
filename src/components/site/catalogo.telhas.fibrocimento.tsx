@@ -5,6 +5,7 @@ import { BotaoCotarWhatsApp } from "@/components/site/BotaoCotarWhatsApp";
 import { Button } from "@/components/ui/button";
 import GaleriaProduto, { type ImagemProduto } from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 
 export type Selecao = Record<string, string>;
 export type Quantidades = Record<string, number>;
@@ -130,24 +131,7 @@ export default function ConfiguradorGenerico({ config }: { config: ConfiguradorC
     <ProdutoLayout
       produtoKey={config.produtoKey}
       especificacoes={config.especificacoes}
-      breadcrumb={
-        <div className="bg-white border-b px-4 py-3">
-          <div className="max-w-6xl mx-auto flex items-center gap-1 text-xs text-gray-500 flex-wrap">
-            {config.breadcrumb.map((b, i) => (
-              <span key={b.label} className="flex items-center gap-1">
-                {i > 0 && <ChevronRight size={12} />}
-                {b.href ? (
-                  <a href={b.href} className="hover:text-orange-500">
-                    {b.label}
-                  </a>
-                ) : (
-                  <span className="text-gray-900 font-medium">{b.label}</span>
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-      }
+      breadcrumb={<Breadcrumbs atual=")}" />}
       cabecalho={
         <div>
           {config.badge && (

@@ -7,6 +7,7 @@ import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensCambara } from "../../../data/imagensProduto";
 import { TIPOS_MADEIRA, BITOLAS_MADEIRA, COMPRIMENTOS_MADEIRA } from "../../../data/configs/madeiramento";
 import { useBuscaSelecao } from "@/hooks/useBuscaSelecao";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 
 
 const TIPOS = TIPOS_MADEIRA;
@@ -107,17 +108,7 @@ export default function Cambara() {
     <ProdutoLayout
       galeriaSticky={false}
       produtoKey="cambara"
-      breadcrumb={
-      <div className="bg-white border-b px-4 py-3">
-        <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-          <a href="/catalogo" className="hover:text-orange-500 transition-colors">Catálogo</a>
-          <ChevronRight size={12} />
-          <a href="/catalogo/madeiramento" className="hover:text-orange-500 transition-colors">Madeiramento</a>
-          <ChevronRight size={12} />
-          <span className="text-gray-900 font-medium">Cambará Rosa</span>
-        </div>
-      </div>
-      }
+      breadcrumb={<Breadcrumbs atual="Cambará Rosa" />}
       cabecalho={
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Cambará Rosa</h1>

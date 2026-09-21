@@ -6,6 +6,7 @@ import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import TipoCard from "../../../components/site/TipoCard";
 import { imagensPinus } from "../../../data/imagensProduto";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 
 type Produto = {
   id: string;
@@ -89,17 +90,7 @@ export default function Pinus() {
   return (
     <ProdutoLayout
       produtoKey="pinus"
-      breadcrumb={
-      <div className="bg-white border-b px-4 py-3">
-        <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-          <a href="/catalogo" className="hover:text-orange-500">Catálogo</a>
-          <ChevronRight size={12} />
-          <a href="/catalogo/madeiramento" className="hover:text-orange-500">Madeiramento</a>
-          <ChevronRight size={12} />
-          <span className="text-gray-900 font-medium">Pinus</span>
-        </div>
-      </div>
-      }
+      breadcrumb={<Breadcrumbs atual="Pinus" />}
       cabecalho={
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Pinus</h1>
