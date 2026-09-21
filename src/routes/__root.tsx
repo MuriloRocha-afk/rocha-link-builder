@@ -92,6 +92,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HomeAndConstructionBusiness",
+          name: "Rocha Telhas & Madeiras",
+          description:
+            "Distribuidora e madeireira com mais de 25 anos, telhas, madeiramento estrutural, madeirites e acessórios com frota própria em Franco da Rocha.",
+          url: "https://rochatelhas.com.br",
+          telephone: "+55-11-98571-4231",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "R. Dr. Hamilton Prado, 856 - Centro",
+            addressLocality: "Franco da Rocha",
+            addressRegion: "SP",
+            postalCode: "07849-070",
+            addressCountry: "BR",
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "08:00",
+              closes: "18:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "08:00",
+              closes: "13:00",
+            },
+          ],
+        }),
+      },
+    ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
