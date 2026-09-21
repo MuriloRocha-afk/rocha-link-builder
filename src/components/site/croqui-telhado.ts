@@ -342,7 +342,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
       `<line x1="${xDir}" y1="${yParedeBaixa}" x2="${xCotaBaixa}" y2="${yParedeBaixa}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
       `<line x1="${xDir}" y1="${chao}" x2="${xCotaBaixa}" y2="${chao}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
       `<line x1="${xCotaBaixa}" y1="${yParedeBaixa}" x2="${xCotaBaixa}" y2="${chao}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
-      `<text x="${xCotaBaixa + 6}" y="${(yParedeBaixa + chao) / 2}" font-size="8.5" font-weight="700" fill="${TEXTO}">altura lado baixo</text>`,
+      `<text x="${xCotaBaixa - 6}" y="${(yParedeBaixa + chao) / 2}" text-anchor="end" font-size="8.5" font-weight="700" fill="${TEXTO}">altura lado baixo</text>`,
       `<line x1="${xDir}" y1="${yParedeAlta}" x2="${xCotaDesnivel}" y2="${yParedeAlta}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
       `<line x1="${xDir}" y1="${yParedeBaixa}" x2="${xCotaDesnivel}" y2="${yParedeBaixa}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
       `<line x1="${xCotaDesnivel}" y1="${yParedeAlta}" x2="${xCotaDesnivel}" y2="${yParedeBaixa}" stroke="${LARANJA}" stroke-width="1" marker-start="url(#seta-laranja)" marker-end="url(#seta-laranja)"/>`,
