@@ -92,7 +92,13 @@ export function Footer() {
         </div>
 
         <div className="mt-14 border-t border-primary-foreground/15 pt-6 text-xs text-primary-foreground/50">
-          © {new Date().getFullYear()} Rocha Telhas. Todos os direitos reservados.
+          © {new Date().getFullYear()} Rocha Telhas. Todos os direitos reservados.{" "}
+          <Link
+            to="/politica-de-privacidade"
+            className="transition-colors hover:text-accent underline underline-offset-2"
+          >
+            Política de Privacidade
+          </Link>
         </div>
       </div>
     </footer>

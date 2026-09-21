@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as LinksRouteImport } from './routes/links'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as CalculadoraRouteImport } from './routes/calculadora'
@@ -80,6 +81,11 @@ import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 import { Route as AuthenticatedAdminAvaliacoesRouteImport } from './routes/_authenticated/admin.avaliacoes'
 
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LinksRoute = LinksRouteImport.update({
   id: '/links',
   path: '/links',
@@ -475,6 +481,7 @@ export interface FileRoutesByFullPath {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
@@ -546,6 +553,7 @@ export interface FileRoutesByTo {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo': typeof CatalogoIndexRoute
@@ -618,6 +626,7 @@ export interface FileRoutesById {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
@@ -691,6 +700,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/links'
+    | '/politica-de-privacidade'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/completo'
     | '/guias/$slug'
@@ -762,6 +772,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/links'
+    | '/politica-de-privacidade'
     | '/catalogo/completo'
     | '/guias/$slug'
     | '/catalogo'
@@ -833,6 +844,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/links'
+    | '/politica-de-privacidade'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/completo'
     | '/guias/$slug'
@@ -906,6 +918,7 @@ export interface RootRouteChildren {
   CalculadoraRoute: typeof CalculadoraRoute
   FerramentasRoute: typeof FerramentasRoute
   LinksRoute: typeof LinksRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoCompletoRoute: typeof CatalogoCompletoRoute
   GuiasSlugRoute: typeof GuiasSlugRoute
@@ -971,6 +984,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/links': {
       id: '/links'
       path: '/links'
@@ -1499,6 +1519,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculadoraRoute: CalculadoraRoute,
   FerramentasRoute: FerramentasRoute,
   LinksRoute: LinksRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoCompletoRoute: CatalogoCompletoRoute,
   GuiasSlugRoute: GuiasSlugRoute,
