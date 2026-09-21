@@ -4,6 +4,7 @@ import { useOrcamento } from "@/context/OrcamentoContext";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto, { type ImagemProduto } from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import BlocoAcessorios, { type AcessorioItem } from "@/components/site/BlocoAcessorios";
 import TipoCard from "@/components/site/TipoCard";
 import SugestaoCumeeira from "@/components/site/SugestaoCumeeira";

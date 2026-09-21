@@ -4,6 +4,7 @@ import { useOrcamento } from "@/context/OrcamentoContext";
 import ModalCotarWhatsApp from "@/components/ModalCotarWhatsApp";
 import GaleriaProduto from "@/components/GaleriaProduto";
 import ProdutoLayout from "@/components/site/ProdutoLayout";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import {
   TIPOS_MADEIRA,
   BITOLAS_MADEIRA,
