@@ -245,7 +245,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   p.push(`<line x1="${xB1 - 12}" y1="${chao}" x2="${xB2 + 12}" y2="${chao}" stroke="${CINZA}" stroke-width="1"/>`);
 
   if (umaAgua) {
-    const folgaEstrutura = 2;
+    const folgaEstrutura = 0;
     const espViga = 9;
     const topoVigaEsq = faceInferiorTelhado(vigaX) + folgaEstrutura;
     const topoVigaDir = faceInferiorTelhado(vigaX + vigaW) + folgaEstrutura;
@@ -385,7 +385,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   // extensões: começam exatamente na ponta inferior da telha e no encontro
   // da água com a face externa da parede, sem encurtar visualmente o beiral
   p.push(
-    ext(xB1, yPontaAgua + ESP_TELHA, yCotaTotal + 8),
+    ext(xB1, (umaAgua ? yPontaAlta : yPontaAgua) + ESP_TELHA, yCotaTotal + 8),
     ext(xB2, yPontaAgua + ESP_TELHA, yCotaTotal + 8),
     ext(xEsq, faceInferiorTelhado(xEsq), yCotaTotal + 8),
     ext(xDir, faceInferiorTelhado(xDir), yCotaTotal + 8),
