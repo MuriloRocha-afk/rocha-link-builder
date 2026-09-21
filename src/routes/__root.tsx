@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { QuoteCartProvider } from "@/components/site/quote-cart";
 import CrossSellHost from "@/components/CrossSellHost";
 import { MobileBottomNav } from "@/components/site/MobileBottomNav";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { getGaMeasurementId } from "@/lib/analytics.functions";
 
 
 function NotFoundComponent() {
@@ -105,6 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
 
   }),
+  loader: async () => ({ gaMeasurementId: await getGaMeasurementId() }),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -127,9 +130,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { gaMeasurementId } = Route.useLoaderData();
 
   return (
     <QueryClientProvider client={queryClient}>
+      <GoogleAnalytics measurementId={gaMeasurementId} />
       <QuoteCartProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <div className="pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
