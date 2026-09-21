@@ -290,14 +290,14 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
       `<text x="${xApex - 37}" y="${yApex - 28}" text-anchor="end" font-size="9" font-weight="800" letter-spacing="0.4" fill="${TEXTO}">CUMEEIRA</text>`,
     );
 
-    // altura do oitão — cota externa, à esquerda do telhado (não colide com as águas)
+    // altura do oitão — mede exatamente do topo até a linha externa da parede
     const xCotaH = xB1 - 26;
     p.push(
       `<line x1="${xCotaH}" y1="${yApex}" x2="${xApex}" y2="${yApex}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
-      `<line x1="${xCotaH}" y1="${yViga}" x2="${pilarEsq}" y2="${yViga}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
-      `<line x1="${xCotaH}" y1="${yApex}" x2="${xCotaH}" y2="${yViga}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
-      `<text x="${xCotaH - 5}" y="${(yApex + yViga) / 2 - 1}" text-anchor="end" font-size="9.5" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
-      `<text x="${xCotaH - 5}" y="${(yApex + yViga) / 2 + 10}" text-anchor="end" font-size="8.5" fill="${CINZA_TXT}">altura do oitão</text>`,
+      `<line x1="${xCotaH}" y1="${yBeiral}" x2="${xEsq}" y2="${yBeiral}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaH}" y1="${yApex}" x2="${xCotaH}" y2="${yBeiral}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
+      `<text x="${xCotaH - 5}" y="${(yApex + yBeiral) / 2 - 1}" text-anchor="end" font-size="9.5" font-weight="700" fill="${TEXTO}">${fmt(h)} m</text>`,
+      `<text x="${xCotaH - 5}" y="${(yApex + yBeiral) / 2 + 10}" text-anchor="end" font-size="8.5" fill="${CINZA_TXT}">altura do oitão</text>`,
     );
 
   }
@@ -307,12 +307,16 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   {
     const x1 = umaAgua ? xB1 : xApex;
     const y1 = umaAgua ? yApex : yApex;
-    const x2 = xB2;
-    const y2 = yBeiral + px(bH * i);
+    // Em duas águas, o valor representa a água entre a cumeeira e a face
+    // externa da parede; o beiral tem sua própria cota abaixo do desenho.
+    const x2 = umaAgua ? xB2 : xDir;
+    const y2 = umaAgua ? yBeiral + px(bH * i) : yBeiral;
     const ang = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
     const dx = 16;
     const dy = -20;
     p.push(
+      `<line x1="${x1}" y1="${y1}" x2="${x1 + dx}" y2="${y1 + dy}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${x2}" y1="${y2}" x2="${x2 + dx}" y2="${y2 + dy}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
       `<line x1="${x1 + dx}" y1="${y1 + dy}" x2="${x2 + dx}" y2="${y2 + dy}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
       `<g transform="translate(${(x1 + x2) / 2 + dx} ${(y1 + y2) / 2 + dy}) rotate(${ang})">
         <text x="0" y="-16" text-anchor="middle" font-size="10" font-weight="700" fill="${TEXTO}">${fmt(inclinada)} m</text>
@@ -329,12 +333,13 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   const ext = (x: number, yDe: number, yAte: number) =>
     `<line x1="${x}" y1="${yDe}" x2="${x}" y2="${yAte}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`;
 
-  // extensões: pontas reais da água do telhado e cantos externos da parede
+  // extensões: começam exatamente na ponta inferior da telha e no encontro
+  // da água com a face externa da parede, sem encurtar visualmente o beiral
   p.push(
-    ext(xB1, yPontaAgua + 8, yCotaTotal + 8),
-    ext(xB2, yPontaAgua + 8, yCotaTotal + 8),
-    ext(xEsq, chao, yCotaTotal + 8),
-    ext(xDir, chao, yCotaTotal + 8),
+    ext(xB1, yPontaAgua + ESP_TELHA, yCotaTotal + 8),
+    ext(xB2, yPontaAgua + ESP_TELHA, yCotaTotal + 8),
+    ext(xEsq, faceInferiorTelhado(xEsq), yCotaTotal + 8),
+    ext(xDir, faceInferiorTelhado(xDir), yCotaTotal + 8),
   );
 
   if (b > 0) {
