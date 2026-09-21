@@ -22,8 +22,10 @@ export function GoogleAnalytics({ measurementId }: { measurementId: string | nul
     if (document.getElementById("ga4-script")) return;
 
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag(...args: unknown[]) {
-      window.dataLayer!.push(args);
+    // O gtag.js só processa o objeto `arguments` — não um array.
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer!.push(arguments);
     };
     window.gtag("js", new Date());
     // page_view manual: evitamos duplicar com o disparo automático.
