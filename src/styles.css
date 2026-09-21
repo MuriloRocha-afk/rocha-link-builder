@@ -200,7 +200,7 @@
   input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
   textarea,
   select {
-    font-size: max(16px, 1rem);
+    font-size: max(16px, 1rem) !important;
   }
 }
 
