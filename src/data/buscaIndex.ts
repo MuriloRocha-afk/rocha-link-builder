@@ -1,3 +1,5 @@
+import { SUBPRODUTOS_BUSCA } from "@/data/buscaSubprodutos";
+
 /**
  * Índice de busca global do site.
  * Cada entrada leva direto para a página de nível 3 (wizard/configurador),
@@ -505,7 +507,7 @@ const ferramentasSite: ItemBusca[] = [
   },
 ];
 
-export const ITENS_BUSCA: ItemBusca[] = [
+const manuais: ItemBusca[] = [
   ...telhas,
   ...madeiramentoPecas,
   ...madeiramentoProdutos,
@@ -514,6 +516,17 @@ export const ITENS_BUSCA: ItemBusca[] = [
   ...tintas,
   ...ferramentasSite,
 ];
+
+/** Produtos individuais derivados automaticamente dos configuradores. */
+const subprodutos: ItemBusca[] = SUBPRODUTOS_BUSCA.map((s) => ({
+  id: s.id,
+  nome: s.nome,
+  categoria: s.categoria,
+  rota: s.rota,
+  termos: s.termos,
+}));
+
+export const ITENS_BUSCA: ItemBusca[] = [...manuais, ...subprodutos];
 
 /**
  * Sinônimos e apelidos populares → termos oficiais.
@@ -582,7 +595,7 @@ function expandir(consulta: string): string[] {
   return [q, ...extras];
 }
 
-export function buscar(consulta: string, limite = 12): ItemBusca[] {
+export function buscar(consulta: string, limite = 20): ItemBusca[] {
   const termo = normalizar(consulta);
   if (termo.length < 2) return [];
   const consultas = expandir(consulta);
