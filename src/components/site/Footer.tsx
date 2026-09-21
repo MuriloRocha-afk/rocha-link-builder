@@ -107,14 +107,19 @@ export function Footer() {
 
 export function FloatingWhats() {
   return (
-    <a
-      href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de falar com o comercial.")}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="pulse-whats fixed right-5 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-50 flex items-center gap-2 rounded-full bg-whats px-5 py-4 text-sm font-bold text-primary-deep shadow-[var(--shadow-lift)] transition-transform hover:scale-105 md:bottom-5"
-    >
-      <MessageCircle className="h-5 w-5" />
-      Fale Conosco
-    </a>
+    <div className="fixed right-5 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-50 flex flex-col items-end gap-1.5 md:bottom-5">
+      <span className="max-w-[70vw] rounded-full bg-white/95 px-3 py-1 text-right text-[11px] font-semibold text-gray-600 shadow-sm">
+        Respondemos rapidinho, geralmente em minutos
+      </span>
+      <a
+        href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de falar com o comercial.")}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pulse-whats flex items-center gap-2 rounded-full bg-whats px-5 py-4 text-sm font-bold text-primary-deep shadow-[var(--shadow-lift)] transition-transform hover:scale-105"
+      >
+        <MessageCircle className="h-5 w-5" />
+        Fale Conosco
+      </a>
+    </div>
   );
 }

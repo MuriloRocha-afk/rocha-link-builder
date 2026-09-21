@@ -18,19 +18,31 @@ export function WhatsAppButton({
   children,
   size = "xl",
   className,
+  hint = "Respondemos rapidinho, geralmente em minutos",
 }: {
   message: string;
   children: React.ReactNode;
   size?: "default" | "sm" | "lg" | "xl";
   className?: string;
+  hint?: string | false;
 }) {
-  return (
+  const botao = (
     <Button asChild variant="whats" size={size} className={className}>
       <a href={waLink(message)} target="_blank" rel="noopener noreferrer">
         <MessageCircle />
         {children}
       </a>
     </Button>
+  );
+
+  if (!hint) return botao;
+
+  const full = className?.includes("w-full");
+  return (
+    <span className={`flex flex-col items-center gap-1.5 ${full ? "w-full" : ""}`}>
+      {botao}
+      <span className="text-xs text-muted-foreground text-center">{hint}</span>
+    </span>
   );
 }
 

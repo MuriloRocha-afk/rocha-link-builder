@@ -154,6 +154,9 @@ export default function ModalCotarWhatsApp({ aberto, onFechar, corpoMensagem, no
                 <MessageCircle size={18} />
                 Enviar no WhatsApp
               </button>
+              <p className="mt-2 text-center text-xs text-gray-500">
+                Respondemos rapidinho, geralmente em minutos
+              </p>
 
               <button onClick={onFechar} className="w-full text-gray-400 hover:text-gray-600 text-xs py-2 mt-2 transition-colors">
                 Cancelar
