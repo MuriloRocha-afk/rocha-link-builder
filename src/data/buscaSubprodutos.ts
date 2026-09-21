@@ -93,23 +93,45 @@ function gerar(config: ConfiguradorConfig): SubprodutoBusca[] {
   ];
 
   const passos = config.passos.filter((p) => p.tipo !== "quantidade");
-  const itens: SubprodutoBusca[] = [];
   const vistos = new Set<string>();
-  let selecoes: { sel: Selecao; subs: string[] }[] = [{ sel: {}, subs: [] }];
+  const porNivel: SubprodutoBusca[][] = [];
+  let baseRaiz = "";
+  try {
+    baseRaiz = limpar(config.resumoNome({}) ?? "");
+  } catch {
+    baseRaiz = "";
+  }
 
-  for (const passo of passos.slice(0, 2)) {
-    const proximas: { sel: Selecao; subs: string[] }[] = [];
+  let selecoes: { sel: Selecao; subs: string[]; base: string }[] = [
+    { sel: {}, subs: [], base: baseRaiz },
+  ];
+
+  for (const [nivel, passo] of passos.slice(0, 2).entries()) {
+    const proximas: { sel: Selecao; subs: string[]; base: string }[] = [];
     for (const atual of selecoes) {
       if (passo.visivel && !passo.visivel(atual.sel)) continue;
       for (const opcao of opcoesDo(passo, atual.sel)) {
+        const sel = { ...atual.sel, [passo.chave]: opcao.valor };
+        let nomeProduto = "";
+        try {
+          nomeProduto = limpar(config.resumoNome(sel) ?? "");
+        } catch {
+          nomeProduto = "";
+        }
+        // A partir do 2º nível só indexamos quando a escolha muda o nome do
+        // produto (ex.: "Bestfer — Serrote"); variações como volume ou cor não
+        // viram entradas separadas.
+        if (nivel > 0 && nomeProduto === atual.base) continue;
         proximas.push({
-          sel: { ...atual.sel, [passo.chave]: opcao.valor },
+          sel,
           subs: [...atual.subs, opcao.sub ?? "", opcao.label ?? ""],
+          base: nomeProduto,
         });
       }
     }
     if (proximas.length === 0 || proximas.length > 28) break;
 
+    const doNivel: SubprodutoBusca[] = [];
     for (const { sel, subs } of proximas) {
       const valor = sel[passo.chave] as string;
       const nome = nomeDe(config, sel, valor);
@@ -118,7 +140,7 @@ function gerar(config: ConfiguradorConfig): SubprodutoBusca[] {
       vistos.add(chaveUnica);
 
       const query = new URLSearchParams(sel).toString();
-      itens.push({
+      doNivel.push({
         id: `sub-${config.produtoKey}-${Object.values(sel).join("-")}`,
         nome,
         categoria: config.categoria,
@@ -126,11 +148,16 @@ function gerar(config: ConfiguradorConfig): SubprodutoBusca[] {
         termos: [...Object.values(sel), ...subs, ...contexto].filter(Boolean) as string[],
       });
     }
-
+    porNivel.push(doNivel);
     selecoes = proximas;
   }
 
-  return itens;
+  // Quando o 2º nível traz os produtos de verdade (caso das ferramentas), as
+  // entradas genéricas do 1º nível (famílias) são descartadas.
+  if (porNivel.length === 2 && porNivel[1].length > 0) {
+    return [...porNivel[0].filter((i) => !i.nome.includes(`${baseRaiz} —`)), ...porNivel[1]];
+  }
+  return porNivel.flat();
 }
 
 export const SUBPRODUTOS_BUSCA: SubprodutoBusca[] = CONFIGS.flatMap(gerar);
