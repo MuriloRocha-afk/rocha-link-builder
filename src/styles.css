@@ -196,6 +196,14 @@
 
 }
 
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,
+  select {
+    font-size: max(16px, 1rem) !important;
+  }
+}
+
 @layer base {
   body {
     font-family: var(--font-body);
