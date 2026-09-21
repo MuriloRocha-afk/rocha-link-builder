@@ -107,6 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
 
   }),
+  loader: async () => ({ gaMeasurementId: await getGaMeasurementId() }),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -129,9 +130,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { gaMeasurementId } = Route.useLoaderData();
 
   return (
     <QueryClientProvider client={queryClient}>
+      <GoogleAnalytics measurementId={gaMeasurementId} />
       <QuoteCartProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <div className="pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
