@@ -60,8 +60,8 @@ export function BuscaGlobal({
   let indice = -1;
 
   return (
-    <div ref={containerRef} className={`relative ${className}`}>
-      <div className="flex items-center gap-2 rounded-xl border border-border bg-background px-3 py-2 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20">
+    <div ref={containerRef} className={`relative min-w-0 max-w-full ${className}`}>
+      <div className="flex min-w-0 max-w-full items-center gap-2 rounded-xl border border-border bg-background px-3 py-2 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20">
         <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
         <input
           type="search"
@@ -74,7 +74,7 @@ export function BuscaGlobal({
           onKeyDown={onKeyDown}
           placeholder={placeholder}
           aria-label="Buscar produtos no catálogo"
-          className="w-full bg-transparent text-sm [&::-webkit-search-cancel-button]:appearance-none text-foreground outline-none placeholder:text-muted-foreground"
+          className="min-w-0 w-full bg-transparent text-sm [&::-webkit-search-cancel-button]:appearance-none text-foreground outline-none placeholder:text-muted-foreground"
         />
         {termo ? (
           <button
@@ -89,7 +89,7 @@ export function BuscaGlobal({
       </div>
 
       {mostrar ? (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] lg:left-auto lg:w-[26rem] overflow-y-auto rounded-xl border border-border bg-card shadow-xl">
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] max-w-full overflow-x-hidden overflow-y-auto rounded-xl border border-border bg-card shadow-xl lg:left-auto lg:w-[26rem] lg:max-w-none">
           {resultados.length > 0 ? (
             grupos.map((grupo) => (
               <div key={grupo.categoria} className="border-b border-border/60 last:border-0">
