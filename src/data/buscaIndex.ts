@@ -595,7 +595,7 @@ function expandir(consulta: string): string[] {
   return [q, ...extras];
 }
 
-export function buscar(consulta: string, limite = 12): ItemBusca[] {
+export function buscar(consulta: string, limite = 20): ItemBusca[] {
   const termo = normalizar(consulta);
   if (termo.length < 2) return [];
   const consultas = expandir(consulta);
