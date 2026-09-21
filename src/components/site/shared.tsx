@@ -45,8 +45,8 @@ export function Logo({
     <RochaLogoHorizontal
       className={
         big
-          ? "h-14 shrink-0 md:h-16 lg:h-[72px] xl:h-20"
-          : "h-14 shrink-0 md:h-16"
+          ? "h-11 min-w-0 max-w-full overflow-hidden sm:h-14 md:h-16 lg:h-[72px] xl:h-20"
+          : "h-11 min-w-0 max-w-full overflow-hidden sm:h-14 md:h-16"
       }
     />
   );

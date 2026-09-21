@@ -70,8 +70,8 @@ export function Header() {
     <header
       className="fixed inset-x-0 top-0 z-50 bg-card/95 shadow-[var(--shadow-card)] backdrop-blur transition-all"
     >
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-5">
-        <Link to="/" aria-label="Rocha Telhas — início" className="flex shrink-0 items-center">
+      <div className="mx-auto grid h-24 w-full max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-4 sm:gap-4 sm:px-5 lg:flex lg:justify-between">
+        <Link to="/" aria-label="Rocha Telhas — início" className="flex min-w-0 items-center overflow-hidden lg:shrink-0">
           <Logo size="lg" />
         </Link>
 
@@ -125,7 +125,7 @@ export function Header() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:hidden">
           <button
             type="button"
             onClick={() => {
@@ -133,11 +133,11 @@ export function Header() {
               setOpen(false);
             }}
             aria-label="Buscar produtos"
-            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary transition-colors hover:bg-muted"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border text-primary transition-colors hover:bg-muted sm:h-11 sm:w-11"
           >
             <Search className="h-5 w-5" />
           </button>
-          <QuoteCartButton />
+          <QuoteCartButton className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
           <button
             type="button"
             onClick={() => {
@@ -145,7 +145,7 @@ export function Header() {
               setBuscaAberta(false);
             }}
             aria-label="Abrir menu"
-            className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-primary transition-colors hover:bg-muted"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border text-primary transition-colors hover:bg-muted sm:h-11 sm:w-11"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -153,8 +153,8 @@ export function Header() {
       </div>
 
       {buscaAberta ? (
-        <div className="border-t border-border bg-card px-5 py-4 lg:hidden">
-          <BuscaGlobal placeholder="Buscar produto..." />
+        <div className="min-w-0 overflow-x-clip border-t border-border bg-card px-4 py-4 sm:px-5 lg:hidden">
+          <BuscaGlobal className="min-w-0 max-w-full" placeholder="Buscar produto..." />
         </div>
       ) : null}
 

@@ -112,14 +112,14 @@ export function RochaWordmark({ className }: { className?: string }) {
 export function RochaLogoHorizontal({
   className,
   iconClassName = "h-full w-auto shrink-0",
-  wordClassName = "h-[77%] w-auto shrink-0 max-w-none",
+  wordClassName = "h-[77%] min-w-0 w-auto max-w-full",
 }: {
   className?: string;
   iconClassName?: string;
   wordClassName?: string;
 }) {
   return (
-    <div className={`flex items-center gap-3 ${className ?? ""}`}>
+    <div className={`flex min-w-0 items-center gap-2 sm:gap-3 ${className ?? ""}`}>
       <RochaLogoIcon className={iconClassName} />
       <RochaWordmark className={wordClassName} />
     </div>
