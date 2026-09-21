@@ -5,6 +5,7 @@ import ModalCotarWhatsApp from "../../../components/ModalCotarWhatsApp";
 import GaleriaProduto from "../../../components/GaleriaProduto";
 import ProdutoLayout from "../../../components/site/ProdutoLayout";
 import { imagensEucalipto } from "../../../data/imagensProduto";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 
 const NOME = "Pontalete de Eucalipto";
 const COMPRIMENTOS = ["3,0m", "4,0m", "5,0m", "6,0m"];
@@ -40,17 +41,7 @@ export default function Eucalipto() {
   return (
     <ProdutoLayout
       produtoKey="eucalipto"
-      breadcrumb={
-        <div className="bg-white border-b px-4 py-3">
-          <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-            <a href="/catalogo" className="hover:text-orange-500">Catálogo</a>
-            <ChevronRight size={12} />
-            <a href="/catalogo/madeiramento" className="hover:text-orange-500">Madeiramento</a>
-            <ChevronRight size={12} />
-            <span className="text-gray-900 font-medium">{NOME}</span>
-          </div>
-        </div>
-      }
+      breadcrumb={<Breadcrumbs atual={NOME} />}
       cabecalho={
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{NOME}</h1>

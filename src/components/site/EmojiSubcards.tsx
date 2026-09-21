@@ -146,8 +146,12 @@ export function CategoriaSubcardPage({
         <div className="mx-auto max-w-7xl px-5">
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-sm font-semibold text-primary-foreground/70"
+            className="flex flex-wrap items-center gap-2 text-sm font-semibold text-primary-foreground/70"
           >
+            <Link to="/" className="transition-colors hover:text-accent">
+              Início
+            </Link>
+            <ChevronRight className="h-4 w-4 opacity-60" />
             <Link to="/catalogo" className="transition-colors hover:text-accent">
               Catálogo
             </Link>

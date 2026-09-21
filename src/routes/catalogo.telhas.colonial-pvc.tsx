@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronRight } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { ColonialPvcConfigurator } from "@/components/site/ColonialPvcConfigurator";
@@ -28,27 +27,6 @@ function ColonialPvcPage() {
       <Header />
 
       <main className="pt-24">
-        <div className="border-b bg-white px-4 py-3">
-          <nav
-            aria-label="Breadcrumb"
-            className="mx-auto flex max-w-6xl flex-wrap items-center gap-1 text-xs text-gray-500"
-          >
-            <Link to="/catalogo" className="hover:text-orange-500">
-              Catálogo
-            </Link>
-            <ChevronRight className="h-3 w-3" />
-            <Link
-              to="/catalogo/$categoriaSlug"
-              params={{ categoriaSlug: "telhas" }}
-              className="hover:text-orange-500"
-            >
-              Telhas
-            </Link>
-            <ChevronRight className="h-3 w-3" />
-            <span className="font-medium text-gray-900">Colonial PVC</span>
-          </nav>
-        </div>
-
         <ColonialPvcConfigurator />
       </main>
 

@@ -11,6 +11,7 @@ import AcessoriosForroPergunta, {
 } from "@/components/site/AcessoriosForroPergunta";
 import { acessoriosForroMadeira } from "@/data/acessoriosForro";
 import { galeriaForroCedrinho } from "../../../data/imagensProduto";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 
 const CATEGORIAS = [
   {
@@ -58,21 +59,7 @@ export default function ForroCedrinho() {
   return (
     <ProdutoLayout
       produtoKey="forro-cedrinho"
-      breadcrumb={
-        <div className="bg-white border-b px-4 py-3">
-          <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-            <a href="/catalogo" className="hover:text-orange-500">
-              Catálogo
-            </a>
-            <ChevronRight size={12} />
-            <a href="/catalogo/madeiramento" className="hover:text-orange-500">
-              Madeiramento
-            </a>
-            <ChevronRight size={12} />
-            <span className="text-gray-900 font-medium">Forro Cedrinho</span>
-          </div>
-        </div>
-      }
+      breadcrumb={<Breadcrumbs atual="Forro Cedrinho" />}
       cabecalho={
         <div>
           <span className="text-xs font-bold text-orange-500 uppercase tracking-widest">
