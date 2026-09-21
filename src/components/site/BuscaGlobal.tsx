@@ -74,7 +74,7 @@ export function BuscaGlobal({
           onKeyDown={onKeyDown}
           placeholder={placeholder}
           aria-label="Buscar produtos no catálogo"
-          className="min-w-0 w-full bg-transparent text-sm [&::-webkit-search-cancel-button]:appearance-none text-foreground outline-none placeholder:text-muted-foreground"
+          className="min-w-0 w-full bg-transparent text-base [&::-webkit-search-cancel-button]:appearance-none text-foreground outline-none placeholder:text-muted-foreground md:text-sm"
         />
         {termo ? (
           <button
