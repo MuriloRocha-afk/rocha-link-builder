@@ -108,21 +108,7 @@ export default function MadeiraNativaConfigurator({
     <ProdutoLayout
       galeriaSticky={false}
       produtoKey={produtoKey}
-      breadcrumb={
-        <div className="bg-white border-b px-4 py-3">
-          <div className="max-w-3xl mx-auto flex items-center gap-1 text-xs text-gray-500">
-            <a href="/catalogo" className="hover:text-orange-500 transition-colors">
-              Catálogo
-            </a>
-            <ChevronRight size={12} />
-            <a href="/catalogo/madeiramento" className="hover:text-orange-500 transition-colors">
-              Madeiramento
-            </a>
-            <ChevronRight size={12} />
-            <span className="text-gray-900 font-medium">{nome}</span>
-          </div>
-        </div>
-      }
+      breadcrumb={<Breadcrumbs atual={nome} />}
       cabecalho={
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{nome}</h1>

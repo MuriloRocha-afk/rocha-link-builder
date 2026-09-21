@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { getDestaques } from "@/data/produtoDestaques";
 import { Reveal } from "@/components/site/Reveal";
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 
 type Props = {
   /** chave em DESTAQUES_PRODUTO — habilita badges e "Por que escolher?" */
@@ -35,7 +36,7 @@ export default function ProdutoLayout({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {breadcrumb}
+      {breadcrumb ?? <Breadcrumbs />}
 
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-5 md:items-start">
