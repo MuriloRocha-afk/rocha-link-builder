@@ -219,6 +219,12 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   const yApex = yBeiral - px(h);
   const xApex = umaAgua ? xB1 : cxBase;
 
+  // Em uma água, a reta passa pelos topos das duas paredes e os beirais são
+  // apenas prolongamentos dessa mesma inclinação, sem degraus nas pontas.
+  const yAguaUma = (x: number) => yApex + (x - xEsq) * i;
+  const yPontaAlta = umaAgua ? yAguaUma(xB1) : yApex;
+  const yPontaBaixa = umaAgua ? yAguaUma(xB2) : yBeiral + px(bH * i);
+
   const p: string[] = [];
   const chao = 262;
 
@@ -226,7 +232,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   const ESP_TELHA = 7; // espessura desenhada da telha
   /** face inferior da água do telhado no X informado */
   const faceInferiorTelhado = (x: number) =>
-    (umaAgua ? yApex + (x - xB1) * i : yApex + Math.abs(x - cxBase) * i) + ESP_TELHA;
+    (umaAgua ? yAguaUma(x) : yApex + Math.abs(x - cxBase) * i) + ESP_TELHA;
 
   const pilarW = 9;
   // pilares simétricos em relação ao eixo central do desenho
@@ -236,23 +242,43 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
 
   const vigaX = pilarEsq - 6;
   const vigaW = pilarDir - pilarEsq + pilarW + 12;
-  // a estrutura nunca pode atravessar a água: fica sempre abaixo da face inferior
-  const limiteTelhado = Math.max(
-    faceInferiorTelhado(vigaX),
-    faceInferiorTelhado(vigaX + vigaW),
-    faceInferiorTelhado(pilarEsq),
-    faceInferiorTelhado(pilarDir + pilarW),
-  );
-  const yViga = Math.max(yBeiral - 22, limiteTelhado + 3);
-  const yPilarTopo = yViga + 10;
-  p.push(
-    `<line x1="${xB1 - 12}" y1="${chao}" x2="${xB2 + 12}" y2="${chao}" stroke="${CINZA}" stroke-width="1"/>`,
-    // viga de amarração
-    `<rect x="${vigaX}" y="${yViga}" width="${vigaW}" height="9" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
-    // pilares
-    `<rect x="${pilarEsq}" y="${yPilarTopo}" width="${pilarW}" height="${chao - yPilarTopo}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
-    `<rect x="${pilarDir}" y="${yPilarTopo}" width="${pilarW}" height="${chao - yPilarTopo}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
-  );
+  p.push(`<line x1="${xB1 - 12}" y1="${chao}" x2="${xB2 + 12}" y2="${chao}" stroke="${CINZA}" stroke-width="1"/>`);
+
+  if (umaAgua) {
+    const folgaEstrutura = 0;
+    const espViga = 9;
+    const topoVigaEsq = faceInferiorTelhado(vigaX) + folgaEstrutura;
+    const topoVigaDir = faceInferiorTelhado(vigaX + vigaW) + folgaEstrutura;
+    const baseVigaEsq = topoVigaEsq + espViga;
+    const baseVigaDir = topoVigaDir + espViga;
+    const topoPilarEsqA = faceInferiorTelhado(pilarEsq) + folgaEstrutura + espViga;
+    const topoPilarEsqB = faceInferiorTelhado(pilarEsq + pilarW) + folgaEstrutura + espViga;
+    const topoPilarDirA = faceInferiorTelhado(pilarDir) + folgaEstrutura + espViga;
+    const topoPilarDirB = faceInferiorTelhado(pilarDir + pilarW) + folgaEstrutura + espViga;
+
+    p.push(
+      // viga inclinada paralela à face inferior da cobertura
+      `<path d="M ${vigaX} ${topoVigaEsq} L ${vigaX + vigaW} ${topoVigaDir} L ${vigaX + vigaW} ${baseVigaDir} L ${vigaX} ${baseVigaEsq} Z" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+      // pilares com alturas distintas, recortados exatamente sob a viga
+      `<path d="M ${pilarEsq} ${topoPilarEsqA} L ${pilarEsq + pilarW} ${topoPilarEsqB} L ${pilarEsq + pilarW} ${chao} L ${pilarEsq} ${chao} Z" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+      `<path d="M ${pilarDir} ${topoPilarDirA} L ${pilarDir + pilarW} ${topoPilarDirB} L ${pilarDir + pilarW} ${chao} L ${pilarDir} ${chao} Z" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+    );
+  } else {
+    // Geometria original de duas águas: viga e pilares permanecem nivelados.
+    const limiteTelhado = Math.max(
+      faceInferiorTelhado(vigaX),
+      faceInferiorTelhado(vigaX + vigaW),
+      faceInferiorTelhado(pilarEsq),
+      faceInferiorTelhado(pilarDir + pilarW),
+    );
+    const yViga = Math.max(yBeiral - 22, limiteTelhado + 3);
+    const yPilarTopo = yViga + 10;
+    p.push(
+      `<rect x="${vigaX}" y="${yViga}" width="${vigaW}" height="9" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+      `<rect x="${pilarEsq}" y="${yPilarTopo}" width="${pilarW}" height="${chao - yPilarTopo}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+      `<rect x="${pilarDir}" y="${yPilarTopo}" width="${pilarW}" height="${chao - yPilarTopo}" fill="${MADEIRA}" stroke="${MADEIRA_BORDA}" stroke-width="1"/>`,
+    );
+  }
 
 
   /** desenha uma água com espessura de telha + textura de ondas */
@@ -275,7 +301,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   };
 
   if (umaAgua) {
-    p.push(agua(xB1, yApex, xB2, yBeiral + px(bH * i)));
+    p.push(agua(xB1, yPontaAlta, xB2, yPontaBaixa));
   } else {
     p.push(agua(xB1, yBeiral + px(bH * i), xApex, yApex));
     p.push(agua(xApex, yApex, xB2, yBeiral + px(bH * i)));
@@ -302,15 +328,38 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
 
   }
 
+  if (umaAgua) {
+    const xCotaAlta = xB1 - 20;
+    const xCotaBaixa = xB2 + 20;
+    const yParedeAlta = faceInferiorTelhado(xEsq);
+    const yParedeBaixa = faceInferiorTelhado(xDir);
+    const xCotaDesnivel = xDir + 44;
+    p.push(
+      `<line x1="${xCotaAlta}" y1="${yParedeAlta}" x2="${xEsq}" y2="${yParedeAlta}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaAlta}" y1="${chao}" x2="${xEsq}" y2="${chao}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaAlta}" y1="${yParedeAlta}" x2="${xCotaAlta}" y2="${chao}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
+      `<text x="${xCotaAlta - 6}" y="${(yParedeAlta + chao) / 2}" text-anchor="end" font-size="8.5" font-weight="700" fill="${TEXTO}">altura lado alto</text>`,
+      `<line x1="${xDir}" y1="${yParedeBaixa}" x2="${xCotaBaixa}" y2="${yParedeBaixa}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xDir}" y1="${chao}" x2="${xCotaBaixa}" y2="${chao}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaBaixa}" y1="${yParedeBaixa}" x2="${xCotaBaixa}" y2="${chao}" stroke="${TEXTO}" stroke-width="1" marker-start="url(#seta)" marker-end="url(#seta)"/>`,
+      `<text x="${xCotaBaixa - 6}" y="${(yParedeBaixa + chao) / 2}" text-anchor="end" font-size="8.5" font-weight="700" fill="${TEXTO}">altura lado baixo</text>`,
+      `<line x1="${xDir}" y1="${yParedeAlta}" x2="${xCotaDesnivel}" y2="${yParedeAlta}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xDir}" y1="${yParedeBaixa}" x2="${xCotaDesnivel}" y2="${yParedeBaixa}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`,
+      `<line x1="${xCotaDesnivel}" y1="${yParedeAlta}" x2="${xCotaDesnivel}" y2="${yParedeBaixa}" stroke="${LARANJA}" stroke-width="1" marker-start="url(#seta-laranja)" marker-end="url(#seta-laranja)"/>`,
+      `<text x="${xCotaDesnivel - 5}" y="${(yParedeAlta + yParedeBaixa) / 2 - 2}" text-anchor="end" font-size="9" font-weight="700" fill="${LARANJA_ESC}">${fmt(h)} m</text>`,
+      `<text x="${xCotaDesnivel - 5}" y="${(yParedeAlta + yParedeBaixa) / 2 + 9}" text-anchor="end" font-size="8" fill="${CINZA_TXT}">desnível</text>`,
+    );
+  }
+
 
   // ----- comprimento inclinado (seta dupla ao longo da água direita) -----
   {
     const x1 = umaAgua ? xB1 : xApex;
-    const y1 = umaAgua ? yApex : yApex;
+    const y1 = umaAgua ? yPontaAlta : yApex;
     // Em duas águas, o valor representa a água entre a cumeeira e a face
     // externa da parede; o beiral tem sua própria cota abaixo do desenho.
     const x2 = umaAgua ? xB2 : xDir;
-    const y2 = umaAgua ? yBeiral + px(bH * i) : yBeiral;
+    const y2 = umaAgua ? yPontaBaixa : yBeiral;
     const ang = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
     const dx = 16;
     const dy = -20;
@@ -328,7 +377,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   // ----- cotas inferiores -----
   const yCota = chao + 26;
   const yCotaTotal = yCota + 44;
-  const yPontaAgua = yBeiral + px(bH * i);
+  const yPontaAgua = yPontaBaixa;
   /** linha de extensão fina, ligando o elemento desenhado à linha de cota */
   const ext = (x: number, yDe: number, yAte: number) =>
     `<line x1="${x}" y1="${yDe}" x2="${x}" y2="${yAte}" stroke="${CINZA}" stroke-width="0.7" stroke-dasharray="3 3"/>`;
@@ -336,7 +385,7 @@ export function croquiPerfilSvg({ tipo, largura, beiral = 0, inclinacao }: Perfi
   // extensões: começam exatamente na ponta inferior da telha e no encontro
   // da água com a face externa da parede, sem encurtar visualmente o beiral
   p.push(
-    ext(xB1, yPontaAgua + ESP_TELHA, yCotaTotal + 8),
+    ext(xB1, (umaAgua ? yPontaAlta : yPontaAgua) + ESP_TELHA, yCotaTotal + 8),
     ext(xB2, yPontaAgua + ESP_TELHA, yCotaTotal + 8),
     ext(xEsq, faceInferiorTelhado(xEsq), yCotaTotal + 8),
     ext(xDir, faceInferiorTelhado(xDir), yCotaTotal + 8),
