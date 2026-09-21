@@ -1,3 +1,5 @@
+import { SUBPRODUTOS_BUSCA } from "@/data/buscaSubprodutos";
+
 /**
  * Índice de busca global do site.
  * Cada entrada leva direto para a página de nível 3 (wizard/configurador),
