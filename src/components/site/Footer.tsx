@@ -108,8 +108,8 @@ export function Footer() {
 export function FloatingWhats() {
   return (
     <div className="fixed right-5 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-50 flex flex-col items-end gap-1.5 md:bottom-5">
-      <span className="max-w-[70vw] rounded-full bg-white/95 px-3 py-1 text-right text-[11px] font-semibold text-gray-600 shadow-sm">
-        Respondemos rapidinho, geralmente em minutos
+      <span className="rounded-full bg-white/95 px-2.5 py-0.5 text-[10px] font-semibold text-gray-600 shadow-sm">
+        Respondemos rapidinho
       </span>
       <a
         href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de falar com o comercial.")}
