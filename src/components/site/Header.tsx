@@ -161,6 +161,17 @@ export function Header() {
       {open ? (
         <div className="border-t border-border bg-card px-5 py-5 lg:hidden">
           <nav className="flex flex-col gap-2">
+            {/* Em tablets (>=768px) a barra inferior não aparece; manter os links principais aqui */}
+            <div className="mb-3 hidden flex-col gap-2 border-b border-border pb-3 md:flex">
+              {NAV_PRIMARY.map((item) => (
+                <NavLink
+                  key={item.label}
+                  item={item}
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-2.5 text-base font-semibold text-primary transition-colors hover:bg-muted"
+                />
+              ))}
+            </div>
             <p className="px-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Mais
             </p>
