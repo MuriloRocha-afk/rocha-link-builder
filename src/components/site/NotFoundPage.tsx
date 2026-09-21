@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { Home, LayoutGrid } from "lucide-react";
-import { RochaLogoHorizontal } from "./shared";
+import { RochaLogoHorizontal } from "./RochaLogoMark";
 
 export function NotFoundPage() {
   useEffect(() => {
