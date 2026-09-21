@@ -16,6 +16,7 @@ import CrossSellHost from "@/components/CrossSellHost";
 import { MobileBottomNav } from "@/components/site/MobileBottomNav";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { getGaMeasurementId } from "@/lib/analytics.functions";
+import { NotFoundPage } from "@/components/site/NotFoundPage";
 
 
 function NotFoundComponent() {
