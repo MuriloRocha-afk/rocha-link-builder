@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { QuoteCartProvider } from "@/components/site/quote-cart";
 import CrossSellHost from "@/components/CrossSellHost";
 import { MobileBottomNav } from "@/components/site/MobileBottomNav";
+import { CookieBanner } from "@/components/site/CookieBanner";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { getGaMeasurementId } from "@/lib/analytics.functions";
 import { NotFoundPage } from "@/components/site/NotFoundPage";
@@ -161,6 +162,7 @@ function RootComponent() {
         </div>
         <CrossSellHost />
         <MobileBottomNav />
+        <CookieBanner />
       </QuoteCartProvider>
     </QueryClientProvider>
   );

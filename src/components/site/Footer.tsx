@@ -98,6 +98,13 @@ export function Footer() {
             className="transition-colors hover:text-accent underline underline-offset-2"
           >
             Política de Privacidade
+          </Link>{" "}
+          ·{" "}
+          <Link
+            to="/politica-de-cookies"
+            className="transition-colors hover:text-accent underline underline-offset-2"
+          >
+            Política de Cookies
           </Link>
         </div>
       </div>
@@ -107,7 +114,7 @@ export function Footer() {
 
 export function FloatingWhats() {
   return (
-    <div className="fixed right-5 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-50 flex flex-col items-end gap-1.5 md:bottom-5">
+    <div className="floating-whats fixed right-5 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-50 flex flex-col items-end gap-1.5 md:bottom-5">
       <span className="rounded-full bg-white/95 px-2.5 py-0.5 text-[10px] font-semibold text-gray-600 shadow-sm">
         Respondemos rapidinho
       </span>
