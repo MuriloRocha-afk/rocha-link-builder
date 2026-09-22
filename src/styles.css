@@ -425,6 +425,6 @@
    para não ser coberto pelo banner (o banner fica acima da barra inferior). */
 @media (max-width: 767px) {
   html[data-cookie-banner="1"] .floating-whats {
-    bottom: calc(10.5rem + env(safe-area-inset-bottom));
+    bottom: calc(16.5rem + env(safe-area-inset-bottom));
   }
 }
