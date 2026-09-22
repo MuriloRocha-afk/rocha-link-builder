@@ -30,6 +30,18 @@ export function Footer() {
                 {CONTATO.phone}
               </li>
             </ul>
+            <div className="mt-6 text-[11px] leading-relaxed text-primary-foreground/50">
+              <p className="font-semibold tracking-wide text-primary-foreground/60 uppercase">
+                Dados da empresa
+              </p>
+              <p className="mt-1.5">
+                RENZO N DA ROCHA COMERCIO DE MADEIRA LTDA
+                <br />
+                CNPJ: 54.491.531/0002-34
+                <br />
+                R. Dr. Hamilton Prado, 856 — Centro, Franco da Rocha/SP
+              </p>
+            </div>
             <div className="mt-6 flex gap-3">
               <a
                 href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de falar com um vendedor.")}
