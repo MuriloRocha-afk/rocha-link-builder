@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as LinksRouteImport } from './routes/links'
 import { Route as FerramentasRouteImport } from './routes/ferramentas'
 import { Route as CalculadoraRouteImport } from './routes/calculadora'
@@ -84,6 +85,11 @@ import { Route as AuthenticatedAdminAvaliacoesRouteImport } from './routes/_auth
 const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
   id: '/politica-de-privacidade',
   path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDeCookiesRoute = PoliticaDeCookiesRouteImport.update({
+  id: '/politica-de-cookies',
+  path: '/politica-de-cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LinksRoute = LinksRouteImport.update({
@@ -481,6 +487,7 @@ export interface FileRoutesByFullPath {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/completo': typeof CatalogoCompletoRoute
@@ -553,6 +560,7 @@ export interface FileRoutesByTo {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
@@ -626,6 +634,7 @@ export interface FileRoutesById {
   '/calculadora': typeof CalculadoraRoute
   '/ferramentas': typeof FerramentasRoute
   '/links': typeof LinksRoute
+  '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/completo': typeof CatalogoCompletoRoute
@@ -700,6 +709,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/links'
+    | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/completo'
@@ -772,6 +782,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/links'
+    | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/catalogo/completo'
     | '/guias/$slug'
@@ -844,6 +855,7 @@ export interface FileRouteTypes {
     | '/calculadora'
     | '/ferramentas'
     | '/links'
+    | '/politica-de-cookies'
     | '/politica-de-privacidade'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/completo'
@@ -918,6 +930,7 @@ export interface RootRouteChildren {
   CalculadoraRoute: typeof CalculadoraRoute
   FerramentasRoute: typeof FerramentasRoute
   LinksRoute: typeof LinksRoute
+  PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoCompletoRoute: typeof CatalogoCompletoRoute
@@ -989,6 +1002,13 @@ declare module '@tanstack/react-router' {
       path: '/politica-de-privacidade'
       fullPath: '/politica-de-privacidade'
       preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-cookies': {
+      id: '/politica-de-cookies'
+      path: '/politica-de-cookies'
+      fullPath: '/politica-de-cookies'
+      preLoaderRoute: typeof PoliticaDeCookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/links': {
@@ -1519,6 +1539,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculadoraRoute: CalculadoraRoute,
   FerramentasRoute: FerramentasRoute,
   LinksRoute: LinksRoute,
+  PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoCompletoRoute: CatalogoCompletoRoute,

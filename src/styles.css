@@ -420,3 +420,11 @@
     transform: none !important;
   }
 }
+
+/* Banner de cookies visível: sobe o botão flutuante de WhatsApp no mobile
+   para não ser coberto pelo banner (o banner fica acima da barra inferior). */
+@media (max-width: 767px) {
+  html[data-cookie-banner="1"] .floating-whats {
+    bottom: calc(16.5rem + env(safe-area-inset-bottom));
+  }
+}
