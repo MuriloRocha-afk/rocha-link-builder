@@ -47,7 +47,7 @@ export function CookieBanner() {
     <div
       role="region"
       aria-label="Aviso de cookies"
-      className="fixed inset-x-0 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-[55] px-3 pb-3 md:bottom-4 md:px-5 md:pb-0"
+      className="fixed inset-x-0 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-[45] px-3 pb-3 md:bottom-4 md:px-5 md:pb-0"
     >
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-3 rounded-2xl border border-border bg-card/98 p-4 shadow-[var(--shadow-lift)] backdrop-blur sm:flex-row sm:gap-4">
         <p className="flex-1 text-center text-[13px] leading-snug text-foreground sm:text-left">
