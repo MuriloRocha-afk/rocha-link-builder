@@ -9,7 +9,7 @@ export type BlocoGuia =
   | { tipo: "h2"; texto: string }
   | { tipo: "p"; texto: string }
   | { tipo: "lista"; itens: string[] }
-  | { tipo: "imagem"; src: string; alt: string };
+  | { tipo: "imagem"; src: string; alt: string; ajuste?: "cover" | "contain" };
 
 export type Guia = {
   slug: string;
@@ -47,6 +47,7 @@ export const GUIAS: Guia[] = [
         tipo: "imagem",
         src: guia1InternaAsset.url,
         alt: "Comparativo entre telhados de cerâmica, fibrocimento e PVC",
+        ajuste: "contain",
       },
       { tipo: "h2", texto: "Telha Cerâmica (barro)" },
       {

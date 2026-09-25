@@ -131,7 +131,7 @@ function GuiaPost() {
                       src={bloco.src}
                       alt={bloco.alt}
                       loading="lazy"
-                      className="h-full w-full object-cover"
+                      className={`h-full w-full ${bloco.ajuste === "contain" ? "object-contain" : "object-cover"}`}
                     />
                   </figure>
                 );
