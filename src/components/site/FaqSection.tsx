@@ -151,7 +151,7 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
       },
       {
         q: "É possível retirar o material na loja?",
-        a: "Sim. Você pode retirar pessoalmente na nossa loja em Franco da Rocha na Rua Dr. Hamilton Prado, 856, Centro, de segunda a sexta das 8h às 18h e sábados das 8h às 13h. Para retirada de madeiras longas, verifique as dimensões do seu veículo antes de vir.",
+        a: "Sim. Você pode retirar pessoalmente na nossa loja em Franco da Rocha, na Rua Dr. Hamilton Prado, 856, Centro, de segunda a quinta das 8h às 17h30 (com pausa de 1h para almoço, das 12h às 13h), sexta das 8h às 16h e sábados das 8h às 12h. Para retirada de madeiras longas, verifique as dimensões do seu veículo antes de vir.",
       },
       {
         q: "Vocês entregam em outras cidades? O frete tem valor fixo?",
