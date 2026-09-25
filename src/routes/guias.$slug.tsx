@@ -121,6 +121,21 @@ function GuiaPost() {
                   </ul>
                 );
               }
+              if (bloco.tipo === "imagem") {
+                return (
+                  <figure
+                    key={i}
+                    className="my-8 aspect-[16/9] w-full overflow-hidden rounded-3xl border border-border bg-muted"
+                  >
+                    <img
+                      src={bloco.src}
+                      alt={bloco.alt}
+                      loading="lazy"
+                      className={`h-full w-full ${bloco.ajuste === "contain" ? "object-contain" : "object-cover"}`}
+                    />
+                  </figure>
+                );
+              }
               return (
                 <p key={i} className="text-base leading-relaxed text-foreground/80">
                   {bloco.texto}

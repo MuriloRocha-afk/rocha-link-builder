@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Guide article content supports typed image blocks in `src/data/guias.ts`, so cover and inline editorial media stay data-driven and render consistently across articles.
