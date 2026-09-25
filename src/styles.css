@@ -421,10 +421,19 @@
   }
 }
 
-/* Banner de cookies visível: sobe o botão flutuante de WhatsApp no mobile
-   para não ser coberto pelo banner (o banner fica acima da barra inferior). */
+/* Banner de cookies visível: sobe o botão flutuante de WhatsApp para não
+   cobrir o banner (o banner fica acima da barra inferior). */
 @media (max-width: 767px) {
   html[data-cookie-banner="1"] .floating-whats {
     bottom: calc(16.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Tablet/desktop: o banner de cookies (bottom-4) fica sob o botão flutuante
+   de WhatsApp (md:bottom-5, z-50 > z-45), bloqueando os botões "Aceitar" e
+   "Saiba mais". Sobe o botão enquanto o banner está visível. */
+@media (min-width: 768px) {
+  html[data-cookie-banner="1"] .floating-whats {
+    bottom: 7rem;
   }
 }
