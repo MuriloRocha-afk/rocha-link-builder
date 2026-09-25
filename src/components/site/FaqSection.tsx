@@ -157,10 +157,14 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
         q: "Vocês parcelam a compra no cartão de crédito?",
         a: "Sim, parcelamos em até 6 vezes no cartão de crédito. Também aceitamos PIX, débito e dinheiro. Para obras de grande volume, consulte condições especiais de prazo com nossa equipe.",
       },
-      {
-        q: "O frete é cobrado? Como é calculado?",
-        a: "O valor do frete varia conforme a distância e o volume do pedido. Para alguns produtos e regiões, pode haver frete grátis em pedidos acima de determinado valor. Consulte nossa equipe pelo WhatsApp com o endereço de entrega e a lista de materiais para receber o valor exato do frete junto com a cotação.",
-      },
+        {
+          q: "Vocês entregam em outras cidades? O frete tem valor fixo?",
+          a: "Sim, entregamos em Franco da Rocha, Caieiras, Morato e região. Para Franco da Rocha, Caieiras e Morato o frete tem valor fixo; para as demais localidades, o valor varia de acordo com a distância. Fale com a gente pelo WhatsApp para confirmar o valor da sua região.",
+        },
+        {
+          q: "Como funciona o parcelamento?",
+          a: "Parcelamos em até 6x sem juros para compras a partir de R$ 600. Dependendo do valor da compra, também é possível parcelar em 8x ou 10x — as condições são acordadas na negociação com nossa equipe.",
+        },
       {
         q: "O que acontece se o material chegar danificado?",
         a: "Antes de assinar o recibo de entrega, verifique as peças. Em caso de avaria visível, recuse o item danificado e comunique imediatamente nossa equipe. Trabalhamos para resolver qualquer problema rapidamente — nossa reputação de 25 anos foi construída assim.",
