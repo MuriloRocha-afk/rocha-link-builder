@@ -145,10 +145,10 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
         q: "Como funciona o descarregamento na entrega?",
         a: "O descarregamento é realizado exclusivamente na frente do imóvel, no nível do solo ou térreo. Nossa equipe não realiza transporte manual interno, subida de escadas, rampas ou elevadores. Tenha pessoal disponível para auxiliar no recebimento e organização do material dentro do canteiro.",
       },
-      {
-        q: "Qual o prazo de entrega?",
-        a: "Para pedidos com produtos em estoque, o prazo é de 1 a 3 dias úteis para Franco da Rocha e municípios vizinhos. Para cidades mais distantes ou pedidos com produtos especiais, o prazo pode variar — consulte nossa equipe pelo WhatsApp.",
-      },
+        {
+          q: "Qual o prazo de entrega?",
+          a: "O prazo de entrega é sempre definido na negociação com nossa equipe, de acordo com a disponibilidade e a região. Para Franco da Rocha e regiões vizinhas, a entrega costuma levar de 1 a 3 dias úteis.",
+        },
       {
         q: "É possível retirar o material na loja?",
         a: "Sim. Você pode retirar pessoalmente na nossa loja em Franco da Rocha na Rua Dr. Hamilton Prado, 856, Centro, de segunda a sexta das 8h às 18h e sábados das 8h às 13h. Para retirada de madeiras longas, verifique as dimensões do seu veículo antes de vir.",
