@@ -1,7 +1,15 @@
+import guia1CapaAsset from "@/assets/guias/01-guia1-capa-trabalhador-telhado.jpg.asset.json";
+import guia1InternaAsset from "@/assets/guias/02-guia1-interna-comparativo-telhados.png.asset.json";
+import guia2CapaAsset from "@/assets/guias/03-guia2-capa-telhado-ceramico-vermelho.jpg.asset.json";
+import guia2InternaAsset from "@/assets/guias/04-guia2-interna-telhado-escuro.jpg.asset.json";
+import guia3CapaAsset from "@/assets/guias/05-guia3-capa-martelo-planta.jpg.asset.json";
+import guia3InternaAsset from "@/assets/guias/06-guia3-interna-vista-aerea-telhados.jpg.asset.json";
+
 export type BlocoGuia =
   | { tipo: "h2"; texto: string }
   | { tipo: "p"; texto: string }
-  | { tipo: "lista"; itens: string[] };
+  | { tipo: "lista"; itens: string[] }
+  | { tipo: "imagem"; src: string; alt: string };
 
 export type Guia = {
   slug: string;
@@ -26,6 +34,7 @@ export const GUIAS: Guia[] = [
       "Fibrocimento, telha cerâmica ou PVC: entenda o peso, a inclinação mínima e o custo real de cada opção antes de fechar o orçamento do seu telhado.",
     categoria: "Telhas",
     tempoLeitura: "6 min de leitura",
+    imagem: guia1CapaAsset.url,
     ctaCalculadora: "Calcular meu telhado agora",
     ctaWhatsApp: "Falar no WhatsApp",
     corpo: [
@@ -33,6 +42,11 @@ export const GUIAS: Guia[] = [
         tipo: "p",
         texto:
           "Toda reforma ou obra nova passa pela mesma dúvida: qual telha escolher? A resposta quase nunca é \"a mais barata\" — porque o preço da telha sozinho não conta a história toda. Peso, inclinação mínima do telhado e estrutura de madeira necessária mudam junto, e isso pode custar mais na estrutura do que você economizou na telha. Neste guia comparamos as três opções mais vendidas na loja: Fibrocimento, Cerâmica (barro) e PVC.",
+      },
+      {
+        tipo: "imagem",
+        src: guia1InternaAsset.url,
+        alt: "Comparativo entre telhados de cerâmica, fibrocimento e PVC",
       },
       { tipo: "h2", texto: "Telha Cerâmica (barro)" },
       {
@@ -98,6 +112,7 @@ export const GUIAS: Guia[] = [
       "Os erros mais comuns na hora de comprar material para reformar o telhado — e como evitar retrabalho, sobra de material e obra parada esperando reposição.",
     categoria: "Reforma",
     tempoLeitura: "6 min de leitura",
+    imagem: guia2CapaAsset.url,
     ctaCalculadora: "Calcular meu telhado completo agora",
     ctaWhatsApp: "Tire suas dúvidas no WhatsApp",
     corpo: [
@@ -111,6 +126,11 @@ export const GUIAS: Guia[] = [
         tipo: "p",
         texto:
           "Esse é o erro número um. A área do telhado não é igual à área da casa — ela precisa somar o beiral (a parte que passa da parede pra fora, protegendo contra chuva) e, em telhados inclinados, considerar a área inclinada, que é maior que a área \"vista de cima\". Ignorar isso costuma gerar falta de telha bem no fim da obra.",
+      },
+      {
+        tipo: "imagem",
+        src: guia2InternaAsset.url,
+        alt: "Telhado de telhas escuras contra o céu azul",
       },
       { tipo: "h2", texto: "2. Não separar cumeeira e espigão do cálculo da telha" },
       {
@@ -175,6 +195,7 @@ export const GUIAS: Guia[] = [
       "Telhado de 2 águas ou 4 águas: entenda a diferença de estrutura, acabamento e custo entre os dois formatos antes de decidir o projeto da sua obra.",
     categoria: "Telhas",
     tempoLeitura: "5 min de leitura",
+    imagem: guia3CapaAsset.url,
     ctaCalculadora: "Simule seu telhado de 2 ou 4 águas na calculadora",
     ctaWhatsApp: "Falar com a gente no WhatsApp",
     corpo: [
@@ -195,6 +216,11 @@ export const GUIAS: Guia[] = [
         tipo: "p",
         texto:
           "Existem outros dois formatos comuns fora do escopo deste post: telhado de uma água, mais simples e econômico, comum em edículas e garagens; e telhado embutido/platibanda, de baixa inclinação e visual \"clean\", que exige impermeabilização impecável.",
+      },
+      {
+        tipo: "imagem",
+        src: guia3InternaAsset.url,
+        alt: "Vista aérea de telhados com diferentes formatos e números de águas",
       },
       { tipo: "h2", texto: "1. Acabamento: cumeeira sozinha x cumeeira + espigão" },
       {
