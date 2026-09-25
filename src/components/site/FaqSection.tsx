@@ -147,19 +147,19 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
       },
       {
         q: "Qual o prazo de entrega?",
-        a: "Para pedidos com produtos em estoque, o prazo é de 1 a 3 dias úteis para Franco da Rocha e municípios vizinhos. Para cidades mais distantes ou pedidos com produtos especiais, o prazo pode variar — consulte nossa equipe pelo WhatsApp.",
+        a: "O prazo de entrega é sempre definido na negociação com nossa equipe, de acordo com a disponibilidade e a região. Para Franco da Rocha e regiões vizinhas, a entrega costuma levar de 1 a 3 dias úteis.",
       },
       {
         q: "É possível retirar o material na loja?",
         a: "Sim. Você pode retirar pessoalmente na nossa loja em Franco da Rocha na Rua Dr. Hamilton Prado, 856, Centro, de segunda a sexta das 8h às 18h e sábados das 8h às 13h. Para retirada de madeiras longas, verifique as dimensões do seu veículo antes de vir.",
       },
       {
-        q: "Vocês parcelam a compra no cartão de crédito?",
-        a: "Sim, parcelamos em até 6 vezes no cartão de crédito. Também aceitamos PIX, débito e dinheiro. Para obras de grande volume, consulte condições especiais de prazo com nossa equipe.",
+        q: "Vocês entregam em outras cidades? O frete tem valor fixo?",
+        a: "Sim, entregamos em Franco da Rocha, Caieiras, Morato e região. Para Franco da Rocha, Caieiras e Morato o frete tem valor fixo; para as demais localidades, o valor varia de acordo com a distância. Fale com a gente pelo WhatsApp para confirmar o valor da sua região.",
       },
       {
-        q: "O frete é cobrado? Como é calculado?",
-        a: "O valor do frete varia conforme a distância e o volume do pedido. Para alguns produtos e regiões, pode haver frete grátis em pedidos acima de determinado valor. Consulte nossa equipe pelo WhatsApp com o endereço de entrega e a lista de materiais para receber o valor exato do frete junto com a cotação.",
+        q: "Como funciona o parcelamento?",
+        a: "Parcelamos em até 6x sem juros para compras a partir de R$ 600. Dependendo do valor da compra, também é possível parcelar em 8x ou 10x — as condições são acordadas na negociação com nossa equipe.",
       },
       {
         q: "O que acontece se o material chegar danificado?",
