@@ -5,8 +5,9 @@ import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucaliptoAsset from "@/assets/produtos/eucalipto-pontalete/01_patio_pontaletes_eucalipto.jpg.asset.json";
 import cedrinhoAsset from "@/assets/produtos/cedrinho-patio/01_patio_pilha_cedrinho.jpg.asset.json";
 import pinusAsset from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinus.jpg.asset.json";
-import garapeira from "@/assets/prod-garapeira.jpg";
-import amescla from "@/assets/prod-amescla.jpg";
+import capaGarapeira from "@/assets/produtos/madeiras-nativas/01-garapeira-capa.jpg.asset.json";
+import capaPeroba from "@/assets/produtos/madeiras-nativas/03-peroba-capa-patio.jpg.asset.json";
+import capaJatoba from "@/assets/produtos/madeiras-nativas/04-jatoba-capa.jpg.asset.json";
 import forroPvcAsset from "@/assets/produtos/forro-pvc/01_capa_forro_pvc.jpg.asset.json";
 import forroCedrinhoAsset from "@/assets/produtos/forro-cedrinho/01_capa_card_e_cerne_1.jpg.asset.json";
 import forroPinusCapaAsset from "@/assets/produtos/forro-pinus/01_capa_forro_pinus.jpg.asset.json";
@@ -61,7 +62,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "garapeira",
     name: "Garapeira",
-    image: garapeira,
+    image: capaGarapeira.url,
     description: "Madeira dura nativa: barrotes, caibros, vigas e dormentes para alta resistência.",
     cta: "Ver Bitolas",
     grupo: "nobres",
@@ -154,7 +155,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "peroba",
     name: "Peroba do Norte / D'Água",
-    image: garapeira,
+    image: capaPeroba.url,
     description:
       "Viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada em plaina. Sob consulta.",
     tag: "Verificar disponibilidade · DOF/IBAMA · Madeira de Lei",
@@ -164,7 +165,7 @@ export const MADEIRAMENTO_SUBCARDS: Subcard[] = [
   {
     slug: "jatoba",
     name: "Jatobá",
-    image: garapeira,
+    image: capaJatoba.url,
     description:
       "Madeira de lei de altíssima densidade: viga, caibro, caibrão, ripa, ripão, sarrafo e tábua — bruta ou aparelhada. Sob consulta.",
     tag: "Verificar disponibilidade · DOF/IBAMA · Madeira de Lei",
