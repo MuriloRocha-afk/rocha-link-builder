@@ -12,7 +12,7 @@ import { Footer, FloatingWhats } from "@/components/site/Footer";
 import { GuiasHome } from "@/components/site/GuiasHome";
 import { WhatsAppButton } from "@/components/site/shared";
 import { Reveal, CountUp } from "@/components/site/Reveal";
-import heroAsset from "@/assets/IMG_1476.jpg.asset.json";
+const heroAsset = { url: "/assets/IMG_1476.jpg" };
 
 const hero = heroAsset.url;
 
