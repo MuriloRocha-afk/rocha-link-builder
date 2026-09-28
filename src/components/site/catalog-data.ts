@@ -1,9 +1,9 @@
 import ceramica from "@/assets/prod-ceramica.jpg";
-import fotoTelhasPatio from "@/assets/IMG_1486.jpg.asset.json";
-import fotoMadeiraPatio from "@/assets/IMG_1490.jpg.asset.json";
-import fotoTintasCat from "@/assets/cat-tintas.jpg.asset.json";
-import fotoFixadoresCat from "@/assets/cat-fixadores.jpg.asset.json";
-import fotoCalhasCat from "@/assets/cat-calhas-oficial.jpeg.asset.json";
+const fotoTelhasPatio = { url: "/assets/IMG_1486.jpg" };
+const fotoMadeiraPatio = { url: "/assets/IMG_1490.jpg" };
+const fotoTintasCat = { url: "/assets/cat-tintas.jpg" };
+const fotoFixadoresCat = { url: "/assets/cat-fixadores.jpg" };
+const fotoCalhasCat = { url: "/assets/cat-calhas-oficial.jpeg" };
 import isotec from "@/assets/prod-isotec.jpg";
 import pvc from "@/assets/prod-pvc.jpg";
 import fibro from "@/assets/prod-fibro.jpg";

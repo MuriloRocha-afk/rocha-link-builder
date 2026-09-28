@@ -3,8 +3,8 @@ import { ArrowLeft, Printer } from "lucide-react";
 import { RochaLogoHorizontal } from "@/components/site/RochaLogoMark";
 import { CONTATO, waLink, WHATSAPP_NUMBER } from "@/components/site/shared";
 import { SECOES_PDF, type ProdutoPdf } from "@/data/catalogoCompleto";
-import fotoPatio from "@/assets/IMG_1486.jpg.asset.json";
-import fotoLoja from "@/assets/IMG_1490.jpg.asset.json";
+const fotoPatio = { url: "/assets/IMG_1486.jpg" };
+const fotoLoja = { url: "/assets/IMG_1490.jpg" };
 
 const TITLE = "Catálogo Completo em PDF | Rocha Telhas";
 const DESCRIPTION =
