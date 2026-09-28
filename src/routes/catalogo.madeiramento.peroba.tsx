@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
-import perobaImg from "@/assets/prod-garapeira.jpg";
+import capaPeroba from "@/assets/produtos/madeiras-nativas/03-peroba-capa-patio.jpg.asset.json";
 
 const TITLE = "Peroba do Norte / D'Água — Vigas, Caibros e Ripas | Rocha Telhas";
 const DESCRIPTION =

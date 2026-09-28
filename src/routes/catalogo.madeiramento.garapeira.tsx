@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
-import garapeiraImg from "@/assets/prod-garapeira.jpg";
+import capaGarapeira from "@/assets/produtos/madeiras-nativas/01-garapeira-capa.jpg.asset.json";
+import fotoAdicionalGarapeira from "@/assets/produtos/madeiras-nativas/02-garapeira-adicional.jpg.asset.json";
 
 
 const TITLE = "Garapeira — Sarrafos, Tábuas e Vigas | Rocha Telhas";

@@ -53,6 +53,8 @@ export type MadeiraNativaProps = {
   subtitulo: string;
   tags: string[];
   imagem: string;
+  /** fotos adicionais exibidas junto da capa na galeria */
+  imagensAdicionais?: { src: string; alt: string }[];
   /** todos os itens sob "verificar disponibilidade" */
   consulta?: boolean;
 };
@@ -64,6 +66,7 @@ export default function MadeiraNativaConfigurator({
   subtitulo,
   tags,
   imagem,
+  imagensAdicionais,
   consulta = true,
 }: MadeiraNativaProps) {
   const { adicionar } = useOrcamento();
@@ -136,7 +139,10 @@ export default function MadeiraNativaConfigurator({
         <GaleriaProduto
           titulo={tipo ? `${nome} — ${tipo}` : nome}
           subtitulo={tipo ? "Foto ilustrativa" : "Selecione o tipo de peça para ver as fotos"}
-          imagens={[{ src: imagem, alt: `${nome} — peça de madeira nativa` }]}
+          imagens={[
+            { src: imagem, alt: `${nome} — peça de madeira nativa` },
+            ...(imagensAdicionais ?? []),
+          ]}
         />
       }
     >

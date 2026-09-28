@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
-import jatobaImg from "@/assets/prod-garapeira.jpg";
+import capaJatoba from "@/assets/produtos/madeiras-nativas/04-jatoba-capa.jpg.asset.json";
 
 const TITLE = "Jatobá — Vigas, Caibros e Tábuas de Madeira de Lei | Rocha Telhas";
 const DESCRIPTION =
