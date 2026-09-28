@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
-import jatobaImg from "@/assets/prod-garapeira.jpg";
+import capaJatoba from "@/assets/produtos/madeiras-nativas/04-jatoba-capa.jpg.asset.json";
 
 const TITLE = "Jatobá — Vigas, Caibros e Tábuas de Madeira de Lei | Rocha Telhas";
 const DESCRIPTION =
@@ -33,7 +33,7 @@ function MadeiramentoJatobaRoute() {
           produtoKey="jatoba"
           subtitulo="Madeira de lei de altíssima densidade para projetos de longa duração. Bruta ou aparelhada em plaina. Sob consulta."
           tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Sob consulta"]}
-          imagem={jatobaImg}
+          imagem={capaJatoba.url}
         />
       </div>
       <Footer />

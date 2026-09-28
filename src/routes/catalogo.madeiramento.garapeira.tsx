@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer, FloatingWhats } from "@/components/site/Footer";
 import MadeiraNativaConfigurator from "@/components/site/MadeiraNativaConfigurator";
-import garapeiraImg from "@/assets/prod-garapeira.jpg";
+import capaGarapeira from "@/assets/produtos/madeiras-nativas/01-garapeira-capa.jpg.asset.json";
+import fotoAdicionalGarapeira from "@/assets/produtos/madeiras-nativas/02-garapeira-adicional.jpg.asset.json";
 
 
 const TITLE = "Garapeira — Sarrafos, Tábuas e Vigas | Rocha Telhas";
@@ -33,7 +34,10 @@ function MadeiramentoGarapeiraRoute() {
           produtoKey="garapeira"
           subtitulo="Madeira dura nativa para estruturas de alta resistência. Bruta ou aparelhada em plaina no nosso pátio."
           tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Frota Própria"]}
-          imagem={garapeiraImg}
+          imagem={capaGarapeira.url}
+          imagensAdicionais={[
+            { src: fotoAdicionalGarapeira.url, alt: "Garapeira — detalhe das peças no pátio" },
+          ]}
         />
 
       </div>
