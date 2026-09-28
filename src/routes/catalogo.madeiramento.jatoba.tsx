@@ -33,7 +33,7 @@ function MadeiramentoJatobaRoute() {
           produtoKey="jatoba"
           subtitulo="Madeira de lei de altíssima densidade para projetos de longa duração. Bruta ou aparelhada em plaina. Sob consulta."
           tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Sob consulta"]}
-          imagem={jatobaImg}
+          imagem={capaJatoba.url}
         />
       </div>
       <Footer />

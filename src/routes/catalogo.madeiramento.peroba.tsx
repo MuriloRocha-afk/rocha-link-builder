@@ -33,7 +33,7 @@ function MadeiramentoPerobaRoute() {
           produtoKey="peroba"
           subtitulo="Madeira nativa estável e de acabamento nobre para estruturas de telhado. Bruta ou aparelhada em plaina."
           tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Frota Própria"]}
-          imagem={perobaImg}
+          imagem={capaPeroba.url}
         />
       </div>
       <Footer />

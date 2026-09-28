@@ -34,7 +34,10 @@ function MadeiramentoGarapeiraRoute() {
           produtoKey="garapeira"
           subtitulo="Madeira dura nativa para estruturas de alta resistência. Bruta ou aparelhada em plaina no nosso pátio."
           tags={["DOF/IBAMA Legalizado", "Madeira de Lei", "Frota Própria"]}
-          imagem={garapeiraImg}
+          imagem={capaGarapeira.url}
+          imagensAdicionais={[
+            { src: fotoAdicionalGarapeira.url, alt: "Garapeira — detalhe das peças no pátio" },
+          ]}
         />
 
       </div>
