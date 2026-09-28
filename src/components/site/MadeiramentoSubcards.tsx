@@ -5,6 +5,7 @@ import cambaraAsset from "@/assets/IMG_1500.jpeg.asset.json";
 import eucaliptoAsset from "@/assets/produtos/eucalipto-pontalete/01_patio_pontaletes_eucalipto.jpg.asset.json";
 import cedrinhoAsset from "@/assets/produtos/cedrinho-patio/01_patio_pilha_cedrinho.jpg.asset.json";
 import pinusAsset from "@/assets/produtos/pinus-patio/01_patio_pilhas_pinus.jpg.asset.json";
+import amescla from "@/assets/prod-amescla.jpg";
 import capaGarapeira from "@/assets/produtos/madeiras-nativas/01-garapeira-capa.jpg.asset.json";
 import capaPeroba from "@/assets/produtos/madeiras-nativas/03-peroba-capa-patio.jpg.asset.json";
 import capaJatoba from "@/assets/produtos/madeiras-nativas/04-jatoba-capa.jpg.asset.json";
