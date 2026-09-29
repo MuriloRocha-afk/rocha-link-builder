@@ -169,7 +169,7 @@ const FAQ_DATA: { id: string; label: string; items: QA[] }[] = [
   },
 ];
 
-const WHATS_FAQ = `https://wa.me/5511971761003?text=${encodeURIComponent(
+const WHATS_FAQ = `https://wa.me/5511985714231?text=${encodeURIComponent(
   "Olá! Vim pelo site da Rocha Telhas e gostaria de tirar uma dúvida sobre um produto.",
 )}`;
 

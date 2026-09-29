@@ -193,7 +193,7 @@ export function relatorioTelhadoBody(d: RelatorioData, agora = new Date()): stri
       <span class="sep">|</span>
       <span>rochatelhas.com.br</span>
       <span class="sep">|</span>
-      <span>(11) 97176-1003</span>
+      <span>(11) 98571-4231</span>
       <span style="margin-left:auto">Página 1 de 1</span>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import { X, MessageCircle, Send } from "lucide-react";
 import { useState } from "react";
 
-const WHATSAPP = "5511971761003";
+const WHATSAPP = "5511985714231";
 
 type Props = {
   aberto: boolean;
