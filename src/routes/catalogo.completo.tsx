@@ -57,7 +57,7 @@ function Pagina({
       <div className="flex-1">{children}</div>
       {numero ? (
         <footer className="flex items-center justify-between border-t border-[#E3E7EE] px-[14mm] pt-3 pb-[10mm] text-[9px] text-[#8A93A2]">
-          <span>rochatelhas.com.br · (11) 97176-1003</span>
+          <span>rochatelhas.com.br · (11) 98571-4231</span>
           <span>{numero}</span>
         </footer>
       ) : null}
@@ -279,7 +279,7 @@ function CatalogoCompletoPage() {
                 href={waLink("Olá! Vim pelo site da Rocha Telhas e gostaria de um orçamento. Vi o catálogo em PDF.")}
                 className="text-[16px] font-extrabold text-[#0F1B2D]"
               >
-                (11) 97176-1003
+                (11) 98571-4231
               </a>
               <p className="text-[10px] text-[#5A6472]">wa.me/{WHATSAPP_NUMBER}</p>
             </div>
