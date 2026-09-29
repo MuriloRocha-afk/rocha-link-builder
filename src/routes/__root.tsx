@@ -16,8 +16,11 @@ import CrossSellHost from "@/components/CrossSellHost";
 import { MobileBottomNav } from "@/components/site/MobileBottomNav";
 import { CookieBanner } from "@/components/site/CookieBanner";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { getGaMeasurementId } from "@/lib/analytics.functions";
 import { NotFoundPage } from "@/components/site/NotFoundPage";
+
+// GA4 measurement IDs are public. Keep the ID in the rendered HTML so hosts
+// without Lovable runtime secrets (including Vercel) send the first page view.
+const GA_MEASUREMENT_ID = "G-DCT7G6P93W";
 
 
 function NotFoundComponent() {
@@ -63,16 +66,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: ({ loaderData }) => {
-    const gaId = loaderData?.gaMeasurementId;
-    const gaScripts = gaId && /^G-[A-Z0-9]+$/.test(gaId)
-      ? [
-          { async: true, src: `https://www.googletagmanager.com/gtag/js?id=${gaId}` },
-          {
-            children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${gaId}');window.__gaInitialPath=location.pathname+location.search;`,
-          },
-        ]
-      : [];
+  head: () => {
     return {
     meta: [
       { charSet: "utf-8" },
@@ -86,7 +80,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     scripts: [
-      ...gaScripts,
+      { async: true, src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}` },
+      {
+        children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');window.__gaInitialPath=location.pathname+location.search;`,
+      },
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -139,7 +136,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
     };
   },
-  loader: async () => ({ gaMeasurementId: await getGaMeasurementId() }),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -162,11 +158,10 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const { gaMeasurementId } = Route.useLoaderData();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GoogleAnalytics measurementId={gaMeasurementId} />
+      <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
       <QuoteCartProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <div className="pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
