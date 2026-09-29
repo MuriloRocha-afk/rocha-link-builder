@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Telha de vidro real com textura que suaviza os raios UV e encaixe compatível com a telha cerâmica. Escolha o formato e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/vidro")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

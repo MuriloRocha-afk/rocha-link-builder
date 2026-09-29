@@ -8,6 +8,7 @@ const TITLE = "Manta Térmica Aluminizada 1F e 2F | Rocha Telhas";
 const DESCRIPTION = "Manta térmica aluminizada de 1 e 2 faces em rolos de 10, 25 e 50 m². Reduz até 70% do calor. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/manta-termica")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

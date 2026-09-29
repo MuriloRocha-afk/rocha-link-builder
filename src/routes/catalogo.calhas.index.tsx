@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Calha galvanizada, rufos, condutores e acessórios de captação de água. Monte seu orçamento e cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

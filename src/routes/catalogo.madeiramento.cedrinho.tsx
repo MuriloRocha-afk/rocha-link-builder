@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Cedrinho em sarrafos e tábuas, bruto ou aparelhado. Escolha bitola, comprimento e quantidade e cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/cedrinho")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

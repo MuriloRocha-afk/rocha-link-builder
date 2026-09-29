@@ -18,6 +18,7 @@ const hero = heroAsset.url;
 
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Rocha Telhas | Telhas e Madeiramento em Franco da Rocha" },

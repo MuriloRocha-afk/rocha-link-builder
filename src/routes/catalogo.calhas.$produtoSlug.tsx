@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EmBreveProduto } from "@/components/site/EmBreveProduto";
 
 export const Route = createFileRoute("/catalogo/calhas/$produtoSlug")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Calhas e Rufos — em breve | Rocha Telhas" },

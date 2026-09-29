@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Pontalete roliço de eucalipto tratado em autoclave: escolha bitola (diâmetro) de 6cm a 18cm e comprimento de 2m a 6m. Cotação direta no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/pontalete-eucalipto")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

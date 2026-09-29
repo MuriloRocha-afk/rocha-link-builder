@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Pontalete roliço de eucalipto in natura de 3m a 6m, reflorestamento certificado. Escolha o comprimento e a quantidade e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/eucalipto")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

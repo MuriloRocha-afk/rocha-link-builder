@@ -3,6 +3,7 @@ import { MessageCircle } from "lucide-react";
 import { CONTATO, waLink } from "@/components/site/shared";
 
 export const Route = createFileRoute("/politica-de-privacidade")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Política de Privacidade — Rocha Telhas & Madeiras" },

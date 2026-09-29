@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Aguarrás Sayerlack Sayerraz em 900ml e 5L para diluir tintas e vernizes à base de óleo e limpar pincéis, rolos e ferramentas. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/sayerraz")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

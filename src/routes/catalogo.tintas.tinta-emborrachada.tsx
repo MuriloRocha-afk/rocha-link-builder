@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Tinta emborrachada Brazilian Color Super Proteção, Cinza Espacial, em 3,6L e 18L. Impermeável para laje, telhado e fachada. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/tinta-emborrachada")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

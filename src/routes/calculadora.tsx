@@ -11,6 +11,7 @@ import { ConversorMedidas } from "@/components/site/ConversorMedidas";
 import { CalcDimsProvider } from "@/components/site/calc-dims";
 
 export const Route = createFileRoute("/calculadora")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Calculadoras de Telhado, Forro, Manta e Tinta | Rocha Telhas" },

@@ -5,6 +5,7 @@ import { GuiaCard } from "@/components/site/GuiaCard";
 import { GUIAS } from "@/data/guias";
 
 export const Route = createFileRoute("/guias/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Guias de Telhado e Obra | Rocha Telhas" },

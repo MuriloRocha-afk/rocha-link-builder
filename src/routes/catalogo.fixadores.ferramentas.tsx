@@ -8,6 +8,7 @@ const TITLE = "Ferramentas Bestfer — Serras, Martelos e Trenas | Rocha Telhas"
 const DESCRIPTION = "Ferramentas Bestfer: serrotes, martelos, trenas, esquadros, furadeiras, brocas, níveis, chaves, alicates e formões. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/fixadores/ferramentas")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

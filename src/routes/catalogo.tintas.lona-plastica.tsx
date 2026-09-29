@@ -8,6 +8,7 @@ const TITLE = "Lona Plástica Preta | Rocha Telhas";
 const DESCRIPTION = "Lona plástica preta vendida por metro linear, rolo de 4 m de largura, nas espessuras de 09 a 40 kg. Proteção de obra e transporte. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/lona-plastica")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

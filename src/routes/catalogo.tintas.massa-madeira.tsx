@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Massa para madeira Sayerlack Sayermassa nas cores Eucalipto, Imbuia Tabaco, Mogno e Pinus. Repara rachaduras, furos e imperfeições. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/massa-madeira")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

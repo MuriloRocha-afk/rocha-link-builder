@@ -8,6 +8,7 @@ import { TabelaComparativa } from "@/components/site/ferramentas/TabelaComparati
 import { Glossario } from "@/components/site/ferramentas/Glossario";
 
 export const Route = createFileRoute("/ferramentas")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Guias & Informações sobre Telhas | Rocha Telhas" },

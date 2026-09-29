@@ -8,6 +8,7 @@ const TITLE = "Rufos Galvanizados de 2m a 6m | Rocha Telhas";
 const DESCRIPTION = "Rufos galvanizados para arremate entre telhado e parede. Escolha o comprimento e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/rufo")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

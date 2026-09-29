@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Telha cerâmica esmaltada Cejatel linha Wave nas cores Branca, Cinza, Marfim, Azul, Pinhão, Bordô, Grafite, Verde e Chocolate. Cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/esmaltada")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

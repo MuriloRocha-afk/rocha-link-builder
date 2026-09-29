@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Forro de cedrinho mesclado vendido por m², com meia cana e acabamentos. Calcule a área e cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/forro-cedrinho")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

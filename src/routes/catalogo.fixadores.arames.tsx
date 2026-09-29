@@ -8,6 +8,7 @@ const TITLE = "Arame Galvanizado BWG e Recozido | Rocha Telhas";
 const DESCRIPTION = "Arame galvanizado BWG14, 16 e 18 e recozido liso ou torcido para amarrações e cercas. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/fixadores/arames")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

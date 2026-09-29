@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Acessórios para fixação e aplicação: rolos Roloflex, broxas, pincéis Bestfer, suporte para rolo e espátulas de aço. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/acessorios-pintura")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

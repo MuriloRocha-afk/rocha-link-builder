@@ -8,6 +8,7 @@ const TITLE = "Thinner Profissional Sayerlack 900ml e 5L | Rocha Telhas";
 const DESCRIPTION = "Sayerlack Thinner Profissional em 900ml e 5L para diluir tintas e vernizes e limpar pincéis, rolos e equipamentos. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/aguarras")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

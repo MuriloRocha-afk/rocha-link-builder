@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Jatobá em viga, caibro, caibrão, ripa, ripão, sarrafo e tábua. Escolha bitola, comprimento e aparelhagem e cote no WhatsApp. Verificar disponibilidade.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/jatoba")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

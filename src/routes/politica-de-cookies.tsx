@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CONTATO } from "@/components/site/shared";
 
 export const Route = createFileRoute("/politica-de-cookies")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Política de Cookies — Rocha Telhas & Madeiras" },

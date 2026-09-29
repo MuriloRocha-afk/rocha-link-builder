@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as PoliticaDeCookiesRouteImport } from './routes/politica-de-cookies'
 import { Route as LinksRouteImport } from './routes/links'
@@ -82,6 +83,11 @@ import { Route as CatalogoCalhasProdutoSlugRouteImport } from './routes/catalogo
 import { Route as CatalogoCategoriaSlugProdutoSlugRouteImport } from './routes/catalogo.$categoriaSlug.$produtoSlug'
 import { Route as AuthenticatedAdminAvaliacoesRouteImport } from './routes/_authenticated/admin.avaliacoes'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
   id: '/politica-de-privacidade',
   path: '/politica-de-privacidade',
@@ -489,6 +495,7 @@ export interface FileRoutesByFullPath {
   '/links': typeof LinksRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
@@ -562,6 +569,7 @@ export interface FileRoutesByTo {
   '/links': typeof LinksRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
   '/catalogo': typeof CatalogoIndexRoute
@@ -636,6 +644,7 @@ export interface FileRoutesById {
   '/links': typeof LinksRoute
   '/politica-de-cookies': typeof PoliticaDeCookiesRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/catalogo/$categoriaSlug': typeof CatalogoCategoriaSlugRouteRouteWithChildren
   '/catalogo/completo': typeof CatalogoCompletoRoute
   '/guias/$slug': typeof GuiasSlugRoute
@@ -711,6 +720,7 @@ export interface FileRouteTypes {
     | '/links'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
+    | '/sitemap.xml'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/completo'
     | '/guias/$slug'
@@ -784,6 +794,7 @@ export interface FileRouteTypes {
     | '/links'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
+    | '/sitemap.xml'
     | '/catalogo/completo'
     | '/guias/$slug'
     | '/catalogo'
@@ -857,6 +868,7 @@ export interface FileRouteTypes {
     | '/links'
     | '/politica-de-cookies'
     | '/politica-de-privacidade'
+    | '/sitemap.xml'
     | '/catalogo/$categoriaSlug'
     | '/catalogo/completo'
     | '/guias/$slug'
@@ -932,6 +944,7 @@ export interface RootRouteChildren {
   LinksRoute: typeof LinksRoute
   PoliticaDeCookiesRoute: typeof PoliticaDeCookiesRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CatalogoCategoriaSlugRouteRoute: typeof CatalogoCategoriaSlugRouteRouteWithChildren
   CatalogoCompletoRoute: typeof CatalogoCompletoRoute
   GuiasSlugRoute: typeof GuiasSlugRoute
@@ -997,6 +1010,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/politica-de-privacidade': {
       id: '/politica-de-privacidade'
       path: '/politica-de-privacidade'
@@ -1541,6 +1561,7 @@ const rootRouteChildren: RootRouteChildren = {
   LinksRoute: LinksRoute,
   PoliticaDeCookiesRoute: PoliticaDeCookiesRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   CatalogoCategoriaSlugRouteRoute: CatalogoCategoriaSlugRouteRouteWithChildren,
   CatalogoCompletoRoute: CatalogoCompletoRoute,
   GuiasSlugRoute: GuiasSlugRoute,

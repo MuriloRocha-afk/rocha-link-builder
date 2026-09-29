@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Configure sua Telha Plan PVC Lux Telhas: perfil plano de 6 ondas, cores terracota, marfim e cinza, comprimentos de 198 a 330 cm e cotação no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/plan-pvc")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

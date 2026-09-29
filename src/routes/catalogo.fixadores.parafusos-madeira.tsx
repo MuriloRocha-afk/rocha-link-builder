@@ -8,6 +8,7 @@ const TITLE = "Parafusos para Madeira — Chipboard e Frances | Rocha Telhas";
 const DESCRIPTION = "Parafusos chipboard, autobrocante, frances completo e sextavado soberba em várias bitolas. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/fixadores/parafusos-madeira")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

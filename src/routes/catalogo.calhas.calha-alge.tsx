@@ -8,6 +8,7 @@ const TITLE = "Calha Galvanizada Moldura e Platibanda | Rocha Telhas";
 const DESCRIPTION = "Calha galvanizada nos cortes Moldura e Platibanda, de 2,0m a 6,0m. Monte seu pedido e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/calha-alge")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Parafusos com vedação para fibrocimento, kits de fixação para telha PVC, pregos e acessórios. Cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/fixadores/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

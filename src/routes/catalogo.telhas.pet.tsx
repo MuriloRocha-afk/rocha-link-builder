@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Telha PET translúcida em plástico transparente 100% reciclado, com filtro UV e encaixe igual ao da telha cerâmica. Escolha o formato e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/pet")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

@@ -20,6 +20,7 @@ function paginar<T>(itens: T[], tamanho: number) {
 }
 
 export const Route = createFileRoute("/catalogo/completo")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

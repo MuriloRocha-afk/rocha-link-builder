@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Policarbonato alveolar e compacto para cobertura translúcida: espessuras, cores e comprimentos disponíveis. Monte seu orçamento e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/policarbonato")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

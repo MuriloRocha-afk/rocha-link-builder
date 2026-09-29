@@ -37,6 +37,7 @@ function SpecTable({ rows }: { rows: { label: string; value: string }[] }) {
 
 
 export const Route = createFileRoute("/catalogo/$categoriaSlug/$produtoSlug")({
+  staticData: { sitemap: true },
   loader: ({ params }) => {
     const found = findCategoryItem(params.categoriaSlug, params.produtoSlug);
     if (!found) throw notFound();

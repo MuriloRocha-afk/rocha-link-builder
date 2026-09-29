@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Peroba do Norte / d'Água em viga, caibro, caibrão, ripa, ripão, sarrafo e tábua. Escolha bitola, comprimento e aparelhagem e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/peroba")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },
