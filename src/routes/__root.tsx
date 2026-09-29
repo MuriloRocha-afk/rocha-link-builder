@@ -63,20 +63,30 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
+  head: ({ loaderData }) => {
+    const gaId = loaderData?.gaMeasurementId;
+    const gaScripts = gaId && /^G-[A-Z0-9]+$/.test(gaId)
+      ? [
+          { async: true, src: `https://www.googletagmanager.com/gtag/js?id=${gaId}` },
+          {
+            children: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','${gaId}');window.__gaInitialPath=location.pathname+location.search;`,
+          },
+        ]
+      : [];
+    return {
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Rocha Telhas & Madeiras" },
+      { name: "description", content: "Telhas, madeiramento e acessórios em Franco da Rocha." },
+      { name: "author", content: "Rocha Telhas & Madeiras" },
+      { property: "og:title", content: "Rocha Telhas & Madeiras" },
+      { property: "og:description", content: "Telhas, madeiramento e acessórios em Franco da Rocha." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     scripts: [
+      ...gaScripts,
       {
         type: "application/ld+json",
         children: JSON.stringify({
@@ -127,7 +137,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
 
-  }),
+    };
+  },
   loader: async () => ({ gaMeasurementId: await getGaMeasurementId() }),
   shellComponent: RootShell,
   component: RootComponent,
