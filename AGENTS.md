@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Guide article content supports typed image blocks in `src/data/guias.ts`, so cover and inline editorial media stay data-driven and render consistently across articles.
+- The public GA4 measurement ID is defined in the root route and rendered into its head, because external deployments such as Vercel do not receive Lovable runtime secrets.
