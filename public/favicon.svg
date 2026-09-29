@@ -10,8 +10,8 @@
       x2="1264.64"
       y2="-29.7635"
     >
-      <stop offset="0" stopOpacity="1" stopColor="rgb(220,152,0)" />
-      <stop offset="1" stopOpacity="1" stopColor="rgb(202,96,26)" />
+      <stop offset="0" stop-opacity="1" stop-color="rgb(220,152,0)" />
+      <stop offset="1" stop-opacity="1" stop-color="rgb(202,96,26)" />
     </linearGradient>
   </defs>
 
