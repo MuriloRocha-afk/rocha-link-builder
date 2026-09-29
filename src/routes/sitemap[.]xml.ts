@@ -21,7 +21,8 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = sitemapStaticPaths(router).map((path) => ({ path }));
 
         const add = (routeId: string, to: string, params: Record<string, string>) => {
-          if (!isSitemapRouteIncluded(router.routesById[routeId])) return;
+          const routes = router.routesById as unknown as Record<string, Parameters<typeof isSitemapRouteIncluded>[0]>;
+          if (!isSitemapRouteIncluded(routes[routeId])) return;
           const location = router.buildLocation({ to, params, search: () => ({}), hash: "" } as never);
           const path = sitemapPathForLocation(router, location, routeId);
           if (path) entries.push({ path });
