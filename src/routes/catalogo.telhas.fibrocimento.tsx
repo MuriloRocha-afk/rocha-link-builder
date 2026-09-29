@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Configure sua telha de fibrocimento ondulada INFIBRA: comprimentos de 1,53 m a 3,66 m, espessuras 5, 6 e 8 mm, com cobertura estimada em tempo real e cotação no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/fibrocimento")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

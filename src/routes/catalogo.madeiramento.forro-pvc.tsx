@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Forro de PVC em réguas: largura, comprimento e acabamentos. Calcule a área, monte seu orçamento e cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/forro-pvc")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

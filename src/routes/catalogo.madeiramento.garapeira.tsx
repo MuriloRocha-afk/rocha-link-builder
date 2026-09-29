@@ -10,6 +10,7 @@ const TITLE = "Garapeira — Sarrafos, Tábuas e Vigas | Rocha Telhas";
 const DESCRIPTION = "Garapeira em viga, caibro, caibrão, ripa, ripão, sarrafo, tábua e dormente, bruta ou aparelhada. Verificar disponibilidade.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/garapeira")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

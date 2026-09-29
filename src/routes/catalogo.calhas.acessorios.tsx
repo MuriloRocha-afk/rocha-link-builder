@@ -8,6 +8,7 @@ const TITLE = "Acessórios de Calha Galvanizada | Rocha Telhas";
 const DESCRIPTION = "Suportes, cabeceiras e saídas para calha galvanizada. Escolha o acessório e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/calhas/acessorios")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

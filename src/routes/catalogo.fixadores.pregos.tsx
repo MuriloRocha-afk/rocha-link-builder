@@ -8,6 +8,7 @@ const TITLE = "Pregos Telheiro e Polidos por Kg ou 100un | Rocha Telhas";
 const DESCRIPTION = "Pregos telheiro, polidos com e sem cabeça em diversas bitolas, vendidos por Kg ou embalagem. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/fixadores/pregos")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

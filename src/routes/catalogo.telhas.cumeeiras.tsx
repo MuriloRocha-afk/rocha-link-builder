@@ -11,6 +11,7 @@ const DESCRIPTION =
 type CumeeiraSearch = { peca?: string; material?: string; formato?: string; cor?: string };
 
 export const Route = createFileRoute("/catalogo/telhas/cumeeiras")({
+  staticData: { sitemap: true },
   validateSearch: (search: Record<string, unknown>): CumeeiraSearch => ({
     peca: typeof search.peca === "string" ? search.peca : undefined,
     material: typeof search.material === "string" ? search.material : undefined,

@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Pinus em sarrafos, tábuas e pontaletes para formas e estruturas provisórias. Monte seu orçamento e cote no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/pinus")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

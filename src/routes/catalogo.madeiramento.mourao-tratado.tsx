@@ -8,6 +8,7 @@ const TITLE = "Mourão Tratado em Autoclave | Rocha Telhas";
 const DESCRIPTION = "Mourão tratado em autoclave de 4cm a 20cm e até 10m. Ideal para cercas e estruturas rurais. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/mourao-tratado")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

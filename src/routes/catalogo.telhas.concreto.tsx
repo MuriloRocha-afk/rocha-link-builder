@@ -8,6 +8,7 @@ const TITLE = "Telha de Concreto Eurotop — Areia, Cinza, Grafite e Transparent
 const DESCRIPTION = "Telha de concreto Eurotop nas cores Areia, Cinza, Grafite e Transparente. Monte seu pedido e cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/telhas/concreto")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

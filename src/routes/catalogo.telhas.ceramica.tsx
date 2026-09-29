@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Telha cerâmica Portuguesa, Romana, Francesa e Mediterrânea — natural ou resinada. Escolha o modelo, informe a quantidade e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/ceramica")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

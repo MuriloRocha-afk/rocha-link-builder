@@ -14,6 +14,7 @@ type Avaliacao = {
 type Filtro = "todas" | "baixas" | "altas";
 
 export const Route = createFileRoute("/_authenticated/admin/avaliacoes")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Avaliações recebidas — Rocha Telhas" },

@@ -8,6 +8,7 @@ const TITLE = "Parafusos e Kits de Vedação para Telha | Rocha Telhas";
 const DESCRIPTION = "Parafusos com vedação 110, 150 e 200mm para fibrocimento e kits coloridos para Colonial PVC. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/fixadores/parafusos-telha")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

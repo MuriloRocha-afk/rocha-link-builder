@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Configure sua Telha Colonial PVC Lux Telhas: 5 ondas, cores terracota, marfim e cinza, comprimentos de 230 a 525 cm, cobertura em m² em tempo real e cotação no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/colonial-pvc")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

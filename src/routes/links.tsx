@@ -16,6 +16,7 @@ import { RochaLogoStacked } from "@/components/site/RochaLogoMark";
 import { CONTATO } from "@/components/site/shared";
 
 export const Route = createFileRoute("/links")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Rocha Telhas & Madeiras — Links" },

@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Tintas, stains, vernizes e impermeabilizantes para telhado e madeira. Monte seu orçamento e cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/tintas/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

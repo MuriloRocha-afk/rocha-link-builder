@@ -9,6 +9,7 @@ import { TelhasSubcardGrid } from "@/components/site/TelhasSubcards";
 import { MadeiramentoSubcardGrid } from "@/components/site/MadeiramentoSubcards";
 
 export const Route = createFileRoute("/catalogo/$categoriaSlug/")({
+  staticData: { sitemap: true },
   loader: ({ params }) => {
     const category = CATEGORIES.find((c) => c.id === params.categoriaSlug);
     if (!category) throw notFound();

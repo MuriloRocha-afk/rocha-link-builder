@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Forro de pinus macho-fêmea vendido por m², com meia cana, sarrafos e verniz. Calcule a área e cote direto no WhatsApp com a Rocha Telhas.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/forro-pinus")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

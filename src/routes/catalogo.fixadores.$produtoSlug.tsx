@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EmBreveProduto } from "@/components/site/EmBreveProduto";
 
 export const Route = createFileRoute("/catalogo/fixadores/$produtoSlug")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Fixadores — em breve | Rocha Telhas" },

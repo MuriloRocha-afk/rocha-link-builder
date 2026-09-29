@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EmBreveProduto } from "@/components/site/EmBreveProduto";
 
 export const Route = createFileRoute("/catalogo/tintas/$produtoSlug")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Tintas e Vernizes — em breve | Rocha Telhas" },

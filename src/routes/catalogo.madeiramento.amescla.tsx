@@ -8,6 +8,7 @@ const TITLE = "Amescla — Sarrafos e Tábuas em Bruto | Rocha Telhas";
 const DESCRIPTION = "Amescla em sarrafos e tábuas brutas, opção econômica para estruturas secundárias. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/amescla")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

@@ -119,6 +119,7 @@ function CategoriaCard({
 }
 
 export const Route = createFileRoute("/catalogo/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Catálogo de Telhas e Madeiramento | Rocha Telhas" },

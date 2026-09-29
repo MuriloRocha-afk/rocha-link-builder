@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Madeirit plastificado preto e rosa, OSB e compensados em várias espessuras. Escolha a chapa ideal e cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/madeirit")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

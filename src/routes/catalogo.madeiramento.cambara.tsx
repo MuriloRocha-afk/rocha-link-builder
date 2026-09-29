@@ -8,6 +8,7 @@ const DESCRIPTION =
   "Configure vigas, caibros, ripas, ripões e dormentes de Cambará Rosa: bitola, comprimento e acabamento bruto ou aparelhado em plaina. Cotação direta no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/cambara")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

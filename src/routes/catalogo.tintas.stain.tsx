@@ -8,6 +8,7 @@ const TITLE = "Stain Sayerlack Polisten para Madeira | Rocha Telhas";
 const DESCRIPTION = "Sayerlack Polisten em Imbuia, Mogno Inglês e Transparente, nos tamanhos 900ml e 3,6L. Protege a madeira contra UV e umidade. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/stain")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

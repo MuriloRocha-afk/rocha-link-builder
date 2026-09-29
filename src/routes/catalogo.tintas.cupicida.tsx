@@ -8,6 +8,7 @@ const TITLE = "Exterminador de Cupim Sayerlack | Rocha Telhas";
 const DESCRIPTION = "Cupicida preventivo e curativo Sayerlack nos tamanhos 900ml, 5L e 18L. Proteção para madeira. Cote direto no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/cupicida")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

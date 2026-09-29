@@ -8,6 +8,7 @@ const TITLE = "Telha Translúcida Polipropileno 153 a 366cm | Rocha Telhas";
 const DESCRIPTION = "Telha translúcida de polipropileno Onda Alta, 100% compatível com fibrocimento. Calcule a cobertura e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/telhas/polipropileno")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

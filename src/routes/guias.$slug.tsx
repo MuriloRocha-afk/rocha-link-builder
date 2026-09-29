@@ -16,6 +16,7 @@ import { waLink } from "@/constants/whatsapp";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/guias/$slug")({
+  staticData: { sitemap: true },
   loader: ({ params }) => {
     const guia = getGuia(params.slug);
     if (!guia) throw notFound();

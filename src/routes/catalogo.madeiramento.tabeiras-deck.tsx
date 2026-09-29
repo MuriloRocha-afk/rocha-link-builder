@@ -8,6 +8,7 @@ const TITLE = "Tabeiras Desenhadas & Deck de Madeira | Rocha Telhas";
 const DESCRIPTION = "Tabeiras desenhadas de 15cm a 30cm e deck de cumaru, garapeia e pinus tratado por m². Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/tabeiras-deck")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

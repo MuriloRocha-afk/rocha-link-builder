@@ -8,6 +8,7 @@ const TITLE = "Verniz Sayerlack Polirex para Madeira | Rocha Telhas";
 const DESCRIPTION = "Verniz restaurador Sayerlack Polirex nas cores Imbuia e Mogno. Tamanhos 230ml, 900ml e 3,6L. Cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/tintas/verniz")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

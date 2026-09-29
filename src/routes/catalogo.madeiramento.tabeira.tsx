@@ -9,6 +9,7 @@ const DESCRIPTION =
   "Tabeiras lisas (boleadas) e desenhadas de 15cm a 30cm em 6 modelos. Escolha acabamento, tamanho e modelo e cote no WhatsApp.";
 
 export const Route = createFileRoute("/catalogo/madeiramento/tabeira")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },
