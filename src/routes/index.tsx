@@ -25,13 +25,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Distribuidora e madeireira com +25 anos: telhas, madeiramento estrutural, madeirites e acessórios com frota própria em Franco da Rocha. Cote pelo WhatsApp.",
+          "Distribuidora e madeireira referência em Franco da Rocha: telhas, madeiramento estrutural, madeirites e acessórios com frota própria. Cote pelo WhatsApp.",
       },
       { property: "og:title", content: "Rocha Telhas | Telhas e Madeiramento Estrutural" },
       {
         property: "og:description",
         content:
-          "Tradição de mais de 25 anos em telhas e madeiras. Frota própria, entrega rápida em toda SP e orçamento na hora pelo WhatsApp.",
+          "Distribuidora e madeireira referência em Franco da Rocha, com frota própria, entrega rápida em toda SP e orçamento pelo WhatsApp.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

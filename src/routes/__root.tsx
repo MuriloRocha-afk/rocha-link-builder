@@ -92,7 +92,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "HomeAndConstructionBusiness",
           name: "Rocha Telhas & Madeiras",
           description:
-            "Distribuidora e madeireira com mais de 25 anos, telhas, madeiramento estrutural, madeirites e acessórios com frota própria em Franco da Rocha.",
+            "Distribuidora e madeireira referência em Franco da Rocha: telhas, madeiramento estrutural, madeirites e acessórios com frota própria.",
           url: "https://rochatelhas.com.br",
           telephone: "+55-11-98571-4231",
           address: {
