@@ -62,9 +62,17 @@ export const Route = createFileRoute("/catalogo/$categoriaSlug/$produtoSlug")({
     };
   },
   component: ProdutoPage,
-  errorComponent: ProdutoNotFound,
-  notFoundComponent: ProdutoNotFound,
+  errorComponent: ProdutoErro,
+  notFoundComponent: ProdutoNaoEncontrado,
 });
+
+function ProdutoErro() {
+  return <ProdutoNotFound />;
+}
+
+function ProdutoNaoEncontrado() {
+  return <ProdutoNotFound />;
+}
 
 function ProdutoNotFound() {
   return (
