@@ -55,20 +55,27 @@ const PERGUNTAS: Pergunta[] = [
 const FIBRO: Resultado = {
   nome: "Telha de Fibrocimento",
   porque: "Ótimo custo-benefício, é leve para a estrutura e cobre grandes vãos com instalação rápida.",
-  to: "/catalogo/$categoriaSlug/$produtoSlug",
-  params: { categoriaSlug: "telhas", produtoSlug: "telha-fibrocimento-infibra" },
+  to: "/catalogo/telhas/fibrocimento",
 };
-const PVC: Resultado = {
-  nome: "Telha PVC (Colonial ou Plan)",
-  porque: "Muito leve, de baixa manutenção e funciona em inclinações baixas — econômica sem sobrecarregar a estrutura.",
-  to: "/catalogo/$categoriaSlug/$produtoSlug",
-  params: { categoriaSlug: "telhas", produtoSlug: "telha-pvc-colonial" },
+const PVC_COLONIAL: Resultado = {
+  nome: "Telha Colonial PVC",
+  porque: "Muito leve, de baixa manutenção e com boa vedação — econômica sem sobrecarregar a estrutura.",
+  to: "/catalogo/telhas/colonial-pvc",
+};
+const PVC_PLAN: Resultado = {
+  nome: "Telha Plan PVC",
+  porque: "Perfil plano, muito leve e de baixa manutenção — funciona bem em inclinações baixas.",
+  to: "/catalogo/telhas/plan-pvc",
 };
 const CERAMICA: Resultado = {
-  nome: "Telha Cerâmica ou Esmaltada",
+  nome: "Telha Cerâmica",
   porque: "Visual bonito e altíssima durabilidade, com ótimo conforto térmico em telhados mais inclinados.",
-  to: "/catalogo/$categoriaSlug/$produtoSlug",
-  params: { categoriaSlug: "telhas", produtoSlug: "telhas-ceramicas-tradicionais" },
+  to: "/catalogo/telhas/ceramica",
+};
+const ESMALTADA: Resultado = {
+  nome: "Telha Esmaltada",
+  porque: "Acabamento esmaltado sofisticado com a resistência da cerâmica — ótima para telhados mais inclinados.",
+  to: "/catalogo/telhas/esmaltada",
 };
 const CONCRETO: Resultado = {
   nome: "Telha de Concreto (Eurotop)",
@@ -78,17 +85,18 @@ const CONCRETO: Resultado = {
 
 function recomendar(r: Record<string, string>): Resultado {
   const { uso, prioridade, inclinacao } = r;
+  const pvc = inclinacao === "baixa" ? PVC_PLAN : PVC_COLONIAL;
   if (uso === "reforma") {
-    const base = prioridade === "economia" || prioridade === "durabilidade" ? FIBRO : PVC;
+    const base = prioridade === "economia" || prioridade === "durabilidade" ? FIBRO : pvc;
     return { ...base, porque: `${base.porque} Por ser leve, é mais fácil de instalar sobre a estrutura existente.` };
   }
   if (uso === "galpao") return FIBRO;
-  if (prioridade === "estetica" || prioridade === "durabilidade") {
+  if (prioridade === "durabilidade") return inclinacao === "alta" ? ESMALTADA : CONCRETO;
+  if (prioridade === "estetica") {
     if (inclinacao === "alta") return CERAMICA;
-    if (prioridade === "durabilidade") return CONCRETO;
-    return inclinacao === "baixa" ? PVC : CERAMICA;
+    return pvc;
   }
-  return PVC;
+  return PVC_COLONIAL;
 }
 
 const DICA_CLIMA: Record<string, string> = {
