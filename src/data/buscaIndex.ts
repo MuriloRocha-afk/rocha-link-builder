@@ -502,7 +502,7 @@ const ferramentasSite: ItemBusca[] = [
     id: "guias",
     nome: "Guias e Glossário",
     categoria: "Ferramentas",
-    rota: "/ferramentas",
+    rota: "/guias",
     termos: ["guia", "glossario", "comparativo", "duvidas"],
   },
 ];
