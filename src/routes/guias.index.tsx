@@ -8,6 +8,7 @@ import { GuiaTelha } from "@/components/site/ferramentas/GuiaTelha";
 import { TabelaComparativa } from "@/components/site/ferramentas/TabelaComparativa";
 import { Glossario } from "@/components/site/ferramentas/Glossario";
 import { SosTelhado } from "@/components/site/ferramentas/SosTelhado";
+import { ConsultaEntrega } from "@/components/site/ferramentas/ConsultaEntrega";
 
 export const Route = createFileRoute("/guias/")({
   staticData: { sitemap: true },
@@ -60,7 +61,8 @@ function GuiasIndex() {
               Ferramentas para a sua obra
             </h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              Descubra a telha ideal, compare modelos e entenda os termos técnicos do telhado.
+              Descubra a telha ideal, compare modelos, entenda os termos técnicos do telhado e
+              consulte o frete da sua região.
             </p>
             <Tabs defaultValue="quiz" className="mt-8">
               <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1 sm:w-auto">
@@ -68,11 +70,13 @@ function GuiasIndex() {
                 <TabsTrigger value="comparativo">Comparativo</TabsTrigger>
                 <TabsTrigger value="glossario">Glossário</TabsTrigger>
                 <TabsTrigger value="sos">SOS Telhado</TabsTrigger>
+                <TabsTrigger value="entrega">Entrega</TabsTrigger>
               </TabsList>
               <TabsContent value="quiz" className="mt-6"><GuiaTelha /></TabsContent>
               <TabsContent value="comparativo" className="mt-6"><TabelaComparativa /></TabsContent>
               <TabsContent value="glossario" className="mt-6"><Glossario /></TabsContent>
               <TabsContent value="sos" className="mt-6"><SosTelhado /></TabsContent>
+              <TabsContent value="entrega" className="mt-6"><ConsultaEntrega /></TabsContent>
             </Tabs>
           </section>
 
