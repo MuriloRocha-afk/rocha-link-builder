@@ -1,94 +1,21 @@
 import { useState } from "react";
 
 const TERMOS: { termo: string; def: string }[] = [
-  {
-    termo: "Água (do telhado)",
-    def: "Cada plano inclinado da cobertura. Um telhado de 2 águas tem dois planos que se encontram na cumeeira.",
-  },
-  {
-    termo: "Água furtada",
-    def: "Canal em V formado no encontro de duas águas do telhado; recebe a água da chuva e precisa ser impermeabilizado com calha própria.",
-  },
-  {
-    termo: "Cumeeira",
-    def: "Peça que cobre a linha mais alta do telhado, onde duas águas se encontram, impedindo entrada de água e vento.",
-  },
-  {
-    termo: "Espigão",
-    def: "Aresta inclinada que sai da cumeeira até o canto do telhado, comum em coberturas de 4 águas.",
-  },
-  {
-    termo: "Rufo",
-    def: "Chapa metálica dobrada usada no encontro do telhado com paredes ou platibandas, para impedir infiltração.",
-  },
-  {
-    termo: "Calha",
-    def: "Canal instalado na borda do telhado que recolhe a água da chuva e conduz até o condutor/descida.",
-  },
-  {
-    termo: "Platibanda",
-    def: "Mureta que sobe além do nível do telhado, escondendo a cobertura vista da rua.",
-  },
-  {
-    termo: "Terça",
-    def: "Viga horizontal apoiada na estrutura, paralela à cumeeira, que sustenta os caibros.",
-  },
-  {
-    termo: "Caibro",
-    def: "Peça de madeira apoiada sobre as terças, no sentido da inclinação, que recebe o ripamento.",
-  },
-  {
-    termo: "Ripa",
-    def: "Sarrafo fino pregado sobre os caibros onde as telhas cerâmicas, de concreto ou PVC se encaixam.",
-  },
-  {
-    termo: "Cavalete",
-    def: "Estrutura triangular de madeira que dá o formato e a inclinação do telhado, também chamada de tesoura.",
-  },
-  {
-    termo: "Frontão / oitão",
-    def: "Parede triangular na extremidade de um telhado de duas águas.",
-  },
-  {
-    termo: "Madeira aparelhada",
-    def: "Peça que passou pela plaina industrial, ficando com faces lisas, esquadro correto e bitola uniforme.",
-  },
-  {
-    termo: "Cambará aparelhado",
-    def: "Madeira nobre de boa resistência e estabilidade, beneficiada na plaina — muito usada em estrutura de telhado aparente.",
-  },
-  {
-    termo: "Bitola",
-    def: "Medida da seção da peça de madeira (ex.: 5×6 cm para caibro, 6×12 cm para terça).",
-  },
-  {
-    termo: "Autoclavado",
-    def: "Madeira tratada sob pressão com produtos que a protegem de cupim, fungos e umidade.",
-  },
-  {
-    termo: "Recobrimento",
-    def: "Sobreposição de uma telha sobre a outra; quanto menor a inclinação, maior precisa ser o recobrimento.",
-  },
-  {
-    termo: "Inclinação (caimento)",
-    def: "Relação entre altura e vão do telhado, expressa em % — cada tipo de telha tem uma inclinação mínima.",
-  },
-  {
-    termo: "Beiral",
-    def: "Parte do telhado que avança além da parede, protegendo a fachada da chuva.",
-  },
-  {
-    termo: "Testeira / tabeira",
-    def: "Tábua instalada na ponta do beiral, dando acabamento e servindo de apoio para a calha.",
-  },
-  {
-    termo: "Stain",
-    def: "Acabamento que penetra na madeira realçando os veios, com proteção UV — alternativa ao verniz na área externa.",
-  },
-  {
-    termo: "Seladora",
-    def: "Produto aplicado antes do verniz ou da tinta para fechar os poros da madeira e reduzir o consumo de acabamento.",
-  },
+  { termo: "Água (do telhado)", def: "cada um dos planos inclinados que formam o telhado. Um telhado \"2 águas\" tem dois planos; \"4 águas\", quatro." },
+  { termo: "Água-furtada", def: "encontro interno entre duas águas do telhado, formando um \"V\" por onde a água escoa — ponto que exige atenção redobrada contra infiltração." },
+  { termo: "Beiral", def: "parte do telhado que se projeta para fora das paredes, protegendo a fachada da chuva." },
+  { termo: "Caibro", def: "peça de madeira que fica apoiada sobre as terças e recebe as ripas (ou a telha diretamente), formando a base da cobertura." },
+  { termo: "Caibrão", def: "caibro de bitola maior, usado em vãos mais largos ou estruturas que exigem mais resistência." },
+  { termo: "Calha", def: "canaleta instalada na borda do telhado para captar e escoar a água da chuva." },
+  { termo: "Cumeeira", def: "peça usada no ponto mais alto do telhado, onde duas águas se encontram, fechando e impermeabilizando essa junção." },
+  { termo: "Espigão", def: "encontro externo entre duas águas do telhado (o oposto da água-furtada), comum em telhados de 4 águas." },
+  { termo: "Forro", def: "revestimento instalado por baixo da estrutura do telhado, fechando o teto internamente." },
+  { termo: "Inclinação do telhado", def: "ângulo do plano do telhado em relação à horizontal; cada tipo de telha exige uma inclinação mínima para funcionar corretamente." },
+  { termo: "Manta térmica/subcobertura", def: "camada instalada sob as telhas para melhorar o conforto térmico e dar proteção extra contra infiltração." },
+  { termo: "Ripão", def: "ripa de madeira de maior espessura, usada em estruturas mais robustas." },
+  { termo: "Rufo", def: "peça metálica usada para vedar o encontro entre o telhado e paredes, chaminés ou outras estruturas verticais." },
+  { termo: "Terça", def: "viga horizontal que sustenta os caibros, apoiada sobre a estrutura principal do telhado." },
+  { termo: "Vão livre", def: "distância entre dois pontos de apoio (postes, paredes, pilares), usada para calcular a bitola necessária das vigas." },
 ];
 
 export function Glossario() {
@@ -109,7 +36,7 @@ export function Glossario() {
         type="search"
         value={busca}
         onChange={(e) => setBusca(e.target.value)}
-        placeholder="Buscar termo (ex.: cumeeira, rufo, bitola)"
+        placeholder="Buscar termo (ex.: cumeeira, rufo, terça)"
         className="mt-4 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-primary outline-none focus:border-orange-400"
       />
 
