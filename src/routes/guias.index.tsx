@@ -8,6 +8,7 @@ import { GuiaTelha } from "@/components/site/ferramentas/GuiaTelha";
 import { TabelaComparativa } from "@/components/site/ferramentas/TabelaComparativa";
 import { Glossario } from "@/components/site/ferramentas/Glossario";
 import { SosTelhado } from "@/components/site/ferramentas/SosTelhado";
+import { ConsultaEntrega } from "@/components/site/ferramentas/ConsultaEntrega";
 
 export const Route = createFileRoute("/guias/")({
   staticData: { sitemap: true },
@@ -68,11 +69,13 @@ function GuiasIndex() {
                 <TabsTrigger value="comparativo">Comparativo</TabsTrigger>
                 <TabsTrigger value="glossario">Glossário</TabsTrigger>
                 <TabsTrigger value="sos">SOS Telhado</TabsTrigger>
+                <TabsTrigger value="entrega">Entrega</TabsTrigger>
               </TabsList>
               <TabsContent value="quiz" className="mt-6"><GuiaTelha /></TabsContent>
               <TabsContent value="comparativo" className="mt-6"><TabelaComparativa /></TabsContent>
               <TabsContent value="glossario" className="mt-6"><Glossario /></TabsContent>
               <TabsContent value="sos" className="mt-6"><SosTelhado /></TabsContent>
+              <TabsContent value="entrega" className="mt-6"><ConsultaEntrega /></TabsContent>
             </Tabs>
           </section>
 
