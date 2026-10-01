@@ -11,6 +11,7 @@ const NAV_PRIMARY: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Catálogo", to: "/catalogo" },
   { label: "Calculadora", to: "/calculadora" },
+  { label: "Guias", to: "/guias" },
 ];
 
 const NAV_MORE: NavItem[] = [
