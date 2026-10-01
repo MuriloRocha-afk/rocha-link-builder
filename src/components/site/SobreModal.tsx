@@ -39,7 +39,7 @@ const TIMELINE = [
     year: "Hoje",
     title: "Parque industrial e frota própria",
     image: hist3,
-    text: "Mais de 25 anos depois, a Rocha Telhas é uma das maiores distribuidoras e madeireiras da região: pátio logístico amplo, frota própria entregando em toda a Grande São Paulo e a mesma gestão familiar de sempre.",
+    text: "Referência em telhas e madeiramento na região de Franco da Rocha, a Rocha Telhas conta hoje com pátio logístico amplo, frota própria entregando em toda a Grande São Paulo e a mesma gestão familiar de sempre.",
   },
 ];
 
