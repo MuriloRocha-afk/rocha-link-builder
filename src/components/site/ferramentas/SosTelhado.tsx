@@ -80,7 +80,7 @@ export function SosTelhado() {
             {sel.solucao.map((s) => <li key={s}>{s}</li>)}
           </ul>
           <a
-            href={waLink(`Olá! Usei o SOS Telhado do site: meu problema é ${sel.label.toLowerCase()}, gostaria de orçar: ${sel.solucao.join(", ")}.`)}
+            href={waLink(`Olá! Usei o SOS Telhado do site e identifiquei:\n\n${sel.emoji} ${sel.label}\n\nGostaria de um orçamento para o reparo.`)}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-extrabold text-white hover:opacity-90"
