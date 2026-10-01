@@ -5,7 +5,7 @@ import { waLink } from "@/constants/whatsapp";
 
 type Opcao = { value: string; label: string; hint?: string };
 type Pergunta = { id: "uso" | "prioridade" | "inclinacao" | "clima"; titulo: string; ajuda: string; opcoes: Opcao[] };
-type Resultado = { nome: string; porque: string; produtoSlug: string };
+type Resultado = { nome: string; porque: string; to: string; params?: Record<string, string> };
 
 const PERGUNTAS: Pergunta[] = [
   {
@@ -55,22 +55,25 @@ const PERGUNTAS: Pergunta[] = [
 const FIBRO: Resultado = {
   nome: "Telha de Fibrocimento",
   porque: "Ótimo custo-benefício, é leve para a estrutura e cobre grandes vãos com instalação rápida.",
-  produtoSlug: "telha-fibrocimento-infibra",
+  to: "/catalogo/$categoriaSlug/$produtoSlug",
+  params: { categoriaSlug: "telhas", produtoSlug: "telha-fibrocimento-infibra" },
 };
 const PVC: Resultado = {
   nome: "Telha PVC (Colonial ou Plan)",
   porque: "Muito leve, de baixa manutenção e funciona em inclinações baixas — econômica sem sobrecarregar a estrutura.",
-  produtoSlug: "telha-pvc-colonial",
+  to: "/catalogo/$categoriaSlug/$produtoSlug",
+  params: { categoriaSlug: "telhas", produtoSlug: "telha-pvc-colonial" },
 };
 const CERAMICA: Resultado = {
   nome: "Telha Cerâmica ou Esmaltada",
   porque: "Visual bonito e altíssima durabilidade, com ótimo conforto térmico em telhados mais inclinados.",
-  produtoSlug: "telhas-ceramicas-tradicionais",
+  to: "/catalogo/$categoriaSlug/$produtoSlug",
+  params: { categoriaSlug: "telhas", produtoSlug: "telhas-ceramicas-tradicionais" },
 };
 const CONCRETO: Resultado = {
   nome: "Telha de Concreto (Eurotop)",
   porque: "Robusta e durável por décadas, com encaixe preciso e baixa manutenção.",
-  produtoSlug: "outros-modelos-telhas",
+  to: "/catalogo/telhas/concreto",
 };
 
 function recomendar(r: Record<string, string>): Resultado {
@@ -162,7 +165,7 @@ export function GuiaTelha() {
           <p className="mt-1 text-sm text-muted-foreground">{resultado.porque}</p>
           {DICA_CLIMA[respostas.clima] ? <p className="mt-2 text-xs text-muted-foreground">💡 {DICA_CLIMA[respostas.clima]}</p> : null}
           <div className="mt-4 flex flex-wrap gap-2">
-            <Link to="/catalogo/$categoriaSlug/$produtoSlug" params={{ categoriaSlug: "telhas", produtoSlug: resultado.produtoSlug }} className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-5 py-3 text-sm font-extrabold text-white hover:bg-orange-700">
+            <Link to={resultado.to} params={resultado.params} className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-5 py-3 text-sm font-extrabold text-white hover:bg-orange-700">
               Ver no catálogo <ArrowRight size={16} />
             </Link>
             <a href={waLink(`Olá! Fiz o quiz do site: preciso de telha para ${label("uso")}, prioridade ${label("prioridade")}, gostaria de orçamento. (Recomendação: ${resultado.nome})`)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-extrabold text-white hover:opacity-90">
