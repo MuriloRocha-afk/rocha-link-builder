@@ -45,7 +45,7 @@ const COMPRIMENTOS: Record<Variante, { value: string; metros: number; badge?: st
 };
 
 const LARGURA: Record<Variante, { value: string; util: number }> = {
-  Colonial: { value: "86 cm", util: 0.79 },
+  Colonial: { value: "86 cm", util: 0.77 },
   Plan: { value: "88 cm", util: 0.8 },
 };
 
