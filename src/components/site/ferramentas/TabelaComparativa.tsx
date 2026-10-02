@@ -1,4 +1,14 @@
+import { Link } from "@tanstack/react-router";
+
 const TELHAS = ["Fibrocimento", "Cerâmica", "PVC", "Concreto (Eurotop)", "Esmaltada"];
+
+const LINKS: Record<string, string> = {
+  Fibrocimento: "/catalogo/telhas/fibrocimento",
+  "Cerâmica": "/catalogo/telhas/ceramica",
+  "PVC": "/catalogo/telhas/colonial-pvc",
+  "Concreto (Eurotop)": "/catalogo/telhas/concreto",
+  "Esmaltada": "/catalogo/telhas/esmaltada",
+};
 
 const LINHAS: { criterio: string; valores: string[] }[] = [
   { criterio: "Peso aproximado", valores: ["Médio", "Alto", "Muito baixo", "Alto", "Alto"] },
